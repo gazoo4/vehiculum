@@ -1,0 +1,60 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="6dip" >
+    
+    <TextView
+        android:id="@+id/list_stats_entry_dynamic_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/list_stats_fuelling_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/list_stats_entry_dynamic_id"/>
+    
+    <!-- 
+    <TextView
+        android:id="@+id/list_stats_fuelling_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:gravity="center_vertical"/>
+     -->
+
+    <TextView
+        android:id="@+id/list_stats_fuelling_total_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/list_stats_fuelling_date" />
+    
+    <TextView
+        android:id="@+id/list_stats_fuelling_unit_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/list_stats_fuelling_total_price" />
+    
+    <TextView
+        android:id="@+id/list_stats_fuelling_volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/list_stats_fuelling_unit_price" />
+    
+    <TextView
+        android:id="@+id/list_stats_fuelling_fuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/list_stats_fuelling_volume" />
+    
+    <TextView
+        android:id="@+id/list_stats_fuelling_consumption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/list_stats_fuelling_fuel" />
+    
+</RelativeLayout> 

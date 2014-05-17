@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name"											>Fueller</string>
+    <string name="action_settings"									>Settings</string>
+    <string name="activity_car_add_brand_hint"						>Brand</string>
+    <string name="activity_car_add_button_add"						>Add car</string>
+    <string name="activity_car_add_button_edit"						>Edit car</string>
+    <string name="activity_car_add_distance_units_hint"				>Distance units</string>
+    <string name="activity_car_add_header"							>Enter the details about your car</string>
+    <string name="activity_car_add_label"							>Add a new car</string>
+    <string name="activity_car_add_license_plate_hint"				>License plate</string>
+    <string name="activity_car_add_mileage_hint"					>Mileage</string>
+    <string name="activity_car_add_model_hint"						>Model</string>
+    <string name="activity_car_add_model_year_hint"					>Model Year</string>
+    <string name="activity_car_add_nickname_hint"					>Nickname (optional)</string>
+    <string name="activity_car_add_volume_units_hint"				>Volume units</string>
+    <string name="activity_car_edit_label"							>Edit your car</string>
+    <string name="activity_entry_add_button_refuel"					>Enter the fuel bill</string>
+    <string name="activity_entry_add_fields_missing_alert"			>Some of the required fields are not filled-in:</string>
+    <string name="activity_entry_add_header"						>Pick an action to record</string>
+    <string name="activity_entry_add_label"							>Adding new event</string>
+    <string name="activity_garage_management_label"					>Your garage</string>
+    <string name="activity_garage_management_button_car_add"		>Add a new car</string>
+    <string name="activity_garage_management_info_text"				>List of cars in your garage:</string>
+    <string name="activity_main_button_entry_add"					>Add event</string>
+    <string name="activity_main_button_stats_view"					>View statistics</string>
+    <string name="activity_main_button_garage_enter"				>Enter garage</string>
+    <string name="activity_main_create_garage_alert"				>You didn\'t setup your garage yet. Prepare one now.</string>
+    <string name="activity_main_header"								>Manage your enthusiasm!</string>
+    <string name="activity_refuel_button_date_change"				>Change date</string>
+    <string name="activity_refuel_button_entry_save"				>Save the record</string>
+    <string name="activity_refuel_comment_hint"						>Additional comment</string>
+    <string name="activity_refuel_cost_hint"						>Cost of the bill</string>
+    <string name="activity_refuel_fuel_type_hint"					>Fuel type</string>
+    <string name="activity_refuel_header"							>Enter your bill details</string>
+    <string name="activity_refuel_mileage_hint"						>Mileage</string>
+    <string name="activity_refuel_price_hint"						>Price per liter</string>
+    <string name="activity_refuel_volume_hint"						>Fuel volume bought</string>
+    <string name="activity_stats_show_button_fuelling"				>Consumption stats</string>
+    <string name="activity_stats_show_header"						>Statistic center</string>
+    
+    <string-array name="activity_car_add_distance_units">
+        <item>Kilometer</item>
+        <item>Mile</item>
+    </string-array>
+    
+    <string-array name="activity_car_add_volume_units">
+        <item>Liter</item>
+        <item>US Gallon</item>
+        <item>Imperial Gallon</item>
+    </string-array>
+    
+    <string-array name="activity_refuel_fuel_type">
+        <item>Gasoline</item>
+        <item>LPG</item>
+        <item>Diesel</item>
+        <item>CNG</item>
+        <item>Electricity</item>
+    </string-array>
+
+    <string name="fragment_entry_edit_delete_activate_button"		>Activate</string>
+    <string name="fragment_entry_edit_delete_activate_toast"		>Activating entry</string>
+    <string name="fragment_entry_edit_delete_delete_button"			>Delete</string>
+    <string name="fragment_entry_edit_delete_delete_toast"			>Removing entry</string>
+    <string name="fragment_entry_edit_delete_edit_button"			>Edit</string>
+    <string name="fragment_entry_edit_delete_edit_toast"			>Opening entry</string>
+    
+</resources>
+
