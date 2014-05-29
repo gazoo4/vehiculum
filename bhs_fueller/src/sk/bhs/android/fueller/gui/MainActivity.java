@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
 				Toast.makeText(getApplicationContext(), "Loaded car: "+ garage.getActiveCar().getNickname(), Toast.LENGTH_LONG).show();
 				SimpleConsumption.calculateAverageConsumption(garage.getActiveCar().getHistory());
 			} catch (FileNotFoundException e) {
-				System.out.println("Old garage.xml file not found, is this the first run? Building new garage.");
+				System.out.println("Old garage.xml file not found, is this the first run? Building new garage.....");
 				throwAlertCreateGarage();
 			}
 		}
