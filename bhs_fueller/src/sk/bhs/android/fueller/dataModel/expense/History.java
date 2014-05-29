@@ -40,12 +40,13 @@ public class History implements Serializable {
 	
 	public LinkedList<FuellingEntry> getFuellingEntriesFiltered(FuellingEntry.FuelType filter) {
 		LinkedList<FuellingEntry> entries = this.getFuellingEntries();
+		LinkedList<FuellingEntry> entriesFiltered = new LinkedList<FuellingEntry>();
 		for (FuellingEntry fuellingEntry : entries) {
-			if (fuellingEntry.getFuelType() != filter) {
-				entries.remove(fuellingEntry);
+			if (fuellingEntry.getFuelType() == filter) {
+				entriesFiltered.add(fuellingEntry);
 			}
 		}
-		return entries;
+		return entriesFiltered;
 		
 	}
 	

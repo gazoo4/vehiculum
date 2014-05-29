@@ -37,8 +37,8 @@ public class Garage {
 	}
 	
 	public Car getActiveCar() {
-		if ((activeCarId == -1) 
-				&& (getCars().size() > 0)) {
+		if (getCars().size() == 0) return null;
+		if (activeCarId < 0) {
 			activeCarId = 0;
 		}
 		try {

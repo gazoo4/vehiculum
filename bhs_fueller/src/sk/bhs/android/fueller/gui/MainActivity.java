@@ -13,6 +13,7 @@ import sk.bhs.android.fueller.dataModel.Garage;
 import sk.bhs.android.fueller.dataModel.calculation.Consumption;
 import sk.bhs.android.fueller.dataModel.expense.FuellingEntry.FuelType;
 import sk.bhs.android.fueller.engine.calculation.CalculationException;
+import sk.bhs.android.fueller.engine.calculation.FloatingConsumption;
 import sk.bhs.android.fueller.engine.calculation.SimpleConsumption;
 import sk.bhs.android.fueller.gui.fuelling.ActivityRefuel;
 import sk.bhs.android.fueller.gui.garage.ActivityGarageManagement;
@@ -46,10 +47,14 @@ public class MainActivity extends Activity {
 			try {
 				garage = dataHandler.loadGarage();
 				Toast.makeText(getApplicationContext(), "Loaded car: "+ garage.getActiveCar().getNickname(), Toast.LENGTH_LONG).show();
-				SimpleConsumption.calculateAverageConsumption(garage.getActiveCar().getHistory());
+				SimpleConsumption.calculateConsumption(garage.getActiveCar().getHistory());
+				//TODO: set the following 5, true params in options
+				FloatingConsumption.calculateConsumption(garage.getActiveCar().getHistory(), 5, true);
 			} catch (FileNotFoundException e) {
 				System.out.println("Old garage.xml file not found, is this the first run? Building new garage.....");
 				throwAlertCreateGarage();
+			} catch (CalculationException e) {
+				e.getReason();
 			}
 		}
 		
@@ -60,7 +65,9 @@ public class MainActivity extends Activity {
 	public void onResume() {
 		super.onResume();
 		generateQuickStat();
-		SimpleConsumption.calculateAverageConsumption(garage.getActiveCar().getHistory());
+		if (garage != null && garage.getActiveCar() != null) {
+			SimpleConsumption.calculateConsumption(garage.getActiveCar().getHistory());
+		}
 	}
 	
 	public void throwAlertCreateGarage() {

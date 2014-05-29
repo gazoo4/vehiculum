@@ -52,7 +52,7 @@ public class SimpleConsumption {
 		return consumption;
 	}
 	
-	public static void calculateAverageConsumption(History history) {
+	public static void calculateConsumption(History history) {
 		LinkedList<FuellingEntry> entries;
 		ListIterator<FuellingEntry> i;
 		FuellingEntry e;
