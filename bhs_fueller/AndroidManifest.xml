@@ -40,6 +40,9 @@
             android:name="sk.bhs.android.fueller.gui.garage.ActivityGarageManagement"
             android:label="@string/activity_garage_management_label"/>
         <activity
+            android:name="sk.bhs.android.fueller.gui.report.ActivityCharts"
+            android:label="@string/app_name"/>
+        <activity
             android:name="sk.bhs.android.fueller.gui.report.ActivityStatsShow"
             android:label="@string/app_name"/>
         <activity

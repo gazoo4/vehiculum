@@ -37,6 +37,7 @@
     <string name="activity_refuel_mileage_hint"						>Mileage</string>
     <string name="activity_refuel_price_hint"						>Price per liter</string>
     <string name="activity_refuel_volume_hint"						>Fuel volume bought</string>
+    <string name="activity_stats_show_button_charts"				>Charts</string>
     <string name="activity_stats_show_button_fuelling"				>Consumption stats</string>
     <string name="activity_stats_show_header"						>Statistic center</string>
     

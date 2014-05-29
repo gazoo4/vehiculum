@@ -26,6 +26,9 @@ public class ActivityStatsShow extends Activity {
 		case R.id.activity_stats_show_button_fuelling:
 			startActivity(new Intent(this, ActivityStatsFuelling.class));
 			break;
+		case R.id.activity_stats_show_button_charts:
+			startActivity(new Intent(this, ActivityCharts.class));
+			break;
 		}
 	}
 }
