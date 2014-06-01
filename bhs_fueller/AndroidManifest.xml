@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sk.bhs.android.fueller"
+    package="sk.berops.android.fueller"
     android:versionCode="2"
     android:versionName="0.0.2" >
 
@@ -12,10 +12,10 @@
         android:allowBackup="true"
         android:icon="@drawable/mb_icon"
         android:label="@string/app_name"
-        android:name="sk.bhs.android.fueller.Fueller"
+        android:name="sk.berops.android.fueller.Fueller"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="sk.bhs.android.fueller.gui.MainActivity"
+            android:name="sk.berops.android.fueller.gui.MainActivity"
             android:label="@string/app_name"
             android:configChanges="orientation|keyboardHidden|keyboard" >
             <intent-filter>
@@ -25,31 +25,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="sk.bhs.android.fueller.gui.fuelling.ActivityRefuel"
+            android:name="sk.berops.android.fueller.gui.fuelling.ActivityRefuel"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.bhs.android.fueller.gui.fuelling.ActivityFuellingEdit"
+            android:name="sk.berops.android.fueller.gui.fuelling.ActivityFuellingEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.bhs.android.fueller.gui.garage.ActivityCarAdd"
+            android:name="sk.berops.android.fueller.gui.garage.ActivityCarAdd"
             android:label="@string/activity_car_add_label"/>
         <activity
-            android:name="sk.bhs.android.fueller.gui.garage.ActivityCarEdit"
+            android:name="sk.berops.android.fueller.gui.garage.ActivityCarEdit"
             android:label="@string/activity_car_edit_label"/>
         <activity
-            android:name="sk.bhs.android.fueller.gui.garage.ActivityGarageManagement"
+            android:name="sk.berops.android.fueller.gui.garage.ActivityGarageManagement"
             android:label="@string/activity_garage_management_label"/>
         <activity
-            android:name="sk.bhs.android.fueller.gui.report.ActivityCharts"
+            android:name="sk.berops.android.fueller.gui.report.ActivityCharts"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.bhs.android.fueller.gui.report.ActivityStatsShow"
+            android:name="sk.berops.android.fueller.gui.report.ActivityStatsShow"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.bhs.android.fueller.gui.report.ActivityStatsFuelling"
+            android:name="sk.berops.android.fueller.gui.report.ActivityStatsFuelling"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.bhs.android.fueller.gui.ActivityEntryAdd"
+            android:name="sk.berops.android.fueller.gui.ActivityEntryAdd"
             android:label="@string/activity_entry_add_label"/>
     </application>
 
