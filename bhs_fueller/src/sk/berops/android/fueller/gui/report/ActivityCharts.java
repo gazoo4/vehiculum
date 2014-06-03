@@ -67,7 +67,7 @@ public class ActivityCharts extends Activity {
 			}
 		}
 		
-		HistoryViewData[] data;
+		HistoryViewData[] data = new HistoryViewData[0];
 		GraphViewSeriesStyle style;
 		GraphViewSeries series;
 		// add all the data series to the chart
@@ -76,6 +76,13 @@ public class ActivityCharts extends Activity {
 			style = new GraphViewSeriesStyle(type.getColor(), 4);
 			series = new GraphViewSeries(type.getType(), style, data);
 			graphView.addSeries(series);
+		}
+		
+		if (data.length > 10) {
+			int start = (int) data[data.length - 10].getX();
+			int size = (int) data[data.length - 1].getX() - start;
+			System.out.println(""+ start +", "+ size);
+			graphView.setViewPort(start, size);
 		}
 		
 		graphView.setBackgroundColor(Color.BLACK);

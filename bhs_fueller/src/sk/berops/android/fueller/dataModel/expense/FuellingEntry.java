@@ -18,7 +18,7 @@ public class FuellingEntry extends Entry {
 	private double floatingConsumption;
 	public enum FuelType{
 		GASOLINE(0, "gasoline", Color.MAGENTA), 
-		LPG(1, "lpg", Color.YELLOW),
+		LPG(1, "lpg", 0xFFFF8000), //Color.ORANGE
 		DIESEL(2, "diesel", Color.GRAY),
 		CNG(3, "cng", Color.GREEN),
 		ELECTRICITY(4, "electricity", Color.BLUE);
