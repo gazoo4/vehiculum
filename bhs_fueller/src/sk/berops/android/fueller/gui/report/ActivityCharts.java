@@ -3,6 +3,9 @@ package sk.berops.android.fueller.gui.report;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.commons.math3.analysis.interpolation.SplineInterpolator;
+import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
+
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphView.LegendAlign;
@@ -15,6 +18,7 @@ import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.fueller.dataModel.expense.History;
+import sk.berops.android.fueller.engine.calculation.ChartInterpolator;
 import sk.berops.android.fueller.engine.charts.HistoryViewData;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.R;
@@ -25,7 +29,8 @@ import android.widget.RelativeLayout;
 
 public class ActivityCharts extends Activity {
 	
-	private int resolution = 100;
+	private int resolution = 200; //TODO this should go to settings
+	private boolean splineInterpolation = true; //TODO this should go to settings
 	private Car car = MainActivity.garage.getActiveCar();
 	private History history = car.getHistory();
 	private FuelType fuelType = history.getFuellingEntries().getLast().getFuelType();
@@ -67,15 +72,28 @@ public class ActivityCharts extends Activity {
 			}
 		}
 		
-		HistoryViewData[] data;
+		HistoryViewData[] data = new HistoryViewData[0];
 		GraphViewSeriesStyle style;
 		GraphViewSeries series;
+		int viewportThreshold = 10; //TODO add this to settings
 		// add all the data series to the chart
 		for (FuelType type : graphDataMap.keySet()) {
 			data = graphDataMap.get(type).toArray(new HistoryViewData[0]);
+			// apply spline interpolation if needed
+			if (splineInterpolation) {
+				data = ChartInterpolator.applySpline(data, resolution);
+				viewportThreshold *= resolution;
+			}
 			style = new GraphViewSeriesStyle(type.getColor(), 4);
 			series = new GraphViewSeries(type.getType(), style, data);
 			graphView.addSeries(series);
+		}
+		
+		if (data.length > viewportThreshold) {
+			int start = (int) data[data.length - viewportThreshold].getX();
+			int size = (int) data[data.length - 1].getX() - start;
+			System.out.println(""+ start +", "+ size);
+			graphView.setViewPort(start, size);
 		}
 		
 		graphView.setBackgroundColor(Color.BLACK);
@@ -91,6 +109,5 @@ public class ActivityCharts extends Activity {
 		
 		RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_charts_layout);
 		layout.addView(graphView);
-		
 	}
 }
