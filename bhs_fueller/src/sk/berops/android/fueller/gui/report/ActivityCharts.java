@@ -96,13 +96,6 @@ public class ActivityCharts extends Activity {
 			graphView.setViewPort(start, size);
 		}
 		
-		if (data.length > 10) {
-			int start = (int) data[data.length - 10].getX();
-			int size = (int) data[data.length - 1].getX() - start;
-			System.out.println(""+ start +", "+ size);
-			graphView.setViewPort(start, size);
-		}
-		
 		graphView.setBackgroundColor(Color.BLACK);
 		graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.GRAY);
 		graphView.getGraphViewStyle().setVerticalLabelsColor(Color.GRAY);
