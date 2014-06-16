@@ -23,6 +23,8 @@
     
     <Button
         android:id="@+id/activity_garage_management_button_car_add"
+        style="@style/button_text"
+        android:background="@drawable/red_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/activity_garage_management_cars_listview"

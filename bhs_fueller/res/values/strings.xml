@@ -16,7 +16,7 @@
     <string name="activity_car_add_nickname_hint"					>Nickname (optional)</string>
     <string name="activity_car_add_volume_units_hint"				>Volume units</string>
     <string name="activity_car_edit_label"							>Edit your car</string>
-    <string name="activity_entry_add_button_refuel"					>Enter the fuel bill</string>
+    <string name="activity_entry_add_button_refuel"					>Refuelling</string>
     <string name="activity_entry_add_fields_missing_alert"			>Some of the required fields are not filled-in:</string>
     <string name="activity_entry_add_header"						>Pick an action to record</string>
     <string name="activity_entry_add_label"							>Adding new event</string>

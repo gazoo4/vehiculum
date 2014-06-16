@@ -139,6 +139,11 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
+	@Override
+	public void onBackPressed() {
+		startActivity(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME));
+	}
+	
 	public void onClick(View view) {
 		switch(view.getId()) {
 		case R.id.activity_main_button_entry_add:

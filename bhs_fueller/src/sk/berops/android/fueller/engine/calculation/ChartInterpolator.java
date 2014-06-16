@@ -28,21 +28,27 @@ public class ChartInterpolator {
 			dataInterpolated[(int) Math.round(multiplicator * i)] = data[i];
 		}
 		
-		// interpolate the empty fields
+		double newX;
+		// interpolate the empty/all fields
 		for (int i = 0; i < dataInterpolated.length; i++) {
-			if (dataInterpolated[i] == null) {
-				double newX = initX + (rangeX/dataInterpolated.length * i); 
+			//if (dataInterpolated[i] == null) {
+				newX = initX + ((double) (rangeX * i) / (double) dataInterpolated.length); 
 				dataInterpolated[i] = new HistoryViewData(newX, f.value(newX));
-			}
+			//}
 		}
 		
 		double previous = dataInterpolated[0].getX();
 		for (int i = 1; i < dataInterpolated.length; i++) {
+			System.out.println("interpolated: "+ i +" "+ dataInterpolated[i].getX() +" "+ dataInterpolated[i].getY());
 			if (previous > dataInterpolated[i].getX()) {
 				// fix would be to sort by X, but why not doing that properly from beginning?
 				System.out.println("TROUBLE");
 			}
 			previous = dataInterpolated[i].getX();
+		}
+		
+		for (int i = 1; i < data.length; i++) {
+			System.out.println("non-interpolated: "+ i +" "+ data[i].getX() +" "+ data[i].getY());
 		}
 		
 		// return the interpolated data
