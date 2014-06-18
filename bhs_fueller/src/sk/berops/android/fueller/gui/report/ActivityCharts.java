@@ -29,7 +29,7 @@ import android.widget.RelativeLayout;
 
 public class ActivityCharts extends Activity {
 	
-	private int resolution = 200; //TODO this should go to settings
+	private int resolution = 10; //TODO this should go to settings
 	private boolean splineInterpolation = true; //TODO this should go to settings
 	private Car car = MainActivity.garage.getActiveCar();
 	private History history = car.getHistory();
@@ -76,13 +76,13 @@ public class ActivityCharts extends Activity {
 		GraphViewSeriesStyle style;
 		GraphViewSeries series;
 		int viewportThreshold = 10; //TODO add this to settings
+		if (splineInterpolation) viewportThreshold *= resolution;
 		// add all the data series to the chart
 		for (FuelType type : graphDataMap.keySet()) {
 			data = graphDataMap.get(type).toArray(new HistoryViewData[0]);
 			// apply spline interpolation if needed
 			if (splineInterpolation) {
 				data = ChartInterpolator.applySpline(data, resolution);
-				viewportThreshold *= resolution;
 			}
 			style = new GraphViewSeriesStyle(type.getColor(), 4);
 			series = new GraphViewSeries(type.getType(), style, data);

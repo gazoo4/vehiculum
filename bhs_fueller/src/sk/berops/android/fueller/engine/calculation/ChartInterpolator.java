@@ -7,7 +7,7 @@ import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
 
 public class ChartInterpolator {
 	public static HistoryViewData[] applySpline(HistoryViewData[] data, int resolution) {
-		HistoryViewData[] dataInterpolated = new HistoryViewData[resolution];
+		HistoryViewData[] dataInterpolated = new HistoryViewData[resolution * data.length];
 		
 		double[] x = new double[data.length];
 		double[] y = new double[data.length];
@@ -23,7 +23,7 @@ public class ChartInterpolator {
 		double rangeX = data[data.length - 1].getX() - data[0].getX();
 		
 		// when mapping 5-item long field to 8-item long field, the indexes need to be stretched by a factor of 7/4
-		double multiplicator = (resolution - 1) / (data.length - 1);
+		double multiplicator = (resolution * data.length - 1) / (data.length - 1);
 		for (int i = 0; i < data.length; i++) {
 			dataInterpolated[(int) Math.round(multiplicator * i)] = data[i];
 		}
@@ -36,7 +36,7 @@ public class ChartInterpolator {
 				dataInterpolated[i] = new HistoryViewData(newX, f.value(newX));
 			//}
 		}
-		
+		/*
 		double previous = dataInterpolated[0].getX();
 		for (int i = 1; i < dataInterpolated.length; i++) {
 			System.out.println("interpolated: "+ i +" "+ dataInterpolated[i].getX() +" "+ dataInterpolated[i].getY());
@@ -46,11 +46,7 @@ public class ChartInterpolator {
 			}
 			previous = dataInterpolated[i].getX();
 		}
-		
-		for (int i = 1; i < data.length; i++) {
-			System.out.println("non-interpolated: "+ i +" "+ data[i].getX() +" "+ data[i].getY());
-		}
-		
+		*/
 		// return the interpolated data
 		return dataInterpolated;
 	}
