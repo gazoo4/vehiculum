@@ -1,13 +1,19 @@
 package sk.berops.android.fueller.gui.report;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
+import sk.berops.android.fueller.dataModel.calculation.Consumption;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
+import sk.berops.android.fueller.engine.calculation.CalculationException;
+import sk.berops.android.fueller.engine.calculation.SimpleConsumption;
+import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.R;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,13 +45,24 @@ public class FuellingStatsAdapter extends ArrayAdapter<FuellingEntry> {
 		TextView fuel = (TextView) rowView.findViewById(R.id.list_stats_fuelling_fuel);
 		TextView consumption = (TextView) rowView.findViewById(R.id.list_stats_fuelling_consumption);
 		
+		DecimalFormat df = new DecimalFormat("##0.00#");
 		dynamicId.setText(Integer.toString(entry.getDynamicId()));
-		date.setText(DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(entry.getEventDate()));
-		totalPrice.setText(Double.toString(entry.getCost()));
-		unitPrice.setText(Double.toString(entry.getFuelPrice()));
-		volume.setText(Double.toString(entry.getFuelVolume()));
+		date.setText(DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(entry.getEventDate()));
+		totalPrice.setText(df.format(entry.getCost()));
+		unitPrice.setText(df.format(entry.getFuelPrice()));
+		volume.setText(df.format(entry.getFuelVolume()));
 		fuel.setText(entry.getFuelType().toString());
-		//TODO consumption.setText(Double.toString(entry.getConsumption));
+		fuel.setBackgroundColor(entry.getFuelType().getColor());
+		fuel.setTextColor(Color.WHITE);
+		consumption.setText(df.format(entry.getConsumption()));
+		Consumption c;
+		try {
+			c = MainActivity.garage.getActiveCar().getConsumption();
+			double avg = c.getPerType().get(entry.getFuelType());
+			consumption.setBackgroundColor(SimpleConsumption.getConsumptionColor(avg, entry.getConsumption()));
+		} catch (NullPointerException e) {
+			// TODO if not enough refuellings done, this should not be a problem (no specific collor will be picked
+		}
 		return rowView;
 	}
 

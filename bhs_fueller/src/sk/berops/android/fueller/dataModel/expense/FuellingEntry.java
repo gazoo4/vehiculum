@@ -10,12 +10,16 @@ import android.graphics.Color;
 public class FuellingEntry extends Entry {
 	@Element(name="fuelVolume")
 	private double fuelVolume;
+	@Element(name="fuelVolumeSI")
+	private double fuelVolumeSI;
 	@Element(name="fuelType")
 	private FuelType fuelType;
 	@Element(name="fuelPrice")
 	private double fuelPrice;
 	private double consumption;
+	private double consumptionSI;
 	private double floatingConsumption;
+	private double floatingConsumptionSI;
 	public enum FuelType{
 		GASOLINE(0, "gasoline", Color.MAGENTA), 
 		LPG(1, "lpg", 0xFFFF8000), //Color.ORANGE
@@ -121,5 +125,23 @@ public class FuellingEntry extends Entry {
 	}
 	public void setFloatingConsumption(double floatingConsumption) {
 		this.floatingConsumption = floatingConsumption;
+	}
+	public double getFuelVolumeSI() {
+		return fuelVolumeSI;
+	}
+	public void setFuelVolumeSI(double fuelVolumeSI) {
+		this.fuelVolumeSI = fuelVolumeSI;
+	}
+	public double getConsumptionSI() {
+		return consumptionSI;
+	}
+	public void setConsumptionSI(double consumptionSI) {
+		this.consumptionSI = consumptionSI;
+	}
+	public double getFloatingConsumptionSI() {
+		return floatingConsumptionSI;
+	}
+	public void setFloatingConsumptionSI(double floatingConsumptionSI) {
+		this.floatingConsumptionSI = floatingConsumptionSI;
 	}
 }

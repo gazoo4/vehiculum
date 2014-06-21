@@ -100,7 +100,7 @@ public class MainActivity extends Activity {
 		stat += "Car: "+ garage.getActiveCar().getNickname() +"\n";
 		
 		try {
-			c = SimpleConsumption.getTotalAverage(garage.getActiveCar().getHistory());
+			garage.getActiveCar().setConsumption(SimpleConsumption.getTotalAverage(garage.getActiveCar().getHistory()));
 		} catch (CalculationException e) {
 			// TODO Generate a toast saying not enough refuellings done
 			
@@ -113,13 +113,13 @@ public class MainActivity extends Activity {
 		DecimalFormat df = new DecimalFormat("##.###");
 		
 		for (FuelType t: FuelType.values()) {
-			avgConsumption = c.getPerType().get(t);
+			avgConsumption = garage.getActiveCar().getConsumption().getPerType().get(t);
 			if (avgConsumption != 0) {
 				formattedVolume = df.format(avgConsumption);
 				stat += t.getType() +": "+ formattedVolume +" l/100 km\n";
 			}
 		}
-		formattedVolume = df.format(c.getTotal());
+		formattedVolume = df.format(garage.getActiveCar().getConsumption().getTotal());
 		stat += "average: "+ formattedVolume +" l/100 km\n\n";
 		
 		try {

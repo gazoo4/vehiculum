@@ -6,6 +6,7 @@ import java.util.ListIterator;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import android.graphics.Color;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.calculation.Consumption;
 import sk.berops.android.fueller.dataModel.expense.Entry;
@@ -108,6 +109,20 @@ public class SimpleConsumption {
 		consumption.setConsumption(volume / (mileage - e.getMileage()) * 100);
 		
 		return consumption;
+	}
+	
+	public static int getConsumptionColor(double average, double oneOff) {
+		double ratio = oneOff/average;
+		if (ratio >= 1.1) {
+			return Color.rgb(255, 0, 0);
+		} else if (ratio > 0.9) {
+			double coef = (ratio - 0.9)/0.2;
+			int red = (int) (255 * coef);
+			int green = (int) (255 * (1 - coef));
+			return Color.rgb(red, green, 0);
+		} else {
+			return Color.rgb(0, 255, 0);
+		}
 	}
 	
 	public static double getTotalMileage(Car car) {

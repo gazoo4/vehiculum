@@ -9,7 +9,7 @@ import sk.berops.android.fueller.dataModel.Part;
 
 public class MaintenanceEntry extends Entry {
 	@Element(name="regularMaintenance")
-	private boolean regularMaintenance;//or crash maintenance?
+	private boolean regularMaintenance;//or crash/or malfunction maintenance?
 	@Element(name="laborCost", required=false)
 	private double laborCost;
 	@Element(name="parts", required=false)
