@@ -35,11 +35,9 @@ public class Car extends Record implements Serializable {
 	private String licensePlate;
 	@Element(name="initialMileage")
 	private double initialMileage;
-	@Element(name="initialMileageSI")
 	private double initialMileageSI;
 	@Element(name="currentMileage")
 	private double currentMileage;
-	@Element(name="currentMileageSI")
 	private double currentMileageSI;
 	@Element(name="volumeUnit", required=false)
 	private VolumeUnit volumeUnit;
@@ -187,6 +185,7 @@ public class Car extends Record implements Serializable {
 		setHistory(new History());
 		this.setDistanceUnit(DistanceUnit.getDistanceUnit(0));
 		this.setVolumeUnit(VolumeUnit.getVolumeUnit(0));
+		this.setConsumptionUnit(ConsumptionUnit.getConsumptionUnit(0));
 	}
 
 	public Car(String nickname) {
@@ -292,6 +291,7 @@ public class Car extends Record implements Serializable {
 	}
 
 	public VolumeUnit getVolumeUnit() {
+		if (volumeUnit == null) return VolumeUnit.getVolumeUnit(0);
 		return volumeUnit;
 	}
 
@@ -300,6 +300,7 @@ public class Car extends Record implements Serializable {
 	}
 
 	public DistanceUnit getDistanceUnit() {
+		if (distanceUnit == null) return DistanceUnit.getDistanceUnit(0);
 		return distanceUnit;
 	}
 
@@ -339,6 +340,7 @@ public class Car extends Record implements Serializable {
 	}
 
 	public ConsumptionUnit getConsumptionUnit() {
+		if (consumptionUnit == null) return ConsumptionUnit.getConsumptionUnit(0);
 		return consumptionUnit;
 	}
 

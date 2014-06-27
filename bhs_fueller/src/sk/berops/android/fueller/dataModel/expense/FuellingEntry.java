@@ -10,7 +10,6 @@ import android.graphics.Color;
 public class FuellingEntry extends Entry {
 	@Element(name="fuelVolume")
 	private double fuelVolume;
-	@Element(name="fuelVolumeSI")
 	private double fuelVolumeSI;
 	@Element(name="fuelType")
 	private FuelType fuelType;

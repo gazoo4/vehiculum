@@ -40,6 +40,7 @@ public class XMLHandler extends DataHandler {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("Could not load Garage!");
 		return null;
 	}
 	

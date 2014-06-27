@@ -13,7 +13,6 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 	
 	@Element(name="mileage")
 	private double mileage;
-	@Element(name="mileageSI")
 	private double mileageSI;
 	@Element(name="eventDate")
 	private Date eventDate;
