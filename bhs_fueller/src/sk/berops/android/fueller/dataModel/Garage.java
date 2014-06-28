@@ -57,13 +57,14 @@ public class Garage {
 		this.activeCarId = id;
 	}
 	
-	public void initLoadedGarage() {
+	public void initAfterLoad() {
 		Car car;
 		Entry entry;
 		int dynamicId = 0;
 		
 		for (Iterator<Car> c = this.cars.iterator(); c.hasNext(); ) {
 			car = c.next();
+			car.initAfterLoad();
 			for (Iterator<Entry> e = car.getHistory().getEntries().iterator(); e.hasNext(); ) {
 				entry = e.next();
 				entry.setDynamicId(dynamicId++);

@@ -5,6 +5,9 @@ import java.util.Map;
 
 import org.simpleframework.xml.Element;
 
+import sk.berops.android.fueller.dataModel.Car.DistanceUnit;
+import sk.berops.android.fueller.dataModel.Car.VolumeUnit;
+import sk.berops.android.fueller.dataModel.UnitConstants;
 import android.graphics.Color;
 
 public class FuellingEntry extends Entry {
@@ -88,6 +91,24 @@ public class FuellingEntry extends Entry {
 			this.color = color;
 		}
 	}
+	
+	@Override
+	public void initAfterLoad(DistanceUnit du, VolumeUnit vu) {
+		super.initAfterLoad(du, vu);
+		double coef = 0;
+		switch (vu) {
+		case IMPERIAL_GALLON: coef = UnitConstants.IMPERIAL_GALLON;
+			break;
+		case LITER: coef = UnitConstants.LITRE;
+			break;
+		case US_GALLON: coef = UnitConstants.US_GALLON;
+			break;
+		default: System.out.println("Unexpected program branch reached.");
+			break;
+		}
+		setFuelVolumeSI(getFuelVolume() * coef); 
+	}
+	
 	public int compareTo(FuellingEntry e) {
 		return super.compareTo(e);
 	}

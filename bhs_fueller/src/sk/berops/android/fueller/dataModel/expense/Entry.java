@@ -6,7 +6,10 @@ import java.util.Date;
 
 import org.simpleframework.xml.Element;
 
+import sk.berops.android.fueller.dataModel.Car.DistanceUnit;
+import sk.berops.android.fueller.dataModel.Car.VolumeUnit;
 import sk.berops.android.fueller.dataModel.Record;
+import sk.berops.android.fueller.dataModel.UnitConstants;
 
 public abstract class Entry extends Record implements Comparable<Entry> {
 	private int dynamicId;
@@ -20,6 +23,21 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 	private double cost;
 	@Element(name="expenseType")
 	private ExpenseType expenseType;
+	
+	public void initAfterLoad(DistanceUnit du, VolumeUnit vu) {
+		if (getMileageSI() == 0 && getMileage() != 0) {
+			double coef = 0;
+			switch (du) {
+			case KILOMETER: coef = UnitConstants.KILOMETER;
+				break;
+			case MILE: coef = UnitConstants.MILE;
+				break;
+			default: System.out.println("Unexpected program branch.");
+				break;
+			}
+			setMileageSI(getMileage() * coef);
+		}
+	}
 	
 	public int compareTo(Entry e) {
 		return Double.valueOf(this.getMileage()).compareTo(Double.valueOf(e.getMileage()));

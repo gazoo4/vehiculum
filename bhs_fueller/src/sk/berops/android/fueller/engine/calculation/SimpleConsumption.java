@@ -69,7 +69,7 @@ public class SimpleConsumption {
 				e = i.next();
 				mileage2 = e.getMileage();
 				volume = e.getFuelVolume();
-				e.setConsumption(100*volume/(mileage2 - mileage1));
+				e.setConsumptionSI(100*volume/(mileage2 - mileage1));
 				mileage1 = mileage2;
 			}
 		}

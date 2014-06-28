@@ -33,7 +33,7 @@ public class XMLHandler extends DataHandler {
 		Garage garage;
 		try {
 			garage = serializer.read(Garage.class, file);
-			garage.initLoadedGarage();
+			garage.initAfterLoad();
 			return garage;
 		} catch (FileNotFoundException ex) {
 			throw ex;
