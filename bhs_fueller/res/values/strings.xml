@@ -6,6 +6,7 @@
     <string name="activity_car_add_brand_hint"						>Brand</string>
     <string name="activity_car_add_button_add"						>Add car</string>
     <string name="activity_car_add_button_edit"						>Edit car</string>
+    <string name="activity_car_add_button_get_photo"				>Add photo</string>
     <string name="activity_car_add_distance_units_hint"				>Distance units</string>
     <string name="activity_car_add_header"							>Enter the details about your car</string>
     <string name="activity_car_add_label"							>Add a new car</string>

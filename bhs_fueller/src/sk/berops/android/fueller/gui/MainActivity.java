@@ -100,7 +100,7 @@ public class MainActivity extends Activity {
 		stat += "Car: "+ garage.getActiveCar().getNickname() +"\n";
 		
 		try {
-			garage.getActiveCar().setConsumption(SimpleConsumption.getTotalAverage(garage.getActiveCar().getHistory()));
+			garage.getActiveCar().setConsumption(SimpleConsumption.getTotalAverage(garage.getActiveCar()));
 		} catch (CalculationException e) {
 			// TODO Generate a toast saying not enough refuellings done
 			

@@ -107,6 +107,9 @@ public class ActivityCarAdd extends ActivityAddRecord {
 		case R.id.activity_car_add_button_commit:
 			startActivity(new Intent(this, MainActivity.class));
 			break;
+		case R.id.activity_car_add_button_get_photo:
+			
+			break;
 		}
 	}
 }

@@ -17,7 +17,8 @@ import sk.berops.android.fueller.R;
 
 public class SimpleConsumption {
 
-	public static Consumption getTotalAverage(History history) throws CalculationException {
+	public static Consumption getTotalAverage(Car car) throws CalculationException {
+		History history = car.getHistory();
 		LinkedList<FuellingEntry> entries = history.getFuellingEntries();
 		FuellingEntry e;
 		double volume = 0;
