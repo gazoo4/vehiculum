@@ -24,6 +24,7 @@ public class CameraHandler extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		dispatchTakePictureIntent();
 	}
 
@@ -36,6 +37,7 @@ public class CameraHandler extends Activity {
 	        try {
 	            photoFile = createImageFile();
 	        } catch (IOException ex) {
+	        	ex.printStackTrace();
 	            //TODO: Error occurred while creating the File
 	        	System.out.println("ERROR: Couldn't create image file.");
 	        }
@@ -64,6 +66,7 @@ public class CameraHandler extends Activity {
 	    String imageFileName = "JPEG_" + timeStamp + "_";
 	    File storageDir = Environment.getExternalStoragePublicDirectory(
 	            Environment.DIRECTORY_PICTURES);
+	    System.out.println(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
 	    File image = File.createTempFile(
 	        imageFileName,  /* prefix */
 	        ".jpg",         /* suffix */
