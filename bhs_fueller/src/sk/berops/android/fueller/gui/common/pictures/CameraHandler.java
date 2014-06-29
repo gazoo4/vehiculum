@@ -17,10 +17,15 @@ import android.widget.ImageView;
 public class CameraHandler extends Activity {
 
 	static final int REQUEST_IMAGE_CAPTURE = 1;
-	static final int REQUEST_TAKE_PHOTO = 1;
+	static final int REQUEST_TAKE_PHOTO = 2;
 	
 	private String currentPhotoPath;
 	private ImageView thumbnail;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		dispatchTakePictureIntent();
+	}
 
 	private void dispatchTakePictureIntent() {
 	    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -32,6 +37,7 @@ public class CameraHandler extends Activity {
 	            photoFile = createImageFile();
 	        } catch (IOException ex) {
 	            //TODO: Error occurred while creating the File
+	        	System.out.println("ERROR: Couldn't create image file.");
 	        }
 	        // Continue only if the File was successfully created
 	        if (photoFile != null) {
@@ -40,12 +46,12 @@ public class CameraHandler extends Activity {
 	        }
 	    }
 	    
-	    galleryAddPic();
+	    //galleryAddPic();
 	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+	    if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
 	        Bundle extras = data.getExtras();
 	        Bitmap imageBitmap = (Bitmap) extras.get("data");
 	        thumbnail.setImageBitmap(imageBitmap);
