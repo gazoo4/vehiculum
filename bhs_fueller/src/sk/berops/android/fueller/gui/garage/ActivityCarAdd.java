@@ -6,6 +6,7 @@ import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityAddRecord;
+import sk.berops.android.fueller.gui.common.pictures.CameraHandler;
 import sk.berops.android.fueller.gui.fuelling.ActivityRefuel;
 import sk.berops.android.fueller.R;
 import android.app.Activity;
@@ -108,7 +109,7 @@ public class ActivityCarAdd extends ActivityAddRecord {
 			startActivity(new Intent(this, MainActivity.class));
 			break;
 		case R.id.activity_car_add_button_get_photo:
-			
+			startActivity(new Intent(this, CameraHandler.class));
 			break;
 		}
 	}
