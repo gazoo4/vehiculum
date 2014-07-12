@@ -1,9 +1,9 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
     android:shrinkColumns="*"
-    android:stretchColumns="*" >
+    android:stretchColumns="*" 
+    android:background="#5F8055">
 
     <TableRow
         style="@style/HeaderRow"
@@ -34,7 +34,8 @@
 
         <TextView
             android:id="@+id/list_stats_fuelling_fuel"
-            style="@style/BodyText"
+            android:typeface="monospace"
+            android:textAllCaps="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_span="2"
