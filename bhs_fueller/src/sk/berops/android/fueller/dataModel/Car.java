@@ -187,6 +187,27 @@ public class Car extends Record implements Serializable {
 		this.setVolumeUnit(VolumeUnit.getVolumeUnit(0));
 		this.setConsumptionUnit(ConsumptionUnit.getConsumptionUnit(0));
 	}
+	
+	public void initAfterLoad() {
+		double coef = 0;
+		switch (getDistanceUnit()) {
+		case KILOMETER: coef = 1;
+			break;
+		case MILE: coef = UnitConstants.MILE;
+			break;
+		default:
+			System.out.println("Not expected program branch reached");
+			break;
+		}
+		if (getInitialMileageSI() == 0 && getInitialMileage() != 0) {
+			setInitialMileageSI(getInitialMileage() * coef);
+		}
+		if (getCurrentMileageSI() == 0 && getCurrentMileage() != 0) {
+			setCurrentMileageSI(getCurrentMileage() * coef); 
+		}
+		
+		history.initAfterLoad(getDistanceUnit(), getVolumeUnit());
+	}
 
 	public Car(String nickname) {
 		this();

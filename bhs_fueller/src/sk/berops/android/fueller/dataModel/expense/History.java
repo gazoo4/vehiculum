@@ -12,6 +12,8 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
+import sk.berops.android.fueller.dataModel.Car.DistanceUnit;
+import sk.berops.android.fueller.dataModel.Car.VolumeUnit;
 import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
 
 public class History implements Serializable {
@@ -25,6 +27,13 @@ public class History implements Serializable {
 	public History() {
 		super();
 		entries = new LinkedList<Entry>();
+	}
+	
+	public void initAfterLoad(DistanceUnit du, VolumeUnit vu) {
+		for (Entry e : getEntries()) {
+			e.initAfterLoad(du, vu);
+		}
+		
 	}
 
 	public LinkedList<FuellingEntry> getFuellingEntries() {
