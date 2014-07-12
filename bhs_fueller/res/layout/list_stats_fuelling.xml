@@ -1,49 +1,107 @@
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/GridLayout1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:columnCount="4"
-    android:rowCount="2"
-    android:orientation="horizontal"
-    tools:context=".GridXMLActivity">
-    
-    <TextView
-        android:id="@+id/list_stats_entry_dynamic_id"
-        android:layout_margin="5dp"/>
-    
-    <TextView
-        android:id="@+id/list_stats_fuelling_date"
-        android:layout_margin="5dp"
-        android:layout_columnSpan="2"/>
-    
-    <TextView
-        android:id="@+id/list_stats_fuelling_fuel"
-        android:layout_margin="5dp"/>
-    
-    <TextView
-        android:id="@+id/list_stats_fuelling_consumption"
-        android:layout_margin="5dp"/>
-    
-    <TextView
-        android:id="@+id/list_stats_fuelling_volume"
-        android:layout_margin="5dp"/>
-    
-    <TextView
-        android:id="@+id/list_stats_fuelling_unit_price"
-        android:layout_margin="5dp"/>
-    
-    <TextView
-        android:id="@+id/list_stats_fuelling_total_price"
-        android:layout_margin="5dp"/>
-    
-</GridLayout>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:shrinkColumns="*"
+    android:stretchColumns="*" 
+    android:background="#5F8055">
 
-<!--
+    <TableRow
+        style="@style/HeaderRow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" >
+
+        <TextView
+            android:id="@+id/list_stats_entry_dynamic_id"
+            style="@style/HeaderText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left" />
+
+        <TextView
+            android:id="@+id/list_stats_fuelling_date"
+            style="@style/HeaderText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right" />
+    </TableRow>
+
+    <TableRow
+        style="@style/BodyRow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" >
+
+        <TextView
+            android:id="@+id/list_stats_fuelling_fuel"
+            android:typeface="monospace"
+            android:textAllCaps="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:gravity="left"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/list_stats_fuelling_consumption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:typeface="monospace" />
+    </TableRow>
+
+    <TableRow
+        style="@style/BodyRow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" >
+
+        <TextView
+            android:id="@+id/list_stats_fuelling_total_price"
+            style="@style/BodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="3"
+            android:gravity="right" />
+    </TableRow>
+
+    <TableRow
+        style="@style/BodyRow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" >
+
+        <TextView
+            android:id="@+id/list_stats_fuelling_unit_price"
+            style="@style/BodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="3"
+            android:gravity="right" />
+    </TableRow>
+
+    <TableRow
+        style="@style/BodyRow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" >
+
+        <TextView
+            android:id="@+id/list_stats_fuelling_volume"
+            style="@style/BodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="3"
+            android:gravity="right" />
+    </TableRow>
+
+</TableLayout><!--
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:padding="6dip" >
+    
     
     <TextView
         android:id="@+id/list_stats_entry_dynamic_id"
@@ -90,4 +148,4 @@
         android:layout_toRightOf="@id/list_stats_fuelling_fuel" />
     
 </RelativeLayout>
---> 
+-->
