@@ -53,10 +53,14 @@ public class ActivityCarAdd extends ActivityAddRecord {
 	@Override
 	protected void attachGuiObjects() {
 		buttonCommit = (Button)findViewById(R.id.activity_car_add_button_commit);
-		if (this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-			buttonCommit.setVisibility(View.VISIBLE);
-		}
 		buttonAddPhoto = (Button)findViewById(R.id.activity_car_add_button_get_photo);
+		if (this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+			System.out.println("TRUE TRUE");
+			buttonAddPhoto.setVisibility(View.VISIBLE);
+		} else {
+			System.out.println("FALSE FALSE");
+			buttonAddPhoto.setVisibility(View.GONE);
+		}
 		editTextBrand = (EditText)findViewById(R.id.activity_car_add_brand);
 		editTextModel = (EditText)findViewById(R.id.activity_car_add_model);
 		editTextLicensePlate = (EditText)findViewById(R.id.activity_car_add_license_plate);
