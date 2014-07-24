@@ -9,6 +9,7 @@ import java.util.Date;
 import sk.berops.android.fueller.dataModel.Garage;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
+import sk.berops.android.fueller.gui.Colors;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityAddEventGeneric;
 import sk.berops.android.fueller.gui.common.FragmentDatePicker;
@@ -167,5 +168,14 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		updateFuelVolume();
 		updateFuelType();
 		updateFuelPrice();
+	}
+
+	@Override
+	protected void styleGuiObjects() {
+		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextCost.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextVolume.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextComment.setHintTextColor(Colors.LIGHT_GREEN);
+		
 	}
 }

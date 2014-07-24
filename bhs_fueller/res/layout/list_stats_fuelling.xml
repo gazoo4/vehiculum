@@ -59,7 +59,7 @@
 
         <TextView
             android:id="@+id/list_stats_fuelling_total_price"
-            style="@style/BodyText"
+            style="@style/EntryText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_span="3"
@@ -74,7 +74,7 @@
 
         <TextView
             android:id="@+id/list_stats_fuelling_unit_price"
-            style="@style/BodyText"
+            style="@style/EntryText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_span="3"
@@ -89,7 +89,7 @@
 
         <TextView
             android:id="@+id/list_stats_fuelling_volume"
-            style="@style/BodyText"
+            style="@style/EntryText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_span="3"

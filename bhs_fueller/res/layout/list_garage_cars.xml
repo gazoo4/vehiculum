@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:padding="6dip" >
+    android:padding="6dip" 
+    >
     
     <TextView
         android:id="@+id/list_garage_cars_brand"
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/list_garage_cars_model"
         android:ellipsize="marquee"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:gravity="right" />
 
 </RelativeLayout> 

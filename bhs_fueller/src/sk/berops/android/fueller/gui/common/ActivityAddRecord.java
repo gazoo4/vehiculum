@@ -22,9 +22,12 @@ public abstract class ActivityAddRecord extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		attachGuiObjects();
+		styleGuiObjects();
 	}
 	
 	protected abstract void attachGuiObjects();
+	
+	protected abstract void styleGuiObjects();
 	
 	protected void updateCreationDate() {
 		final Calendar c = Calendar.getInstance();

@@ -4,6 +4,7 @@ import org.w3c.dom.NamedNodeMap;
 
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Record;
+import sk.berops.android.fueller.gui.Colors;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityAddRecord;
 import sk.berops.android.fueller.gui.common.pictures.CameraHandler;
@@ -118,5 +119,16 @@ public class ActivityCarAdd extends ActivityAddRecord {
 			startActivity(new Intent(this, CameraHandler.class));
 			break;
 		}
+	}
+
+	@Override
+	protected void styleGuiObjects() {
+		editTextBrand.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextModel.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextLicensePlate.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextModelYear.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextNickname.setHintTextColor(Colors.LIGHT_GREEN);
+		
 	}
 }
