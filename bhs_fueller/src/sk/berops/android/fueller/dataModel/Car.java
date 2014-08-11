@@ -3,6 +3,7 @@ package sk.berops.android.fueller.dataModel;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import org.simpleframework.xml.Attribute;
@@ -47,6 +48,8 @@ public class Car extends Record implements Serializable {
 	private ConsumptionUnit consumptionUnit;
 	private Consumption consumption;
 	private Consumption consumptionSI;
+	private CarType type;
+	private LinkedList<Axle> axles;
 	
 	public enum VolumeUnit{
 		LITER(0, "liter"), 
@@ -180,12 +183,88 @@ public class Car extends Record implements Serializable {
 		}
 	}
 	
-	public Car() {
+	public enum CarType{
+		SEDAN(0, "sedan"), 
+		WAGON(1, "wagon"),
+		CITY_CAR(2, "city car"),
+		COUPE(2, "coupe"),
+		ROADSTER(2, "roadster"),
+		HATCHBACK(2, "hatchback"),
+		SUV(2, "SUV"),
+		VAN(2, "VAN"),
+		PICKUP(2, "pickup"),
+		TRUCK(2, "truck"),
+		TRACTOR(2, "tractor"),
+		TRUCK_TRACTOR(2, "truck tractor"),
+		SEMI_TRAILER(2, "semi-trailer"),
+		MOTORBIKE(2, "motorbike"),
+		THREE_WHEELER(2, "3-wheeler");
+		private int id;
+		private String type;	
+		CarType(int id, String type) {
+			this.setId(id);
+			this.setType(type);
+		}
+		
+		private static Map<Integer, CarType> idToTypeMapping;
+
+		public static CarType getCarType(int id) {
+			if (idToTypeMapping == null) {
+				initMapping();
+			}
+			
+			CarType result = null;
+			result = idToTypeMapping.get(id);
+			return result;
+		}
+		
+		private static void initMapping() {
+			idToTypeMapping = new HashMap<Integer, CarType>();
+			for (CarType type : values()) {
+				idToTypeMapping.put(type.id, type);
+			}
+		}
+	
+		public String getType() {
+			return type;
+		}
+		public void setType(String type) {
+			this.type = type;
+		}
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+	}
+	
+	public Car(CarType type) {
 		super();
 		setHistory(new History());
 		this.setDistanceUnit(DistanceUnit.getDistanceUnit(0));
 		this.setVolumeUnit(VolumeUnit.getVolumeUnit(0));
 		this.setConsumptionUnit(ConsumptionUnit.getConsumptionUnit(0));
+		this.axles = createAxles(type);
+	}
+	
+	public Car() {
+		this(CarType.SEDAN);
+	}
+	
+	public Car(CarType type, String nickname) {
+		this(type);
+		this.setNickname(nickname);
+	}
+	
+	public Car(CarType type, String nickname, DistanceUnit du, VolumeUnit vu) {
+		this(type, nickname);
+		if (du != null) {
+			this.setDistanceUnit(du);
+		}
+		if (vu != null) {
+			this.setVolumeUnit(vu);
+		}
 	}
 	
 	public void initAfterLoad() {
@@ -206,22 +285,49 @@ public class Car extends Record implements Serializable {
 			setCurrentMileageSI(getCurrentMileage() * coef); 
 		}
 		
-		history.initAfterLoad(getDistanceUnit(), getVolumeUnit());
+		history.initAfterLoad(this);
 	}
 
-	public Car(String nickname) {
-		this();
-		this.setNickname(nickname);
-	}
-	
-	public Car(String nickname, DistanceUnit du, VolumeUnit vu) {
-		this(nickname);
-		if (du != null) {
-			this.setDistanceUnit(du);
+	private LinkedList<Axle> createAxles(CarType type) {
+		LinkedList<Axle> axles = new LinkedList<Axle>();
+		
+		switch (type) {
+		case CITY_CAR:
+		case COUPE:
+		case HATCHBACK:
+		case PICKUP:
+		case ROADSTER:
+		case SEDAN:
+		case SUV:
+		case TRACTOR:
+		case VAN:
+		case WAGON:
+			axles.add(new Axle(Axle.AxleType.STANDARD));
+			axles.add(new Axle(Axle.AxleType.STANDARD));
+			break;
+		case MOTORBIKE:
+			axles.add(new Axle(Axle.AxleType.SINGLE));
+			axles.add(new Axle(Axle.AxleType.SINGLE));
+			break;
+		case SEMI_TRAILER:
+			axles.add(new Axle(Axle.AxleType.STANDARD));
+			axles.add(new Axle(Axle.AxleType.STANDARD));
+			axles.add(new Axle(Axle.AxleType.STANDARD));
+			break;
+		case THREE_WHEELER:
+			axles.add(new Axle(Axle.AxleType.SINGLE));
+			axles.add(new Axle(Axle.AxleType.STANDARD));
+			break;
+		case TRUCK:
+		case TRUCK_TRACTOR:
+			axles.add(new Axle(Axle.AxleType.STANDARD));
+			axles.add(new Axle(Axle.AxleType.TANDEM));
+			axles.add(new Axle(Axle.AxleType.TANDEM));
+			break;
+		default: System.out.println("wrong car type specified");
+			break;
 		}
-		if (vu != null) {
-			this.setVolumeUnit(vu);
-		}
+		return axles;
 	}
 
 	public String getBrand() {
@@ -367,5 +473,21 @@ public class Car extends Record implements Serializable {
 
 	public void setConsumptionUnit(ConsumptionUnit consumptionUnit) {
 		this.consumptionUnit = consumptionUnit;
+	}
+
+	public CarType getType() {
+		return type;
+	}
+
+	public void setType(CarType type) {
+		this.type = type;
+	}
+
+	public LinkedList<Axle> getAxles() {
+		return axles;
+	}
+
+	public void setAxles(LinkedList<Axle> axles) {
+		this.axles = axles;
 	}
 }

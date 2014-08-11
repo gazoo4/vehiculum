@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.simpleframework.xml.Element;
 
+import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Car.DistanceUnit;
 import sk.berops.android.fueller.dataModel.Car.VolumeUnit;
 import sk.berops.android.fueller.dataModel.UnitConstants;
@@ -93,10 +94,10 @@ public class FuellingEntry extends Entry {
 	}
 	
 	@Override
-	public void initAfterLoad(DistanceUnit du, VolumeUnit vu) {
-		super.initAfterLoad(du, vu);
+	public void initAfterLoad(Car car) {
+		super.initAfterLoad(car);
 		double coef = 0;
-		switch (vu) {
+		switch (car.getVolumeUnit()) {
 		case IMPERIAL_GALLON: coef = UnitConstants.IMPERIAL_GALLON;
 			break;
 		case LITER: coef = UnitConstants.LITRE;

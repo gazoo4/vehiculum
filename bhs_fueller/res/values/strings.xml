@@ -24,7 +24,7 @@
     <string name="activity_garage_management_label"					>Your garage</string>
     <string name="activity_garage_management_button_car_add"		>Add a new car</string>
     <string name="activity_garage_management_info_text"				>List of cars in your garage:</string>
-    <string name="activity_main_button_entry_add"					>Add event</string>
+    <string name="activity_main_button_entry_add"					>Record a new event</string>
     <string name="activity_main_button_stats_view"					>View statistics</string>
     <string name="activity_main_button_garage_enter"				>Enter garage</string>
     <string name="activity_main_create_garage_alert"				>You didn\'t setup your garage yet. Prepare one now.</string>
