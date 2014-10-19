@@ -25,6 +25,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.*;
 import android.widget.*;
 
@@ -34,6 +35,7 @@ public class MainActivity extends Activity {
 	public static DataHandler dataHandler;
 	
 	private TextView textQuickStat;
+	private TextView textViewHeader;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class MainActivity extends Activity {
 		
 		dataHandler = new XMLHandler();
 		attachGuiObjects();
+		styleGuiObjects();
 		
 		if (garage == null) {
 			try {
@@ -88,6 +91,11 @@ public class MainActivity extends Activity {
 	
 	public void attachGuiObjects() {
 		textQuickStat = (TextView)findViewById(R.id.activity_main_quick_status);
+		textViewHeader = (TextView)findViewById(R.id.activity_main_header);
+	}
+	
+	public void styleGuiObjects() {
+		textViewHeader.setTypeface(Fonts.getGomariceFont(this));
 	}
 	
 	public void generateQuickStat() {
@@ -143,6 +151,8 @@ public class MainActivity extends Activity {
 	public void onBackPressed() {
 		startActivity(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME));
 	}
+	
+	
 	
 	public void onClick(View view) {
 		switch(view.getId()) {

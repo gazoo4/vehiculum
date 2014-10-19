@@ -84,6 +84,16 @@ public class ActivityCarAdd extends ActivityAddRecord {
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerVolumeUnit.setAdapter(adapterVolumeUnit);
 	}
+	
+	@Override
+	protected void styleGuiObjects() {
+		editTextBrand.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextModel.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextLicensePlate.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextModelYear.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextNickname.setHintTextColor(Colors.LIGHT_GREEN);
+	}
 
 	public void saveEntry(View view) {
 		car.setBrand(editTextBrand.getText().toString());
@@ -123,16 +133,5 @@ public class ActivityCarAdd extends ActivityAddRecord {
 			startActivity(new Intent(this, CameraHandler.class));
 			break;
 		}
-	}
-
-	@Override
-	protected void styleGuiObjects() {
-		editTextBrand.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextModel.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextLicensePlate.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextModelYear.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextNickname.setHintTextColor(Colors.LIGHT_GREEN);
-		
 	}
 }

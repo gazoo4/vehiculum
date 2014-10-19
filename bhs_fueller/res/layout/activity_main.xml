@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/merc_fueller"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/paper_texture"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -11,51 +11,239 @@
 
     <TextView
         android:id="@+id/activity_main_header"
-        android:layout_width="wrap_content"
+        style="@style/caption"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/activity_main_header" 
-        style="@style/caption"/>
-
-    <Button
-        android:id="@+id/activity_main_button_entry_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_main_quick_status"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/red_button"
-        android:onClick="onClick"
-        android:text="@string/activity_main_button_entry_add"
-        style="@style/button_text" />
-
-    <Button
-        android:id="@+id/activity_main_button_stats_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activity_main_button_entry_add"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/red_button"
-        android:onClick="onClick"
-        android:text="@string/activity_main_button_stats_view"
-        style="@style/button_text" />
-
-    <Button
-        android:id="@+id/activity_main_button_garage_enter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_main_button_stats_view"
-        android:background="@drawable/red_button"
-        android:onClick="onClick"
-        android:text="@string/activity_main_button_garage_enter"
-        style="@style/button_text" /> 
+        android:layout_marginBottom="20dp"
+        android:text="@string/activity_main_header" />
 
     <TextView
         android:id="@+id/activity_main_quick_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/activity_main_header"
         android:layout_marginBottom="10dp"
-        android:typeface="monospace"
+        android:textIsSelectable="true"
         android:textStyle="bold"
-        android:textIsSelectable="true" />
+        android:typeface="monospace"
+        android:visibility="gone" />
+
+    <TableLayout
+        android:id="@+id/activity_main_quick_stats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_main_header"
+        android:layout_marginBottom="40dp"
+        android:shrinkColumns="*"
+        android:stretchColumns="*" >
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/activity_main_car_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/temporary_car" />
+
+            <TextView
+                android:id="@+id/activity_main_car_nick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/temporary_mamut" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/activity_main_sincelast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/temporary_since" />
+
+            <TextView
+                android:id="@+id/activity_main_consumpvalue"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:gravity="right"
+                android:text="@string/temporary_consvalue" />
+
+            <TextView
+                android:id="@+id/activity_main_car_consumpunit"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:gravity="right"
+                android:text="@string/temporary_consunit" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/activity_main_consumpgasoline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/temporary_gasoline" />
+
+            <TextView
+                android:id="@+id/activity_main_gasoline_consumption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/temporary_consvalue" />
+
+            <TextView
+                android:id="@+id/activity_main_cons_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/temporary_consunit" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/activity_main_consumpLPG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/temporary_LPG" />
+
+            <TextView
+                android:id="@+id/activity_main_LPG_consumption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/temporary_consvalue" />
+
+            <TextView
+                android:id="@+id/activity_main_cons_unit2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/temporary_consunit" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/activity_main_consumpelectr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/temporary_electricity" />
+
+            <TextView
+                android:id="@+id/activity_main_electr_consumption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/temporary_consvalue" />
+
+            <TextView
+                android:id="@+id/activity_main_cons_unit3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/temporary_consunit" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:id="@+id/activity_main_consumpCNG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/temporary_CNG" />
+
+            <TextView
+                android:id="@+id/activity_main_CNG_consumption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/temporary_consvalue" />
+
+            <TextView
+                android:id="@+id/activity_main_cons_unit4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/temporary_consunit" />
+        </TableRow>
+
+        <TableRow
+            android:layout_height="wrap_content" >
+            <TextView
+                android:id="@+id/activity_main_consumpcombined"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/temporary_comb" />
+
+            <TextView
+                android:id="@+id/activity_main_combined_consumption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/temporary_consvalue" />
+
+            <TextView
+                android:id="@+id/activity_main_cons_unit5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/temporary_consunit" /> 
+        </TableRow>
+    </TableLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <Button
+            android:id="@+id/activity_main_button_entry_add"
+            style="@style/button_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/red_button"
+            android:onClick="onClick"
+            android:text="@string/activity_main_button_entry_add" />
+
+        <Button
+            android:id="@+id/activity_main_button_stats_view"
+            style="@style/button_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_main_button_entry_add"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/red_button"
+            android:onClick="onClick"
+            android:text="@string/activity_main_button_stats_view" />
+
+        <Button
+            android:id="@+id/activity_main_button_garage_enter"
+            style="@style/button_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_main_button_stats_view"
+            android:background="@drawable/red_button"
+            android:onClick="onClick"
+            android:text="@string/activity_main_button_garage_enter" />
+    </RelativeLayout>
 
 </RelativeLayout>

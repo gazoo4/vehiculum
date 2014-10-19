@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:shrinkColumns="*"
     android:stretchColumns="*" 
-    android:background="#5F8055">
+    >
 
     <TableRow
         style="@style/HeaderRow"

@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" 
-    android:background="@drawable/backg_addevent">
+    android:background="@drawable/paper_texture">
 
     <TextView
         android:id="@+id/activity_stats_show_header"

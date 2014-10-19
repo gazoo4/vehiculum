@@ -10,6 +10,7 @@ import sk.berops.android.fueller.dataModel.Garage;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.gui.Colors;
+import sk.berops.android.fueller.gui.Fonts;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityAddEventGeneric;
 import sk.berops.android.fueller.gui.common.FragmentDatePicker;
@@ -93,6 +94,21 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerFuelType.setAdapter(adapterFuelType);
 	}
+	
+	@Override
+	protected void styleGuiObjects() {
+		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextCost.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextVolume.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextComment.setHintTextColor(Colors.LIGHT_GREEN);
+		
+		textViewDisplayDate.setTypeface(Fonts.getFontBook(this));
+		textViewPrice.setTypeface(Fonts.getFontBook(this));
+		editTextMileage.setTypeface(Fonts.getFontPort(this));
+		editTextCost.setTypeface(Fonts.getFontPort(this));
+		editTextVolume.setTypeface(Fonts.getFontPort(this));
+		editTextComment.setTypeface(Fonts.getFontPort(this));
+	}
 
 	protected void refreshPrice() {
 		double volume;
@@ -168,14 +184,5 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		updateFuelVolume();
 		updateFuelType();
 		updateFuelPrice();
-	}
-
-	@Override
-	protected void styleGuiObjects() {
-		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextCost.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextVolume.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextComment.setHintTextColor(Colors.LIGHT_GREEN);
-		
 	}
 }
