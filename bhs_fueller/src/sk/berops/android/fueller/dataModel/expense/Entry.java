@@ -6,6 +6,7 @@ import java.util.Date;
 
 import org.simpleframework.xml.Element;
 
+import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Car.DistanceUnit;
 import sk.berops.android.fueller.dataModel.Car.VolumeUnit;
 import sk.berops.android.fueller.dataModel.Record;
@@ -24,10 +25,10 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 	@Element(name="expenseType")
 	private ExpenseType expenseType;
 	
-	public void initAfterLoad(DistanceUnit du, VolumeUnit vu) {
+	public void initAfterLoad(Car car) {
 		if (getMileageSI() == 0 && getMileage() != 0) {
 			double coef = 0;
-			switch (du) {
+			switch (car.getDistanceUnit()) {
 			case KILOMETER: coef = UnitConstants.KILOMETER;
 				break;
 			case MILE: coef = UnitConstants.MILE;
@@ -76,7 +77,7 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 		FUEL("fuel"), 
 		MAINTENANCE("maintenance"), //any maintenance action
 		SERVICE("service"), //tow service
-		FEE("fee"); //highway fee, vignette...
+		FEE("fee"); //ferry fee, highway vignette...
 		private String value;	
 		ExpenseType(String value) {
 			this.setValue(value);
