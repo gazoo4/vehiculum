@@ -28,6 +28,7 @@
     <string name="activity_car_add_volume_units_hint"				>Volume units</string>
     <string name="activity_car_edit_label"							>Edit your car</string>
     <string name="activity_entry_add_button_refuel"					>Refuelling</string>
+    <string name="activity_entry_add_button_tyres_change"			>Change tyres</string>
     <string name="activity_entry_add_fields_missing_alert"			>Some of the required fields are not filled-in:</string>
     <string name="activity_entry_add_header"						>Pick an action to record</string>
     <string name="activity_entry_add_label"							>Adding new event</string>
@@ -51,6 +52,12 @@
     <string name="activity_stats_show_button_charts"				>Charts</string>
     <string name="activity_stats_show_button_fuelling"				>Consumption stats</string>
     <string name="activity_stats_show_header"						>Statistic center</string>
+    <string name="activity_tyre_change_button_date_change"			>Change date</string>
+    <string name="activity_tyre_change_button_entry_save"			>Save the record</string>
+    <string name="activity_tyre_change_comment_hint"				>Additional comment</string>
+    <string name="activity_tyre_change_labor_cost_hint"				>Labor cost</string>
+    <string name="activity_tyre_change_mileage_hint"				>Mileage</string>
+    <string name="activity_tyre_change_small_parts_cost_hint"		>Cost of small parts</string>
     
     
     

@@ -69,13 +69,12 @@ public abstract class ActivityAddEventGeneric extends ActivityAddRecord implemen
 		MainActivity.garage.getActiveCar().setCurrentMileage(entry.getMileage());
 	}
 	
-	private void updateCost() {
+	protected void updateCost() {
 		try {
 			entry.setCost(Double.parseDouble(editTextCost.getText().toString()));
 		} catch (NumberFormatException ex) {
 			throwAlertFieldsEmpty(getResources().getString(R.string.activity_refuel_cost_hint));
 		}
-		
 	}
 	
 	private void updateComment() {

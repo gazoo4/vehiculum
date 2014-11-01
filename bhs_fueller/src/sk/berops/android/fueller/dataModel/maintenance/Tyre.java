@@ -23,6 +23,24 @@ public class Tyre extends GenericPart {
 	private String dot;
 	@Element(name="season")
 	private Season season;
+	@Element(name="wearLevel")
+	private int wearLevel; //in percentages
+	@Element(name="price")
+	private double price;
+	
+	public Tyre() {
+		this(0);
+	}
+	
+	public Tyre(int wearLevel) {
+		super();
+		this.wearLevel = wearLevel;
+		if (wearLevel == 0) {
+			this.setUsed(false);
+		} else {
+			this.setUsed(true);
+		}
+	}
 	
 	public enum Season{
 		SUMMER(0, "summer"),
@@ -67,5 +85,85 @@ public class Tyre extends GenericPart {
 		public void setId(int id) {
 			this.id = id;
 		}
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public double getDiameter() {
+		return diameter;
+	}
+
+	public void setDiameter(double diameter) {
+		this.diameter = diameter;
+	}
+
+	public int getWeightIndex() {
+		return weightIndex;
+	}
+
+	public void setWeightIndex(int weightIndex) {
+		this.weightIndex = weightIndex;
+	}
+
+	public int getSpeedIndex() {
+		return speedIndex;
+	}
+
+	public void setSpeedIndex(int speedIndex) {
+		this.speedIndex = speedIndex;
+	}
+
+	public String getDot() {
+		return dot;
+	}
+
+	public void setDot(String dot) {
+		this.dot = dot;
+	}
+
+	public Season getSeason() {
+		return season;
+	}
+
+	public void setSeason(Season season) {
+		this.season = season;
+	}
+
+	public int getWearLevel() {
+		return wearLevel;
+	}
+
+	public void setWearLevel(int wearLevel) {
+		this.wearLevel = wearLevel;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 }

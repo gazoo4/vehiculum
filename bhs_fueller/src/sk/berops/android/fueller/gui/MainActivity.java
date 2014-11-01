@@ -26,6 +26,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 
@@ -49,6 +50,7 @@ public class MainActivity extends Activity {
 		if (garage == null) {
 			try {
 				garage = dataHandler.loadGarage();
+				Log.d("DEBUG", garage.getActiveCar().getNickname());
 				Toast.makeText(getApplicationContext(), "Loaded car: "+ garage.getActiveCar().getNickname(), Toast.LENGTH_LONG).show();
 				SimpleConsumption.calculateConsumption(garage.getActiveCar().getHistory());
 				//TODO: set the following 5, true params in options

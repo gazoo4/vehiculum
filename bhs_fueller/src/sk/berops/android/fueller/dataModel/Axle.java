@@ -6,20 +6,25 @@ import java.util.Map;
 import org.simpleframework.xml.Element;
 
 import sk.berops.android.fueller.dataModel.Car.VolumeUnit;
+import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 
 public class Axle {
 
 	@Element(name="axleType")
 	private AxleType axleType;
+	@Element(name="drivable")
+	private boolean drivable;
+	@Element(name="tyres")
+	private Tyre[] tyres; //tyres from left to right (from the birds perspective view)
 	
 	public Axle() {
-		super();
-		setAxleType(AxleType.STANDARD);
+		this(AxleType.STANDARD);
 	}
 	
 	public Axle(AxleType type) {
 		super();
 		setAxleType(type);
+		createTyres();
 	}
 	
 	public enum AxleType{
@@ -65,10 +70,43 @@ public class Axle {
 			this.id = id;
 		}
 	}
+	
+	private void createTyres() {
+		switch (getAxleType()) {
+		case SINGLE:
+			tyres = new Tyre[1];
+			break;
+		case STANDARD:
+			tyres = new Tyre[2];
+			break;
+		case TANDEM:
+			tyres = new Tyre[4];
+			break;
+		default:
+			break;
+		}
+	}
+	
 	public AxleType getAxleType() {
 		return axleType;
 	}
 	public void setAxleType(AxleType axleType) {
 		this.axleType = axleType;
+	}
+
+	public boolean isDrivable() {
+		return drivable;
+	}
+
+	public void setDrivable(boolean drivable) {
+		this.drivable = drivable;
+	}
+
+	public Tyre[] getTyres() {
+		return tyres;
+	}
+
+	public void setTyres(Tyre[] tyres) {
+		this.tyres = tyres;
 	}
 }

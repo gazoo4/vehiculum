@@ -185,4 +185,12 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		updateFuelType();
 		updateFuelPrice();
 	}
+
+	@Override
+	protected void styleGuiObjects() {
+		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextCost.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextVolume.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextComment.setHintTextColor(Colors.LIGHT_GREEN);
+	}
 }

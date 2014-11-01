@@ -10,15 +10,19 @@ import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 
 public class TyreChangeEntry extends Entry {
 	
-	@Element(name="newTyres")
-	private Tyre[] newTyres;
 	private Car car;
+	@Element(name="axles")
 	private LinkedList<Axle> axles;
+	@Element(name="laborCost", required=false)
+	private double laborCost;
+	@Element(name="extraMaterialCost", required=false)
+	private double extraMaterialCost;
 	
+	@SuppressWarnings("unchecked")
 	public TyreChangeEntry(Car car) {
 		super();
 		this.car = car;
-		this.axles = car.getAxles();
+		this.axles = (LinkedList<Axle>) car.getAxles().clone();
 	}
 	
 	@Override
@@ -26,14 +30,6 @@ public class TyreChangeEntry extends Entry {
 		super.initAfterLoad(car);
 		this.car = car;
 		this.axles = car.getAxles();
-	}
-
-	public Tyre[] getNewTyres() {
-		return newTyres;
-	}
-
-	public void setNewTyres(Tyre[] newTyres) {
-		this.newTyres = newTyres;
 	}
 
 	public LinkedList<Axle> getAxles() {
@@ -50,5 +46,21 @@ public class TyreChangeEntry extends Entry {
 
 	public void setCar(Car car) {
 		this.car = car;
+	}
+
+	public double getLaborCost() {
+		return laborCost;
+	}
+
+	public void setLaborCost(double laborCost) {
+		this.laborCost = laborCost;
+	}
+
+	public double getExtraMaterialCost() {
+		return extraMaterialCost;
+	}
+
+	public void setExtraMaterialCost(double extraMaterialCost) {
+		this.extraMaterialCost = extraMaterialCost;
 	}
 }

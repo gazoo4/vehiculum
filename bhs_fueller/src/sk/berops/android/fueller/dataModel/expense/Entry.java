@@ -77,6 +77,7 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 		FUEL("fuel"), 
 		MAINTENANCE("maintenance"), //any maintenance action
 		SERVICE("service"), //tow service
+		TYRES("tyres"),
 		FEE("fee"); //ferry fee, highway vignette...
 		private String value;	
 		ExpenseType(String value) {

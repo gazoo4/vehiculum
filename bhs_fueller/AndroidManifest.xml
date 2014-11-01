@@ -25,32 +25,35 @@
             android:name="sk.berops.android.fueller.gui.common.pictures.CameraHandler"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.fuelling.ActivityRefuel"
-            android:label="@string/app_name"/>
-        <activity
-            android:name="sk.berops.android.fueller.gui.fuelling.ActivityFuellingEdit"
-            android:label="@string/app_name"/>
-        <activity
             android:name="sk.berops.android.fueller.gui.garage.ActivityCarAdd"
             android:label="@string/activity_car_add_label"/>
         <activity
             android:name="sk.berops.android.fueller.gui.garage.ActivityCarEdit"
             android:label="@string/activity_car_edit_label"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.garage.ActivityGarageManagement"
-            android:label="@string/activity_garage_management_label"/>
-        <activity
             android:name="sk.berops.android.fueller.gui.report.ActivityCharts"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.report.ActivityStatsShow"
+            android:name="sk.berops.android.fueller.gui.ActivityEntryAdd"
+            android:label="@string/activity_entry_add_label"/>
+        <activity
+            android:name="sk.berops.android.fueller.gui.fuelling.ActivityFuellingEdit"
+            android:label="@string/app_name"/>
+        <activity
+            android:name="sk.berops.android.fueller.gui.garage.ActivityGarageManagement"
+            android:label="@string/activity_garage_management_label"/>
+                <activity
+            android:name="sk.berops.android.fueller.gui.fuelling.ActivityRefuel"
             android:label="@string/app_name"/>
         <activity
             android:name="sk.berops.android.fueller.gui.report.ActivityStatsFuelling"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.ActivityEntryAdd"
-            android:label="@string/activity_entry_add_label"/>
+            android:name="sk.berops.android.fueller.gui.report.ActivityStatsShow"
+            android:label="@string/app_name"/>
+        <activity
+            android:name="sk.berops.android.fueller.gui.maintenance.ActivityTyreChange"
+            android:label="@string/app_name"/>
     </application>
 
     <uses-feature

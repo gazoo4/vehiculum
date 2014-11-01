@@ -44,12 +44,14 @@ public class Car extends Record implements Serializable {
 	private VolumeUnit volumeUnit;
 	@Element(name="distanceUnit", required=false)
 	private DistanceUnit distanceUnit;
-	@Element (name="consumptionUnit", required=false)
+	@Element(name="consumptionUnit", required=false)
 	private ConsumptionUnit consumptionUnit;
+	@Element(name="axles", required=false)
+	private LinkedList<Axle> axles;
+	@Element(name="type", required=false)
+	private CarType type;
 	private Consumption consumption;
 	private Consumption consumptionSI;
-	private CarType type;
-	private LinkedList<Axle> axles;
 	
 	public enum VolumeUnit{
 		LITER(0, "liter"), 
@@ -245,7 +247,8 @@ public class Car extends Record implements Serializable {
 		this.setDistanceUnit(DistanceUnit.getDistanceUnit(0));
 		this.setVolumeUnit(VolumeUnit.getVolumeUnit(0));
 		this.setConsumptionUnit(ConsumptionUnit.getConsumptionUnit(0));
-		this.axles = createAxles(type);
+		this.setType(type);
+		this.axles = createAxles(getType());
 	}
 	
 	public Car() {
