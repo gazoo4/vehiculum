@@ -110,6 +110,21 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		editTextComment.setTypeface(Fonts.getFontPort(this));
 	}
 
+	@Override
+	protected void styleGuiObjects() {
+		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextCost.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextVolume.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextComment.setHintTextColor(Colors.LIGHT_GREEN);
+		
+		textViewDisplayDate.setTypeface(Fonts.getFontBook(this));
+		textViewPrice.setTypeface(Fonts.getFontBook(this));
+		editTextMileage.setTypeface(Fonts.getFontPort(this));
+		editTextCost.setTypeface(Fonts.getFontPort(this));
+		editTextVolume.setTypeface(Fonts.getFontPort(this));
+		editTextComment.setTypeface(Fonts.getFontPort(this));
+	}
+	
 	protected void refreshPrice() {
 		double volume;
 		double cost;
@@ -184,13 +199,5 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		updateFuelVolume();
 		updateFuelType();
 		updateFuelPrice();
-	}
-
-	@Override
-	protected void styleGuiObjects() {
-		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextCost.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextVolume.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextComment.setHintTextColor(Colors.LIGHT_GREEN);
 	}
 }

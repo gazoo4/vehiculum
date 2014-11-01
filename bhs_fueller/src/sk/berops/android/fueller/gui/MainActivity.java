@@ -26,7 +26,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+<<<<<<< Upstream, based on origin/master
 import android.util.Log;
+=======
+>>>>>>> 5ef7db0 sync
 import android.view.*;
 import android.widget.*;
 
