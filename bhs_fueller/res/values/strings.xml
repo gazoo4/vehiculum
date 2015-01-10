@@ -52,12 +52,15 @@
     <string name="activity_stats_show_button_charts"				>Charts</string>
     <string name="activity_stats_show_button_fuelling"				>Consumption stats</string>
     <string name="activity_stats_show_header"						>Statistic center</string>
+    <string name="activity_tyre_change_button_advanced"				>Advanced</string>
     <string name="activity_tyre_change_button_date_change"			>Change date</string>
     <string name="activity_tyre_change_button_entry_save"			>Save the record</string>
     <string name="activity_tyre_change_comment_hint"				>Additional comment</string>
     <string name="activity_tyre_change_labor_cost_hint"				>Labor cost</string>
     <string name="activity_tyre_change_mileage_hint"				>Mileage</string>
     <string name="activity_tyre_change_small_parts_cost_hint"		>Cost of small parts</string>
+    <string name="activity_tyre_change_total_cost_hint"				>Total cost</string>
+    <string name="activity_tyre_change_tyres_cost_hint"				>Cost of tyres (if bought now)</string>
     
     
     

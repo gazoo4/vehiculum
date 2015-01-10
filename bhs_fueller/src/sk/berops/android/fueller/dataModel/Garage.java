@@ -8,18 +8,22 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 import sk.berops.android.fueller.dataModel.expense.Entry;
+import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.gui.MainActivity;
 
 @Root
 public class Garage {
 	@ElementList(inline=true, required=false)
 	private LinkedList<Car> cars;
+	@ElementList(inline=true, required=false)
+	private LinkedList<Tyre> tyres;
 	@Element(name="activeCar", required=false)
 	private int activeCarId;
 	
 	public Garage() {
 		super();
 		cars = new LinkedList<Car>();
+		tyres = new LinkedList<Tyre>();
 		activeCarId = -1;
 	}
 	
@@ -34,6 +38,14 @@ public class Garage {
 	public void addCar(Car car) {
 		cars.add(car);
 		setActiveCarId(getCars().size() - 1);
+	}
+	
+	public LinkedList<Tyre> getTyres() {
+		return tyres;
+	}
+	
+	public void addTyre(Tyre tyre) {
+		tyres.add(tyre);
 	}
 	
 	public Car getActiveCar() {

@@ -1,9 +1,11 @@
 package sk.berops.android.fueller.dataModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 
 import sk.berops.android.fueller.dataModel.Car.VolumeUnit;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
@@ -14,8 +16,8 @@ public class Axle {
 	private AxleType axleType;
 	@Element(name="drivable")
 	private boolean drivable;
-	@Element(name="tyres")
-	private Tyre[] tyres; //tyres from left to right (from the birds perspective view)
+	@ElementList(inline=true, required=false)
+	private ArrayList<Tyre> tyres; //tyres from left to right (from the birds perspective view)
 	
 	public Axle() {
 		this(AxleType.STANDARD);
@@ -72,15 +74,20 @@ public class Axle {
 	}
 	
 	private void createTyres() {
+		tyres = new ArrayList<Tyre>();
 		switch (getAxleType()) {
 		case SINGLE:
-			tyres = new Tyre[1];
+			tyres.add(new Tyre());
 			break;
 		case STANDARD:
-			tyres = new Tyre[2];
+			tyres.add(new Tyre());
+			tyres.add(new Tyre());
 			break;
 		case TANDEM:
-			tyres = new Tyre[4];
+			tyres.add(new Tyre());
+			tyres.add(new Tyre());
+			tyres.add(new Tyre());
+			tyres.add(new Tyre());
 			break;
 		default:
 			break;
@@ -102,11 +109,11 @@ public class Axle {
 		this.drivable = drivable;
 	}
 
-	public Tyre[] getTyres() {
+	public ArrayList<Tyre> getTyres() {
 		return tyres;
 	}
 
-	public void setTyres(Tyre[] tyres) {
+	public void setTyres(ArrayList<Tyre> tyres) {
 		this.tyres = tyres;
 	}
 }

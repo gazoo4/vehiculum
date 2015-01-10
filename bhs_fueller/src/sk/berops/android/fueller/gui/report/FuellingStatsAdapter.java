@@ -61,7 +61,7 @@ public class FuellingStatsAdapter extends ArrayAdapter<FuellingEntry> {
 			double avg = c.getPerType().get(entry.getFuelType());
 			consumption.setBackgroundColor(SimpleConsumption.getConsumptionColor(avg, entry.getConsumption()));
 		} catch (NullPointerException e) {
-			// TODO if not enough refuellings done, this should not be a problem (no specific collor will be picked
+			// TODO if not enough refuelings done, this should not be a problem (no specific color will be picked
 		}
 		return rowView;
 	}

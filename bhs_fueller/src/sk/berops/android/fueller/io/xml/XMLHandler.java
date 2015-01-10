@@ -8,6 +8,7 @@ import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import sk.berops.android.fueller.Fueller;
 import sk.berops.android.fueller.dataModel.Car;
@@ -32,8 +33,17 @@ public class XMLHandler extends DataHandler {
 		File file = new File(getFullFileName(fileName));
 		Garage garage;
 		try {
+			long startTime = System.nanoTime();
 			garage = serializer.read(Garage.class, file);
+			long endTime = System.nanoTime();
+			
+			Log.d("DEBUG", "Garage loaded in "+ (endTime - startTime)/1000000 +"ms");
+			
+			startTime = System.nanoTime();
 			garage.initAfterLoad();
+			endTime = System.nanoTime();
+			
+			Log.d("DEBUG", "Garage initalized in "+ (endTime - startTime)/1000000 +"ms");
 			return garage;
 		} catch (FileNotFoundException ex) {
 			throw ex;

@@ -3,6 +3,7 @@ package sk.berops.android.fueller.dataModel.expense;
 import java.util.LinkedList;
 
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 
 import sk.berops.android.fueller.dataModel.Axle;
 import sk.berops.android.fueller.dataModel.Car;
@@ -11,25 +12,24 @@ import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 public class TyreChangeEntry extends Entry {
 	
 	private Car car;
-	@Element(name="axles")
+	@ElementList(inline=true, required=false)
 	private LinkedList<Axle> axles;
 	@Element(name="laborCost", required=false)
 	private double laborCost;
 	@Element(name="extraMaterialCost", required=false)
 	private double extraMaterialCost;
+	@Element(name="tyresCost", required=false)
+	private double tyresCost;
 	
-	@SuppressWarnings("unchecked")
 	public TyreChangeEntry(Car car) {
 		super();
 		this.car = car;
-		this.axles = (LinkedList<Axle>) car.getAxles().clone();
 	}
 	
 	@Override
 	public void initAfterLoad(Car car) {
 		super.initAfterLoad(car);
 		this.car = car;
-		this.axles = car.getAxles();
 	}
 
 	public LinkedList<Axle> getAxles() {
@@ -62,5 +62,13 @@ public class TyreChangeEntry extends Entry {
 
 	public void setExtraMaterialCost(double extraMaterialCost) {
 		this.extraMaterialCost = extraMaterialCost;
+	}
+
+	public double getTyresCost() {
+		return tyresCost;
+	}
+
+	public void setTyresCost(double tyresCost) {
+		this.tyresCost = tyresCost;
 	}
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 import sk.berops.android.fueller.dataModel.calculation.Consumption;
@@ -46,7 +47,7 @@ public class Car extends Record implements Serializable {
 	private DistanceUnit distanceUnit;
 	@Element(name="consumptionUnit", required=false)
 	private ConsumptionUnit consumptionUnit;
-	@Element(name="axles", required=false)
+	@ElementList(inline=true, required=false)
 	private LinkedList<Axle> axles;
 	@Element(name="type", required=false)
 	private CarType type;

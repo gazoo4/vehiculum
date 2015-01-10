@@ -71,7 +71,7 @@ public abstract class ActivityAddEventGeneric extends ActivityAddRecord implemen
 	
 	protected void updateCost() {
 		try {
-			entry.setCost(Double.parseDouble(editTextCost.getText().toString()));
+			entry.setCost(GuiUtils.extractDouble(editTextCost));
 		} catch (NumberFormatException ex) {
 			throwAlertFieldsEmpty(getResources().getString(R.string.activity_refuel_cost_hint));
 		}

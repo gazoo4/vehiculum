@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 
 import sk.berops.android.fueller.dataModel.maintenance.ReplacementPart;
 
@@ -13,7 +14,7 @@ public class MaintenanceEntry extends Entry {
 	private Type type;
 	@Element(name="laborCost", required=false)
 	private double laborCost;
-	@Element(name="replacedParts", required=false)
+	@ElementList(inline=true, required=false)
 	private LinkedList<ReplacementPart> replacedParts;
 	public MaintenanceEntry() {
 		super();

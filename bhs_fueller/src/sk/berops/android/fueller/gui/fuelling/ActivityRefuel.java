@@ -14,6 +14,7 @@ import sk.berops.android.fueller.gui.Fonts;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityAddEventGeneric;
 import sk.berops.android.fueller.gui.common.FragmentDatePicker;
+import sk.berops.android.fueller.gui.common.GuiUtils;
 import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.R.id;
 import android.app.Activity;
@@ -109,21 +110,6 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		editTextVolume.setTypeface(Fonts.getFontPort(this));
 		editTextComment.setTypeface(Fonts.getFontPort(this));
 	}
-
-	@Override
-	protected void styleGuiObjects() {
-		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextCost.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextVolume.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextComment.setHintTextColor(Colors.LIGHT_GREEN);
-		
-		textViewDisplayDate.setTypeface(Fonts.getFontBook(this));
-		textViewPrice.setTypeface(Fonts.getFontBook(this));
-		editTextMileage.setTypeface(Fonts.getFontPort(this));
-		editTextCost.setTypeface(Fonts.getFontPort(this));
-		editTextVolume.setTypeface(Fonts.getFontPort(this));
-		editTextComment.setTypeface(Fonts.getFontPort(this));
-	}
 	
 	protected void refreshPrice() {
 		double volume;
@@ -131,8 +117,8 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		double price;
 
 		try {
-			volume = Double.parseDouble(editTextVolume.getText().toString());
-			cost = Double.parseDouble(editTextCost.getText().toString());
+			volume = GuiUtils.extractDouble(editTextVolume);
+			cost = GuiUtils.extractDouble(editTextCost);
 			price = cost / volume;
 
 			String formattedPrice;
@@ -148,8 +134,7 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 	private void updateFuelVolume() {
 		double volume = 0;
 		try {
-			volume = Double.parseDouble(editTextVolume
-					.getText().toString());
+			volume = GuiUtils.extractDouble(editTextVolume);
 		} catch (NumberFormatException ex) {
 			throwAlertFieldsEmpty(getResources().getString(
 					R.string.activity_refuel_volume_hint));
@@ -173,8 +158,8 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		double price;
 
 		try {
-			volume = Double.parseDouble(editTextVolume.getText().toString());
-			cost = Double.parseDouble(editTextCost.getText().toString());
+			volume = GuiUtils.extractDouble(editTextVolume);
+			cost = GuiUtils.extractDouble(editTextCost);
 			price = cost / volume;
 			fuellingEntry.setFuelPrice(price);
 		} catch (NumberFormatException ex) {
@@ -183,15 +168,15 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 	}
 
 	public void onClick(View view) {
-		entryOK = true;
-		saveEntry(view);
-		if (entryOK) {
-			switch (view.getId()) {
-			case R.id.activity_refuel_button_commit:
-				super.saveFieldsAndPersist(view);
-				startActivity(new Intent(this, MainActivity.class));
-				break;
+		switch (view.getId()) {
+		case R.id.activity_refuel_button_commit:
+			entryOK = true;
+			saveEntry(view);
+			if (entryOK) {
+			super.saveFieldsAndPersist(view);
+			startActivity(new Intent(this, MainActivity.class));
 			}
+			break;
 		}
 	}
 	

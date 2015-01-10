@@ -4,11 +4,11 @@ import org.simpleframework.xml.Element;
 
 public abstract class GenericItem {
 	
-	@Element(name="producer")
+	@Element(name="producer", required=false)
 	private String producer;
-	@Element(name="partID")
+	@Element(name="partID", required=false)
 	private String partID;
-	@Element(name="price")
+	@Element(name="price", required=false)
 	private double price;
 	//@Element(category="category")
 	//private ??? category 

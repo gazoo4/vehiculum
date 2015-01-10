@@ -7,26 +7,24 @@ import org.simpleframework.xml.Element;
 
 public class Tyre extends GenericPart {
 
-	@Element(name="model")
+	@Element(name="model", required=false)
 	private String model;
-	@Element(name="width")
+	@Element(name="width", required=false)
 	private int width;
-	@Element(name="height")
+	@Element(name="height", required=false)
 	private int height;
-	@Element(name="diameter")
+	@Element(name="diameter", required=false)
 	private double diameter;
-	@Element(name="weightIndex")
+	@Element(name="weightIndex", required=false)
 	private int weightIndex;
-	@Element(name="speedIndex")
+	@Element(name="speedIndex", required=false)
 	private int speedIndex;
-	@Element(name="dot")
+	@Element(name="dot", required=false)
 	private String dot;
-	@Element(name="season")
+	@Element(name="season", required=false)
 	private Season season;
-	@Element(name="wearLevel")
+	@Element(name="wearLevel", required=false)
 	private int wearLevel; //in percentages
-	@Element(name="price")
-	private double price;
 	
 	public Tyre() {
 		this(0);
@@ -157,13 +155,5 @@ public class Tyre extends GenericPart {
 
 	public void setWearLevel(int wearLevel) {
 		this.wearLevel = wearLevel;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
 	}
 }
