@@ -23,17 +23,29 @@ public class Tyre extends GenericPart {
 	private String dot;
 	@Element(name="season", required=false)
 	private Season season;
-	@Element(name="wearLevel", required=false)
-	private int wearLevel; //in percentages
+	@Element(name="threadLevel", required=false)
+	private double threadLevel; //in mm
+	@Element(name="threadMin", required=false)
+	private int threadMin; //in mm
+	@Element(name="threadMax", required=false)
+	private int threadMax; //in mm
+	@Element(name="mileageDriveAxle", required=false)
+	private double mileageDriveAxle;
+	private double mileageDriveAxleSI;
+	@Element(name="mileageNonDriveAxle", required=false)
+	private double mileageNonDriveAxle;
+	private double mileageNonDriveAxleSI;
+	
+	private static final int TEMP_DEFAULT_THREAD_LEVEL = 9; //in mm
 	
 	public Tyre() {
-		this(0);
+		this(TEMP_DEFAULT_THREAD_LEVEL);
 	}
 	
-	public Tyre(int wearLevel) {
+	public Tyre(int threadLevel) {
 		super();
-		this.wearLevel = wearLevel;
-		if (wearLevel == 0) {
+		this.threadLevel = threadLevel;
+		if (threadLevel == TEMP_DEFAULT_THREAD_LEVEL) {
 			this.setUsed(false);
 		} else {
 			this.setUsed(true);
@@ -140,6 +152,17 @@ public class Tyre extends GenericPart {
 	public void setDot(String dot) {
 		this.dot = dot;
 	}
+	
+	public int getYear() {
+		String string = getDot().substring(2, 4);
+		int year = Integer.valueOf(string);
+		if (year > 50) {
+			year +=1900;
+		} else {
+			year +=2000;
+		}
+		return year;
+	}
 
 	public Season getSeason() {
 		return season;
@@ -150,10 +173,63 @@ public class Tyre extends GenericPart {
 	}
 
 	public int getWearLevel() {
-		return wearLevel;
+		/* returns wear level in percentages; new tyres = 100%; used tyres < 100% */
+		return (int) ((getThreadMax() - getThreadLevel()) / (getThreadMax() - getThreadMin()) * 100);
 	}
 
-	public void setWearLevel(int wearLevel) {
-		this.wearLevel = wearLevel;
+	public double getMileageDriveAxle() {
+		return mileageDriveAxle;
+	}
+
+	public void setMileageDriveAxle(double mileageDriveAxle) {
+		this.mileageDriveAxle = mileageDriveAxle;
+	}
+
+	public double getMileageDriveAxleSI() {
+		return mileageDriveAxleSI;
+	}
+
+	public void setMileageDriveAxleSI(double mileageDriveAxleSI) {
+		this.mileageDriveAxleSI = mileageDriveAxleSI;
+	}
+
+	public double getMileageNonDriveAxle() {
+		return mileageNonDriveAxle;
+	}
+
+	public void setMileageNonDriveAxle(double mileageNonDriveAxle) {
+		this.mileageNonDriveAxle = mileageNonDriveAxle;
+	}
+
+	public double getMileageNonDriveAxleSI() {
+		return mileageNonDriveAxleSI;
+	}
+
+	public void setMileageNonDriveAxleSI(double mileageNonDriveAxleSI) {
+		this.mileageNonDriveAxleSI = mileageNonDriveAxleSI;
+	}
+
+	public double getThreadLevel() {
+		return threadLevel;
+	}
+
+	public void setThreadLevel(double threadLevel) {
+		this.threadLevel = threadLevel;
+	}
+
+	public int getThreadMin() {
+		return threadMin;
+	}
+
+	public void setThreadMin(int threadMin) {
+		this.threadMin = threadMin;
+	}
+
+	public int getThreadMax() {
+		return threadMax;
+	}
+
+	public void setThreadMax(int threadMax) {
+		this.threadMax = threadMax;
 	}
 }

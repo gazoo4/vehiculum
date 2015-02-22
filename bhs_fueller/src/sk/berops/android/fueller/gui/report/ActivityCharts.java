@@ -61,7 +61,10 @@ public class ActivityCharts extends Activity {
 		
 		// fill-in the HistoryViewData with all the average consumptions
 		for (FuellingEntry e : history.getFuellingEntries()) {
-			graphDataMap.get(e.getFuelType()).add(new HistoryViewData(e.getMileage(), e.getFloatingConsumption()));
+			FuelType type = e.getFuelType();
+			double xValue = e.getMileage();
+			double yValue = e.getFuelConsumption().getMovingAveragePerFuelType().get(type).doubleValue();
+			graphDataMap.get(type).add(new HistoryViewData(xValue, yValue));
 		}
 		
 		// remove those HistoryViewData which are empty (as there was no re-fuelling of this type)

@@ -11,9 +11,11 @@ import sk.berops.android.fueller.dataModel.Car.DistanceUnit;
 import sk.berops.android.fueller.dataModel.Car.VolumeUnit;
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.dataModel.UnitConstants;
+import sk.berops.android.fueller.dataModel.calculation.Consumption;
 
 public abstract class Entry extends Record implements Comparable<Entry> {
 	private int dynamicId;
+	private Consumption consumption;
 	
 	@Element(name="mileage")
 	private double mileage;
@@ -48,6 +50,12 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 	}
 	public void setDynamicId(int dynamicId) {
 		this.dynamicId = dynamicId;
+	}
+	public Consumption getConsumption() {
+		return consumption;
+	}
+	public void setConsumption(Consumption consumption) {
+		this.consumption = consumption;
 	}
 	public double getMileage() {
 		return mileage;

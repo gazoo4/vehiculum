@@ -33,11 +33,8 @@ public class TyrePoolAdapter extends ArrayAdapter<Tyre> {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View rowView = inflater.inflate(R.layout.list_tyre_change_pool, parent, false);
 		
-		//ImageView iv = (ImageView) rowView.findViewById(R.id.imageview);
-		//iv.setImageBitmap(TyreDrawer.getInstance(context).getTyreBitmap(tyre));
-		
 		View tyreView = new ViewTyreGraphics(getContext(), tyre);
-		
+		 
 		LinearLayout ll = (LinearLayout) rowView.findViewById(R.id.list_tyre_change_pool_layout);
 		ll.addView(tyreView);
 		return rowView;

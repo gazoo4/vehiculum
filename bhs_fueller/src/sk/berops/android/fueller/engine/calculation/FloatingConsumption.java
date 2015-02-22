@@ -12,6 +12,56 @@ import sk.berops.android.fueller.dataModel.expense.History;
 
 public class FloatingConsumption {
 	
+	public static void calculateAverageConsumption(History history, int precision) throws CalculationException {
+		
+		if (precision < 0) {
+			throw new CalculationException("Trying to calculate consumption with averaging over a 0 refuellings");
+		}
+		
+		double distance;
+		double consumption;
+		double volume;
+		
+		LinkedList<Double> movingVolume;
+		LinkedList<Double> movingDistance;
+		
+		LinkedList<FuellingEntry> entries;
+		
+		for (FuellingEntry.FuelType fuelType : FuellingEntry.FuelType.values()) {
+			entries = history.getFuellingEntriesFiltered(fuelType);	
+			if (entries.size() <= precision) {
+				continue;
+			}
+			
+			distance = 0;
+			consumption = 0;
+			volume = 0;
+			movingVolume = new LinkedList<Double>();
+			movingDistance = new LinkedList<Double>();
+			
+			for (FuellingEntry entry : entries) {
+				if (movingVolume.size() != 0) {
+					volume += entry.getFuelVolume();
+				}
+				
+				movingVolume.add(new Double(entry.getFuelVolume()));
+				movingDistance.add(new Double(entry.getMileage()));
+				
+				if (movingVolume.size() > (precision + 1)) {
+					volume -= movingVolume.getFirst().doubleValue();
+					movingVolume.removeFirst();
+					movingDistance.removeFirst();
+				}
+				
+				if (movingVolume.size() > 1) {
+					distance = movingDistance.getLast().doubleValue() - movingDistance.getFirst().doubleValue(); 
+					consumption = volume / distance * 100;
+					entry.setAverageConsumption(consumption);
+				}
+			}
+		}
+	}
+	
 	public static void calculateConsumption(History history, int precision, boolean dropMinMax) throws CalculationException {
 		LinkedList<FuellingEntry> entries = history.getFuellingEntries();
 		LinkedList<Double> consumptions;

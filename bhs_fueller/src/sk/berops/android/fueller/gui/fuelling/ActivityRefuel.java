@@ -98,17 +98,17 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 	
 	@Override
 	protected void styleGuiObjects() {
-		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextCost.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextVolume.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextComment.setHintTextColor(Colors.LIGHT_GREEN);
+		//editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
+		//editTextCost.setHintTextColor(Colors.LIGHT_GREEN);
+		//editTextVolume.setHintTextColor(Colors.LIGHT_GREEN);
+		//editTextComment.setHintTextColor(Colors.LIGHT_GREEN);
 		
 		textViewDisplayDate.setTypeface(Fonts.getFontBook(this));
 		textViewPrice.setTypeface(Fonts.getFontBook(this));
-		editTextMileage.setTypeface(Fonts.getFontPort(this));
-		editTextCost.setTypeface(Fonts.getFontPort(this));
-		editTextVolume.setTypeface(Fonts.getFontPort(this));
-		editTextComment.setTypeface(Fonts.getFontPort(this));
+		//editTextMileage.setTypeface(Fonts.getFontPort(this));
+		//editTextCost.setTypeface(Fonts.getFontPort(this));
+		//editTextVolume.setTypeface(Fonts.getFontPort(this));
+		//editTextComment.setTypeface(Fonts.getFontPort(this));
 	}
 	
 	protected void refreshPrice() {
@@ -171,16 +171,16 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		switch (view.getId()) {
 		case R.id.activity_refuel_button_commit:
 			entryOK = true;
-			saveEntry(view);
+			saveEntry();
 			if (entryOK) {
-			super.saveFieldsAndPersist(view);
-			startActivity(new Intent(this, MainActivity.class));
+				super.saveFieldsAndPersist(view);
+				startActivity(new Intent(this, MainActivity.class));
 			}
 			break;
 		}
 	}
 	
-	public void saveEntry(View view) {
+	public void saveEntry() {
 		updateFuelVolume();
 		updateFuelType();
 		updateFuelPrice();

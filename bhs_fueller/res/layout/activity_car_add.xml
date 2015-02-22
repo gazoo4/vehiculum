@@ -9,7 +9,7 @@
     tools:context=".MainActivity"
     android:scrollbars="vertical"
     android:isScrollContainer="true"
-    android:background="@drawable/backg_addevent">
+    android:background="@drawable/background_blue">
     
     <TextView
         android:id="@+id/activity_car_add_header"

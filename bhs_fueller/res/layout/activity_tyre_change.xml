@@ -6,7 +6,7 @@
     <RelativeLayout
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:background="@drawable/backg_addevent" >
+	    android:background="@drawable/background_blue" >
 	    
         <EditText
         android:id="@+id/activity_tyre_change_mileage"

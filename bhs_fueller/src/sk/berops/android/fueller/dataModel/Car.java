@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
@@ -12,6 +13,7 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 import sk.berops.android.fueller.dataModel.calculation.Consumption;
+import sk.berops.android.fueller.dataModel.calculation.FuelConsumption;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.dataModel.expense.History;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry.FuelType;
@@ -51,7 +53,6 @@ public class Car extends Record implements Serializable {
 	private LinkedList<Axle> axles;
 	@Element(name="type", required=false)
 	private CarType type;
-	private Consumption consumption;
 	private Consumption consumptionSI;
 	
 	public enum VolumeUnit{
@@ -456,12 +457,9 @@ public class Car extends Record implements Serializable {
 	}
 	
 	public Consumption getConsumption() {
-		return consumption;
+		return getHistory().getEntries().getLast().getConsumption();
 	}
 
-	public void setConsumption(Consumption consumption) {
-		this.consumption = consumption;
-	}
 	public Consumption getConsumptionSI() {
 		return consumptionSI;
 	}
@@ -478,6 +476,10 @@ public class Car extends Record implements Serializable {
 	public void setConsumptionUnit(ConsumptionUnit consumptionUnit) {
 		this.consumptionUnit = consumptionUnit;
 	}
+	
+	public FuelConsumption getFuelConsumption() {
+		return getHistory().getFuellingEntries().getLast().getFuelConsumption();
+	}
 
 	public CarType getType() {
 		return type;
@@ -493,5 +495,14 @@ public class Car extends Record implements Serializable {
 
 	public void setAxles(LinkedList<Axle> axles) {
 		this.axles = axles;
+	}
+
+	public double getDistanceDriven() {
+		double distance = this.getCurrentMileage() - this.getHistory().getEntries().getFirst().getMileage();
+		return distance;
+	}
+	
+	public Set<FuelType> getFuelTypes() {
+		return getHistory().getFuellingEntries().getLast().getFuelConsumption().getFuellingCountPerFuelType().keySet();
 	}
 }

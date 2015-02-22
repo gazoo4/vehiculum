@@ -35,11 +35,20 @@
     <string name="activity_garage_management_label"					>Your garage</string>
     <string name="activity_garage_management_button_car_add"		>Add a new car</string>
     <string name="activity_garage_management_info_text"				>List of cars in your garage:</string>
+    <string name="activity_main_average"							>Average consumption</string>
+    <string name="activity_main_average_combined"					>Average consumption combined</string>
     <string name="activity_main_button_entry_add"					>Record a new event</string>
     <string name="activity_main_button_stats_view"					>View statistics</string>
     <string name="activity_main_button_garage_enter"				>Enter garage</string>
+    <string name="activity_main_car"								>Car</string>
     <string name="activity_main_create_garage_alert"				>You didn\'t setup your garage yet. Prepare one now.</string>
+    <string name="activity_main_consumption_combined"				>Combined</string>
     <string name="activity_main_header"								>Manage your enthusiasm!</string>
+    <string name="activity_main_relative_costs"						>Relative costs</string>
+    <string name="activity_main_relative_costs_fuel"				>Relative costs for </string>
+    <string name="activity_main_relative_since_last_refuel"			>Relative costs since last refuel</string>
+    <string name="activity_main_since_last_refuel"					>Since the last refuel</string>
+    <string name="activity_main_total_costs"						>Total costs</string>
     <string name="activity_refuel_button_date_change"				>Change date</string>
     <string name="activity_refuel_button_entry_save"				>Save the record</string>
     <string name="activity_refuel_comment_hint"						>Additional comment</string>
@@ -52,6 +61,18 @@
     <string name="activity_stats_show_button_charts"				>Charts</string>
     <string name="activity_stats_show_button_fuelling"				>Consumption stats</string>
     <string name="activity_stats_show_header"						>Statistic center</string>
+    <string name="activity_tyre_add_brand_hint"						>Brand</string>
+    <string name="activity_tyre_add_button_entry_save"				>Save the record</string>
+    <string name="activity_tyre_add_diameter_hint"					>Diameter</string>
+    <string name="activity_tyre_add_dot_hint"						>DOT</string>
+    <string name="activity_tyre_add_header"							>New tyre</string>
+    <string name="activity_tyre_add_height_hint"					>Height</string>
+    <string name="activity_tyre_add_model_hint"						>Model</string>
+    <string name="activity_tyre_add_season_hint"					>Season</string>
+    <string name="activity_tyre_add_speed_index_hint"				>Speed index</string>
+    <string name="activity_tyre_add_thread_level_hint"				>Thread level</string>
+    <string name="activity_tyre_add_weight_index_hint"				>Weight index</string>
+    <string name="activity_tyre_add_width_hint"						>Width</string>
     <string name="activity_tyre_change_button_advanced"				>Advanced</string>
     <string name="activity_tyre_change_button_date_change"			>Change date</string>
     <string name="activity_tyre_change_button_entry_save"			>Save the record</string>
@@ -59,6 +80,14 @@
     <string name="activity_tyre_change_labor_cost_hint"				>Labor cost</string>
     <string name="activity_tyre_change_mileage_hint"				>Mileage</string>
     <string name="activity_tyre_change_small_parts_cost_hint"		>Cost of small parts</string>
+    <string name="activity_tyre_change_scheme_button_tyre_add"		>Add</string>
+    <string name="activity_tyre_change_scheme_button_tyre_delete"	>Delete</string>
+    <string name="activity_tyre_change_scheme_button_tyre_move"		>&lt;==&gt;</string>
+    <string name="activity_tyre_change_scheme_brand_model_text"		>Brand, model: </string>
+    <string name="activity_tyre_change_scheme_dimensions_text"		>Dimensions: </string>
+    <string name="activity_tyre_change_scheme_dot_year_wear_text"	>DOT: </string>
+    <string name="activity_tyre_change_scheme_mileage_text"			>Mileage: </string>
+    <string name="activity_tyre_change_scheme_pattern_text"			>Tread pattern: </string>
     <string name="activity_tyre_change_total_cost_hint"				>Total cost</string>
     <string name="activity_tyre_change_tyres_cost_hint"				>Cost of tyres (if bought now)</string>
     
@@ -81,6 +110,13 @@
         <item>Diesel</item>
         <item>CNG</item>
         <item>Electricity</item>
+    </string-array>
+    
+    <string-array name="activity_tyre_add_season">
+        <item>Summer</item>
+        <item>All-Season</item>
+        <item>Winter</item>
+        <item>Spikes</item>
     </string-array>
 
     <string name="fragment_entry_edit_delete_activate_button"		>Activate</string>

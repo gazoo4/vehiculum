@@ -101,4 +101,13 @@ public class History implements Serializable {
 			}
 		}
 	}
+
+	public double getTotalCost() {
+		double cost = 0;
+		LinkedList<Entry> entries = this.getEntries();
+		for (Entry e: entries) {
+			cost += e.getCost();
+		}
+		return cost;
+	}
 }

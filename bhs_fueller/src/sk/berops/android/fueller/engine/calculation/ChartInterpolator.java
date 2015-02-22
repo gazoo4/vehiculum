@@ -36,17 +36,6 @@ public class ChartInterpolator {
 				dataInterpolated[i] = new HistoryViewData(newX, f.value(newX));
 			//}
 		}
-		/*
-		double previous = dataInterpolated[0].getX();
-		for (int i = 1; i < dataInterpolated.length; i++) {
-			System.out.println("interpolated: "+ i +" "+ dataInterpolated[i].getX() +" "+ dataInterpolated[i].getY());
-			if (previous > dataInterpolated[i].getX()) {
-				// fix would be to sort by X, but why not doing that properly from beginning?
-				System.out.println("TROUBLE");
-			}
-			previous = dataInterpolated[i].getX();
-		}
-		*/
 		// return the interpolated data
 		return dataInterpolated;
 	}

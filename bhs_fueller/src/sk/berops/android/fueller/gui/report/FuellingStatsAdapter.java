@@ -2,15 +2,9 @@ package sk.berops.android.fueller.gui.report;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 
-import sk.berops.android.fueller.dataModel.calculation.Consumption;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
-import sk.berops.android.fueller.engine.calculation.CalculationException;
-import sk.berops.android.fueller.engine.calculation.SimpleConsumption;
-import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.R;
 import android.content.Context;
 import android.graphics.Color;
@@ -54,15 +48,7 @@ public class FuellingStatsAdapter extends ArrayAdapter<FuellingEntry> {
 		fuel.setText(entry.getFuelType().toString());
 		fuel.setBackgroundColor(entry.getFuelType().getColor());
 		fuel.setTextColor(Color.WHITE);
-		consumption.setText(df.format(entry.getConsumption()));
-		Consumption c;
-		try {
-			c = MainActivity.garage.getActiveCar().getConsumption();
-			double avg = c.getPerType().get(entry.getFuelType());
-			consumption.setBackgroundColor(SimpleConsumption.getConsumptionColor(avg, entry.getConsumption()));
-		} catch (NullPointerException e) {
-			// TODO if not enough refuelings done, this should not be a problem (no specific color will be picked
-		}
+		consumption.setText(df.format(entry.getConsumptionOld()));
 		return rowView;
 	}
 

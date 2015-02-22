@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,10 +35,10 @@ public class ActivityStatsFuelling extends Activity implements FragmentEntryEdit
 		listView = (ListView) findViewById(R.id.activity_stats_fuelling_listview);
 		adapter = new FuellingStatsAdapter(this, entries);
 		listView.setAdapter(adapter);
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
-		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, final View view,
+			public boolean onItemLongClick(AdapterView<?> parent, final View view,
 					int position, long id) {
 				Toast.makeText(getApplicationContext(),
 						"Click ListItem Number " + position, Toast.LENGTH_LONG)
@@ -45,6 +46,7 @@ public class ActivityStatsFuelling extends Activity implements FragmentEntryEdit
 				setSelectedEntryPosition(position);
 				DialogFragment dialog = new FragmentEntryEditDelete();
 				dialog.show(getFragmentManager(), "FragmentEntryEditDelete");
+				return true;
 			}
 		});
 	}

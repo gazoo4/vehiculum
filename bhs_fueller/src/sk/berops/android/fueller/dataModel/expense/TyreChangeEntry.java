@@ -21,9 +21,8 @@ public class TyreChangeEntry extends Entry {
 	@Element(name="tyresCost", required=false)
 	private double tyresCost;
 	
-	public TyreChangeEntry(Car car) {
+	public TyreChangeEntry() {
 		super();
-		this.car = car;
 	}
 	
 	@Override

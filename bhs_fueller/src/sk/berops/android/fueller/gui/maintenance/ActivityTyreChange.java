@@ -67,7 +67,7 @@ public class ActivityTyreChange extends ActivityAddEventGeneric {
 		setContentView(R.layout.activity_tyre_change);
 		car = MainActivity.garage.getActiveCar();
 		if (tyreChangeEntry == null) {
-			tyreChangeEntry = new TyreChangeEntry(car);
+			tyreChangeEntry = new TyreChangeEntry();
 		}
 		tyreChangeEntry.setExpenseType(ExpenseType.TYRES);
 		

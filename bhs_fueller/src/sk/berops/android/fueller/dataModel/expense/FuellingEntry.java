@@ -8,6 +8,7 @@ import org.simpleframework.xml.Element;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Car.DistanceUnit;
 import sk.berops.android.fueller.dataModel.Car.VolumeUnit;
+import sk.berops.android.fueller.dataModel.calculation.FuelConsumption;
 import sk.berops.android.fueller.dataModel.UnitConstants;
 import android.graphics.Color;
 
@@ -19,10 +20,12 @@ public class FuellingEntry extends Entry {
 	private FuelType fuelType;
 	@Element(name="fuelPrice")
 	private double fuelPrice;
-	private double consumption;
+	private double consumptionOld;
 	private double consumptionSI;
 	private double floatingConsumption;
 	private double floatingConsumptionSI;
+	private double averageConsumption;
+	private double averageConsumptionSI;
 	public enum FuelType{
 		GASOLINE(0, "gasoline", Color.MAGENTA), 
 		LPG(1, "lpg", 0xFFFF8000), //Color.ORANGE
@@ -135,11 +138,11 @@ public class FuellingEntry extends Entry {
 	public void setFuelPrice(double fuelPrice) {
 		this.fuelPrice = fuelPrice;
 	}
-	public double getConsumption() {
-		return consumption;
+	public double getConsumptionOld() {
+		return consumptionOld;
 	}
-	public void setConsumption(double consumption) {
-		this.consumption = consumption;
+	public void setConsumptionOld(double consumption) {
+		this.consumptionOld = consumption;
 	}
 	public double getFloatingConsumption() {
 		return floatingConsumption;
@@ -164,5 +167,25 @@ public class FuellingEntry extends Entry {
 	}
 	public void setFloatingConsumptionSI(double floatingConsumptionSI) {
 		this.floatingConsumptionSI = floatingConsumptionSI;
+	}
+
+	public double getAverageConsumption() {
+		return averageConsumption;
+	}
+
+	public void setAverageConsumption(double averageConsumption) {
+		this.averageConsumption = averageConsumption;
+	}
+
+	public double getAverageConsumptionSI() {
+		return averageConsumptionSI;
+	}
+
+	public void setAverageConsumptionSI(double averageConsumptionSI) {
+		this.averageConsumptionSI = averageConsumptionSI;
+	}
+	
+	public FuelConsumption getFuelConsumption() {
+		return (FuelConsumption) this.getConsumption();
 	}
 }
