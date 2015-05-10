@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!-- temporary strings -->
-    <string name="temporary_car"									>car</string>
-    <string name="temporary_mamut"									>mamut</string>
-    <string name="temporary_since"									>Since last refuel</string>
-    <string name="temporary_gasoline"								>gasoline</string>
-    <string name="temporary_LPG"									>LPG</string>    
-    <string name="temporary_electricity"						    >electricity</string>
-    <string name="temporary_CNG"									>CNG</string>
-    <string name="temporary_consvalue"								>7.289</string>
-    <string name="temporary_consunit"						        >l/100km</string>
-    <string name="temporary_comb"						            >combined</string>
     <string name="app_name"											>Fueller</string>
     <string name="action_settings"									>Settings</string>
     <string name="activity_car_add_brand_hint"						>Brand</string>
@@ -35,8 +24,8 @@
     <string name="activity_garage_management_label"					>Your garage</string>
     <string name="activity_garage_management_button_car_add"		>Add a new car</string>
     <string name="activity_garage_management_info_text"				>List of cars in your garage:</string>
-    <string name="activity_main_average"							>Average consumption</string>
-    <string name="activity_main_average_combined"					>Average consumption combined</string>
+    <string name="activity_main_average"							>Average</string>
+    <string name="activity_main_average_combined"					>Average combined</string>
     <string name="activity_main_button_entry_add"					>Record a new event</string>
     <string name="activity_main_button_stats_view"					>View statistics</string>
     <string name="activity_main_button_garage_enter"				>Enter garage</string>
@@ -90,8 +79,15 @@
     <string name="activity_tyre_change_scheme_pattern_text"			>Tread pattern: </string>
     <string name="activity_tyre_change_total_cost_hint"				>Total cost</string>
     <string name="activity_tyre_change_tyres_cost_hint"				>Cost of tyres (if bought now)</string>
-    
-    
+    <string name="fragment_entry_edit_delete_activate_button"		>Activate</string>
+    <string name="fragment_entry_edit_delete_activate_toast"		>Activating entry</string>
+    <string name="fragment_entry_edit_delete_delete_button"			>Delete</string>
+    <string name="fragment_entry_edit_delete_delete_toast"			>Removing entry</string>
+    <string name="fragment_entry_edit_delete_edit_button"			>Edit</string>
+    <string name="fragment_entry_edit_delete_edit_toast"			>Opening entry</string>
+    <string name="preferences_units_item"							>Units</string>
+    <string name="preferences_units_item_summary"					>Distance, volume, consumption</string>
+    <string name="preferences_units_item_title"						>Units in reports</string>
     
     <string-array name="activity_car_add_distance_units">
         <item>Kilometer</item>
@@ -118,13 +114,20 @@
         <item>Winter</item>
         <item>Spikes</item>
     </string-array>
-
-    <string name="fragment_entry_edit_delete_activate_button"		>Activate</string>
-    <string name="fragment_entry_edit_delete_activate_toast"		>Activating entry</string>
-    <string name="fragment_entry_edit_delete_delete_button"			>Delete</string>
-    <string name="fragment_entry_edit_delete_delete_toast"			>Removing entry</string>
-    <string name="fragment_entry_edit_delete_edit_button"			>Edit</string>
-    <string name="fragment_entry_edit_delete_edit_toast"			>Opening entry</string>
+    
+    <string-array name="entries_list_preference">
+        <item>List item 1</item>
+        <item>List item 2</item>
+        <item>List item 3</item>
+        <item>List item 4</item>
+    </string-array>
+    
+    <string-array name="entryvalues_list_preference">
+        <item>List value 1</item>
+        <item>List value 2</item>
+        <item>List value 3</item>
+        <item>List value 4</item>
+    </string-array>
     
 </resources>
 

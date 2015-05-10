@@ -35,7 +35,6 @@ public class ActivityCharts extends Activity {
 	private History history = car.getHistory();
 	private FuelType fuelType = history.getFuellingEntries().getLast().getFuelType();
 	
-	//keep in mind here we should go through all the fuels so that we can show the consumption from all of them
 	//http://android-graphview.org/#api
 	
 	@Override

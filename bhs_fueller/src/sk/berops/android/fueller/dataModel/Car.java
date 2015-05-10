@@ -56,14 +56,16 @@ public class Car extends Record implements Serializable {
 	private Consumption consumptionSI;
 	
 	public enum VolumeUnit{
-		LITER(0, "liter"), 
-		US_GALLON(1, "US gallon"),
-		IMPERIAL_GALLON(2, "imperial gallon");
+		LITER(0, "ltrs", "liters"), 
+		US_GALLON(1, "gal", "US gallons"),
+		IMPERIAL_GALLON(2, "gal", "Imperial gallons");
 		private int id;
 		private String unit;	
-		VolumeUnit(int id, String unit) {
+		private String longUnit;
+		VolumeUnit(int id, String unit, String longUnit) {
 			this.setId(id);
 			this.setUnit(unit);
+			this.setLongUnit(longUnit);
 		}
 		
 		private static Map<Integer, VolumeUnit> idToUnitMapping;
@@ -97,16 +99,24 @@ public class Car extends Record implements Serializable {
 		public void setId(int id) {
 			this.id = id;
 		}
+		public String getLongUnit() {
+			return longUnit;
+		}
+		public void setLongUnit(String longUnit) {
+			this.longUnit = longUnit;
+		}
 	}
 	
 	public enum DistanceUnit{
-		KILOMETER(0, "kilometer"), 
-		MILE(1, "mile");
+		KILOMETER(0, "km", "kilometers"), 
+		MILE(1, "mil", "miles");
 		private int id;
 		private String unit;	
-		DistanceUnit(int id, String unit) {
+		private String longUnit;
+		DistanceUnit(int id, String unit, String longUnit) {
 			this.setId(id);
 			this.setUnit(unit);
+			this.setLongUnit(longUnit);
 		}
 		
 		private static Map<Integer, DistanceUnit> idToUnitMapping;
@@ -139,6 +149,12 @@ public class Car extends Record implements Serializable {
 		}
 		public void setId(int id) {
 			this.id = id;
+		}
+		public String getLongUnit() {
+			return longUnit;
+		}
+		public void setLongUnit(String longUnit) {
+			this.longUnit = longUnit;
 		}
 	}
 	

@@ -7,6 +7,7 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
+import sk.berops.android.fueller.configuration.UserSettings;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.gui.MainActivity;
@@ -19,11 +20,14 @@ public class Garage {
 	private LinkedList<Tyre> tyres;
 	@Element(name="activeCar", required=false)
 	private int activeCarId;
+	@Element(name="userSettings", required=false)
+	private UserSettings settings;
 	
 	public Garage() {
 		super();
 		cars = new LinkedList<Car>();
 		tyres = new LinkedList<Tyre>();
+		settings = UserSettings.getInstance();
 		activeCarId = -1;
 	}
 	
@@ -82,5 +86,13 @@ public class Garage {
 				entry.setDynamicId(dynamicId++);
 			}
 		}
+	}
+
+	public UserSettings getSettings() {
+		return settings;
+	}
+
+	public void setSettings(UserSettings settings) {
+		this.settings = settings;
 	}
 }

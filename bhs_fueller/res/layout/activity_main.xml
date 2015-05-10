@@ -23,8 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/activity_main_header"
         android:layout_marginBottom="60dp"
-        android:shrinkColumns="*"
-        android:stretchColumns="*">
+        android:stretchColumns="0"
+        android:shrinkColumns="1,2">
+        
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
@@ -33,14 +34,14 @@
                 android:id="@+id/activity_main_car"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:text="@string/activity_main_car" />
 
             <TextView
                 android:id="@+id/activity_main_car_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right" />
+                android:gravity="end" />
         </TableRow>
 
         <TableRow
@@ -51,22 +52,20 @@
                 android:id="@+id/activity_main_since_last_consumption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:text="@string/activity_main_since_last_refuel" />
 
             <TextView
                 android:id="@+id/activity_main_since_last_consumption_value"
                 android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:gravity="right"
-                android:layout_marginRight="5dp" />
+                android:layout_width="wrap_content"
+                android:gravity="end" />
 
-            <!-- TODO: add consumption units to the displays -->
             <TextView
-                android:id="@+id/activity_main_car_consump_unit1"
+                android:id="@+id/activity_main_since_last_consumption_unit"
                 android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:gravity="left"/>
+                android:layout_width="wrap_content"
+                android:gravity="start"/>
         </TableRow>
 
         <TableRow
@@ -75,21 +74,20 @@
                 android:id="@+id/activity_main_consumption_combined"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:text="@string/activity_main_consumption_combined" />
 
             <TextView
                 android:id="@+id/activity_main_consumption_combined_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:gravity="right" />
+                android:gravity="end" />
 
             <TextView
-                android:id="@+id/activity_main_cons_unit2"
+                android:id="@+id/activity_main_consumption_combined_unit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" /> 
+                android:gravity="start" /> 
         </TableRow>
     </TableLayout>
 
@@ -101,7 +99,9 @@
         <Button
             android:id="@+id/activity_main_button_entry_add"
             style="@style/button_text"
+            android:drawableStart="@drawable/plus_icon_tiny"
             android:drawableLeft="@drawable/plus_icon_tiny"
+            android:paddingStart="15dp"
             android:paddingLeft="15dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -126,7 +126,9 @@
         <Button
             android:id="@+id/activity_main_button_garage_enter"
             style="@style/button_text"
+            android:drawableStart="@drawable/garage_tiny"
             android:drawableLeft="@drawable/garage_tiny"
+            android:paddingStart="15dp"
             android:paddingLeft="15dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

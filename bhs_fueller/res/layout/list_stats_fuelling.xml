@@ -1,102 +1,130 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:shrinkColumns="*"
-    android:stretchColumns="*" 
-    >
+    android:background="@drawable/background_blue"
+    android:shrinkColumns="2"
+    android:stretchColumns="0,1">
 
     <TableRow
-        style="@style/HeaderRow"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal" >
 
         <TextView
-            android:id="@+id/list_stats_entry_dynamic_id"
-            style="@style/HeaderText"
+            android:id="@+id/list_stats_fuelling_dynamic_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="3dp" />
+        
+        <TextView
+            android:id="@+id/list_stats_fuelling_mileage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="left" />
+            android:gravity="end"
+            android:padding="3dp" />
 
         <TextView
             android:id="@+id/list_stats_fuelling_date"
-            style="@style/HeaderText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="right" />
+            android:gravity="end"
+            android:padding="3dp" />
     </TableRow>
 
     <TableRow
-        style="@style/BodyRow"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal" >
-
+        android:gravity="center_horizontal">
+                
         <TextView
-            android:id="@+id/list_stats_fuelling_fuel"
-            android:typeface="monospace"
-            android:textAllCaps="true"
-            android:layout_width="wrap_content"
+            android:id="@+id/list_stats_fuelling_volume"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_span="2"
-            android:gravity="left"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
+            android:gravity="end" />
+        
         <TextView
-            android:id="@+id/list_stats_fuelling_consumption"
+            android:id="@+id/list_stats_fuelling_volume_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:typeface="monospace" />
+            android:padding="3dp"
+            android:gravity="start" />
     </TableRow>
-
+  
     <TableRow
-        style="@style/BodyRow"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal" >
-
-        <TextView
-            android:id="@+id/list_stats_fuelling_total_price"
-            style="@style/EntryText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_span="3"
-            android:gravity="right" />
-    </TableRow>
-
-    <TableRow
-        style="@style/BodyRow"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal" >
 
         <TextView
             android:id="@+id/list_stats_fuelling_unit_price"
-            style="@style/EntryText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:gravity="end" />
+        
+        <TextView
+            android:id="@+id/list_stats_fuelling_unit_price_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_span="3"
-            android:gravity="right" />
+            android:padding="3dp"
+            android:gravity="start" />
     </TableRow>
 
     <TableRow
-        style="@style/BodyRow"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal" >
 
         <TextView
-            android:id="@+id/list_stats_fuelling_volume"
-            style="@style/EntryText"
+            android:id="@+id/list_stats_fuelling_total_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:gravity="end" />
+        
+        <TextView
+            android:id="@+id/list_stats_fuelling_total_price_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_span="3"
-            android:gravity="right" />
+            android:padding="3dp"
+            android:gravity="start"/>
     </TableRow>
+    
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" >
 
-</TableLayout><!--
+        <TextView
+            android:id="@+id/list_stats_fuelling_fuel"
+            android:textAllCaps="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="3dp" />
+
+        <TextView
+            android:id="@+id/list_stats_fuelling_consumption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end" />
+        
+        <TextView
+            android:id="@+id/list_stats_fuelling_consumption_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:gravity="start" />
+    </TableRow>
+    
+</TableLayout>
+
+<!--
+another attempt below:
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
