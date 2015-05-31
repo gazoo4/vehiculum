@@ -32,6 +32,7 @@
     <string name="activity_main_car"								>Car</string>
     <string name="activity_main_create_garage_alert"				>You didn\'t setup your garage yet. Prepare one now.</string>
     <string name="activity_main_consumption_combined"				>Combined</string>
+    <string name="activity_main_garage_empty"						>Your garage is empty</string>
     <string name="activity_main_header"								>Manage your enthusiasm!</string>
     <string name="activity_main_relative_costs"						>Relative costs</string>
     <string name="activity_main_relative_costs_fuel"				>Relative costs for </string>
@@ -85,9 +86,15 @@
     <string name="fragment_entry_edit_delete_delete_toast"			>Removing entry</string>
     <string name="fragment_entry_edit_delete_edit_button"			>Edit</string>
     <string name="fragment_entry_edit_delete_edit_toast"			>Opening entry</string>
-    <string name="preferences_units_item"							>Units</string>
-    <string name="preferences_units_item_summary"					>Distance, volume, consumption</string>
-    <string name="preferences_units_item_title"						>Units in reports</string>
+    <string name="preferences_units"								>Units</string>
+    <string name="preferences_units_consumption"					>Consumption</string>
+    <string name="preferences_units_consumption_dialog"				>Select consumption units for reporting</string>
+    <string name="preferences_units_distance"						>Distance</string>
+    <string name="preferences_units_distance_dialog"				>Select distance units for reporting</string>
+    <string name="preferences_units_summary"						>Distance, volume, consumption</string>
+    <string name="preferences_units_title"							>Units in reports</string>
+    <string name="preferences_units_volume"							>Volume</string>
+    <string name="preferences_units_volume_dialog"					>Select volume units for reporting</string>
     
     <string-array name="activity_car_add_distance_units">
         <item>Kilometer</item>
@@ -113,6 +120,42 @@
         <item>All-Season</item>
         <item>Winter</item>
         <item>Spikes</item>
+    </string-array>
+    
+    <string-array name="preferences_units_consumption_entries">
+        <item>Litre per 100 km</item>
+        <item>Km per Litre</item>
+        <item>Miles per Gallon (US)</item>
+        <item>Miles per Gallon (Imperial)</item>
+    </string-array>
+    
+    <string-array name="preferences_units_consumption_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+    <string-array name="preferences_units_distance_entries">
+        <item>Kilometer</item>
+        <item>Mile</item>
+    </string-array>
+    
+    <string-array name="preferences_units_distance_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    
+    <string-array name="preferences_units_volume_entries">
+        <item>Liter</item>
+        <item>Gallon (US)</item>
+        <item>Gallon (Imperial)</item>
+    </string-array>
+    
+    <string-array name="preferences_units_volume_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
     
     <string-array name="entries_list_preference">

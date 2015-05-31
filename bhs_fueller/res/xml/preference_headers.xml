@@ -1,0 +1,23 @@
+<preference-headers
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <header android:id="@+id/preferences_units_item" 
+        android:fragment="sk.berops.android.fueller.gui.preferences.PreferenceWithHeaders$Units"
+        android:title="@string/preferences_units"
+        android:summary="@string/preferences_units_summary" />
+<!-- 
+    <header android:fragment="sk.berops.android.fueller.gui.preferences.PreferenceWithHeaders$Prefs2Fragment"
+            android:icon="@drawable/mb_icon"
+            android:title="Prefs 2"
+            android:summary="Some other preferences you can see.">
+        <extra android:name="someKey" android:value="someHeaderValue" />
+    </header>
+
+    <header android:icon="@drawable/mb_icon"
+            android:title="Intent"
+            android:summary="Launches an Intent.">
+        <intent android:action="android.intent.action.VIEW"
+                android:data="https://www.fueller.com" />
+    </header>
+ -->
+</preference-headers>

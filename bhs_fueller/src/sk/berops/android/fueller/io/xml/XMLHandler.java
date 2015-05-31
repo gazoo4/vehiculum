@@ -3,6 +3,8 @@ package sk.berops.android.fueller.io.xml;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
@@ -19,6 +21,8 @@ import sk.berops.android.fueller.io.DataHandler;
 public class XMLHandler extends DataHandler {
 	private static final int fileHistory = 5;
 	static String defaultFileName = "garage.xml";
+	static Locale localeUS = Locale.US;
+	static Locale localeDefault = Locale.getDefault();
 	
 	public static String getFullFileName(String fileName) {
 		return ""+ Fueller.getAppContext().getFilesDir().getParentFile().getPath() +"/"+ fileName;
@@ -34,6 +38,11 @@ public class XMLHandler extends DataHandler {
 		Garage garage;
 		try {
 			long startTime = System.nanoTime();
+			System.out.println(Locale.getDefault().toString());
+			//Locale.setDefault(Locale.US);
+			System.out.println(TimeZone.getDefault().toString());
+			//TimeZone.setDefault(TimeZone.getTimeZone("CEST"));
+			System.out.println(Locale.getDefault().toString());
 			garage = serializer.read(Garage.class, file);
 			long endTime = System.nanoTime();
 			

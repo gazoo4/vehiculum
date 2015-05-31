@@ -7,6 +7,6 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="lib" path="D:/Workspace/graphview/graphview-3.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="D:/Workspace/commons-math3-3.3/commons-math3-3.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="D:/Workspace/simple-xml-2.7.1/jar/simple-xml-2.7.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Workspace/simple-xml-2.7.1/jar/simple-xml-2.7.1.jar" sourcepath="D:/Workspace/simple-xml-2.7.1/src"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

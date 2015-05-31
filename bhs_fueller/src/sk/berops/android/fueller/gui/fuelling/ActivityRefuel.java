@@ -90,7 +90,7 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		spinnerFuelType = (Spinner) findViewById(R.id.activity_refuel_fuel_type);
 		ArrayAdapter<CharSequence> adapterFuelType = ArrayAdapter
 				.createFromResource(this, R.array.activity_refuel_fuel_type,
-						android.R.layout.simple_spinner_item);
+						R.layout.spinner_white);
 		adapterFuelType
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerFuelType.setAdapter(adapterFuelType);

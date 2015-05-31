@@ -35,7 +35,7 @@ public class Car extends Record implements Serializable {
 	private int modelYear;
 	@Element(name="history")
 	private History history;
-	@Element(name="licensePlate")
+	@Element(name="licensePlate", required=false)
 	private String licensePlate;
 	@Element(name="initialMileage")
 	private double initialMileage;
@@ -473,6 +473,7 @@ public class Car extends Record implements Serializable {
 	}
 	
 	public Consumption getConsumption() {
+		if (getHistory().getEntries().size() == 0) return null;
 		return getHistory().getEntries().getLast().getConsumption();
 	}
 
@@ -494,6 +495,7 @@ public class Car extends Record implements Serializable {
 	}
 	
 	public FuelConsumption getFuelConsumption() {
+		if (getHistory().getFuellingEntries().size() == 0) return null;
 		return getHistory().getFuellingEntries().getLast().getFuelConsumption();
 	}
 

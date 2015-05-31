@@ -70,8 +70,14 @@ public class MainActivity extends Activity {
 				Log.d("DEBUG", garage.getActiveCar().getNickname());
 				Toast.makeText(getApplicationContext(), "Loaded car: "+ garage.getActiveCar().getNickname(), Toast.LENGTH_LONG).show();
 			} catch (FileNotFoundException e) {
-				System.out.println("Old garage.xml file not found, is this the first run? Building new garage.....");
+				Log.d("DEBUG", "Old garage.xml file not found, is this the first run? Building new garage");
 				throwAlertCreateGarage();
+			} catch (NullPointerException e) {
+				if (garage == null) {
+					Log.d("DEBUG", "Garage failed to load");
+				} else if (garage.getActiveCar() == null) {
+					Log.d("DEBUG", "No car loaded");
+				}
 			}
 		}
 		
@@ -117,7 +123,9 @@ public class MainActivity extends Activity {
 	}
 	
 	private void refreshStats() {
-		Calculator.calculateAll(garage.getActiveCar().getHistory());
+		if ((garage != null) && (garage.getActiveCar() != null)) {
+			Calculator.calculateAll(garage.getActiveCar().getHistory());
+		}
 	}
 	
 	private void generateStatTable() {
@@ -128,23 +136,30 @@ public class MainActivity extends Activity {
 		//TODO: this view shall be generated based on the settings
 		
 		generateRowCarSummary(statsTable);
-		generateRowTotalCosts(statsTable);
-		generateRowTotalRelativeCosts(statsTable);
-		generateRowAverageConsumption(statsTable);
-		//generateRowRelativeCosts(statsTable);
-		//generateRowLastCosts(statsTable);
-		generateRowLastConsumption(statsTable);
+		if ((garage != null) && (garage.getActiveCar() != null)) {
+			generateRowTotalCosts(statsTable);
+			generateRowTotalRelativeCosts(statsTable);
+			generateRowAverageConsumption(statsTable);
+			//generateRowRelativeCosts(statsTable);
+			//generateRowLastCosts(statsTable);
+			generateRowLastConsumption(statsTable);
+		}
 	}
 	
 	private void generateRowCarSummary(TableLayout layout) {
 		
-		String description = getString(R.string.activity_main_car);
-		String nickname = garage.getActiveCar().getNickname();
-		layout.addView(createStatRow(description, nickname));
+		if (garage != null && garage.getActiveCar() != null) {
+			String description = getString(R.string.activity_main_car);
+			String nickname = garage.getActiveCar().getNickname();
+			layout.addView(createStatRow(description, nickname));
+		} else {
+			layout.addView(createStatRow(getString(R.string.activity_main_garage_empty),""));
+		}
 	}
 	
 	private void generateRowTotalCosts(TableLayout layout) {
 		Consumption c = garage.getActiveCar().getConsumption();
+		if (c == null) return;
 		
 		String description = getString(R.string.activity_main_total_costs);
 		double value = c.getTotalCost();
@@ -156,6 +171,7 @@ public class MainActivity extends Activity {
 	private void generateRowAverageConsumption(TableLayout layout) {
 		double avgConsumption = 0;
 		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
+		if (c == null) return;
 		
 		String description;
 		double value;
@@ -191,6 +207,7 @@ public class MainActivity extends Activity {
 	
 	private void generateRowTotalRelativeCosts(TableLayout layout) {
 		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
+		if (c == null) return;
 		
 		String description = getString(R.string.activity_main_relative_costs);
 		double value = c.getAverageFuelCost();
@@ -223,6 +240,7 @@ public class MainActivity extends Activity {
 		double avgCost = c.getAverageFuelCostPerFuelType().get(type);
 		double lastCost = c.getCostSinceLastRefuel();
 		double relativeChange = (lastCost / avgCost - 0.8) / 0.4;
+		System.out.println("Relative Distance: "+ relativeChange);
 		int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange);
 		
 		String description = getString(R.string.activity_main_relative_since_last_refuel);
@@ -234,6 +252,8 @@ public class MainActivity extends Activity {
 	}
 	
 	private void generateRowLastConsumption(TableLayout layout) {
+		if (garage.getActiveCar().getHistory().getFuellingEntries().size() == 0) return;
+		
 		FuellingEntry e = garage.getActiveCar().getHistory().getFuellingEntries().getLast();
 		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
 		FuelType type = e.getFuelType();

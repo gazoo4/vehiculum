@@ -56,7 +56,6 @@ public class GuiUtils {
 	}
 	
 	public static int getShade(int start, int end, double distance) {
-		if (distance < 0 || distance > 1) Log.d("WARN", "getShade: Relative distance not from <0,1>");
 		if (distance < 0) distance = 0;
 		if (distance > 1) distance = 1;
 		int alpha = (int) (Color.alpha(start) + Math.round((Color.alpha(end) - Color.alpha(start)) * distance));

@@ -71,7 +71,7 @@ public class ActivityCarAdd extends ActivityAddRecord {
 		spinnerDistanceUnit = (Spinner) findViewById(R.id.activity_car_add_distance_unit);
 		ArrayAdapter<CharSequence> adapterDistanceUnit = ArrayAdapter
 				.createFromResource(this, R.array.activity_car_add_distance_units,
-						android.R.layout.simple_spinner_item);
+						R.layout.spinner_white);
 		adapterDistanceUnit
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerDistanceUnit.setAdapter(adapterDistanceUnit);
@@ -79,7 +79,7 @@ public class ActivityCarAdd extends ActivityAddRecord {
 		spinnerVolumeUnit = (Spinner) findViewById(R.id.activity_car_add_volume_unit);
 		ArrayAdapter<CharSequence> adapterVolumeUnit = ArrayAdapter
 				.createFromResource(this, R.array.activity_car_add_volume_units,
-						android.R.layout.simple_spinner_item);
+						R.layout.spinner_white);
 		adapterDistanceUnit
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerVolumeUnit.setAdapter(adapterVolumeUnit);
