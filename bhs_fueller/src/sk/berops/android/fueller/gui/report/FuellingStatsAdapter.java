@@ -7,8 +7,10 @@ import java.util.LinkedList;
 import sk.berops.android.fueller.configuration.UnitSettings;
 import sk.berops.android.fueller.configuration.UserSettings;
 import sk.berops.android.fueller.dataModel.Car;
+import sk.berops.android.fueller.dataModel.calculation.FuelConsumption;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.gui.MainActivity;
+import sk.berops.android.fueller.gui.common.GuiUtils;
 import sk.berops.android.fueller.gui.common.TextFormatter;
 import sk.berops.android.fueller.R;
 import android.content.Context;
@@ -76,9 +78,17 @@ public class FuellingStatsAdapter extends ArrayAdapter<FuellingEntry> {
 		volume.setText(TextFormatter.format(entry.getFuelVolume(), "###0.00"));
 		volumeUnit.setText(settings.getVolumeUnit().getUnit());
 		fuel.setText(entry.getFuelType().toString());
-		fuel.setTextColor(entry.getFuelType().getColor());
 		consumption.setText(TextFormatter.format(entry.getFuelConsumption().getAverageSinceLast(),"##0.00"));
 		consumptionUnit.setText(settings.getConsumptionUnit().getUnit());
+		
+		fuel.setTextColor(entry.getFuelType().getColor());
+		
+		FuelConsumption c = entry.getFuelConsumption();
+		double avgConsumption = c.getAveragePerFuelType().get(entry.getFuelType());
+		double lastConsumption = c.getAverageSinceLast();
+		double relativeChange = (lastConsumption / avgConsumption - 0.8) / 0.4;
+		consumption.setTextColor(GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange));
+		
 		return rowView;
 	}
 }

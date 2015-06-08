@@ -238,7 +238,6 @@ public class MainActivity extends Activity {
 		double avgCost = c.getAverageFuelCostPerFuelType().get(type);
 		double lastCost = c.getCostSinceLastRefuel();
 		double relativeChange = (lastCost / avgCost - 0.8) / 0.4;
-		System.out.println("Relative Distance: "+ relativeChange);
 		int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange);
 		
 		String description = getString(R.string.activity_main_relative_since_last_refuel);
