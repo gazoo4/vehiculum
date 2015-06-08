@@ -7,10 +7,8 @@ import java.util.Date;
 import org.simpleframework.xml.Element;
 
 import sk.berops.android.fueller.dataModel.Car;
-import sk.berops.android.fueller.dataModel.Car.DistanceUnit;
-import sk.berops.android.fueller.dataModel.Car.VolumeUnit;
 import sk.berops.android.fueller.dataModel.Record;
-import sk.berops.android.fueller.dataModel.UnitConstants;
+import sk.berops.android.fueller.dataModel.UnitConstants.DistanceUnit;
 import sk.berops.android.fueller.dataModel.calculation.Consumption;
 
 public abstract class Entry extends Record implements Comparable<Entry> {
@@ -20,6 +18,7 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 	@Element(name="mileage")
 	private double mileage;
 	private double mileageSI;
+	private DistanceUnit distanceUnit;
 	@Element(name="eventDate")
 	private Date eventDate;
 	@Element(name="cost")
@@ -28,18 +27,8 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 	private ExpenseType expenseType;
 	
 	public void initAfterLoad(Car car) {
-		if (getMileageSI() == 0 && getMileage() != 0) {
-			double coef = 0;
-			switch (car.getDistanceUnit()) {
-			case KILOMETER: coef = UnitConstants.KILOMETER;
-				break;
-			case MILE: coef = UnitConstants.MILE;
-				break;
-			default: System.out.println("Unexpected program branch.");
-				break;
-			}
-			setMileageSI(getMileage() * coef);
-		}
+		setDistanceUnit(car.getDistanceUnit());
+		setMileageSI(getMileage() * getDistanceUnit().getCoef());
 	}
 	
 	public int compareTo(Entry e) {
@@ -62,6 +51,7 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 	}
 	public void setMileage(double mileage) {
 		this.mileage = mileage;
+		setMileageSI(mileage * getDistanceUnit().getCoef());
 	}
 	public Date getEventDate() {
 		return eventDate;
@@ -103,5 +93,13 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 	}
 	public void setMileageSI(double mileageSI) {
 		this.mileageSI = mileageSI;
+	}
+
+	public DistanceUnit getDistanceUnit() {
+		return distanceUnit;
+	}
+
+	public void setDistanceUnit(DistanceUnit distanceUnit) {
+		this.distanceUnit = distanceUnit;
 	}
 }

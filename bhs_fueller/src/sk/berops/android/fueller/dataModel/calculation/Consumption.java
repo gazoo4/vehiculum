@@ -5,10 +5,10 @@ import java.util.TreeMap;
 import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
 
 public class Consumption {
-	private double totalCostAllEntries;
-	private TreeMap<ExpenseType, Double> totalCostPerEntryType;
-	private double averageCostAllEntries;
-	private TreeMap<ExpenseType, Double> averageCostPerEntryType;
+	private double totalCostAllEntries;										//cumulated cost across all entries
+	private TreeMap<ExpenseType, Double> totalCostPerEntryType;				//cumulated cost within the entries
+	private double averageCostAllEntries;									//average cost of all entries per distance
+	private TreeMap<ExpenseType, Double> averageCostPerEntryType;			//average cost within the entry type per distance
 	private ExpenseType lastEntryType;
 	
 	public Consumption() {

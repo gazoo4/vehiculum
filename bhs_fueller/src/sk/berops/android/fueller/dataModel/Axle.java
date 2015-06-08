@@ -7,7 +7,6 @@ import java.util.Map;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
-import sk.berops.android.fueller.dataModel.Car.VolumeUnit;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 
 public class Axle {

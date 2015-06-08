@@ -5,6 +5,9 @@ import java.io.Serializable;
 import org.simpleframework.xml.Element;
 
 import sk.berops.android.fueller.dataModel.Car;
+import sk.berops.android.fueller.dataModel.UnitConstants.ConsumptionUnit;
+import sk.berops.android.fueller.dataModel.UnitConstants.DistanceUnit;
+import sk.berops.android.fueller.dataModel.UnitConstants.VolumeUnit;
 import sk.berops.android.fueller.dataModel.expense.Currency;
 import sk.berops.android.fueller.dataModel.expense.Currency.Unit;
 
@@ -15,18 +18,18 @@ public class UnitSettings implements Serializable {
 	private static UnitSettings instance = null;
 	
 	@Element(name="consumptionUnit", required=false)
-	private Car.ConsumptionUnit consumptionUnit;
+	private ConsumptionUnit consumptionUnit;
 	@Element(name="volumeUnit", required=false)
-	private Car.VolumeUnit volumeUnit;
+	private VolumeUnit volumeUnit;
 	@Element(name="distanceUnit", required=false)
-	private Car.DistanceUnit distanceUnit;
+	private DistanceUnit distanceUnit;
 	@Element(name="currency", required=false)
 	private Currency.Unit currency;
 	
 	private UnitSettings() {
-		consumptionUnit = Car.ConsumptionUnit.LITRE_PER_100KM;
-		volumeUnit = Car.VolumeUnit.LITER;
-		distanceUnit = Car.DistanceUnit.KILOMETER;
+		consumptionUnit = ConsumptionUnit.LITRE_PER_100KM;
+		volumeUnit = VolumeUnit.LITER;
+		distanceUnit = DistanceUnit.KILOMETER;
 		currency = Currency.Unit.EURO;
 	}
 	
@@ -37,27 +40,27 @@ public class UnitSettings implements Serializable {
 		return instance;
 	}
 
-	public Car.ConsumptionUnit getConsumptionUnit() {
+	public ConsumptionUnit getConsumptionUnit() {
 		return consumptionUnit;
 	}
 
-	public void setConsumptionUnit(Car.ConsumptionUnit consumptionUnit) {
+	public void setConsumptionUnit(ConsumptionUnit consumptionUnit) {
 		this.consumptionUnit = consumptionUnit;
 	}
 
-	public Car.VolumeUnit getVolumeUnit() {
+	public VolumeUnit getVolumeUnit() {
 		return volumeUnit;
 	}
 
-	public void setVolumeUnit(Car.VolumeUnit volumeUnit) {
+	public void setVolumeUnit(VolumeUnit volumeUnit) {
 		this.volumeUnit = volumeUnit;
 	}
 
-	public Car.DistanceUnit getDistanceUnit() {
+	public DistanceUnit getDistanceUnit() {
 		return distanceUnit;
 	}
 
-	public void setDistanceUnit(Car.DistanceUnit distanceUnit) {
+	public void setDistanceUnit(DistanceUnit distanceUnit) {
 		this.distanceUnit = distanceUnit;
 	}
 

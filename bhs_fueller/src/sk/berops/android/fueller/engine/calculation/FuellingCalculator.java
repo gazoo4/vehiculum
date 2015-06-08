@@ -18,10 +18,9 @@ public class FuellingCalculator {
 		FuellingEntry entryFirst = null;
 		FuellingEntry entryLast = new FuellingEntry();
 
-		double grandTotal = 0.0;
+		double totalVolume = 0.0;
 		int fuellingCount = 0;
 		double totalFuelCost = 0.0;
-		double totalVolume = 0.0;
 		double averageFuelPrice = 0.0;
 		
 		boolean movingEligible = true;
@@ -38,7 +37,7 @@ public class FuellingCalculator {
 		
 		TreeMap<FuelType, ArrayList<Double>> floatingValues = new TreeMap<FuelType, ArrayList<Double>>();
 		
-		TreeMap<FuelType, Double> totalPerFuelType = new TreeMap<FuelType, Double>();
+		TreeMap<FuelType, Double> totalVolumePerFuelType = new TreeMap<FuelType, Double>();
 		TreeMap<FuelType, Integer> fuellingCountPerFuelType = new TreeMap<FuelType, Integer>();
 		TreeMap<FuelType, Double> averagePerFuelType = new TreeMap<FuelType, Double>();
 		TreeMap<FuelType, Double> movingAveragePerFuelType = new TreeMap<FuelType, Double>();
@@ -46,7 +45,6 @@ public class FuellingCalculator {
 		TreeMap<FuelType, Double> mileageSinceFirstRefuelPerFuelType = new TreeMap<FuelType, Double>();
 		TreeMap<FuelType, Double> mileageSinceLastRefuelPerFuelType = new TreeMap<FuelType, Double>();
 		TreeMap<FuelType, Double> totalFuelCostPerFuelType = new TreeMap<FuelType, Double>();
-		TreeMap<FuelType, Double> totalVolumePerFuelType = new TreeMap<FuelType, Double>();
 		TreeMap<FuelType, Double> averageFuelCostPerFuelType = new TreeMap<FuelType, Double>();
 		TreeMap<FuelType, Double> costSinceLastRefuelPerFuelType = new TreeMap<FuelType, Double>();
 		TreeMap<FuelType, Double> averageFuelPricePerFuelType = new TreeMap<FuelType, Double>();
@@ -64,7 +62,7 @@ public class FuellingCalculator {
 			FuelType fuelType = e.getFuelType();
 			
 			if (fuellingCountPerFuelType.get(fuelType) == null) {
-				totalPerFuelType.put(fuelType, 0.0);
+				totalVolumePerFuelType.put(fuelType, 0.0);
 				fuellingCountPerFuelType.put(fuelType, 0);
 				averagePerFuelType.put(fuelType, 0.0);
 				movingAveragePerFuelType.put(fuelType, 0.0);
@@ -88,15 +86,15 @@ public class FuellingCalculator {
 					
 			consumption.setLastRefuelType(fuelType);
 			
-			grandTotal += e.getCost();
-			consumption.setGrandTotal(grandTotal);
+			totalVolume += e.getFuelVolumeSI();
+			consumption.setTotalVolume(totalVolume);
 			
 			double typeTotal = 0.0;
-			typeTotal = totalPerFuelType.get(fuelType);
-			typeTotal += e.getCost();
-			totalPerFuelType.put(fuelType, typeTotal);
-			TreeMap<FuelType, Double> totalPerFuelTypeCopy = new TreeMap<FuelType, Double>(totalPerFuelType);
-			consumption.setTotalPerFuelType(totalPerFuelTypeCopy);
+			typeTotal = totalVolumePerFuelType.get(fuelType);
+			typeTotal += e.getFuelVolumeSI();
+			totalVolumePerFuelType.put(fuelType, typeTotal);
+			TreeMap<FuelType, Double> totalVolumePerFuelTypeCopy = new TreeMap<FuelType, Double>(totalVolumePerFuelType);
+			consumption.setTotalVolumePerFuelType(totalVolumePerFuelTypeCopy);
 			
 			consumption.setFuellingCount(++fuellingCount);
 			
@@ -108,16 +106,16 @@ public class FuellingCalculator {
 			if (fuellingCountPerFuelType.get(fuelType) == 1) {
 				consumption.setAverageSinceLast(0.0);
 			} else {
-				double mileageLast = entryLastPerFuelType.get(fuelType).getMileage();
-				double averageSinceLast = e.getFuelVolume() / (e.getMileage() - mileageLast) * 100;
+				double mileageLast = entryLastPerFuelType.get(fuelType).getMileageSI();
+				double averageSinceLast = e.getFuelVolume() / (e.getMileageSI() - mileageLast) * 100;
 				consumption.setAverageSinceLast(averageSinceLast);
 			}
 			
 			if (fuellingCountPerFuelType.get(fuelType) == 1) {
 				averagePerFuelType.put(fuelType, 0.0);
 			} else {
-				double volume = consumption.getTotalPerFuelType().get(fuelType) - entryFirstPerFuelType.get(fuelType).getFuelVolume();
-				double distance = e.getMileage() - entryFirstPerFuelType.get(fuelType).getMileage();
+				double volume = consumption.getTotalVolumePerFuelType().get(fuelType) - entryFirstPerFuelType.get(fuelType).getFuelVolumeSI();
+				double distance = e.getMileageSI() - entryFirstPerFuelType.get(fuelType).getMileageSI();
 				averagePerFuelType.put(fuelType, volume/distance*100);
 			}
 			TreeMap<FuelType, Double> averagePerFuelTypeCopy = new TreeMap<FuelType, Double>(averagePerFuelType);
@@ -135,11 +133,11 @@ public class FuellingCalculator {
 			
 			if (movingEligible) {
 				if (movingVolume.get(fuelType).size() != 0) {
-					volumeSum.put(fuelType, volumeSum.get(fuelType) + e.getFuelVolume());
+					volumeSum.put(fuelType, volumeSum.get(fuelType) + e.getFuelVolumeSI());
 				}
 				
-				movingVolume.get(fuelType).add(Double.valueOf(e.getFuelVolume()));
-				movingDistance.get(fuelType).add(Double.valueOf(e.getMileage()));
+				movingVolume.get(fuelType).add(Double.valueOf(e.getFuelVolumeSI()));
+				movingDistance.get(fuelType).add(Double.valueOf(e.getMileageSI()));
 				
 				if (movingVolume.get(fuelType).size() > (movingPrecision + 1)) {
 					volumeSum.put(fuelType, volumeSum.get(fuelType) - movingVolume.get(fuelType).getFirst().doubleValue());
@@ -198,14 +196,14 @@ public class FuellingCalculator {
 			if (fuellingCount == 1) {
 				consumption.setMileageSinceFirstRefuel(0.0);
 			} else {
-				double mileage = e.getMileage() - entryFirst.getMileage();
+				double mileage = e.getMileageSI() - entryFirst.getMileageSI();
 				consumption.setMileageSinceFirstRefuel(mileage);
 			}
 			
 			if (fuellingCountPerFuelType.get(fuelType) == 1) {
 				mileageSinceFirstRefuelPerFuelType.put(fuelType, 0.0);
 			} else {
-				double mileage = e.getMileage() - entryFirstPerFuelType.get(fuelType).getMileage();
+				double mileage = e.getMileageSI() - entryFirstPerFuelType.get(fuelType).getMileageSI();
 				mileageSinceFirstRefuelPerFuelType.put(fuelType, mileage);
 			}
 			TreeMap<FuelType, Double> mileageSinceFirstRefuelPerFuelTypeCopy = new TreeMap<FuelType, Double>(mileageSinceFirstRefuelPerFuelType);
@@ -214,14 +212,14 @@ public class FuellingCalculator {
 			if (fuellingCount == 1) {
 				consumption.setMileageSinceLastRefuel(0.0);
 			} else {
-				double mileage = e.getMileage() - entryLast.getMileage();
+				double mileage = e.getMileageSI() - entryLast.getMileageSI();
 				consumption.setMileageSinceLastRefuel(mileage);
 			}
 			
 			if (fuellingCountPerFuelType.get(fuelType) == 1) {
 				mileageSinceLastRefuelPerFuelType.put(fuelType, 0.0);
 			} else {
-				double mileage = e.getMileage() - entryLastPerFuelType.get(fuelType).getMileage();
+				double mileage = e.getMileageSI() - entryLastPerFuelType.get(fuelType).getMileageSI();
 				mileageSinceLastRefuelPerFuelType.put(fuelType, mileage);
 			}
 			TreeMap<FuelType, Double> mileageSinceLastRefuelPerFuelTypeCopy = new TreeMap<FuelType, Double>(mileageSinceLastRefuelPerFuelType);
@@ -236,21 +234,12 @@ public class FuellingCalculator {
 			TreeMap<FuelType, Double> totalFuelCostPerFuelTypeCopy = new TreeMap<FuelType, Double>(totalFuelCostPerFuelType);
 			consumption.setTotalFuelCostPerFuelType(totalFuelCostPerFuelTypeCopy);
 			
-			totalVolume += e.getFuelVolume();
-			consumption.setTotalVolume(totalVolume);
-			
-			double totalVolumeType = totalVolumePerFuelType.get(fuelType);
-			totalVolumeType += e.getFuelVolume();
-			totalVolumePerFuelType.put(fuelType, totalVolumeType);
-			TreeMap<FuelType, Double> totalVolumePerFuelTypeCopy = new TreeMap<FuelType, Double>(totalVolumePerFuelType);
-			consumption.setTotalVolumePerFuelType(totalVolumePerFuelTypeCopy);
-			
 			double averageFuelCost;
 			if (fuellingCount == 1) {
 				averageFuelCost = 0.0;
 			} else {
 				double fuelCost = totalFuelCost - entryFirst.getCost();
-				double mileage = e.getMileage() - entryFirst.getMileage();
+				double mileage = e.getMileageSI() - entryFirst.getMileageSI();
 				averageFuelCost = fuelCost / mileage * 100;
 			}
 			consumption.setAverageFuelCost(averageFuelCost);
@@ -259,7 +248,7 @@ public class FuellingCalculator {
 				averageFuelCostPerFuelType.put(fuelType, 0.0);
 			} else {
 				double fuelCost = totalFuelCostPerFuelType.get(fuelType) - entryFirstPerFuelType.get(fuelType).getCost();
-				double mileage = e.getMileage() - entryFirstPerFuelType.get(fuelType).getMileage();
+				double mileage = e.getMileageSI() - entryFirstPerFuelType.get(fuelType).getMileageSI();
 				double averageFuelCostType = fuelCost / mileage * 100;
 				averageFuelCostPerFuelType.put(fuelType, averageFuelCostType);
 			}
@@ -269,7 +258,7 @@ public class FuellingCalculator {
 			if (fuellingCount == 1) {
 				consumption.setCostSinceLastRefuel(0.0);
 			} else {
-				double mileage = e.getMileage() - entryLast.getMileage();
+				double mileage = e.getMileageSI() - entryLast.getMileageSI();
 				double costSinceLastRefuel = e.getCost() / mileage * 100;
 				consumption.setCostSinceLastRefuel(costSinceLastRefuel);
 			}
@@ -277,7 +266,7 @@ public class FuellingCalculator {
 			if (fuellingCountPerFuelType.get(fuelType) == 1) {
 				costSinceLastRefuelPerFuelType.put(fuelType, 0.0);
 			} else {
-				double mileage = e.getMileage() - entryLastPerFuelType.get(fuelType).getMileage();
+				double mileage = e.getMileageSI() - entryLastPerFuelType.get(fuelType).getMileageSI();
 				double costSinceLastRefuelType = e.getCost() / mileage * 100;
 				costSinceLastRefuelPerFuelType.put(fuelType, costSinceLastRefuelType);
 			}

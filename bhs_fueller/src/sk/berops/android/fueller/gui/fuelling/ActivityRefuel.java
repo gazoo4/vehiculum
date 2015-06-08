@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -139,12 +140,7 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 			throwAlertFieldsEmpty(getResources().getString(
 					R.string.activity_refuel_volume_hint));
 		}
-		switch (MainActivity.garage.getActiveCar().getVolumeUnit()) {
-			case LITER: fuellingEntry.setFuelVolume(volume); break;
-			case IMPERIAL_GALLON: fuellingEntry.setFuelVolume(volume*4.54609); break;
-			case US_GALLON: fuellingEntry.setFuelVolume(volume*3.78541); break;
-			default: System.out.println("Very weird volume unit");
-		}
+		fuellingEntry.setFuelVolume(volume, MainActivity.garage.getActiveCar().getVolumeUnit());
 	}
 
 	private void updateFuelType() {
@@ -163,7 +159,7 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 			price = cost / volume;
 			fuellingEntry.setFuelPrice(price);
 		} catch (NumberFormatException ex) {
-			System.out.println("Cannot compute the price when not both Cost + Volume are filled-in");
+			Log.d("INFO", "Cannot compute the price when not both Cost + Volume are filled-in");
 		}
 	}
 

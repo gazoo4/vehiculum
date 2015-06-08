@@ -12,6 +12,9 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
+import sk.berops.android.fueller.dataModel.UnitConstants.ConsumptionUnit;
+import sk.berops.android.fueller.dataModel.UnitConstants.DistanceUnit;
+import sk.berops.android.fueller.dataModel.UnitConstants.VolumeUnit;
 import sk.berops.android.fueller.dataModel.calculation.Consumption;
 import sk.berops.android.fueller.dataModel.calculation.FuelConsumption;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
@@ -24,6 +27,7 @@ public class Car extends Record implements Serializable {
 	 */
 	private static final long serialVersionUID = -1491264721816146235L;
 	// TODO: add gallery, power, first registration, owner (2nd, 3rd...)
+	// TODO: add VIN number
 	// TODO: add engine object (power, construction,...)
 	@Element(name="nickname", required=false)
 	private String nickname;
@@ -53,155 +57,6 @@ public class Car extends Record implements Serializable {
 	private LinkedList<Axle> axles;
 	@Element(name="type", required=false)
 	private CarType type;
-	private Consumption consumptionSI;
-	
-	public enum VolumeUnit{
-		LITER(0, "ltrs", "liters"), 
-		US_GALLON(1, "gal", "US gallons"),
-		IMPERIAL_GALLON(2, "gal", "Imperial gallons");
-		private int id;
-		private String unit;	
-		private String longUnit;
-		VolumeUnit(int id, String unit, String longUnit) {
-			this.setId(id);
-			this.setUnit(unit);
-			this.setLongUnit(longUnit);
-		}
-		
-		private static Map<Integer, VolumeUnit> idToUnitMapping;
-
-		public static VolumeUnit getVolumeUnit(int id) {
-			if (idToUnitMapping == null) {
-				initMapping();
-			}
-			
-			VolumeUnit result = null;
-			result = idToUnitMapping.get(id);
-			return result;
-		}
-		
-		private static void initMapping() {
-			idToUnitMapping = new HashMap<Integer, Car.VolumeUnit>();
-			for (VolumeUnit unit : values()) {
-				idToUnitMapping.put(unit.id, unit);
-			}
-		}
-	
-		public String getUnit() {
-			return unit;
-		}
-		public void setUnit(String unit) {
-			this.unit = unit;
-		}
-		public int getId() {
-			return id;
-		}
-		public void setId(int id) {
-			this.id = id;
-		}
-		public String getLongUnit() {
-			return longUnit;
-		}
-		public void setLongUnit(String longUnit) {
-			this.longUnit = longUnit;
-		}
-	}
-	
-	public enum DistanceUnit{
-		KILOMETER(0, "km", "kilometers"), 
-		MILE(1, "mil", "miles");
-		private int id;
-		private String unit;	
-		private String longUnit;
-		DistanceUnit(int id, String unit, String longUnit) {
-			this.setId(id);
-			this.setUnit(unit);
-			this.setLongUnit(longUnit);
-		}
-		
-		private static Map<Integer, DistanceUnit> idToUnitMapping;
-
-		public static DistanceUnit getDistanceUnit(int id) {
-			if (idToUnitMapping == null) {
-				initMapping();
-			}
-			
-			DistanceUnit result = null;
-			result = idToUnitMapping.get(id);
-			return result;
-		}
-		
-		private static void initMapping() {
-			idToUnitMapping = new HashMap<Integer, Car.DistanceUnit>();
-			for (DistanceUnit unit : values()) {
-				idToUnitMapping.put(unit.id, unit);
-			}
-		}
-	
-		public String getUnit() {
-			return unit;
-		}
-		public void setUnit(String unit) {
-			this.unit = unit;
-		}
-		public int getId() {
-			return id;
-		}
-		public void setId(int id) {
-			this.id = id;
-		}
-		public String getLongUnit() {
-			return longUnit;
-		}
-		public void setLongUnit(String longUnit) {
-			this.longUnit = longUnit;
-		}
-	}
-	
-	public enum ConsumptionUnit{
-		LITRE_PER_100KM(0, "l/100 km"), 
-		KM_PER_LITRE(1, "km/l"),
-		MPG_US(2, "mpg"),
-		MPG_IMPERIAL(3, "mpg");
-		private int id;
-		private String unit;	
-		ConsumptionUnit(int id, String unit) {
-			this.setId(id);
-			this.setUnit(unit);
-		}
-		
-		private static Map<Integer, ConsumptionUnit> idToUnitMapping;
-
-		public static ConsumptionUnit getConsumptionUnit(int id) {
-			if (idToUnitMapping == null) {
-				initMapping();
-			}
-			
-			ConsumptionUnit result = null;
-			result = idToUnitMapping.get(id);
-			return result;
-		}
-		
-		private static void initMapping() {
-			idToUnitMapping = new HashMap<Integer, Car.ConsumptionUnit>();
-			for (ConsumptionUnit unit : values()) {
-				idToUnitMapping.put(unit.id, unit);
-			}
-		}
-	
-		public String getUnit() {
-			return unit;
-		}
-		public void setUnit(String unit) {
-			this.unit = unit;
-		}
-		public int getId() {
-			return id;
-		}
-		public void setId(int id) {
-			this.id = id;
-		}
-	}
 	
 	public enum CarType{
 		SEDAN(0, "sedan"), 
@@ -289,22 +144,8 @@ public class Car extends Record implements Serializable {
 	}
 	
 	public void initAfterLoad() {
-		double coef = 0;
-		switch (getDistanceUnit()) {
-		case KILOMETER: coef = 1;
-			break;
-		case MILE: coef = UnitConstants.MILE;
-			break;
-		default:
-			System.out.println("Not expected program branch reached");
-			break;
-		}
-		if (getInitialMileageSI() == 0 && getInitialMileage() != 0) {
-			setInitialMileageSI(getInitialMileage() * coef);
-		}
-		if (getCurrentMileageSI() == 0 && getCurrentMileage() != 0) {
-			setCurrentMileageSI(getCurrentMileage() * coef); 
-		}
+		setInitialMileageSI(getInitialMileage() * getDistanceUnit().getCoef());
+		setCurrentMileageSI(getCurrentMileage() * getDistanceUnit().getCoef()); 
 		
 		history.initAfterLoad(this);
 	}
@@ -408,16 +249,7 @@ public class Car extends Record implements Serializable {
 
 	public void setInitialMileage(double initialMileage) {
 		this.initialMileage = initialMileage;
-		switch (this.getDistanceUnit()) {
-		case KILOMETER:
-			setInitialMileageSI(initialMileage);
-			break;
-		case MILE:
-			setInitialMileageSI(initialMileage * UnitConstants.MILE);
-			break;
-		default:
-			break;
-		}
+		setInitialMileageSI(initialMileage * getDistanceUnit().getCoef());
 	}
 
 	public double getCurrentMileage() {
@@ -426,16 +258,7 @@ public class Car extends Record implements Serializable {
 
 	public void setCurrentMileage(double currentMileage) {
 		this.currentMileage = currentMileage;
-		switch (this.getDistanceUnit()) {
-		case KILOMETER:
-			setCurrentMileageSI(currentMileage);
-			break;
-		case MILE:
-			setCurrentMileageSI(currentMileage * UnitConstants.MILE);
-			break;
-		default:
-			break;
-		}
+		setCurrentMileageSI(currentMileage * getDistanceUnit().getCoef());
 	}
 
 	public VolumeUnit getVolumeUnit() {
@@ -475,14 +298,6 @@ public class Car extends Record implements Serializable {
 	public Consumption getConsumption() {
 		if (getHistory().getEntries().size() == 0) return null;
 		return getHistory().getEntries().getLast().getConsumption();
-	}
-
-	public Consumption getConsumptionSI() {
-		return consumptionSI;
-	}
-
-	public void setConsumptionSI(Consumption consumptionSI) {
-		this.consumptionSI = consumptionSI;
 	}
 
 	public ConsumptionUnit getConsumptionUnit() {

@@ -4,6 +4,8 @@ import org.w3c.dom.NamedNodeMap;
 
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Record;
+import sk.berops.android.fueller.dataModel.UnitConstants.DistanceUnit;
+import sk.berops.android.fueller.dataModel.UnitConstants.VolumeUnit;
 import sk.berops.android.fueller.gui.Colors;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityAddRecord;
@@ -114,8 +116,8 @@ public class ActivityCarAdd extends ActivityAddRecord {
 			System.out.println("ModelYear not defined.");
 			ex.printStackTrace();
 		}
-		car.setDistanceUnit(Car.DistanceUnit.getDistanceUnit(spinnerDistanceUnit.getSelectedItemPosition()));
-		car.setVolumeUnit(Car.VolumeUnit.getVolumeUnit(spinnerVolumeUnit.getSelectedItemPosition()));
+		car.setDistanceUnit(DistanceUnit.getDistanceUnit(spinnerDistanceUnit.getSelectedItemPosition()));
+		car.setVolumeUnit(VolumeUnit.getVolumeUnit(spinnerVolumeUnit.getSelectedItemPosition()));
 		
 		if (!editMode) {
 			MainActivity.garage.addCar(car);

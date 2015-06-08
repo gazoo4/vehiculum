@@ -4,44 +4,42 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import sk.berops.android.fueller.dataModel.Car;
-import sk.berops.android.fueller.dataModel.Car.ConsumptionUnit;
 import sk.berops.android.fueller.dataModel.UnitConstants;
+import sk.berops.android.fueller.dataModel.UnitConstants.ConsumptionUnit;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry.FuelType;
 
 public class FuelConsumption extends Consumption {
 	//TODO: create also MaintenanceConsumption, FeeConsumption, etc...
 	private FuelType lastRefuelType;
-	private Double grandTotal;											//total consumption in units
-	private TreeMap<FuelType, Double> totalPerFuelType;
-	private int fuellingCount;
-	private TreeMap<FuelType, Integer> fuellingCountPerFuelType;
-	private double averageSinceLast;
-	private double grandAverage;										//overall average units per distance
-	private TreeMap<FuelType, Double> averagePerFuelType;					//average consumption per type
-	private TreeMap<FuelType, Double> movingAveragePerFuelType;
-	private TreeMap<FuelType, Double> floatingAveragePerFuelType;
-	private double mileageSinceFirstRefuel;
-	private TreeMap<FuelType, Double> mileageSinceFirstRefuelPerFuelType;
-	private double mileageSinceLastRefuel;
-	private TreeMap<FuelType, Double> mileageSinceLastRefuelPerFuelType;
-	private double totalFuelCost;										//total fuel costs
-	private TreeMap<FuelType, Double> totalFuelCostPerFuelType;
-	private double totalVolume;
-	private TreeMap<FuelType, Double> totalVolumePerFuelType;
-	private double averageFuelCost;										//average cost per distance
-	private TreeMap<FuelType, Double> averageFuelCostPerFuelType;
-	private double costSinceLastRefuel;									//cost since last refuel per distance
-	private TreeMap<FuelType, Double> costSinceLastRefuelPerFuelType;
-	private double averageFuelPrice;									//average unit price
-	private TreeMap<FuelType, Double> averageFuelPricePerFuelType;			
+	private Double totalVolume;												//total fuel volume bought
+	private TreeMap<FuelType, Double> totalVolumePerFuelType;				//total fuel type volume bought
+	private int fuellingCount;												//amount of fuelling counts
+	private TreeMap<FuelType, Integer> fuellingCountPerFuelType;			//amount of fuelling counts per fuel type
+	private double averageSinceLast;										//average consumption since last refuelling
+	private double grandAverage;											//overall average consumption combined across fuels
+	private TreeMap<FuelType, Double> averagePerFuelType;					//average consumption per fuel type
+	private TreeMap<FuelType, Double> movingAveragePerFuelType;				//moving average per fuel type
+	private TreeMap<FuelType, Double> floatingAveragePerFuelType;			//floating average per fuel type
+	private double mileageSinceFirstRefuel;									//mileage driven since the first refuel
+	private TreeMap<FuelType, Double> mileageSinceFirstRefuelPerFuelType;	//mileage driven since the first refuel of a certain fuel type
+	private double mileageSinceLastRefuel;									//mileage driven since the last refuel
+	private TreeMap<FuelType, Double> mileageSinceLastRefuelPerFuelType;	//mileage driven since the last refuel of a certain fuel type
+	private double totalFuelCost;											//total fuel costs
+	private TreeMap<FuelType, Double> totalFuelCostPerFuelType;				//total fuel costs of a certain fuel type
+	private double averageFuelCost;											//average fuel cost per distance
+	private TreeMap<FuelType, Double> averageFuelCostPerFuelType;			//average fuel type cost per distance
+	private double costSinceLastRefuel;										//cost since last refuel per distance
+	private TreeMap<FuelType, Double> costSinceLastRefuelPerFuelType;		//fuel type cost since last refuel per distance
+	private double averageFuelPrice;										//average unit price
+	private TreeMap<FuelType, Double> averageFuelPricePerFuelType;			//average unit price per fuel type
 	
 	private TreeMap<FuelType, Double> averagePerFuelTypeOld;
 	
 	public FuelConsumption() {
 		super();
 		lastRefuelType = FuelType.GASOLINE;
-		grandTotal = 0.0;
-		totalPerFuelType = new TreeMap<FuelType, Double>();
+		totalVolume = 0.0;
+		totalVolumePerFuelType = new TreeMap<FuelType, Double>();
 		fuellingCount = 0;
 		fuellingCountPerFuelType = new TreeMap<FuelType, Integer>();
 		averageSinceLast = 0.0;
@@ -73,18 +71,18 @@ public class FuelConsumption extends Consumption {
 		this.lastRefuelType = lastRefuelType;
 	}
 
-	public Double getGrandTotal() {
-		return grandTotal;
+	public Double getTotalVolume() {
+		return totalVolume;
 	}
-	public void setGrandTotal(Double grandTotal) {
-		this.grandTotal = grandTotal;
+	public void setTotalVolume(Double totalVolume) {
+		this.totalVolume = totalVolume;
 	}
-	public TreeMap<FuelType, Double> getTotalPerFuelType() {
-		return totalPerFuelType;
+	public TreeMap<FuelType, Double> getTotalVolumePerFuelType() {
+		return totalVolumePerFuelType;
 	}
 
-	public void setTotalPerFuelType(TreeMap<FuelType, Double> totalPerFuelType) {
-		this.totalPerFuelType = totalPerFuelType;
+	public void setTotalVolumePerFuelType(TreeMap<FuelType, Double> totalVolumePerFuelType) {
+		this.totalVolumePerFuelType = totalVolumePerFuelType;
 	}
 
 	public int getFuellingCount() {
@@ -211,22 +209,6 @@ public class FuelConsumption extends Consumption {
 		this.totalFuelCostPerFuelType = totalFuelCostPerFuelType;
 	}
 
-	public double getTotalVolume() {
-		return totalVolume;
-	}
-
-	public void setTotalVolume(double totalVolume) {
-		this.totalVolume = totalVolume;
-	}
-
-	public TreeMap<FuelType, Double> getTotalVolumePerFuelType() {
-		return totalVolumePerFuelType;
-	}
-
-	public void setTotalVolumePerFuelType(TreeMap<FuelType, Double> totalVolumePerFuelType) {
-		this.totalVolumePerFuelType = totalVolumePerFuelType;
-	}
-
 	public double getAverageFuelCost() {
 		return averageFuelCost;
 	}
@@ -288,7 +270,7 @@ public class FuelConsumption extends Consumption {
 		return getFuellingCountPerFuelType().keySet();
 	}
 	
-		public FuelConsumption getConsumptionNonSI(Car.ConsumptionUnit cu) {
+		public FuelConsumption getConsumptionNonSI(ConsumptionUnit cu) {
 		FuelConsumption consumption = new FuelConsumption();
 		double value = 0;
 		double coef = 0;
