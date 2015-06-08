@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import sk.berops.android.fueller.configuration.UnitSettings;
 import sk.berops.android.fueller.configuration.UserSettings;
 import sk.berops.android.fueller.dataModel.Car;
+import sk.berops.android.fueller.dataModel.UnitConstants.ConsumptionUnit;
 import sk.berops.android.fueller.dataModel.calculation.FuelConsumption;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.gui.MainActivity;
@@ -87,7 +88,18 @@ public class FuellingStatsAdapter extends ArrayAdapter<FuellingEntry> {
 		double avgConsumption = c.getAveragePerFuelType().get(entry.getFuelType());
 		double lastConsumption = c.getAverageSinceLast();
 		double relativeChange = (lastConsumption / avgConsumption - 0.8) / 0.4;
-		consumption.setTextColor(GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange));
+		int colorBelow; 
+		int colorMiddle = 0xFFFFFF00;
+		int colorAbove; 
+		if (UnitSettings.getInstance().getConsumptionUnit() == ConsumptionUnit.LITRE_PER_100KM
+				|| UnitSettings.getInstance().getConsumptionUnit() == ConsumptionUnit.SI) {
+			colorBelow = Color.GREEN;
+			colorAbove = Color.RED;
+		} else {
+			colorBelow = Color.RED;
+			colorAbove = Color.GREEN;
+		}
+		consumption.setTextColor(GuiUtils.getShade(colorBelow, colorMiddle, colorAbove, relativeChange));
 		
 		return rowView;
 	}

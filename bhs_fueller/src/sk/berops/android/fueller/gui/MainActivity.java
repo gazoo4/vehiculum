@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import sk.berops.android.fueller.configuration.UnitSettings;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Garage;
+import sk.berops.android.fueller.dataModel.UnitConstants.ConsumptionUnit;
 import sk.berops.android.fueller.dataModel.calculation.Consumption;
 import sk.berops.android.fueller.dataModel.calculation.FuelConsumption;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
@@ -257,7 +258,18 @@ public class MainActivity extends Activity {
 		double avgConsumption = c.getAveragePerFuelType().get(type);
 		double lastConsumption = c.getAverageSinceLast();
 		double relativeChange = (lastConsumption / avgConsumption - 0.8) / 0.4;
-		int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange); //orange in the middle
+		int colorBelow; 
+		int colorMiddle = 0xFFFFFF00;
+		int colorAbove; 
+		if (UnitSettings.getInstance().getConsumptionUnit() == ConsumptionUnit.LITRE_PER_100KM
+				|| UnitSettings.getInstance().getConsumptionUnit() == ConsumptionUnit.SI) {
+			colorBelow = Color.GREEN;
+			colorAbove = Color.RED;
+		} else {
+			colorBelow = Color.RED;
+			colorAbove = Color.GREEN;
+		}
+		int color = GuiUtils.getShade(colorBelow, colorMiddle, colorAbove, relativeChange); //orange in the middle
 		
 		String description = getString(R.string.activity_main_since_last_refuel);
 		String unit = settings.getConsumptionUnit().getUnit();
