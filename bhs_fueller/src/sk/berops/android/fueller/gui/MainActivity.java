@@ -48,11 +48,6 @@ public class MainActivity extends Activity {
 	
 	private TableLayout statsTable;
 	private TextView textViewHeader;
-	private TextView textViewCarNickname;
-	private TextView textViewSinceLast;
-	private TextView textViewSinceLastUnit;
-	private TextView textViewConsumptionCombined;
-	private TextView textViewConsumptionCombinedUnit;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -110,11 +105,6 @@ public class MainActivity extends Activity {
 	public void attachGuiObjects() {
 		statsTable = (TableLayout) findViewById(R.id.activity_main_stats_table);
 		textViewHeader = (TextView) findViewById(R.id.activity_main_header);
-		textViewCarNickname = (TextView) findViewById(R.id.activity_main_car_nickname);
-		textViewSinceLast = (TextView) findViewById(R.id.activity_main_since_last_consumption_value);
-		textViewSinceLastUnit = (TextView) findViewById(R.id.activity_main_since_last_consumption_unit);
-		textViewConsumptionCombined = (TextView) findViewById(R.id.activity_main_consumption_combined_value);
-		textViewConsumptionCombinedUnit = (TextView) findViewById(R.id.activity_main_consumption_combined_unit);
 	}
 	
 	public void styleGuiObjects() {
