@@ -77,7 +77,7 @@ public class FuellingStatsAdapter extends ArrayAdapter<FuellingEntry> {
 		unitPrice.setText(TextFormatter.format(entry.getFuelPrice(), "####0.000"));
 		unitPriceUnit.setText(settings.getCurrency().getUnit() +"/"+ settings.getVolumeUnit().getUnit());
 		volume.setText(TextFormatter.format(entry.getFuelVolume(), "###0.00"));
-		volumeUnit.setText(settings.getVolumeUnit().getUnit());
+		volumeUnit.setText(settings.getVolumeUnit().getUnit() +"s");
 		fuel.setText(entry.getFuelType().toString());
 		consumption.setText(TextFormatter.format(entry.getFuelConsumption().getAverageSinceLast(),"##0.00"));
 		consumptionUnit.setText(settings.getConsumptionUnit().getUnit());

@@ -8,7 +8,9 @@ import java.util.LinkedList;
 import sk.berops.android.fueller.configuration.UnitSettings;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Garage;
+import sk.berops.android.fueller.dataModel.UnitConstants;
 import sk.berops.android.fueller.dataModel.UnitConstants.ConsumptionUnit;
+import sk.berops.android.fueller.dataModel.UnitConstants.CostUnit;
 import sk.berops.android.fueller.dataModel.calculation.Consumption;
 import sk.berops.android.fueller.dataModel.calculation.FuelConsumption;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
@@ -163,8 +165,10 @@ public class MainActivity extends Activity {
 		if (c == null) return;
 		
 		String description;
-		double value;
-		String unit;
+		double valueSI;
+		double valueReport;
+		ConsumptionUnit unit;
+		unit = settings.getConsumptionUnit();
 		
 		// we should buy at least 2 different fuels in order to display the stats separately
 		HashMap<FuelType, Double> map = new HashMap<FuelType, Double>();
@@ -180,31 +184,29 @@ public class MainActivity extends Activity {
 				description = getString(R.string.activity_main_average);
 				description += " ";
 				description += t.getType().toString();
-				value = map.get(t);
-				unit = settings.getConsumptionUnit().getUnit();
+				valueSI = map.get(t);
+				valueReport = UnitConstants.convertUnitConsumption(valueSI);
 					
-				layout.addView(createStatRow(description, value, unit));
+				layout.addView(createStatRow(description, valueReport, unit.getUnit()));
 			}
 		}
 		
 		description = getString(R.string.activity_main_average_combined);
-		value = c.getGrandAverage();
-		unit = settings.getConsumptionUnit().getUnit();
-		
-		layout.addView(createStatRow(description, value, unit));
+		valueSI = c.getGrandAverage();
+		valueReport = UnitConstants.convertUnitConsumption(valueSI);
+		layout.addView(createStatRow(description, valueReport, unit.getUnit()));
 	}
 	
 	private void generateRowTotalRelativeCosts(TableLayout layout) {
-		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
+		Consumption c = garage.getActiveCar().getConsumption();
 		if (c == null) return;
 		
 		String description = getString(R.string.activity_main_relative_costs);
-		double value = c.getAverageFuelCost();
-		String unit = settings.getCurrency().getUnit();
-		unit += "/100 ";
-		unit += settings.getDistanceUnit().getUnit();
+		double valueSI = c.getAverageCost();
+		CostUnit unit = settings.getCostUnit();
 		
-		layout.addView(createStatRow(description, value, unit));
+		double valueReport = UnitConstants.convertUnitCost(valueSI);
+		layout.addView(createStatRow(description, valueReport, unit.getUnit()));
 	}
 	
 	private void generateRowRelativeCosts(TableLayout layout) {
@@ -214,29 +216,27 @@ public class MainActivity extends Activity {
 		String description = getString(R.string.activity_main_relative_costs_fuel);
 		description += " ";
 		description += t.toString();
-		double value = c.getAverageFuelCostPerFuelType().get(t).doubleValue();
-		String unit = settings.getCurrency().getUnit();
-		unit += "/100 ";
-		unit += settings.getDistanceUnit();
+		double valueSI = c.getAverageFuelCostPerFuelType().get(t).doubleValue();
+		CostUnit unit = settings.getCostUnit();
 		
-		layout.addView(createStatRow(description, value, unit));
+		double valueReport = UnitConstants.convertUnitCost(valueSI);
+		layout.addView(createStatRow(description, valueReport, unit.getUnit()));
 	}
 	
 	private void generateRowLastCosts(TableLayout layout) {
 		FuellingEntry e = garage.getActiveCar().getHistory().getFuellingEntries().getLast();
 		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
 		FuelType type = e.getFuelType();
-		double avgCost = c.getAverageFuelCostPerFuelType().get(type);
-		double lastCost = c.getCostSinceLastRefuel();
-		double relativeChange = (lastCost / avgCost - 0.8) / 0.4;
+		double avgCostSI = c.getAverageFuelCostPerFuelType().get(type);
+		double lastCostSI = c.getCostSinceLastRefuel();
+		double relativeChange = (lastCostSI / avgCostSI - 0.8) / 0.4;
 		int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange);
 		
 		String description = getString(R.string.activity_main_relative_since_last_refuel);
-		String unit = settings.getCurrency().getUnit();
-		unit += "/100 ";
-		unit += settings.getDistanceUnit().getUnit();
+		CostUnit unit = settings.getCostUnit();
 		
-		layout.addView(createStatRow(description, lastCost, unit, color));
+		double lastCostReport = UnitConstants.convertUnitCost(lastCostSI);
+		layout.addView(createStatRow(description, lastCostReport, unit.getUnit(), color));
 	}
 	
 	private void generateRowLastConsumption(TableLayout layout) {

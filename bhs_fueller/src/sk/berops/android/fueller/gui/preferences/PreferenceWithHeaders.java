@@ -74,4 +74,9 @@ public class PreferenceWithHeaders extends PreferenceActivity {
             //addPreferencesFromResource(R.xml.preference_dependencies);
         }
     }	*/
+    
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        return Units.class.getName().equals(fragmentName);
+    }
 }

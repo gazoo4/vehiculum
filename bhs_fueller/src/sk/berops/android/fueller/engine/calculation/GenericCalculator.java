@@ -72,7 +72,7 @@ public class GenericCalculator {
 			} else {
 				double cost = totalCost - entryFirst.getCost();
 				double mileage = e.getMileage() - entryFirst.getMileage();
-				averageCost = cost / mileage * 100;
+				averageCost = cost / mileage;
 			}
 			consumption.setAverageCost(averageCost);
 			
@@ -81,7 +81,7 @@ public class GenericCalculator {
 			} else {
 				double fuelCost = totalCostPerEntryType.get(entryType) - entryFirstPerEntryType.get(entryType).getCost();
 				double mileage = e.getMileage() - entryFirstPerEntryType.get(entryType).getMileage();
-				double averageFuelCostType = fuelCost / mileage * 100;
+				double averageFuelCostType = fuelCost / mileage;
 				averageCostPerEntryType.put(entryType, averageFuelCostType);
 			}
 			TreeMap<ExpenseType, Double> averageCostPerEntryTypeCopy = new TreeMap<ExpenseType, Double>(averageCostPerEntryType);

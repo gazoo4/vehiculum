@@ -8,9 +8,9 @@ public class Currency {
 	private Unit unit;
 
 	public enum Unit{
-		EURO(0, "€", "Euro"), 
+		EURO(0, "â‚¬", "Euro"), 
 		US_DOLLAR(1, "$", "US Dollar"),
-		UK_POUND(2, "£", "UK Pound");
+		UK_POUND(2, "Â£", "UK Pound");
 		private int id;
 		private String unit;	
 		private String longUnit;

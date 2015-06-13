@@ -6,6 +6,7 @@ import org.simpleframework.xml.Element;
 
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.UnitConstants.ConsumptionUnit;
+import sk.berops.android.fueller.dataModel.UnitConstants.CostUnit;
 import sk.berops.android.fueller.dataModel.UnitConstants.DistanceUnit;
 import sk.berops.android.fueller.dataModel.UnitConstants.VolumeUnit;
 import sk.berops.android.fueller.dataModel.expense.Currency;
@@ -25,12 +26,15 @@ public class UnitSettings implements Serializable {
 	private DistanceUnit distanceUnit;
 	@Element(name="currency", required=false)
 	private Currency.Unit currency;
+	@Element(name="costUnit", required=false)
+	private CostUnit costUnit;
 	
 	private UnitSettings() {
 		consumptionUnit = ConsumptionUnit.LITRE_PER_100KM;
 		volumeUnit = VolumeUnit.LITER;
 		distanceUnit = DistanceUnit.KILOMETER;
 		currency = Currency.Unit.EURO;
+		costUnit = CostUnit.COST_PER_100_DISTANCE;
 	}
 	
 	public static UnitSettings getInstance() {
@@ -70,5 +74,13 @@ public class UnitSettings implements Serializable {
 
 	public void setCurrency(Unit currency) {
 		this.currency = currency;
+	}
+
+	public CostUnit getCostUnit() {
+		return costUnit;
+	}
+
+	public void setCostUnit(CostUnit costUnit) {
+		this.costUnit = costUnit;
 	}
 }

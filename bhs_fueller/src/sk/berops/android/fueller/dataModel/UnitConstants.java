@@ -3,6 +3,9 @@ package sk.berops.android.fueller.dataModel;
 import java.util.HashMap;
 import java.util.Map;
 
+import sk.berops.android.fueller.configuration.UnitSettings;
+import sk.berops.android.fueller.configuration.UserSettings;
+import sk.berops.android.fueller.dataModel.expense.Currency.Unit;
 import android.util.Log;
 
 public class UnitConstants {
@@ -13,10 +16,11 @@ public class UnitConstants {
 	public static final double MPG_US = 0;
 	
 	public enum VolumeUnit{
-		SI(-1,1.0, "ltrs", "liters"),
-		LITER(0, 1.0, "ltrs", "liters"), 
+		SI(-1,1.0, "ltr", "liters"),
+		LITER(0, 1.0, "ltr", "liters"), 
 		US_GALLON(1, 3.78541, "gal", "US gallons"),
 		IMPERIAL_GALLON(2, 4.54609, "gal", "Imperial gallons");
+		
 		private int id;
 		private double coef;
 		private String unit;	
@@ -77,6 +81,7 @@ public class UnitConstants {
 		SI(-1, 1.0, "km", "kilometers"),
 		KILOMETER(0, 1.0, "km", "kilometers"), 
 		MILE(1, 1.609344, "mil", "miles");
+		
 		private int id;
 		private double coef;
 		private String unit;	
@@ -139,6 +144,7 @@ public class UnitConstants {
 		KM_PER_LITRE(1, 1.0, "km/l"),
 		MPG_US(2, 1.0, "mpg"),
 		MPG_IMPERIAL(3, 1.0, "mpg");
+		
 		private int id;
 		private double coef;
 		private String unit;	
@@ -186,8 +192,90 @@ public class UnitConstants {
 			this.id = id;
 		}
 	}
+	
+	public enum CostUnit{
+		SI(-1, 1.0, "/"),
+		COST_PER_DISTANCE(0, 1.0, "/"),
+		COST_PER_100_DISTANCE(1, 100.0, "/100 "),
+		DISTANCE_PER_COST(2, 1.0, "/"),
+		DISTANCE_PER_100_COST(3, 100.0, "/100 ");
+		
+		private int id;
+		private double coef;
+		private String unit;	
+		CostUnit(int id, double coef, String unit) {
+			this.setId(id);
+			this.setCoef(coef);
+			this.setUnit(unit);
+		}
+		
+		private static Map<Integer, CostUnit> idToUnitMapping;
+
+		public static CostUnit getConsumptionUnit(int id) {
+			if (idToUnitMapping == null) {
+				initMapping();
+			}
+			
+			CostUnit result = null;
+			result = idToUnitMapping.get(id);
+			return result;
+		}
+		
+		private static void initMapping() {
+			idToUnitMapping = new HashMap<Integer, CostUnit>();
+			for (CostUnit unit : values()) {
+				idToUnitMapping.put(unit.id, unit);
+			}
+		}
+	
+		public double getCoef() {
+			return coef;
+		}
+		public void setCoef(double coef) {
+			this.coef = coef;
+		}
+		public String getUnit() {
+			UnitSettings settings = UserSettings.getInstance().getUnitSettings();
+			DistanceUnit distanceUnit = settings.getDistanceUnit();
+			Unit currency = settings.getCurrency();
+			
+			switch (this) {
+			case COST_PER_100_DISTANCE:
+			case COST_PER_DISTANCE:
+				return ""+ currency.getUnit() + unit + distanceUnit.getUnit();
+			case DISTANCE_PER_100_COST:
+			case DISTANCE_PER_COST:
+				return ""+ distanceUnit.getUnit() + unit + currency.getUnit();
+			case SI:
+				break;
+			default:
+				Log.d("DEBUG", "Unexpected CostUnit value");
+			}
+			return unit;
+		}
+		public void setUnit(String unit) {
+			this.unit = unit;
+		}
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+	}
+	
+	public static double convertUnitConsumption(double fromValue) {
+		return convertUnitConsumption(fromValue, null, null);
+	}
 
 	public static double convertUnitConsumption(double fromValue, ConsumptionUnit fromUnit, ConsumptionUnit toUnit) {
+		if (fromUnit == null) {
+			fromUnit = ConsumptionUnit.SI;
+		}
+		if (toUnit == null) {
+			toUnit = UserSettings.getInstance().getUnitSettings().getConsumptionUnit();
+		}
+		
 		switch (fromUnit) {
 		case KM_PER_LITRE:
 			switch (toUnit) {
@@ -252,6 +340,68 @@ public class UnitConstants {
 			default:
 				Log.d("DEBUG", "Conversion method missing to: "+toUnit.getUnit());
 				break;	
+			}
+			break;
+		default:
+			Log.d("DEBUG", "Conversion method missing from: "+fromUnit.getUnit());
+			break;
+		}
+		return 0.0;
+	}
+
+	public static double convertUnitCost(double fromValue) {
+		return convertUnitCost(fromValue, null, null);
+	}
+	
+	public static double convertUnitCost(double fromValue, CostUnit fromUnit, CostUnit toUnit) {
+		if (fromUnit == null) {
+			fromUnit = CostUnit.SI;
+		}
+		if (toUnit == null) {
+			toUnit = UserSettings.getInstance().getUnitSettings().getCostUnit();
+		}
+		
+		double distanceCoef = UserSettings.getInstance().getUnitSettings().getDistanceUnit().getCoef();
+		
+		int coefFrom = 1;
+		int coefTo = 1;
+		
+		switch (fromUnit) {
+		case COST_PER_100_DISTANCE:
+			coefFrom = 100;
+		case SI:
+		case COST_PER_DISTANCE:
+			switch (toUnit) {
+			case COST_PER_100_DISTANCE:
+				coefTo = 100;
+			case SI:
+			case COST_PER_DISTANCE:
+				return coefTo*(fromValue*distanceCoef/coefFrom);
+			case DISTANCE_PER_100_COST:
+				coefTo = 100;
+			case DISTANCE_PER_COST:
+				return coefTo/(fromValue*distanceCoef/coefFrom);
+			default:
+				Log.d("DEBUG", "Conversion method missing to: "+fromUnit.getUnit());
+				break;
+			}
+			break;
+		case DISTANCE_PER_100_COST:
+			coefFrom = 100;
+		case DISTANCE_PER_COST:
+			switch (toUnit) {
+			case COST_PER_100_DISTANCE:
+				coefTo = 100;
+			case SI:
+			case COST_PER_DISTANCE:
+				return coefTo/(fromValue*distanceCoef/coefFrom);
+			case DISTANCE_PER_100_COST:
+				coefTo = 100;
+			case DISTANCE_PER_COST:
+				return coefTo*(fromValue*distanceCoef/coefFrom);
+			default:
+				Log.d("DEBUG", "Conversion method missing to: "+fromUnit.getUnit());
+				break;
 			}
 			break;
 		default:

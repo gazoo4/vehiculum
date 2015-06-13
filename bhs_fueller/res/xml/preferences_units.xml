@@ -30,6 +30,15 @@
                 android:entryValues="@array/preferences_units_volume_values"
                 android:dialogTitle="@string/preferences_units_volume_dialog"
                 android:defaultValue="0" />
+        <ListPreference
+            	android:key="cost_unit"
+            	android:title="@string/preferences_units_cost"
+            	android:summary="%s"
+            	android:entries="@array/preferences_units_cost_entries"
+            	android:entryValues="@array/preferences_units_cost_values"
+                android:dialogTitle="@string/preferences_units_cost_dialog"
+                android:defaultValue="0"
+            />
         
     </PreferenceCategory>
 <!-- 

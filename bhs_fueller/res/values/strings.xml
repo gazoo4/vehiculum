@@ -89,6 +89,8 @@
     <string name="preferences_units"								>Units</string>
     <string name="preferences_units_consumption"					>Consumption</string>
     <string name="preferences_units_consumption_dialog"				>Select consumption units for reporting</string>
+    <string name="preferences_units_cost"							>Cost</string>
+    <string name="preferences_units_cost_dialog"					>Select cost units for reporting</string>
     <string name="preferences_units_distance"						>Distance</string>
     <string name="preferences_units_distance_dialog"				>Select distance units for reporting</string>
     <string name="preferences_units_summary"						>Distance, volume, consumption</string>
@@ -130,6 +132,20 @@
     </string-array>
     
     <string-array name="preferences_units_consumption_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+    <string-array name="preferences_units_cost_entries">
+        <item>Cost/Distance</item>
+        <item>Cost/100 Distance</item>
+        <item>Distance/Cost</item>
+        <item>Distance/100 Cost</item>
+    </string-array>
+    
+    <string-array name="preferences_units_cost_values">
         <item>0</item>
         <item>1</item>
         <item>2</item>
