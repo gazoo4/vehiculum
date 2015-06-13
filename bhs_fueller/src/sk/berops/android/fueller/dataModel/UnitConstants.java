@@ -3,9 +3,9 @@ package sk.berops.android.fueller.dataModel;
 import java.util.HashMap;
 import java.util.Map;
 
-import sk.berops.android.fueller.configuration.UnitSettings;
-import sk.berops.android.fueller.configuration.UserSettings;
-import sk.berops.android.fueller.dataModel.expense.Currency.Unit;
+import sk.berops.android.fueller.Fueller;
+import sk.berops.android.fueller.configuration.Preferences;
+import sk.berops.android.fueller.dataModel.Currency.Unit;
 import android.util.Log;
 
 public class UnitConstants {
@@ -14,6 +14,8 @@ public class UnitConstants {
 	public static final double KM_PER_LITRE = 0;
 	public static final double MPG_IMPERIAL = 0;
 	public static final double MPG_US = 0;
+	
+	static Preferences preferences = Preferences.getInstance();
 	
 	public enum VolumeUnit{
 		SI(-1,1.0, "ltr", "liters"),
@@ -211,7 +213,7 @@ public class UnitConstants {
 		
 		private static Map<Integer, CostUnit> idToUnitMapping;
 
-		public static CostUnit getConsumptionUnit(int id) {
+		public static CostUnit getCostUnit(int id) {
 			if (idToUnitMapping == null) {
 				initMapping();
 			}
@@ -235,9 +237,8 @@ public class UnitConstants {
 			this.coef = coef;
 		}
 		public String getUnit() {
-			UnitSettings settings = UserSettings.getInstance().getUnitSettings();
-			DistanceUnit distanceUnit = settings.getDistanceUnit();
-			Unit currency = settings.getCurrency();
+			DistanceUnit distanceUnit = preferences.getDistanceUnit();
+			Currency.Unit currency = preferences.getCurrency();
 			
 			switch (this) {
 			case COST_PER_100_DISTANCE:
@@ -273,7 +274,7 @@ public class UnitConstants {
 			fromUnit = ConsumptionUnit.SI;
 		}
 		if (toUnit == null) {
-			toUnit = UserSettings.getInstance().getUnitSettings().getConsumptionUnit();
+			toUnit = preferences.getConsumptionUnit();
 		}
 		
 		switch (fromUnit) {
@@ -358,10 +359,10 @@ public class UnitConstants {
 			fromUnit = CostUnit.SI;
 		}
 		if (toUnit == null) {
-			toUnit = UserSettings.getInstance().getUnitSettings().getCostUnit();
+			toUnit = preferences.getCostUnit();
 		}
 		
-		double distanceCoef = UserSettings.getInstance().getUnitSettings().getDistanceUnit().getCoef();
+		double distanceCoef = preferences.getDistanceUnit().getCoef();
 		
 		int coefFrom = 1;
 		int coefTo = 1;

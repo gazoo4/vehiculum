@@ -75,6 +75,9 @@ public class PreferenceWithHeaders extends PreferenceActivity {
         }
     }	*/
     
+    /**
+     * Android API 19+ security flaw fix. Every fragment should be listed. 
+     */
     @Override
     protected boolean isValidFragment(String fragmentName) {
         return Units.class.getName().equals(fragmentName);

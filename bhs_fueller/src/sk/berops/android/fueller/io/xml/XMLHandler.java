@@ -25,7 +25,7 @@ public class XMLHandler extends DataHandler {
 	static Locale localeDefault = Locale.getDefault();
 	
 	public static String getFullFileName(String fileName) {
-		return ""+ Fueller.getAppContext().getFilesDir().getParentFile().getPath() +"/"+ fileName;
+		return ""+ Fueller.context.getFilesDir().getParentFile().getPath() +"/"+ fileName;
 	}
 	
 	public Garage loadGarage() throws FileNotFoundException {

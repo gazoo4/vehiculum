@@ -5,7 +5,7 @@
             android:title="@string/preferences_units_title">
             
         <ListPreference
-                android:key="consumption_unit"
+                android:key="consumption_unit_key"
                 android:title="@string/preferences_units_consumption"
                 android:summary="%s"
                 android:entries="@array/preferences_units_consumption_entries"
@@ -14,7 +14,7 @@
                 android:defaultValue="0" />
         
         <ListPreference
-                android:key="distance_unit"
+                android:key="distance_unit_key"
                 android:title="@string/preferences_units_distance"
                 android:summary="%s"
                 android:entries="@array/preferences_units_distance_entries"
@@ -23,22 +23,22 @@
                 android:defaultValue="0" />
         
         <ListPreference
-                android:key="volume_unit"
+                android:key="volume_unit_key"
                 android:title="@string/preferences_units_volume"
                 android:summary="%s"
                 android:entries="@array/preferences_units_volume_entries"
                 android:entryValues="@array/preferences_units_volume_values"
                 android:dialogTitle="@string/preferences_units_volume_dialog"
                 android:defaultValue="0" />
+        
         <ListPreference
-            	android:key="cost_unit"
+            	android:key="cost_unit_key"
             	android:title="@string/preferences_units_cost"
             	android:summary="%s"
             	android:entries="@array/preferences_units_cost_entries"
             	android:entryValues="@array/preferences_units_cost_values"
                 android:dialogTitle="@string/preferences_units_cost_dialog"
-                android:defaultValue="0"
-            />
+                android:defaultValue="0" />
         
     </PreferenceCategory>
 <!-- 

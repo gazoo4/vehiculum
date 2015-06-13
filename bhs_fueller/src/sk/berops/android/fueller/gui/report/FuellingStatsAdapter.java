@@ -4,8 +4,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
 
-import sk.berops.android.fueller.configuration.UnitSettings;
-import sk.berops.android.fueller.configuration.UserSettings;
+import sk.berops.android.fueller.configuration.Preferences;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.UnitConstants.ConsumptionUnit;
 import sk.berops.android.fueller.dataModel.calculation.FuelConsumption;
@@ -26,13 +25,12 @@ public class FuellingStatsAdapter extends ArrayAdapter<FuellingEntry> {
 
 	private LinkedList<FuellingEntry> entries;
 	private final Context context;
-	private UnitSettings settings;
+	private Preferences preferences;
 
 	public FuellingStatsAdapter(Context context, LinkedList<FuellingEntry> entries) {
 		super(context, R.layout.list_stats_fuelling, entries);
 		this.context = context;
 		this.entries = entries;
-		this.settings = MainActivity.garage.getSettings().getUnitSettings();
 	}
 
 	@Override
@@ -73,14 +71,14 @@ public class FuellingStatsAdapter extends ArrayAdapter<FuellingEntry> {
 		mileage.setText(TextFormatter.format(entry.getMileage(), "#######.#") +" "+ MainActivity.garage.getActiveCar().getDistanceUnit().getUnit());
 		date.setText(DateFormat.getDateInstance(DateFormat.MEDIUM).format(entry.getEventDate()));
 		totalPrice.setText(TextFormatter.format(entry.getCost(),"####0.00"));
-		totalPriceUnit.setText(settings.getCurrency().getUnit());
+		totalPriceUnit.setText(preferences.getCurrency().getUnit());
 		unitPrice.setText(TextFormatter.format(entry.getFuelPrice(), "####0.000"));
-		unitPriceUnit.setText(settings.getCurrency().getUnit() +"/"+ settings.getVolumeUnit().getUnit());
+		unitPriceUnit.setText(preferences.getCurrency().getUnit() +"/"+ preferences.getVolumeUnit().getUnit());
 		volume.setText(TextFormatter.format(entry.getFuelVolume(), "###0.00"));
-		volumeUnit.setText(settings.getVolumeUnit().getUnit() +"s");
+		volumeUnit.setText(preferences.getVolumeUnit().getUnit() +"s");
 		fuel.setText(entry.getFuelType().toString());
 		consumption.setText(TextFormatter.format(entry.getFuelConsumption().getAverageSinceLast(),"##0.00"));
-		consumptionUnit.setText(settings.getConsumptionUnit().getUnit());
+		consumptionUnit.setText(preferences.getConsumptionUnit().getUnit());
 		
 		fuel.setTextColor(entry.getFuelType().getColor());
 		
@@ -91,8 +89,8 @@ public class FuellingStatsAdapter extends ArrayAdapter<FuellingEntry> {
 		int colorBelow; 
 		int colorMiddle = 0xFFFFFF00;
 		int colorAbove; 
-		if (UnitSettings.getInstance().getConsumptionUnit() == ConsumptionUnit.LITRE_PER_100KM
-				|| UnitSettings.getInstance().getConsumptionUnit() == ConsumptionUnit.SI) {
+		if (preferences.getConsumptionUnit() == ConsumptionUnit.LITRE_PER_100KM
+				|| preferences.getConsumptionUnit() == ConsumptionUnit.SI) {
 			colorBelow = Color.GREEN;
 			colorAbove = Color.RED;
 		} else {

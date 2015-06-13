@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import sk.berops.android.fueller.configuration.UnitSettings;
+import sk.berops.android.fueller.configuration.Preferences;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Garage;
 import sk.berops.android.fueller.dataModel.UnitConstants;
@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 	
 	public static Garage garage;
 	public static DataHandler dataHandler;
-	private static UnitSettings settings = UnitSettings.getInstance();
+	private static Preferences preferences = Preferences.getInstance();
 	
 	private TableLayout statsTable;
 	private TextView textViewHeader;
@@ -154,7 +154,7 @@ public class MainActivity extends Activity {
 		
 		String description = getString(R.string.activity_main_total_costs);
 		double value = c.getTotalCost();
-		String unit = settings.getCurrency().getUnit();
+		String unit = preferences.getCurrency().getUnit();
 		
 		layout.addView(createStatRow(description, value, unit));
 	}
@@ -168,7 +168,7 @@ public class MainActivity extends Activity {
 		double valueSI;
 		double valueReport;
 		ConsumptionUnit unit;
-		unit = settings.getConsumptionUnit();
+		unit = preferences.getConsumptionUnit();
 		
 		// we should buy at least 2 different fuels in order to display the stats separately
 		HashMap<FuelType, Double> map = new HashMap<FuelType, Double>();
@@ -203,7 +203,8 @@ public class MainActivity extends Activity {
 		
 		String description = getString(R.string.activity_main_relative_costs);
 		double valueSI = c.getAverageCost();
-		CostUnit unit = settings.getCostUnit();
+		CostUnit unit = preferences.getCostUnit();
+		System.out.println(unit.getUnit());
 		
 		double valueReport = UnitConstants.convertUnitCost(valueSI);
 		layout.addView(createStatRow(description, valueReport, unit.getUnit()));
@@ -217,7 +218,7 @@ public class MainActivity extends Activity {
 		description += " ";
 		description += t.toString();
 		double valueSI = c.getAverageFuelCostPerFuelType().get(t).doubleValue();
-		CostUnit unit = settings.getCostUnit();
+		CostUnit unit = preferences.getCostUnit();
 		
 		double valueReport = UnitConstants.convertUnitCost(valueSI);
 		layout.addView(createStatRow(description, valueReport, unit.getUnit()));
@@ -233,7 +234,7 @@ public class MainActivity extends Activity {
 		int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange);
 		
 		String description = getString(R.string.activity_main_relative_since_last_refuel);
-		CostUnit unit = settings.getCostUnit();
+		CostUnit unit = preferences.getCostUnit();
 		
 		double lastCostReport = UnitConstants.convertUnitCost(lastCostSI);
 		layout.addView(createStatRow(description, lastCostReport, unit.getUnit(), color));
@@ -251,8 +252,8 @@ public class MainActivity extends Activity {
 		int colorBelow; 
 		int colorMiddle = 0xFFFFFF00;
 		int colorAbove; 
-		if (UnitSettings.getInstance().getConsumptionUnit() == ConsumptionUnit.LITRE_PER_100KM
-				|| UnitSettings.getInstance().getConsumptionUnit() == ConsumptionUnit.SI) {
+		if (preferences.getConsumptionUnit() == ConsumptionUnit.LITRE_PER_100KM
+				|| preferences.getConsumptionUnit() == ConsumptionUnit.SI) {
 			colorBelow = Color.GREEN;
 			colorAbove = Color.RED;
 		} else {
@@ -262,7 +263,7 @@ public class MainActivity extends Activity {
 		int color = GuiUtils.getShade(colorBelow, colorMiddle, colorAbove, relativeChange); //orange in the middle
 		
 		String description = getString(R.string.activity_main_since_last_refuel);
-		String unit = settings.getConsumptionUnit().getUnit();
+		String unit = preferences.getConsumptionUnit().getUnit();
 		
 		layout.addView(createStatRow(description, lastConsumption, unit, color));
 	}

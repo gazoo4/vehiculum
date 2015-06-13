@@ -1,4 +1,4 @@
-package sk.berops.android.fueller.dataModel.expense;
+package sk.berops.android.fueller.dataModel;
 
 import java.util.HashMap;
 import java.util.Map;
