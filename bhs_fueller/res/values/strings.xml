@@ -43,6 +43,7 @@
     <string name="activity_refuel_button_entry_save"				>Save the record</string>
     <string name="activity_refuel_comment_hint"						>Additional comment</string>
     <string name="activity_refuel_cost_hint"						>Cost of the bill</string>
+    <string name="activity_refuel_currency_hint"					>Currency</string>
     <string name="activity_refuel_fuel_type_hint"					>Fuel type</string>
     <string name="activity_refuel_header"							>Enter your bill details</string>
     <string name="activity_refuel_mileage_hint"						>Mileage</string>
@@ -115,6 +116,12 @@
         <item>Diesel</item>
         <item>CNG</item>
         <item>Electricity</item>
+    </string-array>
+    
+    <string-array name="activity_refuel_currency">
+        <item>€</item>
+        <item>$</item>
+        <item>£</item>
     </string-array>
     
     <string-array name="activity_tyre_add_season">

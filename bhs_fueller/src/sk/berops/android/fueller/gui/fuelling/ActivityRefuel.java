@@ -95,6 +95,13 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		adapterFuelType
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerFuelType.setAdapter(adapterFuelType);
+		
+		spinnerCurrency = (Spinner) findViewById(R.id.activity_refuel_currency);
+		ArrayAdapter<CharSequence> adapterCurrency = ArrayAdapter
+				.createFromResource(this, R.array.activity_refuel_currency, 
+						R.layout.spinner_white);
+		adapterCurrency.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinnerCurrency.setAdapter(adapterCurrency);
 	}
 	
 	@Override

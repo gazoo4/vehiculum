@@ -131,7 +131,7 @@ public class ActivityTyreChange extends ActivityAddEventGeneric {
 	@Override
 	protected void updateCost() {
 		readCosts();
-		entry.setCost(cost);
+		//entry.setCost(cost);
 	}
 	
 	public void onClick(View view) {

@@ -47,32 +47,22 @@ public class Preferences {
     }
     
     public ConsumptionUnit getConsumptionUnit() {
-    	System.out.print("Consumption: ");
-    	System.out.println(getInt(CONSUMPTION_UNIT_KEY, 0));
     	return ConsumptionUnit.getConsumptionUnit(getInt(CONSUMPTION_UNIT_KEY, 0));
     }
     
     public CostUnit getCostUnit() {
-    	System.out.print("Cost: ");
-    	System.out.println(getInt(COST_UNIT_KEY, 0));
     	return CostUnit.getCostUnit(getInt(COST_UNIT_KEY, 0));
     }
     
     public Currency.Unit getCurrency() {
-    	System.out.print("Currency: ");
-    	System.out.println(getInt(CURRENCY_KEY, 0));
     	return Currency.Unit.getUnit(getInt(CURRENCY_KEY, 0));
     }
     
     public DistanceUnit getDistanceUnit() {
-    	System.out.print("Distance: ");
-    	System.out.println(getInt(DISTANCE_UNIT_KEY, 0));
     	return DistanceUnit.getDistanceUnit(getInt(DISTANCE_UNIT_KEY, 0));
     }
     
     public VolumeUnit getVolumeUnit() {
-    	System.out.print("Volume: ");
-    	System.out.println(getInt(VOLUME_UNIT_KEY, 0));
     	return VolumeUnit.getVolumeUnit(getInt(VOLUME_UNIT_KEY, 0));
     }
 }

@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Calendar;
 
+import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.Garage;
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.dataModel.expense.Entry;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ public abstract class ActivityAddEventGeneric extends ActivityAddRecord implemen
 	protected EditText editTextCost;
 	protected EditText editTextComment;
 	protected TextView textViewDisplayDate;
+	protected Spinner spinnerCurrency;
 	
 	protected Entry entry;
 	protected boolean editMode;
@@ -71,7 +74,8 @@ public abstract class ActivityAddEventGeneric extends ActivityAddRecord implemen
 	
 	protected void updateCost() {
 		try {
-			entry.setCost(GuiUtils.extractDouble(editTextCost));
+			Currency.Unit currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
+			entry.setCost(GuiUtils.extractDouble(editTextCost), currency);
 		} catch (NumberFormatException ex) {
 			throwAlertFieldsEmpty(getResources().getString(R.string.activity_refuel_cost_hint));
 		}

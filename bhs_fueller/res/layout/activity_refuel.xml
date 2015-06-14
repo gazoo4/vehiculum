@@ -1,7 +1,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_blue">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,23 +36,39 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/activity_refuel_mileage"
             android:layout_toRightOf="@id/activity_refuel_date_text"
+            android:layout_toEndOf="@id/activity_refuel_date_text"
             android:background="@drawable/red_button"
             android:onClick="showDatePickerDialog"
             android:text="@string/activity_refuel_button_date_change" />
 
-        <EditText
-            android:id="@+id/activity_refuel_cost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/activity_refuel_cost_layout"
             android:layout_below="@id/activity_refuel_button_date_change"
-            android:hint="@string/activity_refuel_cost_hint"
-            android:inputType="numberDecimal" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
+	        <EditText
+	            android:id="@+id/activity_refuel_cost"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight=".70"
+	            android:hint="@string/activity_refuel_cost_hint"
+	            android:inputType="numberDecimal" />
+	        
+	        <Spinner
+	            android:id="@+id/activity_refuel_currency"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight=".30"
+	            android:entries="@array/activity_refuel_currency"
+	            android:prompt="@string/activity_refuel_fuel_type_hint" />
+        </LinearLayout>
 
         <Spinner
             android:id="@+id/activity_refuel_fuel_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_refuel_cost"
+            android:layout_below="@id/activity_refuel_cost_layout"
             android:entries="@array/activity_refuel_fuel_type"
             android:prompt="@string/activity_refuel_fuel_type_hint" />
 

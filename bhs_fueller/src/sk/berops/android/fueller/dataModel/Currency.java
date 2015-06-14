@@ -1,7 +1,10 @@
 package sk.berops.android.fueller.dataModel;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import sk.berops.android.fueller.dataModel.Currency.Unit;
 
 public class Currency {
 	
@@ -65,5 +68,21 @@ public class Currency {
 
 	public void setUnit(Unit unit) {
 		this.unit = unit;
+	}
+
+	public static double convertToSI(double cost, Unit currency) {
+		return convertToSI(cost, currency, new Date());
+	}
+	
+	public static double convertToSI(double cost, Unit currency, Date eventDate) {
+		return convert(cost, currency, Unit.EURO, eventDate);
+	}
+	
+	public static double convert(double cost, Unit fromCurrency, Unit toCurrency) {
+		return convert(cost, fromCurrency, toCurrency, new Date());
+	}
+	
+	public static double convert(double cost, Unit fromCurrency, Unit toCurrency, Date eventDate) {
+		return cost;
 	}
 }

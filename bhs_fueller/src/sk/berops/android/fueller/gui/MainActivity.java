@@ -246,26 +246,16 @@ public class MainActivity extends Activity {
 		FuellingEntry e = garage.getActiveCar().getHistory().getFuellingEntries().getLast();
 		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
 		FuelType type = e.getFuelType();
-		double avgConsumption = c.getAveragePerFuelType().get(type);
-		double lastConsumption = c.getAverageSinceLast();
-		double relativeChange = (lastConsumption / avgConsumption - 0.8) / 0.4;
-		int colorBelow; 
-		int colorMiddle = 0xFFFFFF00;
-		int colorAbove; 
-		if (preferences.getConsumptionUnit() == ConsumptionUnit.LITRE_PER_100KM
-				|| preferences.getConsumptionUnit() == ConsumptionUnit.SI) {
-			colorBelow = Color.GREEN;
-			colorAbove = Color.RED;
-		} else {
-			colorBelow = Color.RED;
-			colorAbove = Color.GREEN;
-		}
-		int color = GuiUtils.getShade(colorBelow, colorMiddle, colorAbove, relativeChange); //orange in the middle
+		double avgConsumptionSI = c.getAveragePerFuelType().get(type);
+		double lastConsumptionSI = c.getAverageSinceLast();
+		double relativeChange = (lastConsumptionSI / avgConsumptionSI - 0.8) / 0.4;
+		int color = GuiUtils.getShade(Color.RED, 0xFFFFFF00, Color.GREEN, relativeChange); //orange in the middle
 		
 		String description = getString(R.string.activity_main_since_last_refuel);
 		String unit = preferences.getConsumptionUnit().getUnit();
 		
-		layout.addView(createStatRow(description, lastConsumption, unit, color));
+		double lastConsumptionReport = UnitConstants.convertUnitConsumption(lastConsumptionSI);
+		layout.addView(createStatRow(description, lastConsumptionReport, unit, color));
 	}
 	
 	private TableRow createStatRow(String description, double value) {

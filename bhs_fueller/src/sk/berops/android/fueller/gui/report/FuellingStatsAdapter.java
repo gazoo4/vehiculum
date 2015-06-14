@@ -25,7 +25,7 @@ public class FuellingStatsAdapter extends ArrayAdapter<FuellingEntry> {
 
 	private LinkedList<FuellingEntry> entries;
 	private final Context context;
-	private Preferences preferences;
+	private Preferences preferences = Preferences.getInstance();
 
 	public FuellingStatsAdapter(Context context, LinkedList<FuellingEntry> entries) {
 		super(context, R.layout.list_stats_fuelling, entries);
@@ -68,15 +68,22 @@ public class FuellingStatsAdapter extends ArrayAdapter<FuellingEntry> {
 		consumptionUnit.setTextAppearance(context, R.style.plain_text_small);
 		
 		dynamicId.setText(Integer.toString(entry.getDynamicId()));
+		
 		mileage.setText(TextFormatter.format(entry.getMileage(), "#######.#") +" "+ MainActivity.garage.getActiveCar().getDistanceUnit().getUnit());
+		
 		date.setText(DateFormat.getDateInstance(DateFormat.MEDIUM).format(entry.getEventDate()));
+		
 		totalPrice.setText(TextFormatter.format(entry.getCost(),"####0.00"));
-		totalPriceUnit.setText(preferences.getCurrency().getUnit());
+		totalPriceUnit.setText(entry.getCurrency().getUnit());
+		
 		unitPrice.setText(TextFormatter.format(entry.getFuelPrice(), "####0.000"));
 		unitPriceUnit.setText(preferences.getCurrency().getUnit() +"/"+ preferences.getVolumeUnit().getUnit());
+		
 		volume.setText(TextFormatter.format(entry.getFuelVolume(), "###0.00"));
 		volumeUnit.setText(preferences.getVolumeUnit().getUnit() +"s");
+		
 		fuel.setText(entry.getFuelType().toString());
+		
 		consumption.setText(TextFormatter.format(entry.getFuelConsumption().getAverageSinceLast(),"##0.00"));
 		consumptionUnit.setText(preferences.getConsumptionUnit().getUnit());
 		
@@ -86,18 +93,7 @@ public class FuellingStatsAdapter extends ArrayAdapter<FuellingEntry> {
 		double avgConsumption = c.getAveragePerFuelType().get(entry.getFuelType());
 		double lastConsumption = c.getAverageSinceLast();
 		double relativeChange = (lastConsumption / avgConsumption - 0.8) / 0.4;
-		int colorBelow; 
-		int colorMiddle = 0xFFFFFF00;
-		int colorAbove; 
-		if (preferences.getConsumptionUnit() == ConsumptionUnit.LITRE_PER_100KM
-				|| preferences.getConsumptionUnit() == ConsumptionUnit.SI) {
-			colorBelow = Color.GREEN;
-			colorAbove = Color.RED;
-		} else {
-			colorBelow = Color.RED;
-			colorAbove = Color.GREEN;
-		}
-		consumption.setTextColor(GuiUtils.getShade(colorBelow, colorMiddle, colorAbove, relativeChange));
+		consumption.setTextColor(GuiUtils.getShade(Color.RED, 0xFFFFFF00, Color.GREEN, relativeChange));
 		
 		return rowView;
 	}

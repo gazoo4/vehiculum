@@ -7,6 +7,7 @@ import java.util.Date;
 import org.simpleframework.xml.Element;
 
 import sk.berops.android.fueller.dataModel.Car;
+import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.dataModel.UnitConstants.DistanceUnit;
 import sk.berops.android.fueller.dataModel.calculation.Consumption;
@@ -23,12 +24,24 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 	private Date eventDate;
 	@Element(name="cost")
 	private double cost;
+	@Element(name="costSI", required=false)
+	private double costSI;
+	@Element(name="currency", required=false)
+	private Currency.Unit currency;
 	@Element(name="expenseType")
 	private ExpenseType expenseType;
 	
 	public void initAfterLoad(Car car) {
 		setDistanceUnit(car.getDistanceUnit());
-		setMileageSI(getMileage() * getDistanceUnit().getCoef());
+		if (getCurrency() == null) {
+			setCurrency(Currency.Unit.EURO);
+		}
+		generateSI();
+	}
+	
+	private void generateSI() {
+		setMileage(getMileage());
+		setCost(getCost(), getCurrency());
 	}
 	
 	public int compareTo(Entry e) {
@@ -62,9 +75,27 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 	public double getCost() {
 		return cost;
 	}
-	public void setCost(double cost) {
+	public void setCost(double cost, Currency.Unit currency) {
 		this.cost = cost;
+		this.currency = currency;
+		setCostSI(Currency.convertToSI(getCost(), getCurrency(), getEventDate()));
 	}
+	public double getCostSI() {
+		return costSI;
+	}
+
+	public void setCostSI(double costSI) {
+		this.costSI = costSI;
+	}
+
+	public Currency.Unit getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(Currency.Unit currency) {
+		this.currency = currency;
+	}
+
 	public ExpenseType getExpenseType() {
 		return expenseType;
 	}

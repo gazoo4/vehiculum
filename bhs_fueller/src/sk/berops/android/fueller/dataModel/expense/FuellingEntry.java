@@ -94,7 +94,11 @@ public class FuellingEntry extends Entry {
 	@Override
 	public void initAfterLoad(Car car) {
 		super.initAfterLoad(car);
-		setFuelVolume(getFuelVolume(), getVolumeUnit()); 
+		generateSI();
+	}
+	
+	public void generateSI() {
+		setFuelVolume(getFuelVolume(), getVolumeUnit());
 	}
 	
 	public int compareTo(FuellingEntry e) {
