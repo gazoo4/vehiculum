@@ -96,6 +96,11 @@ public class ActivityCarAdd extends ActivityAddRecord {
 		editTextModelYear.setHintTextColor(Colors.LIGHT_GREEN);
 		editTextNickname.setHintTextColor(Colors.LIGHT_GREEN);
 	}
+	
+	@Override
+	protected void initializeGuiObjects() {
+		
+	}
 
 	public void saveEntry(View view) {
 		car.setBrand(editTextBrand.getText().toString());

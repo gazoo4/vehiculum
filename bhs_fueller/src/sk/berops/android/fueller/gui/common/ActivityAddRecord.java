@@ -24,11 +24,14 @@ public abstract class ActivityAddRecord extends Activity {
 		
 		attachGuiObjects();
 		styleGuiObjects();
+		initializeGuiObjects();
 	}
 	
 	protected abstract void attachGuiObjects();
 	
 	protected abstract void styleGuiObjects();
+	
+	protected abstract void initializeGuiObjects();
 	
 	protected void updateCreationDate() {
 		final Calendar c = Calendar.getInstance();

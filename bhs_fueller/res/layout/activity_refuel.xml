@@ -12,29 +12,70 @@
             android:id="@+id/activity_refuel_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/activity_refuel_header" />
+            android:text="@string/activity_refuel_header"
+            style="@style/caption" />
 
-        <EditText
-            android:id="@+id/activity_refuel_mileage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/activity_refuel_mileage_layout"
             android:layout_below="@id/activity_refuel_header"
-            android:hint="@string/activity_refuel_mileage_hint"
-            android:inputType="number" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
+	        <EditText
+	            android:id="@+id/activity_refuel_mileage"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight=".7"
+	            android:hint="@string/activity_refuel_mileage_hint"
+	            android:inputType="number"
+	            style="@style/plain_text" />
+	        
+	        <TextView 
+	            android:id="@+id/activity_refuel_distance_unit"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight=".3"
+	            style="@style/plain_text" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/activity_refuel_volume_layout"
+            android:layout_below="@id/activity_refuel_mileage_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+	        
+	        <EditText
+	            android:id="@+id/activity_refuel_volume"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight=".7"
+	            android:hint="@string/activity_refuel_volume_hint"
+	            android:inputType="numberDecimal"
+	            style="@style/plain_text" />
+	        
+	        <Spinner
+	            android:id="@+id/activity_refuel_volume_unit"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight=".3"
+	            android:entries="@array/activity_refuel_volume_unit"
+	            android:prompt="@string/activity_refuel_volume_unit_hint" />
+	    </LinearLayout>
 
         <TextView
             android:id="@+id/activity_refuel_date_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_refuel_mileage"
-            android:textIsSelectable="true" />
+            android:layout_below="@id/activity_refuel_volume_layout"
+            android:textIsSelectable="true"
+            style="@style/plain_text" />
 
         <Button
             android:id="@+id/activity_refuel_button_date_change"
             style="@style/button_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_refuel_mileage"
+            android:layout_below="@id/activity_refuel_volume_layout"
             android:layout_toRightOf="@id/activity_refuel_date_text"
             android:layout_toEndOf="@id/activity_refuel_date_text"
             android:background="@drawable/red_button"
@@ -53,7 +94,8 @@
 	            android:layout_height="wrap_content"
 	            android:layout_weight=".70"
 	            android:hint="@string/activity_refuel_cost_hint"
-	            android:inputType="numberDecimal" />
+	            android:inputType="numberDecimal"
+	            style="@style/plain_text" />
 	        
 	        <Spinner
 	            android:id="@+id/activity_refuel_currency"
@@ -72,13 +114,6 @@
             android:entries="@array/activity_refuel_fuel_type"
             android:prompt="@string/activity_refuel_fuel_type_hint" />
 
-        <EditText
-            android:id="@+id/activity_refuel_volume"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_refuel_fuel_type"
-            android:hint="@string/activity_refuel_volume_hint"
-            android:inputType="numberDecimal" />
         <!--
     <EditText 
         android:id="@+id/activity_refuel_price"
@@ -93,15 +128,17 @@
             android:id="@+id/activity_refuel_price_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_refuel_volume"
-            android:text="@string/activity_refuel_price_hint" />
+            android:layout_below="@id/activity_refuel_fuel_type"
+            android:text="@string/activity_refuel_price_hint"
+            style="@style/plain_text" />
 
         <TextView
             android:id="@+id/activity_refuel_price_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/activity_refuel_price_hint"
-            android:textIsSelectable="true" />
+            android:textIsSelectable="true"
+            style="@style/plain_text" />
 
         <EditText
             android:id="@+id/activity_refuel_comment"
@@ -109,7 +146,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/activity_refuel_price_text"
             android:hint="@string/activity_refuel_comment_hint"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            style="@style/plain_text" />
 
         <Button
             android:id="@+id/activity_refuel_button_commit"

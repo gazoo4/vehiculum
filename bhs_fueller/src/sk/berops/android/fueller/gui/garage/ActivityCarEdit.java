@@ -17,10 +17,10 @@ public class ActivityCarEdit extends ActivityCarAdd {
 		super.car = car;
 		super.onCreate(savedInstanceState);
 		editMode = true;
-		initializeGuiObjects();
 	}
 
-	private void initializeGuiObjects() {
+	@Override
+	protected void initializeGuiObjects() {
 		buttonCommit.setText(R.string.activity_car_add_button_edit);
 		editTextBrand.setText(car.getBrand());
 		editTextModel.setText(car.getModel());

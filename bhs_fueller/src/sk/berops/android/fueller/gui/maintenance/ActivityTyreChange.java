@@ -98,6 +98,11 @@ public class ActivityTyreChange extends ActivityAddEventGeneric {
 		// TODO Auto-generated method stub
 	}
 	
+	@Override
+	protected void initializeGuiObjects() {
+		// TODO Auto-generated method stub	
+	}
+	
 	private void readCosts() {
 		cost = 0.0;
 		try {

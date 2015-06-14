@@ -27,7 +27,7 @@ public class ActivityFuellingEdit extends ActivityRefuel {
 		initializeGuiObjects();
 	}
 	
-	private void initializeGuiObjects() {
+	protected void initializeGuiObjects() {
 		editTextMileage.setText(Double.valueOf(fuellingEntry.getMileage()).toString());
 		editTextCost.setText(Double.valueOf(fuellingEntry.getCost()).toString());
 		editTextComment.setText(fuellingEntry.getComment());

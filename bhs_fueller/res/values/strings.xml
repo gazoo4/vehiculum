@@ -49,6 +49,7 @@
     <string name="activity_refuel_mileage_hint"						>Mileage</string>
     <string name="activity_refuel_price_hint"						>Price per liter</string>
     <string name="activity_refuel_volume_hint"						>Fuel volume bought</string>
+    <string name="activity_refuel_volume_unit_hint"					>Volume unit</string>
     <string name="activity_stats_show_button_charts"				>Charts</string>
     <string name="activity_stats_show_button_fuelling"				>Consumption stats</string>
     <string name="activity_stats_show_header"						>Statistic center</string>
@@ -110,6 +111,12 @@
         <item>Imperial Gallon</item>
     </string-array>
     
+    <string-array name="activity_refuel_currency">
+        <item>€</item>
+        <item>$</item>
+        <item>£</item>
+    </string-array>
+    
     <string-array name="activity_refuel_fuel_type">
         <item>Gasoline</item>
         <item>LPG</item>
@@ -118,10 +125,10 @@
         <item>Electricity</item>
     </string-array>
     
-    <string-array name="activity_refuel_currency">
-        <item>€</item>
-        <item>$</item>
-        <item>£</item>
+    <string-array name="activity_refuel_volume_unit">
+        <item>ltr</item>
+        <item>gal (US)</item>
+        <item>gal (IMP)</item>
     </string-array>
     
     <string-array name="activity_tyre_add_season">

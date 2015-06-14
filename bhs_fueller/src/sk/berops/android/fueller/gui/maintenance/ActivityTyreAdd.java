@@ -34,5 +34,10 @@ public class ActivityTyreAdd extends ActivityAddEventGeneric {
 		// TODO Auto-generated method stub
 
 	}
+	
+	@Override
+	protected void initializeGuiObjects() {
+		
+	}
 
 }
