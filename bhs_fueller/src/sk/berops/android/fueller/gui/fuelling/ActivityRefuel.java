@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.NoSuchElementException;
 
 import sk.berops.android.fueller.configuration.Preferences;
 import sk.berops.android.fueller.dataModel.Car;
@@ -156,7 +157,7 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		Currency.Unit currency;
 		try {
 			currency = car.getHistory().getEntries().getLast().getCurrency();
-		} catch (NullPointerException e) {
+		} catch (NoSuchElementException e) {
 			currency = Preferences.getInstance().getCurrency();
 		}
 		spinnerCurrency.setSelection(currency.getId());
@@ -164,7 +165,7 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		FuelType fuelType;
 		try {
 			fuelType = car.getHistory().getFuellingEntries().getLast().getFuelType();
-		} catch (NullPointerException e) {
+		} catch (NoSuchElementException e) {
 			fuelType = FuelType.getFuelType(0);
 		}
 		spinnerFuelType.setSelection(fuelType.getId());
