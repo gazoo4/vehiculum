@@ -249,7 +249,7 @@ public class MainActivity extends Activity {
 		double avgConsumptionSI = c.getAveragePerFuelType().get(type);
 		double lastConsumptionSI = c.getAverageSinceLast();
 		double relativeChange = (lastConsumptionSI / avgConsumptionSI - 0.8) / 0.4;
-		int color = GuiUtils.getShade(Color.RED, 0xFFFFFF00, Color.GREEN, relativeChange); //orange in the middle
+		int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange); //orange in the middle
 		
 		String description = getString(R.string.activity_main_since_last_refuel);
 		String unit = preferences.getConsumptionUnit().getUnit();

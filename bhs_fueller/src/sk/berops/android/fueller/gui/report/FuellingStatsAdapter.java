@@ -93,7 +93,7 @@ public class FuellingStatsAdapter extends ArrayAdapter<FuellingEntry> {
 		double avgConsumption = c.getAveragePerFuelType().get(entry.getFuelType());
 		double lastConsumption = c.getAverageSinceLast();
 		double relativeChange = (lastConsumption / avgConsumption - 0.8) / 0.4;
-		consumption.setTextColor(GuiUtils.getShade(Color.RED, 0xFFFFFF00, Color.GREEN, relativeChange));
+		consumption.setTextColor(GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange));
 		
 		return rowView;
 	}
