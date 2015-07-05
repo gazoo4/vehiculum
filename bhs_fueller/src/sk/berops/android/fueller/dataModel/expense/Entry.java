@@ -15,11 +15,11 @@ import sk.berops.android.fueller.dataModel.calculation.Consumption;
 public abstract class Entry extends Record implements Comparable<Entry> {
 	private int dynamicId;
 	private Consumption consumption;
+	private Car car;
 	
 	@Element(name="mileage")
 	private double mileage;
 	private double mileageSI;
-	private DistanceUnit distanceUnit;
 	@Element(name="eventDate")
 	private Date eventDate;
 	@Element(name="cost")
@@ -32,10 +32,11 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 	private ExpenseType expenseType;
 	
 	public void initAfterLoad(Car car) {
-		setDistanceUnit(car.getDistanceUnit());
+		setCar(car);
 		if (getCurrency() == null) {
 			setCurrency(Currency.Unit.EURO);
 		}
+		
 		generateSI();
 	}
 	
@@ -59,12 +60,20 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 	public void setConsumption(Consumption consumption) {
 		this.consumption = consumption;
 	}
+	public Car getCar() {
+		return car;
+	}
+
+	public void setCar(Car car) {
+		this.car = car;
+	}
+
 	public double getMileage() {
 		return mileage;
 	}
 	public void setMileage(double mileage) {
 		this.mileage = mileage;
-		setMileageSI(mileage * getDistanceUnit().getCoef());
+		setMileageSI(mileage * car.getDistanceUnit().getCoef());
 	}
 	public Date getEventDate() {
 		return eventDate;
@@ -124,13 +133,5 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 	}
 	public void setMileageSI(double mileageSI) {
 		this.mileageSI = mileageSI;
-	}
-
-	public DistanceUnit getDistanceUnit() {
-		return distanceUnit;
-	}
-
-	public void setDistanceUnit(DistanceUnit distanceUnit) {
-		this.distanceUnit = distanceUnit;
 	}
 }

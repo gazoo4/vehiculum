@@ -69,14 +69,6 @@ public class History implements Serializable {
 		return maintenanceEntries;
 	}
 	
-	public void runAutoCalculations() {
-		for (Entry e: getEntries()) {
-			if (e.getExpenseType() == Entry.ExpenseType.FUEL) {
-				FuellingEntry fe = (FuellingEntry) e;
-				fe.setFuelPrice(fe.getCost()/fe.getFuelVolume());
-			}
-		}
-	}
 	public LinkedList<Entry> getEntries() {
 		Collections.sort(this.entries);
 		return this.entries;

@@ -297,14 +297,12 @@ public class MainActivity extends Activity {
 		TextView unitView = new TextView(this);
 		valueView.setGravity(Gravity.END);
 		unitView.setGravity(Gravity.START);
-	
-		if (unit == null) {
-			unit = "";
-		}
-		
+				
 		descriptionView.setText(description);
 		valueView.setText(value);
-		unitView.setText(unit);
+		if (unit != null) {
+			unitView.setText(unit);
+		}
 		
 		descriptionView.setTextAppearance(this, R.style.plain_text);
 		valueView.setTextAppearance(this, R.style.plain_text_big);
@@ -313,11 +311,24 @@ public class MainActivity extends Activity {
 		valueView.setTextColor(valueColor);
 		valueView.setShadowLayer(15, 0, 0, valueColor);
 		
-		unitView.setPadding(3, 3, 3, 3);
-		
 		row.addView(descriptionView);
-		row.addView(valueView);
-		row.addView(unitView);
+		
+		TableRow.LayoutParams params;
+		
+		if (unit == null) {
+			valueView.setPadding(3, 3, 3, 3);
+			row.addView(valueView);
+			
+			params = (TableRow.LayoutParams) valueView.getLayoutParams();
+			params.span = 2;
+			valueView.setLayoutParams(params);
+			
+		} else {
+			row.addView(valueView);
+			unitView.setPadding(3, 3, 3, 3);
+			row.addView(unitView);
+		}
+		
 		return row;
 	}
 

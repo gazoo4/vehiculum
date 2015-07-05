@@ -72,9 +72,10 @@ public class Garage {
 	public void initAfterLoad() {
 		Car car;
 		Entry entry;
-		int dynamicId = 0;
+		int dynamicId;
 		
 		for (Iterator<Car> c = this.cars.iterator(); c.hasNext(); ) {
+			dynamicId = 0;
 			car = c.next();
 			car.initAfterLoad();
 			for (Iterator<Entry> e = car.getHistory().getEntries().iterator(); e.hasNext(); ) {

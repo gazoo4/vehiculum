@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Calendar;
 
+import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.Garage;
 import sk.berops.android.fueller.dataModel.Record;
@@ -57,6 +58,7 @@ public abstract class ActivityAddEventGeneric extends ActivityAddRecord implemen
 	}
 	
 	private void updateMileage() {
+		Car car = MainActivity.garage.getActiveCar();
 		double mileage = 0;
 		try {
 			mileage = Double.parseDouble(editTextMileage.getText().toString());
@@ -64,12 +66,8 @@ public abstract class ActivityAddEventGeneric extends ActivityAddRecord implemen
 			throwAlertFieldsEmpty(getResources().getString(R.string.activity_refuel_mileage_hint));
 		}
 		
-		switch (MainActivity.garage.getActiveCar().getDistanceUnit()) {
-			case KILOMETER: entry.setMileage(mileage); break;
-			case MILE: entry.setMileage(mileage*1.60934); break;
-			default: System.out.println("Very weird distance unit");
-		}
-		MainActivity.garage.getActiveCar().setCurrentMileage(entry.getMileage());
+		entry.setMileage(mileage);
+		car.setCurrentMileage(mileage);
 	}
 	
 	protected void updateCost() {
@@ -99,11 +97,13 @@ public abstract class ActivityAddEventGeneric extends ActivityAddRecord implemen
 	}
 	
 	public void saveFieldsAndPersist(View view) {
+		Car car = MainActivity.garage.getActiveCar();
+		entry.setCar(car);
 		updateMileage();
 		updateCost();
 		updateComment();
 		if (!editMode) {
-			MainActivity.garage.getActiveCar().getHistory().getEntries().add(entry);
+			car.getHistory().getEntries().add(entry);
 		}
 		super.saveFieldsAndPersist(view);
 	}

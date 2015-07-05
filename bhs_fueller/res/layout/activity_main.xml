@@ -1,141 +1,92 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/background_blue"
-    tools:context=".MainActivity" >
+    android:orientation="vertical"
+    android:background="@drawable/background_blue">
 
-    <TextView
-        android:id="@+id/activity_main_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@string/activity_main_header"
-        style="@style/plain_text"/>
-    
-    <TableLayout
-        android:id="@+id/activity_main_stats_table"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activity_main_header"
-        android:layout_marginBottom="60dp"
-        android:stretchColumns="0"
-        android:shrinkColumns="1,2">
-        
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+	<RelativeLayout
+	    android:id="@+id/activity_main_buttons"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true">
+	
+	    <Button
+	        android:id="@+id/activity_main_button_entry_add"
+	        style="@style/button_text"
+	        android:drawableStart="@drawable/plus_icon_tiny"
+	        android:drawableLeft="@drawable/plus_icon_tiny"
+	        android:paddingStart="15dp"
+	        android:paddingLeft="15dp"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginBottom="5dp"
+	        android:background="@drawable/red_button"
+	        android:onClick="onClick"
+	        android:text="@string/activity_main_button_entry_add" />
+	
+	    <Button
+	        android:id="@+id/activity_main_button_stats_view"
+	        style="@style/button_text"
+	        android:drawableLeft="@drawable/barchart_tiny"
+	        android:paddingLeft="15dp"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/activity_main_button_entry_add"
+	        android:layout_marginBottom="5dp"
+	        android:background="@drawable/red_button"
+	        android:onClick="onClick"
+	        android:text="@string/activity_main_button_stats_view" />
+	
+	    <Button
+	        android:id="@+id/activity_main_button_garage_enter"
+	        style="@style/button_text"
+	        android:drawableStart="@drawable/garage_tiny"
+	        android:drawableLeft="@drawable/garage_tiny"
+	        android:paddingStart="15dp"
+	        android:paddingLeft="15dp"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/activity_main_button_stats_view"
+	        android:layout_marginBottom="5dp"
+	        android:background="@drawable/red_button"
+	        android:onClick="onClick"
+	        android:text="@string/activity_main_button_garage_enter" />
+	</RelativeLayout>
+	
+	<ScrollView
+	    android:id="@+id/activity_main_scroll_view"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_above="@id/activity_main_buttons">
+	    
+		<RelativeLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:paddingBottom="@dimen/activity_vertical_margin"
+		    android:paddingLeft="@dimen/activity_horizontal_margin"
+		    android:paddingRight="@dimen/activity_horizontal_margin"
+		    android:paddingTop="@dimen/activity_vertical_margin">
+		
+		    <TextView
+		        android:id="@+id/activity_main_header"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="20dp"
+		        android:text="@string/activity_main_header"
+		        style="@style/plain_text"/>
 
-            <TextView
-                android:id="@+id/activity_main_car"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:text="@string/activity_main_car" />
-
-            <TextView
-                android:id="@+id/activity_main_car_nickname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="end" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/activity_main_since_last_consumption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:text="@string/activity_main_since_last_refuel" />
-
-            <TextView
-                android:id="@+id/activity_main_since_last_consumption_value"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:gravity="end" />
-
-            <TextView
-                android:id="@+id/activity_main_since_last_consumption_unit"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:gravity="start"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_height="wrap_content" >
-            <TextView
-                android:id="@+id/activity_main_consumption_combined"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:text="@string/activity_main_consumption_combined" />
-
-            <TextView
-                android:id="@+id/activity_main_consumption_combined_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="end" />
-
-            <TextView
-                android:id="@+id/activity_main_consumption_combined_unit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="start" /> 
-        </TableRow>
-    </TableLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
-
-        <Button
-            android:id="@+id/activity_main_button_entry_add"
-            style="@style/button_text"
-            android:drawableStart="@drawable/plus_icon_tiny"
-            android:drawableLeft="@drawable/plus_icon_tiny"
-            android:paddingStart="15dp"
-            android:paddingLeft="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/red_button"
-            android:onClick="onClick"
-            android:text="@string/activity_main_button_entry_add" />
-
-        <Button
-            android:id="@+id/activity_main_button_stats_view"
-            style="@style/button_text"
-            android:drawableLeft="@drawable/barchart_tiny"
-            android:paddingLeft="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_main_button_entry_add"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/red_button"
-            android:onClick="onClick"
-            android:text="@string/activity_main_button_stats_view" />
-
-        <Button
-            android:id="@+id/activity_main_button_garage_enter"
-            style="@style/button_text"
-            android:drawableStart="@drawable/garage_tiny"
-            android:drawableLeft="@drawable/garage_tiny"
-            android:paddingStart="15dp"
-            android:paddingLeft="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_main_button_stats_view"
-            android:background="@drawable/red_button"
-            android:onClick="onClick"
-            android:text="@string/activity_main_button_garage_enter" />
-    </RelativeLayout>
-
+		    
+		    <TableLayout
+		        android:id="@+id/activity_main_stats_table"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/activity_main_header"
+		        android:stretchColumns="1" />
+		        		    
+		</RelativeLayout>
+	</ScrollView>
 </RelativeLayout>

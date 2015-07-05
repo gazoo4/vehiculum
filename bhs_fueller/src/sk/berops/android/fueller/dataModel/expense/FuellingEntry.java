@@ -19,7 +19,7 @@ public class FuellingEntry extends Entry {
 	private VolumeUnit volumeUnit;
 	@Element(name="fuelType")
 	private FuelType fuelType;
-	@Element(name="fuelPrice")
+	@Element(name="fuelPrice", required=false)
 	private double fuelPrice;
 	public enum FuelType{
 		GASOLINE(0, "gasoline", Color.MAGENTA), 
@@ -123,7 +123,11 @@ public class FuellingEntry extends Entry {
 		setFuelVolumeSI(fuelVolume * unit.getCoef());
 	}
 	public double getFuelPrice() {
-		return fuelPrice;
+		if (fuelPrice == 0.0) {
+			return getCostSI()/getFuelVolumeSI();
+		} else {
+			return fuelPrice;
+		}
 	}
 	public void setFuelPrice(double fuelPrice) {
 		this.fuelPrice = fuelPrice;

@@ -68,5 +68,6 @@ public abstract class ActivityAddRecord extends Activity {
 	
 	public void persistGarage() {
 		MainActivity.dataHandler.persistGarage(MainActivity.garage);
+		MainActivity.garage.initAfterLoad();
 	}
 }

@@ -222,21 +222,6 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 				.getFuelType(spinnerFuelType.getSelectedItemPosition()));
 	}
 
-	private void updateFuelPrice() {
-		double volume;
-		double cost;
-		double price;
-
-		try {
-			volume = fuellingEntry.getFuelVolumeSI();
-			cost = fuellingEntry.getCostSI();
-			price = cost / volume;
-			fuellingEntry.setFuelPrice(price);
-		} catch (NumberFormatException ex) {
-			Log.d("INFO", "Cannot compute the price when not both Cost + Volume are filled-in");
-		}
-	}
-
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.activity_refuel_button_commit:
@@ -253,6 +238,5 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 	public void saveEntry() {
 		updateFuelVolume();
 		updateFuelType();
-		updateFuelPrice();
 	}
 }
