@@ -15,7 +15,7 @@ public class MaintenanceEntry extends Entry {
 	@Element(name="laborCost", required=false)
 	private double laborCost;
 	@ElementList(inline=true, required=false)
-	private LinkedList<ReplacementPart> replacedParts;
+	private LinkedList<ReplacementPart> parts;
 	public MaintenanceEntry() {
 		super();
 		this.setExpenseType(Entry.ExpenseType.MAINTENANCE);
@@ -75,11 +75,11 @@ public class MaintenanceEntry extends Entry {
 	public void setLaborCost(double laborCost) {
 		this.laborCost = laborCost;
 	}
-	public LinkedList<ReplacementPart> getReplacedParts() {
-		return replacedParts;
+	public LinkedList<ReplacementPart> getParts() {
+		return parts;
 	}
-	public void setReplacedParts(LinkedList<ReplacementPart> replacedParts) {
-		this.replacedParts = replacedParts;
+	public void setParts(LinkedList<ReplacementPart> parts) {
+		this.parts = parts;
 	}
 
 	public Type getType() {

@@ -64,7 +64,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_below="@id/activity_car_add_license_plate"
 	        android:inputType="number"
-	        android:hint="@string/activity_car_add_mileage_hint"
+	        android:hint="@string/activity_generic_mileage_hint"
 	        style="@style/plain_text" />
 	    
 	    <EditText 

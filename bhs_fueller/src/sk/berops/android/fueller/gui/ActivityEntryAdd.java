@@ -1,8 +1,8 @@
 package sk.berops.android.fueller.gui;
 
 import sk.berops.android.fueller.gui.fuelling.ActivityRefuel;
+import sk.berops.android.fueller.gui.maintenance.ActivityMaintenance;
 import sk.berops.android.fueller.gui.maintenance.ActivityTyreChange;
-import sk.berops.android.fueller.gui.maintenance.ActivityTyreChangeScheme;
 import sk.berops.android.fueller.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -24,6 +24,9 @@ public class ActivityEntryAdd extends Activity {
 			break;
 		case R.id.activity_entry_add_button_tyres_change:
 			startActivity(new Intent(this, ActivityTyreChange.class)); //this or getApplicationContext()
+			break;
+		case R.id.activity_entry_add_button_maintenance:
+			startActivity(new Intent(this, ActivityMaintenance.class)); //this or getApplicationContext()
 			break;
 		}
 	}

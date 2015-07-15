@@ -32,5 +32,13 @@
         android:background="@drawable/red_button"
         android:onClick="onClick"
         android:text="@string/activity_entry_add_button_tyres_change" />
-
+    <Button
+        android:id="@+id/activity_entry_add_button_maintenance"
+        style="@style/button_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_entry_add_button_tyres_change"
+        android:background="@drawable/red_button"
+        android:onClick="onClick"
+        android:text="@string/activity_entry_add_button_maintenance" />
 </RelativeLayout>

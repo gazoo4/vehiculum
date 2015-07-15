@@ -10,13 +10,13 @@
     <string name="activity_car_add_header"							>Enter the details about your car</string>
     <string name="activity_car_add_label"							>Add a new car</string>
     <string name="activity_car_add_license_plate_hint"				>License plate</string>
-    <string name="activity_car_add_mileage_hint"					>Mileage</string>
     <string name="activity_car_add_model_hint"						>Model</string>
     <string name="activity_car_add_model_year_hint"					>Model Year</string>
     <string name="activity_car_add_nickname_hint"					>Nickname (optional)</string>
     <string name="activity_car_add_volume_units_hint"				>Volume units</string>
     <string name="activity_car_edit_label"							>Edit your car</string>
     <string name="activity_entry_add_button_refuel"					>Refuelling</string>
+    <string name="activity_entry_add_button_maintenance"			>Maintenance</string>
     <string name="activity_entry_add_button_tyres_change"			>Change tyres</string>
     <string name="activity_entry_add_fields_missing_alert"			>Some of the required fields are not filled-in:</string>
     <string name="activity_entry_add_header"						>Pick an action to record</string>
@@ -24,6 +24,10 @@
     <string name="activity_garage_management_label"					>Your garage</string>
     <string name="activity_garage_management_button_car_add"		>Add a new car</string>
     <string name="activity_garage_management_info_text"				>List of cars in your garage:</string>
+    <string name="activity_generic_button_date_change"				>Change date</string>
+    <string name="activity_generic_button_entry_save"				>Save</string>
+    <string name="activity_generic_currency_hint"					>Currency</string>
+    <string name="activity_generic_mileage_hint"					>Mileage</string>
     <string name="activity_main_average"							>Average</string>
     <string name="activity_main_average_combined"					>Average combined</string>
     <string name="activity_main_button_entry_add"					>Record a new event</string>
@@ -39,14 +43,17 @@
     <string name="activity_main_relative_since_last_refuel"			>Relative costs since last refuel</string>
     <string name="activity_main_since_last_refuel"					>Since the last refuel</string>
     <string name="activity_main_total_costs"						>Total costs</string>
-    <string name="activity_refuel_button_date_change"				>Change date</string>
-    <string name="activity_refuel_button_entry_save"				>Save the record</string>
+    <string name="activity_maintenance_button_add"					>+</string>
+    <string name="activity_maintenance_button_delete"				>-</string>
+    <string name="activity_maintenance_header"						>Maintenance</string>
+    <string name="activity_maintenance_labor_cost_hint"				>Labor cost</string>
+    <string name="activity_maintenance_type_accident_repair_label"	>Accident repair</string>
+    <string name="activity_maintenance_type_planned_label"			>Planned</string>
+    <string name="activity_maintenance_type_unplanned_label"		>Unlanned</string>
     <string name="activity_refuel_comment_hint"						>Additional comment</string>
     <string name="activity_refuel_cost_hint"						>Cost of the bill</string>
-    <string name="activity_refuel_currency_hint"					>Currency</string>
     <string name="activity_refuel_fuel_type_hint"					>Fuel type</string>
     <string name="activity_refuel_header"							>Enter your bill details</string>
-    <string name="activity_refuel_mileage_hint"						>Mileage</string>
     <string name="activity_refuel_price_hint"						>Price per liter</string>
     <string name="activity_refuel_volume_hint"						>Fuel volume bought</string>
     <string name="activity_refuel_volume_unit_hint"					>Volume unit</string>
@@ -66,11 +73,9 @@
     <string name="activity_tyre_add_weight_index_hint"				>Weight index</string>
     <string name="activity_tyre_add_width_hint"						>Width</string>
     <string name="activity_tyre_change_button_advanced"				>Advanced</string>
-    <string name="activity_tyre_change_button_date_change"			>Change date</string>
     <string name="activity_tyre_change_button_entry_save"			>Save the record</string>
     <string name="activity_tyre_change_comment_hint"				>Additional comment</string>
     <string name="activity_tyre_change_labor_cost_hint"				>Labor cost</string>
-    <string name="activity_tyre_change_mileage_hint"				>Mileage</string>
     <string name="activity_tyre_change_small_parts_cost_hint"		>Cost of small parts</string>
     <string name="activity_tyre_change_scheme_button_tyre_add"		>Add</string>
     <string name="activity_tyre_change_scheme_button_tyre_delete"	>Delete</string>
@@ -111,7 +116,7 @@
         <item>Imperial Gallon</item>
     </string-array>
     
-    <string-array name="activity_refuel_currency">
+    <string-array name="activity_generic_currency">
         <item>€</item>
         <item>$</item>
         <item>£</item>

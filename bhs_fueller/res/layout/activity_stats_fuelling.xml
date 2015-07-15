@@ -2,4 +2,4 @@
     android:id="@+id/activity_stats_fuelling_listview"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" 
-    android:background="@drawable/paper_texture"/> 
+    android:background="@drawable/background_gradient"/> 

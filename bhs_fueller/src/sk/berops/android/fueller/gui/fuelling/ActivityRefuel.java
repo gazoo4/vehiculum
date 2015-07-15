@@ -77,7 +77,6 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 	}
 
 	private TextView textViewPrice;
-	private TextView textViewDistanceUnit;
 	protected EditText editTextVolume;
 	protected Spinner spinnerFuelType;
 	protected Spinner spinnerVolumeUnit;
@@ -99,6 +98,8 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 
 	@Override
 	protected void attachGuiObjects() {
+		super.attachGuiObjects();
+		
 		editTextMileage = (EditText) findViewById(R.id.activity_refuel_mileage);
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_refuel_distance_unit);
 		editTextCost = (EditText) findViewById(R.id.activity_refuel_cost);
@@ -117,7 +118,7 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_refuel_currency);
 		ArrayAdapter<CharSequence> adapterCurrency = ArrayAdapter
-				.createFromResource(this, R.array.activity_refuel_currency, 
+				.createFromResource(this, R.array.activity_generic_currency, 
 						R.layout.spinner_white);
 		adapterCurrency.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerCurrency.setAdapter(adapterCurrency);
@@ -138,7 +139,8 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 	
 	@Override
 	protected void styleGuiObjects() {
-		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
+		super.styleGuiObjects();
+		
 		editTextCost.setHintTextColor(Colors.LIGHT_GREEN);
 		editTextVolume.setHintTextColor(Colors.LIGHT_GREEN);
 		editTextComment.setHintTextColor(Colors.LIGHT_GREEN);
@@ -153,7 +155,8 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 	
 	@Override
 	protected void initializeGuiObjects() {
-		Car car = MainActivity.garage.getActiveCar();
+		super.initializeGuiObjects();
+		
 		Currency.Unit currency;
 		try {
 			currency = car.getHistory().getEntries().getLast().getCurrency();
@@ -173,8 +176,6 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		UnitConstants.VolumeUnit volumeUnit;
 		volumeUnit = car.getVolumeUnit();
 		spinnerVolumeUnit.setSelection(volumeUnit.getId());
-		
-		textViewDistanceUnit.setText(car.getDistanceUnit().getUnit());
 	}
 	
 	protected void refreshPrice() {

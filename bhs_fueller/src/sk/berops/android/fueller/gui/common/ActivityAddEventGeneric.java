@@ -3,13 +3,16 @@ package sk.berops.android.fueller.gui.common;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.NoSuchElementException;
 
+import sk.berops.android.fueller.configuration.Preferences;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.Garage;
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
+import sk.berops.android.fueller.gui.Colors;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.R;
 import android.app.Activity;
@@ -31,18 +34,44 @@ public abstract class ActivityAddEventGeneric extends ActivityAddRecord implemen
 	protected EditText editTextCost;
 	protected EditText editTextComment;
 	protected TextView textViewDisplayDate;
+	protected TextView textViewDistanceUnit;
 	protected Spinner spinnerCurrency;
 	
+	protected Car car;
 	protected Entry entry;
 	protected boolean editMode;
 	protected boolean entryOK;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		car = MainActivity.garage.getActiveCar();
 		super.record = (Record) this.entry;
 		super.onCreate(savedInstanceState);
 		
 		updateTextAddEventDate();
+	}
+	
+	@Override
+	protected void attachGuiObjects() {
+		
+	}
+	
+	@Override
+	protected void styleGuiObjects() {
+		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
+	}
+	
+	@Override
+	protected void initializeGuiObjects() {
+		textViewDistanceUnit.setText(car.getDistanceUnit().getUnit());
+		
+		Currency.Unit currency;
+		try {
+			currency = car.getHistory().getEntries().getLast().getCurrency();
+		} catch (NoSuchElementException e) {
+			currency = Preferences.getInstance().getCurrency();
+		}
+		spinnerCurrency.setSelection(currency.getId());
 	}
 	
 	public void showDatePickerDialog(View v) {
@@ -63,7 +92,7 @@ public abstract class ActivityAddEventGeneric extends ActivityAddRecord implemen
 		try {
 			mileage = Double.parseDouble(editTextMileage.getText().toString());
 		} catch (NumberFormatException ex) {
-			throwAlertFieldsEmpty(getResources().getString(R.string.activity_refuel_mileage_hint));
+			throwAlertFieldsEmpty(getResources().getString(R.string.activity_generic_mileage_hint));
 		}
 		
 		entry.setMileage(mileage);
