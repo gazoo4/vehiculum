@@ -9,8 +9,10 @@ import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.fueller.dataModel.expense.MaintenanceEntry;
 import sk.berops.android.fueller.gui.Colors;
+import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityAddEventGeneric;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -49,11 +51,6 @@ public class ActivityMaintenance extends ActivityAddEventGeneric {
 		editTextLaborCost = (EditText) findViewById(R.id.activity_maintenance_labor_cost);
 		
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_maintenance_labor_cost_currency);
-		ArrayAdapter<CharSequence> adapterCurrency = ArrayAdapter
-				.createFromResource(this, R.array.activity_generic_currency, 
-						R.layout.spinner_white);
-		adapterCurrency.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerCurrency.setAdapter(adapterCurrency);
 	}
 
 	@Override
@@ -71,6 +68,7 @@ public class ActivityMaintenance extends ActivityAddEventGeneric {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.activity_maintenance_button_add:
+			startActivity(new Intent(this, ActivityPartAdd.class));
 			break;
 		case R.id.activity_maintenance_button_delete:
 			break;

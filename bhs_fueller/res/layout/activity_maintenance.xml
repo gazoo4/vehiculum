@@ -173,7 +173,7 @@
             android:id="@+id/activity_maintenance_button_commit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".5"
+            android:layout_below="@id/activity_maintenance_labor_cost_layout"
             android:background="@drawable/red_button"
             android:onClick="onClick"
             android:text="@string/activity_generic_button_entry_save"

@@ -2,6 +2,7 @@ package sk.berops.android.fueller.gui.common;
 
 import java.util.Calendar;
 
+import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.io.xml.XMLHandler;
@@ -16,11 +17,14 @@ import android.widget.Toast;
 
 public abstract class ActivityAddRecord extends Activity {
 	
+	protected Car car;
+	
 	protected Record record;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		car = MainActivity.garage.getActiveCar();
 		
 		attachGuiObjects();
 		styleGuiObjects();

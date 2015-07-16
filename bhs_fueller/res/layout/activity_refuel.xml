@@ -137,7 +137,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/activity_refuel_price_text"
-            android:hint="@string/activity_refuel_comment_hint"
+            android:hint="@string/activity_generic_comment_hint"
             android:inputType="textMultiLine"
             style="@style/plain_text" />
 

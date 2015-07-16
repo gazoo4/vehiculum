@@ -3,19 +3,20 @@ package sk.berops.android.fueller.dataModel.maintenance;
 import org.simpleframework.xml.Element;
 
 import sk.berops.android.fueller.dataModel.Currency;
+import sk.berops.android.fueller.dataModel.Record;
 
-public abstract class GenericItem {
+public abstract class GenericItem extends Record {
 	
 	@Element(name="producer", required=false)
 	private String producer;
-	@Element(name="partID", required=false)
-	private String partID;
+	@Element(name="producerPartID", required=false)
+	private String producerPartID;
+	@Element(name="carmakerPartID", required=false)
+	private String carmakerPartID;
 	@Element(name="price", required=false)
 	private double price;
 	@Element(name="currency", required=false)
 	private Currency.Unit currency;
-	@Element(name="comment", required=false)
-	private String comment;
 	//@Element(category="category")
 	//private ??? category 
 	public String getProducer() {
@@ -24,11 +25,17 @@ public abstract class GenericItem {
 	public void setProducer(String producer) {
 		this.producer = producer;
 	}
-	public String getPartID() {
-		return partID;
+	public String getProducerPartID() {
+		return producerPartID;
 	}
-	public void setPartID(String partID) {
-		this.partID = partID;
+	public void setProducerPartID(String producerPartID) {
+		this.producerPartID = producerPartID;
+	}
+	public String getCarmakerPartID() {
+		return carmakerPartID;
+	}
+	public void setCarmakerPartID(String carmakerPartID) {
+		this.carmakerPartID = carmakerPartID;
 	}
 	public double getPrice() {
 		return price;
@@ -41,11 +48,5 @@ public abstract class GenericItem {
 	}
 	public void setCurrency(Currency.Unit currency) {
 		this.currency = currency;
-	}
-	public String getComment() {
-		return comment;
-	}
-	public void setComment(String comment) {
-		this.comment = comment;
 	}
 }

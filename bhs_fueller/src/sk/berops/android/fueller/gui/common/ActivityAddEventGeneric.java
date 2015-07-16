@@ -28,23 +28,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public abstract class ActivityAddEventGeneric extends ActivityAddRecord implements DatePickerDialog.OnDateSetListener {
+public abstract class ActivityAddEventGeneric extends ActivityAddExpense implements DatePickerDialog.OnDateSetListener {
 
 	protected EditText editTextMileage;
 	protected EditText editTextCost;
 	protected EditText editTextComment;
 	protected TextView textViewDisplayDate;
 	protected TextView textViewDistanceUnit;
-	protected Spinner spinnerCurrency;
 	
-	protected Car car;
 	protected Entry entry;
 	protected boolean editMode;
 	protected boolean entryOK;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		car = MainActivity.garage.getActiveCar();
 		super.record = (Record) this.entry;
 		super.onCreate(savedInstanceState);
 		
@@ -53,25 +50,19 @@ public abstract class ActivityAddEventGeneric extends ActivityAddRecord implemen
 	
 	@Override
 	protected void attachGuiObjects() {
-		
+		super.attachGuiObjects();
 	}
 	
 	@Override
 	protected void styleGuiObjects() {
+		super.styleGuiObjects();
 		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
 	}
 	
 	@Override
 	protected void initializeGuiObjects() {
+		super.initializeGuiObjects();
 		textViewDistanceUnit.setText(car.getDistanceUnit().getUnit());
-		
-		Currency.Unit currency;
-		try {
-			currency = car.getHistory().getEntries().getLast().getCurrency();
-		} catch (NoSuchElementException e) {
-			currency = Preferences.getInstance().getCurrency();
-		}
-		spinnerCurrency.setSelection(currency.getId());
 	}
 	
 	public void showDatePickerDialog(View v) {

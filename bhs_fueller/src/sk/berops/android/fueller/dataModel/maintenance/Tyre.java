@@ -46,9 +46,9 @@ public class Tyre extends GenericPart {
 		super();
 		this.threadLevel = threadLevel;
 		if (threadLevel == TEMP_DEFAULT_THREAD_LEVEL) {
-			this.setUsed(false);
+			this.setCondition(Condition.NEW);
 		} else {
-			this.setUsed(true);
+			this.setCondition(Condition.USED);
 		}
 	}
 	

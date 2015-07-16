@@ -54,6 +54,9 @@
             android:name="sk.berops.android.fueller.gui.maintenance.ActivityMaintenance"
             android:label="@string/app_name"/>
         <activity
+            android:name="sk.berops.android.fueller.gui.maintenance.ActivityPartAdd"
+            android:label="@string/app_name"/>
+        <activity
             android:name="sk.berops.android.fueller.gui.maintenance.ActivityTyreChange"
             android:label="@string/app_name"/>
         <activity

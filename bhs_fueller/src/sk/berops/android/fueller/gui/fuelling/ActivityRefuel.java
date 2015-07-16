@@ -109,32 +109,8 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		textViewDisplayDate = (TextView) findViewById(R.id.activity_refuel_date_text);
 
 		spinnerFuelType = (Spinner) findViewById(R.id.activity_refuel_fuel_type);
-		ArrayAdapter<CharSequence> adapterFuelType = ArrayAdapter
-				.createFromResource(this, R.array.activity_refuel_fuel_type,
-						R.layout.spinner_white);
-		adapterFuelType
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerFuelType.setAdapter(adapterFuelType);
-		
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_refuel_currency);
-		ArrayAdapter<CharSequence> adapterCurrency = ArrayAdapter
-				.createFromResource(this, R.array.activity_generic_currency, 
-						R.layout.spinner_white);
-		adapterCurrency.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerCurrency.setAdapter(adapterCurrency);
-		
 		spinnerVolumeUnit = (Spinner) findViewById(R.id.activity_refuel_volume_unit);
-		ArrayAdapter<CharSequence> adapterVolumeUnit = ArrayAdapter
-				.createFromResource(this, R.array.activity_refuel_volume_unit, 
-						R.layout.spinner_white);
-		adapterVolumeUnit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerVolumeUnit.setAdapter(adapterVolumeUnit);
-		
-		PriceCalculateListener priceCalculator = new PriceCalculateListener();
-		editTextCost.addTextChangedListener(priceCalculator);
-		editTextVolume.addTextChangedListener(priceCalculator);
-		spinnerCurrency.setOnItemSelectedListener(priceCalculator);
-		spinnerVolumeUnit.setOnItemSelectedListener(priceCalculator);
 	}
 	
 	@Override
@@ -145,25 +121,23 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		editTextVolume.setHintTextColor(Colors.LIGHT_GREEN);
 		editTextComment.setHintTextColor(Colors.LIGHT_GREEN);
 		
-		//textViewDisplayDate.setTypeface(Fonts.getFontBook(this));
-		//textViewPrice.setTypeface(Fonts.getFontBook(this));
-		//editTextMileage.setTypeface(Fonts.getFontPort(this));
-		//editTextCost.setTypeface(Fonts.getFontPort(this));
-		//editTextVolume.setTypeface(Fonts.getFontPort(this));
-		//editTextComment.setTypeface(Fonts.getFontPort(this));
+		ArrayAdapter<CharSequence> adapterFuelType = ArrayAdapter
+				.createFromResource(this, R.array.activity_refuel_fuel_type,
+						R.layout.spinner_white);
+		adapterFuelType
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinnerFuelType.setAdapter(adapterFuelType);
+		
+		ArrayAdapter<CharSequence> adapterVolumeUnit = ArrayAdapter
+				.createFromResource(this, R.array.activity_refuel_volume_unit, 
+						R.layout.spinner_white);
+		adapterVolumeUnit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinnerVolumeUnit.setAdapter(adapterVolumeUnit);
 	}
 	
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
-		
-		Currency.Unit currency;
-		try {
-			currency = car.getHistory().getEntries().getLast().getCurrency();
-		} catch (NoSuchElementException e) {
-			currency = Preferences.getInstance().getCurrency();
-		}
-		spinnerCurrency.setSelection(currency.getId());
 		
 		FuelType fuelType;
 		try {
@@ -176,6 +150,12 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		UnitConstants.VolumeUnit volumeUnit;
 		volumeUnit = car.getVolumeUnit();
 		spinnerVolumeUnit.setSelection(volumeUnit.getId());
+		
+		PriceCalculateListener priceCalculator = new PriceCalculateListener();
+		editTextCost.addTextChangedListener(priceCalculator);
+		editTextVolume.addTextChangedListener(priceCalculator);
+		spinnerCurrency.setOnItemSelectedListener(priceCalculator);
+		spinnerVolumeUnit.setOnItemSelectedListener(priceCalculator);
 	}
 	
 	protected void refreshPrice() {
