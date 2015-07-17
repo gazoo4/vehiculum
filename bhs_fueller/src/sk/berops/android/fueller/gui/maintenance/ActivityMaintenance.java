@@ -8,6 +8,7 @@ import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.fueller.dataModel.expense.MaintenanceEntry;
+import sk.berops.android.fueller.dataModel.maintenance.ReplacementPart;
 import sk.berops.android.fueller.gui.Colors;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityAddEventGeneric;
@@ -24,21 +25,21 @@ import android.widget.TextView;
 public class ActivityMaintenance extends ActivityAddEventGeneric {
 
 	EditText editTextLaborCost;
-	
+
 	protected MaintenanceEntry maintenanceEntry;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.activity_maintenance);
-		
+
 		if (maintenanceEntry == null) {
 			maintenanceEntry = new MaintenanceEntry();
 			maintenanceEntry.setExpenseType(ExpenseType.MAINTENANCE);
 		}
-		
+
 		super.entry = (Entry) this.maintenanceEntry;
 		super.editMode = editMode;
-		
+
 		super.onCreate(savedInstanceState);
 	}
 
@@ -46,10 +47,11 @@ public class ActivityMaintenance extends ActivityAddEventGeneric {
 	protected void attachGuiObjects() {
 		super.attachGuiObjects();
 		textViewDisplayDate = (TextView) findViewById(R.id.activity_maintenance_date_text);
-		editTextMileage = (EditText) findViewById(R.id.activity_maintenance_mileage);
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_maintenance_distance_unit);
+		editTextMileage = (EditText) findViewById(R.id.activity_maintenance_mileage);
 		editTextLaborCost = (EditText) findViewById(R.id.activity_maintenance_labor_cost);
-		
+		editTextComment = (EditText) findViewById(R.id.activity_maintenance_comment);
+
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_maintenance_labor_cost_currency);
 	}
 
@@ -62,13 +64,26 @@ public class ActivityMaintenance extends ActivityAddEventGeneric {
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
-		
+
 	}
-	
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		if (requestCode == 1) {
+			if (resultCode == RESULT_OK) {
+				ReplacementPart result = (ReplacementPart) data.getExtras().getSerializable("part");
+			}
+			if (resultCode == RESULT_CANCELED) {
+				// If no result, no issue
+			}
+		}
+	}
+
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.activity_maintenance_button_add:
-			startActivity(new Intent(this, ActivityPartAdd.class));
+			startActivityForResult(new Intent(this, ActivityPartAdd.class), 1);
 			break;
 		case R.id.activity_maintenance_button_delete:
 			break;

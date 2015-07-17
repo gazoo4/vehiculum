@@ -117,7 +117,6 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 	protected void styleGuiObjects() {
 		super.styleGuiObjects();
 		
-		editTextCost.setHintTextColor(Colors.LIGHT_GREEN);
 		editTextVolume.setHintTextColor(Colors.LIGHT_GREEN);
 		editTextComment.setHintTextColor(Colors.LIGHT_GREEN);
 		

@@ -13,12 +13,14 @@ import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public abstract class ActivityAddRecord extends Activity {
 	
-	protected Car car;
+	protected EditText editTextComment;
 	
+	protected Car car;
 	protected Record record;
 	
 	@Override

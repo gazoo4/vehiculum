@@ -32,7 +32,6 @@ public abstract class ActivityAddEventGeneric extends ActivityAddExpense impleme
 
 	protected EditText editTextMileage;
 	protected EditText editTextCost;
-	protected EditText editTextComment;
 	protected TextView textViewDisplayDate;
 	protected TextView textViewDistanceUnit;
 	

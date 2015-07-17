@@ -1,5 +1,6 @@
 package sk.berops.android.fueller.dataModel.maintenance;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +41,9 @@ public class Tyre extends GenericPart {
 	
 	public Tyre() {
 		this(TEMP_DEFAULT_THREAD_LEVEL);
+		if (getCreationDate() == null) {
+			setCreationDate(new Date());
+		}
 	}
 	
 	public Tyre(int threadLevel) {

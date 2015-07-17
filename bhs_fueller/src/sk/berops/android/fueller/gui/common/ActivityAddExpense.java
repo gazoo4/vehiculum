@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.configuration.Preferences;
 import sk.berops.android.fueller.dataModel.Currency;
+import sk.berops.android.fueller.gui.Colors;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -21,6 +22,12 @@ public class ActivityAddExpense extends ActivityAddRecord {
 
 	@Override
 	protected void styleGuiObjects() {
+		editTextComment.setHintTextColor(Colors.LIGHT_GREEN);
+		if (editTextCost != null) {
+			//in some child views the cost is not used (and instead laborCost might be used)
+			editTextCost.setHintTextColor(Colors.LIGHT_GREEN);
+		}
+		
 		ArrayAdapter<CharSequence> adapterCurrency = ArrayAdapter
 				.createFromResource(this, R.array.activity_generic_currency, 
 						R.layout.spinner_white);
