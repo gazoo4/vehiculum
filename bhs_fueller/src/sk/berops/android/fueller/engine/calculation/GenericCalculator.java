@@ -5,6 +5,7 @@ import java.util.TreeMap;
 
 import sk.berops.android.fueller.dataModel.calculation.Consumption;
 import sk.berops.android.fueller.dataModel.calculation.FuelConsumption;
+import sk.berops.android.fueller.dataModel.calculation.MaintenanceConsumption;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
@@ -47,9 +48,7 @@ public class GenericCalculator {
 				consumption = new FuelConsumption();
 				break;
 			case MAINTENANCE:
-				//TODO: we can imagine more detailed reporting (like labor expenses per mileage, parts expenses...)
-				// we should define a maintenanceconsumption
-				consumption = new Consumption();
+				consumption = new MaintenanceConsumption();
 				break;
 			case SERVICE:
 				break;

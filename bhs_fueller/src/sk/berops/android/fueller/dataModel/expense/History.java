@@ -46,7 +46,7 @@ public class History implements Serializable {
 		
 		return null;
 	}
-
+	
 	public LinkedList<FuellingEntry> getFuellingEntries() {
 		LinkedList<FuellingEntry> fuellingEntries = new LinkedList<FuellingEntry>();
 		for (Entry e: getEntries()) {
