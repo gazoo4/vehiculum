@@ -22,7 +22,7 @@ import sk.berops.android.fueller.gui.common.TextFormatter;
 import sk.berops.android.fueller.gui.fuelling.ActivityRefuel;
 import sk.berops.android.fueller.gui.garage.ActivityGarageManagement;
 import sk.berops.android.fueller.gui.preferences.PreferenceWithHeaders;
-import sk.berops.android.fueller.gui.report.ActivityStatsShow;
+import sk.berops.android.fueller.gui.report.ActivityReportsNavigate;
 import sk.berops.android.fueller.io.DataHandler;
 import sk.berops.android.fueller.io.xml.XMLHandler;
 import sk.berops.android.fueller.R;
@@ -361,7 +361,7 @@ public class MainActivity extends Activity {
 			startActivity(new Intent(this, ActivityEntryAdd.class));
 			break;
 		case R.id.activity_main_button_stats_view:
-			startActivity(new Intent(this, ActivityStatsShow.class));
+			startActivity(new Intent(this, ActivityReportsNavigate.class));
 			break;
 		case R.id.activity_main_button_garage_enter:
 			startActivity(new Intent(this, ActivityGarageManagement.class));

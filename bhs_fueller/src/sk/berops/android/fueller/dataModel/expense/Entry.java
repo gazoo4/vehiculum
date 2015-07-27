@@ -3,12 +3,15 @@ package sk.berops.android.fueller.dataModel.expense;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.simpleframework.xml.Element;
 
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.Record;
+import sk.berops.android.fueller.dataModel.Currency.Unit;
 import sk.berops.android.fueller.dataModel.UnitConstants.DistanceUnit;
 import sk.berops.android.fueller.dataModel.calculation.Consumption;
 
@@ -112,20 +115,48 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 		this.expenseType = expenseType;
 	}
 	public enum ExpenseType{
-		FUEL("fuel"), 
-		MAINTENANCE("maintenance"), //any maintenance action
-		SERVICE("service"), //tow service
-		TYRES("tyres"),
-		FEE("fee"); //ferry fee, highway vignette...
-		private String value;	
-		ExpenseType(String value) {
-			this.setValue(value);
+		FUEL(0, "fuel"), 
+		MAINTENANCE(1, "maintenance"), //any maintenance action
+		SERVICE(2, "service"), //tow service
+		TYRES(3, "tyres"),
+		FEE(4, "fee"); //ferry fee, highway vignette...
+		private int id;
+		private String expenseType;	
+		ExpenseType(int id, String expenseType) {
+			this.setId(id);
+			this.setExpenseType(expenseType);
 		}
-		public String getValue() {
-			return value;
+		
+		private static Map<Integer, ExpenseType> idToExpenseTypeMapping;
+
+		public static ExpenseType getExpenseType(int id) {
+			if (idToExpenseTypeMapping == null) {
+				initMapping();
+			}
+			
+			ExpenseType result = null;
+			result = idToExpenseTypeMapping.get(id);
+			return result;
 		}
-		public void setValue(String value) {
-			this.value = value;
+		
+		private static void initMapping() {
+			idToExpenseTypeMapping = new HashMap<Integer, ExpenseType>();
+			for (ExpenseType expenseType : values()) {
+				idToExpenseTypeMapping.put(expenseType.id, expenseType);
+			}
+		}
+	
+		public String getExpenseType() {
+			return expenseType;
+		}
+		public void setExpenseType(String expenseType) {
+			this.expenseType = expenseType;
+		}
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
 		}
 	}
 	public double getMileageSI() {

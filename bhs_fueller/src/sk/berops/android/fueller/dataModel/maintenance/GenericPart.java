@@ -10,7 +10,9 @@ import sk.berops.android.fueller.dataModel.maintenance.ReplacementPart.Originali
 public abstract class GenericPart extends GenericItem {
 	@Element(name="condition")
 	private Condition condition;
-
+	@Element(name="quantity", required=false)
+	protected int quantity;
+	
 	public enum Condition{
 		NEW(0, "new"),
 		USED(1, "used"),
@@ -61,5 +63,13 @@ public abstract class GenericPart extends GenericItem {
 
 	public void setCondition(Condition condition) {
 		this.condition = condition;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 }

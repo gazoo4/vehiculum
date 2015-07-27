@@ -12,7 +12,7 @@ import sk.berops.android.fueller.gui.ActivityEntryAdd;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.GuiUtils;
 import sk.berops.android.fueller.gui.garage.ActivityGarageManagement;
-import sk.berops.android.fueller.gui.report.ActivityStatsShow;
+import sk.berops.android.fueller.gui.report.ActivityReportsNavigate;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Context;
@@ -32,7 +32,7 @@ import android.widget.TextView;
 public class ActivityTyreChangeScheme extends Activity {
 	
 	private Car car;
-	private TyreChangeEntry tyreChangeEntry;;
+	private TyreChangeEntry tyreChangeEntry;
 	private LinkedList<Tyre> tyreList;
 	
 	private LinearLayout tyreChangeScheme;

@@ -45,16 +45,22 @@
             android:name="sk.berops.android.fueller.gui.fuelling.ActivityRefuel"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.report.ActivityStatsFuelling"
+            android:name="sk.berops.android.fueller.gui.report.ActivityStatsEntries"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.report.ActivityStatsShow"
+            android:name="sk.berops.android.fueller.gui.report.ActivityReportsNavigate"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.maintenance.ActivityMaintenance"
+            android:name="sk.berops.android.fueller.gui.maintenance.ActivityMaintenanceAdd"
+            android:label="@string/app_name"/>
+        <activity
+            android:name="sk.berops.android.fueller.gui.maintenance.ActivityMaintenanceEdit"
             android:label="@string/app_name"/>
         <activity
             android:name="sk.berops.android.fueller.gui.maintenance.ActivityPartAdd"
+            android:label="@string/app_name"/>
+        <activity
+            android:name="sk.berops.android.fueller.gui.maintenance.ActivityPartEdit"
             android:label="@string/app_name"/>
         <activity
             android:name="sk.berops.android.fueller.gui.maintenance.ActivityTyreChange"

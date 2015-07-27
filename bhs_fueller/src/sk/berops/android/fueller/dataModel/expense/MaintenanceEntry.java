@@ -7,6 +7,8 @@ import java.util.Map;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
+import sk.berops.android.fueller.dataModel.Currency;
+import sk.berops.android.fueller.dataModel.Currency.Unit;
 import sk.berops.android.fueller.dataModel.maintenance.ReplacementPart;
 
 public class MaintenanceEntry extends Entry {
@@ -14,8 +16,13 @@ public class MaintenanceEntry extends Entry {
 	private Type type;
 	@Element(name="laborCost", required=false)
 	private double laborCost;
+	@Element(name="laborCostSI", required=false)
+	private double laborCostSI;
+	@Element(name="laborCostCurrency", required=false)
+	private Currency.Unit laborCostCurrency;
 	@ElementList(inline=true, required=false)
 	private LinkedList<ReplacementPart> parts;
+	
 	public MaintenanceEntry() {
 		super();
 		this.setExpenseType(Entry.ExpenseType.MAINTENANCE);
@@ -65,6 +72,17 @@ public class MaintenanceEntry extends Entry {
 		}
 	}
 	
+	public double getPartsCostSI() {
+		if (getParts() == null) return 0;
+		
+		double partsCost = 0;
+			for (ReplacementPart p : getParts()) {
+				partsCost += p.getPriceSI() * p.getQuantity();
+			}
+			
+		return partsCost;
+	}
+	
 	public int compareTo(MaintenanceEntry e) {
 		return super.compareTo(e);
 	}
@@ -72,9 +90,27 @@ public class MaintenanceEntry extends Entry {
 	public double getLaborCost() {
 		return laborCost;
 	}
-	public void setLaborCost(double laborCost) {
+	public void setLaborCost(double laborCost, Unit currency) {
 		this.laborCost = laborCost;
+		this.laborCostCurrency = currency;
+		setLaborCostSI(Currency.convertToSI(getLaborCost(), getLaborCostCurrency(), getEventDate()));
 	}
+	public double getLaborCostSI() {
+		return laborCostSI;
+	}
+
+	public void setLaborCostSI(double laborCostSI) {
+		this.laborCostSI = laborCostSI;
+	}
+
+	public Currency.Unit getLaborCostCurrency() {
+		return laborCostCurrency;
+	}
+
+	public void setLaborCostCurrency(Currency.Unit laborCostCurrency) {
+		this.laborCostCurrency = laborCostCurrency;
+	}
+
 	public LinkedList<ReplacementPart> getParts() {
 		return parts;
 	}

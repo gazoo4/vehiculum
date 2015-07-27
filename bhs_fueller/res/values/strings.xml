@@ -18,7 +18,7 @@
     <string name="activity_entry_add_button_refuel"					>Refuelling</string>
     <string name="activity_entry_add_button_maintenance"			>Maintenance</string>
     <string name="activity_entry_add_button_tyres_change"			>Change tyres</string>
-    <string name="activity_entry_add_fields_missing_alert"			>Some of the required fields are not filled-in:</string>
+    <string name="activity_entry_add_field_missing_alert"			>Some of the required fields are not filled-in:</string>
     <string name="activity_entry_add_header"						>Pick an action to record</string>
     <string name="activity_entry_add_label"							>Adding new event</string>
     <string name="activity_garage_management_label"					>Your garage</string>
@@ -48,7 +48,10 @@
     <string name="activity_maintenance_button_delete"				>-</string>
     <string name="activity_maintenance_header"						>Maintenance</string>
     <string name="activity_maintenance_labor_cost_hint"				>Labor cost</string>
+    <string name="activity_maintenance_parts_cost_hint"				>Parts cost: </string>
+    <string name="activity_maintenance_total_cost_hint"				>Total cost: </string>
     <string name="activity_maintenance_type_accident_repair_label"	>Accident repair</string>
+    <string name="activity_maintenance_type_hint"					>Maintenance type</string>
     <string name="activity_maintenance_type_planned_label"			>Planned</string>
     <string name="activity_maintenance_type_unplanned_label"		>Unlanned</string>
     <string name="activity_part_add_carmaker_part_id_hint"			>Carmaker part No.</string>
@@ -57,6 +60,7 @@
     <string name="activity_part_add_originality_hint"				>Originality</string>
     <string name="activity_part_add_price_hint"						>Price</string>
     <string name="activity_part_add_producer_hint"					>Manufacturer</string>
+    <string name="activity_part_add_quantity_hint"					>Quantity</string>
     <string name="activity_refuel_cost_hint"						>Cost of the bill</string>
     <string name="activity_refuel_fuel_type_hint"					>Fuel type</string>
     <string name="activity_refuel_header"							>Enter your bill details</string>
@@ -64,7 +68,7 @@
     <string name="activity_refuel_volume_hint"						>Fuel volume bought</string>
     <string name="activity_refuel_volume_unit_hint"					>Volume unit</string>
     <string name="activity_stats_show_button_charts"				>Charts</string>
-    <string name="activity_stats_show_button_fuelling"				>Consumption stats</string>
+    <string name="activity_stats_show_button_fuelling"				>Recorded entries</string>
     <string name="activity_stats_show_header"						>Statistic center</string>
     <string name="activity_tyre_add_brand_hint"						>Brand</string>
     <string name="activity_tyre_add_button_entry_save"				>Save the record</string>
@@ -99,6 +103,8 @@
     <string name="fragment_entry_edit_delete_delete_toast"			>Removing entry</string>
     <string name="fragment_entry_edit_delete_edit_button"			>Edit</string>
     <string name="fragment_entry_edit_delete_edit_toast"			>Opening entry</string>
+    <string name="list_stats_maintenance_parts_cost_hint"			>Parts cost: </string>
+    <string name="list_stats_maintenance_total_cost_hint"			>Total cost: </string>
     <string name="preferences_units"								>Units</string>
     <string name="preferences_units_consumption"					>Consumption</string>
     <string name="preferences_units_consumption_dialog"				>Select consumption units for reporting</string>

@@ -34,6 +34,18 @@ public class History implements Serializable {
 		}
 		
 	}
+	
+	public Entry getEntry(int dynamicID) {
+		if (getEntries() == null) return null;
+		
+		for (Entry e : getEntries()) {
+			if (dynamicID == e.getDynamicId()) {
+				return e;
+			}
+		}
+		
+		return null;
+	}
 
 	public LinkedList<FuellingEntry> getFuellingEntries() {
 		LinkedList<FuellingEntry> fuellingEntries = new LinkedList<FuellingEntry>();

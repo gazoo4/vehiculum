@@ -39,6 +39,10 @@ public class GuiUtils {
 		return Double.parseDouble(editText.getText().toString());
 	}
 	
+	public static int extractInteger(EditText editText) {
+		return Integer.parseInt(editText.getText().toString());
+	}
+	
 	public static BitmapDrawable flip(Context context, BitmapDrawable d) {
 		Matrix m = new Matrix();
 		m.preScale(1, -1);

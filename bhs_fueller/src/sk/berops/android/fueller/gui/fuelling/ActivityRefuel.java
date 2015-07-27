@@ -13,6 +13,7 @@ import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.Garage;
 import sk.berops.android.fueller.dataModel.UnitConstants;
 import sk.berops.android.fueller.dataModel.expense.Entry;
+import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.fueller.gui.Colors;
@@ -29,6 +30,7 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -184,15 +186,14 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		}
 	}
 
-	private void updateFuelVolume() {
+	private void updateFuelVolume() throws NotFoundException, FieldsEmptyException {
 		double volume = 0;
 		UnitConstants.VolumeUnit volumeUnit;
 		volumeUnit = UnitConstants.VolumeUnit.getVolumeUnit(spinnerVolumeUnit.getSelectedItemPosition());
 		try {
 			volume = GuiUtils.extractDouble(editTextVolume);
 		} catch (NumberFormatException ex) {
-			throwAlertFieldsEmpty(getResources().getString(
-					R.string.activity_refuel_volume_hint));
+			throwAlertFieldsEmpty(R.string.activity_refuel_volume_hint);
 		}
 		fuellingEntry.setFuelVolume(volume, volumeUnit);
 	}
@@ -205,17 +206,18 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.activity_refuel_button_commit:
-			entryOK = true;
-			saveEntry();
-			if (entryOK) {
+			try {
+				saveEntry();
 				super.saveFieldsAndPersist(view);
 				startActivity(new Intent(this, MainActivity.class));
+			} catch (FieldsEmptyException ex) {
+				ex.throwAlert();
 			}
 			break;
 		}
 	}
 	
-	public void saveEntry() {
+	public void saveEntry() throws FieldsEmptyException {
 		updateFuelVolume();
 		updateFuelType();
 	}

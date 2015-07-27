@@ -11,7 +11,7 @@
         android:gravity="center_horizontal" >
 
         <TextView
-            android:id="@+id/list_stats_fuelling_dynamic_id"
+            android:id="@+id/list_stats_maintenance_dynamic_id"
             style="@style/plain_text_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
             android:padding="3dp" />
 
         <TextView
-            android:id="@+id/list_stats_fuelling_mileage"
+            android:id="@+id/list_stats_maintenance_mileage"
             style="@style/plain_text_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             android:padding="3dp" />
 
         <TextView
-            android:id="@+id/list_stats_fuelling_date"
+            android:id="@+id/list_stats_maintenance_date"
             style="@style/plain_text_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,15 +41,24 @@
         android:gravity="center_horizontal" >
 
         <TextView
-            android:id="@+id/list_stats_fuelling_volume"
+            android:id="@+id/list_stats_maintenance_parts_cost_hint"
             style="@style/plain_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_span="2"
-            android:gravity="end" />
+            android:gravity="start"
+            android:padding="3dp"
+            android:text="@string/list_stats_maintenance_parts_cost_hint" />
 
         <TextView
-            android:id="@+id/list_stats_fuelling_volume_unit"
+            android:id="@+id/list_stats_maintenance_parts_cost"
+            style="@style/plain_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="3dp" />
+
+        <TextView
+            android:id="@+id/list_stats_maintenance_parts_cost_unit"
             style="@style/plain_text_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,15 +72,24 @@
         android:gravity="center_horizontal" >
 
         <TextView
-            android:id="@+id/list_stats_fuelling_unit_price"
+            android:id="@+id/list_stats_maintenance_total_cost_hint"
             style="@style/plain_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_span="2"
-            android:gravity="end" />
+            android:gravity="start"
+            android:padding="3dp"
+            android:text="@string/list_stats_maintenance_total_cost_hint" />
 
         <TextView
-            android:id="@+id/list_stats_fuelling_unit_price_unit"
+            android:id="@+id/list_stats_maintenance_total_cost"
+            style="@style/plain_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="3dp" />
+
+        <TextView
+            android:id="@+id/list_stats_maintenance_total_cost_unit"
             style="@style/plain_text_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,29 +103,7 @@
         android:gravity="center_horizontal" >
 
         <TextView
-            android:id="@+id/list_stats_fuelling_total_price"
-            style="@style/plain_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_span="2"
-            android:gravity="end" />
-
-        <TextView
-            android:id="@+id/list_stats_fuelling_total_price_unit"
-            style="@style/plain_text_small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:padding="3dp" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal" >
-
-        <TextView
-            android:id="@+id/list_stats_fuelling_fuel"
+            android:id="@+id/list_stats_maintenance_entry_type"
             style="@style/plain_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -116,18 +112,12 @@
             android:textAllCaps="true" />
 
         <TextView
-            android:id="@+id/list_stats_fuelling_consumption"
-            style="@style/plain_text_big"
+            android:id="@+id/list_stats_maintenance_comment"
+            style="@style/plain_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="end" />
-
-        <TextView
-            android:id="@+id/list_stats_fuelling_consumption_unit"
-            style="@style/plain_text_small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
+            android:layout_span="2"
+            android:gravity="end"
             android:padding="3dp" />
     </TableRow>
 

@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Record;
+import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.io.xml.XMLHandler;
 import sk.berops.android.fueller.R;
@@ -33,6 +34,10 @@ public abstract class ActivityAddRecord extends Activity {
 		initializeGuiObjects();
 	}
 	
+	public void throwAlertFieldsEmpty(int id) throws FieldsEmptyException {
+		throw new FieldsEmptyException(this, id); 
+	}
+	
 	protected abstract void attachGuiObjects();
 	
 	protected abstract void styleGuiObjects();
@@ -49,21 +54,7 @@ public abstract class ActivityAddRecord extends Activity {
 		record.setModifiedDate(c.getTime());
 	}
 	
-	public void throwAlertFieldsEmpty(String field) {
-		AlertDialog.Builder alertDialog= new AlertDialog.Builder(this);
-		alertDialog.setMessage("" + getResources().getString(R.string.activity_entry_add_fields_missing_alert) + " " + field);
-		alertDialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Toast.makeText(getApplicationContext(), "Ok button Clicked ", Toast.LENGTH_LONG).show();
-			}
-		});
-		
-		alertDialog.show();
-	}
-	
-	public void saveFieldsAndPersist(View view) {
+	public void saveFieldsAndPersist(View view) throws FieldsEmptyException {
 		if (record.getCreationDate() == null) {
 			updateCreationDate();
 		} else {

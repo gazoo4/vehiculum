@@ -11,6 +11,7 @@ import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.Garage;
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.dataModel.expense.Entry;
+import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.gui.Colors;
 import sk.berops.android.fueller.gui.MainActivity;
@@ -19,6 +20,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,7 +39,6 @@ public abstract class ActivityAddEventGeneric extends ActivityAddExpense impleme
 	
 	protected Entry entry;
 	protected boolean editMode;
-	protected boolean entryOK;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,25 +77,25 @@ public abstract class ActivityAddEventGeneric extends ActivityAddExpense impleme
 		textViewDisplayDate.setText(DateFormat.getDateInstance().format(entry.getEventDate()));
 	}
 	
-	private void updateMileage() {
+	private void updateMileage() throws FieldsEmptyException {
 		Car car = MainActivity.garage.getActiveCar();
 		double mileage = 0;
 		try {
 			mileage = Double.parseDouble(editTextMileage.getText().toString());
 		} catch (NumberFormatException ex) {
-			throwAlertFieldsEmpty(getResources().getString(R.string.activity_generic_mileage_hint));
+			throwAlertFieldsEmpty(R.string.activity_generic_mileage_hint);
 		}
 		
 		entry.setMileage(mileage);
 		car.setCurrentMileage(mileage);
 	}
 	
-	protected void updateCost() {
+	protected void updateCost() throws FieldsEmptyException {
 		try {
 			Currency.Unit currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
 			entry.setCost(GuiUtils.extractDouble(editTextCost), currency);
 		} catch (NumberFormatException ex) {
-			throwAlertFieldsEmpty(getResources().getString(R.string.activity_refuel_cost_hint));
+			throwAlertFieldsEmpty(R.string.activity_refuel_cost_hint);
 		}
 	}
 	
@@ -110,12 +111,7 @@ public abstract class ActivityAddEventGeneric extends ActivityAddExpense impleme
 		updateTextAddEventDate();
 	}
 	
-	public void throwAlertFieldsEmpty(String field) {
-		entryOK = false;
-		super.throwAlertFieldsEmpty(field);
-	}
-	
-	public void saveFieldsAndPersist(View view) {
+	public void saveFieldsAndPersist(View view) throws FieldsEmptyException {
 		Car car = MainActivity.garage.getActiveCar();
 		entry.setCar(car);
 		updateMileage();

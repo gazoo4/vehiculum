@@ -9,6 +9,7 @@ import android.widget.Spinner;
 import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.Record;
+import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.dataModel.maintenance.GenericPart.Condition;
 import sk.berops.android.fueller.dataModel.maintenance.ReplacementPart;
 import sk.berops.android.fueller.dataModel.maintenance.ReplacementPart.Originality;
@@ -22,6 +23,7 @@ public class ActivityPartAdd extends ActivityAddExpense {
 	EditText editTextProducer;
 	EditText editTextManufacturerPartID;
 	EditText editTextCarmakerPartID;
+	EditText editTextQuantity;
 	Spinner spinnerCondition;
 	Spinner spinnerOriginality;
 
@@ -47,6 +49,7 @@ public class ActivityPartAdd extends ActivityAddExpense {
 		editTextProducer = (EditText) findViewById(R.id.activity_part_add_producer);
 		editTextManufacturerPartID = (EditText) findViewById(R.id.activity_part_add_manufacturer_part_id);
 		editTextCarmakerPartID = (EditText) findViewById(R.id.activity_part_add_carmaker_part_id);
+		editTextQuantity = (EditText) findViewById(R.id.activity_part_add_quantity);
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_part_add_currency);
 		spinnerCondition = (Spinner) findViewById(R.id.activity_part_add_condition);
 		spinnerOriginality = (Spinner) findViewById(R.id.activity_part_add_originality);
@@ -58,6 +61,7 @@ public class ActivityPartAdd extends ActivityAddExpense {
 		editTextProducer.setHintTextColor(Colors.LIGHT_GREEN);
 		editTextManufacturerPartID.setHintTextColor(Colors.LIGHT_GREEN);
 		editTextCarmakerPartID.setHintTextColor(Colors.LIGHT_GREEN);
+		editTextQuantity.setHintTextColor(Colors.LIGHT_GREEN);
 
 		ArrayAdapter<CharSequence> adapterCondition = ArrayAdapter
 				.createFromResource(this, R.array.activity_part_add_condition,
@@ -81,13 +85,19 @@ public class ActivityPartAdd extends ActivityAddExpense {
 
 	}
 
-	private void updateFields() {
+	private void updateFields() throws FieldsEmptyException {
 		updateProducer();
 		updatePartsID();
 		updatePrice();
+		updateQuantity();
 		updateComment();
 		updateOriginality();
 		updateCondition();
+		if (editMode) {
+			updateModifiedDate();
+		} else {
+			updateCreationDate();
+		}
 	}
 
 	private void updateProducer() {
@@ -99,13 +109,20 @@ public class ActivityPartAdd extends ActivityAddExpense {
 		part.setProducerPartID(editTextManufacturerPartID.getText().toString());
 	}
 
-	private void updatePrice() {
+	private void updatePrice() throws FieldsEmptyException {
 		try {
 			Currency.Unit currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
 			part.setPrice(GuiUtils.extractDouble(editTextCost), currency);
 		} catch (NumberFormatException ex) {
-			throwAlertFieldsEmpty(getResources().getString(
-					R.string.activity_part_add_price_hint));
+			throwAlertFieldsEmpty(R.string.activity_part_add_price_hint);
+		}
+	}
+	
+	private void updateQuantity() throws FieldsEmptyException {
+		try {
+			part.setQuantity(GuiUtils.extractInteger(editTextQuantity));
+		} catch (NumberFormatException ex) {
+			throwAlertFieldsEmpty(R.string.activity_part_add_quantity_hint);
 		}
 	}
 
@@ -126,11 +143,15 @@ public class ActivityPartAdd extends ActivityAddExpense {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.activity_part_add_button_commit:
+			try {
 			updateFields();
 			Intent returnIntent = new Intent();
 			returnIntent.putExtra("part", part);
 			setResult(RESULT_OK, returnIntent);
 			finish();
+			} catch (FieldsEmptyException e) {
+				e.throwAlert();
+			}
 			break;
 		}
 	}

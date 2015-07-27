@@ -2,11 +2,13 @@ package sk.berops.android.fueller.gui.report;
 
 import java.util.LinkedList;
 
+import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.FragmentEntryEditDelete;
 import sk.berops.android.fueller.gui.fuelling.ActivityFuellingEdit;
 import sk.berops.android.fueller.gui.garage.ActivityCarEdit;
+import sk.berops.android.fueller.gui.maintenance.ActivityMaintenanceEdit;
 import sk.berops.android.fueller.io.xml.XMLHandler;
 import sk.berops.android.fueller.R;
 import android.app.Activity;
@@ -20,20 +22,20 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class ActivityStatsFuelling extends Activity implements FragmentEntryEditDelete.EntryEditDeleteDialogListener {
+public class ActivityStatsEntries extends Activity implements FragmentEntryEditDelete.EntryEditDeleteDialogListener {
 	private int selectedEntryPosition;
-	private LinkedList<FuellingEntry> entries;
-	FuellingStatsAdapter adapter;
+	private LinkedList<Entry> entries;
+	EntriesReportAdapter adapter;
 	ListView listView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_stats_fuelling);
-		entries = MainActivity.garage.getActiveCar().getHistory().getFuellingEntries();
+		entries = MainActivity.garage.getActiveCar().getHistory().getEntries();
 		
 		listView = (ListView) findViewById(R.id.activity_stats_fuelling_listview);
-		adapter = new FuellingStatsAdapter(this, entries);
+		adapter = new EntriesReportAdapter(this, entries);
 		listView.setAdapter(adapter);
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
@@ -55,14 +57,31 @@ public class ActivityStatsFuelling extends Activity implements FragmentEntryEdit
 	public void OnDialogEditClick(DialogFragment dialog) {
 		int position = entries.size() - 1 - getSelectedEntryPosition();
 		System.out.println("Editing entry in position " + getSelectedEntryPosition());
-		Intent newIntent = new Intent(this, ActivityFuellingEdit.class);
-		newIntent.putExtra("position", position);
+		
+		Intent newIntent = null;
+		switch (entries.get(position).getExpenseType()) {
+		case FEE:
+			break;
+		case FUEL:
+			newIntent = new Intent(this, ActivityFuellingEdit.class);
+			break;
+		case MAINTENANCE:
+			newIntent = new Intent(this, ActivityMaintenanceEdit.class);
+			break;
+		case SERVICE:
+			break;
+		case TYRES:
+			break;
+		default:
+			break;
+		}
+		newIntent.putExtra("dynamicID", entries.get(position).getDynamicId());
 		startActivity(newIntent);
 	}
 
 	@Override
 	public void OnDialogDeleteClick(DialogFragment dialog) {
-		FuellingEntry entry;
+		Entry entry;
 		entry = entries.get(entries.size() - 1 - getSelectedEntryPosition());
 		System.out.println("Removing entry with ID " + entry.getDynamicId());  
 		entries.remove(entry);

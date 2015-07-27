@@ -27,6 +27,7 @@ import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Garage;
 import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.fueller.dataModel.expense.Entry;
+import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.gui.MainActivity;
@@ -146,11 +147,12 @@ public class ActivityTyreChange extends ActivityAddEventGeneric {
 			startActivity(new Intent(this, ActivityTyreChangeScheme.class));
 			break;
 		case R.id.activity_tyre_change_button_commit:
-			entryOK = true;
-			saveEntry(view);
-			if (entryOK) {
+			try {
+				saveEntry(view);
 				super.saveFieldsAndPersist(view);
 				startActivity(new Intent(this, MainActivity.class));
+			} catch (FieldsEmptyException e) {
+				e.throwAlert();
 			}
 			break;
 		}

@@ -1,5 +1,6 @@
 package sk.berops.android.fueller.dataModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ import org.simpleframework.xml.ElementList;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 
 public class Axle {
-
+	
 	@Element(name="axleType")
 	private AxleType axleType;
 	@Element(name="drivable")

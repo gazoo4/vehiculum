@@ -53,6 +53,15 @@ public class ReplacementPart extends GenericPart {
 			this.id = id;
 		}
 	}
+	
+	public ReplacementPart() {
+		this(1);
+	}
+	
+	public ReplacementPart(int quantity) {
+		super();
+		this.quantity = quantity;
+	}
 
 	public Originality getOriginality() {
 		return originality;

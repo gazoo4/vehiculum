@@ -47,6 +47,9 @@ public class GenericCalculator {
 				consumption = new FuelConsumption();
 				break;
 			case MAINTENANCE:
+				//TODO: we can imagine more detailed reporting (like labor expenses per mileage, parts expenses...)
+				// we should define a maintenanceconsumption
+				consumption = new Consumption();
 				break;
 			case SERVICE:
 				break;
@@ -79,10 +82,10 @@ public class GenericCalculator {
 			if (entryCountPerEntryType.get(entryType) == 1) {
 				averageCostPerEntryType.put(entryType, 0.0);
 			} else {
-				double fuelCost = totalCostPerEntryType.get(entryType) - entryFirstPerEntryType.get(entryType).getCost();
+				double cost = totalCostPerEntryType.get(entryType) - entryFirstPerEntryType.get(entryType).getCost();
 				double mileage = e.getMileage() - entryFirstPerEntryType.get(entryType).getMileage();
-				double averageFuelCostType = fuelCost / mileage;
-				averageCostPerEntryType.put(entryType, averageFuelCostType);
+				double averageCostType = cost / mileage;
+				averageCostPerEntryType.put(entryType, averageCostType);
 			}
 			TreeMap<ExpenseType, Double> averageCostPerEntryTypeCopy = new TreeMap<ExpenseType, Double>(averageCostPerEntryType);
 			consumption.setAverageCostPerEntryType(averageCostPerEntryTypeCopy);

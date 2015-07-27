@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class ActivityStatsShow extends Activity {
+public class ActivityReportsNavigate extends Activity {
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class ActivityStatsShow extends Activity {
 	public void onClick(View view) {
 		switch(view.getId()) {
 		case R.id.activity_stats_show_button_fuelling:
-			startActivity(new Intent(this, ActivityStatsFuelling.class));
+			startActivity(new Intent(this, ActivityStatsEntries.class));
 			break;
 		case R.id.activity_stats_show_button_charts:
 			startActivity(new Intent(this, ActivityCharts.class));
