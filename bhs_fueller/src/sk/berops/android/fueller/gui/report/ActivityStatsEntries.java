@@ -60,7 +60,8 @@ public class ActivityStatsEntries extends Activity implements FragmentEntryEditD
 		
 		Intent newIntent = null;
 		switch (entries.get(position).getExpenseType()) {
-		case FEE:
+		case TOLL:
+			//newIntent = new Intent(this, ActivityTollEdit.class);
 			break;
 		case FUEL:
 			newIntent = new Intent(this, ActivityFuellingEdit.class);
@@ -69,8 +70,15 @@ public class ActivityStatsEntries extends Activity implements FragmentEntryEditD
 			newIntent = new Intent(this, ActivityMaintenanceEdit.class);
 			break;
 		case SERVICE:
+			//newIntent = new Intent(this, ActivityServiceEdit.class);
 			break;
 		case TYRES:
+			break;
+		case BURREAUCRATIC:
+			//newIntent = new Intent(this, ActivityBurreaucraticEdit.class);
+			break;
+		case INSURANCE:
+			//newIntent = new Intent(this, ActivityInsuranceEdit.class);
 			break;
 		default:
 			break;

@@ -20,7 +20,6 @@ public class MaintenanceCalculator {
 		TreeMap<MaintenanceEntry.Type, Double> totalCostPerMaintenanceType = new TreeMap<MaintenanceEntry.Type, Double>();
 		TreeMap<MaintenanceEntry.Type, Double> averageCostPerMaintenanceType = new TreeMap<MaintenanceEntry.Type, Double>();
 
-		int count = 0;
 		double mileageDriven = 0;
 		TreeMap<MaintenanceEntry.Type, Integer> countPerMaintenanceType = new TreeMap<MaintenanceEntry.Type, Integer>();
 
@@ -37,8 +36,9 @@ public class MaintenanceCalculator {
 				totalCostPerMaintenanceType.put(type, 0.0);
 				averageCostPerMaintenanceType.put(type, 0.0);
 			}
+			
+			countPerMaintenanceType.put(type, countPerMaintenanceType.get(type).intValue() + 1);
 
-			count++;
 			totalCost += m.getCostSI();
 			consumption.setTotalCost(totalCost);
 

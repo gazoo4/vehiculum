@@ -54,8 +54,7 @@
             style="@style/plain_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end"
-            android:padding="3dp" />
+            android:gravity="end" />
 
         <TextView
             android:id="@+id/list_stats_maintenance_parts_cost_unit"
@@ -85,8 +84,7 @@
             style="@style/plain_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end"
-            android:padding="3dp" />
+            android:gravity="end" />
 
         <TextView
             android:id="@+id/list_stats_maintenance_total_cost_unit"

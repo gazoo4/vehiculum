@@ -95,7 +95,7 @@ public abstract class ActivityAddEventGeneric extends ActivityAddExpense impleme
 			Currency.Unit currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
 			entry.setCost(GuiUtils.extractDouble(editTextCost), currency);
 		} catch (NumberFormatException ex) {
-			throwAlertFieldsEmpty(R.string.activity_refuel_cost_hint);
+			throwAlertFieldsEmpty(R.string.activity_generic_cost_hint);
 		}
 	}
 	

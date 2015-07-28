@@ -7,5 +7,9 @@ public class Calculator {
 		GenericCalculator.calculate(history.getEntries());
 		FuellingCalculator.calculate(history.getFuellingEntries());
 		MaintenanceCalculator.calculate(history.getMaintenanceEntries());
+		ServiceCalculator.calculate(history.getServiceEntries());
+		TollCalculator.calculate(history.getTollEntries());
+		InsuranceCalculator.calculate(history.getInsuranceEntries());
+		BurreaucraticCalculator.calculate(history.getBurreaucraticEntries());
 	}
 }

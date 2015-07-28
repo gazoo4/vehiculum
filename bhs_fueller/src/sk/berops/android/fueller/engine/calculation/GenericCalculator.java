@@ -3,9 +3,14 @@ package sk.berops.android.fueller.engine.calculation;
 import java.util.LinkedList;
 import java.util.TreeMap;
 
+import android.util.Log;
+import sk.berops.android.fueller.dataModel.calculation.BurreaucraticConsumption;
 import sk.berops.android.fueller.dataModel.calculation.Consumption;
 import sk.berops.android.fueller.dataModel.calculation.FuelConsumption;
+import sk.berops.android.fueller.dataModel.calculation.InsuranceConsumption;
 import sk.berops.android.fueller.dataModel.calculation.MaintenanceConsumption;
+import sk.berops.android.fueller.dataModel.calculation.ServiceConsumption;
+import sk.berops.android.fueller.dataModel.calculation.TollConsumption;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
@@ -42,7 +47,8 @@ public class GenericCalculator {
 			Consumption consumption = null;
 			
 			switch (e.getExpenseType()) {
-			case FEE:
+			case TOLL:
+				consumption = new TollConsumption();
 				break;
 			case FUEL:
 				consumption = new FuelConsumption();
@@ -51,10 +57,18 @@ public class GenericCalculator {
 				consumption = new MaintenanceConsumption();
 				break;
 			case SERVICE:
+				consumption = new ServiceConsumption();
 				break;
 			case TYRES:
 				break;
+			case BURREAUCRATIC:
+				consumption = new BurreaucraticConsumption();
+				break;
+			case INSURANCE:
+				consumption = new InsuranceConsumption();
+				break;
 			default:
+				Log.d("WARN", "Unknown expenseType");
 				break;
 			}
 			

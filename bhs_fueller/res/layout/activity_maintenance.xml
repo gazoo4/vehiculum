@@ -36,7 +36,7 @@
                 android:textIsSelectable="true" />
 
             <Button
-                android:id="@+id/activity_maitnenance_button_date_change"
+                android:id="@+id/activity_maintenance_button_date_change"
                 style="@style/button_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

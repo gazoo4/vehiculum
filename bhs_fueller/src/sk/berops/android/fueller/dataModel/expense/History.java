@@ -47,15 +47,19 @@ public class History implements Serializable {
 		return null;
 	}
 	
-	public LinkedList<FuellingEntry> getFuellingEntries() {
-		LinkedList<FuellingEntry> fuellingEntries = new LinkedList<FuellingEntry>();
+	private <T extends Entry> LinkedList<T> getEntriesOfType(T entry) {
+		LinkedList<T> entriesOfType = new LinkedList<T>();
 		for (Entry e: getEntries()) {
-			if (e.getExpenseType() == ExpenseType.FUEL) {
-				fuellingEntries.add((FuellingEntry) e);
+			if (e.getExpenseType() == entry.getExpenseType()) {
+				entriesOfType.add((T) e);
 			}
 		}
-		Collections.sort(fuellingEntries);
-		return fuellingEntries;
+		Collections.sort(entriesOfType);
+		return entriesOfType;
+	}
+	
+	public LinkedList<FuellingEntry> getFuellingEntries() {
+		return getEntriesOfType(new FuellingEntry());
 	}
 	
 	public LinkedList<FuellingEntry> getFuellingEntriesFiltered(FuellingEntry.FuelType filter) {
@@ -71,14 +75,23 @@ public class History implements Serializable {
 	}
 	
 	public LinkedList<MaintenanceEntry> getMaintenanceEntries() {
-		LinkedList<MaintenanceEntry> maintenanceEntries = new LinkedList<MaintenanceEntry>();
-		for (Entry e: getEntries()) {
-			if (e.getExpenseType() == ExpenseType.MAINTENANCE) {
-				maintenanceEntries.add((MaintenanceEntry) e);
-			}
-		}
-		Collections.sort(maintenanceEntries);
-		return maintenanceEntries;
+		return getEntriesOfType(new MaintenanceEntry());
+	}
+	
+	public LinkedList<ServiceEntry> getServiceEntries() {
+		return getEntriesOfType(new ServiceEntry());
+	}
+	
+	public LinkedList<TollEntry> getTollEntries() {
+		return getEntriesOfType(new TollEntry());
+	}
+	
+	public LinkedList<InsuranceEntry> getInsuranceEntries() {
+		return getEntriesOfType(new InsuranceEntry());
+	}
+	
+	public LinkedList<BurreaucraticEntry> getBurreaucraticEntries() {
+		return getEntriesOfType(new BurreaucraticEntry());
 	}
 	
 	public LinkedList<Entry> getEntries() {

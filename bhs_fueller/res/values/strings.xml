@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name"											>Fueller</string>
     <string name="action_settings"									>Settings</string>
+    <string name="activity_burreaucratic_header"					>Burreaucracy expense</string>
     <string name="activity_car_add_brand_hint"						>Brand</string>
     <string name="activity_car_add_button_add"						>Add car</string>
     <string name="activity_car_add_button_edit"						>Edit car</string>
@@ -15,8 +16,12 @@
     <string name="activity_car_add_nickname_hint"					>Nickname (optional)</string>
     <string name="activity_car_add_volume_units_hint"				>Volume units</string>
     <string name="activity_car_edit_label"							>Edit your car</string>
-    <string name="activity_entry_add_button_refuel"					>Refuelling</string>
+    <string name="activity_entry_add_button_burreaucratic"			>Burreaucracy</string>
+    <string name="activity_entry_add_button_insurance"				>Insurance payment</string>
     <string name="activity_entry_add_button_maintenance"			>Maintenance</string>
+    <string name="activity_entry_add_button_refuel"					>Refuelling</string>
+    <string name="activity_entry_add_button_service"				>Service</string>
+    <string name="activity_entry_add_button_toll"					>Toll expense</string>
     <string name="activity_entry_add_button_tyres_change"			>Change tyres</string>
     <string name="activity_entry_add_field_missing_alert"			>Some of the required fields are not filled-in:</string>
     <string name="activity_entry_add_header"						>Pick an action to record</string>
@@ -27,8 +32,11 @@
     <string name="activity_generic_button_date_change"				>Change date</string>
     <string name="activity_generic_button_entry_save"				>Save</string>
     <string name="activity_generic_comment_hint"					>Additional comment</string>
+    <string name="activity_generic_cost_hint"						>Cost of the bill</string>
     <string name="activity_generic_currency_hint"					>Currency</string>
     <string name="activity_generic_mileage_hint"					>Mileage</string>
+    <string name="activity_insurance_header"						>Insurance expense</string>
+    <string name="activity_insurance_type_hint"						>Insurance type</string>
     <string name="activity_main_average"							>Average</string>
     <string name="activity_main_average_combined"					>Average combined</string>
     <string name="activity_main_button_entry_add"					>Record a new event</string>
@@ -61,15 +69,18 @@
     <string name="activity_part_add_price_hint"						>Price</string>
     <string name="activity_part_add_producer_hint"					>Manufacturer</string>
     <string name="activity_part_add_quantity_hint"					>Quantity</string>
-    <string name="activity_refuel_cost_hint"						>Cost of the bill</string>
     <string name="activity_refuel_fuel_type_hint"					>Fuel type</string>
     <string name="activity_refuel_header"							>Enter your bill details</string>
     <string name="activity_refuel_price_hint"						>Price per liter</string>
     <string name="activity_refuel_volume_hint"						>Fuel volume bought</string>
     <string name="activity_refuel_volume_unit_hint"					>Volume unit</string>
+    <string name="activity_service_header"							>Service</string>
+    <string name="activity_service_type_hint"						>Service type</string>
     <string name="activity_stats_show_button_charts"				>Charts</string>
     <string name="activity_stats_show_button_fuelling"				>Recorded entries</string>
     <string name="activity_stats_show_header"						>Statistic center</string>
+    <string name="activity_toll_header"								>Toll</string>
+    <string name="activity_toll_type_hint"							>Toll category</string>
     <string name="activity_tyre_add_brand_hint"						>Brand</string>
     <string name="activity_tyre_add_button_entry_save"				>Save the record</string>
     <string name="activity_tyre_add_diameter_hint"					>Diameter</string>
@@ -134,6 +145,11 @@
         <item>£</item>
     </string-array>
     
+    <string-array name="activity_insurance_type">
+        <item>Basic (required by law)</item>
+        <item>Other</item>
+    </string-array>
+    
     <string-array name="activity_part_add_condition">
         <item>New</item>
         <item>Used</item>
@@ -158,6 +174,18 @@
         <item>ltr</item>
         <item>gal (US)</item>
         <item>gal (IMP)</item>
+    </string-array>
+    
+    <string-array name="activity_service_type">
+        <item>Towing service</item>
+        <item>Replacement vehicle</item>
+        <item>Other service</item>
+    </string-array>
+    
+    <string-array name="activity_toll_type">
+        <item>Car ferry</item>
+        <item>Toll road</item>
+        <item>Other fee/toll</item>
     </string-array>
     
     <string-array name="activity_tyre_add_season">

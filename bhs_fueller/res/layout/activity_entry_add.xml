@@ -41,4 +41,40 @@
         android:background="@drawable/red_button"
         android:onClick="onClick"
         android:text="@string/activity_entry_add_button_maintenance" />
+    <Button
+        android:id="@+id/activity_entry_add_button_service"
+        style="@style/button_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_entry_add_button_maintenance"
+        android:background="@drawable/red_button"
+        android:onClick="onClick"
+        android:text="@string/activity_entry_add_button_service" />
+    <Button
+        android:id="@+id/activity_entry_add_button_toll"
+        style="@style/button_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_entry_add_button_service"
+        android:background="@drawable/red_button"
+        android:onClick="onClick"
+        android:text="@string/activity_entry_add_button_toll" />
+    <Button
+        android:id="@+id/activity_entry_add_button_insurance"
+        style="@style/button_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_entry_add_button_toll"
+        android:background="@drawable/red_button"
+        android:onClick="onClick"
+        android:text="@string/activity_entry_add_button_insurance" />
+    <Button
+        android:id="@+id/activity_entry_add_button_burreaucratic"
+        style="@style/button_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_entry_add_button_insurance"
+        android:background="@drawable/red_button"
+        android:onClick="onClick"
+        android:text="@string/activity_entry_add_button_burreaucratic" />
 </RelativeLayout>

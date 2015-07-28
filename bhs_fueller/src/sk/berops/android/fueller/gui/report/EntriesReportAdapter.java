@@ -9,9 +9,13 @@ import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.UnitConstants.ConsumptionUnit;
 import sk.berops.android.fueller.dataModel.calculation.FuelConsumption;
+import sk.berops.android.fueller.dataModel.expense.BurreaucraticEntry;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
+import sk.berops.android.fueller.dataModel.expense.InsuranceEntry;
 import sk.berops.android.fueller.dataModel.expense.MaintenanceEntry;
+import sk.berops.android.fueller.dataModel.expense.ServiceEntry;
+import sk.berops.android.fueller.dataModel.expense.TollEntry;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.GuiUtils;
 import sk.berops.android.fueller.gui.common.TextFormatter;
@@ -41,19 +45,30 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		Entry entry = entries.get(entries.size() - 1 - position);
 
 		switch (entry.getExpenseType()) {
-		case FEE:
-			return null;
+		case TOLL:
+			// return getViewTollEntry((TollEntry) entry, convertView, parent);
+			break;
 		case FUEL:
 			return getViewFuellingEntry((FuellingEntry) entry, convertView, parent);
 		case MAINTENANCE:
 			return getViewMaintenanceEntry((MaintenanceEntry) entry, convertView, parent);
 		case SERVICE:
-			return null;
+			// return getViewServiceEntry((ServiceEntry) entry, convertView, parent);
+			break;
 		case TYRES:
-			return null;
+			// return getViewTyreEntry((TyreEntry) entry, convertView, parent);
+			break;
+		case BURREAUCRATIC:
+			// return getViewBurreaucraticEntry((BurreaucraticEntry) entry, convertView, parent);
+			break;
+		case INSURANCE:
+			// return getViewInsuranceEntry((InsuranceEntry) entry, convertView, parent);
+			break;
 		default:
-			return null;
+			break;
 		}
+		
+		return null;
 	}
 
 	private View getViewFuellingEntry(FuellingEntry entry, View convertView, ViewGroup parent) {
