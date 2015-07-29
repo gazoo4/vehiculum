@@ -2,6 +2,7 @@ package sk.berops.android.fueller.gui.report;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import org.apache.commons.math3.analysis.interpolation.SplineInterpolator;
 import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
@@ -63,6 +64,11 @@ public class ActivityCharts extends Activity {
 			FuelType type = e.getFuelType();
 			double xValue = e.getMileage();
 			double yValue = e.getFuelConsumption().getMovingAveragePerFuelType().get(type).doubleValue();
+			// the first consumption cannot be calculated and is always 0
+			// we don't really expect to have another 0.0 consumption (that means we didn't refuel at all, right?)
+			// if (yValue == 0.0) continue;
+			// TODO: this would make sense, however the chart is shifted away from 0-axis and doesn't look nice
+			// to be reconsidered once the chart can be position correctly
 			graphDataMap.get(type).add(new HistoryViewData(xValue, yValue));
 		}
 		

@@ -106,16 +106,20 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 
 		fuel.setText(entry.getFuelType().toString());
 
-		consumption.setText(TextFormatter.format(entry.getFuelConsumption().getAverageSinceLast(), "##0.00"));
 		consumptionUnit.setText(preferences.getConsumptionUnit().getUnit());
 
-		fuel.setTextColor(entry.getFuelType().getColor());
-
 		FuelConsumption c = entry.getFuelConsumption();
-		double avgConsumption = c.getAveragePerFuelType().get(entry.getFuelType());
-		double lastConsumption = c.getAverageSinceLast();
-		double relativeChange = (lastConsumption / avgConsumption - 0.8) / 0.4;
-		consumption.setTextColor(GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange));
+		if (c.getAverageSinceLast() == 0.0) {
+			consumption.setText("--.--");
+		} else {
+			consumption.setText(TextFormatter.format(c.getAverageSinceLast(), "##0.00"));
+			double avgConsumption = c.getAveragePerFuelType().get(entry.getFuelType());
+			double lastConsumption = c.getAverageSinceLast();
+			double relativeChange = (lastConsumption / avgConsumption - 0.8) / 0.4;
+			consumption.setTextColor(GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange));
+		}
+		
+		fuel.setTextColor(entry.getFuelType().getColor());
 
 		return rowView;
 	}
