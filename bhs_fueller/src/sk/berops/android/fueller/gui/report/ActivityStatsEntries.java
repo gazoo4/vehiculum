@@ -5,10 +5,14 @@ import java.util.LinkedList;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.gui.MainActivity;
+import sk.berops.android.fueller.gui.burreaucratic.ActivityBurreaucraticEdit;
 import sk.berops.android.fueller.gui.common.FragmentEntryEditDelete;
 import sk.berops.android.fueller.gui.fuelling.ActivityFuellingEdit;
 import sk.berops.android.fueller.gui.garage.ActivityCarEdit;
+import sk.berops.android.fueller.gui.insurance.ActivityInsuranceEdit;
 import sk.berops.android.fueller.gui.maintenance.ActivityMaintenanceEdit;
+import sk.berops.android.fueller.gui.service.ActivityServiceEdit;
+import sk.berops.android.fueller.gui.toll.ActivityTollEdit;
 import sk.berops.android.fueller.io.xml.XMLHandler;
 import sk.berops.android.fueller.R;
 import android.app.Activity;
@@ -61,7 +65,7 @@ public class ActivityStatsEntries extends Activity implements FragmentEntryEditD
 		Intent newIntent = null;
 		switch (entries.get(position).getExpenseType()) {
 		case TOLL:
-			//newIntent = new Intent(this, ActivityTollEdit.class);
+			newIntent = new Intent(this, ActivityTollEdit.class);
 			break;
 		case FUEL:
 			newIntent = new Intent(this, ActivityFuellingEdit.class);
@@ -70,15 +74,15 @@ public class ActivityStatsEntries extends Activity implements FragmentEntryEditD
 			newIntent = new Intent(this, ActivityMaintenanceEdit.class);
 			break;
 		case SERVICE:
-			//newIntent = new Intent(this, ActivityServiceEdit.class);
+			newIntent = new Intent(this, ActivityServiceEdit.class);
 			break;
 		case TYRES:
 			break;
 		case BURREAUCRATIC:
-			//newIntent = new Intent(this, ActivityBurreaucraticEdit.class);
+			newIntent = new Intent(this, ActivityBurreaucraticEdit.class);
 			break;
 		case INSURANCE:
-			//newIntent = new Intent(this, ActivityInsuranceEdit.class);
+			newIntent = new Intent(this, ActivityInsuranceEdit.class);
 			break;
 		default:
 			break;

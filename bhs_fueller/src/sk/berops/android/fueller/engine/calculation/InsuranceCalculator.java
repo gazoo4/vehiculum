@@ -37,7 +37,7 @@ public class InsuranceCalculator {
 			countPerInsuranceType.put(type, countPerInsuranceType.get(type).intValue() + 1);
 
 			totalCost += i.getCostSI();
-			consumption.setTotalCost(totalCost);
+			consumption.setTotalInsuranceCost(totalCost);
 			
 			if (totalCostPerInsuranceType.get(type) == null) {
 				totalCostPerInsuranceType.put(type, 0.0);
@@ -49,7 +49,7 @@ public class InsuranceCalculator {
 			
 			if (mileageDriven > 0.0) {
 				averageCost = totalCost / mileageDriven * 100;
-				consumption.setAverageCost(averageCost);
+				consumption.setAverageInsuranceCost(averageCost);
 
 				double typeAverageCost = typeTotalCost / mileageDriven * 100;
 				averageCostPerInsuranceType.put(type, typeAverageCost);

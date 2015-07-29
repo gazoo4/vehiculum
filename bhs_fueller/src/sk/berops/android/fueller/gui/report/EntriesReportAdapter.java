@@ -46,24 +46,20 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 
 		switch (entry.getExpenseType()) {
 		case TOLL:
-			// return getViewTollEntry((TollEntry) entry, convertView, parent);
-			break;
+			return getViewTollEntry((TollEntry) entry, convertView, parent);
 		case FUEL:
 			return getViewFuellingEntry((FuellingEntry) entry, convertView, parent);
 		case MAINTENANCE:
 			return getViewMaintenanceEntry((MaintenanceEntry) entry, convertView, parent);
 		case SERVICE:
-			// return getViewServiceEntry((ServiceEntry) entry, convertView, parent);
-			break;
+			return getViewServiceEntry((ServiceEntry) entry, convertView, parent);
 		case TYRES:
 			// return getViewTyreEntry((TyreEntry) entry, convertView, parent);
 			break;
 		case BURREAUCRATIC:
-			// return getViewBurreaucraticEntry((BurreaucraticEntry) entry, convertView, parent);
-			break;
+			return getViewBurreaucraticEntry((BurreaucraticEntry) entry, convertView, parent);
 		case INSURANCE:
-			// return getViewInsuranceEntry((InsuranceEntry) entry, convertView, parent);
-			break;
+			return getViewInsuranceEntry((InsuranceEntry) entry, convertView, parent);
 		default:
 			break;
 		}
@@ -158,6 +154,135 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
 
+		return rowView;
+	}
+	
+	private View getViewServiceEntry(ServiceEntry entry, View convertView, ViewGroup parent) {
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		// TODO: listen to the warning below for smoother scrolling
+		View rowView = inflater.inflate(R.layout.list_stats_service, parent, false);
+
+		TextView dynamicId = (TextView) rowView.findViewById(R.id.list_stats_service_dynamic_id);
+		TextView mileage = (TextView) rowView.findViewById(R.id.list_stats_service_mileage);
+		TextView date = (TextView) rowView.findViewById(R.id.list_stats_service_date);
+		TextView serviceType = (TextView) rowView.findViewById(R.id.list_stats_service_type);
+		TextView totalCost = (TextView) rowView.findViewById(R.id.list_stats_service_cost);
+		TextView totalCostUnit = (TextView) rowView.findViewById(R.id.list_stats_service_cost_unit);
+		TextView entryType = (TextView) rowView.findViewById(R.id.list_stats_service_entry_type);
+		TextView comment = (TextView) rowView.findViewById(R.id.list_stats_service_comment);
+
+		dynamicId.setText(Integer.toString(entry.getDynamicId()));
+
+		mileage.setText(TextFormatter.format(entry.getMileage(), "#######.#") + " "
+				+ MainActivity.garage.getActiveCar().getDistanceUnit().getUnit());
+
+		date.setText(DateFormat.getDateInstance(DateFormat.MEDIUM).format(entry.getEventDate()));
+		
+		serviceType.setText(entry.getType().getType());
+		
+		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
+		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
+		totalCostUnit.setText(preferences.getCurrency().getUnit());
+		
+		entryType.setText(entry.getExpenseType().getExpenseType());
+		comment.setText(entry.getComment());
+		
+		return rowView;
+	}
+	
+	private View getViewInsuranceEntry(InsuranceEntry entry, View convertView, ViewGroup parent) {
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		// TODO: listen to the warning below for smoother scrolling
+		View rowView = inflater.inflate(R.layout.list_stats_insurance, parent, false);
+
+		TextView dynamicId = (TextView) rowView.findViewById(R.id.list_stats_insurance_dynamic_id);
+		TextView mileage = (TextView) rowView.findViewById(R.id.list_stats_insurance_mileage);
+		TextView date = (TextView) rowView.findViewById(R.id.list_stats_insurance_date);
+		TextView insuranceType = (TextView) rowView.findViewById(R.id.list_stats_insurance_type);
+		TextView totalCost = (TextView) rowView.findViewById(R.id.list_stats_insurance_cost);
+		TextView totalCostUnit = (TextView) rowView.findViewById(R.id.list_stats_insurance_cost_unit);
+		TextView entryType = (TextView) rowView.findViewById(R.id.list_stats_insurance_entry_type);
+		TextView comment = (TextView) rowView.findViewById(R.id.list_stats_insurance_comment);
+
+		dynamicId.setText(Integer.toString(entry.getDynamicId()));
+
+		mileage.setText(TextFormatter.format(entry.getMileage(), "#######.#") + " "
+				+ MainActivity.garage.getActiveCar().getDistanceUnit().getUnit());
+
+		date.setText(DateFormat.getDateInstance(DateFormat.MEDIUM).format(entry.getEventDate()));
+		
+		insuranceType.setText(entry.getType().getType());
+		
+		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
+		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
+		totalCostUnit.setText(preferences.getCurrency().getUnit());
+		
+		entryType.setText(entry.getExpenseType().getExpenseType());
+		comment.setText(entry.getComment());
+		
+		return rowView;
+	}
+	
+	private View getViewTollEntry(TollEntry entry, View convertView, ViewGroup parent) {
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		// TODO: listen to the warning below for smoother scrolling
+		View rowView = inflater.inflate(R.layout.list_stats_toll, parent, false);
+
+		TextView dynamicId = (TextView) rowView.findViewById(R.id.list_stats_toll_dynamic_id);
+		TextView mileage = (TextView) rowView.findViewById(R.id.list_stats_toll_mileage);
+		TextView date = (TextView) rowView.findViewById(R.id.list_stats_toll_date);
+		TextView tollType = (TextView) rowView.findViewById(R.id.list_stats_toll_type);
+		TextView totalCost = (TextView) rowView.findViewById(R.id.list_stats_toll_cost);
+		TextView totalCostUnit = (TextView) rowView.findViewById(R.id.list_stats_toll_cost_unit);
+		TextView entryType = (TextView) rowView.findViewById(R.id.list_stats_toll_entry_type);
+		TextView comment = (TextView) rowView.findViewById(R.id.list_stats_toll_comment);
+
+		dynamicId.setText(Integer.toString(entry.getDynamicId()));
+
+		mileage.setText(TextFormatter.format(entry.getMileage(), "#######.#") + " "
+				+ MainActivity.garage.getActiveCar().getDistanceUnit().getUnit());
+
+		date.setText(DateFormat.getDateInstance(DateFormat.MEDIUM).format(entry.getEventDate()));
+		
+		tollType.setText(entry.getType().getType());
+		
+		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
+		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
+		totalCostUnit.setText(preferences.getCurrency().getUnit());
+		
+		entryType.setText(entry.getExpenseType().getExpenseType());
+		comment.setText(entry.getComment());
+		
+		return rowView;
+	}
+	
+	private View getViewBurreaucraticEntry(BurreaucraticEntry entry, View convertView, ViewGroup parent) {
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		// TODO: listen to the warning below for smoother scrolling
+		View rowView = inflater.inflate(R.layout.list_stats_burreaucratic, parent, false);
+
+		TextView dynamicId = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_dynamic_id);
+		TextView mileage = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_mileage);
+		TextView date = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_date);
+		TextView totalCost = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_cost);
+		TextView totalCostUnit = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_cost_unit);
+		TextView entryType = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_entry_type);
+		TextView comment = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_comment);
+
+		dynamicId.setText(Integer.toString(entry.getDynamicId()));
+
+		mileage.setText(TextFormatter.format(entry.getMileage(), "#######.#") + " "
+				+ MainActivity.garage.getActiveCar().getDistanceUnit().getUnit());
+
+		date.setText(DateFormat.getDateInstance(DateFormat.MEDIUM).format(entry.getEventDate()));
+		
+		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
+		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
+		totalCostUnit.setText(preferences.getCurrency().getUnit());
+		
+		entryType.setText(entry.getExpenseType().getExpenseType());
+		comment.setText(entry.getComment());
+		
 		return rowView;
 	}
 

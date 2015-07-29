@@ -38,7 +38,7 @@ public class ServiceCalculator {
 			countPerServiceType.put(type, countPerServiceType.get(type).intValue() + 1);
 
 			totalCost += s.getCostSI();
-			consumption.setTotalCost(totalCost);
+			consumption.setTotalServiceCost(totalCost);
 			
 			if (totalCostPerServiceType.get(type) == null) {
 				totalCostPerServiceType.put(type, 0.0);
@@ -50,7 +50,7 @@ public class ServiceCalculator {
 			
 			if (mileageDriven > 0.0) {
 				averageCost = totalCost / mileageDriven * 100;
-				consumption.setAverageCost(averageCost);
+				consumption.setAverageServiceCost(averageCost);
 
 				double typeAverageCost = typeTotalCost / mileageDriven * 100;
 				averageCostPerServiceType.put(type, typeAverageCost);

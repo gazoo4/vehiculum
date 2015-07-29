@@ -40,7 +40,7 @@ public class MaintenanceCalculator {
 			countPerMaintenanceType.put(type, countPerMaintenanceType.get(type).intValue() + 1);
 
 			totalCost += m.getCostSI();
-			consumption.setTotalCost(totalCost);
+			consumption.setTotalMaintenanceCost(totalCost);
 
 			totalLaborCost += m.getLaborCostSI();
 			consumption.setTotalLaborCost(totalLaborCost);
@@ -58,7 +58,7 @@ public class MaintenanceCalculator {
 
 			if (mileageDriven > 0.0) {
 				averageCost = totalCost / mileageDriven * 100;
-				consumption.setAverageCost(averageCost);
+				consumption.setAverageMaintenanceCost(averageCost);
 
 				averageLaborCost = totalLaborCost / mileageDriven * 100;
 				consumption.setAverageLaborCost(averageLaborCost);

@@ -11,7 +11,7 @@ public class ServiceEntry extends Entry {
 	
 	public ServiceEntry() {
 		super();
-		this.setExpenseType(Entry.ExpenseType.MAINTENANCE);
+		this.setExpenseType(Entry.ExpenseType.SERVICE);
 	}
 	
 	public enum Type {

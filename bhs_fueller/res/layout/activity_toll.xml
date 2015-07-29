@@ -71,8 +71,8 @@
         
         <Spinner
                 android:id="@+id/activity_toll_type"
-                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
                 android:layout_below="@id/activity_toll_mileage_layout"
                 android:entries="@array/activity_toll_type"
                 android:prompt="@string/activity_toll_type_hint" />

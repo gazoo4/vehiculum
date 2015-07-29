@@ -23,11 +23,11 @@ public class BurreaucraticCalculator {
 			mileageDriven = b.getMileageSI() - MainActivity.garage.getActiveCar().getInitialMileageSI();
 
 			totalCost += b.getCostSI();
-			consumption.setTotalCost(totalCost);
+			consumption.setTotalBurreaucraticCost(totalCost);
 			
 			if (mileageDriven > 0.0) {
 				averageCost = totalCost / mileageDriven * 100;
-				consumption.setAverageCost(averageCost);
+				consumption.setAverageBurreaucraticCost(averageCost);
 			}
 		}
 	}

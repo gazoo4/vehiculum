@@ -35,7 +35,7 @@ public class TollCalculator {
 			countPerTollType.put(type, countPerTollType.get(type).intValue() + 1);
 
 			totalCost += t.getCostSI();
-			consumption.setTotalCost(totalCost);
+			consumption.setTotalTollCost(totalCost);
 			
 			if (totalCostPerTollType.get(type) == null) {
 				totalCostPerTollType.put(type, 0.0);
@@ -47,7 +47,7 @@ public class TollCalculator {
 			
 			if (mileageDriven > 0.0) {
 				averageCost = totalCost / mileageDriven * 100;
-				consumption.setAverageCost(averageCost);
+				consumption.setAverageTollCost(averageCost);
 
 				double typeAverageCost = typeTotalCost / mileageDriven * 100;
 				averageCostPerTollType.put(type, typeAverageCost);
