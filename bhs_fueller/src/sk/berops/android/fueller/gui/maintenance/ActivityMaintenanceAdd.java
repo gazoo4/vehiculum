@@ -176,9 +176,9 @@ public class ActivityMaintenanceAdd extends ActivityAddEventGeneric implements
 			}
 			break;
 		case EDIT_PART:
-			maintenanceEntry.getParts().remove(selectedPartPosition);
 			if (resultCode == RESULT_OK) {
 				ReplacementPart result = (ReplacementPart) data.getExtras().getSerializable("part");
+				maintenanceEntry.getParts().remove(selectedPartPosition);
 				maintenanceEntry.getParts().add(selectedPartPosition, result);
 				reloadCost();
 			}
