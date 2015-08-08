@@ -58,6 +58,17 @@ public class History implements Serializable {
 		return entriesOfType;
 	}
 	
+	public LinkedList<Entry> getEntriesFiltered(ExpenseType filter) {
+		LinkedList<Entry> entries = this.getEntries();
+		LinkedList<Entry> entriesFiltered = new LinkedList<Entry>();
+		for (Entry entry : entries) {
+			if (entry.getExpenseType() == filter) {
+				entriesFiltered.add(entry);
+			}
+		}
+		return entriesFiltered;
+	}
+	
 	public LinkedList<FuellingEntry> getFuellingEntries() {
 		return getEntriesOfType(new FuellingEntry());
 	}
@@ -92,6 +103,10 @@ public class History implements Serializable {
 	
 	public LinkedList<BurreaucraticEntry> getBurreaucraticEntries() {
 		return getEntriesOfType(new BurreaucraticEntry());
+	}
+	
+	public LinkedList<OtherEntry> getOtherEntries() {
+		return getEntriesOfType(new OtherEntry());
 	}
 	
 	public LinkedList<Entry> getEntries() {

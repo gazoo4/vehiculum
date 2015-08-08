@@ -24,7 +24,7 @@ public class ActivityReportsNavigate extends Activity {
 	public void onClick(View view) {
 		switch(view.getId()) {
 		case R.id.activity_stats_show_button_fuelling:
-			startActivity(new Intent(this, ActivityStatsEntries.class));
+			startActivity(new Intent(this, ActivityEntriesShow.class));
 			break;
 		case R.id.activity_stats_show_button_charts:
 			startActivity(new Intent(this, ActivityCharts.class));

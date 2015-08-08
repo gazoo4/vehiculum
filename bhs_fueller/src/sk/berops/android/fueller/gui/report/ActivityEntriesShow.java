@@ -23,22 +23,41 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-public class ActivityStatsEntries extends Activity implements FragmentEntryEditDelete.EntryEditDeleteDialogListener {
+public class ActivityEntriesShow extends Activity implements FragmentEntryEditDelete.EntryEditDeleteDialogListener {
 	private int selectedEntryPosition;
 	private LinkedList<Entry> entries;
 	EntriesReportAdapter adapter;
 	ListView listView;
+	Spinner spinnerEntriesType;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_stats_fuelling);
+		setContentView(R.layout.activity_entries_show);
 		entries = MainActivity.garage.getActiveCar().getHistory().getEntries();
-		
-		listView = (ListView) findViewById(R.id.activity_stats_fuelling_listview);
+	}
+	
+	protected void attachGuiObjects() {
+		listView = (ListView) findViewById(R.id.activity_entries_list_listview);
+		spinnerEntriesType = (Spinner) findViewById(R.id.activity_entries_list_type);
+	}
+	
+	protected void styleGuiObjects() {
+		ArrayAdapter<CharSequence> adapterEntriesType = ArrayAdapter
+				.createFromResource(this, R.array.activity_entries_list_types,
+						R.layout.spinner_white);
+		adapterEntriesType
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinnerEntriesType.setAdapter(adapterEntriesType);
+	}
+	
+	protected void initializeGuiObjects() {
 		adapter = new EntriesReportAdapter(this, entries);
 		listView.setAdapter(adapter);
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -53,6 +72,28 @@ public class ActivityStatsEntries extends Activity implements FragmentEntryEditD
 				DialogFragment dialog = new FragmentEntryEditDelete();
 				dialog.show(getFragmentManager(), "FragmentEntryEditDelete");
 				return true;
+			}
+		});
+		
+		spinnerEntriesType.setSelection(0);
+		spinnerEntriesType.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				if (position == 0) {
+					entries = MainActivity.garage.getActiveCar().getHistory().getEntries(); 
+				} else {
+					position--;
+					Entry.ExpenseType type = Entry.ExpenseType.getExpenseType(position);
+					entries = MainActivity.garage.getActiveCar().getHistory().getEntriesFiltered(type);
+				} 
+				adapter.notifyDataSetChanged();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
 			}
 		});
 	}

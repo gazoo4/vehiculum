@@ -16,6 +16,7 @@
     <string name="activity_car_add_nickname_hint"					>Nickname (optional)</string>
     <string name="activity_car_add_volume_units_hint"				>Volume units</string>
     <string name="activity_car_edit_label"							>Edit your car</string>
+    <string name="activity_entries_list_type_hint"					>Filter entries: </string>
     <string name="activity_entry_add_button_burreaucratic"			>Burreaucracy</string>
     <string name="activity_entry_add_button_insurance"				>Insurance payment</string>
     <string name="activity_entry_add_button_maintenance"			>Maintenance</string>
@@ -137,6 +138,18 @@
         <item>Liter</item>
         <item>US Gallon</item>
         <item>Imperial Gallon</item>
+    </string-array>
+    
+    <string-array name="activity_entries_list_types">
+        <item>ALL</item>
+        <item>Fuelling</item>
+        <item>Maintenance</item>
+        <item>Service</item>
+        <item>Tyres</item>
+        <item>Toll</item>
+        <item>Insurance</item>
+        <item>Burreaucratic</item>
+        <item>Other</item>
     </string-array>
     
     <string-array name="activity_generic_currency">

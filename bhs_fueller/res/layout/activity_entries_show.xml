@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_blue">
+    
+    <LinearLayout
+            android:id="@+id/activity_entries_list_type_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
+	        <TextView
+	            android:id="@+id/activity_entries_list_type_hint"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight=".30"
+	            android:hint="@string/activity_entries_list_type_hint"
+	            style="@style/plain_text" />
+	        
+	        <Spinner
+	            android:id="@+id/activity_entries_list_type"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight=".70"/>
+        </LinearLayout>
+
+    <ListView
+        android:id="@+id/activity_entries_list_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_gradient" />
+
+</RelativeLayout>

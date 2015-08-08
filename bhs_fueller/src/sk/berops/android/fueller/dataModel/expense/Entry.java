@@ -121,7 +121,9 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 		TYRES(3, "tyres"),
 		TOLL(4, "toll"), //ferry fee, highway vignette...
 		INSURANCE(5, "insurance"), //basic insurance or extended insurance
-		BURREAUCRATIC(6, "burreaucratic"); //technical compliancy check fee (TUEV), import tax, eco class tax,...
+		BURREAUCRATIC(6, "burreaucratic"), //technical compliancy check fee (TUEV), import tax, eco class tax,...
+		OTHER(Integer.MAX_VALUE, "other");
+		
 		private int id;
 		private String expenseType;	
 		ExpenseType(int id, String expenseType) {
