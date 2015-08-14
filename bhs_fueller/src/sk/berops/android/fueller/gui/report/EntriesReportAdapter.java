@@ -48,7 +48,7 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (entries.size() <= 0) {
-			return null;
+			return convertView;
 		}
 		
 		Entry entry = entries.get(entries.size() - 1 - position);
@@ -73,7 +73,7 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 			break;
 		}
 		
-		return null;
+		return convertView;
 	}
 
 	private View getViewFuellingEntry(FuellingEntry entry, View convertView, ViewGroup parent) {
