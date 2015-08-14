@@ -82,7 +82,6 @@ public class History implements Serializable {
 			}
 		}
 		return entriesFiltered;
-		
 	}
 	
 	public LinkedList<MaintenanceEntry> getMaintenanceEntries() {
@@ -103,6 +102,10 @@ public class History implements Serializable {
 	
 	public LinkedList<BurreaucraticEntry> getBurreaucraticEntries() {
 		return getEntriesOfType(new BurreaucraticEntry());
+	}
+	
+	public LinkedList<TyreChangeEntry> getTyreChangeEntries() {
+		return getEntriesOfType(new TyreChangeEntry());
 	}
 	
 	public LinkedList<OtherEntry> getOtherEntries() {

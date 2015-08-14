@@ -7,6 +7,7 @@ import java.util.LinkedList;
 
 import sk.berops.android.fueller.configuration.Preferences;
 import sk.berops.android.fueller.dataModel.Car;
+import sk.berops.android.fueller.dataModel.Car.CarType;
 import sk.berops.android.fueller.dataModel.Garage;
 import sk.berops.android.fueller.dataModel.UnitConstants;
 import sk.berops.android.fueller.dataModel.UnitConstants.ConsumptionUnit;

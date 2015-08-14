@@ -16,7 +16,7 @@
     <string name="activity_car_add_nickname_hint"					>Nickname (optional)</string>
     <string name="activity_car_add_volume_units_hint"				>Volume units</string>
     <string name="activity_car_edit_label"							>Edit your car</string>
-    <string name="activity_entries_list_type_hint"					>Filter entries: </string>
+    <string name="activity_entries_list_type_hint"					>Filter: </string>
     <string name="activity_entry_add_button_burreaucratic"			>Burreaucracy</string>
     <string name="activity_entry_add_button_insurance"				>Insurance payment</string>
     <string name="activity_entry_add_button_maintenance"			>Maintenance</string>

@@ -1,42 +1,36 @@
 package sk.berops.android.fueller.gui.maintenance;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import sk.berops.android.fueller.R;
-import sk.berops.android.fueller.dataModel.Axle;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
-import sk.berops.android.fueller.gui.ActivityEntryAdd;
+import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
 import sk.berops.android.fueller.gui.MainActivity;
-import sk.berops.android.fueller.gui.common.GuiUtils;
-import sk.berops.android.fueller.gui.garage.ActivityGarageManagement;
-import sk.berops.android.fueller.gui.report.ActivityReportsNavigate;
-import android.app.ActionBar.LayoutParams;
+import sk.berops.android.fueller.gui.common.TyreDrawer;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class ActivityTyreChangeScheme extends Activity {
+public class ActivityTyreChangeScheme extends Activity implements TouchCallbackInterface {
 	
 	private Car car;
 	private TyreChangeEntry tyreChangeEntry;
 	private LinkedList<Tyre> tyreList;
 	
-	private LinearLayout tyreChangeScheme;
+	private RelativeLayout tyreSchemeLayout;
 	private ListView listView;
+	private TyreConfigurationScheme tyreScheme;
 	TyrePoolAdapter adapter;
 	ViewGroup viewGroup;
 	
@@ -79,20 +73,26 @@ public class ActivityTyreChangeScheme extends Activity {
 	}
 	
 	private void buildDynamicLayout() {
-		View graphics = new ViewTyreChangeGraphics(this, car);
+		TyreConfigurationScheme tyreScheme = car.getCurrentTyreScheme().clone();
+		View graphics = new ViewTyreChangeGraphics(this, car, tyreScheme);
+		graphics.setOnTouchListener(new TyreTouchListener(this)); 
+		graphics.setPadding(3, 3, 3, 3);
 		
-		tyreChangeScheme = (LinearLayout) findViewById(R.id.activity_tyre_change_scheme_graphical_layout);
-		tyreChangeScheme.removeAllViews();
-		tyreChangeScheme.addView(graphics);
+		tyreSchemeLayout = (RelativeLayout) findViewById(R.id.activity_tyre_change_scheme_graphical_layout);
+		tyreSchemeLayout.removeAllViews();
+		tyreSchemeLayout.addView(graphics);
 		
 		listView = (ListView) findViewById(R.id.activity_tyre_change_scheme_tyre_pool_list_view);
-		for (int i = 0; i < 10; i++) {
-			Tyre tyre = new Tyre();
-			tyre.setThreadLevel((int) (9 * Math.random()));
-			tyre.setSeason(Tyre.Season.getSeason((int) (4 * Math.random())));
-			MainActivity.garage.addTyre(tyre);
+		// TODO: this is here just for the testing purposes
+		if (MainActivity.garage.getAvailableTyres().size() < 10) {
+			for (int i = 0; i < 10; i++) {
+				Tyre tyre = new Tyre();
+				tyre.setThreadLevel(9 * Math.random());
+				tyre.setSeason(Tyre.Season.getSeason((int) (4 * Math.random())));
+				MainActivity.garage.addNewTyre(tyre);
+			}
 		}
-		tyreList = MainActivity.garage.getTyres();
+		tyreList = MainActivity.garage.getAvailableTyres();
 		adapter = new TyrePoolAdapter(this, tyreList);
 		listView.setAdapter(adapter);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -101,9 +101,29 @@ public class ActivityTyreChangeScheme extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				reloadTyreStats(tyreList.get(position));
+				Tyre tyre = tyreList.get(position);
+				tyreSelected(tyre);
 			}
 		});
+	}
+	
+	private void tyreSelected(Tyre tyre) {
+		TyreDrawer td = TyreDrawer.getInstance();
+		if (td.getSelectedTyre() == tyre) {
+			td.setSelectedTyre(null);
+			td.setFlashingMode(false);
+			td.setFlashingPhase(-1.0);
+			listView.clearChoices();
+			listView.setSelector(new ColorDrawable(0x0));
+			adapter.notifyDataSetChanged();
+		} else {
+			td.setSelectedTyre(tyre);
+			td.setFlashingMode(true);
+			if (tyreList.contains(tyre)) {
+				listView.setSelector(new ColorDrawable(0x80ffffff));
+			}
+		}
+		reloadTyreStats(td.getSelectedTyre());
 	}
 	
 	private void reloadTyreStats(Tyre tyre) {
@@ -169,6 +189,12 @@ public class ActivityTyreChangeScheme extends Activity {
 			value.setVisibility(View.VISIBLE);
 		}
 		viewGroup.invalidate();
+	}
+	
+	@Override
+	public void touchCallback(float x, float y) {
+		Log.d("DEBUG", "Touched X: "+ x);
+		Log.d("DEBUG", "Touched Y: "+ y);
 	}
 	
 	public void onClick(View view) {

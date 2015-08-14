@@ -8,18 +8,23 @@ import org.simpleframework.xml.ElementList;
 import sk.berops.android.fueller.dataModel.Axle;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
+import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
 
 public class TyreChangeEntry extends Entry {
 	
 	private Car car;
-	@ElementList(inline=true, required=false)
-	private LinkedList<Axle> axles;
+	
 	@Element(name="laborCost", required=false)
 	private double laborCost;
 	@Element(name="extraMaterialCost", required=false)
 	private double extraMaterialCost;
 	@Element(name="tyresCost", required=false)
 	private double tyresCost;
+	/**
+	 * Car's initial tyreScheme. Not used yet. So far we assume that the initiall tyreScheme is always null (meaning no tyres installed). 
+	 */
+	@Element(name="tyreScheme", required=false)
+	private TyreConfigurationScheme tyreScheme;
 	
 	public TyreChangeEntry() {
 		super();
@@ -29,14 +34,6 @@ public class TyreChangeEntry extends Entry {
 	public void initAfterLoad(Car car) {
 		super.initAfterLoad(car);
 		this.car = car;
-	}
-
-	public LinkedList<Axle> getAxles() {
-		return axles;
-	}
-
-	public void setAxles(LinkedList<Axle> axles) {
-		this.axles = axles;
 	}
 
 	public Car getCar() {
@@ -69,5 +66,13 @@ public class TyreChangeEntry extends Entry {
 
 	public void setTyresCost(double tyresCost) {
 		this.tyresCost = tyresCost;
+	}
+	
+	public TyreConfigurationScheme getTyreScheme() {
+		return tyreScheme;
+	}
+	
+	public void setTyreScheme(TyreConfigurationScheme tyreScheme) {
+		this.tyreScheme = tyreScheme;
 	}
 }

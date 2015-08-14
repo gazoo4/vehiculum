@@ -9,26 +9,24 @@ import android.view.View;
 public class ViewTyreGraphics extends View {
 	private Tyre tyre;
 	private TyreDrawer tyreDrawer;
+	private TyreGUIContainer tyreGUIContainer;
+	private Context context;
 	
 	public ViewTyreGraphics(Context context, Tyre tyre) {
 		super(context);
-		init(context);
+		this.context = context;
 		this.tyre = tyre;
-	}
-
-	private void init(Context context) {
-		tyreDrawer = TyreDrawer.getInstance(context);
+		tyreDrawer = TyreDrawer.getInstance();
+		tyreGUIContainer = new TyreGUIContainer(context, tyre, 0, 0, 0, 0);
 	}
 	
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		drawTyre(canvas);
-	}
-	
-	private void drawTyre(Canvas canvas) {
 		int x = getWidth();
 		int y = getHeight();
-		tyreDrawer.drawTyre(canvas, tyre, 0, 0, (int) (y * 0.5), y);
+		tyreGUIContainer.setWidth((int) (y * 0.5));
+		tyreGUIContainer.setHeight(y);
+		tyreDrawer.drawTyre(canvas, tyreGUIContainer);
 	}
 }

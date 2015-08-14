@@ -7,47 +7,63 @@ import sk.berops.android.fueller.dataModel.Axle;
 import sk.berops.android.fueller.dataModel.Axle.AxleType;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
+import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
 import sk.berops.android.fueller.gui.common.TyreDrawer;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.View;
 
-public class ViewTyreChangeGraphics extends View {
+public class ViewTyreChangeGraphics extends View implements Runnable {
 
 	private static final double tyreWidth = 0.2; //percentages of the canvas block
 	private static final double tyreHeight = 0.5; //percentages of the canvas block
-	private static final int tyrePadding = 5; //pixels padding between tandem tires
+	private static final int tyrePadding = 0; //pixels padding between tandem tires
+	
 	private Car car;
 	private Paint backgroundPaint;
 	private Paint chasisPaint;
 	private TyreDrawer tyreDrawer;
+	private Context context;
+	private TyreConfigurationScheme tyreScheme;
 	
-	public ViewTyreChangeGraphics(Context context, Car car) {
+	public ViewTyreChangeGraphics(Context context, Car car, TyreConfigurationScheme tyreScheme) {
 		super(context);
-		init(context);
 		this.car = car;
+		this.context = context;
+		this.tyreScheme = tyreScheme;
+		init();
 	}
 	
-	private void init(Context context) {
+	private void init() {
 		backgroundPaint = new Paint();
 		backgroundPaint.setStyle(Paint.Style.FILL);
-		backgroundPaint.setColor(Color.GRAY);
+		backgroundPaint.setColor(Color.TRANSPARENT);
 		
 		chasisPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		chasisPaint.setStyle(Paint.Style.FILL);
 		
-		tyreDrawer = TyreDrawer.getInstance(context);	
+		tyreDrawer = TyreDrawer.getInstance();	
 	}
 	
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		
 		drawBackground(canvas);
 		drawChasis(canvas);
 		//TODO drawEngine(canvas)
+		postDelayed(this, 10);
+	}
+	
+	@Override
+	public void run() {
+		if (tyreDrawer.isFlashingMode()) {
+			tyreDrawer.progressFlashingPhase();
+		}
+		//updateState();
+		invalidate();
 	}
 	
 	private void drawBackground(Canvas canvas) {
@@ -58,7 +74,7 @@ public class ViewTyreChangeGraphics extends View {
 		int x = getWidth();
 		int y = getHeight();
 		
-		LinkedList<Axle> axles = car.getAxles();
+		LinkedList<Axle> axles = getTyreScheme().getAxles();
 		int count = axles.size();
 		int i = 0; //as axlePosition 0: last, 1: first, 2+: middle
 		int yOffset, yRelative;
@@ -72,7 +88,7 @@ public class ViewTyreChangeGraphics extends View {
 	}
 	
 	private void drawAxle(Canvas canvas, Axle axle, int width, int yOffset, int height, int axlePosition) {
-		ArrayList<Tyre> tyres = axle.getTyres();
+		LinkedList<Tyre> tyres = axle.getTyres();
 		AxleType type = axle.getAxleType();
 		
 		int x = 0;
@@ -91,7 +107,8 @@ public class ViewTyreChangeGraphics extends View {
 		
 		if (type == AxleType.SINGLE) {
 			x = (int) (1.0 * width/2 - 1.0 * width/2 * tyreWidth);
-			tyreDrawer.drawTyre(canvas, tyres.get(0), x, y + yOffset, (int) (width * tyreWidth), (int) (height * tyreHeight));
+			TyreGUIContainer tc = new TyreGUIContainer(context, tyres.get(0), x, y + yOffset, (int) (width * tyreWidth), (int) (height * tyreHeight));
+			tyreDrawer.drawTyre(canvas, tc);
 		} else {
 			for (int i = -tyres.size()/2; i < tyres.size()/2; i++) {
 				x = (int) (1.0 * i * width * tyreWidth);
@@ -103,8 +120,18 @@ public class ViewTyreChangeGraphics extends View {
 				if (i < 0) {
 					x += width;
 				}
-				tyreDrawer.drawTyre(canvas, tyres.get((i + tyres.size()) % tyres.size()), x, y + yOffset, (int) (width * tyreWidth), (int) (height * tyreHeight));
+				Tyre tyre = tyres.get((i + tyres.size()) % tyres.size());
+				TyreGUIContainer tc = new TyreGUIContainer(context, tyre, x, y + yOffset, (int) (width * tyreWidth), (int) (height * tyreHeight));
+				tyreDrawer.drawTyre(canvas, tc);
 			}
 		}
+	}
+	
+	public TyreConfigurationScheme getTyreScheme() {
+		return tyreScheme;
+	}
+	
+	public void setTyreScheme(TyreConfigurationScheme tyreScheme) {
+		this.tyreScheme = tyreScheme;
 	}
 }

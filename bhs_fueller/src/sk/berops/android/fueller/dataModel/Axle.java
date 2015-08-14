@@ -3,12 +3,14 @@ package sk.berops.android.fueller.dataModel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
+import sk.berops.android.fueller.gui.MainActivity;
 
 public class Axle {
 	
@@ -16,8 +18,13 @@ public class Axle {
 	private AxleType axleType;
 	@Element(name="drivable")
 	private boolean drivable;
+	/**
+	 * TyreIDs belonging to the tyres from left to right (from the birds perspective view)
+	 */
 	@ElementList(inline=true, required=false)
-	private ArrayList<Tyre> tyres; //tyres from left to right (from the birds perspective view)
+	private LinkedList<Integer> tyreIDs;
+
+	private Car car;
 	
 	public Axle() {
 		this(AxleType.STANDARD);
@@ -27,6 +34,15 @@ public class Axle {
 		super();
 		setAxleType(type);
 		createTyres();
+	}
+	
+	public void initAfterLoad(Car car) {
+		Tyre tyre;
+		this.car = car;
+		for (Integer i : tyreIDs) {
+			tyre = MainActivity.garage.getAllTyres().get(i);
+			tyre.initAfterLoad(car);
+		}
 	}
 	
 	public enum AxleType{
@@ -74,20 +90,20 @@ public class Axle {
 	}
 	
 	private void createTyres() {
-		tyres = new ArrayList<Tyre>();
+		tyreIDs = new LinkedList<Integer>();
 		switch (getAxleType()) {
 		case SINGLE:
-			tyres.add(new Tyre());
+			tyreIDs.add(-1);
 			break;
 		case STANDARD:
-			tyres.add(new Tyre());
-			tyres.add(new Tyre());
+			tyreIDs.add(-1);
+			tyreIDs.add(-1);
 			break;
 		case TANDEM:
-			tyres.add(new Tyre());
-			tyres.add(new Tyre());
-			tyres.add(new Tyre());
-			tyres.add(new Tyre());
+			tyreIDs.add(-1);
+			tyreIDs.add(-1);
+			tyreIDs.add(-1);
+			tyreIDs.add(-1);
 			break;
 		default:
 			break;
@@ -109,11 +125,15 @@ public class Axle {
 		this.drivable = drivable;
 	}
 
-	public ArrayList<Tyre> getTyres() {
-		return tyres;
+	public LinkedList<Integer> getTyreIDs() {
+		return tyreIDs;
 	}
 
-	public void setTyres(ArrayList<Tyre> tyres) {
-		this.tyres = tyres;
+	public void setTyreIDs(LinkedList<Integer> tyreIDs) {
+		this.tyreIDs = tyreIDs;
+	}
+	
+	public LinkedList<Tyre> getTyres() {
+		return MainActivity.garage.getTyresByIDs(getTyreIDs());
 	}
 }

@@ -1,0 +1,3535 @@
+<garage>
+   <activeCar>0</activeCar>
+   <car>
+      <creationDate>2013-09-29 16:49:15.7 GMT+02:00</creationDate>
+      <modifiedDate>2014-06-29 20:01:08.4 GMT+02:00</modifiedDate>
+      <brand>Mercedes-Benz</brand>
+      <consumptionUnit>LITRE_PER_100KM</consumptionUnit>
+      <currentMileage>555555.0</currentMileage>
+      <distanceUnit>KILOMETER</distanceUnit>
+      <history>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:24:24.8 GMT+02:00</creationDate>
+            <cost>49.26</cost>
+            <costSI>49.26</costSI>
+            <currency>EURO</currency>
+            <eventDate>2012-11-25 12:24:21.2 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>299653.0</mileage>
+            <fuelPrice>0.7700484602157261</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>63.97</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 19:15:55.4 GMT+02:00</creationDate>
+            <cost>32.48</cost>
+            <costSI>32.48</costSI>
+            <currency>EURO</currency>
+            <eventDate>2012-11-25 19:15:38.2 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>299963.0</mileage>
+            <fuelPrice>0.82899438489025</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>39.18</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 19:15:14.5 GMT+02:00</creationDate>
+            <cost>55.22</cost>
+            <costSI>55.22</costSI>
+            <currency>EURO</currency>
+            <eventDate>2012-11-27 19:15:02.5 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>300502.0</mileage>
+            <fuelPrice>0.8389547250075965</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>65.82</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 19:13:13.9 GMT+02:00</creationDate>
+            <cost>35.0</cost>
+            <costSI>35.0</costSI>
+            <currency>EURO</currency>
+            <eventDate>2012-11-30 19:12:36.1 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>300849.0</mileage>
+            <fuelPrice>0.868917576961271</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>40.28</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 19:11:38.4 GMT+02:00</creationDate>
+            <cost>39.9</cost>
+            <costSI>39.9</costSI>
+            <currency>EURO</currency>
+            <eventDate>2012-11-30 19:10:44.5 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>301288.0</mileage>
+            <fuelPrice>0.769972983404091</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>51.82</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 19:09:50.5 GMT+02:00</creationDate>
+            <cost>30.67</cost>
+            <costSI>30.67</costSI>
+            <currency>EURO</currency>
+            <eventDate>2012-12-02 19:09:21.6 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>301582.0</mileage>
+            <fuelPrice>0.7800101729399797</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>39.32</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 19:08:35.5 GMT+02:00</creationDate>
+            <cost>53.73</cost>
+            <costSI>53.73</costSI>
+            <currency>EURO</currency>
+            <eventDate>2012-12-02 19:08:10.1 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>302016.0</mileage>
+            <fuelPrice>0.9390073400908773</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>57.22</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 19:07:27.7 GMT+02:00</creationDate>
+            <cost>51.65</cost>
+            <costSI>51.65</costSI>
+            <currency>EURO</currency>
+            <eventDate>2012-12-06 19:07:03.6 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>302529.0</mileage>
+            <fuelPrice>0.8189313461233549</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>63.07</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 19:06:15.5 GMT+02:00</creationDate>
+            <cost>53.96</cost>
+            <costSI>53.96</costSI>
+            <currency>EURO</currency>
+            <eventDate>2012-12-10 19:05:24.9 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>303077.0</mileage>
+            <fuelPrice>0.8089955022488755</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.7</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 19:04:17.6 GMT+02:00</creationDate>
+            <cost>56.71</cost>
+            <costSI>56.71</costSI>
+            <currency>EURO</currency>
+            <eventDate>2012-12-14 19:03:57.3 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>303618.0</mileage>
+            <fuelPrice>0.8489520958083833</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.8</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 19:02:30.5 GMT+02:00</creationDate>
+            <cost>55.04</cost>
+            <costSI>55.04</costSI>
+            <currency>EURO</currency>
+            <eventDate>2012-12-20 19:02:07.5 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>304169.0</mileage>
+            <fuelPrice>0.8290405181503239</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.39</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 13:12:17.1 GMT+02:00</creationDate>
+            <cost>47.68</cost>
+            <costSI>47.68</costSI>
+            <currency>EURO</currency>
+            <eventDate>2012-12-21 13:12:02.9 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>304655.0</mileage>
+            <fuelPrice>0.7899271040424122</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>60.36</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 18:37:57.5 GMT+02:00</creationDate>
+            <cost>44.56</cost>
+            <costSI>44.56</costSI>
+            <currency>EURO</currency>
+            <eventDate>2012-12-29 18:37:28.1 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>305149.0</mileage>
+            <fuelPrice>0.7300131061598952</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>61.04</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 19:01:04.4 GMT+02:00</creationDate>
+            <cost>43.52</cost>
+            <costSI>43.52</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-01-01 19:00:34.5 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>305618.0</mileage>
+            <fuelPrice>0.7400102023465397</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>58.81</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 18:59:37.8 GMT+02:00</creationDate>
+            <cost>33.52</cost>
+            <costSI>33.52</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-01-06 18:58:48.4 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>305970.0</mileage>
+            <fuelPrice>0.7798976268031644</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>42.98</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 18:57:43.8 GMT+02:00</creationDate>
+            <cost>124.08</cost>
+            <costSI>124.08</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-01-06 18:57:10.4 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>306066.0</mileage>
+            <fuelPrice>1.4090392913922325</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>88.06</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 18:55:44.7 GMT+02:00</creationDate>
+            <cost>20.29</cost>
+            <costSI>20.29</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-01-06 18:54:54.2 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>306154.0</mileage>
+            <fuelPrice>0.8288398692810457</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>24.48</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 18:39:05.8 GMT+02:00</creationDate>
+            <cost>51.98</cost>
+            <costSI>51.98</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-01-08 18:38:50.1 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>306680.0</mileage>
+            <fuelPrice>0.7789599880113891</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.73</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:26:41.5 GMT+02:00</creationDate>
+            <cost>50.88</cost>
+            <costSI>50.88</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-01-14 12:26:27.4 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>307271.0</mileage>
+            <fuelPrice>0.7789344764237601</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>65.32</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 13:13:05.1 GMT+02:00</creationDate>
+            <cost>49.91</cost>
+            <costSI>49.91</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-01-18 13:12:53.3 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>307781.0</mileage>
+            <fuelPrice>0.8289320710845374</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>60.21</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 18:34:03.3 GMT+02:00</creationDate>
+            <cost>48.04</cost>
+            <costSI>48.04</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-06-30 18:33:32.4 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>308259.0</mileage>
+            <fuelPrice>0.7699951915371053</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>62.39</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 13:13:46.5 GMT+02:00</creationDate>
+            <cost>54.76</cost>
+            <costSI>54.76</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-01-20 13:13:29.3 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>308960.0</mileage>
+            <fuelPrice>0.8289433848016954</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.06</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:28:01.9 GMT+02:00</creationDate>
+            <cost>42.81</cost>
+            <costSI>42.81</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-01-24 12:27:34.8 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>309482.0</mileage>
+            <fuelPrice>0.7789301310043668</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>54.96</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:25:30.5 GMT+02:00</creationDate>
+            <cost>35.93</cost>
+            <costSI>35.93</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-01-25 12:25:10.4 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>309852.0</mileage>
+            <fuelPrice>0.8290263036455929</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>43.34</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 18:52:47.3 GMT+02:00</creationDate>
+            <cost>46.67</cost>
+            <costSI>46.67</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-01-27 18:51:34.5 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>310315.0</mileage>
+            <fuelPrice>0.78004345645997</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>59.83</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 18:49:54.5 GMT+02:00</creationDate>
+            <cost>42.26</cost>
+            <costSI>42.26</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-01-27 18:48:47.5 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>310752.0</mileage>
+            <fuelPrice>0.82895253040408</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>50.98</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 18:42:47.7 GMT+02:00</creationDate>
+            <cost>46.11</cost>
+            <costSI>46.11</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-01-31 18:42:02.4 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>311254.0</mileage>
+            <fuelPrice>0.8089473684210526</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>57.0</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 18:47:07.4 GMT+02:00</creationDate>
+            <cost>50.86</cost>
+            <costSI>50.86</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-02-02 18:46:16.9 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>311763.0</mileage>
+            <fuelPrice>0.7789860621841016</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>65.29</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 13:07:19.6 GMT+02:00</creationDate>
+            <cost>66.33</cost>
+            <costSI>66.33</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-02-03 13:06:06.8 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>312039.0</mileage>
+            <fuelPrice>1.0349508503666718</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>64.09</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 18:40:15.7 GMT+02:00</creationDate>
+            <cost>54.95</cost>
+            <costSI>54.95</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-02-08 18:39:55.8 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>312344.0</mileage>
+            <fuelPrice>0.8290585395292698</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.28</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 13:05:05.5 GMT+02:00</creationDate>
+            <cost>47.96</cost>
+            <costSI>47.96</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-02-08 13:04:50.5 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>312865.0</mileage>
+            <fuelPrice>0.7700706486833655</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>62.28</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 13:03:05.5 GMT+02:00</creationDate>
+            <cost>52.37</cost>
+            <costSI>52.37</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-02-10 13:02:44.3 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>313375.0</mileage>
+            <fuelPrice>0.8290327687193287</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>63.17</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 13:03:51.1 GMT+02:00</creationDate>
+            <cost>50.74</cost>
+            <costSI>50.74</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-02-12 13:03:36.2 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>313901.0</mileage>
+            <fuelPrice>0.7790572700752343</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>65.13</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 13:04:23.7 GMT+02:00</creationDate>
+            <cost>47.47</cost>
+            <costSI>47.47</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-02-18 13:04:09.7 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>314424.0</mileage>
+            <fuelPrice>0.7789629143419757</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>60.94</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 13:02:17.3 GMT+02:00</creationDate>
+            <cost>44.49</cost>
+            <costSI>44.49</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-02-22 13:02:02.7 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>314883.0</mileage>
+            <fuelPrice>0.8389590797661701</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>53.03</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 13:01:39.6 GMT+02:00</creationDate>
+            <cost>42.52</cost>
+            <costSI>42.52</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-02-22 13:01:26.8 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>315339.0</mileage>
+            <fuelPrice>0.7700108656283956</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>55.22</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.MaintenanceEntry">
+            <comment>LPG regular maintenance</comment>
+            <creationDate>2015-08-06 20:49:57.5 GMT+02:00</creationDate>
+            <modifiedDate>2015-08-06 20:50:58.3 GMT+02:00</modifiedDate>
+            <cost>32.0</cost>
+            <costSI>32.0</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-08-06 20:48:46.4 GMT+02:00</eventDate>
+            <expenseType>MAINTENANCE</expenseType>
+            <mileage>315643.0</mileage>
+            <laborCost>12.0</laborCost>
+            <laborCostCurrency>EURO</laborCostCurrency>
+            <laborCostSI>12.0</laborCostSI>
+            <replacementPart>
+               <comment>LPG filter</comment>
+               <creationDate>2015-08-06 20:49:26.9 GMT+02:00</creationDate>
+               <currency>EURO</currency>
+               <price>7.0</price>
+               <priceSI>7.0</priceSI>
+               <condition>NEW</condition>
+               <quantity>2</quantity>
+               <originality>AFTERMARKET</originality>
+            </replacementPart>
+            <replacementPart>
+               <comment>LPG filter sealing</comment>
+               <creationDate>2015-08-06 20:49:52.6 GMT+02:00</creationDate>
+               <currency>EURO</currency>
+               <price>3.0</price>
+               <priceSI>3.0</priceSI>
+               <condition>NEW</condition>
+               <quantity>2</quantity>
+               <originality>AFTERMARKET</originality>
+            </replacementPart>
+            <type>PLANNED</type>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 13:00:52.4 GMT+02:00</creationDate>
+            <cost>37.21</cost>
+            <costSI>37.21</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-02-25 13:00:39.1 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>315701.0</mileage>
+            <fuelPrice>0.7799203521274366</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>47.71</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:30:02.1 GMT+02:00</creationDate>
+            <cost>42.8</cost>
+            <costSI>42.8</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-02-25 12:29:40.3 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>316133.0</mileage>
+            <fuelPrice>0.8189820130118637</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>52.26</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 13:00:10.1 GMT+02:00</creationDate>
+            <cost>47.5</cost>
+            <costSI>47.5</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-03-01 12:59:44.1 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>316640.0</mileage>
+            <fuelPrice>0.8390743684861331</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>56.61</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:59:19.6 GMT+02:00</creationDate>
+            <cost>41.22</cost>
+            <costSI>41.22</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-03-01 12:59:06.4 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>317095.0</mileage>
+            <fuelPrice>0.7700354941154492</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>53.53</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:56:51.5 GMT+02:00</creationDate>
+            <cost>53.69</cost>
+            <costSI>53.69</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-03-03 12:56:35.2 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>317607.0</mileage>
+            <fuelPrice>0.8290611488573192</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>64.76</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:57:52.9 GMT+02:00</creationDate>
+            <cost>49.75</cost>
+            <costSI>49.75</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-03-05 12:57:36.8 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>318133.0</mileage>
+            <fuelPrice>0.7789259433223736</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>63.87</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:58:34.8 GMT+02:00</creationDate>
+            <cost>43.44</cost>
+            <costSI>43.44</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-03-11 12:58:23.1 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>318644.0</mileage>
+            <fuelPrice>0.7790530846484935</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>55.76</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:42:06.5 GMT+02:00</creationDate>
+            <cost>37.89</cost>
+            <costSI>37.89</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-03-18 12:41:41.5 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>319113.0</mileage>
+            <fuelPrice>0.7990299451708139</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>47.42</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:51:20.4 GMT+02:00</creationDate>
+            <cost>52.29</cost>
+            <costSI>52.29</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-03-25 12:50:53.7 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>319802.0</mileage>
+            <fuelPrice>0.7990525672371638</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>65.44</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:52:10.4 GMT+02:00</creationDate>
+            <cost>38.04</cost>
+            <costSI>38.04</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-03-26 12:51:53.7 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>320183.0</mileage>
+            <fuelPrice>0.8289387666158204</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>45.89</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:43:15.3 GMT+02:00</creationDate>
+            <cost>30.45</cost>
+            <costSI>30.45</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-03-28 12:42:35.5 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>320689.0</mileage>
+            <fuelPrice>1.5488301119023398</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>19.66</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.BurreaucraticEntry">
+            <comment>STK</comment>
+            <creationDate>2015-08-06 20:46:44.9 GMT+02:00</creationDate>
+            <cost>52.0</cost>
+            <costSI>52.0</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-03-28 20:46:28.8 GMT+01:00</eventDate>
+            <expenseType>BURREAUCRATIC</expenseType>
+            <mileage>320689.0</mileage>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:56:07.9 GMT+02:00</creationDate>
+            <cost>49.67</cost>
+            <costSI>49.67</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-03-28 12:55:51.4 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>320700.0</mileage>
+            <fuelPrice>0.7300117577895355</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>68.04</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:50:07.5 GMT+02:00</creationDate>
+            <cost>46.09</cost>
+            <costSI>46.09</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-04-01 12:49:42.7 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>321128.0</mileage>
+            <fuelPrice>0.8289568345323741</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>55.6</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:37:58.2 GMT+02:00</creationDate>
+            <modifiedDate>2014-06-28 12:46:45.9 GMT+02:00</modifiedDate>
+            <cost>47.4</cost>
+            <costSI>47.4</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-04-03 12:46:44.4 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>321582.0</mileage>
+            <fuelPrice>0.7989212877127928</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>59.33</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:38:52.2 GMT+02:00</creationDate>
+            <cost>30.13</cost>
+            <costSI>30.13</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-04-05 12:38:31.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>321876.0</mileage>
+            <fuelPrice>0.8390420495683654</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>35.91</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:39:38.2 GMT+02:00</creationDate>
+            <cost>30.23</cost>
+            <costSI>30.23</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-04-05 12:39:24.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>322148.0</mileage>
+            <fuelPrice>0.8289004661365507</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>36.47</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:41:09.6 GMT+02:00</creationDate>
+            <cost>48.27</cost>
+            <costSI>48.27</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-04-06 12:40:49.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>322618.0</mileage>
+            <fuelPrice>0.7300362976406534</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.12</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:30:45.8 GMT+02:00</creationDate>
+            <modifiedDate>2014-06-28 12:32:05.3 GMT+02:00</modifiedDate>
+            <cost>40.5</cost>
+            <costSI>40.5</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-04-07 12:32:02.3 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>322990.0</mileage>
+            <fuelPrice>0.8288988948014736</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>48.86</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:37:17.1 GMT+02:00</creationDate>
+            <cost>47.98</cost>
+            <costSI>47.98</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-04-15 12:37:05.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>323476.0</mileage>
+            <fuelPrice>0.7790225685987984</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>61.59</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:33:09.4 GMT+02:00</creationDate>
+            <cost>30.95</cost>
+            <costSI>30.95</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-04-16 12:32:51.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>323638.0</mileage>
+            <fuelPrice>1.549049049049049</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>19.98</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:36:36.5 GMT+02:00</creationDate>
+            <cost>46.6</cost>
+            <costSI>46.6</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-04-19 12:36:16.5 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>323970.0</mileage>
+            <fuelPrice>0.779003677699766</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>59.82</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:29:00.8 GMT+02:00</creationDate>
+            <cost>53.65</cost>
+            <costSI>53.65</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-04-28 12:28:39.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>324468.0</mileage>
+            <fuelPrice>0.8490267447380915</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>63.19</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 13:11:19.7 GMT+02:00</creationDate>
+            <cost>46.12</cost>
+            <costSI>46.12</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-04-28 13:11:06.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>324866.0</mileage>
+            <fuelPrice>0.8089808805472724</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>57.01</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 13:07:56.7 GMT+02:00</creationDate>
+            <modifiedDate>2014-06-28 13:08:41.2 GMT+02:00</modifiedDate>
+            <cost>46.43</cost>
+            <costSI>46.43</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-04-29 13:08:39.7 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>325241.0</mileage>
+            <fuelPrice>0.7790268456375838</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>59.6</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:34:09.5 GMT+02:00</creationDate>
+            <cost>51.23</cost>
+            <costSI>51.23</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-04-29 12:33:35.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>325662.0</mileage>
+            <fuelPrice>0.8490222074908849</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>60.34</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:55:08.7 GMT+02:00</creationDate>
+            <cost>53.58</cost>
+            <costSI>53.58</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-04-30 12:55:01.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>326064.0</mileage>
+            <fuelPrice>0.8790812141099261</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>60.95</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-30 18:36:17.8 GMT+02:00</creationDate>
+            <cost>55.56</cost>
+            <costSI>55.56</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-04-30 18:35:01.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>326274.0</mileage>
+            <fuelPrice>1.389</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>40.0</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:34:55.3 GMT+02:00</creationDate>
+            <modifiedDate>2014-06-28 12:49:09.8 GMT+02:00</modifiedDate>
+            <cost>48.31</cost>
+            <costSI>48.31</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-05-01 12:49:04.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>326520.0</mileage>
+            <fuelPrice>0.7790678922754395</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>62.01</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 12:35:39.6 GMT+02:00</creationDate>
+            <cost>38.53</cost>
+            <costSI>38.53</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-05-02 12:35:23.6 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>326866.0</mileage>
+            <fuelPrice>0.8390679442508711</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>45.92</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-28 13:10:27.3 GMT+02:00</creationDate>
+            <cost>124.3</cost>
+            <costSI>124.3</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-07-05 13:09:31.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>328076.0</mileage>
+            <fuelPrice>1.5165934602245</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>81.96</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.TollEntry">
+            <comment>310 czk</comment>
+            <creationDate>2015-08-06 20:37:18.6 GMT+02:00</creationDate>
+            <cost>11.27</cost>
+            <costSI>11.27</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-07-05 20:35:45.9 GMT+02:00</eventDate>
+            <expenseType>TOLL</expenseType>
+            <mileage>328076.0</mileage>
+            <type>TOLL_ROAD</type>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 19:49:26.3 GMT+02:00</creationDate>
+            <cost>121.82</cost>
+            <costSI>121.82</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-07-26 19:48:35.5 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>328750.0</mileage>
+            <fuelPrice>1.5035793631202172</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>81.02</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 19:50:52.2 GMT+02:00</creationDate>
+            <cost>122.2</cost>
+            <costSI>122.2</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-07-28 19:50:13.5 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>329447.0</mileage>
+            <fuelPrice>1.5299862276198823</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>79.87</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 19:51:43.2 GMT+02:00</creationDate>
+            <cost>120.23</cost>
+            <costSI>120.23</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-07-30 19:51:21.2 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>330140.0</mileage>
+            <fuelPrice>1.5689677671930056</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>76.63</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 19:52:37.2 GMT+02:00</creationDate>
+            <cost>116.04</cost>
+            <costSI>116.04</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-08-07 19:52:11.5 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>330790.0</mileage>
+            <fuelPrice>1.5789903388216087</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>73.49</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 19:53:47.4 GMT+02:00</creationDate>
+            <cost>122.85</cost>
+            <costSI>122.85</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-08-09 19:53:19.2 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>331380.0</mileage>
+            <fuelPrice>1.5489849955869373</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>79.31</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 19:54:36.4 GMT+02:00</creationDate>
+            <cost>118.71</cost>
+            <costSI>118.71</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-08-11 19:54:15.4 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>332050.0</mileage>
+            <fuelPrice>1.5990032327586208</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>74.24</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 18:57:03.1 GMT+02:00</creationDate>
+            <cost>108.41</cost>
+            <costSI>108.41</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-08-17 18:56:30.5 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>332738.0</mileage>
+            <fuelPrice>1.4410474544729495</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>75.23</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 18:54:38.9 GMT+02:00</creationDate>
+            <cost>50.6</cost>
+            <costSI>50.6</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-08-30 18:54:18.3 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>334248.0</mileage>
+            <fuelPrice>1.6991269308260577</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>29.78</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 19:01:24.6 GMT+02:00</creationDate>
+            <cost>79.6</cost>
+            <costSI>79.6</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-09-02 19:01:22.4 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>334482.0</mileage>
+            <fuelPrice>1.609055993531433</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>49.47</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 18:58:04.5 GMT+02:00</creationDate>
+            <cost>17.37</cost>
+            <costSI>17.37</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-09-05 18:57:46.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>334888.0</mileage>
+            <fuelPrice>1.629455909943715</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>10.66</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 18:58:52.7 GMT+02:00</creationDate>
+            <cost>112.41</cost>
+            <costSI>112.41</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-09-05 18:58:36.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>334982.0</mileage>
+            <fuelPrice>1.4139622641509433</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>79.5</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 19:00:25.7 GMT+02:00</creationDate>
+            <cost>54.05</cost>
+            <costSI>54.05</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-09-29 18:59:42.3 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>335763.0</mileage>
+            <fuelPrice>1.5398860398860397</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>35.1</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 19:02:03.3 GMT+02:00</creationDate>
+            <cost>115.86</cost>
+            <costSI>115.86</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-09-09 19:01:43.3 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>336096.0</mileage>
+            <fuelPrice>1.4229918938835666</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>81.42</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 18:59:31.1 GMT+02:00</creationDate>
+            <cost>133.19</cost>
+            <costSI>133.19</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-09-29 18:59:06.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>336899.0</mileage>
+            <fuelPrice>1.5890002386065378</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>83.82</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 18:55:48.6 GMT+02:00</creationDate>
+            <cost>129.85</cost>
+            <costSI>129.85</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-08-23 18:55:29.6 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>337464.0</mileage>
+            <fuelPrice>1.5707027942421676</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>82.67</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 19:03:15.8 GMT+02:00</creationDate>
+            <cost>133.95</cost>
+            <costSI>133.95</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-09-18 19:02:56.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>337654.0</mileage>
+            <fuelPrice>1.559008379888268</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>85.92</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 19:04:17.3 GMT+02:00</creationDate>
+            <cost>108.7</cost>
+            <costSI>108.7</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-09-18 19:03:43.6 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>338378.0</mileage>
+            <fuelPrice>1.3783920872432158</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>78.86</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 19:05:20.5 GMT+02:00</creationDate>
+            <cost>50.07</cost>
+            <costSI>50.07</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-09-23 19:05:02.4 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>338714.0</mileage>
+            <fuelPrice>0.7390405904059041</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>67.75</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-29 19:06:11.6 GMT+02:00</creationDate>
+            <cost>50.17</cost>
+            <costSI>50.17</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-09-24 19:05:50.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>339341.0</mileage>
+            <fuelPrice>0.7490295610630039</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.98</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-09-30 08:27:55.9 GMT+02:00</creationDate>
+            <cost>40.87</cost>
+            <costSI>40.87</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-09-30 08:26:25.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>339859.0</mileage>
+            <fuelPrice>0.7490835777126099</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>54.56</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-02 18:58:18.6 GMT+02:00</creationDate>
+            <cost>23.24</cost>
+            <costSI>23.24</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-02 18:57:15.7 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>340174.0</mileage>
+            <fuelPrice>0.788866259334691</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>29.46</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-02 21:38:16.8 GMT+02:00</creationDate>
+            <cost>30.16</cost>
+            <costSI>30.16</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-02 21:37:52.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>340437.0</mileage>
+            <fuelPrice>0.8290269378779549</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>36.38</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-06 15:05:30.9 GMT+02:00</creationDate>
+            <cost>33.35</cost>
+            <costSI>33.35</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-03 15:05:14.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>340843.0</mileage>
+            <fuelPrice>0.5850877192982457</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>57.0</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-08 08:27:27.8 GMT+02:00</creationDate>
+            <cost>20.0</cost>
+            <costSI>20.0</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-08 08:26:55.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>340843.0</mileage>
+            <fuelPrice>1.448225923244026</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>13.81</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-06 15:59:44.3 GMT+02:00</creationDate>
+            <cost>35.94</cost>
+            <costSI>35.94</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-06 15:58:33.4 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>341218.0</mileage>
+            <fuelPrice>0.7689345314505776</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>46.74</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-07 08:01:37.5 GMT+02:00</creationDate>
+            <cost>50.24</cost>
+            <costSI>50.24</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-07 08:01:17.5 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>341771.0</mileage>
+            <fuelPrice>0.7490681377665127</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>67.07</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-07 18:05:46.7 GMT+02:00</creationDate>
+            <cost>46.49</cost>
+            <costSI>46.49</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-07 18:04:34.6 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>341816.0</mileage>
+            <fuelPrice>1.5491502832389203</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>30.01</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-12 10:39:57.6 GMT+02:00</creationDate>
+            <cost>47.09</cost>
+            <costSI>47.09</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-12 10:39:22.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>342383.0</mileage>
+            <fuelPrice>1.5691436187937355</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>30.01</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-16 07:44:52.6 GMT+02:00</creationDate>
+            <cost>62.58</cost>
+            <costSI>62.58</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-16 07:44:15.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>342723.0</mileage>
+            <fuelPrice>1.5590433482810164</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>40.14</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-17 08:12:42.4 GMT+02:00</creationDate>
+            <cost>47.33</cost>
+            <costSI>47.33</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-17 08:11:38.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>342844.0</mileage>
+            <fuelPrice>0.7189731125626614</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>65.83</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-18 18:39:32.3 GMT+02:00</creationDate>
+            <cost>48.84</cost>
+            <costSI>48.84</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-18 18:38:37.5 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>343383.0</mileage>
+            <fuelPrice>0.8289205702647658</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>58.92</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-20 15:58:12.6 GMT+02:00</creationDate>
+            <cost>50.52</cost>
+            <costSI>50.52</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-20 15:57:00.7 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>343944.0</mileage>
+            <fuelPrice>0.7390286717378585</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>68.36</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-20 17:19:36.5 GMT+02:00</creationDate>
+            <cost>109.44</cost>
+            <costSI>109.44</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-20 17:19:11.4 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>344043.0</mileage>
+            <fuelPrice>1.3679999999999999</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>80.0</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-20 21:01:46.5 GMT+02:00</creationDate>
+            <cost>43.67</cost>
+            <costSI>43.67</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-20 21:01:43.2 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>344419.0</mileage>
+            <fuelPrice>0.7789867998572958</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>56.06</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-25 18:21:37.1 GMT+02:00</creationDate>
+            <cost>40.14</cost>
+            <costSI>40.14</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-25 18:21:14.5 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>345053.0</mileage>
+            <fuelPrice>0.7189682966147233</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>55.83</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-10-30 21:24:19.1 GMT+01:00</creationDate>
+            <cost>55.37</cost>
+            <costSI>55.37</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-10-30 21:22:43.9 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>345719.0</mileage>
+            <fuelPrice>0.8290163198083544</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.79</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-11-03 14:26:12.6 GMT+01:00</creationDate>
+            <cost>52.18</cost>
+            <costSI>52.18</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-11-03 14:25:17.8 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>346271.0</mileage>
+            <fuelPrice>0.749066896353718</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>69.66</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-11-03 17:43:37.8 GMT+01:00</creationDate>
+            <cost>31.55</cost>
+            <costSI>31.55</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-11-03 17:43:24.4 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>346581.0</mileage>
+            <fuelPrice>0.8289542827115081</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>38.06</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-11-06 07:40:55.1 GMT+01:00</creationDate>
+            <cost>40.69</cost>
+            <costSI>40.69</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-11-06 07:40:03.5 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>347150.0</mileage>
+            <fuelPrice>0.7190316310302173</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>56.59</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-11-06 18:39:38.5 GMT+01:00</creationDate>
+            <cost>44.93</cost>
+            <costSI>44.93</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-11-06 18:38:48.4 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>347189.0</mileage>
+            <fuelPrice>1.499165832499166</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>29.97</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-11-12 17:23:26.7 GMT+01:00</creationDate>
+            <cost>52.55</cost>
+            <costSI>52.55</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-11-12 17:22:48.6 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>347665.0</mileage>
+            <fuelPrice>1.4890903938792859</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>35.29</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-11-16 11:36:25.4 GMT+01:00</creationDate>
+            <cost>38.1</cost>
+            <costSI>38.1</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-11-16 11:35:04.2 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>348121.0</mileage>
+            <fuelPrice>0.7390882638215326</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>51.55</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-11-17 19:06:40.3 GMT+01:00</creationDate>
+            <cost>44.26</cost>
+            <costSI>44.26</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-11-17 19:05:50.1 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>348178.0</mileage>
+            <fuelPrice>1.4689678061732492</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>30.13</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-11-21 17:44:46.5 GMT+01:00</creationDate>
+            <cost>30.38</cost>
+            <costSI>30.38</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-11-21 17:44:16.2 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>348510.0</mileage>
+            <fuelPrice>1.4892156862745098</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>20.4</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-11-22 07:39:15.8 GMT+01:00</creationDate>
+            <cost>44.04</cost>
+            <costSI>44.04</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-11-22 07:38:00.1 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>348912.0</mileage>
+            <fuelPrice>0.828910220214568</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>53.13</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-11-22 14:15:12.7 GMT+01:00</creationDate>
+            <cost>28.35</cost>
+            <costSI>28.35</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-11-22 14:12:00.7 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>349265.0</mileage>
+            <fuelPrice>0.6821462945139557</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>41.56</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-11-24 17:53:08.7 GMT+01:00</creationDate>
+            <cost>41.38</cost>
+            <costSI>41.38</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-11-24 17:52:40.2 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>349617.0</mileage>
+            <fuelPrice>0.828926282051282</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>49.92</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-11-26 07:59:12.8 GMT+01:00</creationDate>
+            <cost>41.9</cost>
+            <costSI>41.9</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-11-26 07:58:35.5 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>350070.0</mileage>
+            <fuelPrice>0.7189430336307481</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>58.28</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-11-28 18:00:40.8 GMT+01:00</creationDate>
+            <cost>45.69</cost>
+            <costSI>45.69</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-11-28 17:59:44.6 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>350357.0</mileage>
+            <fuelPrice>1.5089167767503302</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>30.28</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-12-01 13:43:07.5 GMT+01:00</creationDate>
+            <cost>49.61</cost>
+            <costSI>49.61</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-12-01 13:42:02.7 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>350655.0</mileage>
+            <fuelPrice>0.7390138537166692</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>67.13</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-12-15 13:33:19.3 GMT+01:00</creationDate>
+            <cost>50.83</cost>
+            <costSI>50.83</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-12-15 13:32:14.4 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>351179.0</mileage>
+            <fuelPrice>0.7890406705991927</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>64.42</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-12-17 17:47:44.5 GMT+01:00</creationDate>
+            <cost>14.94</cost>
+            <costSI>14.94</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-12-17 17:46:29.7 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>351423.0</mileage>
+            <fuelPrice>1.4792079207920792</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>10.1</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-12-20 16:30:14.9 GMT+01:00</creationDate>
+            <cost>22.38</cost>
+            <costSI>22.38</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-12-20 16:29:12.5 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>351795.0</mileage>
+            <fuelPrice>1.4791804362194314</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>15.13</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-12-20 16:58:14.1 GMT+01:00</creationDate>
+            <cost>52.06</cost>
+            <costSI>52.06</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-12-20 16:57:54.6 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>351812.0</mileage>
+            <fuelPrice>0.7890269778720824</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>65.98</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-12-21 13:38:34.7 GMT+01:00</creationDate>
+            <cost>22.42</cost>
+            <costSI>22.42</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-12-21 13:37:31.5 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>352138.0</mileage>
+            <fuelPrice>0.8291420118343196</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>27.04</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-12-21 18:00:47.2 GMT+01:00</creationDate>
+            <cost>96.52</cost>
+            <costSI>96.52</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-12-21 18:00:04.2 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>352275.0</mileage>
+            <fuelPrice>1.3450390189520622</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>71.76</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2013-12-31 12:17:59.7 GMT+01:00</creationDate>
+            <cost>48.79</cost>
+            <costSI>48.79</costSI>
+            <currency>EURO</currency>
+            <eventDate>2013-12-31 12:17:24.6 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>352583.0</mileage>
+            <fuelPrice>0.7089508863702413</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>68.82</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-01-06 19:49:10.3 GMT+01:00</creationDate>
+            <cost>50.96</cost>
+            <costSI>50.96</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-01-06 19:48:24.1 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>353291.0</mileage>
+            <fuelPrice>0.7689754036517278</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.27</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-01-10 17:21:25.9 GMT+01:00</creationDate>
+            <cost>46.03</cost>
+            <costSI>46.03</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-01-10 17:20:52.5 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>353828.0</mileage>
+            <fuelPrice>0.8289213037997479</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>55.53</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-01-17 08:29:34.1 GMT+01:00</creationDate>
+            <cost>48.63</cost>
+            <costSI>48.63</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-01-17 08:23:32.2 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>354376.0</mileage>
+            <fuelPrice>0.8290146607569043</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>58.66</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-01-17 20:03:22.2 GMT+01:00</creationDate>
+            <cost>39.49</cost>
+            <costSI>39.49</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-01-17 20:02:33.8 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>354788.0</mileage>
+            <fuelPrice>0.8290993071593533</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>47.63</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-01-19 15:59:41.4 GMT+01:00</creationDate>
+            <cost>45.93</cost>
+            <costSI>45.93</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-01-19 15:59:15.8 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>355238.0</mileage>
+            <fuelPrice>0.759048091224591</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>60.51</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-01-19 16:42:22.1 GMT+01:00</creationDate>
+            <cost>85.41</cost>
+            <costSI>85.41</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-01-19 16:41:59.1 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>355280.0</mileage>
+            <fuelPrice>1.3109746738296237</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>65.15</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-01-20 08:23:40.5 GMT+01:00</creationDate>
+            <cost>6.72</cost>
+            <costSI>6.72</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-01-20 08:22:56.9 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>355759.0</mileage>
+            <fuelPrice>0.8286066584463625</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>8.11</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-01-20 19:20:09.7 GMT+01:00</creationDate>
+            <cost>55.01</cost>
+            <costSI>55.01</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-01-20 19:19:48.3 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>355838.0</mileage>
+            <fuelPrice>0.828963230861965</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.36</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-01-24 16:48:34.8 GMT+01:00</creationDate>
+            <cost>39.72</cost>
+            <costSI>39.72</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-01-24 16:48:00.3 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>356289.0</mileage>
+            <fuelPrice>0.7789762698568347</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>50.99</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-01-29 08:22:16.9 GMT+01:00</creationDate>
+            <cost>55.38</cost>
+            <costSI>55.38</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-01-29 08:21:32.9 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>356897.0</mileage>
+            <fuelPrice>0.8290419161676648</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.8</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-02-05 16:11:00.3 GMT+01:00</creationDate>
+            <cost>51.01</cost>
+            <costSI>51.01</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-02-05 16:08:32.1 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>357526.0</mileage>
+            <fuelPrice>0.7589644398155037</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>67.21</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-02-27 19:53:44.8 GMT+01:00</creationDate>
+            <cost>43.1</cost>
+            <costSI>43.1</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-02-27 19:52:22.8 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>358026.0</mileage>
+            <fuelPrice>0.7589364324705055</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>56.79</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-03-07 23:24:00.7 GMT+01:00</creationDate>
+            <cost>40.83</cost>
+            <costSI>40.83</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-03-07 23:23:30.6 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>358460.0</mileage>
+            <fuelPrice>0.7990215264187867</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>51.1</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-03-07 23:24:41.3 GMT+01:00</creationDate>
+            <cost>48.89</cost>
+            <costSI>48.89</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-03-07 23:24:08.7 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>358968.0</mileage>
+            <fuelPrice>0.7290486131822248</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>67.06</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-03-09 16:25:56.1 GMT+01:00</creationDate>
+            <cost>50.64</cost>
+            <costSI>50.64</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-03-09 16:25:14.5 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>359218.0</mileage>
+            <fuelPrice>1.332982363779942</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>37.99</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-03-09 17:55:36.8 GMT+01:00</creationDate>
+            <cost>38.57</cost>
+            <costSI>38.57</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-03-09 17:54:18.4 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>359358.0</mileage>
+            <fuelPrice>0.8291057609630266</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>46.52</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-03-11 08:19:54.4 GMT+01:00</creationDate>
+            <cost>45.64</cost>
+            <costSI>45.64</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-03-11 08:19:25.7 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>359799.0</mileage>
+            <fuelPrice>0.7689974726200506</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>59.35</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-03-18 07:50:35.6 GMT+01:00</creationDate>
+            <cost>51.1</cost>
+            <costSI>51.1</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-03-18 07:50:02.2 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>360424.0</mileage>
+            <fuelPrice>0.7489374175582588</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>68.23</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-03-23 15:13:51.9 GMT+01:00</creationDate>
+            <cost>51.28</cost>
+            <costSI>51.28</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-03-23 15:13:02.7 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>361047.0</mileage>
+            <fuelPrice>0.7490505404615835</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>68.46</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-03-31 08:11:28.8 GMT+02:00</creationDate>
+            <cost>48.53</cost>
+            <costSI>48.53</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-03-31 08:10:11.6 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>361606.0</mileage>
+            <fuelPrice>0.7490353449606421</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>64.79</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-04-06 18:04:54.6 GMT+02:00</creationDate>
+            <cost>37.03</cost>
+            <costSI>37.03</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-04-04 18:04:38.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>362068.0</mileage>
+            <fuelPrice>0.769055036344756</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>48.15</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-04-06 18:06:14.6 GMT+02:00</creationDate>
+            <cost>39.68</cost>
+            <costSI>39.68</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-04-06 18:05:48.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>362546.0</mileage>
+            <fuelPrice>0.7290097372772368</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>54.43</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-04-06 18:05:41.2 GMT+02:00</creationDate>
+            <cost>52.89</cost>
+            <costSI>52.89</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-04-06 18:05:02.2 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>362838.0</mileage>
+            <fuelPrice>1.320929070929071</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>40.04</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-04-06 17:45:52.6 GMT+02:00</creationDate>
+            <cost>51.33</cost>
+            <costSI>51.33</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-04-06 17:45:18.4 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>362978.0</mileage>
+            <fuelPrice>0.8289728682170542</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>61.92</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-04-08 18:41:53.2 GMT+02:00</creationDate>
+            <cost>46.9</cost>
+            <costSI>46.9</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-04-08 18:40:47.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>363501.0</mileage>
+            <fuelPrice>0.6990609628856759</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>67.09</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-04-16 18:02:53.6 GMT+02:00</creationDate>
+            <cost>43.15</cost>
+            <costSI>43.15</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-04-14 18:02:26.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>364029.0</mileage>
+            <fuelPrice>0.699011825692532</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>61.73</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-04-17 19:25:33.1 GMT+02:00</creationDate>
+            <cost>47.39</cost>
+            <costSI>47.39</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-04-17 19:24:55.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>364518.0</mileage>
+            <fuelPrice>0.7689436962518253</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>61.63</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-04-18 00:27:54.6 GMT+02:00</creationDate>
+            <cost>43.5</cost>
+            <costSI>43.5</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-04-18 00:27:33.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>364947.0</mileage>
+            <fuelPrice>0.7389162561576355</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>58.87</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:53:01.5 GMT+02:00</creationDate>
+            <cost>55.53</cost>
+            <costSI>55.53</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-04-22 19:52:43.7 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>365492.0</mileage>
+            <fuelPrice>0.8290534487906838</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.98</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:54:31.7 GMT+02:00</creationDate>
+            <cost>51.21</cost>
+            <costSI>51.21</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-04-24 19:54:03.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>366022.0</mileage>
+            <fuelPrice>0.7390676865348534</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>69.29</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:51:36.2 GMT+02:00</creationDate>
+            <cost>52.16</cost>
+            <costSI>52.16</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-04-25 19:51:04.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>366457.0</mileage>
+            <fuelPrice>0.8289891926255561</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>62.92</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:49:41.1 GMT+02:00</creationDate>
+            <cost>47.67</cost>
+            <costSI>47.67</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-04-27 19:48:53.3 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>366912.0</mileage>
+            <fuelPrice>0.7490571967316153</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>63.64</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:47:36.2 GMT+02:00</creationDate>
+            <cost>47.38</cost>
+            <costSI>47.38</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-04-27 19:47:13.5 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>367341.0</mileage>
+            <fuelPrice>0.8290463692038496</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>57.15</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:46:20.7 GMT+02:00</creationDate>
+            <cost>41.31</cost>
+            <costSI>41.31</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-05-01 19:45:44.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>367799.0</mileage>
+            <fuelPrice>0.7490480507706256</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>55.15</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:44:19.8 GMT+02:00</creationDate>
+            <cost>31.15</cost>
+            <costSI>31.15</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-05-02 19:43:59.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>368114.0</mileage>
+            <fuelPrice>1.529209621993127</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>20.37</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:40:28.8 GMT+02:00</creationDate>
+            <cost>42.33</cost>
+            <costSI>42.33</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-05-04 19:39:45.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>368212.0</mileage>
+            <fuelPrice>0.7290733723734067</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>58.06</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:42:47.4 GMT+02:00</creationDate>
+            <cost>46.32</cost>
+            <costSI>46.32</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-05-04 19:42:05.2 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>368716.0</mileage>
+            <fuelPrice>0.699064292182312</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.26</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:38:12.2 GMT+02:00</creationDate>
+            <cost>42.05</cost>
+            <costSI>42.05</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-05-07 19:37:38.5 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>369185.0</mileage>
+            <fuelPrice>0.698969414893617</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>60.16</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:36:18.3 GMT+02:00</creationDate>
+            <cost>49.08</cost>
+            <costSI>49.08</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-05-10 19:35:46.2 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>369692.0</mileage>
+            <fuelPrice>0.7589299520643266</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>64.67</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:34:26.6 GMT+02:00</creationDate>
+            <cost>49.29</cost>
+            <costSI>49.29</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-05-13 19:34:03.4 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>370208.0</mileage>
+            <fuelPrice>0.7389805097451274</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.7</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:32:45.4 GMT+02:00</creationDate>
+            <cost>23.04</cost>
+            <costSI>23.04</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-05-14 19:32:24.3 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>370461.0</mileage>
+            <fuelPrice>1.5187870797626895</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>15.17</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:28:12.4 GMT+02:00</creationDate>
+            <cost>46.41</cost>
+            <costSI>46.41</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-05-19 19:27:42.7 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>370777.0</mileage>
+            <fuelPrice>0.7390127388535032</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>62.8</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:31:06.8 GMT+02:00</creationDate>
+            <cost>37.41</cost>
+            <costSI>37.41</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-05-23 19:30:30.4 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>371227.0</mileage>
+            <fuelPrice>0.7890740350137102</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>47.41</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:29:46.3 GMT+02:00</creationDate>
+            <cost>50.0</cost>
+            <costSI>50.0</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-05-23 19:29:01.2 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>371628.0</mileage>
+            <fuelPrice>1.3939224979091163</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>35.87</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:24:24.8 GMT+02:00</creationDate>
+            <cost>49.19</cost>
+            <costSI>49.19</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-05-25 19:24:19.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>371805.0</mileage>
+            <fuelPrice>0.7289567279193835</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>67.48</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-27 19:25:53.7 GMT+02:00</creationDate>
+            <cost>29.09</cost>
+            <costSI>29.09</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-05-25 19:25:21.3 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>372103.0</mileage>
+            <fuelPrice>0.8290111142775719</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>35.09</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-05-28 17:31:46.7 GMT+02:00</creationDate>
+            <cost>47.28</cost>
+            <costSI>47.28</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-05-28 17:31:13.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>372666.0</mileage>
+            <fuelPrice>0.6989946777054997</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>67.64</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-05 08:25:42.6 GMT+02:00</creationDate>
+            <cost>42.77</cost>
+            <costSI>42.77</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-06-05 08:24:26.3 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>373280.0</mileage>
+            <fuelPrice>0.6989704200032686</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>61.19</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-06 18:32:10.8 GMT+02:00</creationDate>
+            <cost>39.64</cost>
+            <costSI>39.64</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-06-06 18:30:42.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>373720.0</mileage>
+            <fuelPrice>0.8289418653283145</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>47.82</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-09 14:07:25.9 GMT+02:00</creationDate>
+            <cost>50.89</cost>
+            <costSI>50.89</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-06-09 14:06:06.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>374214.0</mileage>
+            <fuelPrice>0.7489330389992641</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>67.95</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-09 14:32:52.2 GMT+02:00</creationDate>
+            <cost>55.04</cost>
+            <costSI>55.04</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-06-09 14:29:49.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>374251.0</mileage>
+            <fuelPrice>1.3510063819342168</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>40.74</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-10 08:31:53.8 GMT+02:00</creationDate>
+            <cost>43.11</cost>
+            <costSI>43.11</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-06-10 08:31:24.6 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>374724.0</mileage>
+            <fuelPrice>0.6990432949570293</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>61.67</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-13 20:00:45.8 GMT+02:00</creationDate>
+            <cost>32.95</cost>
+            <costSI>32.95</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-06-13 19:59:58.5 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>375151.0</mileage>
+            <fuelPrice>0.6989817564700892</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>47.14</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-14 08:25:38.2 GMT+02:00</creationDate>
+            <cost>40.57</cost>
+            <costSI>40.57</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-06-14 08:24:44.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>375482.0</mileage>
+            <fuelPrice>0.8289742541888027</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>48.94</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-23 17:59:25.9 GMT+02:00</creationDate>
+            <modifiedDate>2014-06-23 18:07:18.7 GMT+02:00</modifiedDate>
+            <cost>10.0</cost>
+            <costSI>10.0</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-06-18 18:07:16.4 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>375582.0</mileage>
+            <fuelPrice>0.7092198581560284</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>14.1</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-19 12:09:52.9 GMT+02:00</creationDate>
+            <cost>43.0</cost>
+            <costSI>43.0</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-06-19 12:09:28.4 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>376078.0</mileage>
+            <fuelPrice>0.7089859851607585</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>60.65</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-22 18:15:03.4 GMT+02:00</creationDate>
+            <cost>51.9</cost>
+            <costSI>51.9</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-06-22 18:14:04.3 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>376494.0</mileage>
+            <fuelPrice>0.829073482428115</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>62.6</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-06-24 08:26:13.4 GMT+02:00</creationDate>
+            <cost>50.22</cost>
+            <costSI>50.22</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-06-24 08:25:24.3 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>376969.0</mileage>
+            <fuelPrice>0.738964096527369</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>67.96</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-07-01 20:28:37.7 GMT+02:00</creationDate>
+            <cost>50.66</cost>
+            <costSI>50.66</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-07-01 20:27:50.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>377540.0</mileage>
+            <fuelPrice>0.7489651094027202</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>67.64</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-07-04 14:45:07.4 GMT+02:00</creationDate>
+            <cost>31.97</cost>
+            <costSI>31.97</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-07-04 14:44:49.2 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>377923.0</mileage>
+            <fuelPrice>0.7289101687186502</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>43.86</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-07-04 19:38:59.6 GMT+02:00</creationDate>
+            <cost>35.2</cost>
+            <costSI>35.2</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-07-04 19:38:14.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>378256.0</mileage>
+            <fuelPrice>0.8290155440414508</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>42.46</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-07-06 15:43:19.1 GMT+02:00</creationDate>
+            <cost>30.86</cost>
+            <costSI>30.86</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-07-06 15:42:45.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>378582.0</mileage>
+            <fuelPrice>1.5239506172839505</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>20.25</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-07-06 17:03:41.5 GMT+02:00</creationDate>
+            <cost>44.81</cost>
+            <costSI>44.81</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-07-06 17:03:13.6 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>378708.0</mileage>
+            <fuelPrice>0.7490805750585089</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>59.82</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-07-06 21:24:25.7 GMT+02:00</creationDate>
+            <cost>41.45</cost>
+            <costSI>41.45</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-07-06 21:22:27.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>379157.0</mileage>
+            <fuelPrice>0.7189939288811796</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>57.65</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-07-10 19:50:13.4 GMT+02:00</creationDate>
+            <cost>44.69</cost>
+            <costSI>44.69</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-07-10 19:49:24.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>379656.0</mileage>
+            <fuelPrice>0.7289186103408904</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>61.31</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-07-16 09:49:15.6 GMT+02:00</creationDate>
+            <cost>50.15</cost>
+            <costSI>50.15</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-07-16 09:47:21.7 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>380178.0</mileage>
+            <fuelPrice>0.7589285714285714</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.08</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-07-16 18:09:43.9 GMT+02:00</creationDate>
+            <cost>43.0</cost>
+            <costSI>43.0</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-07-16 18:08:37.4 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>380642.0</mileage>
+            <fuelPrice>0.7590467784642542</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>56.65</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-07-20 17:45:23.7 GMT+02:00</creationDate>
+            <cost>44.82</cost>
+            <costSI>44.82</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-07-20 17:44:41.5 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>381063.0</mileage>
+            <fuelPrice>0.8289254669872388</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>54.07</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-07-22 08:34:31.8 GMT+02:00</creationDate>
+            <cost>51.38</cost>
+            <costSI>51.38</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-07-22 08:33:21.3 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>381529.0</mileage>
+            <fuelPrice>0.7489795918367348</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>68.6</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-07-29 18:51:22.5 GMT+02:00</creationDate>
+            <cost>48.78</cost>
+            <costSI>48.78</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-07-29 18:50:12.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>382081.0</mileage>
+            <fuelPrice>0.7489636112390604</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>65.13</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-07-31 20:45:30.4 GMT+02:00</creationDate>
+            <cost>33.21</cost>
+            <costSI>33.21</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-07-31 20:44:16.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>382432.0</mileage>
+            <fuelPrice>0.7589122486288848</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>43.76</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-08-01 01:00:54.8 GMT+02:00</creationDate>
+            <cost>45.07</cost>
+            <costSI>45.07</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-08-01 01:00:20.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>382885.0</mileage>
+            <fuelPrice>0.759009767598518</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>59.38</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-08-04 15:44:06.6 GMT+02:00</creationDate>
+            <cost>31.95</cost>
+            <costSI>31.95</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-08-04 15:32:18.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>383170.0</mileage>
+            <fuelPrice>0.7589073634204275</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>42.1</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-08-04 19:30:17.1 GMT+02:00</creationDate>
+            <cost>27.28</cost>
+            <costSI>27.28</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-08-04 19:29:39.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>383560.0</mileage>
+            <fuelPrice>1.364</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>20.0</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-08-04 20:04:12.3 GMT+02:00</creationDate>
+            <cost>38.87</cost>
+            <costSI>38.87</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-08-04 20:03:53.7 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>383597.0</mileage>
+            <fuelPrice>0.7590314391720366</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>51.21</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-08-11 08:38:20.2 GMT+02:00</creationDate>
+            <cost>50.62</cost>
+            <costSI>50.62</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-08-11 08:37:30.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>384110.0</mileage>
+            <fuelPrice>0.7489273561177688</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>67.59</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-08-14 21:07:27.8 GMT+02:00</creationDate>
+            <cost>36.01</cost>
+            <costSI>36.01</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-08-14 21:05:34.5 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>384492.0</mileage>
+            <fuelPrice>0.7590640809443507</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>47.44</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-08-15 02:18:44.2 GMT+02:00</creationDate>
+            <cost>44.86</cost>
+            <costSI>44.86</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-08-15 02:17:25.6 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>384953.0</mileage>
+            <fuelPrice>0.7690725184296245</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>58.33</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-09-02 14:46:40.2 GMT+02:00</creationDate>
+            <modifiedDate>2014-09-02 14:47:18.8 GMT+02:00</modifiedDate>
+            <cost>41.15</cost>
+            <costSI>41.15</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-09-02 14:46:27.3 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>385370.0</mileage>
+            <fuelPrice>0.613995822142644</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>67.02</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-09-02 19:57:07.5 GMT+02:00</creationDate>
+            <cost>37.58</cost>
+            <costSI>37.58</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-09-02 19:56:11.3 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>385669.0</mileage>
+            <fuelPrice>0.829031546437238</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>45.33</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-09-04 08:33:27.9 GMT+02:00</creationDate>
+            <cost>44.85</cost>
+            <costSI>44.85</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-09-04 08:33:15.5 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>386116.0</mileage>
+            <fuelPrice>0.6990336658354115</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>64.16</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-09-13 11:44:43.9 GMT+02:00</creationDate>
+            <cost>48.92</cost>
+            <costSI>48.92</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-09-13 11:43:20.6 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>386653.0</mileage>
+            <fuelPrice>0.7100145137880987</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>68.9</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-09-15 18:48:33.2 GMT+02:00</creationDate>
+            <cost>46.79</cost>
+            <costSI>46.79</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-09-15 18:48:12.2 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>387164.0</mileage>
+            <fuelPrice>0.6989841649238124</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.94</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-09-19 16:19:25.7 GMT+02:00</creationDate>
+            <cost>38.37</cost>
+            <costSI>38.37</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-09-19 16:18:48.7 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>387627.0</mileage>
+            <fuelPrice>0.7189432265317593</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>53.37</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-09-19 21:18:04.6 GMT+02:00</creationDate>
+            <cost>27.57</cost>
+            <costSI>27.57</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-09-19 21:16:33.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>388035.0</mileage>
+            <fuelPrice>1.3778110944527735</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>20.01</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-09-19 21:46:41.4 GMT+02:00</creationDate>
+            <cost>38.108</cost>
+            <costSI>38.108</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-09-19 21:44:52.7 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>388057.0</mileage>
+            <fuelPrice>0.7</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>54.44</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-09-22 18:32:36.8 GMT+02:00</creationDate>
+            <cost>49.84</cost>
+            <costSI>49.84</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-09-22 18:31:51.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>388552.0</mileage>
+            <fuelPrice>0.7500376222723852</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>66.45</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-09-23 07:36:17.4 GMT+02:00</creationDate>
+            <cost>49.84</cost>
+            <costSI>49.84</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-09-22 07:35:54.6 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>388572.0</mileage>
+            <fuelPrice>0.7500376222723852</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.45</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-09-23 07:33:21.7 GMT+02:00</creationDate>
+            <cost>49.21</cost>
+            <costSI>49.21</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-09-23 07:32:28.6 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>389041.0</mileage>
+            <fuelPrice>0.7389998498273014</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.59</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-09-26 16:41:05.5 GMT+02:00</creationDate>
+            <cost>33.53</cost>
+            <costSI>33.53</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-09-26 16:40:32.7 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>389408.0</mileage>
+            <fuelPrice>0.7690366972477064</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>43.6</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-09-26 23:01:06.6 GMT+02:00</creationDate>
+            <cost>44.33</cost>
+            <costSI>44.33</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-09-26 22:57:26.6 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>389884.0</mileage>
+            <fuelPrice>0.7690839694656488</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>57.64</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-10-20 15:40:14.4 GMT+02:00</creationDate>
+            <cost>39.23</cost>
+            <costSI>39.23</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-10-20 15:39:14.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>390276.0</mileage>
+            <fuelPrice>0.7499522079908238</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>52.31</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-10-21 08:27:45.9 GMT+02:00</creationDate>
+            <cost>43.6</cost>
+            <costSI>43.6</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-10-21 08:26:36.5 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>390786.0</mileage>
+            <fuelPrice>0.698941968579673</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>62.38</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-10-25 14:33:44.5 GMT+02:00</creationDate>
+            <cost>48.65</cost>
+            <costSI>48.65</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-10-25 14:33:24.4 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>391332.0</mileage>
+            <fuelPrice>0.7190363582618977</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>67.66</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-10-30 18:06:48.8 GMT+01:00</creationDate>
+            <cost>40.44</cost>
+            <costSI>40.44</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-10-30 18:05:52.1 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>391801.0</mileage>
+            <fuelPrice>0.6990492653414001</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>57.85</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-10-30 18:23:29.6 GMT+01:00</creationDate>
+            <cost>42.66</cost>
+            <costSI>42.66</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-10-30 18:23:22.9 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>391801.0</mileage>
+            <fuelPrice>1.4191616766467066</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>30.06</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-11-13 07:38:03.3 GMT+01:00</creationDate>
+            <cost>46.58</cost>
+            <costSI>46.58</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-11-13 07:32:55.8 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>392356.0</mileage>
+            <fuelPrice>0.7190490892250694</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>64.78</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-11-14 18:14:28.8 GMT+01:00</creationDate>
+            <cost>45.22</cost>
+            <costSI>45.22</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-11-14 18:12:33.6 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>392780.0</mileage>
+            <fuelPrice>0.8241297612538728</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>54.87</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-11-17 10:53:02.8 GMT+01:00</creationDate>
+            <modifiedDate>2014-11-17 17:42:41.7 GMT+01:00</modifiedDate>
+            <cost>37.12</cost>
+            <costSI>37.12</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-11-17 10:47:27.6 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>393212.0</mileage>
+            <fuelPrice>0.6140612076095946</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>60.45</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-11-17 17:36:22.1 GMT+01:00</creationDate>
+            <cost>35.56</cost>
+            <costSI>35.56</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-11-17 17:35:12.1 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>393538.0</mileage>
+            <fuelPrice>0.828904428904429</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>42.9</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-11-19 18:41:29.9 GMT+01:00</creationDate>
+            <cost>43.44</cost>
+            <costSI>43.44</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-11-19 18:40:48.3 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>394066.0</mileage>
+            <fuelPrice>0.6689251616877118</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>64.94</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-11-26 08:12:11.9 GMT+01:00</creationDate>
+            <cost>46.48</cost>
+            <costSI>46.48</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-11-26 08:11:00.2 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>394631.0</mileage>
+            <fuelPrice>0.7189481825212682</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>64.65</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-11-28 16:39:00.1 GMT+01:00</creationDate>
+            <cost>33.53</cost>
+            <costSI>33.53</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-11-28 16:37:45.8 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>395025.0</mileage>
+            <fuelPrice>0.7289130434782609</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>46.0</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-11-28 21:14:03.8 GMT+01:00</creationDate>
+            <cost>40.99</cost>
+            <costSI>40.99</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-11-28 21:13:20.2 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>395489.0</mileage>
+            <fuelPrice>0.7530773470512585</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>54.43</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2014-11-30 17:47:43.7 GMT+01:00</creationDate>
+            <cost>42.18</cost>
+            <costSI>42.18</costSI>
+            <currency>EURO</currency>
+            <eventDate>2014-11-30 17:38:21.9 GMT+01:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>395911.0</mileage>
+            <fuelPrice>0.8239890603633523</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>51.19</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 08:24:46.6 GMT+02:00</creationDate>
+            <cost>38.35</cost>
+            <costSI>38.35</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-08-07 08:22:20.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>407906.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>57.84</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 08:22:10.0 GMT+02:00</creationDate>
+            <cost>22.6</cost>
+            <costSI>22.6</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-04-29 08:21:58.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>409373.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>38.96</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 08:37:58.6 GMT+02:00</creationDate>
+            <cost>39.88</cost>
+            <costSI>39.88</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-04-28 08:36:42.6 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>409500.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.61</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 08:19:56.6 GMT+02:00</creationDate>
+            <cost>26.8</cost>
+            <costSI>26.8</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-05-05 08:19:49.6 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>409707.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>46.2</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 08:21:12.4 GMT+02:00</creationDate>
+            <cost>40.04</cost>
+            <costSI>40.04</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-05-05 08:20:54.2 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>409707.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>30.24</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 08:19:07.5 GMT+02:00</creationDate>
+            <cost>29.14</cost>
+            <costSI>29.14</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-05-10 08:19:01.2 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>410064.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>52.13</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 08:18:04.8 GMT+02:00</creationDate>
+            <cost>30.01</cost>
+            <costSI>30.01</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-05-19 08:18:00.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>410580.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.83</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 08:10:17.2 GMT+02:00</creationDate>
+            <cost>21.0</cost>
+            <costSI>21.0</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-05-22 08:10:08.7 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>410985.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>46.78</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 08:08:10.7 GMT+02:00</creationDate>
+            <cost>40.9</cost>
+            <costSI>40.9</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-05-29 08:06:30.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>411363.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>32.36</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 08:16:22.9 GMT+02:00</creationDate>
+            <cost>24.03</cost>
+            <costSI>24.03</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-05-29 08:16:04.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>411363.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>53.52</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 08:05:12.2 GMT+02:00</creationDate>
+            <cost>38.33</cost>
+            <costSI>38.33</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-06-04 08:04:44.2 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>411872.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>66.08</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 08:26:33.7 GMT+02:00</creationDate>
+            <modifiedDate>2015-08-07 08:49:19.1 GMT+02:00</modifiedDate>
+            <cost>24.99</cost>
+            <costSI>24.99</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-06-11 08:49:08.3 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>412358.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>55.66</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 08:03:55.2 GMT+02:00</creationDate>
+            <modifiedDate>2015-08-07 08:50:06.6 GMT+02:00</modifiedDate>
+            <cost>14.34</cost>
+            <costSI>14.34</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-06-12 08:50:05.2 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>412493.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>24.73</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 08:02:26.0 GMT+02:00</creationDate>
+            <cost>30.72</cost>
+            <costSI>30.72</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-06-21 08:02:14.8 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>412838.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>51.29</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 08:01:17.3 GMT+02:00</creationDate>
+            <cost>45.49</cost>
+            <costSI>45.49</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-06-26 08:01:00.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>413300.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>70.1</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 07:59:56.1 GMT+02:00</creationDate>
+            <cost>34.52</cost>
+            <costSI>34.52</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-07-01 07:59:42.2 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>413752.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>57.63</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.MaintenanceEntry">
+            <comment>Timing of the engine, catalytic converters, front axle  + rear axle</comment>
+            <creationDate>2015-07-29 12:27:36.1 GMT+02:00</creationDate>
+            <modifiedDate>2015-07-31 11:04:39.5 GMT+02:00</modifiedDate>
+            <cost>1000.0</cost>
+            <costSI>1000.0</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-07-27 12:27:32.8 GMT+02:00</eventDate>
+            <expenseType>MAINTENANCE</expenseType>
+            <mileage>414000.0</mileage>
+            <laborCost>600.0</laborCost>
+            <laborCostCurrency>EURO</laborCostCurrency>
+            <laborCostSI>600.0</laborCostSI>
+            <replacementPart>
+               <comment>Front shocks</comment>
+               <creationDate>2015-07-29 12:38:37.2 GMT+02:00</creationDate>
+               <currency>EURO</currency>
+               <price>0.0</price>
+               <priceSI>0.0</priceSI>
+               <producer>Bilstein</producer>
+               <condition>NEW</condition>
+               <quantity>2</quantity>
+               <originality>OEM</originality>
+            </replacementPart>
+            <replacementPart>
+               <comment>Rear shocks</comment>
+               <creationDate>2015-07-29 12:38:56.9 GMT+02:00</creationDate>
+               <currency>EURO</currency>
+               <price>0.0</price>
+               <priceSI>0.0</priceSI>
+               <producer>Bilstein</producer>
+               <condition>NEW</condition>
+               <quantity>2</quantity>
+               <originality>OEM</originality>
+            </replacementPart>
+            <replacementPart>
+               <comment>Front springs</comment>
+               <creationDate>2015-07-29 12:39:27.3 GMT+02:00</creationDate>
+               <currency>EURO</currency>
+               <price>0.0</price>
+               <priceSI>0.0</priceSI>
+               <producer>Bilstein</producer>
+               <condition>NEW</condition>
+               <quantity>2</quantity>
+               <originality>OEM</originality>
+            </replacementPart>
+            <replacementPart>
+               <comment>Rear springs</comment>
+               <creationDate>2015-07-29 12:39:48.2 GMT+02:00</creationDate>
+               <currency>EURO</currency>
+               <price>0.0</price>
+               <priceSI>0.0</priceSI>
+               <producer>Bilstein</producer>
+               <condition>NEW</condition>
+               <quantity>2</quantity>
+               <originality>OEM</originality>
+            </replacementPart>
+            <replacementPart>
+               <comment>Catalytic converters</comment>
+               <creationDate>2015-07-29 12:40:09.8 GMT+02:00</creationDate>
+               <currency>EURO</currency>
+               <price>200.0</price>
+               <priceSI>200.0</priceSI>
+               <producer>Unknown</producer>
+               <condition>NEW</condition>
+               <quantity>2</quantity>
+               <originality>OEM</originality>
+            </replacementPart>
+            <type>UNPLANNED</type>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 07:56:55.7 GMT+02:00</creationDate>
+            <cost>38.36</cost>
+            <costSI>38.36</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-07-14 07:56:42.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>414158.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>59.1</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-03 09:33:14.4 GMT+02:00</creationDate>
+            <cost>40.29</cost>
+            <costSI>40.29</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-08-03 09:32:38.7 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>414521.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>GASOLINE</fuelType>
+            <fuelVolume>30.09</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.MaintenanceEntry">
+            <comment>lean/rich mixture adjustment termostat broken possibly?</comment>
+            <creationDate>2015-08-03 11:43:26.6 GMT+02:00</creationDate>
+            <cost>15.0</cost>
+            <costSI>15.0</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-08-03 11:41:37.5 GMT+02:00</eventDate>
+            <expenseType>MAINTENANCE</expenseType>
+            <mileage>414639.0</mileage>
+            <laborCost>15.0</laborCost>
+            <laborCostCurrency>EURO</laborCostCurrency>
+            <laborCostSI>15.0</laborCostSI>
+            <type>UNPLANNED</type>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-03 12:46:44.5 GMT+02:00</creationDate>
+            <cost>39.05</cost>
+            <costSI>39.05</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-08-03 12:45:59.4 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>414710.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>57.51</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.TollEntry">
+            <comment>Austrian vignette</comment>
+            <creationDate>2015-08-03 12:48:03.5 GMT+02:00</creationDate>
+            <cost>8.7</cost>
+            <costSI>8.7</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-08-03 12:47:19.7 GMT+02:00</eventDate>
+            <expenseType>TOLL</expenseType>
+            <mileage>414710.0</mileage>
+            <type>TOLL_ROAD</type>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-03 14:40:02.0 GMT+02:00</creationDate>
+            <cost>20.53</cost>
+            <costSI>20.53</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-08-03 14:38:08.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>414891.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>25.7</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-04 18:25:39.6 GMT+02:00</creationDate>
+            <cost>30.24</cost>
+            <costSI>30.24</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-08-04 18:21:48.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>415306.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>52.22</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.MaintenanceEntry">
+            <comment>thermostat, axle alignment</comment>
+            <creationDate>2015-08-06 18:08:39.6 GMT+02:00</creationDate>
+            <cost>275.0</cost>
+            <costSI>275.0</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-08-06 18:05:29.6 GMT+02:00</eventDate>
+            <expenseType>MAINTENANCE</expenseType>
+            <mileage>415502.0</mileage>
+            <laborCost>165.0</laborCost>
+            <laborCostCurrency>EURO</laborCostCurrency>
+            <laborCostSI>165.0</laborCostSI>
+            <replacementPart>
+               <comment>thermostat</comment>
+               <creationDate>2015-08-06 18:07:53.6 GMT+02:00</creationDate>
+               <currency>EURO</currency>
+               <price>110.0</price>
+               <priceSI>110.0</priceSI>
+               <condition>NEW</condition>
+               <quantity>1</quantity>
+               <originality>AFTERMARKET</originality>
+            </replacementPart>
+            <type>UNPLANNED</type>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-08-07 18:37:21.2 GMT+02:00</creationDate>
+            <cost>23.51</cost>
+            <costSI>23.51</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-08-07 18:36:47.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>415657.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>LPG</fuelType>
+            <fuelVolume>40.61</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+      </history>
+      <initialMileage>197200.0</initialMileage>
+      <licensePlate>TN-623DL</licensePlate>
+      <model>CL 420</model>
+      <modelYear>1998</modelYear>
+      <nickname>mamut</nickname>
+      <type>SEDAN</type>
+      <volumeUnit>LITER</volumeUnit>
+   </car>
+   <car>
+      <creationDate>2015-06-21 16:59:00.6 GMT+02:00</creationDate>
+      <modifiedDate>2015-06-21 16:59:32.6 GMT+02:00</modifiedDate>
+      <brand>Volkswagen</brand>
+      <consumptionUnit>LITRE_PER_100KM</consumptionUnit>
+      <currentMileage>232683.0</currentMileage>
+      <distanceUnit>KILOMETER</distanceUnit>
+      <history>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-07-08 22:06:24.5 GMT+02:00</creationDate>
+            <cost>49.55</cost>
+            <costSI>49.55</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-07-08 22:05:29.7 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>228023.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>DIESEL</fuelType>
+            <fuelVolume>44.28</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-07-08 22:04:19.0 GMT+02:00</creationDate>
+            <cost>72.14</cost>
+            <costSI>72.14</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-07-08 22:02:45.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>229388.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>DIESEL</fuelType>
+            <fuelVolume>61.71</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-07-17 16:39:09.8 GMT+02:00</creationDate>
+            <cost>74.39</cost>
+            <costSI>74.39</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-07-17 16:35:00.2 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>230551.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>DIESEL</fuelType>
+            <fuelVolume>63.1</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-07-20 13:23:17.6 GMT+02:00</creationDate>
+            <cost>68.0</cost>
+            <costSI>68.0</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-07-20 13:22:51.1 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>231623.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>DIESEL</fuelType>
+            <fuelVolume>58.83</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+         <entry class="sk.berops.android.fueller.dataModel.expense.FuellingEntry">
+            <creationDate>2015-07-26 18:56:29.6 GMT+02:00</creationDate>
+            <cost>58.42</cost>
+            <costSI>58.42</costSI>
+            <currency>EURO</currency>
+            <eventDate>2015-07-26 18:56:03.9 GMT+02:00</eventDate>
+            <expenseType>FUEL</expenseType>
+            <mileage>232683.0</mileage>
+            <fuelPrice>0.0</fuelPrice>
+            <fuelType>DIESEL</fuelType>
+            <fuelVolume>49.3</fuelVolume>
+            <volumeUnit>LITER</volumeUnit>
+         </entry>
+      </history>
+      <initialMileage>227935.0</initialMileage>
+      <licensePlate>TN-076EH</licensePlate>
+      <model>Passat</model>
+      <modelYear>1997</modelYear>
+      <type>SEDAN</type>
+      <volumeUnit>LITER</volumeUnit>
+   </car>
+</garage>

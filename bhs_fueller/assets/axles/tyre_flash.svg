@@ -14,12 +14,25 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="tyre_empty.svg"
-   inkscape:export-filename="/mnt/public/workspace/git/bhs_fueller/bhs_fueller/assets/axles/tyre_empty.png"
+   sodipodi:docname="tyre_flash.svg"
+   inkscape:export-filename="/mnt/public/workspace/git/bhs_fueller/bhs_fueller/assets/axles/tyre_flash.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
-     id="defs4" />
+     id="defs4">
+    <filter
+       inkscape:collect="always"
+       id="filter4365"
+       x="-0.13531211"
+       width="1.2706242"
+       y="-0.06236123"
+       height="1.1247225">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="8.5375497"
+         id="feGaussianBlur4367" />
+    </filter>
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -28,7 +41,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="-337.29034"
+     inkscape:cx="102.30507"
      inkscape:cy="784.64721"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -46,7 +59,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -55,7 +68,7 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="fill:none;stroke:#b4b4b4;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:24,24;stroke-dashoffset:0"
+       style="fill:none;stroke:#ff8e00;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;opacity:1;filter:url(#filter4365)"
        id="rect2985"
        width="151.42857"
        height="328.57144"

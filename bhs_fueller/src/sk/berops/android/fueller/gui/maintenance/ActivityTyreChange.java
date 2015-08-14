@@ -87,11 +87,6 @@ public class ActivityTyreChange extends ActivityAddEventGeneric {
 		editTextComment = (EditText) findViewById(R.id.activity_tyre_change_comment);
 
 		textViewDisplayDate = (TextView) findViewById(R.id.activity_tyre_change_date_text);
-		
-		PriceCalculateListener priceCalculator = new PriceCalculateListener();
-		editTextTyresCost.addTextChangedListener(priceCalculator);
-		editTextLaborCost.addTextChangedListener(priceCalculator);
-		editTextSmallPartsCost.addTextChangedListener(priceCalculator);
 	}
 
 	@Override
@@ -101,7 +96,10 @@ public class ActivityTyreChange extends ActivityAddEventGeneric {
 	
 	@Override
 	protected void initializeGuiObjects() {
-		// TODO Auto-generated method stub	
+		PriceCalculateListener priceCalculator = new PriceCalculateListener();
+		editTextTyresCost.addTextChangedListener(priceCalculator);
+		editTextLaborCost.addTextChangedListener(priceCalculator);
+		editTextSmallPartsCost.addTextChangedListener(priceCalculator);
 	}
 	
 	private void readCosts() {
