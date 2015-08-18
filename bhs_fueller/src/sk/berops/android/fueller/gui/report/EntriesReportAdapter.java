@@ -40,14 +40,9 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		this.entries = entries;
 	}
 	
-	public void notifyEntriesSetChanged(LinkedList<Entry> entries) {
-		this.entries = entries;
-		this.notifyDataSetChanged();
-	}
-
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		if (entries.size() <= 0) {
+		if ((entries.size() -1 - position) < 0) {
 			return convertView;
 		}
 		

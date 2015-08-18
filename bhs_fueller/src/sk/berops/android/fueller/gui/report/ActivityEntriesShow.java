@@ -41,7 +41,9 @@ public class ActivityEntriesShow extends Activity implements FragmentEntryEditDe
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_entries_show);
-		entries = MainActivity.garage.getActiveCar().getHistory().getEntries();
+		// need to create a copy of the entries list on which we will do the filtering of the viewing items
+		// we also do the intial population of this list
+		entries = new LinkedList<Entry>(MainActivity.garage.getActiveCar().getHistory().getEntries());
 		attachGuiObjects();
 		styleGuiObjects();
 		initializeGuiObjects();
@@ -85,15 +87,17 @@ public class ActivityEntriesShow extends Activity implements FragmentEntryEditDe
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
+				LinkedList<Entry> newEntries;
 				if (position == 0) {
-					entries = MainActivity.garage.getActiveCar().getHistory().getEntries(); 
+					newEntries = MainActivity.garage.getActiveCar().getHistory().getEntries(); 
 				} else {
 					position--;
 					Entry.ExpenseType type = Entry.ExpenseType.getExpenseType(position);
-					entries = MainActivity.garage.getActiveCar().getHistory().getEntriesFiltered(type);
-				} 
-				Log.d("DEBUG", "Size: "+ entries.size());
-				adapter.notifyEntriesSetChanged(entries);
+					newEntries = MainActivity.garage.getActiveCar().getHistory().getEntriesFiltered(type);
+				}
+				feedNewEntries(entries, newEntries);
+				adapter.notifyDataSetChanged();
+				
 			}
 
 			@Override
@@ -154,5 +158,15 @@ public class ActivityEntriesShow extends Activity implements FragmentEntryEditDe
 
 	public void setSelectedEntryPosition(int selectedEntryPosition) {
 		this.selectedEntryPosition = selectedEntryPosition;
+	}
+	
+	private void feedNewEntries(LinkedList<Entry> oldEntries, LinkedList<Entry> newEntries) {
+		Log.d("DEBUG", "oldEntries: "+ oldEntries.size());
+		Log.d("DEBUG", "newEntries: "+ newEntries.size());
+		oldEntries.clear();
+		for (Entry e : newEntries) {
+			oldEntries.add(e);
+		}
+		Log.d("DEBUG", "New queue size: "+ oldEntries.size());
 	}
 }
