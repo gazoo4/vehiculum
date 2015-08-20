@@ -115,14 +115,16 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 		this.expenseType = expenseType;
 	}
 	public enum ExpenseType{
-		FUEL(0, "fuel"), //fossil fuels, electricity
-		MAINTENANCE(1, "maintenance"), //any maintenance action
-		SERVICE(2, "service"), //tow service, replacement car service
+		FUEL(0, "fuel"), // fossil fuels, electricity
+		MAINTENANCE(1, "maintenance"), // any maintenance action
+		SERVICE(2, "service"), // tow service, replacement car service
 		TYRES(3, "tyres"),
-		TOLL(4, "toll"), //ferry fee, highway vignette...
-		INSURANCE(5, "insurance"), //basic insurance or extended insurance
-		BURREAUCRATIC(6, "burreaucratic"), //technical compliancy check fee (TUEV), import tax, eco class tax,...
+		TOLL(4, "toll"), // ferry fee, highway vignette...
+		INSURANCE(5, "insurance"), // basic insurance or extended insurance
+		BURREAUCRATIC(6, "burreaucratic"), // technical compliancy check fee (TUEV), import tax, eco class tax,...
 		OTHER(Integer.MAX_VALUE, "other");
+		// always update when adding new type
+		public static final int COUNT = 8;
 		
 		private int id;
 		private String expenseType;	

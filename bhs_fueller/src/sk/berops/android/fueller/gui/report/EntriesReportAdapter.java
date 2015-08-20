@@ -11,6 +11,7 @@ import sk.berops.android.fueller.dataModel.UnitConstants.ConsumptionUnit;
 import sk.berops.android.fueller.dataModel.calculation.FuelConsumption;
 import sk.berops.android.fueller.dataModel.expense.BurreaucraticEntry;
 import sk.berops.android.fueller.dataModel.expense.Entry;
+import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.dataModel.expense.InsuranceEntry;
 import sk.berops.android.fueller.dataModel.expense.MaintenanceEntry;
@@ -22,6 +23,7 @@ import sk.berops.android.fueller.gui.common.TextFormatter;
 import sk.berops.android.fueller.R;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,14 +42,31 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		this.entries = entries;
 	}
 	
+	private Entry getEntry(int position) {
+		int id = entries.size() - 1 - position;
+		if (id < 0) {
+			return null;
+		}
+		return entries.get(id);
+	}
+	
+	@Override
+	public int getViewTypeCount() {
+		return Entry.ExpenseType.COUNT;
+	}
+	
+	@Override
+	public int getItemViewType(int position) {
+		return getEntry(position).getExpenseType().getId();
+	}
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		if ((entries.size() -1 - position) < 0) {
+		Entry entry = getEntry(position);
+		if (entry == null) {
 			return convertView;
 		}
 		
-		Entry entry = entries.get(entries.size() - 1 - position);
-
 		switch (entry.getExpenseType()) {
 		case TOLL:
 			return getViewTollEntry((TollEntry) entry, convertView, parent);
@@ -73,21 +92,22 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 
 	private View getViewFuellingEntry(FuellingEntry entry, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		// TODO: listen to the warning below for smoother scrolling
-		View rowView = inflater.inflate(R.layout.list_stats_fuelling, parent, false);
+		if (convertView == null) {
+			convertView = inflater.inflate(R.layout.list_stats_fuelling, parent, false);
+		}
 
-		TextView dynamicId = (TextView) rowView.findViewById(R.id.list_stats_fuelling_dynamic_id);
-		TextView mileage = (TextView) rowView.findViewById(R.id.list_stats_fuelling_mileage);
-		TextView date = (TextView) rowView.findViewById(R.id.list_stats_fuelling_date);
-		TextView totalPrice = (TextView) rowView.findViewById(R.id.list_stats_fuelling_total_price);
-		TextView totalPriceUnit = (TextView) rowView.findViewById(R.id.list_stats_fuelling_total_price_unit);
-		TextView unitPrice = (TextView) rowView.findViewById(R.id.list_stats_fuelling_unit_price);
-		TextView unitPriceUnit = (TextView) rowView.findViewById(R.id.list_stats_fuelling_unit_price_unit);
-		TextView volume = (TextView) rowView.findViewById(R.id.list_stats_fuelling_volume);
-		TextView volumeUnit = (TextView) rowView.findViewById(R.id.list_stats_fuelling_volume_unit);
-		TextView fuel = (TextView) rowView.findViewById(R.id.list_stats_fuelling_fuel);
-		TextView consumption = (TextView) rowView.findViewById(R.id.list_stats_fuelling_consumption);
-		TextView consumptionUnit = (TextView) rowView.findViewById(R.id.list_stats_fuelling_consumption_unit);
+		TextView dynamicId = (TextView) convertView.findViewById(R.id.list_stats_fuelling_dynamic_id);
+		TextView mileage = (TextView) convertView.findViewById(R.id.list_stats_fuelling_mileage);
+		TextView date = (TextView) convertView.findViewById(R.id.list_stats_fuelling_date);
+		TextView totalPrice = (TextView) convertView.findViewById(R.id.list_stats_fuelling_total_price);
+		TextView totalPriceUnit = (TextView) convertView.findViewById(R.id.list_stats_fuelling_total_price_unit);
+		TextView unitPrice = (TextView) convertView.findViewById(R.id.list_stats_fuelling_unit_price);
+		TextView unitPriceUnit = (TextView) convertView.findViewById(R.id.list_stats_fuelling_unit_price_unit);
+		TextView volume = (TextView) convertView.findViewById(R.id.list_stats_fuelling_volume);
+		TextView volumeUnit = (TextView) convertView.findViewById(R.id.list_stats_fuelling_volume_unit);
+		TextView fuel = (TextView) convertView.findViewById(R.id.list_stats_fuelling_fuel);
+		TextView consumption = (TextView) convertView.findViewById(R.id.list_stats_fuelling_consumption);
+		TextView consumptionUnit = (TextView) convertView.findViewById(R.id.list_stats_fuelling_consumption_unit);
 
 		consumption.setShadowLayer(15, 0, 0, Color.WHITE);
 
@@ -125,23 +145,24 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		
 		fuel.setTextColor(entry.getFuelType().getColor());
 
-		return rowView;
+		return convertView;
 	}
 
 	private View getViewMaintenanceEntry(MaintenanceEntry entry, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		// TODO: listen to the warning below for smoother scrolling
-		View rowView = inflater.inflate(R.layout.list_stats_maintenance, parent, false);
+		if (convertView == null) {
+			convertView = inflater.inflate(R.layout.list_stats_maintenance, parent, false);
+		}
 
-		TextView dynamicId = (TextView) rowView.findViewById(R.id.list_stats_maintenance_dynamic_id);
-		TextView mileage = (TextView) rowView.findViewById(R.id.list_stats_maintenance_mileage);
-		TextView date = (TextView) rowView.findViewById(R.id.list_stats_maintenance_date);
-		TextView partsCost = (TextView) rowView.findViewById(R.id.list_stats_maintenance_parts_cost);
-		TextView partsCostUnit = (TextView) rowView.findViewById(R.id.list_stats_maintenance_parts_cost_unit);
-		TextView totalCost = (TextView) rowView.findViewById(R.id.list_stats_maintenance_total_cost);
-		TextView totalCostUnit = (TextView) rowView.findViewById(R.id.list_stats_maintenance_total_cost_unit);
-		TextView entryType = (TextView) rowView.findViewById(R.id.list_stats_maintenance_entry_type);
-		TextView comment = (TextView) rowView.findViewById(R.id.list_stats_maintenance_comment);
+		TextView dynamicId = (TextView) convertView.findViewById(R.id.list_stats_maintenance_dynamic_id);
+		TextView mileage = (TextView) convertView.findViewById(R.id.list_stats_maintenance_mileage);
+		TextView date = (TextView) convertView.findViewById(R.id.list_stats_maintenance_date);
+		TextView partsCost = (TextView) convertView.findViewById(R.id.list_stats_maintenance_parts_cost);
+		TextView partsCostUnit = (TextView) convertView.findViewById(R.id.list_stats_maintenance_parts_cost_unit);
+		TextView totalCost = (TextView) convertView.findViewById(R.id.list_stats_maintenance_total_cost);
+		TextView totalCostUnit = (TextView) convertView.findViewById(R.id.list_stats_maintenance_total_cost_unit);
+		TextView entryType = (TextView) convertView.findViewById(R.id.list_stats_maintenance_entry_type);
+		TextView comment = (TextView) convertView.findViewById(R.id.list_stats_maintenance_comment);
 
 		dynamicId.setText(Integer.toString(entry.getDynamicId()));
 
@@ -162,22 +183,23 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
 
-		return rowView;
+		return convertView;
 	}
 	
 	private View getViewServiceEntry(ServiceEntry entry, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		// TODO: listen to the warning below for smoother scrolling
-		View rowView = inflater.inflate(R.layout.list_stats_service, parent, false);
+		if (convertView == null) {
+			convertView = inflater.inflate(R.layout.list_stats_service, parent, false);
+		}
 
-		TextView dynamicId = (TextView) rowView.findViewById(R.id.list_stats_service_dynamic_id);
-		TextView mileage = (TextView) rowView.findViewById(R.id.list_stats_service_mileage);
-		TextView date = (TextView) rowView.findViewById(R.id.list_stats_service_date);
-		TextView serviceType = (TextView) rowView.findViewById(R.id.list_stats_service_type);
-		TextView totalCost = (TextView) rowView.findViewById(R.id.list_stats_service_cost);
-		TextView totalCostUnit = (TextView) rowView.findViewById(R.id.list_stats_service_cost_unit);
-		TextView entryType = (TextView) rowView.findViewById(R.id.list_stats_service_entry_type);
-		TextView comment = (TextView) rowView.findViewById(R.id.list_stats_service_comment);
+		TextView dynamicId = (TextView) convertView.findViewById(R.id.list_stats_service_dynamic_id);
+		TextView mileage = (TextView) convertView.findViewById(R.id.list_stats_service_mileage);
+		TextView date = (TextView) convertView.findViewById(R.id.list_stats_service_date);
+		TextView serviceType = (TextView) convertView.findViewById(R.id.list_stats_service_type);
+		TextView totalCost = (TextView) convertView.findViewById(R.id.list_stats_service_cost);
+		TextView totalCostUnit = (TextView) convertView.findViewById(R.id.list_stats_service_cost_unit);
+		TextView entryType = (TextView) convertView.findViewById(R.id.list_stats_service_entry_type);
+		TextView comment = (TextView) convertView.findViewById(R.id.list_stats_service_comment);
 
 		dynamicId.setText(Integer.toString(entry.getDynamicId()));
 
@@ -195,22 +217,23 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
 		
-		return rowView;
+		return convertView;
 	}
 	
 	private View getViewInsuranceEntry(InsuranceEntry entry, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		// TODO: listen to the warning below for smoother scrolling
-		View rowView = inflater.inflate(R.layout.list_stats_insurance, parent, false);
-
-		TextView dynamicId = (TextView) rowView.findViewById(R.id.list_stats_insurance_dynamic_id);
-		TextView mileage = (TextView) rowView.findViewById(R.id.list_stats_insurance_mileage);
-		TextView date = (TextView) rowView.findViewById(R.id.list_stats_insurance_date);
-		TextView insuranceType = (TextView) rowView.findViewById(R.id.list_stats_insurance_type);
-		TextView totalCost = (TextView) rowView.findViewById(R.id.list_stats_insurance_cost);
-		TextView totalCostUnit = (TextView) rowView.findViewById(R.id.list_stats_insurance_cost_unit);
-		TextView entryType = (TextView) rowView.findViewById(R.id.list_stats_insurance_entry_type);
-		TextView comment = (TextView) rowView.findViewById(R.id.list_stats_insurance_comment);
+		if (convertView == null) {
+			convertView = inflater.inflate(R.layout.list_stats_insurance, parent, false);
+		}
+		
+		TextView dynamicId = (TextView) convertView.findViewById(R.id.list_stats_insurance_dynamic_id);
+		TextView mileage = (TextView) convertView.findViewById(R.id.list_stats_insurance_mileage);
+		TextView date = (TextView) convertView.findViewById(R.id.list_stats_insurance_date);
+		TextView insuranceType = (TextView) convertView.findViewById(R.id.list_stats_insurance_type);
+		TextView totalCost = (TextView) convertView.findViewById(R.id.list_stats_insurance_cost);
+		TextView totalCostUnit = (TextView) convertView.findViewById(R.id.list_stats_insurance_cost_unit);
+		TextView entryType = (TextView) convertView.findViewById(R.id.list_stats_insurance_entry_type);
+		TextView comment = (TextView) convertView.findViewById(R.id.list_stats_insurance_comment);
 
 		dynamicId.setText(Integer.toString(entry.getDynamicId()));
 
@@ -228,22 +251,23 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
 		
-		return rowView;
+		return convertView;
 	}
 	
 	private View getViewTollEntry(TollEntry entry, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		// TODO: listen to the warning below for smoother scrolling
-		View rowView = inflater.inflate(R.layout.list_stats_toll, parent, false);
+		if (convertView == null) {
+			convertView = inflater.inflate(R.layout.list_stats_toll, parent, false);
+		}
 
-		TextView dynamicId = (TextView) rowView.findViewById(R.id.list_stats_toll_dynamic_id);
-		TextView mileage = (TextView) rowView.findViewById(R.id.list_stats_toll_mileage);
-		TextView date = (TextView) rowView.findViewById(R.id.list_stats_toll_date);
-		TextView tollType = (TextView) rowView.findViewById(R.id.list_stats_toll_type);
-		TextView totalCost = (TextView) rowView.findViewById(R.id.list_stats_toll_cost);
-		TextView totalCostUnit = (TextView) rowView.findViewById(R.id.list_stats_toll_cost_unit);
-		TextView entryType = (TextView) rowView.findViewById(R.id.list_stats_toll_entry_type);
-		TextView comment = (TextView) rowView.findViewById(R.id.list_stats_toll_comment);
+		TextView dynamicId = (TextView) convertView.findViewById(R.id.list_stats_toll_dynamic_id);
+		TextView mileage = (TextView) convertView.findViewById(R.id.list_stats_toll_mileage);
+		TextView date = (TextView) convertView.findViewById(R.id.list_stats_toll_date);
+		TextView tollType = (TextView) convertView.findViewById(R.id.list_stats_toll_type);
+		TextView totalCost = (TextView) convertView.findViewById(R.id.list_stats_toll_cost);
+		TextView totalCostUnit = (TextView) convertView.findViewById(R.id.list_stats_toll_cost_unit);
+		TextView entryType = (TextView) convertView.findViewById(R.id.list_stats_toll_entry_type);
+		TextView comment = (TextView) convertView.findViewById(R.id.list_stats_toll_comment);
 
 		dynamicId.setText(Integer.toString(entry.getDynamicId()));
 
@@ -261,21 +285,22 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
 		
-		return rowView;
+		return convertView;
 	}
 	
 	private View getViewBurreaucraticEntry(BurreaucraticEntry entry, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		// TODO: listen to the warning below for smoother scrolling
-		View rowView = inflater.inflate(R.layout.list_stats_burreaucratic, parent, false);
+		if (convertView == null) {
+			convertView = inflater.inflate(R.layout.list_stats_burreaucratic, parent, false);
+		}
 
-		TextView dynamicId = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_dynamic_id);
-		TextView mileage = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_mileage);
-		TextView date = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_date);
-		TextView totalCost = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_cost);
-		TextView totalCostUnit = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_cost_unit);
-		TextView entryType = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_entry_type);
-		TextView comment = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_comment);
+		TextView dynamicId = (TextView) convertView.findViewById(R.id.list_stats_burreaucratic_dynamic_id);
+		TextView mileage = (TextView) convertView.findViewById(R.id.list_stats_burreaucratic_mileage);
+		TextView date = (TextView) convertView.findViewById(R.id.list_stats_burreaucratic_date);
+		TextView totalCost = (TextView) convertView.findViewById(R.id.list_stats_burreaucratic_cost);
+		TextView totalCostUnit = (TextView) convertView.findViewById(R.id.list_stats_burreaucratic_cost_unit);
+		TextView entryType = (TextView) convertView.findViewById(R.id.list_stats_burreaucratic_entry_type);
+		TextView comment = (TextView) convertView.findViewById(R.id.list_stats_burreaucratic_comment);
 
 		dynamicId.setText(Integer.toString(entry.getDynamicId()));
 
@@ -291,7 +316,7 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
 		
-		return rowView;
+		return convertView;
 	}
 
 }

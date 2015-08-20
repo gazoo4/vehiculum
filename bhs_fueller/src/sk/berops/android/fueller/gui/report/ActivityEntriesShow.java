@@ -161,12 +161,9 @@ public class ActivityEntriesShow extends Activity implements FragmentEntryEditDe
 	}
 	
 	private void feedNewEntries(LinkedList<Entry> oldEntries, LinkedList<Entry> newEntries) {
-		Log.d("DEBUG", "oldEntries: "+ oldEntries.size());
-		Log.d("DEBUG", "newEntries: "+ newEntries.size());
 		oldEntries.clear();
 		for (Entry e : newEntries) {
 			oldEntries.add(e);
 		}
-		Log.d("DEBUG", "New queue size: "+ oldEntries.size());
 	}
 }
