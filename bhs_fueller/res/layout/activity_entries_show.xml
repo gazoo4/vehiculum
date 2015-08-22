@@ -28,7 +28,7 @@
     <ListView
         android:id="@+id/activity_entries_list_listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" 
-        android:layout_below="@id/activity_entries_list_type_layout"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/activity_entries_list_type_layout" />
 
 </RelativeLayout>

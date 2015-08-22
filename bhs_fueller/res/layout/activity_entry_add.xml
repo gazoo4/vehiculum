@@ -5,32 +5,26 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/background_blue"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin" >
-        
+
         <TextView
             android:id="@+id/activity_entry_add_header"
             style="@style/caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/activity_entry_add_header" />
-        
-        <LinearLayout
-            android:id="@+id/activity_entry_add_layout_buttons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_alignParentBottom="true">
 
         <Button
             android:id="@+id/activity_entry_add_button_refuel"
             style="@style/button_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/activity_entry_add_header"
             android:background="@drawable/red_button"
             android:drawableLeft="@drawable/gaspump_tiny"
             android:onClick="onClick"
@@ -39,8 +33,9 @@
         <Button
             android:id="@+id/activity_entry_add_button_tyres_change"
             style="@style/button_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/activity_entry_add_button_refuel"
             android:background="@drawable/red_button"
             android:onClick="onClick"
             android:text="@string/activity_entry_add_button_tyres_change" />
@@ -48,8 +43,9 @@
         <Button
             android:id="@+id/activity_entry_add_button_maintenance"
             style="@style/button_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/activity_entry_add_button_tyres_change"
             android:background="@drawable/red_button"
             android:onClick="onClick"
             android:text="@string/activity_entry_add_button_maintenance" />
@@ -57,8 +53,9 @@
         <Button
             android:id="@+id/activity_entry_add_button_service"
             style="@style/button_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/activity_entry_add_button_maintenance"
             android:background="@drawable/red_button"
             android:onClick="onClick"
             android:text="@string/activity_entry_add_button_service" />
@@ -66,8 +63,9 @@
         <Button
             android:id="@+id/activity_entry_add_button_toll"
             style="@style/button_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/activity_entry_add_button_service"
             android:background="@drawable/red_button"
             android:onClick="onClick"
             android:text="@string/activity_entry_add_button_toll" />
@@ -75,8 +73,9 @@
         <Button
             android:id="@+id/activity_entry_add_button_insurance"
             style="@style/button_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/activity_entry_add_button_toll"
             android:background="@drawable/red_button"
             android:onClick="onClick"
             android:text="@string/activity_entry_add_button_insurance" />
@@ -84,12 +83,12 @@
         <Button
             android:id="@+id/activity_entry_add_button_burreaucratic"
             style="@style/button_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/activity_entry_add_button_insurance"
             android:background="@drawable/red_button"
             android:onClick="onClick"
             android:text="@string/activity_entry_add_button_burreaucratic" />
-        </LinearLayout>
     </RelativeLayout>
 
 </ScrollView>
