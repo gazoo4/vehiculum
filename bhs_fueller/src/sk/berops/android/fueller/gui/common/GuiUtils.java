@@ -3,6 +3,8 @@ package sk.berops.android.fueller.gui.common;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
+import java.util.LinkedList;
 
 import android.R.integer;
 import android.content.Context;
@@ -17,6 +19,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.EditText;
 import sk.berops.android.fueller.R;
+import sk.berops.android.fueller.dataModel.maintenance.Tyre;
+import sk.berops.android.fueller.gui.maintenance.TyreGUIContainer;
 
 public class GuiUtils {
 	
@@ -67,5 +71,33 @@ public class GuiUtils {
 		int green = (int) (Color.green(start) + Math.round((Color.green(end) - Color.green(start)) * distance));
 		int blue = (int) (Color.blue(start) + Math.round((Color.blue(end) - Color.blue(start)) * distance));
 		return 0x00000000 | alpha<<24 | red<<16 | green<<8 | blue;
+	}
+	
+	/**
+	 * 
+	 * @param objects List of objects from which to look for the one which has been clicked on
+	 * @param x X-coordinate of the click
+	 * @param y Y-coordinate of the click
+	 * @return The object which has been clicked on
+	 */
+	public static GUIObjectContainer determineObjectClicked(Collection<? extends GUIObjectContainer> objects, float x, float y) {
+		for (GUIObjectContainer o : objects) {
+			if (x >= o.getX() 
+					&& x <= (o.getX() + o.getWidth())
+					&& y >= o.getY() 
+					&& y <= (o.getY() + o.getHeight())) {
+				return o;
+			}
+		}
+		return null;
+	}
+	
+	public static void removeTyreFromContainer(Tyre tyre, Collection<TyreGUIContainer> objects) {
+		for (TyreGUIContainer o : objects) {
+			if (o.getTyre() == tyre) {
+				o.setTyre(null);
+				return;
+			}
+		}
 	}
 }

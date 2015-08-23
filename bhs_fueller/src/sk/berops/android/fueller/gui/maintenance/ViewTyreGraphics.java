@@ -6,9 +6,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.view.View;
 
-public class ViewTyreGraphics extends View {
+public class ViewTyreGraphics extends View implements Runnable {
 	private Tyre tyre;
 	private TyreDrawer tyreDrawer;
+	private TyreSchemeHelper helper;
 	private TyreGUIContainer tyreGUIContainer;
 	private Context context;
 	
@@ -17,7 +18,8 @@ public class ViewTyreGraphics extends View {
 		this.context = context;
 		this.tyre = tyre;
 		tyreDrawer = TyreDrawer.getInstance();
-		tyreGUIContainer = new TyreGUIContainer(context, tyre, 0, 0, 0, 0);
+		helper = TyreSchemeHelper.getInstance();
+		tyreGUIContainer = new TyreGUIContainer(context, tyre, 0, 0, 0, 0, null, 0);
 	}
 	
 	@Override
@@ -28,5 +30,11 @@ public class ViewTyreGraphics extends View {
 		tyreGUIContainer.setWidth((int) (y * 0.5));
 		tyreGUIContainer.setHeight(y);
 		tyreDrawer.drawTyre(canvas, tyreGUIContainer);
+		postDelayed(this, 10);
+	}
+
+	@Override
+	public void run() {
+		invalidate();
 	}
 }

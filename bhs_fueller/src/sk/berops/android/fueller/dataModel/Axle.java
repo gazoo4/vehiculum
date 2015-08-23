@@ -22,7 +22,7 @@ public class Axle {
 	 * TyreIDs belonging to the tyres from left to right (from the birds perspective view)
 	 */
 	@ElementList(inline=true, required=false)
-	private LinkedList<Integer> tyreIDs;
+	private ArrayList<Integer> tyreIDs;
 
 	private Car car;
 	
@@ -90,7 +90,7 @@ public class Axle {
 	}
 	
 	private void createTyres() {
-		tyreIDs = new LinkedList<Integer>();
+		tyreIDs = new ArrayList<Integer>();
 		switch (getAxleType()) {
 		case SINGLE:
 			tyreIDs.add(-1);
@@ -125,15 +125,19 @@ public class Axle {
 		this.drivable = drivable;
 	}
 
-	public LinkedList<Integer> getTyreIDs() {
+	public ArrayList<Integer> getTyreIDs() {
 		return tyreIDs;
 	}
 
-	public void setTyreIDs(LinkedList<Integer> tyreIDs) {
+	public void setTyreIDs(ArrayList<Integer> tyreIDs) {
 		this.tyreIDs = tyreIDs;
 	}
 	
-	public LinkedList<Tyre> getTyres() {
+	public ArrayList<Tyre> getTyres() {
 		return MainActivity.garage.getTyresByIDs(getTyreIDs());
+	}
+	
+	public void installTyre(Tyre tyre, int position) {
+		getTyreIDs().add(position, tyre.getDynamicID());
 	}
 }

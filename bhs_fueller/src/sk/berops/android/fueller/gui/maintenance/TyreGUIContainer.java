@@ -8,19 +8,26 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import sk.berops.android.fueller.dataModel.Axle;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
+import sk.berops.android.fueller.gui.common.GUIObjectContainer;
 import sk.berops.android.fueller.gui.common.GuiUtils;
+import sk.berops.android.fueller.gui.common.TyreDrawer;
 
 /**
  * Graphical representation of a Tyre
  * @author bernard
  */
-public class TyreGUIContainer {
+public class TyreGUIContainer  extends GUIObjectContainer {
 	private AssetManager manager;
+	private TyreDrawer tyreDrawer;
+	
+	private Axle parentAxle;
+	private int axlePosition;
 	
 	private final static String tyreSummerBitmapFilename = "axles/tyre_summer.png";
 	private final static String tyreAllSeasonsBitmapFilename = "axles/tyre_allseasons.png";
@@ -37,37 +44,36 @@ public class TyreGUIContainer {
 	private static Bitmap tyreFlashingBitmap;
 	
 	/**
-	 * X-axis coordinate of the tyre on the graphics
-	 */
-	private int x;
-	
-	/**
-	 * Y-axis coordinate of the tyre on the graphics
-	 */
-	private int y;
-	
-	/**
-	 * Width of the tyre graphics
-	 */
-	private int width;
-	
-	/**
-	 * Height of the tyre graphics
-	 */
-	private int height;
-	
-	/**
 	 * Tyre object this container is responsible for displaying
 	 */
 	private Tyre tyre;
 	
-	public TyreGUIContainer(Context context, Tyre tyre, int x, int y, int width, int height) {
+	/**
+	 * 
+	 * @param context App context within which this GUI element lives
+	 * @param tyre Tyre to display
+	 * @param x X-coordinate of this GUI element
+	 * @param y Y-coordinate of this GUI element
+	 * @param width Width of this GUI element
+	 * @param height Height of this GUI element
+	 * @param parentAxle Reference to the axle where this tyre is attached to
+	 * @param axlePosition Position on the parent axle
+	 */
+	public TyreGUIContainer(Context context, Tyre tyre, int x, int y, int width, int height, Axle parentAxle, int axlePosition) {
+		super (x, y, width, height);
 		this.manager = context.getAssets();
 		this.tyre = tyre;
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
+		this.parentAxle = parentAxle;
+		this.axlePosition = axlePosition;
+		tyreDrawer = TyreDrawer.getInstance();
+	}
+	
+	public void draw(Canvas canvas) {
+		tyreDrawer.drawTyre(canvas, this);
+	}
+	
+	public void installTyre() {
+		getParentAxle().installTyre(getTyre(), getAxlePosition());
 	}
 
 	public int getTyreColor() {
@@ -165,22 +171,6 @@ public class TyreGUIContainer {
 	public BitmapDrawable getTyreBitmapDrawable(Resources resources) {
 		return new BitmapDrawable(resources, getTyreBitmap());
 	}
-	
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
 
 	public Tyre getTyre() {
 		return tyre;
@@ -189,20 +179,20 @@ public class TyreGUIContainer {
 	public void setTyre(Tyre tyre) {
 		this.tyre = tyre;
 	}
-	
-	public int getWidth() {
-		return width;
+
+	public Axle getParentAxle() {
+		return parentAxle;
 	}
 
-	public void setWidth(int width) {
-		this.width = width;
+	public void setParentAxle(Axle parentAxle) {
+		this.parentAxle = parentAxle;
 	}
 
-	public int getHeight() {
-		return height;
+	public int getAxlePosition() {
+		return axlePosition;
 	}
 
-	public void setHeight(int height) {
-		this.height = height;
+	public void setAxlePosition(int axlePosition) {
+		this.axlePosition = axlePosition;
 	}
 }

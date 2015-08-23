@@ -8,6 +8,7 @@ import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
 import sk.berops.android.fueller.gui.MainActivity;
+import sk.berops.android.fueller.gui.common.GuiUtils;
 import sk.berops.android.fueller.gui.common.TyreDrawer;
 import android.app.Activity;
 import android.content.Intent;
@@ -30,6 +31,10 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 	
 	private RelativeLayout tyreSchemeLayout;
 	private ListView listView;
+	private ViewTyreChangeGraphics graphics;
+	
+	private TyreDrawer td;
+	private TyreSchemeHelper helper;
 	private TyreConfigurationScheme tyreScheme;
 	TyrePoolAdapter adapter;
 	ViewGroup viewGroup;
@@ -54,6 +59,8 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 		tyreChangeEntry = ActivityTyreChange.tyreChangeEntryStatic;
 		super.onCreate(savedInstanceState);
 		
+		helper = TyreSchemeHelper.getInstance();
+		
 		attachGuiObjects();
 		buildDynamicLayout();
 	}
@@ -74,7 +81,7 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 	
 	private void buildDynamicLayout() {
 		TyreConfigurationScheme tyreScheme = car.getCurrentTyreScheme().clone();
-		View graphics = new ViewTyreChangeGraphics(this, car, tyreScheme);
+		graphics = new ViewTyreChangeGraphics(this, car, tyreScheme);
 		graphics.setOnTouchListener(new TyreTouchListener(this)); 
 		graphics.setPadding(3, 3, 3, 3);
 		
@@ -102,29 +109,37 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Tyre tyre = tyreList.get(position);
-				tyreSelected(tyre);
+				tyreClicked(tyre);
 			}
 		});
 	}
 	
-	private void tyreSelected(Tyre tyre) {
-		TyreDrawer td = TyreDrawer.getInstance();
-		if (td.getSelectedTyre() == tyre) {
-			td.setSelectedTyre(null);
-			td.setFlashingMode(false);
-			td.setFlashingPhase(-1.0);
-			listView.clearChoices();
-			listView.setSelector(new ColorDrawable(0x0));
-			adapter.notifyDataSetChanged();
+	private void tyreClicked(Tyre tyre) {
+		if (helper.getSelectedTyre() == tyre) {
+			deselectTyre();
 		} else {
-			td.setSelectedTyre(tyre);
-			td.setFlashingMode(true);
-			if (tyreList.contains(tyre)) {
-				listView.setSelector(new ColorDrawable(0x80ffffff));
-			}
+			selectTyre(tyre);
 		}
-		reloadTyreStats(td.getSelectedTyre());
+		reloadTyreStats(helper.getSelectedTyre());
 	}
+	
+	private void deselectTyre() {
+		helper.setSelectedTyre(null);
+		helper.setFlashingMode(false);
+		helper.setFlashingPhase(-1.0);
+		listView.clearChoices();
+		listView.setSelector(new ColorDrawable(0x0));
+		adapter.notifyDataSetChanged();
+	}
+	
+	private void selectTyre(Tyre tyre) {
+		helper.setSelectedTyre(tyre);
+		helper.setFlashingMode(true);
+		if (tyreList.contains(tyre)) {
+			listView.setSelector(new ColorDrawable(0x80ffffff));
+		}
+	}
+	
 	
 	private void reloadTyreStats(Tyre tyre) {
 		String text;
@@ -193,8 +208,34 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 	
 	@Override
 	public void touchCallback(float x, float y) {
-		Log.d("DEBUG", "Touched X: "+ x);
-		Log.d("DEBUG", "Touched Y: "+ y);
+		TyreGUIContainer tContainer;
+		tContainer = (TyreGUIContainer) GuiUtils.determineObjectClicked(graphics.getTyreGUIObjects(), x, y);
+		// check if we've clicked on a good tyre location on an axis
+		if (tContainer != null) {
+			// check if this spot is free for installing tyre
+			if (tContainer.getTyre() == null) {
+				Tyre selectedTyre = helper.getSelectedTyre();
+				// check if there's a tyre selected from the tyre list
+				if (selectedTyre != null) {
+					// we're moving the tyre, so clear any possible old locations
+					// in list of tyres (if tyre is there)
+					tyreList.remove(selectedTyre);
+					// in graphics (if tyre is there)
+					GuiUtils.removeTyreFromContainer(selectedTyre, graphics.getTyreGUIObjects());
+					// populate structures at new location
+					tContainer.setTyre(selectedTyre);
+					tContainer.installTyre();
+					// cleanup
+					deselectTyre();
+				}
+			} else {
+				if (tContainer.getTyre() == helper.getSelectedTyre()) {
+					deselectTyre();
+				} else {
+					selectTyre(tContainer.getTyre());
+				}
+			}
+		}
 	}
 	
 	public void onClick(View view) {

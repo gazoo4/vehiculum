@@ -123,8 +123,8 @@ public class Garage {
 		}
 	}
 	
-	public LinkedList<Tyre> getTyresByIDs(Collection<Integer> c) {
-		LinkedList<Tyre> tyres = new LinkedList<Tyre>();
+	public ArrayList<Tyre> getTyresByIDs(Collection<Integer> c) {
+		ArrayList<Tyre> tyres = new ArrayList<Tyre>();
 		for (Integer i : c) {
 			if (i == -1) {
 				tyres.add(null);

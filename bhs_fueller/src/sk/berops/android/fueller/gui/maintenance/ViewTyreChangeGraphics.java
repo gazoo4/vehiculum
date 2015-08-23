@@ -8,6 +8,7 @@ import sk.berops.android.fueller.dataModel.Axle.AxleType;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
+import sk.berops.android.fueller.gui.common.GUIObjectContainer;
 import sk.berops.android.fueller.gui.common.TyreDrawer;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -26,8 +27,11 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 	private Paint backgroundPaint;
 	private Paint chasisPaint;
 	private TyreDrawer tyreDrawer;
+	private TyreSchemeHelper helper;
 	private Context context;
 	private TyreConfigurationScheme tyreScheme;
+	private LinkedList<TyreGUIContainer> tyreObjects;
+	private boolean chasisUpdated = true;
 	
 	public ViewTyreChangeGraphics(Context context, Car car, TyreConfigurationScheme tyreScheme) {
 		super(context);
@@ -45,7 +49,9 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 		chasisPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		chasisPaint.setStyle(Paint.Style.FILL);
 		
-		tyreDrawer = TyreDrawer.getInstance();	
+		tyreDrawer = TyreDrawer.getInstance();
+		helper = TyreSchemeHelper.getInstance();
+		tyreObjects = new LinkedList<TyreGUIContainer>();
 	}
 	
 	@Override
@@ -59,8 +65,8 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 	
 	@Override
 	public void run() {
-		if (tyreDrawer.isFlashingMode()) {
-			tyreDrawer.progressFlashingPhase();
+		if (helper.isFlashingMode()) {
+			helper.progressFlashingPhase();
 		}
 		//updateState();
 		invalidate();
@@ -71,24 +77,28 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 	}
 	
 	private void drawChasis(Canvas canvas) {
-		int x = getWidth();
-		int y = getHeight();
-		
-		LinkedList<Axle> axles = getTyreScheme().getAxles();
-		int count = axles.size();
-		int i = 0; //as axlePosition 0: last, 1: first, 2+: middle
-		int yOffset, yRelative;
-		
-		yRelative = Math.round(y/count);
-		for(Axle axle : axles) {
-			yOffset = Math.round(y * i++/count);
-			if (i == count) i = 0;
-			drawAxle(canvas, axle, x, yOffset, yRelative, i);
+		if (chasisUpdated) {
+			int x = getWidth();
+			int y = getHeight();
+			
+			LinkedList<Axle> axles = getTyreScheme().getAxles();
+			int count = axles.size();
+			int i = 0; //as axlePosition 0: last, 1: first, 2+: middle
+			int yOffset, yRelative;
+			
+			yRelative = Math.round(y/count);
+			for(Axle axle : axles) {
+				yOffset = Math.round(y * i++/count);
+				if (i == count) i = 0;
+				parseAxle(axle, x, yOffset, yRelative, i);
+			}
 		}
+		drawObjects(canvas);
+		chasisUpdated = false;
 	}
 	
-	private void drawAxle(Canvas canvas, Axle axle, int width, int yOffset, int height, int axlePosition) {
-		LinkedList<Tyre> tyres = axle.getTyres();
+	private void parseAxle(Axle axle, int width, int yOffset, int height, int axlePosition) {
+		ArrayList<Tyre> tyres = axle.getTyres();
 		AxleType type = axle.getAxleType();
 		
 		int x = 0;
@@ -107,23 +117,30 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 		
 		if (type == AxleType.SINGLE) {
 			x = (int) (1.0 * width/2 - 1.0 * width/2 * tyreWidth);
-			TyreGUIContainer tc = new TyreGUIContainer(context, tyres.get(0), x, y + yOffset, (int) (width * tyreWidth), (int) (height * tyreHeight));
-			tyreDrawer.drawTyre(canvas, tc);
+			TyreGUIContainer tc = new TyreGUIContainer(context, tyres.get(0), x, y + yOffset, (int) (width * tyreWidth), (int) (height * tyreHeight), axle, 0);
+			tyreObjects.add(tc);
 		} else {
-			for (int i = -tyres.size()/2; i < tyres.size()/2; i++) {
-				x = (int) (1.0 * i * width * tyreWidth);
-				if (i == -2) {
+			for (int i = 0; i < tyres.size(); i++) {
+				int j = i - tyres.size()/2;
+				x = (int) (1.0 * j * width * tyreWidth);
+				if (j == -2) {
 					x -= tyrePadding;
-				} else if (i == 1) {
+				} else if (j == 1) {
 					x += tyrePadding;
 				}
-				if (i < 0) {
+				if (j < 0) {
 					x += width;
 				}
-				Tyre tyre = tyres.get((i + tyres.size()) % tyres.size());
-				TyreGUIContainer tc = new TyreGUIContainer(context, tyre, x, y + yOffset, (int) (width * tyreWidth), (int) (height * tyreHeight));
-				tyreDrawer.drawTyre(canvas, tc);
+				Tyre tyre = tyres.get(i);
+				TyreGUIContainer tc = new TyreGUIContainer(context, tyre, x, y + yOffset, (int) (width * tyreWidth), (int) (height * tyreHeight), axle, i);
+				tyreObjects.add(tc);
 			}
+		}
+	}
+	
+	private void drawObjects(Canvas canvas) {
+		for (TyreGUIContainer t : tyreObjects) {
+			t.draw(canvas);
 		}
 	}
 	
@@ -133,5 +150,9 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 	
 	public void setTyreScheme(TyreConfigurationScheme tyreScheme) {
 		this.tyreScheme = tyreScheme;
+	}
+	
+	public LinkedList<TyreGUIContainer> getTyreGUIObjects() {
+		return tyreObjects;
 	}
 }
