@@ -210,7 +210,7 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 	public void touchCallback(float x, float y) {
 		TyreGUIContainer tContainer;
 		tContainer = (TyreGUIContainer) GuiUtils.determineObjectClicked(graphics.getTyreGUIObjects(), x, y);
-		// check if we've clicked on a good tyre location on an axis
+		// check if we've clicked on a tyre container
 		if (tContainer != null) {
 			// check if this spot is free for installing tyre
 			if (tContainer.getTyre() == null) {
