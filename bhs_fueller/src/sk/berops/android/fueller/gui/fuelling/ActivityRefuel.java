@@ -19,9 +19,10 @@ import sk.berops.android.fueller.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.fueller.gui.Colors;
 import sk.berops.android.fueller.gui.Fonts;
 import sk.berops.android.fueller.gui.MainActivity;
-import sk.berops.android.fueller.gui.common.ActivityAddEventGeneric;
+import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.fueller.gui.common.FragmentDatePicker;
 import sk.berops.android.fueller.gui.common.GuiUtils;
+import sk.berops.android.fueller.gui.common.UtilsActivity;
 import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.R.id;
 import android.app.Activity;
@@ -46,7 +47,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class ActivityRefuel extends ActivityAddEventGeneric {
+public class ActivityRefuel extends ActivityEntryGenericAdd {
 
 	class PriceCalculateListener implements TextWatcher, OnItemSelectedListener{
 
@@ -100,8 +101,6 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 
 	@Override
 	protected void attachGuiObjects() {
-		super.attachGuiObjects();
-		
 		editTextMileage = (EditText) findViewById(R.id.activity_refuel_mileage);
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_refuel_distance_unit);
 		editTextCost = (EditText) findViewById(R.id.activity_refuel_cost);
@@ -118,22 +117,9 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 	@Override
 	protected void styleGuiObjects() {
 		super.styleGuiObjects();
-		
-		editTextVolume.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextComment.setHintTextColor(Colors.LIGHT_GREEN);
-		
-		ArrayAdapter<CharSequence> adapterFuelType = ArrayAdapter
-				.createFromResource(this, R.array.activity_refuel_fuel_type,
-						R.layout.spinner_white);
-		adapterFuelType
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerFuelType.setAdapter(adapterFuelType);
-		
-		ArrayAdapter<CharSequence> adapterVolumeUnit = ArrayAdapter
-				.createFromResource(this, R.array.activity_refuel_volume_unit, 
-						R.layout.spinner_white);
-		adapterVolumeUnit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerVolumeUnit.setAdapter(adapterVolumeUnit);
+		UtilsActivity.styleEditText(editTextVolume);
+		UtilsActivity.styleSpinner(spinnerFuelType, this, R.array.activity_refuel_fuel_type);
+		UtilsActivity.styleSpinner(spinnerVolumeUnit, this, R.array.activity_refuel_volume_unit);
 	}
 	
 	@Override
@@ -207,7 +193,6 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		switch (view.getId()) {
 		case R.id.activity_refuel_button_commit:
 			try {
-				saveEntry();
 				super.saveFieldsAndPersist(view);
 				startActivity(new Intent(this, MainActivity.class));
 			} catch (FieldsEmptyException ex) {
@@ -217,7 +202,9 @@ public class ActivityRefuel extends ActivityAddEventGeneric {
 		}
 	}
 	
-	public void saveEntry() throws FieldsEmptyException {
+	@Override
+	protected void updateFields() throws FieldsEmptyException {
+		super.updateFields();
 		updateFuelVolume();
 		updateFuelType();
 	}

@@ -13,9 +13,10 @@ import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.dataModel.expense.ServiceEntry;
 import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.fueller.gui.MainActivity;
-import sk.berops.android.fueller.gui.common.ActivityAddEventGeneric;
+import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
+import sk.berops.android.fueller.gui.common.UtilsActivity;
 
-public class ActivityServiceAdd extends ActivityAddEventGeneric {
+public class ActivityServiceAdd extends ActivityEntryGenericAdd {
 	protected Spinner spinnerServiceType;
 	
 	protected ServiceEntry serviceEntry;
@@ -36,7 +37,6 @@ public class ActivityServiceAdd extends ActivityAddEventGeneric {
 	
 	@Override
 	protected void attachGuiObjects() {
-		super.attachGuiObjects();
 		textViewDisplayDate = (TextView) findViewById(R.id.activity_service_date_text);
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_service_distance_unit);
 		
@@ -51,11 +51,7 @@ public class ActivityServiceAdd extends ActivityAddEventGeneric {
 	@Override
 	protected void styleGuiObjects() {
 		super.styleGuiObjects();
-		
-		ArrayAdapter<CharSequence> adapterServiceType = ArrayAdapter.createFromResource(this,
-				R.array.activity_service_type, R.layout.spinner_white);
-		adapterServiceType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerServiceType.setAdapter(adapterServiceType);
+		UtilsActivity.styleSpinner(spinnerServiceType, this, R.array.activity_service_type);
 	}
 	
 	@Override
@@ -63,21 +59,9 @@ public class ActivityServiceAdd extends ActivityAddEventGeneric {
 		super.initializeGuiObjects();
 	}
 	
-	public void onClick(View view) {
-		switch (view.getId()) {
-		case R.id.activity_service_button_commit:
-			try {
-				saveEntry();
-				super.saveFieldsAndPersist(view);
-				startActivity(new Intent(this, MainActivity.class));
-			} catch (FieldsEmptyException ex) {
-				ex.throwAlert();
-			}
-			break;
-		}
-	}
-	
-	private void saveEntry() {
+	@Override
+	protected void updateFields() throws FieldsEmptyException {
+		super.updateFields();
 		updateType();
 	}
 	
@@ -86,5 +70,18 @@ public class ActivityServiceAdd extends ActivityAddEventGeneric {
 		
 		type = ServiceEntry.Type.getType(spinnerServiceType.getSelectedItemPosition());
 		serviceEntry.setType(type);
+	}
+	
+	public void onClick(View view) {
+		switch (view.getId()) {
+		case R.id.activity_service_button_commit:
+			try {
+				super.saveFieldsAndPersist(view);
+				startActivity(new Intent(this, MainActivity.class));
+			} catch (FieldsEmptyException ex) {
+				ex.throwAlert();
+			}
+			break;
+		}
 	}
 }

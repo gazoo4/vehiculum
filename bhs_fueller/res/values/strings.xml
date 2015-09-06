@@ -27,6 +27,9 @@
     <string name="activity_entry_add_field_missing_alert"			>Some of the required fields are not filled-in:</string>
     <string name="activity_entry_add_header"						>Pick an action to record</string>
     <string name="activity_entry_add_label"							>Adding new event</string>
+    <string name="activity_expense_add_currency_hint"				>Currency</string>
+    <string name="activity_expense_add_cost_hint"					>Cost</string>
+    <string name="activity_expense_add_price_hint"					>Price</string>
     <string name="activity_garage_management_label"					>Your garage</string>
     <string name="activity_garage_management_button_car_add"		>Add a new car</string>
     <string name="activity_garage_management_info_text"				>List of cars in your garage:</string>
@@ -34,8 +37,9 @@
     <string name="activity_generic_button_entry_save"				>Save</string>
     <string name="activity_generic_comment_hint"					>Additional comment</string>
     <string name="activity_generic_cost_hint"						>Cost of the bill</string>
-    <string name="activity_generic_currency_hint"					>Currency</string>
     <string name="activity_generic_mileage_hint"					>Mileage</string>
+    <string name="activity_generic_part_add_condition_hint"			>Condition</string>
+    <string name="activity_generic_part_add_quantity_hint"			>Quantity</string>
     <string name="activity_insurance_header"						>Insurance expense</string>
     <string name="activity_insurance_type_hint"						>Insurance type</string>
     <string name="activity_main_average"							>Average</string>
@@ -64,12 +68,9 @@
     <string name="activity_maintenance_type_planned_label"			>Planned</string>
     <string name="activity_maintenance_type_unplanned_label"		>Unlanned</string>
     <string name="activity_part_add_carmaker_part_id_hint"			>Carmaker part No.</string>
-    <string name="activity_part_add_condition_hint"					>Condition</string>
     <string name="activity_part_add_manufacturer_part_id_hint"		>Manufacturer part No.</string>
     <string name="activity_part_add_originality_hint"				>Originality</string>
-    <string name="activity_part_add_price_hint"						>Price</string>
     <string name="activity_part_add_producer_hint"					>Manufacturer</string>
-    <string name="activity_part_add_quantity_hint"					>Quantity</string>
     <string name="activity_refuel_fuel_type_hint"					>Fuel type</string>
     <string name="activity_refuel_header"							>Enter your bill details</string>
     <string name="activity_refuel_price_hint"						>Price per liter</string>
@@ -101,7 +102,7 @@
     <string name="activity_tyre_change_small_parts_cost_hint"		>Cost of small parts</string>
     <string name="activity_tyre_change_scheme_button_tyre_add"		>Add</string>
     <string name="activity_tyre_change_scheme_button_tyre_delete"	>Delete</string>
-    <string name="activity_tyre_change_scheme_button_tyre_move"		>&lt;==&gt;</string>
+    <string name="activity_tyre_change_scheme_button_tyre_move"		>==&gt;&gt;</string>
     <string name="activity_tyre_change_scheme_brand_model_text"		>Brand, model: </string>
     <string name="activity_tyre_change_scheme_dimensions_text"		>Dimensions: </string>
     <string name="activity_tyre_change_scheme_dot_year_wear_text"	>DOT: </string>
@@ -152,21 +153,21 @@
         <item>Other</item>
     </string-array>
     
-    <string-array name="activity_generic_currency">
+    <string-array name="activity_expense_add_currency">
         <item>€</item>
         <item>$</item>
         <item>£</item>
     </string-array>
     
-    <string-array name="activity_insurance_type">
-        <item>Basic (required by law)</item>
-        <item>Other</item>
-    </string-array>
-    
-    <string-array name="activity_part_add_condition">
+    <string-array name="activity_generic_part_add_condition">
         <item>New</item>
         <item>Used</item>
         <item>Refubrished</item>
+    </string-array>
+    
+    <string-array name="activity_insurance_type">
+        <item>Basic (required by law)</item>
+        <item>Other</item>
     </string-array>
     
     <string-array name="activity_part_add_originality">

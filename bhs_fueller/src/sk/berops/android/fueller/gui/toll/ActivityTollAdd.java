@@ -13,9 +13,10 @@ import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.dataModel.expense.TollEntry;
 import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.fueller.gui.MainActivity;
-import sk.berops.android.fueller.gui.common.ActivityAddEventGeneric;
+import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
+import sk.berops.android.fueller.gui.common.UtilsActivity;
 
-public class ActivityTollAdd extends ActivityAddEventGeneric {
+public class ActivityTollAdd extends ActivityEntryGenericAdd {
 	protected Spinner spinnerTollType;
 	
 	protected TollEntry tollEntry;
@@ -36,7 +37,6 @@ public class ActivityTollAdd extends ActivityAddEventGeneric {
 	
 	@Override
 	protected void attachGuiObjects() {
-		super.attachGuiObjects();
 		textViewDisplayDate = (TextView) findViewById(R.id.activity_toll_date_text);
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_toll_distance_unit);
 		
@@ -51,11 +51,7 @@ public class ActivityTollAdd extends ActivityAddEventGeneric {
 	@Override
 	protected void styleGuiObjects() {
 		super.styleGuiObjects();
-		
-		ArrayAdapter<CharSequence> adapterTollType = ArrayAdapter.createFromResource(this,
-				R.array.activity_toll_type, R.layout.spinner_white);
-		adapterTollType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerTollType.setAdapter(adapterTollType);
+		UtilsActivity.styleSpinner(spinnerTollType, this, R.array.activity_toll_type);
 	}
 	
 	@Override
@@ -63,21 +59,9 @@ public class ActivityTollAdd extends ActivityAddEventGeneric {
 		super.initializeGuiObjects();
 	}
 	
-	public void onClick(View view) {
-		switch (view.getId()) {
-		case R.id.activity_toll_button_commit:
-			try {
-				saveEntry();
-				super.saveFieldsAndPersist(view);
-				startActivity(new Intent(this, MainActivity.class));
-			} catch (FieldsEmptyException ex) {
-				ex.throwAlert();
-			}
-			break;
-		}
-	}
-	
-	private void saveEntry() {
+	@Override
+	protected void updateFields() throws FieldsEmptyException {
+		super.updateFields();
 		updateType();
 	}
 	
@@ -86,5 +70,18 @@ public class ActivityTollAdd extends ActivityAddEventGeneric {
 		
 		type = TollEntry.Type.getType(spinnerTollType.getSelectedItemPosition());
 		tollEntry.setType(type);
+	}
+	
+	public void onClick(View view) {
+		switch (view.getId()) {
+		case R.id.activity_toll_button_commit:
+			try {
+				super.saveFieldsAndPersist(view);
+				startActivity(new Intent(this, MainActivity.class));
+			} catch (FieldsEmptyException ex) {
+				ex.throwAlert();
+			}
+			break;
+		}
 	}
 }

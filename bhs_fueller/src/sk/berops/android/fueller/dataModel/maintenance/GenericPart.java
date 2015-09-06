@@ -5,15 +5,27 @@ import java.util.Map;
 
 import org.simpleframework.xml.Element;
 
+import sk.berops.android.fueller.dataModel.Car;
+import sk.berops.android.fueller.dataModel.Currency;
+import sk.berops.android.fueller.dataModel.Currency.Unit;
+import sk.berops.android.fueller.dataModel.expense.Expense;
 import sk.berops.android.fueller.dataModel.maintenance.ReplacementPart.Originality;
 
-public abstract class GenericPart extends GenericItem {
+public abstract class GenericPart extends Expense {
 	@Element(name="condition")
 	private Condition condition;
 	@Element(name="quantity", required=false)
 	protected int quantity;
+	@Element(name="producer", required=false)
+	private String producer;
+	@Element(name="producerPartID", required=false)
+	private String producerPartID;
+	@Element(name="carmakerPartID", required=false)
+	private String carmakerPartID;
+	//@Element(category="category")
+	//private ??? category 
 	
-	public enum Condition{
+	public enum Condition {
 		NEW(0, "new"),
 		USED(1, "used"),
 		REFUBRISHED(2, "refubrished");
@@ -71,5 +83,24 @@ public abstract class GenericPart extends GenericItem {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	
+	public String getProducer() {
+		return producer;
+	}
+	public void setProducer(String producer) {
+		this.producer = producer;
+	}
+	public String getProducerPartID() {
+		return producerPartID;
+	}
+	public void setProducerPartID(String producerPartID) {
+		this.producerPartID = producerPartID;
+	}
+	public String getCarmakerPartID() {
+		return carmakerPartID;
+	}
+	public void setCarmakerPartID(String carmakerPartID) {
+		this.carmakerPartID = carmakerPartID;
 	}
 }

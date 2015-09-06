@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
+import sk.berops.android.fueller.dataModel.maintenance.ReplacementPart;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
 import sk.berops.android.fueller.gui.MainActivity;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,20 +38,25 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 	private TyreDrawer td;
 	private TyreSchemeHelper helper;
 	private TyreConfigurationScheme tyreScheme;
-	TyrePoolAdapter adapter;
-	ViewGroup viewGroup;
+	private TyrePoolAdapter adapter;
+	private ViewGroup viewGroup;
 	
-	TextView textViewBrandModelHint;
-	TextView textViewDimensionsHint;
-	TextView textViewDotYearWearHint;
-	TextView textViewPatternHint;
-	TextView textViewMileageHint;
+	private TextView textViewBrandModelHint;
+	private TextView textViewDimensionsHint;
+	private TextView textViewDotYearWearHint;
+	private TextView textViewPatternHint;
+	private TextView textViewMileageHint;
 	
-	TextView textViewBrandModelValue;
-	TextView textViewDimensionsValue;
-	TextView textViewDotYearWearValue;
-	TextView textViewPatternValue;
-	TextView textViewMileageValue; 
+	private TextView textViewBrandModelValue;
+	private TextView textViewDimensionsValue;
+	private TextView textViewDotYearWearValue;
+	private TextView textViewPatternValue;
+	private TextView textViewMileageValue;
+	
+	private Button buttonUninstall;
+	private Button buttonDelete;
+	
+	protected static final int ADD_TYRE = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +84,9 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 		textViewDotYearWearValue = (TextView) findViewById(R.id.activity_tyre_change_scheme_dot_year_wear_value);
 		textViewPatternValue = (TextView) findViewById(R.id.activity_tyre_change_scheme_pattern_value);
 		textViewMileageValue = (TextView) findViewById(R.id.activity_tyre_change_scheme_mileage_value); 
+		
+		buttonDelete = (Button) findViewById(R.id.activity_tyre_change_scheme_button_tyre_delete);
+		buttonUninstall = (Button) findViewById(R.id.activity_tyre_change_scheme_button_tyre_uninstall);
 	}
 	
 	private void buildDynamicLayout() {
@@ -112,6 +122,9 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 				tyreClicked(tyre);
 			}
 		});
+		
+		buttonDelete.setVisibility(View.INVISIBLE);
+		buttonUninstall.setVisibility(View.INVISIBLE);
 	}
 	
 	private void tyreClicked(Tyre tyre) {
@@ -127,6 +140,8 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 		helper.setSelectedTyre(null);
 		helper.setFlashingMode(false);
 		helper.setFlashingPhase(-1.0);
+		buttonDelete.setVisibility(View.INVISIBLE);
+		buttonUninstall.setVisibility(View.INVISIBLE);
 		listView.clearChoices();
 		listView.setSelector(new ColorDrawable(0x0));
 		adapter.notifyDataSetChanged();
@@ -135,8 +150,12 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 	private void selectTyre(Tyre tyre) {
 		helper.setSelectedTyre(tyre);
 		helper.setFlashingMode(true);
+		buttonDelete.setVisibility(View.VISIBLE);
 		if (tyreList.contains(tyre)) {
 			listView.setSelector(new ColorDrawable(0x80ffffff));
+			buttonUninstall.setVisibility(View.INVISIBLE);
+		} else {
+			buttonUninstall.setVisibility(View.VISIBLE);
 		}
 	}
 	
@@ -238,14 +257,49 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 		}
 	}
 	
+	private void deleteTyre(Tyre tyre) {
+		if (tyreList.contains(tyre)) {
+			tyreList.remove(tyre);
+		} else {
+			GuiUtils.removeTyreFromContainer(tyre, graphics.getTyreGUIObjects());
+		}
+		deselectTyre();
+	}
+	
+	private void uninstallTyre(Tyre tyre) {
+		GuiUtils.removeTyreFromContainer(tyre, graphics.getTyreGUIObjects());
+		tyreList.add(tyre);
+		deselectTyre();
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		switch (requestCode) {
+		case ADD_TYRE:
+			if (resultCode == RESULT_OK) {
+				Tyre tyre = (Tyre) data.getExtras().getSerializable("tyre");
+				tyreList.add(tyre);
+				adapter.notifyDataSetChanged();
+			}
+			
+			if (resultCode == RESULT_CANCELED) {
+				// If no result, no issue
+			}
+			break;
+		}
+	}
+	
 	public void onClick(View view) {
 		switch(view.getId()) {
 		case R.id.activity_tyre_change_scheme_button_tyre_add:
-			startActivity(new Intent(this, ActivityTyreAdd.class));
+			startActivityForResult(new Intent(this, ActivityTyreAdd.class), ADD_TYRE);
 			break;
 		case R.id.activity_tyre_change_scheme_button_tyre_delete:
+			deleteTyre(helper.getSelectedTyre());
 			break;
-		case R.id.activity_tyre_change_scheme_button_tyre_move:
+		case R.id.activity_tyre_change_scheme_button_tyre_uninstall:
+			uninstallTyre(helper.getSelectedTyre());
 			break;
 		}
 	}

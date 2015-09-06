@@ -10,24 +10,21 @@ import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
+import sk.berops.android.fueller.dataModel.maintenance.GenericPart;
 import sk.berops.android.fueller.dataModel.maintenance.GenericPart.Condition;
 import sk.berops.android.fueller.dataModel.maintenance.ReplacementPart;
 import sk.berops.android.fueller.dataModel.maintenance.ReplacementPart.Originality;
 import sk.berops.android.fueller.gui.Colors;
-import sk.berops.android.fueller.gui.common.ActivityAddExpense;
-import sk.berops.android.fueller.gui.common.ActivityAddRecord;
+import sk.berops.android.fueller.gui.common.ActivityExpenseAdd;
+import sk.berops.android.fueller.gui.common.ActivityGenericPartAdd;
+import sk.berops.android.fueller.gui.common.ActivityRecordAdd;
 import sk.berops.android.fueller.gui.common.GuiUtils;
+import sk.berops.android.fueller.gui.common.UtilsActivity;
 
-public class ActivityPartAdd extends ActivityAddExpense {
+public class ActivityPartAdd extends ActivityGenericPartAdd {
 
-	EditText editTextProducer;
-	EditText editTextManufacturerPartID;
-	EditText editTextCarmakerPartID;
-	EditText editTextQuantity;
-	Spinner spinnerCondition;
-	Spinner spinnerOriginality;
+	protected Spinner spinnerOriginality;
 
-	protected boolean editMode;
 	protected ReplacementPart part;
 
 	@Override
@@ -37,18 +34,17 @@ public class ActivityPartAdd extends ActivityAddExpense {
 			part = new ReplacementPart();
 		}
 
-		super.record = (Record) this.part;
+		super.genericPart = (GenericPart) this.part;
 		super.onCreate(savedInstanceState);
 	}
 
 	@Override
 	protected void attachGuiObjects() {
-		super.attachGuiObjects();
 		editTextCost = (EditText) findViewById(R.id.activity_part_add_price);
 		editTextComment = (EditText) findViewById(R.id.activity_part_add_comment);
 		editTextProducer = (EditText) findViewById(R.id.activity_part_add_producer);
-		editTextManufacturerPartID = (EditText) findViewById(R.id.activity_part_add_manufacturer_part_id);
-		editTextCarmakerPartID = (EditText) findViewById(R.id.activity_part_add_carmaker_part_id);
+		editTextProducerPartId = (EditText) findViewById(R.id.activity_part_add_manufacturer_part_id);
+		editTextCarmakerPartId = (EditText) findViewById(R.id.activity_part_add_carmaker_part_id);
 		editTextQuantity = (EditText) findViewById(R.id.activity_part_add_quantity);
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_part_add_currency);
 		spinnerCondition = (Spinner) findViewById(R.id.activity_part_add_condition);
@@ -58,86 +54,22 @@ public class ActivityPartAdd extends ActivityAddExpense {
 	@Override
 	protected void styleGuiObjects() {
 		super.styleGuiObjects();
-		editTextProducer.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextManufacturerPartID.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextCarmakerPartID.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextQuantity.setHintTextColor(Colors.LIGHT_GREEN);
-
-		ArrayAdapter<CharSequence> adapterCondition = ArrayAdapter
-				.createFromResource(this, R.array.activity_part_add_condition,
-						R.layout.spinner_white);
-		adapterCondition
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerCondition.setAdapter(adapterCondition);
-
-		ArrayAdapter<CharSequence> adapterOriginality = ArrayAdapter
-				.createFromResource(this,
-						R.array.activity_part_add_originality,
-						R.layout.spinner_white);
-		adapterOriginality
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerOriginality.setAdapter(adapterOriginality);
+		UtilsActivity.styleSpinner(spinnerOriginality, this, R.array.activity_part_add_originality);
 	}
 
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
-
 	}
 
-	private void updateFields() throws FieldsEmptyException {
-		updateProducer();
-		updatePartsID();
-		updatePrice();
-		updateQuantity();
-		updateComment();
+	protected void updateFields() throws FieldsEmptyException {
+		super.updateFields();
 		updateOriginality();
-		updateCondition();
-		if (editMode) {
-			updateModifiedDate();
-		} else {
-			updateCreationDate();
-		}
-	}
-
-	private void updateProducer() {
-		part.setProducer(editTextProducer.getText().toString());
-	}
-
-	private void updatePartsID() {
-		part.setCarmakerPartID(editTextCarmakerPartID.getText().toString());
-		part.setProducerPartID(editTextManufacturerPartID.getText().toString());
-	}
-
-	private void updatePrice() throws FieldsEmptyException {
-		try {
-			Currency.Unit currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
-			part.setPrice(GuiUtils.extractDouble(editTextCost), currency);
-		} catch (NumberFormatException ex) {
-			throwAlertFieldsEmpty(R.string.activity_part_add_price_hint);
-		}
-	}
-	
-	private void updateQuantity() throws FieldsEmptyException {
-		try {
-			part.setQuantity(GuiUtils.extractInteger(editTextQuantity));
-		} catch (NumberFormatException ex) {
-			throwAlertFieldsEmpty(R.string.activity_part_add_quantity_hint);
-		}
-	}
-
-	private void updateComment() {
-		part.setComment(editTextComment.getText().toString());
 	}
 
 	private void updateOriginality() {
 		Originality originality = Originality.getOriginality(spinnerOriginality.getSelectedItemPosition());
 		part.setOriginality(originality);
-	}
-
-	private void updateCondition() {
-		Condition condition = Condition.getCondition(spinnerCondition.getSelectedItemPosition());
-		part.setCondition(condition);
 	}
 
 	public void onClick(View view) {
@@ -155,5 +87,4 @@ public class ActivityPartAdd extends ActivityAddExpense {
 			break;
 		}
 	}
-
 }

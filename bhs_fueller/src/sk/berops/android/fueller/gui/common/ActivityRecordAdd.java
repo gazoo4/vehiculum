@@ -5,6 +5,7 @@ import java.util.Calendar;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
+import sk.berops.android.fueller.gui.Colors;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.io.xml.XMLHandler;
 import sk.berops.android.fueller.R;
@@ -17,12 +18,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public abstract class ActivityAddRecord extends Activity {
+public abstract class ActivityRecordAdd extends Activity {
 	
 	protected EditText editTextComment;
 	
 	protected Car car;
 	protected Record record;
+	protected boolean editMode;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +42,24 @@ public abstract class ActivityAddRecord extends Activity {
 	
 	protected abstract void attachGuiObjects();
 	
-	protected abstract void styleGuiObjects();
+	protected void styleGuiObjects() {
+		UtilsActivity.styleEditText(editTextComment);
+	}
 	
 	protected abstract void initializeGuiObjects();
+	
+	protected void updateFields() throws FieldsEmptyException {
+		updateComment();
+		if (record.getCreationDate() == null) {
+			updateCreationDate();
+		} else {
+			updateModifiedDate();
+		}
+	}
+	
+	protected void updateComment() {
+		record.setComment(editTextComment.getText().toString());
+	}
 	
 	protected void updateCreationDate() {
 		final Calendar c = Calendar.getInstance();
@@ -55,11 +72,7 @@ public abstract class ActivityAddRecord extends Activity {
 	}
 	
 	public void saveFieldsAndPersist(View view) throws FieldsEmptyException {
-		if (record.getCreationDate() == null) {
-			updateCreationDate();
-		} else {
-			updateModifiedDate();
-		}
+		updateFields();
 		persistGarage();
 	}
 	

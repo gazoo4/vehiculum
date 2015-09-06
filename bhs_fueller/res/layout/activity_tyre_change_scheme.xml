@@ -59,7 +59,7 @@
                 android:text="@string/activity_tyre_change_scheme_button_tyre_delete" />
 
             <Button
-                android:id="@+id/activity_tyre_change_scheme_button_tyre_move"
+                android:id="@+id/activity_tyre_change_scheme_button_tyre_uninstall"
                 style="@style/button_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                 style="@style/button_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/activity_tyre_change_scheme_button_tyre_move"
+                android:layout_toRightOf="@id/activity_tyre_change_scheme_button_tyre_uninstall"
                 android:background="@drawable/red_button"
                 android:onClick="onClick"
                 android:text="@string/activity_tyre_change_scheme_button_tyre_add" />

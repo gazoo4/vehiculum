@@ -19,10 +19,10 @@ public class ActivityPartEdit extends ActivityPartAdd {
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
 		editTextProducer.setText(part.getProducer());
-		editTextManufacturerPartID.setText(part.getProducerPartID());
-		editTextCarmakerPartID.setText(part.getCarmakerPartID());
+		editTextProducerPartId.setText(part.getProducerPartID());
+		editTextCarmakerPartId.setText(part.getCarmakerPartID());
 		editTextComment.setText(part.getComment());
-		editTextCost.setText(Double.toString(part.getPrice()));
+		editTextCost.setText(Double.toString(part.getCost()));
 		editTextQuantity.setText(Integer.toString(part.getQuantity()));
 		
 		spinnerCurrency.setSelection(part.getCurrency().getId());

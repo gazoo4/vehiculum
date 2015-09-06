@@ -15,7 +15,7 @@ import sk.berops.android.fueller.dataModel.Currency.Unit;
 import sk.berops.android.fueller.dataModel.UnitConstants.DistanceUnit;
 import sk.berops.android.fueller.dataModel.calculation.Consumption;
 
-public abstract class Entry extends Record implements Comparable<Entry> {
+public abstract class Entry extends Expense implements Comparable<Entry> {
 	private int dynamicId;
 	private Consumption consumption;
 	private Car car;
@@ -23,27 +23,12 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 	@Element(name="mileage")
 	private double mileage;
 	private double mileageSI;
-	@Element(name="eventDate")
-	private Date eventDate;
-	@Element(name="cost")
-	private double cost;
-	@Element(name="costSI", required=false)
-	private double costSI;
-	@Element(name="currency", required=false)
-	private Currency.Unit currency;
 	@Element(name="expenseType")
 	private ExpenseType expenseType;
 	
-	public void initAfterLoad(Car car) {
-		setCar(car);
-		if (getCurrency() == null) {
-			setCurrency(Currency.Unit.EURO);
-		}
-		
-		generateSI();
-	}
-	
-	private void generateSI() {
+	@Override
+	public void generateSI() {
+		super.generateSI();
 		setMileage(getMileage());
 		setCost(getCost(), getCurrency());
 	}
@@ -78,36 +63,6 @@ public abstract class Entry extends Record implements Comparable<Entry> {
 		this.mileage = mileage;
 		setMileageSI(mileage * car.getDistanceUnit().getCoef());
 	}
-	public Date getEventDate() {
-		return eventDate;
-	}
-	public void setEventDate(Date date) {
-		this.eventDate = date;
-	}
-	public double getCost() {
-		return cost;
-	}
-	public void setCost(double cost, Currency.Unit currency) {
-		this.cost = cost;
-		this.currency = currency;
-		setCostSI(Currency.convertToSI(getCost(), getCurrency(), getEventDate()));
-	}
-	public double getCostSI() {
-		return costSI;
-	}
-
-	public void setCostSI(double costSI) {
-		this.costSI = costSI;
-	}
-
-	public Currency.Unit getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(Currency.Unit currency) {
-		this.currency = currency;
-	}
-
 	public ExpenseType getExpenseType() {
 		return expenseType;
 	}

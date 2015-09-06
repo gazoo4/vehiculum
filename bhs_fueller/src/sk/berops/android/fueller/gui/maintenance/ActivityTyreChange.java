@@ -31,10 +31,11 @@ import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.gui.MainActivity;
-import sk.berops.android.fueller.gui.common.ActivityAddEventGeneric;
+import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.fueller.gui.common.GuiUtils;
+import sk.berops.android.fueller.gui.common.UtilsActivity;
 
-public class ActivityTyreChange extends ActivityAddEventGeneric {
+public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	
 	class PriceCalculateListener implements TextWatcher {
 
@@ -58,7 +59,7 @@ public class ActivityTyreChange extends ActivityAddEventGeneric {
 	Double laborCost, extraMaterialCost, tyresCost;
 	
 	private Car car;
-	protected static TyreChangeEntry tyreChangeEntryStatic; //used to access the entry from subsequent Activities
+	protected static TyreChangeEntry tyreChangeEntryStatic; // TODO: here we should call activity for result
 	protected TyreChangeEntry tyreChangeEntry;
 	protected EditText editTextTyresCost;
 	protected EditText editTextLaborCost;
@@ -91,11 +92,15 @@ public class ActivityTyreChange extends ActivityAddEventGeneric {
 
 	@Override
 	protected void styleGuiObjects() {
-		// TODO Auto-generated method stub
+		super.styleGuiObjects();
+		UtilsActivity.styleEditText(editTextTyresCost);
+		UtilsActivity.styleEditText(editTextLaborCost);
+		UtilsActivity.styleEditText(editTextSmallPartsCost);
 	}
 	
 	@Override
 	protected void initializeGuiObjects() {
+		super.initializeGuiObjects();
 		PriceCalculateListener priceCalculator = new PriceCalculateListener();
 		editTextTyresCost.addTextChangedListener(priceCalculator);
 		editTextLaborCost.addTextChangedListener(priceCalculator);
@@ -133,6 +138,12 @@ public class ActivityTyreChange extends ActivityAddEventGeneric {
 	}
 	
 	@Override
+	protected void updateFields() throws FieldsEmptyException {
+		super.updateFields();
+		updateCost();
+	}
+	
+	@Override
 	protected void updateCost() {
 		readCosts();
 		//entry.setCost(cost);
@@ -146,7 +157,6 @@ public class ActivityTyreChange extends ActivityAddEventGeneric {
 			break;
 		case R.id.activity_tyre_change_button_commit:
 			try {
-				saveEntry(view);
 				super.saveFieldsAndPersist(view);
 				startActivity(new Intent(this, MainActivity.class));
 			} catch (FieldsEmptyException e) {
@@ -154,9 +164,5 @@ public class ActivityTyreChange extends ActivityAddEventGeneric {
 			}
 			break;
 		}
-	}
-	
-	public void saveEntry(View view) {
-		updateCost();
 	}
 }

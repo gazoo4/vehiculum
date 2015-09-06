@@ -21,7 +21,7 @@ public class Tyre extends GenericPart {
 	@Element(name = "weightIndex", required = false)
 	private int weightIndex;
 	@Element(name = "speedIndex", required = false)
-	private int speedIndex;
+	private String speedIndex;
 	@Element(name = "dot", required = false)
 	private String dot;
 	@Element(name = "season", required = false)
@@ -157,11 +157,11 @@ public class Tyre extends GenericPart {
 		this.weightIndex = weightIndex;
 	}
 
-	public int getSpeedIndex() {
+	public String getSpeedIndex() {
 		return speedIndex;
 	}
 
-	public void setSpeedIndex(int speedIndex) {
+	public void setSpeedIndex(String speedIndex) {
 		this.speedIndex = speedIndex;
 	}
 

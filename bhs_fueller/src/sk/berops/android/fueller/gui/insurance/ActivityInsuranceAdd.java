@@ -13,9 +13,9 @@ import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.dataModel.expense.InsuranceEntry;
 import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.fueller.gui.MainActivity;
-import sk.berops.android.fueller.gui.common.ActivityAddEventGeneric;
+import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 
-public class ActivityInsuranceAdd extends ActivityAddEventGeneric {
+public class ActivityInsuranceAdd extends ActivityEntryGenericAdd {
 	protected Spinner spinnerInsuranceType;
 	
 	protected InsuranceEntry insuranceEntry;
@@ -36,7 +36,6 @@ public class ActivityInsuranceAdd extends ActivityAddEventGeneric {
 	
 	@Override
 	protected void attachGuiObjects() {
-		super.attachGuiObjects();
 		textViewDisplayDate = (TextView) findViewById(R.id.activity_insurance_date_text);
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_insurance_distance_unit);
 		
@@ -63,21 +62,9 @@ public class ActivityInsuranceAdd extends ActivityAddEventGeneric {
 		super.initializeGuiObjects();
 	}
 	
-	public void onClick(View view) {
-		switch (view.getId()) {
-		case R.id.activity_insurance_button_commit:
-			try {
-				saveEntry();
-				super.saveFieldsAndPersist(view);
-				startActivity(new Intent(this, MainActivity.class));
-			} catch (FieldsEmptyException ex) {
-				ex.throwAlert();
-			}
-			break;
-		}
-	}
-	
-	private void saveEntry() {
+	@Override
+	protected void updateFields() throws FieldsEmptyException {
+		super.updateFields();
 		updateType();
 	}
 	
@@ -86,5 +73,18 @@ public class ActivityInsuranceAdd extends ActivityAddEventGeneric {
 		
 		type = InsuranceEntry.Type.getType(spinnerInsuranceType.getSelectedItemPosition());
 		insuranceEntry.setType(type);
+	}
+	
+	public void onClick(View view) {
+		switch (view.getId()) {
+		case R.id.activity_insurance_button_commit:
+			try {
+				super.saveFieldsAndPersist(view);
+				startActivity(new Intent(this, MainActivity.class));
+			} catch (FieldsEmptyException ex) {
+				ex.throwAlert();
+			}
+			break;
+		}
 	}
 }

@@ -14,10 +14,11 @@ import sk.berops.android.fueller.dataModel.expense.MaintenanceEntry;
 import sk.berops.android.fueller.dataModel.maintenance.ReplacementPart;
 import sk.berops.android.fueller.gui.Colors;
 import sk.berops.android.fueller.gui.MainActivity;
-import sk.berops.android.fueller.gui.common.ActivityAddEventGeneric;
+import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.fueller.gui.common.FragmentEntryEditDelete;
 import sk.berops.android.fueller.gui.common.GuiUtils;
 import sk.berops.android.fueller.gui.common.TextFormatter;
+import sk.berops.android.fueller.gui.common.UtilsActivity;
 import sk.berops.android.fueller.gui.fuelling.ActivityFuellingEdit;
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -39,7 +40,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ActivityMaintenanceAdd extends ActivityAddEventGeneric implements
+public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		FragmentEntryEditDelete.EntryEditDeleteDialogListener {
 
 	class CostCalculateListener implements TextWatcher, OnItemSelectedListener {
@@ -105,7 +106,6 @@ public class ActivityMaintenanceAdd extends ActivityAddEventGeneric implements
 
 	@Override
 	protected void attachGuiObjects() {
-		super.attachGuiObjects();
 		textViewDisplayDate = (TextView) findViewById(R.id.activity_maintenance_date_text);
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_maintenance_distance_unit);
 		textViewPartsCost = (TextView) findViewById(R.id.activity_maintenance_parts_cost);
@@ -141,12 +141,8 @@ public class ActivityMaintenanceAdd extends ActivityAddEventGeneric implements
 	@Override
 	protected void styleGuiObjects() {
 		super.styleGuiObjects();
-		editTextLaborCost.setHintTextColor(Colors.LIGHT_GREEN);
-
-		ArrayAdapter<CharSequence> adapterLaborCostCurrency = ArrayAdapter.createFromResource(this,
-				R.array.activity_generic_currency, R.layout.spinner_white);
-		adapterLaborCostCurrency.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerLaborCostCurrency.setAdapter(adapterLaborCostCurrency);
+		UtilsActivity.styleEditText(editTextLaborCost);
+		UtilsActivity.styleSpinner(spinnerCurrency, this, R.array.activity_expense_add_currency);
 	}
 
 	@Override
@@ -216,27 +212,10 @@ public class ActivityMaintenanceAdd extends ActivityAddEventGeneric implements
 		
 		adapter.notifyDataSetChanged();
 	}
-
-	public void onClick(View view) {
-		switch (view.getId()) {
-		case R.id.activity_maintenance_button_add:
-			startActivityForResult(new Intent(this, ActivityPartAdd.class), ADD_PART);
-			break;
-		case R.id.activity_maintenance_button_delete:
-			break;
-		case R.id.activity_maintenance_button_commit:
-			try {
-				saveEntry();
-				super.saveFieldsAndPersist(view);
-				startActivity(new Intent(this, MainActivity.class));
-			} catch (FieldsEmptyException ex) {
-				ex.throwAlert();
-			}
-			break;
-		}
-	}
-
-	private void saveEntry() throws FieldsEmptyException {
+	
+	@Override
+	protected void updateFields() throws FieldsEmptyException {
+		super.updateFields();
 		updateType();
 	}
 
@@ -257,6 +236,24 @@ public class ActivityMaintenanceAdd extends ActivityAddEventGeneric implements
 			return;
 		}
 		maintenanceEntry.setType(type);
+	}
+
+	public void onClick(View view) {
+		switch (view.getId()) {
+		case R.id.activity_maintenance_button_add:
+			startActivityForResult(new Intent(this, ActivityPartAdd.class), ADD_PART);
+			break;
+		case R.id.activity_maintenance_button_delete:
+			break;
+		case R.id.activity_maintenance_button_commit:
+			try {
+				super.saveFieldsAndPersist(view);
+				startActivity(new Intent(this, MainActivity.class));
+			} catch (FieldsEmptyException ex) {
+				ex.throwAlert();
+			}
+			break;
+		}
 	}
 
 	@Override

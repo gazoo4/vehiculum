@@ -47,7 +47,7 @@
 	            android:layout_width="0dp"
 	            android:layout_height="wrap_content"
 	            android:layout_weight=".50"
-	            android:hint="@string/activity_part_add_quantity_hint"
+	            android:hint="@string/activity_generic_part_add_quantity_hint"
 	            android:inputType="number"
 	            style="@style/plain_text" />
             
@@ -56,7 +56,7 @@
 	            android:layout_width="0dp"
 	            android:layout_height="wrap_content"
 	            android:layout_weight=".50"
-	            android:hint="@string/activity_part_add_price_hint"
+	            android:hint="@string/activity_expense_add_price_hint"
 	            android:inputType="numberDecimal"
 	            style="@style/plain_text" />
 	        
@@ -65,8 +65,8 @@
 	            android:layout_width="0dp"
 	            android:layout_height="wrap_content"
 	            android:layout_weight=".20"
-	            android:entries="@array/activity_generic_currency"
-	            android:prompt="@string/activity_generic_currency_hint" />
+	            android:entries="@array/activity_expense_add_currency"
+	            android:prompt="@string/activity_expense_add_currency_hint" />
         </LinearLayout>
         
         <LinearLayout
@@ -81,15 +81,15 @@
 	            android:layout_height="wrap_content"
 	            android:layout_weight=".3"
 	            style="@style/plain_text"
-	            android:text="@string/activity_part_add_condition_hint"/>
+	            android:text="@string/activity_generic_part_add_condition_hint"/>
 	        
 	        <Spinner 
 	            android:id="@+id/activity_part_add_condition"
 	            android:layout_width="0dp"
 	            android:layout_height="wrap_content"
 	            android:layout_weight=".7"
-	            android:entries="@array/activity_part_add_condition"
-	            android:prompt="@string/activity_part_add_condition_hint"/>
+	            android:entries="@array/activity_generic_part_add_condition"
+	            android:prompt="@string/activity_generic_part_add_condition_hint"/>
         </LinearLayout>
         
         <LinearLayout

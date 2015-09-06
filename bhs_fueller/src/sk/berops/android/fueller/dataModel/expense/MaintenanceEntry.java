@@ -77,7 +77,7 @@ public class MaintenanceEntry extends Entry {
 		
 		double partsCost = 0;
 			for (ReplacementPart p : getParts()) {
-				partsCost += p.getPriceSI() * p.getQuantity();
+				partsCost += p.getCostSI() * p.getQuantity();
 			}
 			
 		return partsCost;

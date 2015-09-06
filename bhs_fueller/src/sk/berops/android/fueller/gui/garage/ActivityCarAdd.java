@@ -9,7 +9,7 @@ import sk.berops.android.fueller.dataModel.UnitConstants.VolumeUnit;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.gui.Colors;
 import sk.berops.android.fueller.gui.MainActivity;
-import sk.berops.android.fueller.gui.common.ActivityAddRecord;
+import sk.berops.android.fueller.gui.common.ActivityRecordAdd;
 import sk.berops.android.fueller.gui.common.pictures.CameraHandler;
 import sk.berops.android.fueller.gui.fuelling.ActivityRefuel;
 import sk.berops.android.fueller.R;
@@ -25,7 +25,7 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 
-public class ActivityCarAdd extends ActivityAddRecord {
+public class ActivityCarAdd extends ActivityRecordAdd {
 	
 	protected Car car;
 	protected boolean editMode;

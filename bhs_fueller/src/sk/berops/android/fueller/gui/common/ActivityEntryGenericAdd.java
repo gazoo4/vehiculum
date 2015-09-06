@@ -30,7 +30,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public abstract class ActivityAddEventGeneric extends ActivityAddExpense implements DatePickerDialog.OnDateSetListener {
+public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd implements DatePickerDialog.OnDateSetListener {
 
 	protected EditText editTextMileage;
 	protected EditText editTextCost;
@@ -49,9 +49,7 @@ public abstract class ActivityAddEventGeneric extends ActivityAddExpense impleme
 	}
 	
 	@Override
-	protected void attachGuiObjects() {
-		super.attachGuiObjects();
-	}
+	protected abstract void attachGuiObjects();
 	
 	@Override
 	protected void styleGuiObjects() {
@@ -99,10 +97,6 @@ public abstract class ActivityAddEventGeneric extends ActivityAddExpense impleme
 		}
 	}
 	
-	private void updateComment() {
-		entry.setComment(editTextComment.getText().toString());
-	}
-	
 	public void onDateSet(DatePicker view, int year, int monthOfYear,
 			int dayOfMonth) {
 		Calendar c = Calendar.getInstance();
@@ -111,12 +105,15 @@ public abstract class ActivityAddEventGeneric extends ActivityAddExpense impleme
 		updateTextAddEventDate();
 	}
 	
+	protected void updateFields() throws FieldsEmptyException {
+		super.updateFields();
+		updateMileage();
+		updateCost();
+	}
+	
 	public void saveFieldsAndPersist(View view) throws FieldsEmptyException {
 		Car car = MainActivity.garage.getActiveCar();
 		entry.setCar(car);
-		updateMileage();
-		updateCost();
-		updateComment();
 		if (!editMode) {
 			car.getHistory().getEntries().add(entry);
 		}
