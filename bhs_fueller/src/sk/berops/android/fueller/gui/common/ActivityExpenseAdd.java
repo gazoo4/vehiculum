@@ -7,6 +7,7 @@ import sk.berops.android.fueller.configuration.Preferences;
 import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.expense.Expense;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
+import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.gui.Colors;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -22,7 +23,7 @@ public abstract class ActivityExpenseAdd extends ActivityRecordAdd {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.record = expense;
+		super.record = (Record) expense;
 		super.onCreate(savedInstanceState);
 	}
 	

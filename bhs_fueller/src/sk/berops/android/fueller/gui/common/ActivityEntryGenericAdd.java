@@ -11,6 +11,7 @@ import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.Garage;
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.dataModel.expense.Entry;
+import sk.berops.android.fueller.dataModel.expense.Expense;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.gui.Colors;
@@ -33,16 +34,14 @@ import android.widget.Toast;
 public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd implements DatePickerDialog.OnDateSetListener {
 
 	protected EditText editTextMileage;
-	protected EditText editTextCost;
 	protected TextView textViewDisplayDate;
 	protected TextView textViewDistanceUnit;
 	
 	protected Entry entry;
-	protected boolean editMode;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.record = (Record) this.entry;
+		super.expense = (Expense) this.entry;
 		super.onCreate(savedInstanceState);
 		
 		updateTextAddEventDate();
@@ -88,15 +87,6 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 		car.setCurrentMileage(mileage);
 	}
 	
-	protected void updateCost() throws FieldsEmptyException {
-		try {
-			Currency.Unit currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
-			entry.setCost(GuiUtils.extractDouble(editTextCost), currency);
-		} catch (NumberFormatException ex) {
-			throwAlertFieldsEmpty(R.string.activity_generic_cost_hint);
-		}
-	}
-	
 	public void onDateSet(DatePicker view, int year, int monthOfYear,
 			int dayOfMonth) {
 		Calendar c = Calendar.getInstance();
@@ -108,7 +98,6 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 	protected void updateFields() throws FieldsEmptyException {
 		super.updateFields();
 		updateMileage();
-		updateCost();
 	}
 	
 	public void saveFieldsAndPersist(View view) throws FieldsEmptyException {

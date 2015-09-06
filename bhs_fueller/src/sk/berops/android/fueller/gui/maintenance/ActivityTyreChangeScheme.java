@@ -164,8 +164,8 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 		String text;
 		try {
 			text = "";
-			if (tyre.getProducer() != null) {
-				text = tyre.getProducer() +" ";
+			if (tyre.getBrand() != null) {
+				text = tyre.getBrand() +" ";
 			}
 			if (tyre.getModel() != null) {
 				text += tyre.getModel();

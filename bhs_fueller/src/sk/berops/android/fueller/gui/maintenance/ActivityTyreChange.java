@@ -140,11 +140,11 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	@Override
 	protected void updateFields() throws FieldsEmptyException {
 		super.updateFields();
-		updateCost();
+		calculateCost();
 	}
 	
-	@Override
-	protected void updateCost() {
+	protected void calculateCost() {
+		// TODO: normally updateCost is in ActivityAddExpense superclass 
 		readCosts();
 		//entry.setCost(cost);
 	}

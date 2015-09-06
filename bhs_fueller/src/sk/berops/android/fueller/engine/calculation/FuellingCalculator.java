@@ -179,8 +179,12 @@ public class FuellingCalculator {
 							minIndex = i;
 						}
 					}
-					values.remove(minIndex);
-					values.remove(maxIndex);
+					if (minIndex >= 0) {
+						values.remove(minIndex);
+					}
+					if (maxIndex >= 0) {
+						values.remove(maxIndex);
+					}
 				}
 				
 				double sum = 0.0;

@@ -10,7 +10,7 @@ import sk.berops.android.fueller.dataModel.Record;
 
 public class Expense extends Record {
 
-	@Element(name="eventDate")
+	@Element(name="eventDate", required=false)
 	private Date eventDate;
 	@Element(name="cost")
 	private double cost;
@@ -34,6 +34,9 @@ public class Expense extends Record {
 	}
 	
 	public Date getEventDate() {
+		if (eventDate == null) {
+			return getCreationDate();
+		}
 		return eventDate;
 	}
 	public void setEventDate(Date date) {

@@ -42,7 +42,7 @@ public class ActivityPartAdd extends ActivityGenericPartAdd {
 	protected void attachGuiObjects() {
 		editTextCost = (EditText) findViewById(R.id.activity_part_add_price);
 		editTextComment = (EditText) findViewById(R.id.activity_part_add_comment);
-		editTextProducer = (EditText) findViewById(R.id.activity_part_add_producer);
+		editTextBrand = (EditText) findViewById(R.id.activity_part_add_brand);
 		editTextProducerPartId = (EditText) findViewById(R.id.activity_part_add_manufacturer_part_id);
 		editTextCarmakerPartId = (EditText) findViewById(R.id.activity_part_add_carmaker_part_id);
 		editTextQuantity = (EditText) findViewById(R.id.activity_part_add_quantity);

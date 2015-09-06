@@ -18,7 +18,7 @@ public class ActivityPartEdit extends ActivityPartAdd {
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
-		editTextProducer.setText(part.getProducer());
+		editTextBrand.setText(part.getBrand());
 		editTextProducerPartId.setText(part.getProducerPartID());
 		editTextCarmakerPartId.setText(part.getCarmakerPartID());
 		editTextComment.setText(part.getComment());

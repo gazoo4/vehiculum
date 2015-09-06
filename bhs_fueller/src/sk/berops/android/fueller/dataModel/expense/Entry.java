@@ -28,6 +28,7 @@ public abstract class Entry extends Expense implements Comparable<Entry> {
 	
 	@Override
 	public void generateSI() {
+		// this is called just 8 times????
 		super.generateSI();
 		setMileage(getMileage());
 		setCost(getCost(), getCurrency());

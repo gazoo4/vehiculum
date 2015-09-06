@@ -16,7 +16,7 @@ import android.widget.Spinner;
 
 public abstract class ActivityGenericPartAdd extends ActivityExpenseAdd {
 	
-	protected EditText editTextProducer;
+	protected EditText editTextBrand;
 	protected EditText editTextProducerPartId;
 	protected EditText editTextCarmakerPartId;
 	protected EditText editTextQuantity;
@@ -35,7 +35,7 @@ public abstract class ActivityGenericPartAdd extends ActivityExpenseAdd {
 	@Override
 	protected void styleGuiObjects() {
 		super.styleGuiObjects();
-		UtilsActivity.styleEditText(editTextProducer);
+		UtilsActivity.styleEditText(editTextBrand);
 		UtilsActivity.styleEditText(editTextProducerPartId);
 		UtilsActivity.styleEditText(editTextCarmakerPartId);
 		UtilsActivity.styleEditText(editTextQuantity);
@@ -50,14 +50,14 @@ public abstract class ActivityGenericPartAdd extends ActivityExpenseAdd {
 	@Override
 	protected void updateFields() throws FieldsEmptyException{
 		super.updateFields();
-		updateProducer();
+		updateBrand();
 		updatePartsId();
 		updateQuantity();
 		updateCondition();
 	}
 	
-	protected void updateProducer() {
-		genericPart.setProducer(editTextProducer.getText().toString());
+	protected void updateBrand() {
+		genericPart.setBrand(editTextBrand.getText().toString());
 	}
 	
 	protected void updatePartsId() {

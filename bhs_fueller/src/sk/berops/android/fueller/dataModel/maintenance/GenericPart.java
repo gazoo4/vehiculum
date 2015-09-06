@@ -16,8 +16,8 @@ public abstract class GenericPart extends Expense {
 	private Condition condition;
 	@Element(name="quantity", required=false)
 	protected int quantity;
-	@Element(name="producer", required=false)
-	private String producer;
+	@Element(name="brand", required=false)
+	private String brand;
 	@Element(name="producerPartID", required=false)
 	private String producerPartID;
 	@Element(name="carmakerPartID", required=false)
@@ -85,11 +85,11 @@ public abstract class GenericPart extends Expense {
 		this.quantity = quantity;
 	}
 	
-	public String getProducer() {
-		return producer;
+	public String getBrand() {
+		return brand;
 	}
-	public void setProducer(String producer) {
-		this.producer = producer;
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 	public String getProducerPartID() {
 		return producerPartID;

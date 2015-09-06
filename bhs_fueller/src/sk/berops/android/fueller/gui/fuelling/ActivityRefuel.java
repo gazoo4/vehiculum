@@ -94,7 +94,6 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
 		}
 		fuellingEntry.setExpenseType(Entry.ExpenseType.FUEL);
 		super.entry = (Entry) this.fuellingEntry;
-		super.editMode = editMode;
 		
 		super.onCreate(savedInstanceState);
 	}

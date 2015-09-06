@@ -53,7 +53,7 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 	}
 
 	protected void attachGuiObjects() {
-		editTextProducer = (EditText) findViewById(R.id.activity_tyre_add_brand);
+		editTextBrand = (EditText) findViewById(R.id.activity_tyre_add_brand);
 		editTextModel = (EditText) findViewById(R.id.activity_tyre_add_model);
 		editTextWidth = (EditText) findViewById(R.id.activity_tyre_add_width);
 		editTextHeight = (EditText) findViewById(R.id.activity_tyre_add_height);
@@ -73,7 +73,7 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 
 	protected void styleGuiObjects() {
 		super.styleGuiObjects();
-		UtilsActivity.styleEditText(editTextProducer);
+		UtilsActivity.styleEditText(editTextBrand);
 		UtilsActivity.styleEditText(editTextModel);
 		UtilsActivity.styleEditText(editTextWidth);
 		UtilsActivity.styleEditText(editTextHeight);

@@ -19,7 +19,7 @@ import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.io.DataHandler;
 
 public class XMLHandler extends DataHandler {
-	private static final int fileHistory = 5;
+	private static final int fileHistory = 100;
 	static String defaultFileName = "garage.xml";
 	static Locale localeUS = Locale.US;
 	static Locale localeDefault = Locale.getDefault();
