@@ -27,3 +27,4 @@ proguard/
 
 # Who would like to have a classpath there? :)
 /.classpath
+/target
