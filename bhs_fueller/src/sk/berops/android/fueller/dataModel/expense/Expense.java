@@ -14,8 +14,6 @@ public class Expense extends Record {
 	private Date eventDate;
 	@Element(name="cost")
 	private double cost;
-	@Element(name="costSI", required=false)
-	private double costSI;
 	@Element(name="currency", required=false)
 	private Currency.Unit currency;
 	
@@ -48,14 +46,9 @@ public class Expense extends Record {
 	public void setCost(double cost, Currency.Unit currency) {
 		this.cost = cost;
 		this.currency = currency;
-		setCostSI(Currency.convertToSI(getCost(), getCurrency(), getEventDate()));
 	}
 	public double getCostSI() {
-		return costSI;
-	}
-
-	public void setCostSI(double costSI) {
-		this.costSI = costSI;
+		return Currency.convertToSI(getCost(), getCurrency(), getEventDate());
 	}
 
 	public Currency.Unit getCurrency() {

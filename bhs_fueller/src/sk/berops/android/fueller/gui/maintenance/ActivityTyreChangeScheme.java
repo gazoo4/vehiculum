@@ -28,7 +28,6 @@ import android.widget.TextView;
 public class ActivityTyreChangeScheme extends Activity implements TouchCallbackInterface {
 	
 	private Car car;
-	private TyreChangeEntry tyreChangeEntry;
 	private LinkedList<Tyre> tyreList;
 	
 	private RelativeLayout tyreSchemeLayout;
@@ -63,8 +62,12 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 		setContentView(R.layout.activity_tyre_change_scheme);
 		viewGroup = (ViewGroup) findViewById(R.id.activity_tyre_change_scheme_top_layout);
 		car = MainActivity.garage.getActiveCar();
-		tyreChangeEntry = ActivityTyreChange.tyreChangeEntryStatic;
 		super.onCreate(savedInstanceState);
+		
+		tyreScheme = (TyreConfigurationScheme) getIntent().getSerializableExtra("scheme");
+		if (tyreScheme == null) {
+			tyreScheme = new TyreConfigurationScheme(car);
+		}
 		
 		helper = TyreSchemeHelper.getInstance();
 		
@@ -280,10 +283,9 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 			if (resultCode == RESULT_OK) {
 				Tyre tyre = (Tyre) data.getExtras().getSerializable("tyre");
 				tyreList.add(tyre);
+				// TODO: here we should add the cost of the tyre to the overall entry
 				adapter.notifyDataSetChanged();
-			}
-			
-			if (resultCode == RESULT_CANCELED) {
+			} else if (resultCode == RESULT_CANCELED) {
 				// If no result, no issue
 			}
 			break;

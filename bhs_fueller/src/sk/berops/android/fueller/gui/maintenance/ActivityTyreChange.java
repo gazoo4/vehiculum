@@ -20,6 +20,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.dataModel.Axle;
@@ -30,6 +31,7 @@ import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
+import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.fueller.gui.common.GuiUtils;
@@ -59,11 +61,12 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	Double laborCost, extraMaterialCost, tyresCost;
 	
 	private Car car;
-	protected static TyreChangeEntry tyreChangeEntryStatic; // TODO: here we should call activity for result
 	protected TyreChangeEntry tyreChangeEntry;
 	protected EditText editTextTyresCost;
 	protected EditText editTextLaborCost;
 	protected EditText editTextSmallPartsCost;
+	
+	protected static final int SCHEME = 1;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.activity_tyre_change);
@@ -87,7 +90,10 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		editTextMileage = (EditText) findViewById(R.id.activity_tyre_change_mileage);
 		editTextComment = (EditText) findViewById(R.id.activity_tyre_change_comment);
 
+		textViewDistanceUnit = (TextView) findViewById(R.id.activity_tyre_change_distance_unit);
 		textViewDisplayDate = (TextView) findViewById(R.id.activity_tyre_change_date_text);
+		
+		spinnerCurrency = (Spinner) findViewById(R.id.activity_tyre_change_total_cost_currency);
 	}
 
 	@Override
@@ -149,11 +155,18 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		//entry.setCost(cost);
 	}
 	
+	private void reloadTyresCost() {
+		editTextTyresCost.setText(((Double) tyreChangeEntry.getTyresCost()).toString());
+	}
+	
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.activity_tyre_change_button_advanced:
-			tyreChangeEntryStatic = tyreChangeEntry;
-			startActivity(new Intent(this, ActivityTyreChangeScheme.class));
+			Intent i = new Intent(this, ActivityTyreChangeScheme.class);
+			if (tyreChangeEntry.getTyreScheme() != null) {
+				i.putExtra("scheme", tyreChangeEntry.getTyreScheme());
+			}
+			startActivityForResult(i, SCHEME);
 			break;
 		case R.id.activity_tyre_change_button_commit:
 			try {
@@ -161,6 +174,21 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 				startActivity(new Intent(this, MainActivity.class));
 			} catch (FieldsEmptyException e) {
 				e.throwAlert();
+			}
+			break;
+		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+		case SCHEME:
+			if (resultCode == RESULT_OK) {
+				tyreChangeEntry.setTyreScheme((TyreConfigurationScheme) data.getExtras().getSerializable("scheme"));
+				tyreChangeEntry.setTyresCost(data.getExtras().getDouble(("tyres cost")));
+				reloadTyresCost();
+			} else if (resultCode == RESULT_CANCELED) {
+				// nothing needed to be done if the scheme addition was cancelled
 			}
 			break;
 		}

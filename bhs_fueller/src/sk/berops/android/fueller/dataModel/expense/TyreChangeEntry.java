@@ -7,6 +7,7 @@ import org.simpleframework.xml.ElementList;
 
 import sk.berops.android.fueller.dataModel.Axle;
 import sk.berops.android.fueller.dataModel.Car;
+import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
 
@@ -51,6 +52,10 @@ public class TyreChangeEntry extends Entry {
 	public void setLaborCost(double laborCost) {
 		this.laborCost = laborCost;
 	}
+	
+	public void getLaborCostSI() {
+		Currency.convertToSI(getLaborCost(), getCurrency(), getEventDate());
+	}
 
 	public double getExtraMaterialCost() {
 		return extraMaterialCost;
@@ -59,6 +64,10 @@ public class TyreChangeEntry extends Entry {
 	public void setExtraMaterialCost(double extraMaterialCost) {
 		this.extraMaterialCost = extraMaterialCost;
 	}
+	
+	public void getExtraMaterialCostSI() {
+		Currency.convertToSI(getExtraMaterialCost(), getCurrency(), getEventDate());
+	}
 
 	public double getTyresCost() {
 		return tyresCost;
@@ -66,6 +75,10 @@ public class TyreChangeEntry extends Entry {
 
 	public void setTyresCost(double tyresCost) {
 		this.tyresCost = tyresCost;
+	}
+	
+	public void getTyresCostSI() {
+		Currency.convertToSI(getTyresCost(), getCurrency(), getEventDate());
 	}
 	
 	public TyreConfigurationScheme getTyreScheme() {
