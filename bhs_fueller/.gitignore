@@ -28,3 +28,6 @@ proguard/
 # Who would like to have a classpath there? :)
 /.classpath
 /target/
+
+# Settings are not necessary
+.settings/
