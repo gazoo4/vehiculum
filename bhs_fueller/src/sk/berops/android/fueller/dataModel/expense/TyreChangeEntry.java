@@ -1,5 +1,6 @@
 package sk.berops.android.fueller.dataModel.expense;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.simpleframework.xml.Element;
@@ -26,6 +27,17 @@ public class TyreChangeEntry extends Entry {
 	 */
 	@Element(name="tyreScheme", required=false)
 	private TyreConfigurationScheme tyreScheme;
+	/**
+	 * List of tyres bought 
+	 */
+	@ElementList(inline=true, required=false)
+	private ArrayList<Integer> boughtTyresIDs;
+	
+	/**
+	 * List of tyres thrown away
+	 */
+	@ElementList(inline=true, required=false)
+	private ArrayList<Integer> deletedTyreIDs;
 	
 	public TyreChangeEntry() {
 		super();
@@ -87,5 +99,21 @@ public class TyreChangeEntry extends Entry {
 	
 	public void setTyreScheme(TyreConfigurationScheme tyreScheme) {
 		this.tyreScheme = tyreScheme;
+	}
+
+	public ArrayList<Integer> getBoughtTyresIDs() {
+		return boughtTyresIDs;
+	}
+
+	public void setBoughtTyresIDs(ArrayList<Integer> boughtTyresIDs) {
+		this.boughtTyresIDs = boughtTyresIDs;
+	}
+
+	public ArrayList<Integer> getDeletedTyreIDs() {
+		return deletedTyreIDs;
+	}
+
+	public void setDeletedTyreIDs(ArrayList<Integer> deletedTyreIDs) {
+		this.deletedTyreIDs = deletedTyreIDs;
 	}
 }

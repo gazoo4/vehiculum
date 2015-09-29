@@ -1,5 +1,6 @@
 package sk.berops.android.fueller.gui.maintenance;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import sk.berops.android.fueller.R;
@@ -19,9 +20,9 @@ import android.widget.LinearLayout;
 public class TyrePoolAdapter extends ArrayAdapter<Tyre> {
 	
 	private Context context;
-	private LinkedList<Tyre> tyres;
+	private ArrayList<Tyre> tyres;
 	
-	public TyrePoolAdapter(Context context, LinkedList<Tyre> tyres) {
+	public TyrePoolAdapter(Context context, ArrayList<Tyre> tyres) {
 		super(context,R.layout.list_tyre_change_pool, tyres);
 		this.context = context;
 		this.tyres = tyres;

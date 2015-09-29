@@ -164,7 +164,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		case R.id.activity_tyre_change_button_advanced:
 			Intent i = new Intent(this, ActivityTyreChangeScheme.class);
 			if (tyreChangeEntry.getTyreScheme() != null) {
-				i.putExtra("scheme", tyreChangeEntry.getTyreScheme());
+				i.putExtra("entry", tyreChangeEntry);
 			}
 			startActivityForResult(i, SCHEME);
 			break;

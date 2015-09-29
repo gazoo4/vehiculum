@@ -2,6 +2,7 @@ package sk.berops.android.fueller.dataModel;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -10,6 +11,7 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 import sk.berops.android.fueller.dataModel.expense.Entry;
+import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.gui.MainActivity;
 
@@ -21,16 +23,14 @@ public class Garage {
 	 * A list of all tyres ever recorded
 	 */
 	@ElementList(inline = true, required = false)
-	private ArrayList<Tyre> allTyres;
-	@ElementList(inline = true, required = false)
-	private LinkedList<Integer> availableTyresIDs;
+	private HashMap<Integer, Tyre> allTyres;
 	@Element(name = "activeCar", required = false)
 	private int activeCarId;
 
 	public Garage() {
 		super();
 		cars = new LinkedList<Car>();
-		allTyres = new ArrayList<Tyre>();
+		allTyres = new HashMap<Integer, Tyre>();
 		activeCarId = -1;
 	}
 
@@ -47,34 +47,33 @@ public class Garage {
 		setActiveCarId(getCars().size() - 1);
 	}
 
-	public ArrayList<Tyre> getAllTyres() {
+	public HashMap<Integer, Tyre> getAllTyres() {
 		if (allTyres == null) {
-			allTyres = new ArrayList<Tyre>();
+			allTyres = new HashMap<Integer, Tyre>();
 		}
 		return allTyres;
 	}
 
-	public void setAllTyres(ArrayList<Tyre> allTyres) {
+	public void setAllTyres(HashMap<Integer, Tyre> allTyres) {
 		this.allTyres = allTyres;
 	}
 
-	public LinkedList<Integer> getAvailableTyresIDs() {
-		if (availableTyresIDs == null) {
-			availableTyresIDs = new LinkedList<Integer>();
+	public ArrayList<Tyre> getAvailableTyres() {
+		HashMap<Integer, Tyre> allTyres = new HashMap<Integer, Tyre>(getAllTyres());
+		for (Car c: getCars()) {
+			for (TyreChangeEntry e: c.getHistory().getTyreChangeEntries()) {
+				for (Integer i: e.getDeletedTyreIDs()) {
+					allTyres.remove(i);
+				}
+				for (Axle a: e.getTyreScheme().getAxles()) {
+					for (Integer i: a.getTyreIDs()) {
+						allTyres.remove(i);
+					}
+				}
+			}
 		}
-		return availableTyresIDs;
-	}
-
-	public void setAvailableTyresIDs(LinkedList<Integer> availableTyresIDs) {
-		this.availableTyresIDs = availableTyresIDs;
-	}
-
-	public LinkedList<Tyre> getAvailableTyres() {
-		LinkedList<Tyre> tyres = new LinkedList<Tyre>();
-		for (Integer i : getAvailableTyresIDs()) {
-			tyres.add(getAllTyres().get(i));
-		}
-		return tyres;
+		ArrayList<Tyre> allTyreList = new ArrayList<Tyre>(allTyres.values());
+		return allTyreList;
 	}
 
 	public Car getActiveCar() {
@@ -108,7 +107,7 @@ public class Garage {
 	public void initAfterLoad() {
 		int dynamicId = 0;
 
-		for (Tyre t : getAllTyres()) {
+		for (Tyre t : getAllTyres().values()) {
 			// We want to make sure that all tyres are initialized
 			// If a tyre is installed on a car, it will get re-initialized with
 			// the correct car reference through the below FOR loop
@@ -137,7 +136,6 @@ public class Garage {
 
 	public void addNewTyre(Tyre tyre) {
 		tyre.setDynamicID(getAllTyres().size());
-		getAllTyres().add(tyre);
-		getAvailableTyresIDs().add(tyre.getDynamicID());
+		getAllTyres().put(tyre.getDynamicID(), tyre);
 	}
 }

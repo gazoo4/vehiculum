@@ -1,5 +1,6 @@
 package sk.berops.android.fueller.gui.maintenance;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import sk.berops.android.fueller.R;
@@ -28,7 +29,7 @@ import android.widget.TextView;
 public class ActivityTyreChangeScheme extends Activity implements TouchCallbackInterface {
 	
 	private Car car;
-	private LinkedList<Tyre> tyreList;
+	private ArrayList<Tyre> tyreList;
 	
 	private RelativeLayout tyreSchemeLayout;
 	private ListView listView;
@@ -36,6 +37,7 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 	
 	private TyreDrawer td;
 	private TyreSchemeHelper helper;
+	private TyreChangeEntry tyreEntry;
 	private TyreConfigurationScheme tyreScheme;
 	private TyrePoolAdapter adapter;
 	private ViewGroup viewGroup;
@@ -64,7 +66,12 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 		car = MainActivity.garage.getActiveCar();
 		super.onCreate(savedInstanceState);
 		
-		tyreScheme = (TyreConfigurationScheme) getIntent().getSerializableExtra("scheme");
+		tyreEntry = (TyreChangeEntry) getIntent().getSerializableExtra("entry");
+		if (tyreEntry == null) {
+			tyreEntry = new TyreChangeEntry();
+		}
+		
+		tyreScheme = tyreEntry.getTyreScheme();
 		if (tyreScheme == null) {
 			tyreScheme = new TyreConfigurationScheme(car);
 		}
@@ -266,6 +273,7 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 		} else {
 			GuiUtils.removeTyreFromContainer(tyre, graphics.getTyreGUIObjects());
 		}
+		tyreEntry.getDeletedTyreIDs().add(tyre.getDynamicID());
 		deselectTyre();
 	}
 	
