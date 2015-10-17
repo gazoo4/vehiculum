@@ -34,12 +34,18 @@
             android:text="@string/activity_stats_show_button_charts" />
     </LinearLayout>
 
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/activity_stats_show_chart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/activity_stats_show_layout_buttons" />
+    
     <TextView
         android:id="@+id/activity_stats_show_header"
         style="@style/caption"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/activity_stats_show_layout_buttons"
+        android:layout_above="@id/activity_stats_show_chart"
         android:text="@string/activity_stats_show_header" />
 
 </RelativeLayout>
