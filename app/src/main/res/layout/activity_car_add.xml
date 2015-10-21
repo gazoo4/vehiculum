@@ -1,0 +1,117 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    
+	<RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:paddingBottom="@dimen/activity_vertical_margin"
+	    android:paddingLeft="@dimen/activity_horizontal_margin"
+	    android:paddingRight="@dimen/activity_horizontal_margin"
+	    android:paddingTop="@dimen/activity_vertical_margin"
+	    tools:context=".MainActivity"
+	    android:scrollbars="vertical"
+	    android:isScrollContainer="true"
+	    android:background="@drawable/background_blue">
+	    
+	    <TextView
+	        android:id="@+id/activity_car_add_header"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/activity_car_add_header" 
+	        style="@style/caption"/>
+	    
+	    <EditText 
+	        android:id="@+id/activity_car_add_brand"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/activity_car_add_header"
+	        android:inputType="textCapWords"
+	        android:hint="@string/activity_car_add_brand_hint"
+	        style="@style/plain_text" />
+	    
+	    <EditText 
+	        android:id="@+id/activity_car_add_model"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/activity_car_add_brand"
+	        android:inputType="textCapWords"
+	        android:hint="@string/activity_car_add_model_hint" 
+	        style="@style/plain_text" />
+	    
+	    <EditText 
+	        android:id="@+id/activity_car_add_model_year"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/activity_car_add_model"
+	        android:inputType="number"
+	        android:hint="@string/activity_car_add_model_year_hint"
+	        style="@style/plain_text" />
+	    
+	    <EditText 
+	        android:id="@+id/activity_car_add_license_plate"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/activity_car_add_model_year"
+	        android:inputType="textCapCharacters"
+	        android:hint="@string/activity_car_add_license_plate_hint"
+	        style="@style/plain_text" />
+	    
+	    <EditText 
+	        android:id="@+id/activity_car_add_mileage"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/activity_car_add_license_plate"
+	        android:inputType="number"
+	        android:hint="@string/activity_generic_mileage_hint"
+	        style="@style/plain_text" />
+	    
+	    <EditText 
+	        android:id="@+id/activity_car_add_nickname"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/activity_car_add_mileage"
+	        android:hint="@string/activity_car_add_nickname_hint"
+	        style="@style/plain_text" />
+	    
+	    <Spinner 
+	        android:id="@+id/activity_car_add_distance_unit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/activity_car_add_nickname" 
+	        android:entries="@array/activity_car_add_distance_units"
+	        android:prompt="@string/activity_car_add_distance_units_hint"
+	        style="@style/plain_text" />
+	    
+	    <Spinner 
+	        android:id="@+id/activity_car_add_volume_unit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/activity_car_add_distance_unit" 
+	        android:entries="@array/activity_car_add_distance_units"
+	        android:prompt="@string/activity_car_add_distance_units_hint"
+	        style="@style/plain_text" />
+	    
+	    <Button
+	        android:id="@+id/activity_car_add_button_get_photo"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/activity_car_add_volume_unit"
+	        android:text="@string/activity_car_add_button_get_photo"
+	        android:onClick="onClick"
+	        style="@style/button_text"
+	        android:background="@drawable/red_button" />
+	    
+	    <Button
+	        android:id="@+id/activity_car_add_button_commit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/activity_car_add_button_get_photo"
+	        android:text="@string/activity_car_add_button_add" 
+	        android:onClick="onClick"
+	        style="@style/button_text"
+	        android:background="@drawable/red_button" />
+	      
+	</RelativeLayout>
+</ScrollView>

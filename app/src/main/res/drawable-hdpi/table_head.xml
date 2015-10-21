@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="@dimen/border_offset" 
+    android:insetTop="@dimen/border_offset">
+    <shape android:shape="rectangle">
+        <solid android:color="@android:color/transparent" />
+    </shape>
+	</inset>

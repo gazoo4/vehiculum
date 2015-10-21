@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_blue">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/activity_part_add_brand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/activity_part_add_producer_hint"
+            android:inputType="textCapWords"
+            style="@style/plain_text" />
+        
+        <EditText
+            android:id="@+id/activity_part_add_manufacturer_part_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_part_add_brand"
+            android:hint="@string/activity_part_add_manufacturer_part_id_hint"
+            android:inputType="textCapCharacters"
+            style="@style/plain_text" />
+        
+        <EditText
+            android:id="@+id/activity_part_add_carmaker_part_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_part_add_manufacturer_part_id"
+            android:hint="@string/activity_part_add_carmaker_part_id_hint"
+            android:inputType="textCapCharacters"
+            style="@style/plain_text" />
+        
+        <LinearLayout
+            android:id="@+id/activity_part_add_cost_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_part_add_carmaker_part_id"
+            android:orientation="horizontal">
+            
+            <EditText
+	            android:id="@+id/activity_part_add_quantity"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight=".50"
+	            android:hint="@string/activity_generic_part_add_quantity_hint"
+	            android:inputType="number"
+	            style="@style/plain_text" />
+            
+	        <EditText
+	            android:id="@+id/activity_part_add_price"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight=".50"
+	            android:hint="@string/activity_expense_add_price_hint"
+	            android:inputType="numberDecimal"
+	            style="@style/plain_text" />
+	        
+	        <Spinner
+	            android:id="@+id/activity_part_add_currency"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight=".20"
+	            android:entries="@array/activity_expense_add_currency"
+	            android:prompt="@string/activity_expense_add_currency_hint" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/activity_part_add_condition_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_part_add_cost_layout"
+            android:orientation="horizontal">
+            
+	        <TextView 
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight=".3"
+	            style="@style/plain_text"
+	            android:text="@string/activity_generic_part_add_condition_hint"/>
+	        
+	        <Spinner 
+	            android:id="@+id/activity_part_add_condition"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight=".7"
+	            android:entries="@array/activity_generic_part_add_condition"
+	            android:prompt="@string/activity_generic_part_add_condition_hint"/>
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/activity_part_add_originality_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_part_add_condition_layout"
+            android:orientation="horizontal">
+            
+	        <TextView 
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight=".3"
+	            style="@style/plain_text"
+	            android:text="@string/activity_part_add_originality_hint"/>
+	        
+	        <Spinner 
+	            android:id="@+id/activity_part_add_originality"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight=".7"
+	            android:entries="@array/activity_part_add_originality"
+	            android:prompt="@string/activity_part_add_originality_hint"/>
+        </LinearLayout>
+        
+        <EditText 
+            android:id="@+id/activity_part_add_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_part_add_originality_layout"
+            android:hint="@string/activity_generic_comment_hint"
+            android:inputType="textMultiLine"
+            style="@style/plain_text" />
+        
+        <Button
+            android:id="@+id/activity_part_add_button_commit"
+            style="@style/button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_part_add_comment"
+            android:background="@drawable/red_button"
+            android:onClick="onClick"
+            android:text="@string/activity_generic_button_entry_save" />
+    </RelativeLayout>
+
+</ScrollView>
