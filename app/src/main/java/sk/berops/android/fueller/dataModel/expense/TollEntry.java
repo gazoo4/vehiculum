@@ -15,14 +15,22 @@ public class TollEntry extends Entry {
 	}
 	
 	public enum Type {
-		FERRY(0, "ferry"),
-		TOLL_ROAD(1, "toll road"),
-		OTHER(2, "other fee");
+		FERRY(0, "ferry", 0xFF0B7994),
+		TOLL_ROAD(1, "toll road", 0xFFD0BE37),
+		OTHER(2, "other fee", 0xFF6E6E6E);
+
 		private int id;
-		private String type;	
+		private String type;
+		private int color;
+
 		Type(int id, String type) {
+			this(id, type, (int) (Math.random() * Integer.MAX_VALUE) | 0xFF000000);
+		}
+
+		Type(int id, String type, int color) {
 			this.setId(id);
 			this.setType(type);
+			this.setColor(color);
 		}
 		
 		private static Map<Integer, Type> idToTypeMapping;
@@ -55,6 +63,14 @@ public class TollEntry extends Entry {
 		}
 		public void setId(int id) {
 			this.id = id;
+		}
+
+		public int getColor() {
+			return color;
+		}
+
+		public void setColor(int color) {
+			this.color = color;
 		}
 	}
 

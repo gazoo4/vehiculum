@@ -10,13 +10,14 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.Legend.LegendPosition;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import sk.berops.android.fueller.R;
+import sk.berops.android.fueller.dataModel.expense.History;
 import sk.berops.android.fueller.engine.charts.ExpenseDistributionPieChart;
 import sk.berops.android.fueller.gui.MainActivity;
+import sk.berops.android.fueller.gui.common.TextFormatter;
 
 public class ActivityReportsNavigate extends Activity {
 
@@ -57,13 +58,15 @@ public class ActivityReportsNavigate extends Activity {
         initializeChart();
     }
 
+    /**
+     * Initialize the default chart state. This means, generate chart based on the top-level view of the expenses.
+     */
     private void initializeChart() {
         chartManager = new ExpenseDistributionPieChart();
         chart.setData(chartManager.getPieData());
         chart.setUsePercentValues(true);
         chart.setCenterTextSize(TEXT_SIZE);
 
-        chart.setDescription(MainActivity.garage.getActiveCar().getNickname());
         chart.setDescriptionColor(Color.WHITE);
         chart.setDescriptionTextSize(TEXT_SIZE);
 
@@ -84,17 +87,21 @@ public class ActivityReportsNavigate extends Activity {
         chart.setRotationAngle(0);
         chart.setRotationEnabled(true);
 
+        updateDescription(-1);
+
+        // listener to allow a deep dive into the chart values by clicking on the pie section of interest
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-                //chartManager.invokeSelection((Integer) e.getData());
-                redrawChart(chartManager.getPieData());
+                Integer typeId = (Integer) e.getData();
+                chartManager.invokeSelection(typeId);
+                updateDescription(typeId);
+                redrawChart();
             }
 
             @Override
             public void onNothingSelected() {
-                //chartManager.resetView();
-                redrawChart(chartManager.getPieData());
+                reset();
             }
         });
 
@@ -113,9 +120,47 @@ public class ActivityReportsNavigate extends Activity {
         chart.invalidate();
     }
 
-    private void redrawChart(PieData data) {
-        chart.setData(data);
+    /**
+     * Display the new data loaded into the chartMananger
+     */
+    private void redrawChart() {
+        chart.setData(chartManager.getPieData());
+        chart.animateXY(ANIMATE_MILLIS, ANIMATE_MILLIS);
         chart.invalidate();
+    }
+
+    /**
+     * Reset the chart view to defaults
+     */
+    private void reset() {
+        chartManager.reset();
+        updateDescription(-1);
+        redrawChart();
+    }
+
+    /**
+     * Generate chart description based on the scope of the displayed expense data
+     * @param typeId -1 if looking at the overall view, otherwise the ExpenseType id
+     */
+    private void updateDescription(int typeId) {
+        String description;
+        double costs = 0.0;
+        History history = MainActivity.garage.getActiveCar().getHistory();
+
+        // If -1, we're reviewing the whole expense dataset.
+        if (typeId == -1) {
+            description = getString(R.string.activity_reports_navigate_chart_title);
+            costs = history.getTotalCost();
+        } else {
+            sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType type = sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType.getExpenseType(typeId);
+            description = type.getExpenseType();
+            costs = history.getEntries().getLast().getConsumption().getTotalCostPerEntryType().get(type);
+        }
+
+        // Null for automatic currency format chooser.
+        // TODO: add currency here. Ideally from locales.
+        description += ": " + TextFormatter.format(costs, null);
+        chart.setDescription(description);
     }
 
     public void onClick(View view) {
@@ -126,6 +171,19 @@ public class ActivityReportsNavigate extends Activity {
             case R.id.activity_stats_show_button_charts:
                 startActivity(new Intent(this, ActivityCharts.class));
                 break;
+        }
+    }
+
+    /**
+     * If the back button is pressed, we want to display the chart from a one level higher perspective.
+     * Once we reach the top level view in the chart, the usual back button functionality applies.
+     */
+    @Override
+    public void onBackPressed() {
+        if (chartManager.getDepth() != 0) {
+            reset();
+        } else {
+            super.onBackPressed();
         }
     }
 }

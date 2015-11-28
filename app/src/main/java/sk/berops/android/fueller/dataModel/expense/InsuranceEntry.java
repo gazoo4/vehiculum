@@ -16,13 +16,22 @@ public class InsuranceEntry extends Entry {
 	}
 	
 	public enum Type {
-		BASIC(0, "basic"),
-		OTHER(1, "other");
+		BASIC(0, "basic", 0xFF2C712C),
+		EXTENDED(2, "extended", 0xFF4DA1AE),
+		FULL(3, "full", 0xFFDF6D2B),
+		OTHER(4, "other", 0xFFB74BCF);
 		private int id;
-		private String type;	
+		private String type;
+		private int color;
+
 		Type(int id, String type) {
+			this(id, type, (int) (Math.random() * Integer.MAX_VALUE) | 0xFF000000);
+		}
+
+		Type(int id, String type, int color) {
 			this.setId(id);
 			this.setType(type);
+			this.setColor(color);
 		}
 		
 		private static Map<Integer, Type> idToTypeMapping;
@@ -55,6 +64,13 @@ public class InsuranceEntry extends Entry {
 		}
 		public void setId(int id) {
 			this.id = id;
+		}
+		public int getColor() {
+			return color;
+		}
+
+		public void setColor(int color) {
+			this.color = color;
 		}
 	}
 

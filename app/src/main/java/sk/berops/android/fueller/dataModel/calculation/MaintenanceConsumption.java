@@ -1,5 +1,8 @@
 package sk.berops.android.fueller.dataModel.calculation;
 
+import com.github.mikephil.charting.data.Entry;
+
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import sk.berops.android.fueller.dataModel.expense.MaintenanceEntry;
@@ -25,6 +28,28 @@ public class MaintenanceConsumption extends Consumption {
 		averagePartsCost = 0.0;
 		totalCostPerMaintenanceType = new TreeMap<MaintenanceEntry.Type, Double>();
 		averageCostPerMaintenanceType = new TreeMap<MaintenanceEntry.Type, Double>();
+	}
+
+	@Override
+	public void reloadChartData(int data) {
+		// We're on level 1. For anything smaller than level 1, we should call our parent class for the data generation instead
+		if (data < 1) {
+			super.reloadChartData(data);
+			return;
+		}
+		pieChartLegend = new ArrayList<String>();
+		pieChartVals = new ArrayList<Entry>();
+		pieChartColors = new ArrayList<Integer>();
+
+		for (MaintenanceEntry.Type t : MaintenanceEntry.Type.values()) {
+			if (getTotalCostPerMaintenanceType().get(t) == null) {
+				continue;
+			}
+			double value = getTotalCostPerMaintenanceType().get(t);
+			pieChartLegend.add(t.getType());
+			pieChartVals.add(new Entry((float) value, t.getId()));
+			pieChartColors.add(t.getColor());
+		}
 	}
 	
 	public double getTotalMaintenanceCost() {

@@ -29,14 +29,21 @@ public class MaintenanceEntry extends Entry {
 	}
 	
 	public enum Type{
-		PLANNED(0, "planned"),
-		UNPLANNED(1, "unplanned"),
-		ACCIDENT_REPAIR(2, "accident repair");
+		PLANNED(0, "planned", 0xFFABD14C),
+		UNPLANNED(1, "unplanned", 0xFF4CB0D1),
+		ACCIDENT_REPAIR(2, "accident repair", 0xFFD14CB2);
 		private int id;
-		private String type;	
+		private String type;
+		private int color;
+
 		Type(int id, String type) {
+			this(id, type, (int) (Math.random() * Integer.MAX_VALUE) | 0xFF000000);
+		}
+
+		Type(int id, String type, int color) {
 			this.setId(id);
 			this.setType(type);
+			this.setColor(color);
 		}
 		
 		private static Map<Integer, Type> idToTypeMapping;
@@ -69,6 +76,13 @@ public class MaintenanceEntry extends Entry {
 		}
 		public void setId(int id) {
 			this.id = id;
+		}
+		public int getColor() {
+			return color;
+		}
+
+		public void setColor(int color) {
+			this.color = color;
 		}
 	}
 	

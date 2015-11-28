@@ -81,14 +81,14 @@ public abstract class Entry extends Expense implements Comparable<Entry> {
     }
 
     public enum ExpenseType {
-        FUEL(0, "fuel", 0xFFD716A4), //fossil fuels, electricity
-        MAINTENANCE(1, "maintenance", 0xFF16BED7), //any maintenance action
-        SERVICE(2, "service", 0xFFD77716), //tow service, replacement car service
+        FUEL(0, "fuel", 0xFFDA3BB0), //fossil fuels, electricity
+        MAINTENANCE(1, "maintenance", 0xFF5046C4), //any maintenance action
+        SERVICE(2, "service", 0xFFBCCF30), //tow service, replacement car service
         TYRES(3, "tyres", 0xFF3A3A3A),
-        TOLL(4, "toll", 0xFF1A26A8), //ferry fee, highway vignette...
-        INSURANCE(5, "insurance", 0xFFF9F33B), //basic insurance or extended insurance
-        BURREAUCRATIC(6, "burreaucratic", 0xFF48F93B), //technical compliancy check fee (TUEV), import tax, eco class tax,...
-        OTHER(Integer.MAX_VALUE, "other", 0xFFF93B42);
+        TOLL(4, "toll", 0xFFCF9730), //ferry fee, highway vignette...
+        INSURANCE(5, "insurance", 0xFF30CFBC), //basic insurance or extended insurance
+        BURREAUCRATIC(6, "burreaucratic", 0xFFCF8030), //technical compliancy check fee (TUEV), import tax, eco class tax,...
+        OTHER(Integer.MAX_VALUE, "other", 0xFFB168A9);
 
         private static Map<Integer, ExpenseType> idToExpenseTypeMapping;
         private int id;

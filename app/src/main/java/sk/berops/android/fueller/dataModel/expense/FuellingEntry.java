@@ -1,7 +1,5 @@
 package sk.berops.android.fueller.dataModel.expense;
 
-import android.graphics.Color;
-
 import org.simpleframework.xml.Element;
 
 import java.util.HashMap;
@@ -21,11 +19,11 @@ public class FuellingEntry extends Entry {
 	@Element(name="fuelPrice", required=false)
 	private double fuelPrice;
 	public enum FuelType{
-		GASOLINE(0, "gasoline", Color.MAGENTA), 
-		LPG(1, "lpg", 0xFFFF8000), //Color.ORANGE
-		DIESEL(2, "diesel", Color.GRAY),
-		CNG(3, "cng", Color.GREEN),
-		ELECTRICITY(4, "electricity", Color.BLUE);
+		GASOLINE(0, "gasoline", 0xFFDA3BB0),
+		LPG(1, "lpg", 0xFFDA680A),
+		DIESEL(2, "diesel", 0xFF4C4C4C),
+		CNG(3, "cng", 0xFF2C712C),
+		ELECTRICITY(4, "electricity", 0xFF02A9BC);
 		private int id;
 		private String type;	
 		private int color;

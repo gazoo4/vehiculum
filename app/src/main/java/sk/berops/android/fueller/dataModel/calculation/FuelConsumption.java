@@ -65,7 +65,13 @@ public class FuelConsumption extends Consumption {
 		averagePerFuelTypeOld = new TreeMap<FuelType, Double>();
 	}
 
-	public void initializeFuelChartData() {
+	@Override
+	public void reloadChartData(int data) {
+		// We're on level 1. For anything smaller than level 1, we should call our parent class for the data generation instead
+		if (data < 1) {
+			super.reloadChartData(data);
+			return;
+		}
 		pieChartLegend = new ArrayList<String>();
 		pieChartVals = new ArrayList<Entry>();
 		pieChartColors = new ArrayList<Integer>();
@@ -74,8 +80,8 @@ public class FuelConsumption extends Consumption {
 			if (getTotalFuelCostPerFuelType().get(t) == null) {
 				continue;
 			}
-			pieChartLegend.add(t.getType());
 			double value = getTotalFuelCostPerFuelType().get(t);
+			pieChartLegend.add(t.getType());
 			pieChartVals.add(new Entry((float) value, t.getId()));
 			pieChartColors.add(t.getColor());
 		}

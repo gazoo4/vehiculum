@@ -15,14 +15,22 @@ public class ServiceEntry extends Entry {
 	}
 	
 	public enum Type {
-		TOWING(0, "towing service"),
-		REPLACEMENT_VEHICLE(1, "replacement vehicle"),
-		OTHER(2, "other service");
+		TOWING(0, "towing service", 0xFFDAA92D),
+		REPLACEMENT_VEHICLE(1, "replacement vehicle", 0xFF862DDA),
+		PARKING_(2, "parking", 0xFF2D78DA),
+		OTHER(3, "other service", 0xFF767676);
 		private int id;
-		private String type;	
+		private String type;
+		private int color;
+
 		Type(int id, String type) {
+			this(id, type, (int) (Math.random() * Integer.MAX_VALUE) | 0xFF000000);
+		}
+
+		Type(int id, String type, int color) {
 			this.setId(id);
 			this.setType(type);
+			this.setColor(color);
 		}
 		
 		private static Map<Integer, Type> idToTypeMapping;
@@ -55,6 +63,14 @@ public class ServiceEntry extends Entry {
 		}
 		public void setId(int id) {
 			this.id = id;
+		}
+
+		public int getColor() {
+			return color;
+		}
+
+		public void setColor(int color) {
+			this.color = color;
 		}
 	}
 

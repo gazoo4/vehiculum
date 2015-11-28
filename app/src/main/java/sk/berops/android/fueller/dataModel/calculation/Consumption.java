@@ -27,7 +27,12 @@ public class Consumption implements IntoPieChartExtractable {
 	protected ArrayList<Entry> pieChartVals;
 	protected ArrayList<Integer> pieChartColors;
 
-	public void reloadChartData() {
+	/**
+	 * To generate and package the data for charts. This should be overwritten by each sub-class.
+	 * @param depth identifies at which level we want to process data (Consumption or FuelConsumption level?)
+	 */
+	public void reloadChartData(int depth) {
+		// As we're on depth level 0 and there's nothing above us, we don't really bother with the depth level
 		pieChartLegend = new ArrayList<String>();
 		pieChartVals = new ArrayList<Entry>();
 		pieChartColors = new ArrayList<Integer>();
@@ -41,14 +46,13 @@ public class Consumption implements IntoPieChartExtractable {
 			pieChartLegend.add(t.getExpenseType());
 			pieChartVals.add(new Entry((float) value, i++, t.getId()));
 			pieChartColors.add(t.getColor());
-			System.out.println("Type: " + t.getExpenseType() +" with ID: "+ t.getId());
 		}
 	}
 
 	@Override
 	public ArrayList<String> getPieChartLegend() {
 		if (pieChartLegend == null) {
-			reloadChartData();
+			reloadChartData(0);
 		}
 
 		return pieChartLegend;
@@ -57,7 +61,7 @@ public class Consumption implements IntoPieChartExtractable {
 	@Override
 	public ArrayList<Entry> getPieChartVals() {
 		if (pieChartVals == null) {
-			reloadChartData();
+			reloadChartData(0);
 		}
 
 		return pieChartVals;
@@ -66,7 +70,7 @@ public class Consumption implements IntoPieChartExtractable {
 	@Override
 	public ArrayList<Integer> getPieChartColors() {
 		if (pieChartColors == null) {
-			reloadChartData();
+			reloadChartData(0);
 		}
 
 		return pieChartColors;
