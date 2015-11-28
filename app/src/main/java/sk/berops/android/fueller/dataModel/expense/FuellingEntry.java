@@ -29,6 +29,11 @@ public class FuellingEntry extends Entry {
 		private int id;
 		private String type;	
 		private int color;
+
+		FuelType(int id, String fuelType) {
+			this(id, fuelType, (int) (Math.random() * Integer.MAX_VALUE));
+		}
+
 		FuelType(int id, String type, int color) {
 			this.setId(id);
 			this.setType(type);
@@ -36,7 +41,6 @@ public class FuellingEntry extends Entry {
 		}
 		
 		private static Map<Integer, FuelType> idToDescriptionMapping;
-		private static Map<FuelType, Integer> typeToColorMapping;
 
 		public static FuelType getFuelType(int id) {
 			if (idToDescriptionMapping == null) {
@@ -47,23 +51,11 @@ public class FuellingEntry extends Entry {
 			result = idToDescriptionMapping.get(id);
 			return result;
 		}
-		/*
-		public static int getColor(int id) {
-			if (typeToColorMapping == null) {
-				initMapping();
-			}
-			
-			int result = -1;
-			result = typeToColorMapping.get(id);
-			return result;
-		}
-		*/
+
 		private static void initMapping() {
 			idToDescriptionMapping = new HashMap<Integer, FuellingEntry.FuelType>();
-			typeToColorMapping = new HashMap<FuellingEntry.FuelType, Integer>();
 			for (FuelType ft : values()) {
 				idToDescriptionMapping.put(ft.id, ft);
-				typeToColorMapping.put(ft, ft.color);
 			}
 		}
 	

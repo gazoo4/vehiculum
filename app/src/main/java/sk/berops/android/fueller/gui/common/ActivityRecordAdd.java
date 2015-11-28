@@ -52,7 +52,9 @@ public abstract class ActivityRecordAdd extends Activity {
 	}
 	
 	protected void updateComment() {
-		record.setComment(editTextComment.getText().toString());
+		if (editTextComment != null) {
+			record.setComment(editTextComment.getText().toString());
+		}
 	}
 	
 	protected void updateCreationDate() {

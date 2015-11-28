@@ -1,5 +1,8 @@
 package sk.berops.android.fueller.dataModel.calculation;
 
+import com.github.mikephil.charting.data.Entry;
+
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -60,6 +63,22 @@ public class FuelConsumption extends Consumption {
 		averageFuelPricePerFuelType = new TreeMap<FuelType, Double>();			
 		
 		averagePerFuelTypeOld = new TreeMap<FuelType, Double>();
+	}
+
+	public void initializeFuelChartData() {
+		pieChartLegend = new ArrayList<String>();
+		pieChartVals = new ArrayList<Entry>();
+		pieChartColors = new ArrayList<Integer>();
+
+		for (FuelType t : FuelType.values()) {
+			if (getTotalFuelCostPerFuelType().get(t) == null) {
+				continue;
+			}
+			pieChartLegend.add(t.getType());
+			double value = getTotalFuelCostPerFuelType().get(t);
+			pieChartVals.add(new Entry((float) value, t.getId()));
+			pieChartColors.add(t.getColor());
+		}
 	}
 	
 	public FuelType getLastRefuelType() {

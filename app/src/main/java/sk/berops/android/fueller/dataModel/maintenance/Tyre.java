@@ -36,8 +36,6 @@ public class Tyre extends GenericPart {
 	@Element(name = "mileageNonDriveAxle", required = false)
 	private double mileageNonDriveAxle;
 	private double mileageNonDriveAxleSI;
-	@Element(name = "id", required = false)
-	private int dynamicID;
 
 	private static final int NEW_TYRE_THREAD_LEVEL = 9; // in mm
 
@@ -256,13 +254,5 @@ public class Tyre extends GenericPart {
 
 	public void setThreadMax(int threadMax) {
 		this.threadMax = threadMax;
-	}
-
-	public int getDynamicID() {
-		return dynamicID;
-	}
-
-	public void setDynamicID(int dynamicID) {
-		this.dynamicID = dynamicID;
 	}
 }

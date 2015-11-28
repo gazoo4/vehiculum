@@ -62,7 +62,6 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		tyreChangeEntry.setExpenseType(ExpenseType.TYRES);
 		
 		super.entry = (Entry) this.tyreChangeEntry;
-		super.editMode = editMode;
 		super.onCreate(savedInstanceState);
 	}
 

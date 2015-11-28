@@ -16,11 +16,13 @@ public class Axle {
 	private AxleType axleType;
 	@Element(name="drivable")
 	private boolean drivable;
+
 	/**
-	 * TyreIDs belonging to the tyres from left to right (from the birds perspective view)
+	 * TyreIDs belonging to the tyres from left to right (from the birds perspective view).
+	 * Null means there's an empty slot for the tyre.
 	 */
 	@ElementList(inline=true, required=false)
-	private ArrayList<Integer> tyreIDs;
+	private ArrayList<Long> tyreIDs;
 
 	private Car car;
 	
@@ -37,8 +39,8 @@ public class Axle {
 	public void initAfterLoad(Car car) {
 		Tyre tyre;
 		this.car = car;
-		for (Integer i : tyreIDs) {
-			tyre = MainActivity.garage.getAllTyres().get(i);
+		for (Long id : tyreIDs) {
+			tyre = MainActivity.garage.getTyreById(id);
 			tyre.initAfterLoad(car);
 		}
 	}
@@ -88,20 +90,20 @@ public class Axle {
 	}
 	
 	private void createTyres() {
-		tyreIDs = new ArrayList<Integer>();
+		tyreIDs = new ArrayList<Long>();
 		switch (getAxleType()) {
 		case SINGLE:
-			tyreIDs.add(-1);
+			tyreIDs.add(null);
 			break;
 		case STANDARD:
-			tyreIDs.add(-1);
-			tyreIDs.add(-1);
+			tyreIDs.add(null);
+			tyreIDs.add(null);
 			break;
 		case TANDEM:
-			tyreIDs.add(-1);
-			tyreIDs.add(-1);
-			tyreIDs.add(-1);
-			tyreIDs.add(-1);
+			tyreIDs.add(null);
+			tyreIDs.add(null);
+			tyreIDs.add(null);
+			tyreIDs.add(null);
 			break;
 		default:
 			break;
@@ -123,11 +125,11 @@ public class Axle {
 		this.drivable = drivable;
 	}
 
-	public ArrayList<Integer> getTyreIDs() {
+	public ArrayList<Long> getTyreIDs() {
 		return tyreIDs;
 	}
 
-	public void setTyreIDs(ArrayList<Integer> tyreIDs) {
+	public void setTyreIDs(ArrayList<Long> tyreIDs) {
 		this.tyreIDs = tyreIDs;
 	}
 	
@@ -136,6 +138,6 @@ public class Axle {
 	}
 	
 	public void installTyre(Tyre tyre, int position) {
-		getTyreIDs().add(position, tyre.getDynamicID());
+		getTyreIDs().add(position, tyre.getId());
 	}
 }

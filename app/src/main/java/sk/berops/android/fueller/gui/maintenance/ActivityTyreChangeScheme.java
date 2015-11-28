@@ -271,7 +271,7 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 		} else {
 			GuiUtils.removeTyreFromContainer(tyre, graphics.getTyreGUIObjects());
 		}
-		tyreEntry.getDeletedTyreIDs().add(tyre.getDynamicID());
+		tyreEntry.getDeletedTyreIDs().add(tyre.getId());
 		deselectTyre();
 	}
 	

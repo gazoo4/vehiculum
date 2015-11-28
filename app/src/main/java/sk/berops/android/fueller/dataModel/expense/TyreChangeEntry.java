@@ -2,8 +2,10 @@ package sk.berops.android.fueller.dataModel.expense;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.ElementMap;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Currency;
@@ -15,27 +17,37 @@ public class TyreChangeEntry extends Entry {
 	
 	@Element(name="laborCost", required=false)
 	private double laborCost;
+
 	@Element(name="extraMaterialCost", required=false)
 	private double extraMaterialCost;
+
 	@Element(name="tyresCost", required=false)
 	private double tyresCost;
+
 	/**
 	 * Car's initial tyreScheme. Not used yet. So far we assume that the initiall tyreScheme is always null (meaning no tyres installed). 
 	 */
 	@Element(name="tyreScheme", required=false)
 	private TyreConfigurationScheme tyreScheme;
+
 	/**
 	 * List of tyres bought 
 	 */
 	@ElementList(inline=true, required=false)
-	private ArrayList<Integer> boughtTyresIDs;
+	private ArrayList<Long> boughtTyresIDs;
 	
 	/**
 	 * List of tyres thrown away
 	 */
 	@ElementList(inline=true, required=false)
-	private ArrayList<Integer> deletedTyreIDs;
-	
+	private ArrayList<Long> deletedTyreIDs;
+
+	/**
+	 * Map of tyre IDs with new thread levels of the respective tyres
+	 */
+	@ElementMap(inline = false, required = false)
+	private HashMap<Long, Double> threadLevelUpdate;
+
 	public TyreChangeEntry() {
 		super();
 	}
@@ -98,19 +110,30 @@ public class TyreChangeEntry extends Entry {
 		this.tyreScheme = tyreScheme;
 	}
 
-	public ArrayList<Integer> getBoughtTyresIDs() {
+	public ArrayList<Long> getBoughtTyresIDs() {
 		return boughtTyresIDs;
 	}
 
-	public void setBoughtTyresIDs(ArrayList<Integer> boughtTyresIDs) {
+	public void setBoughtTyresIDs(ArrayList<Long> boughtTyresIDs) {
 		this.boughtTyresIDs = boughtTyresIDs;
 	}
 
-	public ArrayList<Integer> getDeletedTyreIDs() {
+	public ArrayList<Long> getDeletedTyreIDs() {
 		return deletedTyreIDs;
 	}
 
-	public void setDeletedTyreIDs(ArrayList<Integer> deletedTyreIDs) {
+	public void setDeletedTyreIDs(ArrayList<Long> deletedTyreIDs) {
 		this.deletedTyreIDs = deletedTyreIDs;
+	}
+
+	/**
+	 * Map of tyre IDs with new thread levels of the respective tyres
+	 */
+	public HashMap<Long, Double> getThreadLevelUpdate() {
+		return threadLevelUpdate;
+	}
+
+	public void setThreadLevelUpdate(HashMap<Long, Double> threadLevelUpdate) {
+		this.threadLevelUpdate = threadLevelUpdate;
 	}
 }
