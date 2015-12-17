@@ -14,6 +14,7 @@ import java.util.LinkedList;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
+import sk.berops.android.fueller.dataModel.tags.Tag;
 
 @Root
 public class Garage {
@@ -30,11 +31,19 @@ public class Garage {
 	@Element(name = "activeCar", required = false)
 	private int activeCarId;
 
+	@Element(name = "rootTag", required = false)
+	private Tag rootTag;
+
 	public Garage() {
 		super();
 		cars = new LinkedList<Car>();
 		tyreInventory = new ArrayList<Tyre>();
 		activeCarId = -1;
+
+		Tag root = getRootTag();
+		if (root != null) {
+			rootTag.setParent(null);
+		}
 	}
 
 	public LinkedList<Car> getCars() {
@@ -209,5 +218,16 @@ public class Garage {
 
 	public void addNewTyre(Tyre tyre) {
 		tyreInventory.add(tyre);
+	}
+
+	/**
+	 * The root tag for the tag tree structure relevant to this garage
+	 */
+	public Tag getRootTag() {
+		return rootTag;
+	}
+
+	public void setRootTag(Tag rootTag) {
+		this.rootTag = rootTag;
 	}
 }

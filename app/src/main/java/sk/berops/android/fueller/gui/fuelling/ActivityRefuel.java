@@ -3,6 +3,8 @@ package sk.berops.android.fueller.gui.fuelling;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -26,6 +28,7 @@ import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.fueller.gui.common.GuiUtils;
 import sk.berops.android.fueller.gui.common.UtilsActivity;
+import sk.berops.android.fueller.gui.tags.TagManagerFragment;
 
 public class ActivityRefuel extends ActivityEntryGenericAdd {
 
@@ -73,7 +76,7 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
 			fuellingEntry = new FuellingEntry();
 		}
 		fuellingEntry.setExpenseType(Entry.ExpenseType.FUEL);
-		super.entry = (Entry) this.fuellingEntry;
+		super.entry = this.fuellingEntry;
 		
 		super.onCreate(savedInstanceState);
 	}
@@ -91,6 +94,8 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
 		spinnerFuelType = (Spinner) findViewById(R.id.activity_refuel_fuel_type);
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_refuel_currency);
 		spinnerVolumeUnit = (Spinner) findViewById(R.id.activity_refuel_volume_unit);
+
+		recyclerViewTags = (RecyclerView) findViewById(R.id.activity_refuel_tags_recyclerview);
 	}
 	
 	@Override
@@ -122,6 +127,9 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
 		editTextVolume.addTextChangedListener(priceCalculator);
 		spinnerCurrency.setOnItemSelectedListener(priceCalculator);
 		spinnerVolumeUnit.setOnItemSelectedListener(priceCalculator);
+
+		recyclerViewTags.setAdapter(tagAdapter);
+		recyclerViewTags.setLayoutManager(new LinearLayoutManager(this));
 	}
 	
 	protected void refreshPrice() {
@@ -129,7 +137,7 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
 		double cost;
 		double price;
 		Currency.Unit currency;
-		UnitConstants.VolumeUnit volumeUnit = UnitConstants.VolumeUnit.getVolumeUnit(0);
+		UnitConstants.VolumeUnit volumeUnit;
 
 		try {
 			//TODO: here we should reflect the units we've bought in here
@@ -177,6 +185,10 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
 			} catch (FieldsEmptyException ex) {
 				ex.throwAlert();
 			}
+			break;
+		case R.id.activity_refuel_button_tag_add:
+			TagManagerFragment fragment = new TagManagerFragment();
+			fragment.show(getFragmentManager(), "tag picker");
 			break;
 		}
 	}

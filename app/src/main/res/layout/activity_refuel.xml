@@ -15,8 +15,31 @@
             style="@style/caption" />
 
         <LinearLayout
-            android:id="@+id/activity_refuel_mileage_layout"
+            android:id="@+id/activity_refuel_tag_layout"
             android:layout_below="@id/activity_refuel_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/activity_refuel_button_tag_add"
+                style="@style/button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/red_button"
+                android:onClick="onClick"
+                android:text="@string/activity_generic_button_tag_add"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/activity_refuel_tags_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_refuel_mileage_layout"
+            android:layout_below="@id/activity_refuel_tag_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             

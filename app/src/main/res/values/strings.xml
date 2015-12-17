@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name"											>Fueller</string>
+
     <string name="action_settings"									>Settings</string>
+
     <string name="activity_burreaucratic_header"					>Burreaucracy expense</string>
+
     <string name="activity_car_add_brand_hint"						>Brand</string>
     <string name="activity_car_add_button_add"						>Add car</string>
     <string name="activity_car_add_button_edit"						>Edit car</string>
@@ -16,7 +19,9 @@
     <string name="activity_car_add_nickname_hint"					>Nickname (optional)</string>
     <string name="activity_car_add_volume_units_hint"				>Volume units</string>
     <string name="activity_car_edit_label"							>Edit your car</string>
+
     <string name="activity_entries_list_type_hint"					>Filter: </string>
+
     <string name="activity_entry_add_button_burreaucratic"			>Burreaucracy</string>
     <string name="activity_entry_add_button_insurance"				>Insurance payment</string>
     <string name="activity_entry_add_button_maintenance"			>Maintenance</string>
@@ -27,21 +32,27 @@
     <string name="activity_entry_add_field_missing_alert"			>Some of the required fields are not filled-in:</string>
     <string name="activity_entry_add_header"						>Pick an action to record</string>
     <string name="activity_entry_add_label"							>Adding new event</string>
+
     <string name="activity_expense_add_currency_hint"				>Currency</string>
     <string name="activity_expense_add_cost_hint"					>Cost</string>
     <string name="activity_expense_add_price_hint"					>Price</string>
+
     <string name="activity_garage_management_label"					>Your garage</string>
     <string name="activity_garage_management_button_car_add"		>Add a new car</string>
     <string name="activity_garage_management_info_text"				>List of cars in your garage:</string>
+
     <string name="activity_generic_button_date_change"				>Change date</string>
     <string name="activity_generic_button_entry_save"				>Save</string>
+    <string name="activity_generic_button_tag_add"	    			>Tag</string>
     <string name="activity_generic_comment_hint"					>Additional comment</string>
     <string name="activity_generic_cost_hint"						>Cost of the bill</string>
     <string name="activity_generic_mileage_hint"					>Mileage</string>
     <string name="activity_generic_part_add_condition_hint"			>Condition</string>
     <string name="activity_generic_part_add_quantity_hint"			>Quantity</string>
+
     <string name="activity_insurance_header"						>Insurance expense</string>
     <string name="activity_insurance_type_hint"						>Insurance type</string>
+
     <string name="activity_main_average"							>Average</string>
     <string name="activity_main_average_combined"					>Average combined</string>
     <string name="activity_main_button_entry_add"					>Record a new event</string>
@@ -57,6 +68,7 @@
     <string name="activity_main_relative_since_last_refuel"			>Relative costs since last refuel</string>
     <string name="activity_main_since_last_refuel"					>Since the last refuel</string>
     <string name="activity_main_total_costs"						>Total costs</string>
+
     <string name="activity_maintenance_button_add"					>+</string>
     <string name="activity_maintenance_button_delete"				>-</string>
     <string name="activity_maintenance_header"						>Maintenance</string>
@@ -67,23 +79,30 @@
     <string name="activity_maintenance_type_hint"					>Maintenance type</string>
     <string name="activity_maintenance_type_planned_label"			>Planned</string>
     <string name="activity_maintenance_type_unplanned_label"		>Unlanned</string>
+
     <string name="activity_part_add_carmaker_part_id_hint"			>Carmaker part No.</string>
     <string name="activity_part_add_manufacturer_part_id_hint"		>Manufacturer part No.</string>
     <string name="activity_part_add_originality_hint"				>Originality</string>
     <string name="activity_part_add_producer_hint"					>Manufacturer</string>
+
     <string name="activity_refuel_fuel_type_hint"					>Fuel type</string>
     <string name="activity_refuel_header"							>Enter your bill details</string>
     <string name="activity_refuel_price_hint"						>Price per liter</string>
     <string name="activity_refuel_volume_hint"						>Fuel volume bought</string>
     <string name="activity_refuel_volume_unit_hint"					>Volume unit</string>
+
     <string name="activity_reports_navigate_chart_title"			>overall</string>
+
     <string name="activity_service_header"							>Service</string>
     <string name="activity_service_type_hint"						>Service type</string>
+
     <string name="activity_stats_show_button_charts"				>Charts</string>
     <string name="activity_stats_show_button_fuelling"				>Recorded entries</string>
     <string name="activity_stats_show_header"						>Statistic center</string>
+
     <string name="activity_toll_header"								>Toll</string>
     <string name="activity_toll_type_hint"							>Toll category</string>
+
     <string name="activity_tyre_add_brand_hint"						>Brand</string>
     <string name="activity_tyre_add_button_entry_save"				>Save the record</string>
     <string name="activity_tyre_add_diameter_hint"					>Diameter</string>
@@ -96,6 +115,7 @@
     <string name="activity_tyre_add_thread_level_hint"				>Thread level</string>
     <string name="activity_tyre_add_weight_index_hint"				>Weight index</string>
     <string name="activity_tyre_add_width_hint"						>Width</string>
+
     <string name="activity_tyre_change_button_advanced"				>Advanced</string>
     <string name="activity_tyre_change_button_entry_save"			>Save the record</string>
     <string name="activity_tyre_change_comment_hint"				>Additional comment</string>
@@ -111,14 +131,24 @@
     <string name="activity_tyre_change_scheme_pattern_text"			>Tread pattern: </string>
     <string name="activity_tyre_change_total_cost_hint"				>Total cost</string>
     <string name="activity_tyre_change_tyres_cost_hint"				>Cost of tyres (if bought now)</string>
+
     <string name="fragment_entry_edit_delete_activate_button"		>Activate</string>
     <string name="fragment_entry_edit_delete_activate_toast"		>Activating entry</string>
     <string name="fragment_entry_edit_delete_delete_button"			>Delete</string>
     <string name="fragment_entry_edit_delete_delete_toast"			>Removing entry</string>
     <string name="fragment_entry_edit_delete_edit_button"			>Edit</string>
     <string name="fragment_entry_edit_delete_edit_toast"			>Opening entry</string>
+
+    <string name="fragment_tag_manager_commit_button_text"          >Attach tag</string>
+    <string name="fragment_tag_manager_color_button_text"           >Color</string>
+    <string name="fragment_tag_manager_delete_button_text"          >Delete tag</string>
+    <string name="fragment_tag_manager_new_tag_hint"                >or create a new one</string>
+    <string name="fragment_tag_manager_new_tag_name_hint"           >Name</string>
+    <string name="fragment_tag_manager_use_existing_hint"           >Select an existing tag</string>
+
     <string name="list_stats_maintenance_parts_cost_hint"			>Parts cost: </string>
     <string name="list_stats_maintenance_total_cost_hint"			>Total cost: </string>
+
     <string name="preferences_units"								>Units</string>
     <string name="preferences_units_consumption"					>Consumption</string>
     <string name="preferences_units_consumption_dialog"				>Select consumption units for reporting</string>

@@ -1,17 +1,31 @@
 package sk.berops.android.fueller.dataModel.expense;
 
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.calculation.Consumption;
+import sk.berops.android.fueller.dataModel.tags.Tag;
+import sk.berops.android.fueller.dataModel.tags.Taggable;
 
-public abstract class Entry extends Expense implements Comparable<Entry> {
+public abstract class Entry extends Expense implements Comparable<Entry>, Taggable {
     private int dynamicId;
     private Consumption consumption;
+
+    /**
+     * Reference to the Car to which this Entry is attached to.
+     */
     private Car car;
+
+    /**
+     * Structure to hold the tags assigned to this entry.
+     */
+    @ElementList(name = "tagIDs", required = false)
+    private ArrayList<Long> tagIds;
 
     @Element(name = "mileage")
     private double mileage;
@@ -19,9 +33,12 @@ public abstract class Entry extends Expense implements Comparable<Entry> {
     @Element(name = "expenseType")
     private ExpenseType expenseType;
 
+    public Entry() {
+        clearTags();
+    }
+
     @Override
     public void generateSI() {
-        // this is called just 8 times????
         super.generateSI();
         setMileage(getMileage());
         setCost(getCost(), getCurrency());
@@ -79,6 +96,8 @@ public abstract class Entry extends Expense implements Comparable<Entry> {
     public void setMileageSI(double mileageSI) {
         this.mileageSI = mileageSI;
     }
+
+
 
     public enum ExpenseType {
         FUEL(0, "fuel", 0xFFDA3BB0), //fossil fuels, electricity
@@ -145,5 +164,68 @@ public abstract class Entry extends Expense implements Comparable<Entry> {
         public void setColor(int color) {
             this.color = color;
         }
+    }
+
+    /**
+     * Add a new tag to the list of tags for this Entry
+     * @param tag to be added
+     */
+    public void addTag(Tag tag) {
+        tagIds.add(tag.getId());
+    }
+
+    /**
+     * Remove a tag from the list of tags attached to this Entry
+     * @param tag to be removed
+     */
+    public void removeTag(Tag tag) {
+        tagIds.remove(tag.getId());
+    }
+
+    /**
+     * Clear the list of tags IDs attached to this Entry
+     */
+    public void clearTags() {
+        tagIds = new ArrayList<Long>();
+    }
+
+    /**
+     * Get the list of tags IDs for the relevant tags attached to this Entry
+     * @return list of tags
+     */
+    public ArrayList<Long> getTagIds() {
+        return tagIds;
+    }
+
+    /**
+     * Set the list of tags relevant to this Entry
+     * @param tagIds list of tags
+     */
+    public void setTagIds(ArrayList<Long> tagIds) {
+        this.tagIds = tagIds;
+    }
+
+    /**
+     * Get the tags associated with this entry based on the known tag IDs
+     * @return ArrayList of the tags
+     */
+    public ArrayList<Tag> getTags() {
+        ArrayList<Tag> tags = new ArrayList<>();
+        for (Long id : getTagIds()) {
+            tags.add(Tag.getTag(id));
+        }
+        return tags;
+    }
+
+    /**
+     * Set the tag associated to this entry based on the provided list of tags
+     * @param tags
+     */
+    public void setTags(ArrayList<Tag> tags) {
+        ArrayList<Long> tagIds = new ArrayList<>();
+        for (Tag tag : tags) {
+            tagIds.add(tag.getId());
+        }
+        this.tagIds = tagIds;
     }
 }
