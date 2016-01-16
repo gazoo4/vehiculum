@@ -41,8 +41,11 @@ public class Garage {
 		activeCarId = -1;
 
 		Tag root = getRootTag();
-		if (root != null) {
-			rootTag.setParent(null);
+		if (root == null) {
+			root = new Tag();
+			root.setDepth(0);
+			root.setParent(null);
+			setRootTag(root);
 		}
 	}
 

@@ -32,6 +32,14 @@
         <item name="android:shadowRadius">2</item>
     </style>
 
+    <!-- RecyclerView divider -->
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
     <!-- statistics listing style -->
     <style name="HeaderRow">
         <item name="android:background">@drawable/background_blue</item>

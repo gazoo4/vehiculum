@@ -41,14 +41,15 @@
     <string name="activity_garage_management_button_car_add"		>Add a new car</string>
     <string name="activity_garage_management_info_text"				>List of cars in your garage:</string>
 
+    <string name="activity_generic_button_new_tag_add"				>Add new tag</string>
     <string name="activity_generic_button_date_change"				>Change date</string>
     <string name="activity_generic_button_entry_save"				>Save</string>
-    <string name="activity_generic_button_tag_add"	    			>Tag</string>
     <string name="activity_generic_comment_hint"					>Additional comment</string>
     <string name="activity_generic_cost_hint"						>Cost of the bill</string>
     <string name="activity_generic_mileage_hint"					>Mileage</string>
     <string name="activity_generic_part_add_condition_hint"			>Condition</string>
     <string name="activity_generic_part_add_quantity_hint"			>Quantity</string>
+    <string name="activity_generic_tag_add_hint"		    	    >Add tag</string>
 
     <string name="activity_insurance_header"						>Insurance expense</string>
     <string name="activity_insurance_type_hint"						>Insurance type</string>
@@ -139,15 +140,16 @@
     <string name="fragment_entry_edit_delete_edit_button"			>Edit</string>
     <string name="fragment_entry_edit_delete_edit_toast"			>Opening entry</string>
 
-    <string name="fragment_tag_manager_commit_button_text"          >Attach tag</string>
     <string name="fragment_tag_manager_color_button_text"           >Color</string>
     <string name="fragment_tag_manager_delete_button_text"          >Delete tag</string>
     <string name="fragment_tag_manager_new_tag_hint"                >or create a new one</string>
     <string name="fragment_tag_manager_new_tag_name_hint"           >Name</string>
-    <string name="fragment_tag_manager_use_existing_hint"           >Select an existing tag</string>
+    <string name="fragment_tag_manager_use_existing_hint"           >Select a tag</string>
 
     <string name="list_stats_maintenance_parts_cost_hint"			>Parts cost: </string>
     <string name="list_stats_maintenance_total_cost_hint"			>Total cost: </string>
+
+    <string name="list_tree_tags_new_tag_hint"			            >Create a new tag here</string>
 
     <string name="preferences_units"								>Units</string>
     <string name="preferences_units_consumption"					>Consumption</string>

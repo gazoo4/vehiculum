@@ -1,6 +1,5 @@
 package sk.berops.android.fueller.dataModel.tags;
 
-import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;
@@ -15,9 +14,9 @@ import sk.berops.android.fueller.gui.MainActivity;
  */
 public class Tag extends Record {
 	/**
-	 * Link to the parent tag in the tag tree structure
+	 * Link to the parent tag in the tag tree structure.
+	 * No need to persist it, it's dynamically created.
 	 */
-	@Element(name = "parentTag", required = true)
 	private Tag parent;
 
 	/**
@@ -162,10 +161,13 @@ public class Tag extends Record {
 
 	/**
 	 * Return all the tags known to our garage.
-	 * @return tag list
+	 * @return list of known tags
 	 */
 	public static ArrayList<Tag> getAllTags() {
 		Tag root = MainActivity.garage.getRootTag();
+		if (root == null) {
+			return new ArrayList<Tag>();
+		}
 
 		return root.getChildTree();
 	}

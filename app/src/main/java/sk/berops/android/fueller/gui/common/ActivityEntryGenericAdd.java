@@ -19,6 +19,7 @@ import sk.berops.android.fueller.dataModel.expense.Expense;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.gui.Colors;
 import sk.berops.android.fueller.gui.MainActivity;
+import sk.berops.android.fueller.gui.tags.FragmentTagManager;
 import sk.berops.android.fueller.gui.tags.TagAdapter;
 
 public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd implements DatePickerDialog.OnDateSetListener {
@@ -26,39 +27,44 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 	protected EditText editTextMileage;
 	protected TextView textViewDisplayDate;
 	protected TextView textViewDistanceUnit;
-	protected Button buttonAddTag;
+	protected Button buttonTagAdd;
 	protected RecyclerView recyclerViewTags;
 	protected TagAdapter tagAdapter;
-	
+
 	protected Entry entry;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.expense = (Expense) this.entry;
 		super.onCreate(savedInstanceState);
-		
+
 		updateTextAddEventDate();
 	}
-	
+
 	@Override
 	protected abstract void attachGuiObjects();
-	
+
 	@Override
 	protected void styleGuiObjects() {
 		super.styleGuiObjects();
 		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
 	}
-	
+
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
 		textViewDistanceUnit.setText(car.getDistanceUnit().getUnit());
 		tagAdapter = new TagAdapter(entry.getTags());
 	}
-	
-	public void showDatePickerDialog(View v) {
+
+	public void onClickShowDatePickerDialog(View v) {
 		FragmentDatePicker fragment = new FragmentDatePicker();
 		fragment.show(getFragmentManager(), "datePicker");
+	}
+
+	public void onClickTagAdd(View v) {
+		FragmentTagManager fragment = new FragmentTagManager();
+		fragment.show(getFragmentManager(), "tagManager");
 	}
 
 	private void updateTextAddEventDate() {
@@ -67,7 +73,7 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 		}
 		textViewDisplayDate.setText(DateFormat.getDateInstance().format(entry.getEventDate()));
 	}
-	
+
 	private void updateMileage() throws FieldsEmptyException {
 		Car car = MainActivity.garage.getActiveCar();
 		double mileage = 0;
@@ -76,11 +82,11 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 		} catch (NumberFormatException ex) {
 			throwAlertFieldsEmpty(R.string.activity_generic_mileage_hint);
 		}
-		
+
 		entry.setMileage(mileage);
 		car.setCurrentMileage(mileage);
 	}
-	
+
 	public void onDateSet(DatePicker view, int year, int monthOfYear,
 			int dayOfMonth) {
 		Calendar c = Calendar.getInstance();
@@ -88,12 +94,12 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 		entry.setEventDate(c.getTime());
 		updateTextAddEventDate();
 	}
-	
+
 	protected void updateFields() throws FieldsEmptyException {
 		super.updateFields();
 		updateMileage();
 	}
-	
+
 	public void saveFieldsAndPersist(View view) throws FieldsEmptyException {
 		Car car = MainActivity.garage.getActiveCar();
 		entry.setCar(car);

@@ -1,19 +1,33 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storePassword 'android'
+        }
+        release {
+            keyAlias 'release'
+            keyPassword 'release'
+            storePassword 'release'
+        }
+    }
     compileSdkVersion 22
     buildToolsVersion "23.0.1"
-
     defaultConfig {
         applicationId "sk.berops.android.fueller"
         minSdkVersion 14
         targetSdkVersion 22
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.debug
         }
     }
 }
@@ -34,6 +48,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:+'
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.5'
     compile 'com.jjoe64:graphview:3.1.4'
+    compile 'com.larswerkman:lobsterpicker:1.0.1'
     compile 'org.apache.commons:commons-math3:3.5'
     compile 'org.simpleframework:simple-xml:2.7.1'
 }

@@ -28,175 +28,174 @@ import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.fueller.gui.common.GuiUtils;
 import sk.berops.android.fueller.gui.common.UtilsActivity;
-import sk.berops.android.fueller.gui.tags.TagManagerFragment;
+import sk.berops.android.fueller.gui.tags.FragmentTagManager;
 
 public class ActivityRefuel extends ActivityEntryGenericAdd {
 
-	class PriceCalculateListener implements TextWatcher, OnItemSelectedListener{
+    protected EditText editTextVolume;
+    protected Spinner spinnerFuelType;
+    protected Spinner spinnerVolumeUnit;
+    protected FuellingEntry fuellingEntry;
+    private TextView textViewPrice;
 
-		@Override
-		public void afterTextChanged(Editable s) {
-			refreshPrice();
-		}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_refuel);
+        if (fuellingEntry == null) {
+            fuellingEntry = new FuellingEntry();
+        }
+        fuellingEntry.setExpenseType(Entry.ExpenseType.FUEL);
+        super.entry = this.fuellingEntry;
 
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count,
-				int after) {
-		}
+        super.onCreate(savedInstanceState);
+    }
 
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before,
-				int count) {
-		}
+    @Override
+    protected void attachGuiObjects() {
+        editTextMileage = (EditText) findViewById(R.id.activity_refuel_mileage);
+        textViewDistanceUnit = (TextView) findViewById(R.id.activity_refuel_distance_unit);
+        editTextCost = (EditText) findViewById(R.id.activity_refuel_cost);
+        editTextComment = (EditText) findViewById(R.id.activity_refuel_comment);
+        textViewPrice = (TextView) findViewById(R.id.activity_refuel_price_text);
+        editTextVolume = (EditText) findViewById(R.id.activity_refuel_volume);
+        textViewDisplayDate = (TextView) findViewById(R.id.activity_refuel_date_text);
 
-		@Override
-		public void onItemSelected(AdapterView<?> parent, View view,
-				int position, long id) {
-			refreshPrice();		
-		}
+        spinnerFuelType = (Spinner) findViewById(R.id.activity_refuel_fuel_type);
+        spinnerCurrency = (Spinner) findViewById(R.id.activity_refuel_currency);
+        spinnerVolumeUnit = (Spinner) findViewById(R.id.activity_refuel_volume_unit);
 
-		@Override
-		public void onNothingSelected(AdapterView<?> parent) {
-			// TODO Auto-generated method stub
-			
-		}
-	}
+        recyclerViewTags = (RecyclerView) findViewById(R.id.activity_refuel_tags_recyclerview);
+    }
 
-	private TextView textViewPrice;
-	protected EditText editTextVolume;
-	protected Spinner spinnerFuelType;
-	protected Spinner spinnerVolumeUnit;
+    @Override
+    protected void styleGuiObjects() {
+        super.styleGuiObjects();
+        UtilsActivity.styleEditText(editTextVolume);
+        UtilsActivity.styleSpinner(spinnerFuelType, this, R.array.activity_refuel_fuel_type);
+        UtilsActivity.styleSpinner(spinnerVolumeUnit, this, R.array.activity_refuel_volume_unit);
+    }
 
-	protected FuellingEntry fuellingEntry;
+    @Override
+    protected void initializeGuiObjects() {
+        super.initializeGuiObjects();
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_refuel);
-		if (fuellingEntry == null) {
-			fuellingEntry = new FuellingEntry();
-		}
-		fuellingEntry.setExpenseType(Entry.ExpenseType.FUEL);
-		super.entry = this.fuellingEntry;
-		
-		super.onCreate(savedInstanceState);
-	}
+        FuelType fuelType;
+        try {
+            fuelType = car.getHistory().getFuellingEntries().getLast().getFuelType();
+        } catch (NoSuchElementException e) {
+            fuelType = FuelType.getFuelType(0);
+        }
+        spinnerFuelType.setSelection(fuelType.getId());
 
-	@Override
-	protected void attachGuiObjects() {
-		editTextMileage = (EditText) findViewById(R.id.activity_refuel_mileage);
-		textViewDistanceUnit = (TextView) findViewById(R.id.activity_refuel_distance_unit);
-		editTextCost = (EditText) findViewById(R.id.activity_refuel_cost);
-		editTextComment = (EditText) findViewById(R.id.activity_refuel_comment);
-		textViewPrice = (TextView) findViewById(R.id.activity_refuel_price_text);
-		editTextVolume = (EditText) findViewById(R.id.activity_refuel_volume);
-		textViewDisplayDate = (TextView) findViewById(R.id.activity_refuel_date_text);
+        UnitConstants.VolumeUnit volumeUnit;
+        volumeUnit = car.getVolumeUnit();
+        spinnerVolumeUnit.setSelection(volumeUnit.getId());
 
-		spinnerFuelType = (Spinner) findViewById(R.id.activity_refuel_fuel_type);
-		spinnerCurrency = (Spinner) findViewById(R.id.activity_refuel_currency);
-		spinnerVolumeUnit = (Spinner) findViewById(R.id.activity_refuel_volume_unit);
+        PriceCalculateListener priceCalculator = new PriceCalculateListener();
+        editTextCost.addTextChangedListener(priceCalculator);
+        editTextVolume.addTextChangedListener(priceCalculator);
+        spinnerCurrency.setOnItemSelectedListener(priceCalculator);
+        spinnerVolumeUnit.setOnItemSelectedListener(priceCalculator);
 
-		recyclerViewTags = (RecyclerView) findViewById(R.id.activity_refuel_tags_recyclerview);
-	}
-	
-	@Override
-	protected void styleGuiObjects() {
-		super.styleGuiObjects();
-		UtilsActivity.styleEditText(editTextVolume);
-		UtilsActivity.styleSpinner(spinnerFuelType, this, R.array.activity_refuel_fuel_type);
-		UtilsActivity.styleSpinner(spinnerVolumeUnit, this, R.array.activity_refuel_volume_unit);
-	}
-	
-	@Override
-	protected void initializeGuiObjects() {
-		super.initializeGuiObjects();
-		
-		FuelType fuelType;
-		try {
-			fuelType = car.getHistory().getFuellingEntries().getLast().getFuelType();
-		} catch (NoSuchElementException e) {
-			fuelType = FuelType.getFuelType(0);
-		}
-		spinnerFuelType.setSelection(fuelType.getId());
-		
-		UnitConstants.VolumeUnit volumeUnit;
-		volumeUnit = car.getVolumeUnit();
-		spinnerVolumeUnit.setSelection(volumeUnit.getId());
-		
-		PriceCalculateListener priceCalculator = new PriceCalculateListener();
-		editTextCost.addTextChangedListener(priceCalculator);
-		editTextVolume.addTextChangedListener(priceCalculator);
-		spinnerCurrency.setOnItemSelectedListener(priceCalculator);
-		spinnerVolumeUnit.setOnItemSelectedListener(priceCalculator);
+        recyclerViewTags.setAdapter(tagAdapter);
+        recyclerViewTags.setLayoutManager(new LinearLayoutManager(this));
+    }
 
-		recyclerViewTags.setAdapter(tagAdapter);
-		recyclerViewTags.setLayoutManager(new LinearLayoutManager(this));
-	}
-	
-	protected void refreshPrice() {
-		double volume;
-		double cost;
-		double price;
-		Currency.Unit currency;
-		UnitConstants.VolumeUnit volumeUnit;
+    protected void refreshPrice() {
+        double volume;
+        double cost;
+        double price;
+        Currency.Unit currency;
+        UnitConstants.VolumeUnit volumeUnit;
 
-		try {
-			//TODO: here we should reflect the units we've bought in here
-			volume = GuiUtils.extractDouble(editTextVolume);
-			cost = GuiUtils.extractDouble(editTextCost);
-			price = cost / volume;
+        try {
+            //TODO: here we should reflect the units we've bought in here
+            volume = GuiUtils.extractDouble(editTextVolume);
+            cost = GuiUtils.extractDouble(editTextCost);
+            price = cost / volume;
 
-			String formattedPrice;
-			String unit;
-			DecimalFormat df = new DecimalFormat("##.###");
-			formattedPrice = df.format(price);
+            String formattedPrice;
+            String unit;
+            DecimalFormat df = new DecimalFormat("##.###");
+            formattedPrice = df.format(price);
 
-			currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
-			volumeUnit = UnitConstants.VolumeUnit.getVolumeUnit(spinnerVolumeUnit.getSelectedItemPosition());
-			unit = ""+ currency.getUnit() +"/"+ volumeUnit.getUnit(); 
-			textViewPrice.setText(formattedPrice +" "+ unit);
-		} catch (NumberFormatException e) {
-			// Both the fields need to be filled-in (volume, cost)
-		}
-	}
+            currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
+            volumeUnit = UnitConstants.VolumeUnit.getVolumeUnit(spinnerVolumeUnit.getSelectedItemPosition());
+            unit = "" + currency.getUnit() + "/" + volumeUnit.getUnit();
+            textViewPrice.setText(formattedPrice + " " + unit);
+        } catch (NumberFormatException e) {
+            // Both the fields need to be filled-in (volume, cost)
+        }
+    }
 
-	private void updateFuelVolume() throws NotFoundException, FieldsEmptyException {
-		double volume = 0;
-		UnitConstants.VolumeUnit volumeUnit;
-		volumeUnit = UnitConstants.VolumeUnit.getVolumeUnit(spinnerVolumeUnit.getSelectedItemPosition());
-		try {
-			volume = GuiUtils.extractDouble(editTextVolume);
-		} catch (NumberFormatException ex) {
-			throwAlertFieldsEmpty(R.string.activity_refuel_volume_hint);
-		}
-		fuellingEntry.setFuelVolume(volume, volumeUnit);
-	}
+    private void updateFuelVolume() throws NotFoundException, FieldsEmptyException {
+        double volume = 0;
+        UnitConstants.VolumeUnit volumeUnit;
+        volumeUnit = UnitConstants.VolumeUnit.getVolumeUnit(spinnerVolumeUnit.getSelectedItemPosition());
+        try {
+            volume = GuiUtils.extractDouble(editTextVolume);
+        } catch (NumberFormatException ex) {
+            throwAlertFieldsEmpty(R.string.activity_refuel_volume_hint);
+        }
+        fuellingEntry.setFuelVolume(volume, volumeUnit);
+    }
 
-	private void updateFuelType() {
-		fuellingEntry.setFuelType(FuellingEntry.FuelType
-				.getFuelType(spinnerFuelType.getSelectedItemPosition()));
-	}
+    private void updateFuelType() {
+        fuellingEntry.setFuelType(FuellingEntry.FuelType
+                .getFuelType(spinnerFuelType.getSelectedItemPosition()));
+    }
 
-	public void onClick(View view) {
-		switch (view.getId()) {
-		case R.id.activity_refuel_button_commit:
-			try {
-				super.saveFieldsAndPersist(view);
-				startActivity(new Intent(this, MainActivity.class));
-			} catch (FieldsEmptyException ex) {
-				ex.throwAlert();
-			}
-			break;
-		case R.id.activity_refuel_button_tag_add:
-			TagManagerFragment fragment = new TagManagerFragment();
-			fragment.show(getFragmentManager(), "tag picker");
-			break;
-		}
-	}
-	
-	@Override
-	protected void updateFields() throws FieldsEmptyException {
-		super.updateFields();
-		updateFuelVolume();
-		updateFuelType();
-	}
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.activity_refuel_button_commit:
+                try {
+                    super.saveFieldsAndPersist(view);
+                    startActivity(new Intent(this, MainActivity.class));
+                } catch (FieldsEmptyException ex) {
+                    ex.throwAlert();
+                }
+                break;
+            case R.id.activity_refuel_button_tag_add:
+                FragmentTagManager fragment = new FragmentTagManager();
+                fragment.show(getFragmentManager(), "tag picker");
+                break;
+        }
+    }
+
+    @Override
+    protected void updateFields() throws FieldsEmptyException {
+        super.updateFields();
+        updateFuelVolume();
+        updateFuelType();
+    }
+
+    class PriceCalculateListener implements TextWatcher, OnItemSelectedListener {
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            refreshPrice();
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                                      int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before,
+                                  int count) {
+        }
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view,
+                                   int position, long id) {
+            refreshPrice();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            // TODO Auto-generated method stub
+
+        }
+    }
 }
