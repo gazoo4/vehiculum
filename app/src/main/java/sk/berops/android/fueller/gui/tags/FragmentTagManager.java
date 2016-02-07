@@ -58,7 +58,11 @@ public class FragmentTagManager extends DialogFragment implements TagTreeCallbac
 			    positive.setOnClickListener(new View.OnClickListener() {
 				    @Override
 				    public void onClick(View v) {
-						if (callback != null) callback.onTagSelected(selectedTag);
+						if (callback != null) {
+							Tag rootTag = MainActivity.garage.getRootTag();
+							tagTreeAdapter.removePlaceholder(rootTag, true);
+							callback.onTagSelected(selectedTag);
+						}
 					    dismiss();
 				    }
 			    });
@@ -75,6 +79,7 @@ public class FragmentTagManager extends DialogFragment implements TagTreeCallbac
 			    negative.setOnClickListener(new View.OnClickListener() {
 				    @Override
 				    public void onClick(View v) {
+					    // TODO: Here we need to delete the tag from all the entries where it exist
 					    tagTreeAdapter.deleteTag();
 				    }
 			    });

@@ -259,7 +259,7 @@ public class TagTreeAdapter extends RecyclerView.Adapter<TagTreeAdapter.ViewHold
 	 * @param parent tag
 	 * @return true if placeholder was contained
 	 */
-	private boolean removePlaceholder(Tag parent, boolean updateTagList) {
+	protected boolean removePlaceholder(Tag parent, boolean updateTagList) {
 		if (updateTagList) checkDiscrepancy("removePlaceholder start");
 		boolean placeholderRemoved = false;
 		int parentIndex = tags.indexOf(parent);
