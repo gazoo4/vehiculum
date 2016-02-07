@@ -1,6 +1,5 @@
 package sk.berops.android.fueller.gui.tags;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +14,11 @@ import sk.berops.android.fueller.dataModel.tags.Tag;
 /**
  * Created by Bernard Halas on 11/29/15.
  */
-public class TagAdapter extends RecyclerView.Adapter<TagAdapter.ViewHolder> {
+public class LinearTagAdapter extends RecyclerView.Adapter<LinearTagAdapter.ViewHolder> {
 
-	public static class ViewHolder extends RecyclerView.ViewHolder {
+	private ArrayList<Tag> tags;
+
+	public class ViewHolder extends RecyclerView.ViewHolder {
 		public TextView textViewName;
 
 		public ViewHolder(View view) {
@@ -27,22 +28,21 @@ public class TagAdapter extends RecyclerView.Adapter<TagAdapter.ViewHolder> {
 		}
 	}
 
-	private ArrayList<Tag> tags;
-
-	public TagAdapter(ArrayList<Tag> tags) {
+	public LinearTagAdapter(ArrayList<Tag> tags) {
 		this.tags = tags;
+		notifyDataSetChanged();
 	}
 
 	@Override
-	public TagAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		Context context = parent.getContext();
-		LayoutInflater inflater = LayoutInflater.from(context);
+	public LinearTagAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+		LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 		View view = inflater.inflate(R.layout.list_tags, parent, false);
-		return new ViewHolder(view);
+
+		return new LinearTagAdapter.ViewHolder(view);
 	}
 
 	@Override
-	public void onBindViewHolder(TagAdapter.ViewHolder holder, int position) {
+	public void onBindViewHolder(LinearTagAdapter.ViewHolder holder, int position) {
 		Tag tag = tags.get(position);
 		holder.textViewName.setText(tag.getName());
 	}
@@ -50,5 +50,10 @@ public class TagAdapter extends RecyclerView.Adapter<TagAdapter.ViewHolder> {
 	@Override
 	public int getItemCount() {
 		return tags.size();
+	}
+
+	public void notifyTagAdded(Tag tag) {
+		tags.add(tag);
+		notifyItemInserted(tags.size() - 1);
 	}
 }

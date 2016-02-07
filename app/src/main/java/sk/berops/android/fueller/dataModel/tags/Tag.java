@@ -3,6 +3,7 @@ package sk.berops.android.fueller.dataModel.tags;
 import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.gui.MainActivity;
@@ -12,7 +13,7 @@ import sk.berops.android.fueller.gui.MainActivity;
  *
  * Tag class used for tagging Expenses or other Records
  */
-public class Tag extends Record {
+public class Tag extends Record implements Comparable<Tag> {
 	/**
 	 * Link to the parent tag in the tag tree structure.
 	 * No need to persist it, it's dynamically created.
@@ -96,6 +97,21 @@ public class Tag extends Record {
 		return parent;
 	}
 
+	/**
+	 * Method used to search for grandparents. Height == 1 equals parent; height == 2 equals grandparent
+	 * @param height
+	 * @return Tag
+	 */
+	public Tag getParent(int height) {
+		if (height == 0) {
+			return this;
+		} else if (height == 1) {
+			return parent;
+		} else {
+			return parent.getParent(height - 1);
+		}
+	}
+
 	public void setParent(Tag parent) {
 		this.parent = parent;
 	}
@@ -104,6 +120,9 @@ public class Tag extends Record {
 	 * Links to the child tags in the tag tree structure
 	 */
 	public ArrayList<Tag> getChildren() {
+		if (children == null) {
+			children = new ArrayList<Tag>();
+		}
 		return children;
 	}
 
@@ -160,6 +179,50 @@ public class Tag extends Record {
 	}
 
 	/**
+	 * Method to create a new tag under this parent
+	 * @return The new tag
+	 */
+	public Tag createChild() {
+		Tag child = new Tag();
+
+		// Child's depth is one more than ours
+		child.setDepth(getDepth() + 1);
+
+		// Update the creation date
+		child.setCreationDate(Calendar.getInstance().getTime());
+
+		// Initialize the bottom->up links (to parent)
+		child.setParent(this);
+
+		// Initialize the top->down links (to children)
+		getChildren().add(child);
+
+		return child;
+	}
+
+	/**
+	 * Method used to generate full tag's path using default separator '>'
+	 * @return String containing path
+	 */
+	public String getPath() {
+		return getPath('>');
+	}
+
+	/**
+	 * Method used to generate full tag's path using custom separator
+	 * @param separator
+	 * @return
+	 */
+	public String getPath(char separator) {
+		String path = "";
+		if (parent != null) {
+			path += parent.getPath() + getName() + " ";
+		}
+		path += separator + " ";
+		return path;
+	}
+
+	/**
 	 * Return all the tags known to our garage.
 	 * @return list of known tags
 	 */
@@ -170,5 +233,10 @@ public class Tag extends Record {
 		}
 
 		return root.getChildTree();
+	}
+
+	@Override
+	public int compareTo(Tag another) {
+		return this.getName().compareTo(another.getName());
 	}
 }

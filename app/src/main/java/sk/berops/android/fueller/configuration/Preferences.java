@@ -52,7 +52,7 @@ public class Preferences {
     }
     
     public CostUnit getCostUnit() {
-    	return CostUnit.getCostUnit(getInt(COST_UNIT_KEY, 0));
+    	return CostUnit.getCostUnit(getInt(COST_UNIT_KEY, 1));
     }
     
     public Currency.Unit getCurrency() {

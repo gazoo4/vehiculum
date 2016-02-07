@@ -128,7 +128,7 @@ public class MainActivity extends Activity {
 			generateRowTotalRelativeCosts(statsTable);
 			generateRowAverageConsumption(statsTable);
 			//generateRowRelativeCosts(statsTable);
-			//generateRowLastCosts(statsTable);
+			generateRowLastCosts(statsTable);
 			generateRowLastConsumption(statsTable);
 		}
 	}
@@ -185,9 +185,11 @@ public class MainActivity extends Activity {
 					
 				layout.addView(createStatRow(description, valueReport, unit.getUnit()));
 			}
+			description = getString(R.string.activity_main_combined_average);
+		} else {
+			description = getString(R.string.activity_main_average_consumption);
 		}
-		
-		description = getString(R.string.activity_main_average_combined);
+
 		valueSI = c.getGrandAverage();
 		valueReport = UnitConstants.convertUnitConsumption(valueSI);
 		layout.addView(createStatRow(description, valueReport, unit.getUnit()));
@@ -200,8 +202,7 @@ public class MainActivity extends Activity {
 		String description = getString(R.string.activity_main_relative_costs);
 		double valueSI = c.getAverageCost();
 		CostUnit unit = preferences.getCostUnit();
-		System.out.println(unit.getUnit());
-		
+
 		double valueReport = UnitConstants.convertUnitCost(valueSI);
 		layout.addView(createStatRow(description, valueReport, unit.getUnit()));
 	}

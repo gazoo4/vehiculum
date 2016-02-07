@@ -8,7 +8,6 @@ import org.simpleframework.xml.core.Persister;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Locale;
-import java.util.TimeZone;
 
 import sk.berops.android.fueller.Fueller;
 import sk.berops.android.fueller.dataModel.Garage;
@@ -35,11 +34,6 @@ public class XMLHandler extends DataHandler {
 		Garage garage;
 		try {
 			long startTime = System.nanoTime();
-			System.out.println(Locale.getDefault().toString());
-			//Locale.setDefault(Locale.US);
-			System.out.println(TimeZone.getDefault().toString());
-			//TimeZone.setDefault(TimeZone.getTimeZone("CEST"));
-			System.out.println(Locale.getDefault().toString());
 			garage = serializer.read(Garage.class, file);
 			long endTime = System.nanoTime();
 			

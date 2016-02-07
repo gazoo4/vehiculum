@@ -5,86 +5,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/fragment_tag_manager_select_layout"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/fragment_tag_manager_tag_tree_recyclerview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/fragment_tag_manager_select_tag_hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_margin="5dp"
-            android:text="@string/fragment_tag_manager_use_existing_hint"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/fragment_tag_manager_tag_tree_recyclerview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/fragment_tag_manager_select_tag_hint"
-            android:scrollbars="vertical">
-        </android.support.v7.widget.RecyclerView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/fragment_tag_manager_edit_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/fragment_tag_manager_new_tag_hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="@string/fragment_tag_manager_new_tag_hint"/>
-
-        <com.larswerkman.lobsterpicker.LobsterPicker
-            android:id="@+id/fragment_tag_manager_lobsterpicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <com.larswerkman.lobsterpicker.sliders.LobsterShadeSlider
-            android:id="@+id/fragment_tag_manager_shadeslider"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <com.larswerkman.lobsterpicker.sliders.LobsterOpacitySlider
-            android:id="@+id/fragment_tag_manager_opacityslider"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/fragment_tag_manager_delete_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onClick"
-            android:text="@string/fragment_tag_manager_delete_button_text"/>
-
-        <Button
-            android:id="@+id/fragment_tag_manager_edit_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onClick"
-            android:text="@string/fragment_tag_manager_delete_button_text"/>
-
-        <TextView
-            android:id="@+id/fragment_tag_manager_tag_name_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <EditText
-            android:id="@+id/fragment_tag_manager_tag_name_edittext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/fragment_tag_manager_new_tag_name_hint"/>
-
-        <TextView
-            android:id="@+id/fragment_tag_manager_color_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+        android:scrollbars="vertical">
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>
