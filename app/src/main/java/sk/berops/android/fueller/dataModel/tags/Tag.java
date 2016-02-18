@@ -81,6 +81,7 @@ public class Tag extends Record implements Comparable<Tag> {
 		} else {
 			Tag result;
 			for (Tag child : getChildren()) {
+				if (child == null) continue;
 				result = child.searchTreeById(id);
 				if (result != null) {
 					return result;

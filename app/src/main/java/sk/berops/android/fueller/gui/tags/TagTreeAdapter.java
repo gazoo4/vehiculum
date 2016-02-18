@@ -8,9 +8,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import sk.berops.android.fueller.R;
+import sk.berops.android.fueller.dataModel.Car;
+import sk.berops.android.fueller.dataModel.Garage;
+import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.tags.Tag;
+import sk.berops.android.fueller.gui.MainActivity;
 
 /**
  * Class responsible for maintaining a tag tree view on the tag structure. Allowing modification
@@ -222,7 +227,7 @@ public class TagTreeAdapter extends RecyclerView.Adapter<TagTreeAdapter.ViewHold
 	 */
 	protected void initializeTags() {
 		tags.clear();
-		removePlaceholder(rootTag, false);
+		removePlaceholder(false);
 		highlightedTag = rootTag;
 		tags.addAll(rootTag.getChildren());
 		checkDiscrepancy("initializeTags");
@@ -255,8 +260,18 @@ public class TagTreeAdapter extends RecyclerView.Adapter<TagTreeAdapter.ViewHold
 	}
 
 	/**
+	 * Search the whole tag tree for a possible placeholder and remove it
+	 * @param updateTagList should the placeholder be removed from the visual tag list as well?
+	 * @return true if placeholder was contained
+	 */
+	protected boolean removePlaceholder(boolean updateTagList) {
+		return removePlaceholder(rootTag, updateTagList);
+	}
+
+	/**
 	 * * Search the parent tag tree for a possible placeholder and remove it
 	 * @param parent tag
+	 * @param updateTagList should the placeholder be removed from the visual tag list as well?
 	 * @return true if placeholder was contained
 	 */
 	protected boolean removePlaceholder(Tag parent, boolean updateTagList) {
@@ -412,23 +427,74 @@ public class TagTreeAdapter extends RecyclerView.Adapter<TagTreeAdapter.ViewHold
 	}
 
 	/**
-	 * Reflect a tag deletion in our views
+	 * Process the tag deletion in the views and also in the list of the provided entries
 	 */
-	protected void deleteTag() {
+	protected void deleteTag(ArrayList<Entry> entries, Tag tag) {
 		checkDiscrepancy("delete tag start");
-		Tag deadTag = highlightedTag;
-		collapseTree(deadTag);
 
-		int position = tags.indexOf(deadTag);
+		ArrayList<Tag> children = createChildrenTree(tag);
+		if (entries != null) {
+			for (Entry e : entries) {
+				// Clean-up the entries from the tag being deleted
+				e.getTags().remove(tag);
+				for (Tag t : children) {
+					// Check each entry for each tag from the list
+					e.removeTag(t);
+				}
+			}
+		}
+
+		collapseTree(tag);
+
+		int position = tags.indexOf(tag);
 		tags.remove(position);
 		notifyItemRemoved(position);
 
-		Tag parent = deadTag.getParent();
-		parent.getChildren().remove(deadTag);
-		deadTag.setParent(null);
+		Tag parent = tag.getParent();
+		parent.getChildren().remove(tag);
+		tag.setParent(null);
 
 		createPlaceholder(parent);
 		checkDiscrepancy("delete tag end");
+	}
+
+	/**
+	 * Method used to collect the Entries which will be affected by a tag deletion
+	 * @return list of entries that will be affected
+	 */
+	protected ArrayList<Entry> getEntriesForTagDeletion(Tag tag) {
+		Garage garage = MainActivity.garage;
+		ArrayList<Entry> entries = new ArrayList<>();
+		ArrayList<Tag> children = createChildrenTree(tag);
+
+		for (Car c : garage.getCars()) {
+			for (Entry e : c.getHistory().getEntries()) {
+				for (Tag t : e.getTags()) {
+					// Scan all the tags in all the entries in all the cars
+					if (t != null && children.contains(t)) {
+						// To see if they contain the tag being deleted or any of its children
+						entries.add(e);
+						break;
+					}
+				}
+			}
+		}
+
+		return entries;
+	}
+
+	private ArrayList<Tag> createChildrenTree(Tag tag) {
+		ArrayList<Tag> children = new ArrayList<>();
+		children.add(tag);
+		Iterator<Tag> i = children.iterator();
+		Tag t;
+		// Populate the children array with all the children Tags (both direct and indirect)
+		while (i.hasNext()) {
+			t = i.next();
+			if (t.getChildren() != null)  children.addAll(t.getChildren());
+		}
+
+		return children;
 	}
 
 	private void setHighlightedTag(Tag highlightedTag) {

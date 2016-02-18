@@ -52,8 +52,11 @@
     <string name="activity_generic_part_add_quantity_hint"			>Quantity</string>
     <string name="activity_generic_sorry_hint"                      >Sorry</string>
     <string name="activity_generic_tag_alert_end"                   >has already been attached</string>
+    <string name="activity_generic_tag_deletion_alert_1"            >Are you sure you want to proceed? This tag is used in</string>
+    <string name="activity_generic_tag_deletion_alert_2"            >entries</string>
     <string name="activity_generic_tag_toast_start"		    	    >Tag</string>
     <string name="activity_generic_tag_toast_end"		    	    >has been attached</string>
+    <string name="activity_generic_warning_hint"                    >Warning</string>
 
     <string name="activity_insurance_header"						>Insurance expense</string>
     <string name="activity_insurance_type_hint"						>Insurance type</string>
@@ -145,7 +148,9 @@
     <string name="fragment_entry_edit_delete_edit_button"			>Edit</string>
     <string name="fragment_entry_edit_delete_edit_toast"			>Opening entry</string>
 
+    <string name="fragment_generic_no"			                    >No</string>
     <string name="fragment_generic_sorry"			                >Sorry</string>
+    <string name="fragment_generic_yes"			                    >Yes</string>
 
     <string name="fragment_tag_editor_create_tag_hint"              >Create your tag</string>
     <string name="fragment_tag_editor_modify_tag_hint"              >Edit your tag</string>

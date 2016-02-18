@@ -121,12 +121,14 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 		super.saveFieldsAndPersist(view);
 	}
 
-
-
 	/*
-    ############ FragmentTagManager.OnTagSelectedListener implementation methods follow ############
+    ############ FragmentTagManager.OnTagSelectedListener implementation method follows ############
      */
 
+	/**
+	 * Method responsible for notifying the linear tag adapter about the tag selection.
+	 * @param tag selected
+	 */
 	public void onTagSelected(Tag tag) {
 		String toast = getString(R.string.activity_generic_tag_toast_start) + " " + tag.getName() + " ";
 

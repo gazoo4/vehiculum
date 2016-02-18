@@ -12,7 +12,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 import sk.berops.android.fueller.R;
+import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.tags.Tag;
 import sk.berops.android.fueller.gui.MainActivity;
 
@@ -79,8 +82,9 @@ public class FragmentTagManager extends DialogFragment implements TagTreeCallbac
 			    negative.setOnClickListener(new View.OnClickListener() {
 				    @Override
 				    public void onClick(View v) {
-					    // TODO: Here we need to delete the tag from all the entries where it exist
-					    tagTreeAdapter.deleteTag();
+					    if (callback != null) {
+						    requestTagDeletion();
+					    }
 				    }
 			    });
 		    }
@@ -116,6 +120,41 @@ public class FragmentTagManager extends DialogFragment implements TagTreeCallbac
 	    dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setVisibility(visibility);
 	    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setVisibility(visibility);
     }
+
+	/**
+	 * Method responsible for processing a tag deletion request.
+	 */
+	public void requestTagDeletion() {
+		final ArrayList<Entry> affectedEntries = tagTreeAdapter.getEntriesForTagDeletion(selectedTag);
+
+		if (affectedEntries.size() > 0) {
+			// If there are any tags to be deleted from the already existing entries,
+			// ask the user for a confirmation
+			String message = getString(R.string.activity_generic_tag_deletion_alert_1);
+			message += " " + affectedEntries.size() + " ";
+			message += getString(R.string.activity_generic_tag_deletion_alert_2);
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setTitle(getString(R.string.activity_generic_warning_hint));
+			builder.setMessage(message);
+			builder.setPositiveButton(getString(R.string.fragment_generic_yes), new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					tagTreeAdapter.removePlaceholder(true);
+					tagTreeAdapter.deleteTag(affectedEntries, selectedTag);
+					dialog.dismiss();
+				}
+			});
+			builder.setNegativeButton(getString(R.string.fragment_generic_no), new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			});
+			builder.show();
+		} else {
+			tagTreeAdapter.deleteTag(null, selectedTag);
+		}
+	}
 
     /**
      * This method is used to notify that the tag editing has been successfully completed.
