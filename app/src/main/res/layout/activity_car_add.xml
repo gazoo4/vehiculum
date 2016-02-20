@@ -101,7 +101,7 @@
 	        android:text="@string/activity_car_add_button_get_photo"
 	        android:onClick="onClick"
 	        style="@style/button_text"
-	        android:background="@drawable/red_button" />
+	        android:background="@drawable/grey_button" />
 	    
 	    <Button
 	        android:id="@+id/activity_car_add_button_commit"
@@ -111,7 +111,7 @@
 	        android:text="@string/activity_car_add_button_add" 
 	        android:onClick="onClick"
 	        style="@style/button_text"
-	        android:background="@drawable/red_button" />
+	        android:background="@drawable/grey_button" />
 	      
 	</RelativeLayout>
 </ScrollView>

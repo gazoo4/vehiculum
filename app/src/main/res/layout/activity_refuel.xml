@@ -175,7 +175,7 @@
                 style="@style/button_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/red_button"
+                android:background="@drawable/grey_button"
                 android:onClick="onClick"
                 android:text="@string/activity_generic_button_entry_save" />
 

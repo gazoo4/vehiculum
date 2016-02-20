@@ -106,7 +106,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void styleGuiObjects() {
-		textViewHeader.setTypeface(Fonts.getGomariceFont(this));
+
 	}
 	
 	private void refreshStats() {
@@ -156,7 +156,7 @@ public class MainActivity extends Activity {
 	}
 	
 	private void generateRowAverageConsumption(TableLayout layout) {
-		double avgConsumption = 0;
+		double avgConsumption;
 		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
 		if (c == null) return;
 		
@@ -167,9 +167,9 @@ public class MainActivity extends Activity {
 		unit = preferences.getConsumptionUnit();
 		
 		// we should buy at least 2 different fuels in order to display the stats separately
-		HashMap<FuelType, Double> map = new HashMap<FuelType, Double>();
+		HashMap<FuelType, Double> map = new HashMap<>();
 		for (FuelType t: c.getFuelTypes()) {
-			avgConsumption = c.getAveragePerFuelType().get(t).doubleValue();
+			avgConsumption = c.getAveragePerFuelType().get(t);
 			if (avgConsumption != 0.0) {
 				map.put(t,  avgConsumption);
 			}
@@ -179,7 +179,7 @@ public class MainActivity extends Activity {
 			for (FuelType t: map.keySet()) {
 				description = getString(R.string.activity_main_average);
 				description += " ";
-				description += t.getType().toString();
+				description += t.getType();
 				valueSI = map.get(t);
 				valueReport = UnitConstants.convertUnitConsumption(valueSI);
 					
@@ -214,7 +214,7 @@ public class MainActivity extends Activity {
 		String description = getString(R.string.activity_main_relative_costs_fuel);
 		description += " ";
 		description += t.toString();
-		double valueSI = c.getAverageFuelCostPerFuelType().get(t).doubleValue();
+		double valueSI = c.getAverageFuelCostPerFuelType().get(t);
 		CostUnit unit = preferences.getCostUnit();
 		
 		double valueReport = UnitConstants.convertUnitCost(valueSI);
@@ -280,11 +280,11 @@ public class MainActivity extends Activity {
 	}
 	
 	private TableRow createStatRow(String description, String value) {
-		return createStatRow(description, value, null, 0xffffffff);
+		return createStatRow(description, value, null, 0xff888888);
 	}
 	
 	private TableRow createStatRow(String description, String value, String unit) {
-		return createStatRow(description, value, unit, 0xffffffff);
+		return createStatRow(description, value, unit, 0xff888888);
 	}
 	
 	private TableRow createStatRow(String description, String value, String unit, int valueColor) {
@@ -303,7 +303,7 @@ public class MainActivity extends Activity {
 		
 		descriptionView.setTextAppearance(this, R.style.plain_text);
 		valueView.setTextAppearance(this, R.style.plain_text_big);
-		unitView.setTextAppearance(this, R.style.plain_text_small);
+		unitView.setTextAppearance(this, R.style.plain_text);
 		
 		valueView.setTextColor(valueColor);
 		valueView.setShadowLayer(15, 0, 0, valueColor);
