@@ -58,11 +58,13 @@ public class MainActivity extends Activity {
 		
 		if (garage == null) {
 			try {
-				garage = dataHandler.loadGarage();
+				garage = dataHandler.loadGarage(this);
 				Log.d("DEBUG", garage.getActiveCar().getNickname());
 				Toast.makeText(getApplicationContext(), "Loaded car: "+ garage.getActiveCar().getNickname(), Toast.LENGTH_LONG).show();
 			} catch (FileNotFoundException e) {
-				Log.d("DEBUG", "Old garage.xml file not found, is this the first run? Building new garage");
+				Log.d("DEBUG", "Could not load garage.xml");
+				Log.d("DEBUG", e.getMessage());
+				e.printStackTrace();
 				throwAlertCreateGarage();
 			} catch (NullPointerException e) {
 				if (garage == null) {
@@ -222,6 +224,8 @@ public class MainActivity extends Activity {
 	}
 	
 	private void generateRowLastCosts(TableLayout layout) {
+		if (garage.getActiveCar().getHistory().getFuellingEntries().size() == 0) return;
+
 		FuellingEntry e = garage.getActiveCar().getHistory().getFuellingEntries().getLast();
 		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
 		FuelType type = e.getFuelType();

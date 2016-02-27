@@ -15,6 +15,10 @@ public abstract class Record implements Serializable, Identifiable {
 	@Element(name="id", required=false)
 	private long id;
 
+	public Record() {
+		setCreationDate(new Date());
+	}
+
 	private long generatedId() {
 		return (new java.util.Random()).nextLong();
 	}

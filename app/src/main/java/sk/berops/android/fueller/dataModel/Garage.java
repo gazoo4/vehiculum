@@ -43,6 +43,7 @@ public class Garage {
 		Tag root = getRootTag();
 		if (root == null) {
 			root = new Tag();
+			root.setName("rootTag");
 			root.setDepth(0);
 			root.setParent(null);
 			setRootTag(root);
@@ -192,6 +193,7 @@ public class Garage {
 	public void initAfterLoad() {
 		int dynamicId = 0;
 
+		// Init tyres
 		for (Tyre t : getAllTyres()) {
 			// We want to make sure that all tyres are initialized
 			// If a tyre is installed on a car, it will get re-initialized with
@@ -199,12 +201,16 @@ public class Garage {
 			t.initAfterLoad(null);
 		}
 
+		// Init cars
 		for (Car c : cars) {
 			c.initAfterLoad();
 			for (Entry e : c.getHistory().getEntries()) {
 				e.setDynamicId(dynamicId++);
 			}
 		}
+
+		//Init tag tree
+		this.rootTag.initAfterLoad();
 	}
 
 	public ArrayList<Tyre> getTyresByIDs(Collection<Long> c) {

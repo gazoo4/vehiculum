@@ -1,5 +1,6 @@
 package sk.berops.android.fueller.dataModel.tags;
 
+import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;
@@ -16,24 +17,26 @@ import sk.berops.android.fueller.gui.MainActivity;
 public class Tag extends Record implements Comparable<Tag> {
 	/**
 	 * Link to the parent tag in the tag tree structure.
-	 * No need to persist it, it's dynamically created.
+	 * No need to persist it, it's dynamically created through initAfterLoad().
 	 */
 	private Tag parent;
 
 	/**
 	 * Links to the child tags in the tag tree structure
 	 */
-	@ElementList(name = "childTags", required = false)
+	@ElementList(inline = true, required = false)
 	private ArrayList<Tag> children;
 
 	/**
 	 * Name of the tag
 	 */
+	@Element(name = "name", required = true)
 	private String name;
 
 	/**
 	 * Customized color of the tag
 	 */
+	@Element(name = "color", required = false)
 	private int color;
 
 	/**

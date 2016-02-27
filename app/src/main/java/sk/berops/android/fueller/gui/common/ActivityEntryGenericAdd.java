@@ -24,7 +24,7 @@ import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.tags.FragmentTagManager;
 import sk.berops.android.fueller.gui.tags.LinearTagAdapter;
 
-public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd implements DatePickerDialog.OnDateSetListener, FragmentTagManager.OnTagSelectedListener {
+public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd implements DatePickerDialog.OnDateSetListener, FragmentTagManager.TagAttachControlListener {
 
 	protected EditText editTextMileage;
 	protected TextView textViewDisplayDate;
@@ -138,8 +138,18 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 			entry.addTag(tag);
 			linearTagAdapter.notifyTagAdded(tag);
 			toast += getString(R.string.activity_generic_tag_toast_end);
+			MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
 		}
 
 		Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
+	}
+
+	/**
+	 * Method responsible for deleting a tag from the linear tag adapter in the entry modification view
+	 * @param tag deleted
+	 */
+	public void onTagDeleted(Tag tag) {
+		linearTagAdapter.notifyTagDeleted(tag);
+		MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
 	}
 }

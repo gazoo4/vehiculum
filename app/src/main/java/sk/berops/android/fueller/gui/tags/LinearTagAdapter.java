@@ -52,8 +52,25 @@ public class LinearTagAdapter extends RecyclerView.Adapter<LinearTagAdapter.View
 		return tags.size();
 	}
 
+	/**
+	 * Notification about a new tag addition
+	 * @param tag
+	 */
 	public void notifyTagAdded(Tag tag) {
 		tags.add(tag);
 		notifyItemInserted(tags.size() - 1);
+	}
+
+	/**
+	 * Notification about a new tag deletion
+	 * @param tag
+	 */
+	public void notifyTagDeleted(Tag tag) {
+		int position = tags.indexOf(tag);
+		if (position != -1) {
+			// If the tag is attached to the entry currently being displayed
+			tags.remove(position);
+			notifyItemRemoved(position);
+		}
 	}
 }

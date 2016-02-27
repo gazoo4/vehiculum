@@ -263,7 +263,7 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		ReplacementPart part = parts.get(parts.size() - 1 - getSelectedPartPosition());
 		System.out.println("Removing part with ID " + (parts.size() - 1 - getSelectedPartPosition()));  
 		parts.remove(part);
-		MainActivity.dataHandler.persistGarage(MainActivity.garage);
+		MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
 		adapter.notifyDataSetChanged();
 		reloadCost();
 	}

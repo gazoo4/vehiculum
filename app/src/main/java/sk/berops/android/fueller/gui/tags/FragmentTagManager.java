@@ -28,13 +28,14 @@ public class FragmentTagManager extends DialogFragment implements TagTreeCallbac
     private RecyclerView tagTreeView;
     private TagTreeAdapter tagTreeAdapter;
 	private Tag selectedTag;
-	private OnTagSelectedListener callback;
+	private TagAttachControlListener callback;
 
 	private static final int CREATE_TAG_REQUEST = 0;
     private static final int EDIT_TAG_REQUEST = 1;
 
-	public interface OnTagSelectedListener {
+	public interface TagAttachControlListener {
 		void onTagSelected(Tag tag);
+		void onTagDeleted(Tag tag);
 	}
 
     @Override
@@ -110,7 +111,7 @@ public class FragmentTagManager extends DialogFragment implements TagTreeCallbac
         showButtons(false);
     }
 
-	public void setCallback(OnTagSelectedListener callback) {
+	public void setCallback(TagAttachControlListener callback) {
 		this.callback = callback;
 	}
 
@@ -140,6 +141,7 @@ public class FragmentTagManager extends DialogFragment implements TagTreeCallbac
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					tagTreeAdapter.removePlaceholder(true);
+					callback.onTagDeleted(selectedTag);
 					tagTreeAdapter.deleteTag(affectedEntries, selectedTag);
 					dialog.dismiss();
 				}
@@ -152,6 +154,8 @@ public class FragmentTagManager extends DialogFragment implements TagTreeCallbac
 			});
 			builder.show();
 		} else {
+			// Tag needs to be removed only from the currently being created entry at the most
+			callback.onTagDeleted(selectedTag);
 			tagTreeAdapter.deleteTag(null, selectedTag);
 		}
 	}
