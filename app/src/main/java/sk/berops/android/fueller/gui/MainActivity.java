@@ -310,7 +310,7 @@ public class MainActivity extends Activity {
 		unitView.setTextAppearance(this, R.style.plain_text_small);
 		
 		valueView.setTextColor(valueColor);
-		valueView.setShadowLayer(15, 0, 0, valueColor);
+		valueView.setShadowLayer(12, 0, 0, valueColor);
 		
 		row.addView(descriptionView);
 		
