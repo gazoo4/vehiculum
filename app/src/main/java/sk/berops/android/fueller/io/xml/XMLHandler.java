@@ -52,7 +52,7 @@ public class XMLHandler extends DataHandler {
 	}
 	
 	public static Garage loadFromFile(Activity activity, String fileName) throws FileNotFoundException {
-		Serializer serializer = new Persister();
+		Serializer serializer = new Persister(new FuellerCustomMatcher());
 		File file = new File(getFullFileName(fileName));
 		Garage garage;
 		try {
@@ -88,7 +88,7 @@ public class XMLHandler extends DataHandler {
 	}
 	
 	public void persistGarage(Activity activity, Garage garage, String fileName) {
-		Serializer serializer = new Persister();
+		Serializer serializer = new Persister(new FuellerCustomMatcher());
 		
 		fileName = getFullFileName(fileName);
 		

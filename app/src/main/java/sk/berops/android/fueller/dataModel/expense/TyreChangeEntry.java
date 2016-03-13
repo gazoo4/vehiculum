@@ -6,6 +6,7 @@ import org.simpleframework.xml.ElementMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Currency;
@@ -34,19 +35,19 @@ public class TyreChangeEntry extends Entry {
 	 * List of tyres bought 
 	 */
 	@ElementList(inline=true, required=false)
-	private ArrayList<Long> boughtTyresIDs;
+	private ArrayList<UUID> boughtTyresIDs;
 	
 	/**
 	 * List of tyres thrown away
 	 */
 	@ElementList(inline=true, required=false)
-	private ArrayList<Long> deletedTyreIDs;
+	private ArrayList<UUID> deletedTyreIDs;
 
 	/**
 	 * Map of tyre IDs with new thread levels of the respective tyres
 	 */
 	@ElementMap(inline = false, required = false)
-	private HashMap<Long, Double> threadLevelUpdate;
+	private HashMap<UUID, Double> threadLevelUpdate;
 
 	public TyreChangeEntry() {
 		super();
@@ -110,30 +111,30 @@ public class TyreChangeEntry extends Entry {
 		this.tyreScheme = tyreScheme;
 	}
 
-	public ArrayList<Long> getBoughtTyresIDs() {
+	public ArrayList<UUID> getBoughtTyresIDs() {
 		return boughtTyresIDs;
 	}
 
-	public void setBoughtTyresIDs(ArrayList<Long> boughtTyresIDs) {
+	public void setBoughtTyresIDs(ArrayList<UUID> boughtTyresIDs) {
 		this.boughtTyresIDs = boughtTyresIDs;
 	}
 
-	public ArrayList<Long> getDeletedTyreIDs() {
+	public ArrayList<UUID> getDeletedTyreIDs() {
 		return deletedTyreIDs;
 	}
 
-	public void setDeletedTyreIDs(ArrayList<Long> deletedTyreIDs) {
+	public void setDeletedTyreIDs(ArrayList<UUID> deletedTyreIDs) {
 		this.deletedTyreIDs = deletedTyreIDs;
 	}
 
 	/**
 	 * Map of tyre IDs with new thread levels of the respective tyres
 	 */
-	public HashMap<Long, Double> getThreadLevelUpdate() {
+	public HashMap<UUID, Double> getThreadLevelUpdate() {
 		return threadLevelUpdate;
 	}
 
-	public void setThreadLevelUpdate(HashMap<Long, Double> threadLevelUpdate) {
+	public void setThreadLevelUpdate(HashMap<UUID, Double> threadLevelUpdate) {
 		this.threadLevelUpdate = threadLevelUpdate;
 	}
 }

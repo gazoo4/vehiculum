@@ -63,8 +63,7 @@ public class FragmentTagManager extends DialogFragment implements TagTreeCallbac
 				    @Override
 				    public void onClick(View v) {
 						if (callback != null) {
-							Tag rootTag = MainActivity.garage.getRootTag();
-							tagTreeAdapter.removePlaceholder(rootTag, true);
+							tagTreeAdapter.removePlaceholder(true);
 							callback.onTagSelected(selectedTag);
 						}
 					    dismiss();

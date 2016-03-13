@@ -5,6 +5,7 @@ import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.UUID;
 
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.gui.MainActivity;
@@ -68,7 +69,7 @@ public class Tag extends Record implements Comparable<Tag> {
 	 * @param id of the tag
 	 * @return tag
 	 */
-	public static Tag getTag(Long id) {
+	public static Tag getTag(UUID id) {
 		Tag root = MainActivity.garage.getRootTag();
 		return root.searchTreeById(id);
 	}
@@ -78,8 +79,8 @@ public class Tag extends Record implements Comparable<Tag> {
 	 * @param id to base the tag search on.
 	 * @return Tag which has the provided ID. If not found, return null.
 	 */
-	private Tag searchTreeById(Long id) {
-		if (getId() == id) {
+	private Tag searchTreeById(UUID id) {
+		if (getUuid() == id) {
 			return this;
 		} else {
 			Tag result;
