@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="500"
+   height="500"
+   id="svg2">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient5201">
+      <stop
+         id="stop5203"
+         style="stop-color:#000000;stop-opacity:1"
+         offset="0" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5195">
+      <stop
+         id="stop5197"
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="0" />
+    </linearGradient>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0,-552.36218)"
+     id="layer1">
+    <path
+       d="M 90.71875,52.84375 C 75.681602,52.84375 63.5625,64.962852 63.5625,80 l 0,345.71875 c 0,15.03715 12.119102,27.125 27.15625,27.125 l 102.84375,0 c 15.03715,0 27.15625,-12.08785 27.15625,-27.125 l 0,-345.71875 c 0,-15.037148 -12.1191,-27.15625 -27.15625,-27.15625 l -102.84375,0 z m -11.4375,21.4375 125.71875,0 0,125.71875 -125.71875,0 0,-125.71875 z"
+       transform="translate(0,552.36218)"
+       id="rect2985"
+       style="fill:#444444;fill-opacity:1;stroke:#444444;stroke-width:8.39999962;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       width="213.94243"
+       height="18.228151"
+       ry="0"
+       x="35.171635"
+       y="987.53381"
+       id="rect2987"
+       style="fill:#444444;fill-opacity:1;stroke:#444444;stroke-width:7.31470537;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       d="m 272.85714,158.57143 c 0,0 -19.07026,110.37459 -5.71429,205.71428 2.64255,18.86342 14.38152,67.24361 30.00001,71.42857 16.22141,4.34652 7.235,-45.89439 4.28571,-64.2857 -6.86142,-42.78667 -48.57143,-127.14287 -48.57143,-127.14287 l -27.14285,-8.57142"
+       transform="translate(0,552.36218)"
+       id="path5239"
+       style="fill:none;stroke:#444444;stroke-width:7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       d="M 228.57143,114.28571 255.71429,130 c 0,0 -10.64664,22.15274 -4.28572,30 4.50783,5.56117 21.42857,1.42857 21.42857,1.42857 l -15.71428,-30"
+       transform="translate(0,552.36218)"
+       id="path5241"
+       style="fill:#444444;fill-opacity:1;stroke:#444444;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <g
+       transform="matrix(1.0215631,0,0,1.0215631,-214.38004,-69.221549)"
+       id="g5343"
+       style="stroke-width:23.40569496;stroke-miterlimit:4;stroke-dasharray:none">
+      <path
+         d="m 605.71429,82.857142 c 0,0 -40.97059,96.289488 -52.14287,145.714288 -3.80913,16.85111 -10.34189,32.9679 -3.54127,58.51112 3.29705,12.38377 11.13958,28.92361 28.54128,37.20317 21.74151,10.83188 51.76103,12.75492 72.85714,0.71428 14.72244,-8.40286 21.26272,-27.75117 25,-44.28571 3.78854,-16.76132 0.67386,-34.77708 -3.57143,-51.42858 C 659.59166,177.25395 605.71429,82.857142 605.71429,82.857142 z"
+         transform="translate(0,552.36218)"
+         id="path5339"
+         style="fill:none;stroke:#444444;stroke-width:23.40569496;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         d="m 625.71429,202.14286 c 0,0 22.68418,21.56993 19.27633,64.51716"
+         transform="translate(0,552.36218)"
+         id="path5341"
+         style="fill:none;stroke:#444444;stroke-width:23.40569496;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+  </g>
+</svg>
