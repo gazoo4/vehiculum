@@ -71,6 +71,7 @@
     <string name="activity_main_create_garage_alert"				>You didn\'t setup your garage yet. Prepare one now.</string>
     <string name="activity_main_consumption_combined"				>Combined</string>
     <string name="activity_main_garage_empty"						>Your garage is empty</string>
+    <string name="activity_main_garage_saved_toast"					>The changes have been saved</string>
     <string name="activity_main_header"								>Manage your enthusiasm!</string>
     <string name="activity_main_relative_costs"						>Relative costs</string>
     <string name="activity_main_relative_costs_fuel"				>Relative costs for </string>

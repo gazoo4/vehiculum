@@ -418,6 +418,9 @@ public class TagTreeAdapter extends RecyclerView.Adapter<TagTreeAdapter.ViewHold
 		createPlaceholder(parent);
 	}
 
+	/**
+	 * Reflect a successful tag update in our structures
+	 */
 	protected void notifyTagUpdated(Tag tag) {
 		notifyItemChanged(tags.indexOf(tag));
 

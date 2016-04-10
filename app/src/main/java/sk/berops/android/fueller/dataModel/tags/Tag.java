@@ -80,7 +80,7 @@ public class Tag extends Record implements Comparable<Tag> {
 	 * @return Tag which has the provided ID. If not found, return null.
 	 */
 	private Tag searchTreeById(UUID id) {
-		if (getUuid() == id) {
+		if (id.equals(getUuid())) {
 			return this;
 		} else {
 			Tag result;

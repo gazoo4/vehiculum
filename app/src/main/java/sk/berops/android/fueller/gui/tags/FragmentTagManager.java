@@ -66,6 +66,8 @@ public class FragmentTagManager extends DialogFragment implements TagTreeCallbac
 							tagTreeAdapter.removePlaceholder(true);
 							callback.onTagSelected(selectedTag);
 						}
+					    // Once the tag is selected, save the changes.
+					    MainActivity.saveGarage(getActivity());
 					    dismiss();
 				    }
 			    });
@@ -174,10 +176,12 @@ public class FragmentTagManager extends DialogFragment implements TagTreeCallbac
 			    int size = selectedTag.getChildren().size();
 			    Tag last = selectedTag.getChildren().get(size - 1);
 			    tagTreeAdapter.notifyTagCreated(last);
+			    MainActivity.saveGarage(getActivity());
 		    }
 	    } else if (requestCode == EDIT_TAG_REQUEST) {
             if (resultCode == FragmentTagEditor.EDIT_TAG_SUCCESS) {
                 tagTreeAdapter.notifyTagUpdated(selectedTag);
+	            MainActivity.saveGarage(getActivity());
             }
         }
     }

@@ -46,13 +46,27 @@ public class MainActivity extends Activity {
 	
 	private TableLayout statsTable;
 	private TextView textViewHeader;
+
+	public static void saveGarage(Activity activity) {
+		getDataHandler().persistGarage(activity);
+		Toast.makeText(activity.getApplication(), activity.getResources().getString(R.string.activity_main_garage_saved_toast), Toast.LENGTH_LONG).show();
+	}
+
+
+	private static DataHandler getDataHandler() {
+		if (dataHandler == null) {
+			return new XMLHandler();
+		}
+
+		return dataHandler;
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		dataHandler = new XMLHandler();
+		dataHandler = getDataHandler();
 		attachGuiObjects();
 		styleGuiObjects();
 		
@@ -90,7 +104,7 @@ public class MainActivity extends Activity {
 		AlertDialog.Builder alertDialog= new AlertDialog.Builder(this);
 		alertDialog.setMessage(getResources().getString(R.string.activity_main_create_garage_alert));
 		alertDialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Toast.makeText(getApplicationContext(), "Creating garage... ", Toast.LENGTH_LONG).show();
@@ -109,6 +123,10 @@ public class MainActivity extends Activity {
 	
 	public void styleGuiObjects() {
 		textViewHeader.setTypeface(Fonts.getGomariceFont(this));
+	}
+
+	public void persistGarage() {
+		dataHandler.persistGarage(this);
 	}
 	
 	private void refreshStats() {
