@@ -19,7 +19,7 @@
             style="@style/button_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/grey_button"
+            android:background="@drawable/transparent_button"
             android:onClick="onClick"
             android:text="@string/activity_stats_show_button_fuelling" />
 
@@ -28,7 +28,7 @@
             style="@style/button_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/grey_button"
+            android:background="@drawable/transparent_button"
             android:onClick="onClick"
             android:text="@string/activity_stats_show_button_charts" />
     </LinearLayout>

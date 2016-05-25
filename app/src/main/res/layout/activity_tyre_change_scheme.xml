@@ -53,7 +53,7 @@
                 style="@style/button_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/grey_button"
+                android:background="@drawable/transparent_button"
                 android:onClick="onClick"
                 android:text="@string/activity_tyre_change_scheme_button_tyre_delete" />
 
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/activity_tyre_change_scheme_button_tyre_delete"
-                android:background="@drawable/grey_button"
+                android:background="@drawable/transparent_button"
                 android:onClick="onClick"
                 android:text="@string/activity_tyre_change_scheme_button_tyre_move" />
 
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/activity_tyre_change_scheme_button_tyre_uninstall"
-                android:background="@drawable/grey_button"
+                android:background="@drawable/transparent_button"
                 android:onClick="onClick"
                 android:text="@string/activity_tyre_change_scheme_button_tyre_add" />
 

@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.configuration.Preferences;
@@ -222,19 +223,23 @@ public class MainActivity extends Activity {
 	}
 	
 	private void generateRowLastCosts(TableLayout layout) {
-		FuellingEntry e = garage.getActiveCar().getHistory().getFuellingEntries().getLast();
-		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
-		FuelType type = e.getFuelType();
-		double avgCostSI = c.getAverageFuelCostPerFuelType().get(type);
-		double lastCostSI = c.getCostSinceLastRefuel();
-		double relativeChange = (lastCostSI / avgCostSI - 0.8) / 0.4;
-		int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange);
-		
-		String description = getString(R.string.activity_main_relative_since_last_refuel);
-		CostUnit unit = preferences.getCostUnit();
-		
-		double lastCostReport = UnitConstants.convertUnitCost(lastCostSI);
-		layout.addView(createStatRow(description, lastCostReport, unit.getUnit(), color));
+		try {
+			FuellingEntry e = garage.getActiveCar().getHistory().getFuellingEntries().getLast();
+			FuelConsumption c = garage.getActiveCar().getFuelConsumption();
+			FuelType type = e.getFuelType();
+			double avgCostSI = c.getAverageFuelCostPerFuelType().get(type);
+			double lastCostSI = c.getCostSinceLastRefuel();
+			double relativeChange = (lastCostSI / avgCostSI - 0.8) / 0.4;
+			int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange);
+
+			String description = getString(R.string.activity_main_relative_since_last_refuel);
+			CostUnit unit = preferences.getCostUnit();
+
+			double lastCostReport = UnitConstants.convertUnitCost(lastCostSI);
+			layout.addView(createStatRow(description, lastCostReport, unit.getUnit(), color));
+		} catch (NoSuchElementException ex) {
+			Log.d("DEBUG", "Not enough history to generate stats");
+		}
 	}
 	
 	private void generateRowLastConsumption(TableLayout layout) {

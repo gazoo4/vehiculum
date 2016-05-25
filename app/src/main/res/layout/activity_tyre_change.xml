@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/activity_tyre_change_mileage_layout"
             android:layout_toRightOf="@id/activity_tyre_change_date_text"
-            android:background="@drawable/grey_button"
+            android:background="@drawable/transparent_button"
             android:onClick="onClickShowDatePickerDialog"
             android:text="@string/activity_generic_button_date_change" />
 
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/activity_tyre_change_date_text"
-            android:background="@drawable/grey_button"
+            android:background="@drawable/transparent_button"
             android:onClick="onClick"
             android:text="@string/activity_tyre_change_button_advanced" />
 
@@ -127,7 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/activity_tyre_change_comment"
-            android:background="@drawable/grey_button"
+            android:background="@drawable/transparent_button"
             android:onClick="onClick"
             android:text="@string/activity_tyre_change_button_entry_save" />
     </RelativeLayout>

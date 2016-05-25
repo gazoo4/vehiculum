@@ -129,7 +129,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/activity_part_add_comment"
-            android:background="@drawable/grey_button"
+            android:background="@drawable/transparent_button"
             android:onClick="onClick"
             android:text="@string/activity_generic_button_entry_save" />
     </RelativeLayout>

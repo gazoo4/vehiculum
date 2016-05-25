@@ -1,9 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="#ffffffff">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFDDDDDD">
 
     <LinearLayout
         android:id="@+id/activity_main_buttons"
@@ -12,49 +10,53 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:background="@drawable/blue_gradient_line"/>
+
         <Button
             android:id="@+id/activity_main_button_entry_add"
             style="@style/button_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/grey_button"
-            android:drawableLeft="@drawable/plus_icon_tiny1"
-            android:drawableStart="@drawable/plus_icon_tiny1"
+            android:background="@drawable/transparent_button"
+            android:drawableLeft="@drawable/add_event"
+            android:drawableStart="@drawable/add_event"
             android:onClick="onClick"
             android:paddingLeft="15dp"
             android:paddingStart="15dp"
-            android:text="@string/activity_main_button_entry_add" />
+            android:text="@string/activity_main_button_entry_add"/>
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:background="@drawable/gradient_line"/>
+            android:layout_height="2dp"
+            android:background="@drawable/blue_gradient_line"/>
 
         <Button
             android:id="@+id/activity_main_button_stats_view"
             style="@style/button_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/grey_button"
+            android:background="@drawable/transparent_button"
             android:drawableLeft="@drawable/view_statistics"
+            android:drawableStart="@drawable/view_statistics"
             android:onClick="onClick"
             android:paddingLeft="15dp"
+            android:paddingStart="15dp"
             android:text="@string/activity_main_button_stats_view" />
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:background="@drawable/gradient_line"/>
+            android:layout_height="2dp"
+            android:background="@drawable/blue_gradient_line"/>
 
         <Button
             android:id="@+id/activity_main_button_garage_enter"
             style="@style/button_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/grey_button"
+            android:background="@drawable/transparent_button"
             android:drawableLeft="@drawable/enter_garage"
             android:drawableStart="@drawable/enter_garage"
             android:onClick="onClick"
