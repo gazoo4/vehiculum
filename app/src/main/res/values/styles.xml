@@ -20,7 +20,7 @@
     <style name="button_text">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#ff444444</item>
+        <item name="android:textColor">#FFFFFFFF</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_margin">3dp</item>
         <item name="android:textSize">20sp</item>
@@ -116,16 +116,16 @@
     </style>
     
     <style name="plain_text">
-        <item name="android:textColor">#ff444444</item>
+        <item name="android:textColor">#FFFFFFFF</item>
     </style>
     
     <style name="plain_text_big">
-        <item name="android:textColor">#ff444444</item>
+        <item name="android:textColor">#FFFFFFFF</item>
         <item name="android:textSize">20sp</item>
     </style>
     
     <style name="plain_text_small">
-        <item name="android:textColor">#ff444444</item>
+        <item name="android:textColor">#FFFFFFFF</item>
         <item name="android:textSize">8sp</item>
     </style>
 

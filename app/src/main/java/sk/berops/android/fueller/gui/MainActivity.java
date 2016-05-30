@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -44,10 +45,13 @@ public class MainActivity extends Activity {
 	public static Garage garage;
 	public static DataHandler dataHandler;
 	private static Preferences preferences = Preferences.getInstance();
-	
+
+	private Button buttonRecordEvent;
+	private Button buttonViewStats;
+	private Button buttonEnterGarage;
 	private TableLayout statsTable;
 	private TextView textViewHeader;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -104,10 +108,16 @@ public class MainActivity extends Activity {
 	public void attachGuiObjects() {
 		statsTable = (TableLayout) findViewById(R.id.activity_main_stats_table);
 		textViewHeader = (TextView) findViewById(R.id.activity_main_header);
+		buttonRecordEvent = (Button) findViewById(R.id.activity_main_button_entry_add);
+		buttonViewStats = (Button) findViewById(R.id.activity_main_button_stats_view);
+		buttonEnterGarage = (Button) findViewById(R.id.activity_main_button_garage_enter);
 	}
 	
 	public void styleGuiObjects() {
-
+		int drawableColor = 0xFFFFFFFF;
+		buttonRecordEvent.getCompoundDrawables()[0].setTint(drawableColor);
+		buttonViewStats.getCompoundDrawables()[0].setTint(drawableColor);
+		buttonEnterGarage.getCompoundDrawables()[0].setTint(drawableColor);
 	}
 	
 	private void refreshStats() {
@@ -285,11 +295,11 @@ public class MainActivity extends Activity {
 	}
 	
 	private TableRow createStatRow(String description, String value) {
-		return createStatRow(description, value, null, 0xff888888);
+		return createStatRow(description, value, null, 0xFFFFFFFF);
 	}
 	
 	private TableRow createStatRow(String description, String value, String unit) {
-		return createStatRow(description, value, unit, 0xff888888);
+		return createStatRow(description, value, unit, 0xFFFFFFFF);
 	}
 	
 	private TableRow createStatRow(String description, String value, String unit, int valueColor) {
