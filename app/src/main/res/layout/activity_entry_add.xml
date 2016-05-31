@@ -1,9 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background_blue"
-    tools:context=".MainActivity" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_blue">
 
     <ScrollView
         android:id="@+id/activity_entry_add_layout_buttons"
@@ -22,9 +20,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button"
-                android:drawableLeft="@drawable/gaspump_tiny"
+                android:drawableLeft="@drawable/refuel"
+                android:drawableStart="@drawable/refuel"
+                android:paddingLeft="15dp"
+                android:paddingStart="15dp"
                 android:onClick="onClick"
                 android:text="@string/activity_entry_add_button_refuel" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:background="@drawable/white_gradient_line"/>
 
             <Button
                 android:id="@+id/activity_entry_add_button_tyres_change"
@@ -32,8 +38,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button"
+                android:drawableLeft="@drawable/tyres"
+                android:drawableStart="@drawable/tyres"
+                android:paddingLeft="15dp"
+                android:paddingStart="15dp"
                 android:onClick="onClick"
                 android:text="@string/activity_entry_add_button_tyres_change" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:background="@drawable/white_gradient_line"/>
 
             <Button
                 android:id="@+id/activity_entry_add_button_maintenance"
@@ -41,8 +56,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button"
+                android:paddingLeft="15dp"
+                android:paddingStart="15dp"
                 android:onClick="onClick"
                 android:text="@string/activity_entry_add_button_maintenance" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:background="@drawable/white_gradient_line"/>
 
             <Button
                 android:id="@+id/activity_entry_add_button_service"
@@ -50,8 +72,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button"
+                android:paddingLeft="15dp"
+                android:paddingStart="15dp"
                 android:onClick="onClick"
                 android:text="@string/activity_entry_add_button_service" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:background="@drawable/white_gradient_line"/>
 
             <Button
                 android:id="@+id/activity_entry_add_button_toll"
@@ -59,8 +88,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button"
+                android:paddingLeft="15dp"
+                android:paddingStart="15dp"
                 android:onClick="onClick"
                 android:text="@string/activity_entry_add_button_toll" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:background="@drawable/white_gradient_line"/>
 
             <Button
                 android:id="@+id/activity_entry_add_button_insurance"
@@ -68,8 +104,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button"
+                android:paddingLeft="15dp"
+                android:paddingStart="15dp"
                 android:onClick="onClick"
                 android:text="@string/activity_entry_add_button_insurance" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:background="@drawable/white_gradient_line"/>
 
             <Button
                 android:id="@+id/activity_entry_add_button_burreaucratic"
@@ -77,6 +120,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button"
+                android:paddingLeft="15dp"
+                android:paddingStart="15dp"
                 android:onClick="onClick"
                 android:text="@string/activity_entry_add_button_burreaucratic" />
         </LinearLayout>
