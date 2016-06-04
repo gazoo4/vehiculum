@@ -14,7 +14,6 @@ import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.dataModel.expense.TollEntry;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
-import sk.berops.android.fueller.gui.common.UtilsActivity;
 
 public class ActivityTollAdd extends ActivityEntryGenericAdd {
 	protected Spinner spinnerTollType;
@@ -31,7 +30,6 @@ public class ActivityTollAdd extends ActivityEntryGenericAdd {
 		}
 
 		super.entry = (Entry) this.tollEntry;
-		super.editMode = editMode;
 		super.onCreate(savedInstanceState);
 	}
 	
@@ -46,17 +44,13 @@ public class ActivityTollAdd extends ActivityEntryGenericAdd {
 		
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_toll_currency);
 		spinnerTollType = (Spinner) findViewById(R.id.activity_toll_type);
-	}
-	
-	@Override
-	protected void styleGuiObjects() {
-		super.styleGuiObjects();
-		UtilsActivity.styleSpinner(spinnerTollType, this, R.array.activity_toll_type);
-	}
-	
-	@Override
-	protected void initializeGuiObjects() {
-		super.initializeGuiObjects();
+
+		listEditTexts.add(editTextMileage);
+		listEditTexts.add(editTextCost);
+		listEditTexts.add(editTextComment);
+
+		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
+		mapSpinners.put(R.array.activity_toll_type, spinnerTollType);
 	}
 	
 	@Override

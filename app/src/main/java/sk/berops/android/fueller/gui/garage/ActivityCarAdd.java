@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -15,7 +14,6 @@ import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.dataModel.UnitConstants.DistanceUnit;
 import sk.berops.android.fueller.dataModel.UnitConstants.VolumeUnit;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
-import sk.berops.android.fueller.gui.Colors;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityRecordAdd;
 import sk.berops.android.fueller.gui.common.pictures.CameraHandler;
@@ -67,35 +65,21 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 		editTextNickname = (EditText)findViewById(R.id.activity_car_add_nickname);
 		
 		spinnerDistanceUnit = (Spinner) findViewById(R.id.activity_car_add_distance_unit);
-		ArrayAdapter<CharSequence> adapterDistanceUnit = ArrayAdapter
-				.createFromResource(this, R.array.activity_car_add_distance_units,
-						R.layout.spinner_white);
-		adapterDistanceUnit
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerDistanceUnit.setAdapter(adapterDistanceUnit);
-		
 		spinnerVolumeUnit = (Spinner) findViewById(R.id.activity_car_add_volume_unit);
-		ArrayAdapter<CharSequence> adapterVolumeUnit = ArrayAdapter
-				.createFromResource(this, R.array.activity_car_add_volume_units,
-						R.layout.spinner_white);
-		adapterDistanceUnit
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerVolumeUnit.setAdapter(adapterVolumeUnit);
-	}
-	
-	@Override
-	protected void styleGuiObjects() {
-		editTextBrand.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextModel.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextLicensePlate.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextModelYear.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextNickname.setHintTextColor(Colors.LIGHT_GREEN);
+
+		listEditTexts.add(editTextBrand);
+		listEditTexts.add(editTextModel);
+		listEditTexts.add(editTextLicensePlate);
+		listEditTexts.add(editTextMileage);
+		listEditTexts.add(editTextModelYear);
+		listEditTexts.add(editTextNickname);
+
+		mapSpinners.put(R.array.activity_car_add_distance_units, spinnerDistanceUnit);
+		mapSpinners.put(R.array.activity_car_add_volume_units, spinnerVolumeUnit);
 	}
 	
 	@Override
 	protected void initializeGuiObjects() {
-		
 	}
 
 	public void saveEntry(View view) {

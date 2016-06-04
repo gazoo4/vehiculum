@@ -19,29 +19,12 @@ public abstract class ActivityGenericPartAdd extends ActivityExpenseAdd {
 	
 	protected GenericPart genericPart;
 	
-	protected int quantity;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.expense = genericPart;
 		super.onCreate(savedInstanceState);
 	}
-	
-	@Override
-	protected void styleGuiObjects() {
-		super.styleGuiObjects();
-		UtilsActivity.styleEditText(editTextBrand);
-		UtilsActivity.styleEditText(editTextProducerPartId);
-		UtilsActivity.styleEditText(editTextCarmakerPartId);
-		UtilsActivity.styleEditText(editTextQuantity);
-		UtilsActivity.styleSpinner(spinnerCondition, this, R.array.activity_generic_part_add_condition);
-	}
 
-	@Override
-	protected void initializeGuiObjects() {
-		super.initializeGuiObjects();
-	}
-	
 	@Override
 	protected void updateFields() throws FieldsEmptyException{
 		super.updateFields();

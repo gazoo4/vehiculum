@@ -10,12 +10,13 @@
         android:layout_height="80dp"
         android:orientation="horizontal">
 
-        <TextView
+        <ImageView
+            android:id="@+id/activity_refuel_icon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:text="Refuel ICON"
-            style="@style/plain_text"/>
+            android:padding="15dp"
+            android:src="@drawable/refuel"/>
 
         <TextView
             android:id="@+id/activity_refuel_date_text"

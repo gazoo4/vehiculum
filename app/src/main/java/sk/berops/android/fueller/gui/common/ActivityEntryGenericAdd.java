@@ -19,7 +19,6 @@ import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.Expense;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.dataModel.tags.Tag;
-import sk.berops.android.fueller.gui.Colors;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.tags.FragmentTagManager;
 import sk.berops.android.fueller.gui.tags.LinearTagAdapter;
@@ -40,15 +39,6 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 		super.onCreate(savedInstanceState);
 
 		updateTextAddEventDate();
-	}
-
-	@Override
-	protected abstract void attachGuiObjects();
-
-	@Override
-	protected void styleGuiObjects() {
-		super.styleGuiObjects();
-		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
 	}
 
 	@Override

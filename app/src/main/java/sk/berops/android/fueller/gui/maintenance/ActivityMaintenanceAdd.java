@@ -31,7 +31,6 @@ import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.fueller.gui.common.FragmentEntryEditDelete;
 import sk.berops.android.fueller.gui.common.GuiUtils;
 import sk.berops.android.fueller.gui.common.TextFormatter;
-import sk.berops.android.fueller.gui.common.UtilsActivity;
 
 public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		FragmentEntryEditDelete.EntryEditDeleteDialogListener {
@@ -103,6 +102,7 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_maintenance_distance_unit);
 		textViewPartsCost = (TextView) findViewById(R.id.activity_maintenance_parts_cost);
 		textViewTotalCost = (TextView) findViewById(R.id.activity_maintenance_total_cost);
+
 		editTextMileage = (EditText) findViewById(R.id.activity_maintenance_mileage);
 		editTextLaborCost = (EditText) findViewById(R.id.activity_maintenance_labor_cost);
 		editTextCost = (EditText) findViewById(R.id.activity_maintenance_cost);
@@ -129,13 +129,14 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 				return true;
 			}
 		});
-	}
 
-	@Override
-	protected void styleGuiObjects() {
-		super.styleGuiObjects();
-		UtilsActivity.styleEditText(editTextLaborCost);
-		UtilsActivity.styleSpinner(spinnerCurrency, this, R.array.activity_expense_add_currency);
+		listEditTexts.add(editTextMileage);
+		listEditTexts.add(editTextLaborCost);
+		listEditTexts.add(editTextCost);
+		listEditTexts.add(editTextComment);
+
+		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
+		mapSpinners.put(R.array.activity_expense_add_currency, spinnerLaborCostCurrency);
 	}
 
 	@Override

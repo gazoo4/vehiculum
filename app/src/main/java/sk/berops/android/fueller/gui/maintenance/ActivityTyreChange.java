@@ -20,7 +20,6 @@ import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.fueller.gui.common.GuiUtils;
-import sk.berops.android.fueller.gui.common.UtilsActivity;
 
 public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	
@@ -78,16 +77,17 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		textViewDisplayDate = (TextView) findViewById(R.id.activity_tyre_change_date_text);
 		
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_tyre_change_total_cost_currency);
+
+		listEditTexts.add(editTextTyresCost);
+		listEditTexts.add(editTextLaborCost);
+		listEditTexts.add(editTextSmallPartsCost);
+		listEditTexts.add(editTextCost);
+		listEditTexts.add(editTextMileage);
+		listEditTexts.add(editTextComment);
+
+		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
 	}
 
-	@Override
-	protected void styleGuiObjects() {
-		super.styleGuiObjects();
-		UtilsActivity.styleEditText(editTextTyresCost);
-		UtilsActivity.styleEditText(editTextLaborCost);
-		UtilsActivity.styleEditText(editTextSmallPartsCost);
-	}
-	
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();

@@ -43,6 +43,12 @@ public class ActivityBurreaucraticAdd extends ActivityEntryGenericAdd {
 		editTextComment = (EditText) findViewById(R.id.activity_burreaucratic_comment);
 		
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_burreaucratic_currency);
+
+		listEditTexts.add(editTextMileage);
+		listEditTexts.add(editTextCost);
+		listEditTexts.add(editTextComment);
+
+		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
 	}
 	
 	@Override

@@ -8,12 +8,10 @@ import android.widget.Spinner;
 
 import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
-import sk.berops.android.fueller.dataModel.maintenance.GenericPart;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre.Season;
 import sk.berops.android.fueller.gui.common.ActivityGenericPartAdd;
 import sk.berops.android.fueller.gui.common.GuiUtils;
-import sk.berops.android.fueller.gui.common.UtilsActivity;
 
 public class ActivityTyreAdd extends ActivityGenericPartAdd {
 
@@ -38,7 +36,7 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 			tyre = new Tyre();
 		}
 
-		super.genericPart = (GenericPart) this.tyre;
+		super.genericPart = this.tyre;
 		super.onCreate(savedInstanceState);
 	}
 
@@ -59,27 +57,24 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 		spinnerCondition = (Spinner) findViewById(R.id.activity_tyre_add_condition);
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_tyre_add_currency);
 
+		listEditTexts.add(editTextBrand);
+		listEditTexts.add(editTextModel);
+		listEditTexts.add(editTextWidth);
+		listEditTexts.add(editTextHeight);
+		listEditTexts.add(editTextDiameter);
+		listEditTexts.add(editTextWeightIndex);
+		listEditTexts.add(editTextSpeedIndex);
+		listEditTexts.add(editTextDot);
+		listEditTexts.add(editTextThreadLevel);
+		listEditTexts.add(editTextQuantity);
+		listEditTexts.add(editTextCost);
+		listEditTexts.add(editTextComment);
+
+		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
+		mapSpinners.put(R.array.activity_generic_part_add_condition, spinnerCondition);
+		mapSpinners.put(R.array.activity_tyre_add_season, spinnerSeason);
 	}
 
-	protected void styleGuiObjects() {
-		super.styleGuiObjects();
-		UtilsActivity.styleEditText(editTextBrand);
-		UtilsActivity.styleEditText(editTextModel);
-		UtilsActivity.styleEditText(editTextWidth);
-		UtilsActivity.styleEditText(editTextHeight);
-		UtilsActivity.styleEditText(editTextDiameter);
-		UtilsActivity.styleEditText(editTextWeightIndex);
-		UtilsActivity.styleEditText(editTextSpeedIndex);
-		UtilsActivity.styleEditText(editTextDot);
-		UtilsActivity.styleEditText(editTextThreadLevel);
-		
-		UtilsActivity.styleSpinner(spinnerSeason, this, R.array.activity_tyre_add_season);
-	}
-
-	protected void initializeGuiObjects() {
-		super.initializeGuiObjects();
-	}
-	
 	private void updateModel() {
 		tyre.setModel(editTextModel.getText().toString());
 	}

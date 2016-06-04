@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,10 +26,10 @@ import sk.berops.android.fueller.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.fueller.gui.common.GuiUtils;
-import sk.berops.android.fueller.gui.common.UtilsActivity;
 
 public class ActivityRefuel extends ActivityEntryGenericAdd {
 
+    protected ImageView imageRefuelIcon;
     protected EditText editTextVolume;
     protected Spinner spinnerFuelType;
     protected Spinner spinnerVolumeUnit;
@@ -49,25 +50,31 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
 
     @Override
     protected void attachGuiObjects() {
-        editTextMileage = (EditText) findViewById(R.id.activity_refuel_mileage);
         textViewDistanceUnit = (TextView) findViewById(R.id.activity_refuel_distance_unit);
+        textViewPrice = (TextView) findViewById(R.id.activity_refuel_price_text);
+        textViewDisplayDate = (TextView) findViewById(R.id.activity_refuel_date_text);
+
+        editTextMileage = (EditText) findViewById(R.id.activity_refuel_mileage);
         editTextCost = (EditText) findViewById(R.id.activity_refuel_cost);
         editTextComment = (EditText) findViewById(R.id.activity_refuel_comment);
-        textViewPrice = (TextView) findViewById(R.id.activity_refuel_price_text);
         editTextVolume = (EditText) findViewById(R.id.activity_refuel_volume);
-        textViewDisplayDate = (TextView) findViewById(R.id.activity_refuel_date_text);
+
+        imageRefuelIcon = (ImageView) findViewById(R.id.activity_refuel_icon);
 
         spinnerFuelType = (Spinner) findViewById(R.id.activity_refuel_fuel_type);
         spinnerCurrency = (Spinner) findViewById(R.id.activity_refuel_currency);
         spinnerVolumeUnit = (Spinner) findViewById(R.id.activity_refuel_volume_unit);
-    }
 
-    @Override
-    protected void styleGuiObjects() {
-        super.styleGuiObjects();
-        UtilsActivity.styleEditText(editTextVolume);
-        UtilsActivity.styleSpinner(spinnerFuelType, this, R.array.activity_refuel_fuel_type);
-        UtilsActivity.styleSpinner(spinnerVolumeUnit, this, R.array.activity_refuel_volume_unit);
+        listEditTexts.add(editTextMileage);
+        listEditTexts.add(editTextCost);
+        listEditTexts.add(editTextComment);
+        listEditTexts.add(editTextVolume);
+
+        listIcons.add(imageRefuelIcon);
+
+        mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
+        mapSpinners.put(R.array.activity_refuel_fuel_type, spinnerFuelType);
+        mapSpinners.put(R.array.activity_refuel_volume_unit, spinnerVolumeUnit);
     }
 
     @Override

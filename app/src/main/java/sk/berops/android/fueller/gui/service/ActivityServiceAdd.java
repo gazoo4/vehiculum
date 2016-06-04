@@ -14,7 +14,6 @@ import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.dataModel.expense.ServiceEntry;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
-import sk.berops.android.fueller.gui.common.UtilsActivity;
 
 public class ActivityServiceAdd extends ActivityEntryGenericAdd {
 	protected Spinner spinnerServiceType;
@@ -31,7 +30,6 @@ public class ActivityServiceAdd extends ActivityEntryGenericAdd {
 		}
 
 		super.entry = (Entry) this.serviceEntry;
-		super.editMode = editMode;
 		super.onCreate(savedInstanceState);
 	}
 	
@@ -46,12 +44,13 @@ public class ActivityServiceAdd extends ActivityEntryGenericAdd {
 		
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_service_currency);
 		spinnerServiceType = (Spinner) findViewById(R.id.activity_service_type);
-	}
-	
-	@Override
-	protected void styleGuiObjects() {
-		super.styleGuiObjects();
-		UtilsActivity.styleSpinner(spinnerServiceType, this, R.array.activity_service_type);
+
+		listEditTexts.add(editTextMileage);
+		listEditTexts.add(editTextCost);
+		listEditTexts.add(editTextComment);
+
+		mapSpinners.put(R.array.activity_service_type, spinnerServiceType);
+		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
 	}
 	
 	@Override

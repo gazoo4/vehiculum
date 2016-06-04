@@ -9,7 +9,6 @@ import java.util.NoSuchElementException;
 import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.configuration.Preferences;
 import sk.berops.android.fueller.dataModel.Currency;
-import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.dataModel.expense.Expense;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 
@@ -22,15 +21,8 @@ public abstract class ActivityExpenseAdd extends ActivityRecordAdd {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.record = (Record) expense;
+		super.record = expense;
 		super.onCreate(savedInstanceState);
-	}
-	
-	@Override
-	protected void styleGuiObjects() {
-		super.styleGuiObjects();
-		UtilsActivity.styleEditText(editTextCost);
-		UtilsActivity.styleSpinner(spinnerCurrency, this, R.array.activity_expense_add_currency);
 	}
 
 	@Override
