@@ -45,9 +45,16 @@ public abstract class ActivityRecordAdd extends Activity {
 	public void throwAlertFieldsEmpty(int id) throws FieldsEmptyException {
 		throw new FieldsEmptyException(this, id); 
 	}
-	
+
+	/**
+	 * This method is intended to create assignments between GUI elements like buttons into their respective variables in the code.
+	 * Also it's used to populate collections like listEditTexts, listIcons and mapSpinners for easy GUI customizations via method StyleGuiObjects.
+	 */
 	protected abstract void attachGuiObjects();
-	
+
+	/**
+	 * Method to customize the visuals of the GUI objects.
+	 */
 	protected void styleGuiObjects() {
 		for (EditText e: listEditTexts) {
 			UtilsActivity.styleEditText(e);

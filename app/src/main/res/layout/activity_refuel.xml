@@ -3,7 +3,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/background_blue">
-
+<!--
     <LinearLayout
         android:id="@+id/activity_refuel_header_layout"
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:padding="15dp"
+            android:padding="20dp"
             android:src="@drawable/refuel"/>
 
         <TextView
@@ -39,10 +39,52 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:onClick="onClickTagAdd"
-            android:text="+Tag ICON"
+            android:drawableLeft="@drawable/not_available"
+            android:drawableStart="@drawable/not_available"
+            style="@style/button_text"/>
+    </LinearLayout>
+-->
+
+    <RelativeLayout
+        android:id="@+id/activity_refuel_date_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp">
+
+        <Button
+            android:id="@+id/activity_refuel_date_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/not_available"
+            android:drawableStart="@drawable/not_available"
+            android:onClick="onClickShowDatePickerDialog"
             style="@style/button_text"/>
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/activity_refuel_button_tag_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/not_available"
+            android:drawableStart="@drawable/not_available"
+            android:onClick="onClickTagAdd"
+            style="@style/button_text"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/activity_refuel_tags_recyclerview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/activity_refuel_button_tag_add"
+            android:layout_toStartOf="@id/activity_refuel_button_tag_add"
+            android:gravity="center"
+            android:scrollbars="horizontal" />
+
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
@@ -52,6 +94,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </GridLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -171,10 +219,15 @@
                 android:inputType="textMultiLine"
                 style="@style/plain_text" />
 
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:background="@drawable/white_gradient_line"/>
+
             <Button
                 android:id="@+id/activity_refuel_button_commit"
                 style="@style/button_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button"
                 android:onClick="onClick"

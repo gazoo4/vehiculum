@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioGroup;
@@ -98,7 +99,6 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 
 	@Override
 	protected void attachGuiObjects() {
-		textViewDisplayDate = (TextView) findViewById(R.id.activity_maintenance_date_text);
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_maintenance_distance_unit);
 		textViewPartsCost = (TextView) findViewById(R.id.activity_maintenance_parts_cost);
 		textViewTotalCost = (TextView) findViewById(R.id.activity_maintenance_total_cost);
@@ -107,6 +107,8 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		editTextLaborCost = (EditText) findViewById(R.id.activity_maintenance_labor_cost);
 		editTextCost = (EditText) findViewById(R.id.activity_maintenance_cost);
 		editTextComment = (EditText) findViewById(R.id.activity_maintenance_comment);
+
+		buttonDate = (Button) findViewById(R.id.activity_maintenance_date_button);
 
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_maintenance_currency);
 		spinnerLaborCostCurrency = (Spinner) findViewById(R.id.activity_maintenance_labor_cost_currency);

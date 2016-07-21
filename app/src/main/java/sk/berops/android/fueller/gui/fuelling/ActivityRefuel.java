@@ -8,8 +8,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -29,7 +29,6 @@ import sk.berops.android.fueller.gui.common.GuiUtils;
 
 public class ActivityRefuel extends ActivityEntryGenericAdd {
 
-    protected ImageView imageRefuelIcon;
     protected EditText editTextVolume;
     protected Spinner spinnerFuelType;
     protected Spinner spinnerVolumeUnit;
@@ -52,14 +51,13 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
     protected void attachGuiObjects() {
         textViewDistanceUnit = (TextView) findViewById(R.id.activity_refuel_distance_unit);
         textViewPrice = (TextView) findViewById(R.id.activity_refuel_price_text);
-        textViewDisplayDate = (TextView) findViewById(R.id.activity_refuel_date_text);
 
         editTextMileage = (EditText) findViewById(R.id.activity_refuel_mileage);
         editTextCost = (EditText) findViewById(R.id.activity_refuel_cost);
         editTextComment = (EditText) findViewById(R.id.activity_refuel_comment);
         editTextVolume = (EditText) findViewById(R.id.activity_refuel_volume);
 
-        imageRefuelIcon = (ImageView) findViewById(R.id.activity_refuel_icon);
+        buttonDate = (Button) findViewById(R.id.activity_refuel_date_button);
 
         spinnerFuelType = (Spinner) findViewById(R.id.activity_refuel_fuel_type);
         spinnerCurrency = (Spinner) findViewById(R.id.activity_refuel_currency);
@@ -69,8 +67,6 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
         listEditTexts.add(editTextCost);
         listEditTexts.add(editTextComment);
         listEditTexts.add(editTextVolume);
-
-        listIcons.add(imageRefuelIcon);
 
         mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
         mapSpinners.put(R.array.activity_refuel_fuel_type, spinnerFuelType);

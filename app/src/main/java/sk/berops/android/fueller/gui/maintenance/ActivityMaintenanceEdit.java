@@ -30,14 +30,9 @@ public class ActivityMaintenanceEdit extends ActivityMaintenanceAdd {
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
-		editTextMileage.setText(Double.valueOf(maintenanceEntry.getMileage()).toString());
 		editTextLaborCost.setText(Double.toString(maintenanceEntry.getLaborCost()));
-		editTextCost.setText(Double.valueOf(maintenanceEntry.getCost()).toString());
-		editTextComment.setText(maintenanceEntry.getComment());
-		
 		spinnerLaborCostCurrency.setSelection(maintenanceEntry.getLaborCostCurrency().getId());
-		spinnerCurrency.setSelection(maintenanceEntry.getCurrency().getId());
-		
+
 		RadioButton button;
 		switch (maintenanceEntry.getType()) {
 		case ACCIDENT_REPAIR:

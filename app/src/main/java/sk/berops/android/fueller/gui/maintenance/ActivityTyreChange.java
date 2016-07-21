@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -74,7 +75,8 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		editTextComment = (EditText) findViewById(R.id.activity_tyre_change_comment);
 
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_tyre_change_distance_unit);
-		textViewDisplayDate = (TextView) findViewById(R.id.activity_tyre_change_date_text);
+
+		buttonDate = (Button) findViewById(R.id.activity_tyre_change_date_button);
 		
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_tyre_change_total_cost_currency);
 

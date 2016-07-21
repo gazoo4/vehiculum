@@ -17,14 +17,4 @@ public class ActivityBurreaucraticEdit extends ActivityBurreaucraticAdd {
 		editMode = true;
 		super.onCreate(savedInstanceState);
 	}
-	
-	@Override
-	protected void initializeGuiObjects() {
-		super.initializeGuiObjects();
-		editTextMileage.setText(Double.valueOf(burreaucraticEntry.getMileage()).toString());
-		editTextCost.setText(Double.valueOf(burreaucraticEntry.getCost()).toString());
-		editTextComment.setText(burreaucraticEntry.getComment());
-		
-		spinnerCurrency.setSelection(burreaucraticEntry.getCurrency().getId());
-	}
 }

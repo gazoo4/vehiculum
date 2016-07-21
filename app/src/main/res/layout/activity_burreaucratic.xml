@@ -20,29 +20,51 @@
             android:layout_height="wrap_content"
             android:text="@string/activity_burreaucratic_header" />
 
-        <LinearLayout
-            android:id="@+id/activity_burreaucratic_date_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_burreaucratic_header"
-            android:orientation="horizontal" >
+       <RelativeLayout
+           android:id="@+id/activity_burreaucratic_date_layout"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:padding="3dp">
 
-            <TextView
-                android:id="@+id/activity_burreaucratic_date_text"
-                style="@style/plain_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textIsSelectable="true" />
+           <Button
+               android:id="@+id/activity_burreaucratic_date_button"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentLeft="true"
+               android:layout_alignParentStart="true"
+               android:gravity="center_vertical"
+               android:drawableLeft="@drawable/not_available"
+               android:drawableStart="@drawable/not_available"
+               android:onClick="onClickShowDatePickerDialog"
+               style="@style/button_text"/>
 
-            <Button
-                android:id="@+id/activity_burreaucratic_button_date_change"
-                style="@style/button_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/transparent_button"
-                android:onClick="onClickShowDatePickerDialog"
-                android:text="@string/activity_generic_button_date_change" />
-        </LinearLayout>
+           <Button
+               android:id="@+id/activity_burreaucratic_button_tag_add"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentRight="true"
+               android:layout_alignParentEnd="true"
+               android:gravity="center_vertical"
+               android:drawableLeft="@drawable/not_available"
+               android:drawableStart="@drawable/not_available"
+               android:onClick="onClickTagAdd"
+               style="@style/button_text"/>
+
+           <android.support.v7.widget.RecyclerView
+               android:id="@+id/activity_burreaucratic_tags_recyclerview"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_toLeftOf="@id/activity_burreaucratic_button_tag_add"
+               android:layout_toStartOf="@id/activity_burreaucratic_button_tag_add"
+               android:gravity="center"
+               android:scrollbars="horizontal" />
+
+       </RelativeLayout>
+
+       <View
+           android:layout_width="match_parent"
+           android:layout_height="1dp"
+           android:background="@android:color/holo_blue_light" />
 
         <LinearLayout
             android:id="@+id/activity_burreaucratic_mileage_layout"

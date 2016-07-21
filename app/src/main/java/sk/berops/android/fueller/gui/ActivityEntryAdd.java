@@ -19,6 +19,11 @@ public class ActivityEntryAdd extends Activity {
 
 	Button buttonRefuel;
 	Button buttonTyres;
+	Button buttonMaintenance;
+	Button buttonService;
+	Button buttonToll;
+	Button buttonInsurance;
+	Button buttonBurreaucratic;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,11 @@ public class ActivityEntryAdd extends Activity {
 	private void attachGuiObjects() {
 		buttonRefuel = (Button) findViewById(R.id.activity_entry_add_button_refuel);
 		buttonTyres = (Button) findViewById(R.id.activity_entry_add_button_tyres_change);
+		buttonMaintenance = (Button) findViewById(R.id.activity_entry_add_button_maintenance);
+		buttonService = (Button) findViewById(R.id.activity_entry_add_button_service);
+		buttonToll = (Button) findViewById(R.id.activity_entry_add_button_toll);
+		buttonInsurance = (Button) findViewById(R.id.activity_entry_add_button_insurance);
+		buttonBurreaucratic = (Button) findViewById(R.id.activity_entry_add_button_burreaucratic);
 	}
 
 	private void styleGuiObjects() {

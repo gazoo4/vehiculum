@@ -3,6 +3,7 @@ package sk.berops.android.fueller.gui.burreaucratic;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,13 +36,14 @@ public class ActivityBurreaucraticAdd extends ActivityEntryGenericAdd {
 	
 	@Override
 	protected void attachGuiObjects() {
-		textViewDisplayDate = (TextView) findViewById(R.id.activity_burreaucratic_date_text);
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_burreaucratic_distance_unit);
 		
 		editTextMileage = (EditText) findViewById(R.id.activity_burreaucratic_mileage);
 		editTextCost = (EditText) findViewById(R.id.activity_burreaucratic_cost);
 		editTextComment = (EditText) findViewById(R.id.activity_burreaucratic_comment);
-		
+
+		buttonDate = (Button) findViewById(R.id.activity_burreaucratic_date_button);
+
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_burreaucratic_currency);
 
 		listEditTexts.add(editTextMileage);

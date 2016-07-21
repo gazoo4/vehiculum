@@ -3,8 +3,6 @@ package sk.berops.android.fueller.gui.fuelling;
 import android.content.Intent;
 import android.os.Bundle;
 
-import java.text.DateFormat;
-
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.gui.MainActivity;
 
@@ -23,12 +21,7 @@ public class ActivityFuellingEdit extends ActivityRefuel {
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
-		editTextMileage.setText(Double.valueOf(fuellingEntry.getMileage()).toString());
-		editTextCost.setText(Double.valueOf(fuellingEntry.getCost()).toString());
-		editTextComment.setText(fuellingEntry.getComment());
 		editTextVolume.setText(Double.valueOf(fuellingEntry.getFuelVolume()).toString());
-		textViewDisplayDate.setText(DateFormat.getDateInstance().format(fuellingEntry.getEventDate()));
-
 		spinnerFuelType.setSelection(fuellingEntry.getFuelType().getId());
 		refreshPrice();
 	}
