@@ -28,6 +28,7 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 
 	protected EditText editTextMileage;
 	protected Button buttonDate;
+	protected Button buttonTagAdd;
 	protected TextView textViewDistanceUnit;
 	protected RecyclerView recyclerViewLinearTags;
 	protected LinearTagAdapter linearTagAdapter;

@@ -37,7 +37,6 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_refuel);
         if (fuellingEntry == null) {
             fuellingEntry = new FuellingEntry();
         }
@@ -45,6 +44,11 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
         super.entry = this.fuellingEntry;
 
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void loadLayout() {
+        setContentView(R.layout.activity_refuel);
     }
 
     @Override
@@ -58,10 +62,14 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
         editTextVolume = (EditText) findViewById(R.id.activity_refuel_volume);
 
         buttonDate = (Button) findViewById(R.id.activity_refuel_date_button);
+        buttonTagAdd = (Button) findViewById(R.id.activity_refuel_button_tag_add);
 
         spinnerFuelType = (Spinner) findViewById(R.id.activity_refuel_fuel_type);
         spinnerCurrency = (Spinner) findViewById(R.id.activity_refuel_currency);
         spinnerVolumeUnit = (Spinner) findViewById(R.id.activity_refuel_volume_unit);
+
+        listButtons.add(buttonDate);
+        listButtons.add(buttonTagAdd);
 
         listEditTexts.add(editTextMileage);
         listEditTexts.add(editTextCost);
@@ -76,7 +84,7 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
     @Override
     protected void initializeGuiObjects() {
         super.initializeGuiObjects();
-	    initializeTags(R.id.activity_refuel_tags_recyclerview);
+        initializeTags(R.id.activity_refuel_tags_recyclerview);
 
         FuelType fuelType;
         try {

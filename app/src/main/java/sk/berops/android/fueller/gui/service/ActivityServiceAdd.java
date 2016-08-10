@@ -23,8 +23,6 @@ public class ActivityServiceAdd extends ActivityEntryGenericAdd {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_service);
-
 		if (serviceEntry == null) {
 			serviceEntry = new ServiceEntry();
 			serviceEntry.setExpenseType(ExpenseType.SERVICE);
@@ -32,6 +30,11 @@ public class ActivityServiceAdd extends ActivityEntryGenericAdd {
 
 		super.entry = (Entry) this.serviceEntry;
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_service);
 	}
 	
 	@Override
@@ -47,6 +50,8 @@ public class ActivityServiceAdd extends ActivityEntryGenericAdd {
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_service_currency);
 		spinnerServiceType = (Spinner) findViewById(R.id.activity_service_type);
 
+		listButtons.add(buttonDate);
+
 		listEditTexts.add(editTextMileage);
 		listEditTexts.add(editTextCost);
 		listEditTexts.add(editTextComment);
@@ -54,10 +59,11 @@ public class ActivityServiceAdd extends ActivityEntryGenericAdd {
 		mapSpinners.put(R.array.activity_service_type, spinnerServiceType);
 		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
 	}
-	
+
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
+		initializeTags(R.id.activity_service_tags_recyclerview);
 	}
 	
 	@Override

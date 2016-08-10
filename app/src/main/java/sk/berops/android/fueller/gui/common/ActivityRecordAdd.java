@@ -1,77 +1,34 @@
 package sk.berops.android.fueller.gui.common;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
 
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.LinkedList;
 
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
+import sk.berops.android.fueller.gui.DefaultActivity;
 import sk.berops.android.fueller.gui.MainActivity;
 
-public abstract class ActivityRecordAdd extends Activity {
+public abstract class ActivityRecordAdd extends DefaultActivity {
 
 	protected EditText editTextComment;
 	
 	protected Car car;
 	protected Record record;
 	protected boolean editMode;
-
-	protected LinkedList<EditText> listEditTexts;
-	protected LinkedList<ImageView> listIcons;
-	protected HashMap<Integer, Spinner> mapSpinners;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		car = MainActivity.garage.getActiveCar();
-
-		listEditTexts = new LinkedList<>();
-		listIcons = new LinkedList<>();
-		mapSpinners = new HashMap<>();
-		
-		attachGuiObjects();
-		styleGuiObjects();
-		initializeGuiObjects();
+		super.onCreate(savedInstanceState);
 	}
 	
 	public void throwAlertFieldsEmpty(int id) throws FieldsEmptyException {
 		throw new FieldsEmptyException(this, id); 
 	}
-
-	/**
-	 * This method is intended to create assignments between GUI elements like buttons into their respective variables in the code.
-	 * Also it's used to populate collections like listEditTexts, listIcons and mapSpinners for easy GUI customizations via method StyleGuiObjects.
-	 */
-	protected abstract void attachGuiObjects();
-
-	/**
-	 * Method to customize the visuals of the GUI objects.
-	 */
-	protected void styleGuiObjects() {
-		for (EditText e: listEditTexts) {
-			UtilsActivity.styleEditText(e);
-		}
-
-		Spinner s;
-		for (Integer id: mapSpinners.keySet()) {
-			s = mapSpinners.get(id);
-			UtilsActivity.styleSpinner(s, this, id);
-		}
-
-		for (ImageView i: listIcons) {
-			UtilsActivity.tintIcon(i);
-		}
-	}
-	
-	protected abstract void initializeGuiObjects();
 	
 	protected void updateFields() throws FieldsEmptyException {
 		updateComment();
@@ -107,5 +64,4 @@ public abstract class ActivityRecordAdd extends Activity {
 		MainActivity.dataHandler.persistGarage(MainActivity.garage);
 		MainActivity.garage.initAfterLoad();
 	}
-
 }

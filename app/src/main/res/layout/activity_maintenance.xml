@@ -33,8 +33,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:gravity="center_vertical"
-                android:drawableLeft="@drawable/not_available"
-                android:drawableStart="@drawable/not_available"
+                android:drawableLeft="@drawable/calendar"
+                android:drawableStart="@drawable/calendar"
+                android:drawablePadding="5dp"
                 android:onClick="onClickShowDatePickerDialog"
                 style="@style/button_text"/>
 
@@ -170,8 +171,10 @@
                     style="@style/button_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".5"
                     android:background="@drawable/transparent_button"
+                    android:drawableLeft="@drawable/del_parts"
+                    android:drawableStart="@drawable/del_parts"
+                    android:layout_weight=".5"
                     android:onClick="onClick"
                     android:text="@string/activity_maintenance_button_delete" />
 
@@ -180,8 +183,10 @@
                     style="@style/button_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".5"
                     android:background="@drawable/transparent_button"
+                    android:drawableLeft="@drawable/add_parts"
+                    android:drawableStart="@drawable/add_parts"
+                    android:layout_weight=".5"
                     android:onClick="onClick"
                     android:text="@string/activity_maintenance_button_add" />
             </LinearLayout>

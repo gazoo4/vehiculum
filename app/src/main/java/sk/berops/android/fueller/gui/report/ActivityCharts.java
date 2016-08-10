@@ -1,6 +1,5 @@
 package sk.berops.android.fueller.gui.report;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
@@ -21,9 +20,10 @@ import sk.berops.android.fueller.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.fueller.dataModel.expense.History;
 import sk.berops.android.fueller.engine.calculation.ChartInterpolator;
 import sk.berops.android.fueller.engine.charts.HistoryViewData;
+import sk.berops.android.fueller.gui.DefaultActivity;
 import sk.berops.android.fueller.gui.MainActivity;
 
-public class ActivityCharts extends Activity {
+public class ActivityCharts extends DefaultActivity {
 	
 	private int resolution = 10; //TODO this should go to settings
 	private boolean splineInterpolation = true; //TODO this should go to settings
@@ -36,12 +36,17 @@ public class ActivityCharts extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_charts);
-		attachGuiObjects();
 		generateChart(car.getInitialMileage(), car.getCurrentMileage());
 	}
-	
-	public void attachGuiObjects() {
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_charts);
+	}
+
+	@Override
+	protected void attachGuiObjects() {
+
 	}
 	
 	private void generateChart(double domainStart, double domainEnd) {

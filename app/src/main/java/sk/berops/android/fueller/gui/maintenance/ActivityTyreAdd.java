@@ -30,8 +30,6 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_tyre_add);
-
 		if (tyre == null) {
 			tyre = new Tyre();
 		}
@@ -40,6 +38,12 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 		super.onCreate(savedInstanceState);
 	}
 
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_tyre_add);
+	}
+
+	@Override
 	protected void attachGuiObjects() {
 		editTextBrand = (EditText) findViewById(R.id.activity_tyre_add_brand);
 		editTextModel = (EditText) findViewById(R.id.activity_tyre_add_model);

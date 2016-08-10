@@ -1,6 +1,5 @@
 package sk.berops.android.fueller.gui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,7 +39,7 @@ import sk.berops.android.fueller.gui.report.ActivityReportsNavigate;
 import sk.berops.android.fueller.io.DataHandler;
 import sk.berops.android.fueller.io.xml.XMLHandler;
 
-public class MainActivity extends Activity {
+public class MainActivity extends DefaultActivity {
 	
 	public static Garage garage;
 	public static DataHandler dataHandler;
@@ -55,12 +54,9 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
 		
 		dataHandler = new XMLHandler();
-		attachGuiObjects();
-		styleGuiObjects();
-		
+
 		if (garage == null) {
 			try {
 				garage = dataHandler.loadGarage();
@@ -88,6 +84,24 @@ public class MainActivity extends Activity {
 		refreshStats();
 		generateStatTable();
 	}
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_main);
+	}
+
+	@Override
+	public void attachGuiObjects() {
+		statsTable = (TableLayout) findViewById(R.id.activity_main_stats_table);
+		textViewHeader = (TextView) findViewById(R.id.activity_main_header);
+		buttonRecordEvent = (Button) findViewById(R.id.activity_main_button_entry_add);
+		buttonViewStats = (Button) findViewById(R.id.activity_main_button_stats_view);
+		buttonEnterGarage = (Button) findViewById(R.id.activity_main_button_garage_enter);
+
+		listButtons.add(buttonRecordEvent);
+		listButtons.add(buttonViewStats);
+		listButtons.add(buttonEnterGarage);
+	}
 	
 	public void throwAlertCreateGarage() {
 		AlertDialog.Builder alertDialog= new AlertDialog.Builder(this);
@@ -103,21 +117,6 @@ public class MainActivity extends Activity {
 		});
 		
 		alertDialog.show();
-	}
-	
-	public void attachGuiObjects() {
-		statsTable = (TableLayout) findViewById(R.id.activity_main_stats_table);
-		textViewHeader = (TextView) findViewById(R.id.activity_main_header);
-		buttonRecordEvent = (Button) findViewById(R.id.activity_main_button_entry_add);
-		buttonViewStats = (Button) findViewById(R.id.activity_main_button_stats_view);
-		buttonEnterGarage = (Button) findViewById(R.id.activity_main_button_garage_enter);
-	}
-	
-	public void styleGuiObjects() {
-		int drawableColor = 0xFFFFFFFF;
-		buttonRecordEvent.getCompoundDrawables()[0].setTint(drawableColor);
-		buttonViewStats.getCompoundDrawables()[0].setTint(drawableColor);
-		buttonEnterGarage.getCompoundDrawables()[0].setTint(drawableColor);
 	}
 	
 	private void refreshStats() {

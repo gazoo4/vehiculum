@@ -1,6 +1,5 @@
 package sk.berops.android.fueller.gui.report;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -18,8 +16,9 @@ import java.util.LinkedList;
 
 import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.dataModel.expense.Entry;
+import sk.berops.android.fueller.gui.DefaultActivity;
 import sk.berops.android.fueller.gui.MainActivity;
-import sk.berops.android.fueller.gui.burreaucratic.ActivityBurreaucraticEdit;
+import sk.berops.android.fueller.gui.bureaucratic.ActivityBureaucraticEdit;
 import sk.berops.android.fueller.gui.common.FragmentEntryEditDelete;
 import sk.berops.android.fueller.gui.fuelling.ActivityFuellingEdit;
 import sk.berops.android.fueller.gui.insurance.ActivityInsuranceEdit;
@@ -27,7 +26,7 @@ import sk.berops.android.fueller.gui.maintenance.ActivityMaintenanceEdit;
 import sk.berops.android.fueller.gui.service.ActivityServiceEdit;
 import sk.berops.android.fueller.gui.toll.ActivityTollEdit;
 
-public class ActivityEntriesShow extends Activity implements FragmentEntryEditDelete.EntryEditDeleteDialogListener {
+public class ActivityEntriesShow extends DefaultActivity implements FragmentEntryEditDelete.EntryEditDeleteDialogListener {
 	private int selectedEntryPosition;
 	private LinkedList<Entry> entries;
 	EntriesReportAdapter adapter;
@@ -37,30 +36,27 @@ public class ActivityEntriesShow extends Activity implements FragmentEntryEditDe
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_entries_show);
 		// need to create a copy of the entries list on which we will do the filtering of the viewing items
 		// we also do the intial population of this list
 		entries = new LinkedList<Entry>(MainActivity.garage.getActiveCar().getHistory().getEntries());
-		attachGuiObjects();
-		styleGuiObjects();
-		initializeGuiObjects();
 	}
-	
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_entries_show);
+	}
+
+	@Override
 	protected void attachGuiObjects() {
 		listView = (ListView) findViewById(R.id.activity_entries_list_listview);
 		spinnerEntriesType = (Spinner) findViewById(R.id.activity_entries_list_type);
+
+		mapSpinners.put(R.array.activity_entries_list_types, spinnerEntriesType);
 	}
-	
-	protected void styleGuiObjects() {
-		ArrayAdapter<CharSequence> adapterEntriesType = ArrayAdapter
-				.createFromResource(this, R.array.activity_entries_list_types,
-						R.layout.spinner_white);
-		adapterEntriesType
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerEntriesType.setAdapter(adapterEntriesType);
-	}
-	
+
+	@Override
 	protected void initializeGuiObjects() {
+		super.initializeGuiObjects();
 		adapter = new EntriesReportAdapter(this, entries);
 		listView.setAdapter(adapter);
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -125,8 +121,8 @@ public class ActivityEntriesShow extends Activity implements FragmentEntryEditDe
 			break;
 		case TYRES:
 			break;
-		case BURREAUCRATIC:
-			newIntent = new Intent(this, ActivityBurreaucraticEdit.class);
+		case BUREAUCRATIC:
+			newIntent = new Intent(this, ActivityBureaucraticEdit.class);
 			break;
 		case INSURANCE:
 			newIntent = new Intent(this, ActivityInsuranceEdit.class);

@@ -23,16 +23,18 @@ public class ActivityInsuranceAdd extends ActivityEntryGenericAdd {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_insurance);
-
 		if (insuranceEntry == null) {
 			insuranceEntry = new InsuranceEntry();
 			insuranceEntry.setExpenseType(ExpenseType.INSURANCE);
 		}
 
 		super.entry = (Entry) this.insuranceEntry;
-		super.editMode = editMode;
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_insurance);
 	}
 	
 	@Override
@@ -48,12 +50,20 @@ public class ActivityInsuranceAdd extends ActivityEntryGenericAdd {
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_insurance_currency);
 		spinnerInsuranceType = (Spinner) findViewById(R.id.activity_insurance_type);
 
+		listButtons.add(buttonDate);
+
 		listEditTexts.add(editTextMileage);
 		listEditTexts.add(editTextCost);
 		listEditTexts.add(editTextComment);
 
 		mapSpinners.put(R.array.activity_insurance_type, spinnerInsuranceType);
 		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
+	}
+
+	@Override
+	protected void initializeGuiObjects() {
+		super.initializeGuiObjects();
+		initializeTags(R.id.activity_insurance_button_tag_add);
 	}
 	
 	@Override

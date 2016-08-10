@@ -5,7 +5,7 @@ import android.util.Log;
 import java.util.LinkedList;
 import java.util.TreeMap;
 
-import sk.berops.android.fueller.dataModel.calculation.BurreaucraticConsumption;
+import sk.berops.android.fueller.dataModel.calculation.BureaucraticConsumption;
 import sk.berops.android.fueller.dataModel.calculation.Consumption;
 import sk.berops.android.fueller.dataModel.calculation.FuelConsumption;
 import sk.berops.android.fueller.dataModel.calculation.InsuranceConsumption;
@@ -61,8 +61,8 @@ public class GenericCalculator {
 				break;
 			case TYRES:
 				break;
-			case BURREAUCRATIC:
-				consumption = new BurreaucraticConsumption();
+			case BUREAUCRATIC:
+				consumption = new BureaucraticConsumption();
 				break;
 			case INSURANCE:
 				consumption = new InsuranceConsumption();

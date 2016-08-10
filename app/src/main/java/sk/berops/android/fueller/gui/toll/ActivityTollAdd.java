@@ -23,8 +23,6 @@ public class ActivityTollAdd extends ActivityEntryGenericAdd {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_toll);
-
 		if (tollEntry == null) {
 			tollEntry = new TollEntry();
 			tollEntry.setExpenseType(ExpenseType.TOLL);
@@ -32,6 +30,11 @@ public class ActivityTollAdd extends ActivityEntryGenericAdd {
 
 		super.entry = (Entry) this.tollEntry;
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_toll);
 	}
 	
 	@Override
@@ -47,12 +50,20 @@ public class ActivityTollAdd extends ActivityEntryGenericAdd {
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_toll_currency);
 		spinnerTollType = (Spinner) findViewById(R.id.activity_toll_type);
 
+		listButtons.add(buttonDate);
+
 		listEditTexts.add(editTextMileage);
 		listEditTexts.add(editTextCost);
 		listEditTexts.add(editTextComment);
 
 		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
 		mapSpinners.put(R.array.activity_toll_type, spinnerTollType);
+	}
+
+	@Override
+	protected void initializeGuiObjects() {
+		super.initializeGuiObjects();
+		initializeTags(R.id.activity_toll_tags_recyclerview);
 	}
 	
 	@Override

@@ -54,7 +54,6 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	protected static final int SCHEME = 1;
 	
 	public void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_tyre_change);
 		car = MainActivity.garage.getActiveCar();
 		if (tyreChangeEntry == null) {
 			tyreChangeEntry = new TyreChangeEntry();
@@ -63,6 +62,11 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		
 		super.entry = (Entry) this.tyreChangeEntry;
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_tyre_change);
 	}
 
 	@Override
@@ -77,8 +81,12 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_tyre_change_distance_unit);
 
 		buttonDate = (Button) findViewById(R.id.activity_tyre_change_date_button);
+		buttonTagAdd = (Button) findViewById(R.id.activity_tyre_change_button_tag_add);
 		
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_tyre_change_total_cost_currency);
+
+		listButtons.add(buttonDate);
+		listButtons.add(buttonTagAdd);
 
 		listEditTexts.add(editTextTyresCost);
 		listEditTexts.add(editTextLaborCost);
@@ -93,6 +101,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
+		initializeTags(R.id.activity_tyre_change_tags_recyclerview);
 		PriceCalculateListener priceCalculator = new PriceCalculateListener();
 		editTextTyresCost.addTextChangedListener(priceCalculator);
 		editTextLaborCost.addTextChangedListener(priceCalculator);

@@ -1,4 +1,4 @@
-package sk.berops.android.fueller.gui.burreaucratic;
+package sk.berops.android.fueller.gui.bureaucratic;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,42 +9,46 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import sk.berops.android.fueller.R;
-import sk.berops.android.fueller.dataModel.expense.BurreaucraticEntry;
+import sk.berops.android.fueller.dataModel.expense.BureaucraticEntry;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 
-public class ActivityBurreaucraticAdd extends ActivityEntryGenericAdd {
+public class ActivityBureaucraticAdd extends ActivityEntryGenericAdd {
 	
-	protected BurreaucraticEntry burreaucraticEntry;
+	protected BureaucraticEntry bureaucraticEntry;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_burreaucratic);
-
-		if (burreaucraticEntry == null) {
-			burreaucraticEntry = new BurreaucraticEntry();
-			burreaucraticEntry.setExpenseType(ExpenseType.BURREAUCRATIC);
+		if (bureaucraticEntry == null) {
+			bureaucraticEntry = new BureaucraticEntry();
+			bureaucraticEntry.setExpenseType(ExpenseType.BUREAUCRATIC);
 		}
 
-		super.entry = (Entry) this.burreaucraticEntry;
-		super.editMode = editMode;
+		super.entry = (Entry) this.bureaucraticEntry;
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_bureaucratic);
 	}
 	
 	@Override
 	protected void attachGuiObjects() {
-		textViewDistanceUnit = (TextView) findViewById(R.id.activity_burreaucratic_distance_unit);
+		textViewDistanceUnit = (TextView) findViewById(R.id.activity_bureaucratic_distance_unit);
 		
-		editTextMileage = (EditText) findViewById(R.id.activity_burreaucratic_mileage);
-		editTextCost = (EditText) findViewById(R.id.activity_burreaucratic_cost);
-		editTextComment = (EditText) findViewById(R.id.activity_burreaucratic_comment);
+		editTextMileage = (EditText) findViewById(R.id.activity_bureaucratic_mileage);
+		editTextCost = (EditText) findViewById(R.id.activity_bureaucratic_cost);
+		editTextComment = (EditText) findViewById(R.id.activity_bureaucratic_comment);
 
-		buttonDate = (Button) findViewById(R.id.activity_burreaucratic_date_button);
+		buttonDate = (Button) findViewById(R.id.activity_bureaucratic_date_button);
 
-		spinnerCurrency = (Spinner) findViewById(R.id.activity_burreaucratic_currency);
+		spinnerCurrency = (Spinner) findViewById(R.id.activity_bureaucratic_currency);
+
+		listButtons.add(buttonDate);
 
 		listEditTexts.add(editTextMileage);
 		listEditTexts.add(editTextCost);
@@ -52,26 +56,22 @@ public class ActivityBurreaucraticAdd extends ActivityEntryGenericAdd {
 
 		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
 	}
-	
-	@Override
-	protected void styleGuiObjects() {
-		super.styleGuiObjects();
-	}
-	
+
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
+		initializeTags(R.id.activity_bureaucratic_tags_recyclerview);
 	}
 	
 	@Override
 	protected void updateFields() throws FieldsEmptyException {
 		super.updateFields();
-		// To be updated once more fields are added to BurreaucraticEntry
+		// To be updated once more fields are added to BureaucraticEntry
 	}
 	
 	public void onClick(View view) {
 		switch (view.getId()) {
-		case R.id.activity_burreaucratic_button_commit:
+		case R.id.activity_bureaucratic_button_commit:
 			try {
 				super.saveFieldsAndPersist(view);
 				startActivity(new Intent(this, MainActivity.class));

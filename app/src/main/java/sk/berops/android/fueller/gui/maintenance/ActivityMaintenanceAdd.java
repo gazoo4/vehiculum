@@ -83,8 +83,6 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_maintenance);
-
 		if (maintenanceEntry == null) {
 			maintenanceEntry = new MaintenanceEntry();
 			maintenanceEntry.setExpenseType(ExpenseType.MAINTENANCE);
@@ -93,8 +91,12 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		parts = maintenanceEntry.getParts();
 
 		super.entry = (Entry) this.maintenanceEntry;
-		super.editMode = editMode;
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_maintenance);
 	}
 
 	@Override
@@ -132,6 +134,8 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 			}
 		});
 
+		listButtons.add(buttonDate);
+
 		listEditTexts.add(editTextMileage);
 		listEditTexts.add(editTextLaborCost);
 		listEditTexts.add(editTextCost);
@@ -144,6 +148,7 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
+		initializeTags(R.id.activity_maintenance_tags_recyclerview);
 		spinnerCurrency.setSelection(0);
 
 		CostCalculateListener costCalculator = new CostCalculateListener();

@@ -1,6 +1,5 @@
 package sk.berops.android.fueller.gui.maintenance;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -20,11 +19,12 @@ import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
+import sk.berops.android.fueller.gui.DefaultActivity;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.GuiUtils;
 import sk.berops.android.fueller.gui.common.TyreDrawer;
 
-public class ActivityTyreChangeScheme extends Activity implements TouchCallbackInterface {
+public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCallbackInterface {
 	
 	private Car car;
 	private ArrayList<Tyre> tyreList;
@@ -59,7 +59,6 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_tyre_change_scheme);
 		viewGroup = (ViewGroup) findViewById(R.id.activity_tyre_change_scheme_top_layout);
 		car = MainActivity.garage.getActiveCar();
 		super.onCreate(savedInstanceState);
@@ -75,12 +74,17 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 		}
 		
 		helper = TyreSchemeHelper.getInstance();
-		
-		attachGuiObjects();
+
 		buildDynamicLayout();
 	}
-	
-	private void attachGuiObjects() {
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_tyre_change_scheme);
+	}
+
+	@Override
+	protected void attachGuiObjects() {
 		textViewBrandModelHint = (TextView) findViewById(R.id.activity_tyre_change_scheme_brand_model);
 		textViewDimensionsHint = (TextView) findViewById(R.id.activity_tyre_change_scheme_dimensions);
 		textViewDotYearWearHint = (TextView) findViewById(R.id.activity_tyre_change_scheme_dot_year_wear);
@@ -95,6 +99,9 @@ public class ActivityTyreChangeScheme extends Activity implements TouchCallbackI
 		
 		buttonDelete = (Button) findViewById(R.id.activity_tyre_change_scheme_button_tyre_delete);
 		buttonUninstall = (Button) findViewById(R.id.activity_tyre_change_scheme_button_tyre_uninstall);
+
+		listButtons.add(buttonDelete);
+		listButtons.add(buttonUninstall);
 	}
 	
 	private void buildDynamicLayout() {

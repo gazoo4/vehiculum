@@ -37,7 +37,6 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_car_add);
 		if (car == null) {
 			car = new Car();
 		}
@@ -47,16 +46,21 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 	}
 
 	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_car_add);
+	}
+
+	@Override
 	protected void attachGuiObjects() {
 		buttonCommit = (Button)findViewById(R.id.activity_car_add_button_commit);
 		buttonAddPhoto = (Button)findViewById(R.id.activity_car_add_button_get_photo);
 		if (this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-			System.out.println("TRUE TRUE");
 			buttonAddPhoto.setVisibility(View.VISIBLE);
 		} else {
-			System.out.println("FALSE FALSE");
 			buttonAddPhoto.setVisibility(View.GONE);
 		}
+		//TODO: adding photo feature is hidden for now
+		buttonAddPhoto.setVisibility(View.GONE);
 		editTextBrand = (EditText)findViewById(R.id.activity_car_add_brand);
 		editTextModel = (EditText)findViewById(R.id.activity_car_add_model);
 		editTextLicensePlate = (EditText)findViewById(R.id.activity_car_add_license_plate);
@@ -67,6 +71,9 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 		spinnerDistanceUnit = (Spinner) findViewById(R.id.activity_car_add_distance_unit);
 		spinnerVolumeUnit = (Spinner) findViewById(R.id.activity_car_add_volume_unit);
 
+		listButtons.add(buttonAddPhoto);
+		listButtons.add(buttonCommit);
+
 		listEditTexts.add(editTextBrand);
 		listEditTexts.add(editTextModel);
 		listEditTexts.add(editTextLicensePlate);
@@ -76,10 +83,6 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 
 		mapSpinners.put(R.array.activity_car_add_distance_units, spinnerDistanceUnit);
 		mapSpinners.put(R.array.activity_car_add_volume_units, spinnerVolumeUnit);
-	}
-	
-	@Override
-	protected void initializeGuiObjects() {
 	}
 
 	public void saveEntry(View view) {

@@ -33,8 +33,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:gravity="center_vertical"
-                android:drawableLeft="@drawable/not_available"
-                android:drawableStart="@drawable/not_available"
+                android:drawableLeft="@drawable/calendar"
+                android:drawableStart="@drawable/calendar"
+                android:drawablePadding="5dp"
                 android:onClick="onClickShowDatePickerDialog"
                 style="@style/button_text"/>
 
@@ -45,8 +46,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:gravity="center_vertical"
-                android:drawableLeft="@drawable/not_available"
-                android:drawableStart="@drawable/not_available"
+                android:drawableLeft="@drawable/add_tag"
+                android:drawableStart="@drawable/add_tag"
                 android:onClick="onClickTagAdd"
                 style="@style/button_text"/>
 

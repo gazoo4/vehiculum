@@ -21,13 +21,17 @@ public class ActivityPartAdd extends ActivityGenericPartAdd {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_part_add);
 		if (part == null) {
 			part = new ReplacementPart();
 		}
 
 		super.genericPart = (GenericPart) this.part;
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_part_add);
 	}
 
 	@Override

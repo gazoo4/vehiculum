@@ -56,8 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button"
-                android:drawableLeft="@drawable/not_available"
-                android:drawableStart="@drawable/not_available"
+                android:drawableLeft="@drawable/maintenance"
+                android:drawableStart="@drawable/maintenance"
                 android:paddingLeft="15dp"
                 android:paddingStart="15dp"
                 android:onClick="onClick"
@@ -74,8 +74,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button"
-                android:drawableLeft="@drawable/not_available"
-                android:drawableStart="@drawable/not_available"
+                android:drawableLeft="@drawable/service"
+                android:drawableStart="@drawable/service"
                 android:paddingLeft="15dp"
                 android:paddingStart="15dp"
                 android:onClick="onClick"
@@ -92,8 +92,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button"
-                android:drawableLeft="@drawable/not_available"
-                android:drawableStart="@drawable/not_available"
+                android:drawableLeft="@drawable/toll"
+                android:drawableStart="@drawable/toll"
                 android:paddingLeft="15dp"
                 android:paddingStart="15dp"
                 android:onClick="onClick"
@@ -110,8 +110,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button"
-                android:drawableLeft="@drawable/not_available"
-                android:drawableStart="@drawable/not_available"
+                android:drawableLeft="@drawable/insurance"
+                android:drawableStart="@drawable/insurance"
                 android:paddingLeft="15dp"
                 android:paddingStart="15dp"
                 android:onClick="onClick"
@@ -123,17 +123,17 @@
                 android:background="@drawable/white_gradient_line"/>
 
             <Button
-                android:id="@+id/activity_entry_add_button_burreaucratic"
+                android:id="@+id/activity_entry_add_button_bureaucratic"
                 style="@style/button_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button"
-                android:drawableLeft="@drawable/not_available"
-                android:drawableStart="@drawable/not_available"
+                android:drawableLeft="@drawable/bureaucracy"
+                android:drawableStart="@drawable/bureaucracy"
                 android:paddingLeft="15dp"
                 android:paddingStart="15dp"
                 android:onClick="onClick"
-                android:text="@string/activity_entry_add_button_burreaucratic" />
+                android:text="@string/activity_entry_add_button_bureaucratic" />
         </LinearLayout>
     </ScrollView>
 
