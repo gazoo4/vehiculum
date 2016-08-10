@@ -1,7 +1,6 @@
 package sk.berops.android.fueller.gui.garage;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import sk.berops.android.fueller.dataModel.UnitConstants.VolumeUnit;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityRecordAdd;
-import sk.berops.android.fueller.gui.common.pictures.CameraHandler;
 
 public class ActivityCarAdd extends ActivityRecordAdd {
 	
@@ -42,7 +40,6 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 		}
 		super.record = (Record) this.car;
 		super.onCreate(savedInstanceState);
-		attachGuiObjects();
 	}
 
 	@Override
@@ -53,14 +50,7 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 	@Override
 	protected void attachGuiObjects() {
 		buttonCommit = (Button)findViewById(R.id.activity_car_add_button_commit);
-		buttonAddPhoto = (Button)findViewById(R.id.activity_car_add_button_get_photo);
-		if (this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-			buttonAddPhoto.setVisibility(View.VISIBLE);
-		} else {
-			buttonAddPhoto.setVisibility(View.GONE);
-		}
-		//TODO: adding photo feature is hidden for now
-		buttonAddPhoto.setVisibility(View.GONE);
+
 		editTextBrand = (EditText)findViewById(R.id.activity_car_add_brand);
 		editTextModel = (EditText)findViewById(R.id.activity_car_add_model);
 		editTextLicensePlate = (EditText)findViewById(R.id.activity_car_add_license_plate);
@@ -122,9 +112,6 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 		switch(view.getId()) {
 		case R.id.activity_car_add_button_commit:
 			startActivity(new Intent(this, MainActivity.class));
-			break;
-		case R.id.activity_car_add_button_get_photo:
-			startActivity(new Intent(this, CameraHandler.class));
 			break;
 		}
 	}

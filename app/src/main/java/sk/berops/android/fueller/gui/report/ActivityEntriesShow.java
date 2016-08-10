@@ -35,10 +35,10 @@ public class ActivityEntriesShow extends DefaultActivity implements FragmentEntr
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		// need to create a copy of the entries list on which we will do the filtering of the viewing items
 		// we also do the intial population of this list
 		entries = new LinkedList<Entry>(MainActivity.garage.getActiveCar().getHistory().getEntries());
+		super.onCreate(savedInstanceState);
 	}
 
 	@Override

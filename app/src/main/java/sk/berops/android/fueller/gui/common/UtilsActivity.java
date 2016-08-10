@@ -16,7 +16,8 @@ public class UtilsActivity {
 
 	public static void styleButton(Button button) {
 		if (button == null) return;
-
+		if (button.getCompoundDrawables()[0] == null) return;
+		
 		button.getCompoundDrawables()[0].setTint(DRAWABLE_COLOR);
 	}
 
