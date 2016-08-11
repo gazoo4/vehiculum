@@ -141,7 +141,7 @@ public class ActivityEntriesShow extends DefaultActivity implements FragmentEntr
 		System.out.println("Removing entry with ID " + entry.getDynamicId());  
 		entries.remove(entry);
 		MainActivity.garage.getActiveCar().getHistory().removeEntry(entry);
-		MainActivity.dataHandler.persistGarage(MainActivity.garage);
+		MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
 		adapter.notifyDataSetChanged();
 	}
 	

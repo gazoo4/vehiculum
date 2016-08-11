@@ -20,6 +20,7 @@ android {
         applicationId "sk.berops.android.fueller"
         minSdkVersion 21
         targetSdkVersion 22
+        generatedDensities = ['hdpi','xhdpi','xxhdpi','xxxhdpi']
     }
     buildTypes {
         release {

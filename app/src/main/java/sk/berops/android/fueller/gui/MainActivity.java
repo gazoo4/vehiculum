@@ -51,19 +51,38 @@ public class MainActivity extends DefaultActivity {
 	private TableLayout statsTable;
 	private TextView textViewHeader;
 
+
+	public static void saveGarage(Activity activity) {
+		getDataHandler().persistGarage(activity);
+		Toast.makeText(activity.getApplication(), activity.getResources().getString(R.string.activity_main_garage_saved_toast), Toast.LENGTH_LONG).show();
+	}
+
+
+	private static DataHandler getDataHandler() {
+		if (dataHandler == null) {
+			return new XMLHandler();
+		}
+
+		return dataHandler;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		dataHandler = new XMLHandler();
 
+		dataHandler = getDataHandler();
+
 		if (garage == null) {
 			try {
-				garage = dataHandler.loadGarage();
+				garage = dataHandler.loadGarage(this);
 				Log.d("DEBUG", garage.getActiveCar().getNickname());
 				Toast.makeText(getApplicationContext(), "Loaded car: "+ garage.getActiveCar().getNickname(), Toast.LENGTH_LONG).show();
 			} catch (FileNotFoundException e) {
-				Log.d("DEBUG", "Old garage.xml file not found, is this the first run? Building new garage");
+				Log.d("DEBUG", "Could not load garage.xml");
+				Log.d("DEBUG", e.getMessage());
+				e.printStackTrace();
 				throwAlertCreateGarage();
 			} catch (NullPointerException e) {
 				if (garage == null) {
@@ -102,7 +121,7 @@ public class MainActivity extends DefaultActivity {
 		listButtons.add(buttonViewStats);
 		listButtons.add(buttonEnterGarage);
 	}
-	
+
 	public void throwAlertCreateGarage() {
 		AlertDialog.Builder alertDialog= new AlertDialog.Builder(this);
 		alertDialog.setMessage(getResources().getString(R.string.activity_main_create_garage_alert));
@@ -119,6 +138,10 @@ public class MainActivity extends DefaultActivity {
 		alertDialog.show();
 	}
 	
+	public void persistGarage() {
+		dataHandler.persistGarage(this);
+	}
+
 	private void refreshStats() {
 		if ((garage != null) && (garage.getActiveCar() != null)) {
 			Calculator.calculateAll(garage.getActiveCar().getHistory());
@@ -320,7 +343,7 @@ public class MainActivity extends DefaultActivity {
 		unitView.setTextAppearance(this, R.style.plain_text);
 		
 		valueView.setTextColor(valueColor);
-		valueView.setShadowLayer(15, 0, 0, valueColor);
+		valueView.setShadowLayer(12, 0, 0, valueColor);
 		
 		row.addView(descriptionView);
 		

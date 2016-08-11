@@ -278,7 +278,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		} else {
 			GuiUtils.removeTyreFromContainer(tyre, graphics.getTyreGUIObjects());
 		}
-		tyreEntry.getDeletedTyreIDs().add(tyre.getId());
+		tyreEntry.getDeletedTyreIDs().add(tyre.getUuid());
 		deselectTyre();
 	}
 	

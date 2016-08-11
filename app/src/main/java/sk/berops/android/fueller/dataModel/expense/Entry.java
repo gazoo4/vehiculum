@@ -6,6 +6,7 @@ import org.simpleframework.xml.ElementList;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.calculation.Consumption;
@@ -24,8 +25,8 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
     /**
      * Structure to hold the tags assigned to this entry.
      */
-    @ElementList(name = "tagIDs", required = false)
-    private ArrayList<Long> tagIds;
+    @ElementList(name = "tagUUIDs", required = false)
+    private ArrayList<UUID> tagUuids;
 
     @Element(name = "mileage")
     private double mileage;
@@ -171,7 +172,9 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
      * @param tag to be added
      */
     public void addTag(Tag tag) {
-        tagIds.add(tag.getId());
+        //tagIds.add(tag.getId());
+	    tagUuids.add(tag.getUuid());
+
     }
 
     /**
@@ -179,53 +182,52 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
      * @param tag to be removed
      */
     public void removeTag(Tag tag) {
-        tagIds.remove(tag.getId());
+	    tagUuids.remove(tag.getUuid());
     }
 
     /**
      * Clear the list of tags IDs attached to this Entry
      */
     public void clearTags() {
-        tagIds = new ArrayList<Long>();
+	    tagUuids = new ArrayList<>();
     }
 
     /**
      * Get the list of tags IDs for the relevant tags attached to this Entry
      * @return list of tags
      */
-    public ArrayList<Long> getTagIds() {
-        return tagIds;
-    }
+	public ArrayList<UUID> getTagUuids() {
+		return tagUuids;
+	}
 
     /**
      * Set the list of tags relevant to this Entry
-     * @param tagIds list of tags
+     * @param tagUuids list of tags
      */
-    public void setTagIds(ArrayList<Long> tagIds) {
-        this.tagIds = tagIds;
-    }
+	public void setTagUuids(ArrayList<UUID> tagUuids) {
+		this.tagUuids = tagUuids;
+	}
 
     /**
      * Get the tags associated with this entry based on the known tag IDs
      * @return ArrayList of the tags
      */
     public ArrayList<Tag> getTags() {
-        ArrayList<Tag> tags = new ArrayList<>();
-        for (Long id : getTagIds()) {
-            tags.add(Tag.getTag(id));
-        }
-        return tags;
+	    ArrayList<Tag> tags = new ArrayList<>();
+	    for (UUID id : getTagUuids()) {
+		    tags.add(Tag.getTag(id));
+	    }
+	    return tags;
     }
-
     /**
      * Set the tag associated to this entry based on the provided list of tags
      * @param tags
      */
     public void setTags(ArrayList<Tag> tags) {
-        ArrayList<Long> tagIds = new ArrayList<>();
-        for (Tag tag : tags) {
-            tagIds.add(tag.getId());
-        }
-        this.tagIds = tagIds;
+	    ArrayList<UUID> tagUuids = new ArrayList<>();
+	    for (Tag tag : tags) {
+		    tagUuids.add(tag.getUuid());
+	    }
+	    this.tagUuids = tagUuids;
     }
 }

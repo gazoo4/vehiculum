@@ -87,8 +87,6 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		TextView consumption = (TextView) rowView.findViewById(R.id.list_stats_fuelling_consumption);
 		TextView consumptionUnit = (TextView) rowView.findViewById(R.id.list_stats_fuelling_consumption_unit);
 
-		consumption.setShadowLayer(15, 0, 0, Color.WHITE);
-
 		dynamicId.setText(Integer.toString(entry.getDynamicId()));
 
 		mileage.setText(TextFormatter.format(entry.getMileage(), "#######.#") + " "
@@ -113,12 +111,15 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		FuelConsumption c = entry.getFuelConsumption();
 		if (c.getAverageSinceLast() == 0.0) {
 			consumption.setText("--.--");
+			consumption.setShadowLayer(12, 0, 0, Color.WHITE);
 		} else {
 			consumption.setText(TextFormatter.format(c.getAverageSinceLast(), "##0.00"));
 			double avgConsumption = c.getAveragePerFuelType().get(entry.getFuelType());
 			double lastConsumption = c.getAverageSinceLast();
 			double relativeChange = (lastConsumption / avgConsumption - 0.8) / 0.4;
-			consumption.setTextColor(GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange));
+			int consumptionTextColor = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange);
+			consumption.setTextColor(consumptionTextColor);
+			consumption.setShadowLayer(12, 0, 0, consumptionTextColor);
 		}
 		
 		fuel.setTextColor(entry.getFuelType().getColor());

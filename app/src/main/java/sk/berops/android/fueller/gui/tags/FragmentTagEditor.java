@@ -65,7 +65,7 @@ public class FragmentTagEditor extends DialogFragment {
 
 				if (name.equals("")) {
 					// Throw alert that the tag name cannot be empty and exit from the tag saving process
-					// TODO: add name text listener. If empty, hide the button "Save" and drop this AlertDialog.
+					// TODO: add name text listener. If empty, hide the button "Save" and this AlertDialog can be dropped
 					new AlertDialog.Builder(getActivity())
 							.setTitle(r.getString(R.string.fragment_generic_sorry))
 							.setMessage(r.getString(R.string.fragment_tag_editor_name_required))

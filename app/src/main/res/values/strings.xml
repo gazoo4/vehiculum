@@ -46,6 +46,8 @@
     <string name="activity_generic_button_entry_save"				>Save</string>
     <string name="activity_generic_comment_hint"					>Additional comment</string>
     <string name="activity_generic_cost_hint"						>Cost of the bill</string>
+    <string name="activity_generic_linear_tag_deletion_alert_1"		>Are you sure you want to remove tag</string>
+    <string name="activity_generic_linear_tag_deletion_alert_2"		>from this entry?</string>
     <string name="activity_generic_mileage_hint"					>Mileage</string>
     <string name="activity_generic_ok_hint"                         >OK</string>
     <string name="activity_generic_part_add_condition_hint"			>Condition</string>
@@ -71,6 +73,7 @@
     <string name="activity_main_create_garage_alert"				>You didn\'t setup your garage yet. Prepare one now.</string>
     <string name="activity_main_consumption_combined"				>Combined</string>
     <string name="activity_main_garage_empty"						>Your garage is empty</string>
+    <string name="activity_main_garage_saved_toast"					>The changes have been saved</string>
     <string name="activity_main_header"								>Manage your enthusiasm!</string>
     <string name="activity_main_relative_costs"						>Relative costs</string>
     <string name="activity_main_relative_costs_fuel"				>Relative costs for </string>

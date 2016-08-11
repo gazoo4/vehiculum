@@ -6,6 +6,7 @@ import org.simpleframework.xml.ElementList;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.gui.MainActivity;
@@ -22,7 +23,7 @@ public class Axle {
 	 * Null means there's an empty slot for the tyre.
 	 */
 	@ElementList(inline=true, required=false)
-	private ArrayList<Long> tyreIDs;
+	private ArrayList<UUID> tyreIDs;
 
 	private Car car;
 	
@@ -39,7 +40,7 @@ public class Axle {
 	public void initAfterLoad(Car car) {
 		Tyre tyre;
 		this.car = car;
-		for (Long id : tyreIDs) {
+		for (UUID id : tyreIDs) {
 			tyre = MainActivity.garage.getTyreById(id);
 			tyre.initAfterLoad(car);
 		}
@@ -90,7 +91,7 @@ public class Axle {
 	}
 	
 	private void createTyres() {
-		tyreIDs = new ArrayList<Long>();
+		tyreIDs = new ArrayList<>();
 		switch (getAxleType()) {
 		case SINGLE:
 			tyreIDs.add(null);
@@ -125,11 +126,11 @@ public class Axle {
 		this.drivable = drivable;
 	}
 
-	public ArrayList<Long> getTyreIDs() {
+	public ArrayList<UUID> getTyreIDs() {
 		return tyreIDs;
 	}
 
-	public void setTyreIDs(ArrayList<Long> tyreIDs) {
+	public void setTyreIDs(ArrayList<UUID> tyreIDs) {
 		this.tyreIDs = tyreIDs;
 	}
 	
@@ -138,6 +139,6 @@ public class Axle {
 	}
 	
 	public void installTyre(Tyre tyre, int position) {
-		getTyreIDs().add(position, tyre.getId());
+		getTyreIDs().add(position, tyre.getUuid());
 	}
 }

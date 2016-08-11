@@ -1,9 +1,11 @@
 package sk.berops.android.fueller.dataModel.tags;
 
+import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.UUID;
 
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.gui.MainActivity;
@@ -16,24 +18,26 @@ import sk.berops.android.fueller.gui.MainActivity;
 public class Tag extends Record implements Comparable<Tag> {
 	/**
 	 * Link to the parent tag in the tag tree structure.
-	 * No need to persist it, it's dynamically created.
+	 * No need to persist it, it's dynamically created through initAfterLoad().
 	 */
 	private Tag parent;
 
 	/**
 	 * Links to the child tags in the tag tree structure
 	 */
-	@ElementList(name = "childTags", required = false)
+	@ElementList(inline = true, required = false)
 	private ArrayList<Tag> children;
 
 	/**
 	 * Name of the tag
 	 */
+	@Element(name = "name", required = true)
 	private String name;
 
 	/**
 	 * Customized color of the tag
 	 */
+	@Element(name = "color", required = false)
 	private int color;
 
 	/**
@@ -65,7 +69,7 @@ public class Tag extends Record implements Comparable<Tag> {
 	 * @param id of the tag
 	 * @return tag
 	 */
-	public static Tag getTag(Long id) {
+	public static Tag getTag(UUID id) {
 		Tag root = MainActivity.garage.getRootTag();
 		return root.searchTreeById(id);
 	}
@@ -75,8 +79,8 @@ public class Tag extends Record implements Comparable<Tag> {
 	 * @param id to base the tag search on.
 	 * @return Tag which has the provided ID. If not found, return null.
 	 */
-	private Tag searchTreeById(Long id) {
-		if (getId() == id) {
+	private Tag searchTreeById(UUID id) {
+		if (id.equals(getUuid())) {
 			return this;
 		} else {
 			Tag result;

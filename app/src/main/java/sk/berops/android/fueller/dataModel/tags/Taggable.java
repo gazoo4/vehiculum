@@ -1,6 +1,7 @@
 package sk.berops.android.fueller.dataModel.tags;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by Bernard Halas on 11/29/15.
@@ -12,8 +13,8 @@ public interface Taggable {
 	void addTag(Tag tag);
 	void removeTag(Tag tag);
 	void clearTags();
-	ArrayList<Long> getTagIds();
-	void setTagIds(ArrayList<Long> tagIds);
+	ArrayList<UUID> getTagUuids();
+	void setTagUuids(ArrayList<UUID> tagUuids);
 	ArrayList<Tag> getTags();
 	void setTags(ArrayList<Tag> tags);
 }

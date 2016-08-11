@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.UUID;
 
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
@@ -43,6 +44,7 @@ public class Garage {
 		Tag root = getRootTag();
 		if (root == null) {
 			root = new Tag();
+			root.setName("rootTag");
 			root.setDepth(0);
 			root.setParent(null);
 			setRootTag(root);
@@ -78,9 +80,9 @@ public class Garage {
 	 * @param id identifier
 	 * @return Tyre instance of the matching tyre. If tyre not found, returns null.
 	 */
-	public Tyre getTyreById(long id) {
+	public Tyre getTyreById(UUID id) {
 		for (Tyre t : getAllTyres()) {
-			if (id == t.getId()) {
+			if (id == t.getUuid()) {
 				return t;
 			}
 		}
@@ -109,7 +111,7 @@ public class Garage {
 			if (e.getEventDate().compareTo(date) < 0) {
 
 				// Add bought tyres to the list of available tyres
-				for (Long id : e.getBoughtTyresIDs()) {
+				for (UUID id : e.getBoughtTyresIDs()) {
 					t = getTyreById(id);
 					if (t != null) {
 						inventory.add(t);
@@ -117,7 +119,7 @@ public class Garage {
 				}
 
 				// Remove trashed tyres from the list of available tyres
-				for (Long id : e.getDeletedTyreIDs()) {
+				for (UUID id : e.getDeletedTyreIDs()) {
 					t = getTyreById(id);
 					if (t != null) {
 						inventory.remove(t);
@@ -132,7 +134,7 @@ public class Garage {
 		// Need to remove the tyres from this list, which are installed on the car now
 		if (last != null) {
 			for (Axle a : last.getTyreScheme().getAxles()) {
-				for (Long id : a.getTyreIDs()) {
+				for (UUID id : a.getTyreIDs()) {
 					if (id != null) {
 						t = getTyreById(id);
 						inventory.remove(t);
@@ -185,13 +187,10 @@ public class Garage {
 		this.activeCarId = id;
 	}
 
-	private Integer getLatestTyreID() {
-		return getAllTyres().size();
-	}
-
 	public void initAfterLoad() {
 		int dynamicId = 0;
 
+		// Init tyres
 		for (Tyre t : getAllTyres()) {
 			// We want to make sure that all tyres are initialized
 			// If a tyre is installed on a car, it will get re-initialized with
@@ -199,17 +198,21 @@ public class Garage {
 			t.initAfterLoad(null);
 		}
 
+		// Init cars
 		for (Car c : cars) {
 			c.initAfterLoad();
 			for (Entry e : c.getHistory().getEntries()) {
 				e.setDynamicId(dynamicId++);
 			}
 		}
+
+		//Init tag tree
+		this.rootTag.initAfterLoad();
 	}
 
-	public ArrayList<Tyre> getTyresByIDs(Collection<Long> c) {
-		ArrayList<Tyre> tyres = new ArrayList<Tyre>();
-		for (Long l : c) {
+	public ArrayList<Tyre> getTyresByIDs(Collection<UUID> c) {
+		ArrayList<Tyre> tyres = new ArrayList<>();
+		for (UUID l : c) {
 			if (l == null) {
 				tyres.add(null);
 				continue;

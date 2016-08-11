@@ -84,14 +84,14 @@ public class ActivityGarageManagement extends DefaultActivity implements Fragmen
 		Car car = cars.get(getSelectedCarPosition());
 		System.out.println("Removing car ID " + getSelectedCarPosition());
 		cars.remove(car);
-		MainActivity.dataHandler.persistGarage(MainActivity.garage);
+		MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
 		adapter.notifyDataSetChanged();
 	}
 	
 	@Override
 	public void OnDialogActivateClick(DialogFragment dialog) {
 		MainActivity.garage.setActiveCarId(getSelectedCarPosition());
-		MainActivity.dataHandler.persistGarage();
+		MainActivity.dataHandler.persistGarage(this);
 		startActivity(new Intent(this, MainActivity.class));
 	}
 	

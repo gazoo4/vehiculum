@@ -4,6 +4,7 @@ import org.simpleframework.xml.Element;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 public abstract class Record implements Serializable, Identifiable {
 	@Element(name="comment", required=false)
@@ -12,11 +13,11 @@ public abstract class Record implements Serializable, Identifiable {
 	private Date creationDate; 
 	@Element(name="modifiedDate", required=false)
 	private Date modifiedDate;
-	@Element(name="id", required=false)
-	private long id;
+	@Element(name="uuid", required=false)
+	private UUID uuid;
 
-	private long generatedId() {
-		return (new java.util.Random()).nextLong();
+	public Record() {
+		setCreationDate(new Date());
 	}
 
 	public String getComment() {
@@ -37,10 +38,11 @@ public abstract class Record implements Serializable, Identifiable {
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
-	public long getId() {
-		if (id == 0) {
-			id = generatedId();
+
+	public UUID getUuid() {
+		if (uuid == null) {
+			uuid = UUID.randomUUID();
 		}
-		return id;
+		return uuid;
 	}
 }
