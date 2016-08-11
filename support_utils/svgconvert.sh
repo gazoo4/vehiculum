@@ -6,10 +6,16 @@
 #
 # Environment settings
 #
-src_dir="d:\\Workspace\\bhs_fueller\\app\\src\\main\\assets\\svg"
+src_dir_win="d:\\Workspace\\bhs_fueller\\app\\src\\main\\assets\\svg"
 src_dir_moba="/drives/d/Workspace/bhs_fueller/app/src/main/assets/svg"
-dst_root="d:\\Workspace\\bhs_fueller\\app\\src\\main\\res"
-inkscape_bin='/drives/c/Program\ Files\ \(x86\)/Inkscape/inkscape.exe'
+src_dir_linux="/mnt/public/workspace/bhs_fueller/app/src/main/assets/svg"
+dst_dir_win="d:\\Workspace\\bhs_fueller\\app\\src\\main\\res"
+dst_dir_linux="/mnt/public/workspace/bhs_fueller/app/src/main/res"
+inkscape_bin_win='/drives/c/Program\ Files\ \(x86\)/Inkscape/inkscape.exe'
+inkscape_bin_linux='/usr/bin/inkscape'
+
+# Detect system
+system=`uname -a | awk '{print $1}'`
 
 #
 # This method converts the svg to png using the predefined paths and using the correct density
@@ -27,18 +33,37 @@ function convert {
 
 	echo "  for size ${resolution}"
 
-	dst_dir="${dst_root}\\drawable-${resolution}"
         out_file=`echo ${in_file} | sed 's/\.svg/\.png/g'`
 	inkscape_params="--without-gui \
-	                 --file=\"${src_dir}\\${in_file}\" \
-			 --export-png=\"${dst_dir}\\${out_file}\" \
+	                 --file=\"${src_dir}${divider}${in_file}\" \
+			 --export-png=\"${dst_dir}${divider}drawable-${resolution}${divider}${out_file}\" \
 			 --export-dpi=\"${dpi}\" \
 			 --export-area-drawing"
 	inkscape_cmd="${inkscape_bin} ${inkscape_params} >/dev/null"
         eval ${inkscape_cmd}
 }
 
-for in_file in `ls ${src_dir_moba}`;
+# Set paths based on the system
+case "$system" in
+        "Linux")
+		echo "here"
+		divider="/"
+		svg_dir="${src_dir_linux}"
+		src_dir="${src_dir_linux}"
+                dst_dir="${dst_dir_linux}"
+		inkscape_bin=${inkscape_bin_linux}
+                ;;
+        "CYGWIN")
+		echo "or here"
+		divider="\\"
+		svg_dir="${src_dir_moba}"
+		src_dir="${src_dir_win}"
+		dst_dir="${dst_dir_win}"
+		inkscape_bin=${inkscape_bin_win}
+                ;;
+esac
+
+for in_file in `ls ${svg_dir}`;
 do
 	echo "converting ${in_file}..."
 	convert ${in_file} "ldpi"    "120" & \
