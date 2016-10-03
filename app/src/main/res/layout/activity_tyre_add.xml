@@ -36,60 +36,67 @@
             android:layout_below="@id/activity_tyre_add_brand"
             android:hint="@string/activity_tyre_add_model_hint"
             android:inputType="textCapWords"/>
+
+	   <LinearLayout
+		   android:id="@+id/activity_tyre_add_dimensions"
+		   android:layout_width="match_parent"
+		   android:layout_height="wrap_content"
+		   android:layout_below="@id/activity_tyre_add_model"
+		   android:orientation="horizontal">
         
-        <EditText 
-            android:id="@+id/activity_tyre_add_width"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_add_model"
-            android:hint="@string/activity_tyre_add_width_hint"
-            android:inputType="number"/>
-        
-        <TextView
-	        android:id="@+id/activity_tyre_add_dimension_slash1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@id/activity_tyre_add_model"
-	        android:layout_toRightOf="@id/activity_tyre_add_width"
-	        android:textIsSelectable="false" 
-	        android:text="/" />
-        
-        <EditText 
-            android:id="@+id/activity_tyre_add_height"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_add_model"
-            android:layout_toRightOf="@id/activity_tyre_add_dimension_slash1"
-            android:hint="@string/activity_tyre_add_height_hint"
-            android:inputType="number"/>
-        
-        <TextView
-	        android:id="@+id/activity_tyre_add_dimension_slash2"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@id/activity_tyre_add_model"
-	        android:layout_toRightOf="@id/activity_tyre_add_height"
-	        android:textIsSelectable="false"
-	        android:text="/R" />
-        
-        <EditText 
-            android:id="@+id/activity_tyre_add_diameter"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_add_model"
-            android:layout_toRightOf="@id/activity_tyre_add_width"
-            android:hint="@string/activity_tyre_add_diameter_hint"
-            android:inputType="number"/>
-        
+			<EditText
+				android:id="@+id/activity_tyre_add_width"
+				style="@style/EditText"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="0.3"
+				android:hint="@string/activity_tyre_add_width_hint"
+				android:inputType="number"/>
+
+			<TextView
+				android:id="@+id/activity_tyre_add_dimension_slash1"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="0.05"
+				android:textIsSelectable="false"
+				android:text="@string/activity_tyre_add_dimension_separator_1"
+				style="@style/plain_text" />
+
+			<EditText
+				android:id="@+id/activity_tyre_add_height"
+				style="@style/EditText"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="0.3"
+				android:hint="@string/activity_tyre_add_height_hint"
+				android:inputType="number"/>
+
+			<TextView
+				android:id="@+id/activity_tyre_add_dimension_slash2"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="0.05"
+				android:textIsSelectable="false"
+				android:text="@string/activity_tyre_add_dimension_separator_2"
+				style="@style/plain_text" />
+
+			<EditText
+				android:id="@+id/activity_tyre_add_diameter"
+				style="@style/EditText"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="0.3"
+				android:hint="@string/activity_tyre_add_diameter_hint"
+				android:inputType="number"/>
+
+	   </LinearLayout>
+
         <EditText 
             android:id="@+id/activity_tyre_add_weight_index"
             style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_add_diameter"
+            android:layout_below="@id/activity_tyre_add_dimensions"
             android:hint="@string/activity_tyre_add_weight_index_hint"
             android:inputType="number"/>
         
