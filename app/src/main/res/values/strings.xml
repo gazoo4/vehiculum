@@ -45,7 +45,7 @@
     <string name="activity_generic_button_date_change"				>Change date</string>
     <string name="activity_generic_button_entry_save"				>Save</string>
     <string name="activity_generic_comment_hint"					>Additional comment</string>
-    <string name="activity_generic_cost_hint"						>Cost of the bill</string>
+    <string name="activity_generic_cost_hint"						>Total cost</string>
     <string name="activity_generic_linear_tag_deletion_alert_1"		>Are you sure you want to remove tag</string>
     <string name="activity_generic_linear_tag_deletion_alert_2"		>from this entry?</string>
     <string name="activity_generic_mileage_hint"					>Mileage</string>
@@ -118,6 +118,8 @@
     <string name="activity_tyre_add_brand_hint"						>Brand</string>
     <string name="activity_tyre_add_button_entry_save"				>Save the record</string>
     <string name="activity_tyre_add_diameter_hint"					>Diameter</string>
+    <string name="activity_tyre_add_dimension_separator_1"          > / </string>
+    <string name="activity_tyre_add_dimension_separator_2"          > / R </string>
     <string name="activity_tyre_add_dot_hint"						>DOT</string>
     <string name="activity_tyre_add_header"							>New tyre</string>
     <string name="activity_tyre_add_height_hint"					>Height</string>
@@ -142,7 +144,7 @@
     <string name="activity_tyre_change_scheme_mileage_text"			>Mileage: </string>
     <string name="activity_tyre_change_scheme_pattern_text"			>Tread pattern: </string>
     <string name="activity_tyre_change_total_cost_hint"				>Total cost</string>
-    <string name="activity_tyre_change_tyres_cost_hint"				>Cost of tyres (if bought now)</string>
+    <string name="activity_tyre_change_tyres_cost_hint"				>Tyres price</string>
 
     <string name="fragment_entry_edit_delete_activate_button"		>Activate</string>
     <string name="fragment_entry_edit_delete_activate_toast"		>Activating entry</string>
