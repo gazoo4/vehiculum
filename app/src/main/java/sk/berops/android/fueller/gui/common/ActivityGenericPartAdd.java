@@ -26,7 +26,7 @@ public abstract class ActivityGenericPartAdd extends ActivityExpenseAdd {
 	}
 
 	@Override
-	protected void updateFields() throws FieldsEmptyException{
+	protected void updateFields() throws FieldsEmptyException {
 		super.updateFields();
 		updateBrand();
 		updatePartsId();
@@ -35,17 +35,31 @@ public abstract class ActivityGenericPartAdd extends ActivityExpenseAdd {
 	}
 	
 	protected void updateBrand() {
-		genericPart.setBrand(editTextBrand.getText().toString());
+		if (editTextBrand.getText() != null) {
+			genericPart.setBrand(editTextBrand.getText().toString());
+		}
 	}
 	
 	protected void updatePartsId() {
-		genericPart.setCarmakerPartID(editTextCarmakerPartId.getText().toString());
-		genericPart.setProducerPartID(editTextProducerPartId.getText().toString());
+		if (editTextCarmakerPartId != null
+				&& editTextCarmakerPartId.getText() != null) {
+			genericPart.setCarmakerPartID(editTextCarmakerPartId.getText().toString());
+		}
+
+		if (editTextProducerPartId != null
+				&& editTextProducerPartId.getText() != null) {
+			genericPart.setProducerPartID(editTextProducerPartId.getText().toString());
+		}
 	}
 	
 	protected void updateQuantity() throws FieldsEmptyException {
 		try {
-			genericPart.setQuantity(GuiUtils.extractInteger(editTextQuantity));
+			if (editTextQuantity.getText() == null) {
+				// If user doesn't enter a quantifier, we assume he means 1 piece
+				genericPart.setQuantity(1);
+			} else {
+				genericPart.setQuantity(GuiUtils.extractInteger(editTextQuantity));
+			}
 		} catch (NumberFormatException ex) {
 			throwAlertFieldsEmpty(R.string.activity_generic_part_add_quantity_hint);
 		}
