@@ -21,10 +21,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="sk.berops.android.fueller.gui.burreaucratic.ActivityBurreaucraticAdd"
+            android:name=".gui.bureaucratic.ActivityBureaucraticAdd"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.burreaucratic.ActivityBurreaucraticEdit"
+            android:name=".gui.bureaucratic.ActivityBureaucraticEdit"
             android:label="@string/app_name"/>
         <activity
             android:name="sk.berops.android.fueller.gui.common.pictures.CameraHandler"
@@ -107,7 +107,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="21"
         android:targetSdkVersion="22" />
     
 </manifest>

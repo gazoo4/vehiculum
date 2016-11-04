@@ -4,7 +4,7 @@
 
     <string name="action_settings"									>Settings</string>
 
-    <string name="activity_burreaucratic_header"					>Burreaucracy expense</string>
+    <string name="activity_bureaucratic_header"				    	>Bureaucracy expense</string>
 
     <string name="activity_car_add_brand_hint"						>Brand</string>
     <string name="activity_car_add_button_add"						>Add car</string>
@@ -22,7 +22,7 @@
 
     <string name="activity_entries_list_type_hint"					>Filter: </string>
 
-    <string name="activity_entry_add_button_burreaucratic"			>Burreaucracy</string>
+    <string name="activity_entry_add_button_bureaucratic"			>Bureaucracy</string>
     <string name="activity_entry_add_button_insurance"				>Insurance payment</string>
     <string name="activity_entry_add_button_maintenance"			>Maintenance</string>
     <string name="activity_entry_add_button_refuel"					>Refuelling</string>
@@ -202,7 +202,7 @@
         <item>Tyres</item>
         <item>Toll</item>
         <item>Insurance</item>
-        <item>Burreaucratic</item>
+        <item>Bureaucratic</item>
         <item>Other</item>
     </string-array>
     

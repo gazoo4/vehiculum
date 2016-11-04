@@ -15,7 +15,7 @@ import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.configuration.Preferences;
 import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.calculation.FuelConsumption;
-import sk.berops.android.fueller.dataModel.expense.BurreaucraticEntry;
+import sk.berops.android.fueller.dataModel.expense.BureaucraticEntry;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.dataModel.expense.InsuranceEntry;
@@ -58,8 +58,8 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		case TYRES:
 			// return getViewTyreEntry((TyreEntry) entry, convertView, parent);
 			break;
-		case BURREAUCRATIC:
-			return getViewBurreaucraticEntry((BurreaucraticEntry) entry, convertView, parent);
+		case BUREAUCRATIC:
+			return getViewBureaucraticEntry((BureaucraticEntry) entry, convertView, parent);
 		case INSURANCE:
 			return getViewInsuranceEntry((InsuranceEntry) entry, convertView, parent);
 		default:
@@ -263,18 +263,18 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		return rowView;
 	}
 	
-	private View getViewBurreaucraticEntry(BurreaucraticEntry entry, View convertView, ViewGroup parent) {
+	private View getViewBureaucraticEntry(BureaucraticEntry entry, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		// TODO: listen to the warning below for smoother scrolling
-		View rowView = inflater.inflate(R.layout.list_stats_burreaucratic, parent, false);
+		View rowView = inflater.inflate(R.layout.list_stats_bureaucratic, parent, false);
 
-		TextView dynamicId = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_dynamic_id);
-		TextView mileage = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_mileage);
-		TextView date = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_date);
-		TextView totalCost = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_cost);
-		TextView totalCostUnit = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_cost_unit);
-		TextView entryType = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_entry_type);
-		TextView comment = (TextView) rowView.findViewById(R.id.list_stats_burreaucratic_comment);
+		TextView dynamicId = (TextView) rowView.findViewById(R.id.list_stats_bureaucratic_dynamic_id);
+		TextView mileage = (TextView) rowView.findViewById(R.id.list_stats_bureaucratic_mileage);
+		TextView date = (TextView) rowView.findViewById(R.id.list_stats_bureaucratic_date);
+		TextView totalCost = (TextView) rowView.findViewById(R.id.list_stats_bureaucratic_cost);
+		TextView totalCostUnit = (TextView) rowView.findViewById(R.id.list_stats_bureaucratic_cost_unit);
+		TextView entryType = (TextView) rowView.findViewById(R.id.list_stats_bureaucratic_entry_type);
+		TextView comment = (TextView) rowView.findViewById(R.id.list_stats_bureaucratic_comment);
 
 		dynamicId.setText(Integer.toString(entry.getDynamicId()));
 

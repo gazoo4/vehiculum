@@ -2,7 +2,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_blue">
+            android:background="@drawable/background_blue"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,29 +24,47 @@
             android:layout_height="wrap_content"
             android:text="@string/activity_toll_header" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/activity_toll_date_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_toll_header"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/activity_toll_date_text"
-                style="@style/plain_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textIsSelectable="true" />
+            android:padding="3dp">
 
             <Button
-                android:id="@+id/activity_toll_button_date_change"
-                style="@style/button_text"
+                android:id="@+id/activity_toll_date_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/red_button"
-                android:onClick="showDatePickerDialog"
-                android:text="@string/activity_generic_button_date_change" />
-        </LinearLayout>
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/calendar"
+                android:drawableStart="@drawable/calendar"
+                android:onClick="onClickShowDatePickerDialog"
+                style="@style/button_text"/>
+
+            <Button
+                android:id="@+id/activity_toll_button_tag_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/add_tag"
+                android:drawableStart="@drawable/add_tag"
+                android:drawablePadding="5dp"
+                android:onClick="onClickTagAdd"
+                style="@style/button_text"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/activity_toll_tags_recyclerview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/activity_toll_button_tag_add"
+                android:layout_toStartOf="@id/activity_toll_button_tag_add"
+                android:gravity="center"
+                android:scrollbars="horizontal" />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/activity_toll_mileage_layout"
@@ -116,7 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/activity_toll_comment"
-            android:background="@drawable/red_button"
+            android:background="@drawable/transparent_button"
             android:onClick="onClick"
             android:text="@string/activity_generic_button_entry_save" />
 

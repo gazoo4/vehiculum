@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,7 +20,6 @@ import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.Expense;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
 import sk.berops.android.fueller.dataModel.tags.Tag;
-import sk.berops.android.fueller.gui.Colors;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.tags.FragmentTagManager;
 import sk.berops.android.fueller.gui.tags.LinearTagAdapter;
@@ -27,7 +27,8 @@ import sk.berops.android.fueller.gui.tags.LinearTagAdapter;
 public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd implements DatePickerDialog.OnDateSetListener, FragmentTagManager.TagAttachControlListener {
 
 	protected EditText editTextMileage;
-	protected TextView textViewDisplayDate;
+	protected Button buttonDate;
+	protected Button buttonTagAdd;
 	protected TextView textViewDistanceUnit;
 	protected RecyclerView recyclerViewLinearTags;
 	protected LinearTagAdapter linearTagAdapter;
@@ -43,18 +44,17 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 	}
 
 	@Override
-	protected abstract void attachGuiObjects();
-
-	@Override
-	protected void styleGuiObjects() {
-		super.styleGuiObjects();
-		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
-	}
-
-	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
 		textViewDistanceUnit.setText(car.getDistanceUnit().getUnit());
+
+		if (editMode) {
+			buttonDate.setText(DateFormat.getDateInstance().format(entry.getEventDate()));
+			editTextMileage.setText(Double.valueOf(entry.getMileage()).toString());
+			editTextCost.setText(Double.valueOf(entry.getCost()).toString());
+			editTextComment.setText(entry.getComment());
+			spinnerCurrency.setSelection(entry.getCurrency().getId());
+		}
 	}
 
 	protected void initializeTags(int tagListId) {
@@ -83,7 +83,7 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 		if (entry.getEventDate() == null) {
 			entry.setEventDate(Calendar.getInstance().getTime());
 		}
-		textViewDisplayDate.setText(DateFormat.getDateInstance().format(entry.getEventDate()));
+		buttonDate.setText(DateFormat.getDateInstance().format(entry.getEventDate()));
 	}
 
 	private void updateMileage() throws FieldsEmptyException {

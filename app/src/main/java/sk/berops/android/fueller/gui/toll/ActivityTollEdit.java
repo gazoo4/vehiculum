@@ -21,11 +21,6 @@ public class ActivityTollEdit extends ActivityTollAdd {
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
-		editTextMileage.setText(Double.valueOf(tollEntry.getMileage()).toString());
-		editTextCost.setText(Double.valueOf(tollEntry.getCost()).toString());
-		editTextComment.setText(tollEntry.getComment());
-		
-		spinnerCurrency.setSelection(tollEntry.getCurrency().getId());
 		spinnerTollType.setSelection(tollEntry.getType().getId());
 	}
 }

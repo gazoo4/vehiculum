@@ -1,6 +1,5 @@
 package sk.berops.android.fueller.gui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +10,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.configuration.Preferences;
@@ -38,12 +39,15 @@ import sk.berops.android.fueller.gui.report.ActivityReportsNavigate;
 import sk.berops.android.fueller.io.DataHandler;
 import sk.berops.android.fueller.io.xml.XMLHandler;
 
-public class MainActivity extends Activity {
+public class MainActivity extends DefaultActivity {
 	
 	public static Garage garage;
 	public static DataHandler dataHandler;
 	private static Preferences preferences = Preferences.getInstance();
-	
+
+	private Button buttonRecordEvent;
+	private Button buttonViewStats;
+	private Button buttonEnterGarage;
 	private TableLayout statsTable;
 	private TextView textViewHeader;
 
@@ -60,7 +64,8 @@ public class MainActivity extends Activity {
 
 		return dataHandler;
 	}
-	
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -99,12 +104,30 @@ public class MainActivity extends Activity {
 		refreshStats();
 		generateStatTable();
 	}
-	
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_main);
+	}
+
+	@Override
+	public void attachGuiObjects() {
+		statsTable = (TableLayout) findViewById(R.id.activity_main_stats_table);
+		textViewHeader = (TextView) findViewById(R.id.activity_main_header);
+		buttonRecordEvent = (Button) findViewById(R.id.activity_main_button_entry_add);
+		buttonViewStats = (Button) findViewById(R.id.activity_main_button_stats_view);
+		buttonEnterGarage = (Button) findViewById(R.id.activity_main_button_garage_enter);
+
+		listButtons.add(buttonRecordEvent);
+		listButtons.add(buttonViewStats);
+		listButtons.add(buttonEnterGarage);
+	}
+
 	public void throwAlertCreateGarage() {
 		AlertDialog.Builder alertDialog= new AlertDialog.Builder(this);
 		alertDialog.setMessage(getResources().getString(R.string.activity_main_create_garage_alert));
 		alertDialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-
+			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Toast.makeText(getApplicationContext(), "Creating garage... ", Toast.LENGTH_LONG).show();
@@ -115,20 +138,7 @@ public class MainActivity extends Activity {
 		
 		alertDialog.show();
 	}
-	
-	public void attachGuiObjects() {
-		statsTable = (TableLayout) findViewById(R.id.activity_main_stats_table);
-		textViewHeader = (TextView) findViewById(R.id.activity_main_header);
-	}
-	
-	public void styleGuiObjects() {
-		textViewHeader.setTypeface(Fonts.getGomariceFont(this));
-	}
 
-	public void persistGarage() {
-		dataHandler.persistGarage(this);
-	}
-	
 	private void refreshStats() {
 		if ((garage != null) && (garage.getActiveCar() != null)) {
 			Calculator.calculateAll(garage.getActiveCar().getHistory());
@@ -187,9 +197,9 @@ public class MainActivity extends Activity {
 		unit = preferences.getConsumptionUnit();
 		
 		// we should buy at least 2 different fuels in order to display the stats separately
-		HashMap<FuelType, Double> map = new HashMap<FuelType, Double>();
+		HashMap<FuelType, Double> map = new HashMap<>();
 		for (FuelType t: c.getFuelTypes()) {
-			avgConsumption = c.getAveragePerFuelType().get(t).doubleValue();
+			avgConsumption = c.getAveragePerFuelType().get(t);
 			if (avgConsumption != 0.0) {
 				map.put(t,  avgConsumption);
 			}
@@ -199,7 +209,7 @@ public class MainActivity extends Activity {
 			for (FuelType t: map.keySet()) {
 				description = getString(R.string.activity_main_average);
 				description += " ";
-				description += t.getType().toString();
+				description += t.getType();
 				valueSI = map.get(t);
 				valueReport = UnitConstants.convertUnitConsumption(valueSI);
 					
@@ -234,7 +244,7 @@ public class MainActivity extends Activity {
 		String description = getString(R.string.activity_main_relative_costs_fuel);
 		description += " ";
 		description += t.toString();
-		double valueSI = c.getAverageFuelCostPerFuelType().get(t).doubleValue();
+		double valueSI = c.getAverageFuelCostPerFuelType().get(t);
 		CostUnit unit = preferences.getCostUnit();
 		
 		double valueReport = UnitConstants.convertUnitCost(valueSI);
@@ -242,21 +252,23 @@ public class MainActivity extends Activity {
 	}
 	
 	private void generateRowLastCosts(TableLayout layout) {
-		if (garage.getActiveCar().getHistory().getFuellingEntries().size() == 0) return;
+		try {
+			FuellingEntry e = garage.getActiveCar().getHistory().getFuellingEntries().getLast();
+			FuelConsumption c = garage.getActiveCar().getFuelConsumption();
+			FuelType type = e.getFuelType();
+			double avgCostSI = c.getAverageFuelCostPerFuelType().get(type);
+			double lastCostSI = c.getCostSinceLastRefuel();
+			double relativeChange = (lastCostSI / avgCostSI - 0.8) / 0.4;
+			int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange);
 
-		FuellingEntry e = garage.getActiveCar().getHistory().getFuellingEntries().getLast();
-		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
-		FuelType type = e.getFuelType();
-		double avgCostSI = c.getAverageFuelCostPerFuelType().get(type);
-		double lastCostSI = c.getCostSinceLastRefuel();
-		double relativeChange = (lastCostSI / avgCostSI - 0.8) / 0.4;
-		int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange);
-		
-		String description = getString(R.string.activity_main_relative_since_last_refuel);
-		CostUnit unit = preferences.getCostUnit();
-		
-		double lastCostReport = UnitConstants.convertUnitCost(lastCostSI);
-		layout.addView(createStatRow(description, lastCostReport, unit.getUnit(), color));
+			String description = getString(R.string.activity_main_relative_since_last_refuel);
+			CostUnit unit = preferences.getCostUnit();
+
+			double lastCostReport = UnitConstants.convertUnitCost(lastCostSI);
+			layout.addView(createStatRow(description, lastCostReport, unit.getUnit(), color));
+		} catch (NoSuchElementException ex) {
+			Log.d("DEBUG", "Not enough history to generate stats");
+		}
 	}
 	
 	private void generateRowLastConsumption(TableLayout layout) {
@@ -302,11 +314,11 @@ public class MainActivity extends Activity {
 	}
 	
 	private TableRow createStatRow(String description, String value) {
-		return createStatRow(description, value, null, 0xffffffff);
+		return createStatRow(description, value, null, 0xFFFFFFFF);
 	}
 	
 	private TableRow createStatRow(String description, String value, String unit) {
-		return createStatRow(description, value, unit, 0xffffffff);
+		return createStatRow(description, value, unit, 0xFFFFFFFF);
 	}
 	
 	private TableRow createStatRow(String description, String value, String unit, int valueColor) {
@@ -325,10 +337,10 @@ public class MainActivity extends Activity {
 		
 		descriptionView.setTextAppearance(this, R.style.plain_text);
 		valueView.setTextAppearance(this, R.style.plain_text_big);
-		unitView.setTextAppearance(this, R.style.plain_text_small);
+		unitView.setTextAppearance(this, R.style.plain_text);
 		
 		valueView.setTextColor(valueColor);
-		valueView.setShadowLayer(12, 0, 0, valueColor);
+		valueView.setShadowLayer(15, 0, 0, valueColor);
 		
 		row.addView(descriptionView);
 		

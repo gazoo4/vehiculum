@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioGroup;
@@ -31,7 +32,6 @@ import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.fueller.gui.common.FragmentEntryEditDelete;
 import sk.berops.android.fueller.gui.common.GuiUtils;
 import sk.berops.android.fueller.gui.common.TextFormatter;
-import sk.berops.android.fueller.gui.common.UtilsActivity;
 
 public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		FragmentEntryEditDelete.EntryEditDeleteDialogListener {
@@ -83,8 +83,6 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_maintenance);
-
 		if (maintenanceEntry == null) {
 			maintenanceEntry = new MaintenanceEntry();
 			maintenanceEntry.setExpenseType(ExpenseType.MAINTENANCE);
@@ -93,20 +91,26 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		parts = maintenanceEntry.getParts();
 
 		super.entry = (Entry) this.maintenanceEntry;
-		super.editMode = editMode;
 		super.onCreate(savedInstanceState);
 	}
 
 	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_maintenance);
+	}
+
+	@Override
 	protected void attachGuiObjects() {
-		textViewDisplayDate = (TextView) findViewById(R.id.activity_maintenance_date_text);
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_maintenance_distance_unit);
 		textViewPartsCost = (TextView) findViewById(R.id.activity_maintenance_parts_cost);
 		textViewTotalCost = (TextView) findViewById(R.id.activity_maintenance_total_cost);
+
 		editTextMileage = (EditText) findViewById(R.id.activity_maintenance_mileage);
 		editTextLaborCost = (EditText) findViewById(R.id.activity_maintenance_labor_cost);
 		editTextCost = (EditText) findViewById(R.id.activity_maintenance_cost);
 		editTextComment = (EditText) findViewById(R.id.activity_maintenance_comment);
+
+		buttonDate = (Button) findViewById(R.id.activity_maintenance_date_button);
 
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_maintenance_currency);
 		spinnerLaborCostCurrency = (Spinner) findViewById(R.id.activity_maintenance_labor_cost_currency);
@@ -129,18 +133,22 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 				return true;
 			}
 		});
-	}
 
-	@Override
-	protected void styleGuiObjects() {
-		super.styleGuiObjects();
-		UtilsActivity.styleEditText(editTextLaborCost);
-		UtilsActivity.styleSpinner(spinnerCurrency, this, R.array.activity_expense_add_currency);
+		listButtons.add(buttonDate);
+
+		listEditTexts.add(editTextMileage);
+		listEditTexts.add(editTextLaborCost);
+		listEditTexts.add(editTextCost);
+		listEditTexts.add(editTextComment);
+
+		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
+		mapSpinners.put(R.array.activity_expense_add_currency, spinnerLaborCostCurrency);
 	}
 
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
+		initializeTags(R.id.activity_maintenance_tags_recyclerview);
 		spinnerCurrency.setSelection(0);
 
 		CostCalculateListener costCalculator = new CostCalculateListener();

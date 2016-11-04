@@ -21,11 +21,6 @@ public class ActivityServiceEdit extends ActivityServiceAdd {
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
-		editTextMileage.setText(Double.valueOf(serviceEntry.getMileage()).toString());
-		editTextCost.setText(Double.valueOf(serviceEntry.getCost()).toString());
-		editTextComment.setText(serviceEntry.getComment());
-		
-		spinnerCurrency.setSelection(serviceEntry.getCurrency().getId());
 		spinnerServiceType.setSelection(serviceEntry.getType().getId());
 	}
 }

@@ -10,6 +10,6 @@ public class Calculator {
 		ServiceCalculator.calculate(history.getServiceEntries());
 		TollCalculator.calculate(history.getTollEntries());
 		InsuranceCalculator.calculate(history.getInsuranceEntries());
-		BurreaucraticCalculator.calculate(history.getBurreaucraticEntries());
+		BureaucraticCalculator.calculate(history.getBureaucraticEntries());
 	}
 }

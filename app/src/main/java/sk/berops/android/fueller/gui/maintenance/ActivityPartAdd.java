@@ -12,7 +12,6 @@ import sk.berops.android.fueller.dataModel.maintenance.GenericPart;
 import sk.berops.android.fueller.dataModel.maintenance.ReplacementPart;
 import sk.berops.android.fueller.dataModel.maintenance.ReplacementPart.Originality;
 import sk.berops.android.fueller.gui.common.ActivityGenericPartAdd;
-import sk.berops.android.fueller.gui.common.UtilsActivity;
 
 public class ActivityPartAdd extends ActivityGenericPartAdd {
 
@@ -22,13 +21,17 @@ public class ActivityPartAdd extends ActivityGenericPartAdd {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_part_add);
 		if (part == null) {
 			part = new ReplacementPart();
 		}
 
 		super.genericPart = (GenericPart) this.part;
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_part_add);
 	}
 
 	@Override
@@ -42,17 +45,17 @@ public class ActivityPartAdd extends ActivityGenericPartAdd {
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_part_add_currency);
 		spinnerCondition = (Spinner) findViewById(R.id.activity_part_add_condition);
 		spinnerOriginality = (Spinner) findViewById(R.id.activity_part_add_originality);
-	}
 
-	@Override
-	protected void styleGuiObjects() {
-		super.styleGuiObjects();
-		UtilsActivity.styleSpinner(spinnerOriginality, this, R.array.activity_part_add_originality);
-	}
+		listEditTexts.add(editTextCost);
+		listEditTexts.add(editTextComment);
+		listEditTexts.add(editTextBrand);
+		listEditTexts.add(editTextProducerPartId);
+		listEditTexts.add(editTextCarmakerPartId);
+		listEditTexts.add(editTextQuantity);
 
-	@Override
-	protected void initializeGuiObjects() {
-		super.initializeGuiObjects();
+		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
+		mapSpinners.put(R.array.activity_generic_part_add_condition, spinnerCondition);
+		mapSpinners.put(R.array.activity_part_add_originality, spinnerOriginality);
 	}
 
 	protected void updateFields() throws FieldsEmptyException {

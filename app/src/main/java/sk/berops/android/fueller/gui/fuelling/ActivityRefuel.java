@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,7 +26,6 @@ import sk.berops.android.fueller.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.fueller.gui.common.GuiUtils;
-import sk.berops.android.fueller.gui.common.UtilsActivity;
 
 public class ActivityRefuel extends ActivityEntryGenericAdd {
 
@@ -37,7 +37,6 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_refuel);
         if (fuellingEntry == null) {
             fuellingEntry = new FuellingEntry();
         }
@@ -48,32 +47,44 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
     }
 
     @Override
+    protected void loadLayout() {
+        setContentView(R.layout.activity_refuel);
+    }
+
+    @Override
     protected void attachGuiObjects() {
-        editTextMileage = (EditText) findViewById(R.id.activity_refuel_mileage);
         textViewDistanceUnit = (TextView) findViewById(R.id.activity_refuel_distance_unit);
+        textViewPrice = (TextView) findViewById(R.id.activity_refuel_price_text);
+
+        editTextMileage = (EditText) findViewById(R.id.activity_refuel_mileage);
         editTextCost = (EditText) findViewById(R.id.activity_refuel_cost);
         editTextComment = (EditText) findViewById(R.id.activity_refuel_comment);
-        textViewPrice = (TextView) findViewById(R.id.activity_refuel_price_text);
         editTextVolume = (EditText) findViewById(R.id.activity_refuel_volume);
-        textViewDisplayDate = (TextView) findViewById(R.id.activity_refuel_date_text);
+
+        buttonDate = (Button) findViewById(R.id.activity_refuel_date_button);
+        buttonTagAdd = (Button) findViewById(R.id.activity_refuel_button_tag_add);
 
         spinnerFuelType = (Spinner) findViewById(R.id.activity_refuel_fuel_type);
         spinnerCurrency = (Spinner) findViewById(R.id.activity_refuel_currency);
         spinnerVolumeUnit = (Spinner) findViewById(R.id.activity_refuel_volume_unit);
-    }
 
-    @Override
-    protected void styleGuiObjects() {
-        super.styleGuiObjects();
-        UtilsActivity.styleEditText(editTextVolume);
-        UtilsActivity.styleSpinner(spinnerFuelType, this, R.array.activity_refuel_fuel_type);
-        UtilsActivity.styleSpinner(spinnerVolumeUnit, this, R.array.activity_refuel_volume_unit);
+        listButtons.add(buttonDate);
+        listButtons.add(buttonTagAdd);
+
+        listEditTexts.add(editTextMileage);
+        listEditTexts.add(editTextCost);
+        listEditTexts.add(editTextComment);
+        listEditTexts.add(editTextVolume);
+
+        mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
+        mapSpinners.put(R.array.activity_refuel_fuel_type, spinnerFuelType);
+        mapSpinners.put(R.array.activity_refuel_volume_unit, spinnerVolumeUnit);
     }
 
     @Override
     protected void initializeGuiObjects() {
         super.initializeGuiObjects();
-	    initializeTags(R.id.activity_refuel_tags_recyclerview);
+        initializeTags(R.id.activity_refuel_tags_recyclerview);
 
         FuelType fuelType;
         try {

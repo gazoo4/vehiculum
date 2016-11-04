@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_blue">
+
+   <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_blue"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <TextView
+            android:id="@+id/activity_bureaucratic_header"
+            style="@style/caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_bureaucratic_header" />
+
+       <RelativeLayout
+           android:id="@+id/activity_bureaucratic_date_layout"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:padding="3dp">
+
+           <Button
+               android:id="@+id/activity_bureaucratic_date_button"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentLeft="true"
+               android:layout_alignParentStart="true"
+               android:gravity="center_vertical"
+               android:drawableLeft="@drawable/calendar"
+               android:drawableStart="@drawable/calendar"
+               android:drawablePadding="5dp"
+               android:onClick="onClickShowDatePickerDialog"
+               style="@style/button_text"/>
+
+           <Button
+               android:id="@+id/activity_bureaucratic_button_tag_add"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentRight="true"
+               android:layout_alignParentEnd="true"
+               android:gravity="center_vertical"
+               android:drawableLeft="@drawable/not_available"
+               android:drawableStart="@drawable/not_available"
+               android:onClick="onClickTagAdd"
+               style="@style/button_text"/>
+
+           <android.support.v7.widget.RecyclerView
+               android:id="@+id/activity_bureaucratic_tags_recyclerview"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_toLeftOf="@id/activity_bureaucratic_button_tag_add"
+               android:layout_toStartOf="@id/activity_bureaucratic_button_tag_add"
+               android:gravity="center"
+               android:scrollbars="horizontal" />
+
+       </RelativeLayout>
+
+       <View
+           android:layout_width="match_parent"
+           android:layout_height="1dp"
+           android:background="@android:color/holo_blue_light" />
+
+        <LinearLayout
+            android:id="@+id/activity_bureaucratic_mileage_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_bureaucratic_date_layout"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/activity_bureaucratic_mileage"
+                style="@style/plain_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:hint="@string/activity_generic_mileage_hint"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/activity_bureaucratic_distance_unit"
+                style="@style/plain_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_bureaucratic_cost_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_bureaucratic_mileage_layout"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/activity_bureaucratic_cost"
+                style="@style/plain_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:hint="@string/activity_generic_cost_hint"
+                android:inputType="numberDecimal" />
+
+            <Spinner
+                android:id="@+id/activity_bureaucratic_currency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:entries="@array/activity_expense_add_currency"
+                android:prompt="@string/activity_expense_add_currency_hint" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/activity_bureaucratic_comment"
+            style="@style/plain_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_bureaucratic_cost_layout"
+            android:hint="@string/activity_generic_comment_hint"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/activity_bureaucratic_button_commit"
+            style="@style/button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_bureaucratic_comment"
+            android:background="@drawable/transparent_button"
+            android:onClick="onClick"
+            android:text="@string/activity_generic_button_entry_save" />
+
+    </RelativeLayout>
+</ScrollView>

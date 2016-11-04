@@ -1,10 +1,8 @@
 package sk.berops.android.fueller.gui.garage;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -15,10 +13,8 @@ import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.dataModel.UnitConstants.DistanceUnit;
 import sk.berops.android.fueller.dataModel.UnitConstants.VolumeUnit;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
-import sk.berops.android.fueller.gui.Colors;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityRecordAdd;
-import sk.berops.android.fueller.gui.common.pictures.CameraHandler;
 
 public class ActivityCarAdd extends ActivityRecordAdd {
 	
@@ -39,26 +35,22 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_car_add);
 		if (car == null) {
 			car = new Car();
 		}
 		super.record = (Record) this.car;
 		super.onCreate(savedInstanceState);
-		attachGuiObjects();
+	}
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_car_add);
 	}
 
 	@Override
 	protected void attachGuiObjects() {
 		buttonCommit = (Button)findViewById(R.id.activity_car_add_button_commit);
-		buttonAddPhoto = (Button)findViewById(R.id.activity_car_add_button_get_photo);
-		if (this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-			System.out.println("TRUE TRUE");
-			buttonAddPhoto.setVisibility(View.VISIBLE);
-		} else {
-			System.out.println("FALSE FALSE");
-			buttonAddPhoto.setVisibility(View.GONE);
-		}
+
 		editTextBrand = (EditText)findViewById(R.id.activity_car_add_brand);
 		editTextModel = (EditText)findViewById(R.id.activity_car_add_model);
 		editTextLicensePlate = (EditText)findViewById(R.id.activity_car_add_license_plate);
@@ -67,35 +59,20 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 		editTextNickname = (EditText)findViewById(R.id.activity_car_add_nickname);
 		
 		spinnerDistanceUnit = (Spinner) findViewById(R.id.activity_car_add_distance_unit);
-		ArrayAdapter<CharSequence> adapterDistanceUnit = ArrayAdapter
-				.createFromResource(this, R.array.activity_car_add_distance_units,
-						R.layout.spinner_white);
-		adapterDistanceUnit
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerDistanceUnit.setAdapter(adapterDistanceUnit);
-		
 		spinnerVolumeUnit = (Spinner) findViewById(R.id.activity_car_add_volume_unit);
-		ArrayAdapter<CharSequence> adapterVolumeUnit = ArrayAdapter
-				.createFromResource(this, R.array.activity_car_add_volume_units,
-						R.layout.spinner_white);
-		adapterDistanceUnit
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerVolumeUnit.setAdapter(adapterVolumeUnit);
-	}
-	
-	@Override
-	protected void styleGuiObjects() {
-		editTextBrand.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextModel.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextLicensePlate.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextMileage.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextModelYear.setHintTextColor(Colors.LIGHT_GREEN);
-		editTextNickname.setHintTextColor(Colors.LIGHT_GREEN);
-	}
-	
-	@Override
-	protected void initializeGuiObjects() {
-		
+
+		listButtons.add(buttonAddPhoto);
+		listButtons.add(buttonCommit);
+
+		listEditTexts.add(editTextBrand);
+		listEditTexts.add(editTextModel);
+		listEditTexts.add(editTextLicensePlate);
+		listEditTexts.add(editTextMileage);
+		listEditTexts.add(editTextModelYear);
+		listEditTexts.add(editTextNickname);
+
+		mapSpinners.put(R.array.activity_car_add_distance_units, spinnerDistanceUnit);
+		mapSpinners.put(R.array.activity_car_add_volume_units, spinnerVolumeUnit);
 	}
 
 	public void saveEntry(View view) {
@@ -135,9 +112,6 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 		switch(view.getId()) {
 		case R.id.activity_car_add_button_commit:
 			startActivity(new Intent(this, MainActivity.class));
-			break;
-		case R.id.activity_car_add_button_get_photo:
-			startActivity(new Intent(this, CameraHandler.class));
 			break;
 		}
 	}

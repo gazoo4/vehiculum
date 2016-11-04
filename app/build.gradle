@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: "androidsvgdrawable"
 
 android {
     signingConfigs {
@@ -17,7 +18,7 @@ android {
     buildToolsVersion "23.0.1"
     defaultConfig {
         applicationId "sk.berops.android.fueller"
-        minSdkVersion 14
+        minSdkVersion 21
         targetSdkVersion 22
         generatedDensities = ['hdpi','xhdpi','xxhdpi','xxxhdpi']
     }

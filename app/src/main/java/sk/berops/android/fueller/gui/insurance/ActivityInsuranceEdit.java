@@ -21,11 +21,6 @@ public class ActivityInsuranceEdit extends ActivityInsuranceAdd {
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
-		editTextMileage.setText(Double.valueOf(insuranceEntry.getMileage()).toString());
-		editTextCost.setText(Double.valueOf(insuranceEntry.getCost()).toString());
-		editTextComment.setText(insuranceEntry.getComment());
-		
-		spinnerCurrency.setSelection(insuranceEntry.getCurrency().getId());
 		spinnerInsuranceType.setSelection(insuranceEntry.getType().getId());
 	}
 }

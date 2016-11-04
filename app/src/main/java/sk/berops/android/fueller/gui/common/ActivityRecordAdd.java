@@ -1,6 +1,5 @@
 package sk.berops.android.fueller.gui.common;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -10,10 +9,11 @@ import java.util.Calendar;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
+import sk.berops.android.fueller.gui.DefaultActivity;
 import sk.berops.android.fueller.gui.MainActivity;
 
-public abstract class ActivityRecordAdd extends Activity {
-	
+public abstract class ActivityRecordAdd extends DefaultActivity {
+
 	protected EditText editTextComment;
 	
 	protected Car car;
@@ -22,25 +22,13 @@ public abstract class ActivityRecordAdd extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		car = MainActivity.garage.getActiveCar();
-		
-		attachGuiObjects();
-		styleGuiObjects();
-		initializeGuiObjects();
+		super.onCreate(savedInstanceState);
 	}
 	
 	public void throwAlertFieldsEmpty(int id) throws FieldsEmptyException {
 		throw new FieldsEmptyException(this, id); 
 	}
-	
-	protected abstract void attachGuiObjects();
-	
-	protected void styleGuiObjects() {
-		UtilsActivity.styleEditText(editTextComment);
-	}
-	
-	protected abstract void initializeGuiObjects();
 	
 	protected void updateFields() throws FieldsEmptyException {
 		updateComment();
@@ -76,5 +64,4 @@ public abstract class ActivityRecordAdd extends Activity {
 		MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
 		MainActivity.garage.initAfterLoad();
 	}
-
 }

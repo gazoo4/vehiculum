@@ -3,7 +3,7 @@ package sk.berops.android.fueller.gui.insurance;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,44 +23,47 @@ public class ActivityInsuranceAdd extends ActivityEntryGenericAdd {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_insurance);
-
 		if (insuranceEntry == null) {
 			insuranceEntry = new InsuranceEntry();
 			insuranceEntry.setExpenseType(ExpenseType.INSURANCE);
 		}
 
 		super.entry = (Entry) this.insuranceEntry;
-		super.editMode = editMode;
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_insurance);
 	}
 	
 	@Override
 	protected void attachGuiObjects() {
-		textViewDisplayDate = (TextView) findViewById(R.id.activity_insurance_date_text);
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_insurance_distance_unit);
 		
 		editTextMileage = (EditText) findViewById(R.id.activity_insurance_mileage);
 		editTextCost = (EditText) findViewById(R.id.activity_insurance_cost);
 		editTextComment = (EditText) findViewById(R.id.activity_insurance_comment);
-		
+
+		buttonDate = (Button) findViewById(R.id.activity_insurance_date_button);
+
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_insurance_currency);
 		spinnerInsuranceType = (Spinner) findViewById(R.id.activity_insurance_type);
+
+		listButtons.add(buttonDate);
+
+		listEditTexts.add(editTextMileage);
+		listEditTexts.add(editTextCost);
+		listEditTexts.add(editTextComment);
+
+		mapSpinners.put(R.array.activity_insurance_type, spinnerInsuranceType);
+		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
 	}
-	
-	@Override
-	protected void styleGuiObjects() {
-		super.styleGuiObjects();
-		
-		ArrayAdapter<CharSequence> adapterInsuranceType = ArrayAdapter.createFromResource(this,
-				R.array.activity_insurance_type, R.layout.spinner_white);
-		adapterInsuranceType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerInsuranceType.setAdapter(adapterInsuranceType);
-	}
-	
+
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
+		initializeTags(R.id.activity_insurance_button_tag_add);
 	}
 	
 	@Override

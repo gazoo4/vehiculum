@@ -96,8 +96,8 @@ public class History implements Serializable {
 		return getEntriesOfType(new InsuranceEntry());
 	}
 	
-	public LinkedList<BurreaucraticEntry> getBurreaucraticEntries() {
-		return getEntriesOfType(new BurreaucraticEntry());
+	public LinkedList<BureaucraticEntry> getBureaucraticEntries() {
+		return getEntriesOfType(new BureaucraticEntry());
 	}
 	
 	public LinkedList<TyreChangeEntry> getTyreChangeEntries() {

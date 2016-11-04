@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,7 +21,6 @@ import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.fueller.gui.common.GuiUtils;
-import sk.berops.android.fueller.gui.common.UtilsActivity;
 
 public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	
@@ -54,7 +54,6 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	protected static final int SCHEME = 1;
 	
 	public void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_tyre_change);
 		car = MainActivity.garage.getActiveCar();
 		if (tyreChangeEntry == null) {
 			tyreChangeEntry = new TyreChangeEntry();
@@ -63,6 +62,11 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		
 		super.entry = (Entry) this.tyreChangeEntry;
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected void loadLayout() {
+		setContentView(R.layout.activity_tyre_change);
 	}
 
 	@Override
@@ -75,22 +79,29 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		editTextComment = (EditText) findViewById(R.id.activity_tyre_change_comment);
 
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_tyre_change_distance_unit);
-		textViewDisplayDate = (TextView) findViewById(R.id.activity_tyre_change_date_text);
+
+		buttonDate = (Button) findViewById(R.id.activity_tyre_change_date_button);
+		buttonTagAdd = (Button) findViewById(R.id.activity_tyre_change_button_tag_add);
 		
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_tyre_change_total_cost_currency);
+
+		listButtons.add(buttonDate);
+		listButtons.add(buttonTagAdd);
+
+		listEditTexts.add(editTextTyresCost);
+		listEditTexts.add(editTextLaborCost);
+		listEditTexts.add(editTextSmallPartsCost);
+		listEditTexts.add(editTextCost);
+		listEditTexts.add(editTextMileage);
+		listEditTexts.add(editTextComment);
+
+		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
 	}
 
 	@Override
-	protected void styleGuiObjects() {
-		super.styleGuiObjects();
-		UtilsActivity.styleEditText(editTextTyresCost);
-		UtilsActivity.styleEditText(editTextLaborCost);
-		UtilsActivity.styleEditText(editTextSmallPartsCost);
-	}
-	
-	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
+		initializeTags(R.id.activity_tyre_change_tags_recyclerview);
 		PriceCalculateListener priceCalculator = new PriceCalculateListener();
 		editTextTyresCost.addTextChangedListener(priceCalculator);
 		editTextLaborCost.addTextChangedListener(priceCalculator);
