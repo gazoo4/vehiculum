@@ -51,6 +51,7 @@ public class MainActivity extends DefaultActivity {
 	private TableLayout statsTable;
 	private TextView textViewHeader;
 
+
 	public static void saveGarage(Activity activity) {
 		getDataHandler().persistGarage(activity);
 		Toast.makeText(activity.getApplication(), activity.getResources().getString(R.string.activity_main_garage_saved_toast), Toast.LENGTH_LONG).show();
@@ -70,11 +71,11 @@ public class MainActivity extends DefaultActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		dataHandler = getDataHandler();
 		attachGuiObjects();
 		styleGuiObjects();
-		
+
 		if (garage == null) {
 			try {
 				garage = dataHandler.loadGarage(this);
@@ -127,7 +128,7 @@ public class MainActivity extends DefaultActivity {
 		AlertDialog.Builder alertDialog= new AlertDialog.Builder(this);
 		alertDialog.setMessage(getResources().getString(R.string.activity_main_create_garage_alert));
 		alertDialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Toast.makeText(getApplicationContext(), "Creating garage... ", Toast.LENGTH_LONG).show();
@@ -186,7 +187,7 @@ public class MainActivity extends DefaultActivity {
 	}
 	
 	private void generateRowAverageConsumption(TableLayout layout) {
-		double avgConsumption = 0;
+		double avgConsumption;
 		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
 		if (c == null) return;
 		

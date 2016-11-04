@@ -23,7 +23,6 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 	private View addCarView;
 	
 	protected Button buttonCommit;
-	protected Button buttonAddPhoto;
 	protected EditText editTextBrand;
 	protected EditText editTextModel;
 	protected EditText editTextLicensePlate;
@@ -61,7 +60,6 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 		spinnerDistanceUnit = (Spinner) findViewById(R.id.activity_car_add_distance_unit);
 		spinnerVolumeUnit = (Spinner) findViewById(R.id.activity_car_add_volume_unit);
 
-		listButtons.add(buttonAddPhoto);
 		listButtons.add(buttonCommit);
 
 		listEditTexts.add(editTextBrand);
