@@ -13,6 +13,8 @@ import sk.berops.android.fueller.dataModel.maintenance.Tyre.Season;
 import sk.berops.android.fueller.gui.common.ActivityGenericPartAdd;
 import sk.berops.android.fueller.gui.common.GuiUtils;
 
+import static sk.berops.android.fueller.gui.common.GuiUtils.isEmptyEditText;
+
 public class ActivityTyreAdd extends ActivityGenericPartAdd {
 
 	private EditText editTextModel;
@@ -80,34 +82,58 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 	}
 
 	private void updateModel() {
+		if (isEmptyEditText(editTextModel)) {
+			return;
+		}
 		tyre.setModel(editTextModel.getText().toString());
 	}
 	
 	private void updateWidth() {
+		if (isEmptyEditText(editTextWidth)) {
+			return;
+		}
 		tyre.setWidth(GuiUtils.extractInteger(editTextWidth));
 	}
 	
 	private void updateHeight() {
+		if (isEmptyEditText(editTextHeight)) {
+			return;
+		}
 		tyre.setHeight(GuiUtils.extractInteger(editTextHeight));
 	}
 	
 	private void updateDiameter() {
+		if (isEmptyEditText(editTextDiameter)) {
+			return;
+		}
 		tyre.setDiameter(GuiUtils.extractDouble(editTextDiameter));
 	}
 	
 	private void updateWeightIndex() {
+		if (isEmptyEditText(editTextWeightIndex)) {
+			return;
+		}
 		tyre.setWeightIndex(GuiUtils.extractInteger(editTextWeightIndex));
 	}
 	
 	private void updateSpeedIndex() {
+		if (isEmptyEditText(editTextSpeedIndex)) {
+			return;
+		}
 		tyre.setSpeedIndex(editTextSpeedIndex.getText().toString());
 	}
 	
 	private void updateDot() {
+		if (isEmptyEditText(editTextDot)) {
+			return;
+		}
 		tyre.setDot(editTextDot.getText().toString());
 	}
 	
 	private void updateThreadLevel() {
+		if (isEmptyEditText(editTextThreadLevel)) {
+			return;
+		}
 		tyre.setThreadLevel(GuiUtils.extractDouble(editTextThreadLevel));
 	}
 	
