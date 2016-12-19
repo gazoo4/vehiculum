@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: "androidsvgdrawable"
 
 android {
+    adbOptions {
+        timeOutInMs = 30 * 1000;
+    }
     signingConfigs {
         debug {
             keyAlias 'androiddebugkey'
@@ -9,9 +12,9 @@ android {
             storePassword 'android'
         }
         release {
-            keyAlias 'release'
-            keyPassword 'release'
-            storePassword 'release'
+            keyAlias property_keyAlias
+            keyPassword property_keyPassword
+            storePassword property_storePassword
         }
     }
     compileSdkVersion 22
@@ -20,7 +23,6 @@ android {
         applicationId "sk.berops.android.fueller"
         minSdkVersion 21
         targetSdkVersion 22
-        generatedDensities = ['hdpi','xhdpi','xxhdpi','xxxhdpi']
     }
     buildTypes {
         release {
@@ -53,4 +55,18 @@ dependencies {
     compile 'com.larswerkman:lobsterpicker:1.0.1'
     compile 'org.apache.commons:commons-math3:3.5'
     compile 'org.simpleframework:simple-xml:2.7.1'
+}
+
+afterEvaluate {
+    assembleDebug.dependsOn "generatePng"
+}
+
+task generatePng(type:Exec) {
+    println 'Generating PNG files from SVG images'
+
+    def srcDir = "$workingDir/src/main/assets/svg"
+    def dstDir = "$workingDir/src/main/res"
+
+    // working dir defaults to the project dir
+    commandLine "bash", "./support_utils/svgconvert.sh", "$srcDir", "$dstDir"
 }
