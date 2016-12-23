@@ -259,7 +259,7 @@ public class MainActivity extends DefaultActivity {
 			FuelConsumption c = garage.getActiveCar().getFuelConsumption();
 			FuelType type = e.getFuelType();
 			double avgCostSI = c.getAverageFuelCostPerFuelType().get(type);
-			double lastCostSI = c.getCostSinceLastRefuel();
+			double lastCostSI = c.getCostSinceLastRefuelPerFuelType().get(type);
 			double relativeChange = (lastCostSI / avgCostSI - 0.8) / 0.4;
 			int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange);
 
