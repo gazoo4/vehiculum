@@ -34,6 +34,14 @@ public class GuiUtils {
 			return null;
 		}
 	}
+
+	public static boolean isEmptyEditText(EditText e) {
+		if (e == null || e.getText().equals("")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	public static double extractDouble(EditText editText) {
 		return Double.parseDouble(editText.getText().toString());
