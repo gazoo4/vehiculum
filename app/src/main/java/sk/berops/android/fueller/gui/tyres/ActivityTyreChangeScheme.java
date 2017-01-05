@@ -1,10 +1,9 @@
-package sk.berops.android.fueller.gui.maintenance;
+package sk.berops.android.fueller.gui.tyres;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -22,57 +21,55 @@ import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
 import sk.berops.android.fueller.gui.DefaultActivity;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.GuiUtils;
-import sk.berops.android.fueller.gui.common.TyreDrawer;
 
 public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCallbackInterface {
-	
+
 	private Car car;
 	private ArrayList<Tyre> tyreList;
-	
+
 	private RelativeLayout tyreSchemeLayout;
 	private ListView listView;
 	private ViewTyreChangeGraphics graphics;
-	
-	private TyreDrawer td;
+
 	private TyreSchemeHelper helper;
 	private TyreChangeEntry tyreEntry;
 	private TyreConfigurationScheme tyreScheme;
 	private TyrePoolAdapter adapter;
-	private ViewGroup viewGroup;
-	
+
 	private TextView textViewBrandModelHint;
 	private TextView textViewDimensionsHint;
 	private TextView textViewDotYearWearHint;
 	private TextView textViewPatternHint;
 	private TextView textViewMileageHint;
-	
+
 	private TextView textViewBrandModelValue;
 	private TextView textViewDimensionsValue;
 	private TextView textViewDotYearWearValue;
 	private TextView textViewPatternValue;
 	private TextView textViewMileageValue;
-	
+
 	private Button buttonUninstall;
 	private Button buttonDelete;
-	
-	protected static final int ADD_TYRE = 1;
+
+	public static final int ADD_TYRE = 1;
+	public static final String INTENT_TYRE_ENTRY = "tyre entry";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		viewGroup = (ViewGroup) findViewById(R.id.activity_tyre_change_scheme_top_layout);
 		car = MainActivity.garage.getActiveCar();
 		super.onCreate(savedInstanceState);
-		
-		tyreEntry = (TyreChangeEntry) getIntent().getSerializableExtra("entry");
+
+		tyreEntry = (TyreChangeEntry) getIntent().getSerializableExtra(INTENT_TYRE_ENTRY);
 		if (tyreEntry == null) {
 			tyreEntry = new TyreChangeEntry();
 		}
-		
+
 		tyreScheme = tyreEntry.getTyreScheme();
 		if (tyreScheme == null) {
 			tyreScheme = new TyreConfigurationScheme(car);
+			tyreEntry.setTyreScheme(tyreScheme);
 		}
-		
+
 		helper = TyreSchemeHelper.getInstance();
 
 		buildDynamicLayout();
@@ -90,41 +87,34 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		textViewDotYearWearHint = (TextView) findViewById(R.id.activity_tyre_change_scheme_dot_year_wear);
 		textViewPatternHint = (TextView) findViewById(R.id.activity_tyre_change_scheme_pattern);
 		textViewMileageHint = (TextView) findViewById(R.id.activity_tyre_change_scheme_mileage);
-		
+
 		textViewBrandModelValue = (TextView) findViewById(R.id.activity_tyre_change_scheme_brand_model_value);
 		textViewDimensionsValue = (TextView) findViewById(R.id.activity_tyre_change_scheme_dimensions_value);
 		textViewDotYearWearValue = (TextView) findViewById(R.id.activity_tyre_change_scheme_dot_year_wear_value);
 		textViewPatternValue = (TextView) findViewById(R.id.activity_tyre_change_scheme_pattern_value);
-		textViewMileageValue = (TextView) findViewById(R.id.activity_tyre_change_scheme_mileage_value); 
-		
+		textViewMileageValue = (TextView) findViewById(R.id.activity_tyre_change_scheme_mileage_value);
+
 		buttonDelete = (Button) findViewById(R.id.activity_tyre_change_scheme_button_tyre_delete);
 		buttonUninstall = (Button) findViewById(R.id.activity_tyre_change_scheme_button_tyre_uninstall);
 
 		listButtons.add(buttonDelete);
 		listButtons.add(buttonUninstall);
 	}
-	
+
 	private void buildDynamicLayout() {
 		TyreConfigurationScheme tyreScheme = car.getCurrentTyreScheme().clone();
 		graphics = new ViewTyreChangeGraphics(this, car, tyreScheme);
-		graphics.setOnTouchListener(new TyreTouchListener(this)); 
+		graphics.setOnTouchListener(new TyreTouchListener(this));
 		graphics.setPadding(3, 3, 3, 3);
-		
+
 		tyreSchemeLayout = (RelativeLayout) findViewById(R.id.activity_tyre_change_scheme_graphical_layout);
 		tyreSchemeLayout.removeAllViews();
 		tyreSchemeLayout.addView(graphics);
-		
+
 		listView = (ListView) findViewById(R.id.activity_tyre_change_scheme_tyre_pool_list_view);
-		// TODO: this is here just for the testing purposes
-		if (MainActivity.garage.getAvailableTyres().size() < 10) {
-			for (int i = 0; i < 10; i++) {
-				Tyre tyre = new Tyre();
-				tyre.setThreadLevel(9 * Math.random());
-				tyre.setSeason(Tyre.Season.getSeason((int) (4 * Math.random())));
-				MainActivity.garage.addNewTyre(tyre);
-			}
-		}
-		tyreList = MainActivity.garage.getAvailableTyres();
+
+		tyreList = MainActivity.garage.getAvailableTyresToEntry(tyreEntry);
+		tyreList.addAll(tyreEntry.getBoughtTyres());
 		adapter = new TyrePoolAdapter(this, tyreList);
 		listView.setAdapter(adapter);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -132,16 +122,16 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			                        int position, long id) {
 				Tyre tyre = tyreList.get(position);
 				tyreClicked(tyre);
 			}
 		});
-		
+
 		buttonDelete.setVisibility(View.INVISIBLE);
 		buttonUninstall.setVisibility(View.INVISIBLE);
 	}
-	
+
 	private void tyreClicked(Tyre tyre) {
 		if (helper.getSelectedTyre() == tyre) {
 			deselectTyre();
@@ -150,7 +140,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		}
 		reloadTyreStats(helper.getSelectedTyre());
 	}
-	
+
 	private void deselectTyre() {
 		helper.setSelectedTyre(null);
 		helper.setFlashingMode(false);
@@ -161,7 +151,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		listView.setSelector(new ColorDrawable(0x0));
 		adapter.notifyDataSetChanged();
 	}
-	
+
 	private void selectTyre(Tyre tyre) {
 		helper.setSelectedTyre(tyre);
 		helper.setFlashingMode(true);
@@ -173,14 +163,13 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 			buttonUninstall.setVisibility(View.VISIBLE);
 		}
 	}
-	
-	
+
 	private void reloadTyreStats(Tyre tyre) {
 		String text;
 		try {
 			text = "";
 			if (tyre.getBrand() != null) {
-				text = tyre.getBrand() +" ";
+				text = tyre.getBrand() + " ";
 			}
 			if (tyre.getModel() != null) {
 				text += tyre.getModel();
@@ -190,17 +179,18 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		}
 		reloadSingleTyreStat(text, textViewBrandModelHint, textViewBrandModelValue);
 		try {
-			text="";
-			if (tyre.getWidth() == 0 && tyre.getHeight() == 0 && tyre.getDiameter() == 0.0) throw new NullPointerException();
-			text = ""+ tyre.getWidth() +"/"+ tyre.getHeight() +"/R"+ tyre.getDiameter();
+			text = "";
+			if (tyre.getWidth() == 0 && tyre.getHeight() == 0 && tyre.getDiameter() == 0.0)
+				throw new NullPointerException();
+			text = "" + tyre.getWidth() + "/" + tyre.getHeight() + "/R" + tyre.getDiameter();
 		} catch (NullPointerException e) {
 			text = null;
 		}
 		reloadSingleTyreStat(text, textViewDimensionsHint, textViewDimensionsValue);
 		try {
-			text="";
+			text = "";
 			if (tyre.getDot() == null) throw new NullPointerException();
-			text = tyre.getDot() +" "+ tyre.getYear() +" ("+ (100 - tyre.getWearLevel()) +"% tread left)";
+			text = tyre.getDot() + " " + tyre.getYear() + " (" + (100 - tyre.getWearLevel()) + "% tread left)";
 		} catch (NullPointerException e) {
 			text = null;
 		}
@@ -208,13 +198,13 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		try {
 			text = "";
 			if (tyre.getMileageDriveAxle() != 0.0) {
-				text += tyre.getMileageDriveAxle() +" (engine driven axle) ";
+				text += tyre.getMileageDriveAxle() + " (engine driven axle) ";
 			}
 			if (tyre.getMileageNonDriveAxle() != 0.0) {
-				text += tyre.getMileageDriveAxle() +" (engine non-driven axle) ";
+				text += tyre.getMileageDriveAxle() + " (engine non-driven axle) ";
 			}
 			if (tyre.getMileageDriveAxle() != 0.0 && tyre.getMileageNonDriveAxle() != 0.0) {
-				text += (tyre.getMileageDriveAxle() + tyre.getMileageNonDriveAxle()) +" (total)";
+				text += (tyre.getMileageDriveAxle() + tyre.getMileageNonDriveAxle()) + " (total)";
 			}
 		} catch (NullPointerException e) {
 			text = null;
@@ -227,19 +217,19 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		}
 		reloadSingleTyreStat(text, textViewPatternHint, textViewPatternValue);
 	}
-	
+
 	private void reloadSingleTyreStat(String text, TextView hint, TextView value) {
 		if (text == null || text == "") {
 			hint.setVisibility(View.GONE);
 			value.setVisibility(View.GONE);
 		} else {
-			value.setText(" "+ text);
+			value.setText(" " + text);
 			hint.setVisibility(View.VISIBLE);
 			value.setVisibility(View.VISIBLE);
 		}
-		viewGroup.invalidate();
 	}
-	
+
+
 	@Override
 	public void touchCallback(float x, float y) {
 		TyreGUIContainer tContainer;
@@ -271,7 +261,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 			}
 		}
 	}
-	
+
 	private void deleteTyre(Tyre tyre) {
 		if (tyreList.contains(tyre)) {
 			tyreList.remove(tyre);
@@ -281,41 +271,71 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		tyreEntry.getDeletedTyreIDs().add(tyre.getUuid());
 		deselectTyre();
 	}
-	
+
 	private void uninstallTyre(Tyre tyre) {
 		GuiUtils.removeTyreFromContainer(tyre, graphics.getTyreGUIObjects());
 		tyreList.add(tyre);
 		deselectTyre();
 	}
-	
+
+	/**
+	 * Once the new tyres details are entered, we need to make the entry aware of them.
+	 * @param tyre Tyre which was bought
+	 * @param count of tyres added
+	 */
+	private void registerNewTyres(Tyre tyre, int count) {
+		Tyre newTyre;
+		for (int i = 0; i < count; i++) {
+			newTyre = new Tyre(tyre);
+			tyreEntry.getBoughtTyres().add(newTyre);
+			tyreList.add(newTyre);
+		}
+		adapter.notifyDataSetChanged();
+	}
+
+	/**
+	 * Callback method from follow-up activities
+	 * @param requestCode
+	 * @param resultCode
+	 * @param data
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
 		switch (requestCode) {
-		case ADD_TYRE:
-			if (resultCode == RESULT_OK) {
-				Tyre tyre = (Tyre) data.getExtras().getSerializable("tyre");
-				tyreList.add(tyre);
-				// TODO: here we should add the cost of the tyre to the overall entry
-				adapter.notifyDataSetChanged();
-			} else if (resultCode == RESULT_CANCELED) {
-				// If no result, no issue
-			}
-			break;
+			case ADD_TYRE:
+				if (resultCode == RESULT_OK) {
+					Tyre tyre = (Tyre) data.getExtras().getSerializable(ActivityTyreAdd.INTENT_TYRE);
+					int count = (Integer) data.getExtras().getSerializable(ActivityTyreAdd.INTENT_COUNT);
+					registerNewTyres(tyre, count);
+					adapter.notifyDataSetChanged();
+				} else if (resultCode == RESULT_CANCELED) {
+					// If no result, no issue
+				}
+				break;
 		}
 	}
-	
+
+	/**
+	 * Handler for all buttons
+	 * @param view which has been clicked
+	 */
 	public void onClick(View view) {
-		switch(view.getId()) {
-		case R.id.activity_tyre_change_scheme_button_tyre_add:
-			startActivityForResult(new Intent(this, ActivityTyreAdd.class), ADD_TYRE);
-			break;
-		case R.id.activity_tyre_change_scheme_button_tyre_delete:
-			deleteTyre(helper.getSelectedTyre());
-			break;
-		case R.id.activity_tyre_change_scheme_button_tyre_uninstall:
-			uninstallTyre(helper.getSelectedTyre());
-			break;
+		switch (view.getId()) {
+			case R.id.activity_tyre_change_scheme_button_tyre_add:
+				startActivityForResult(new Intent(this, ActivityTyreAdd.class), ADD_TYRE);
+				break;
+			case R.id.activity_tyre_change_scheme_button_tyre_delete:
+				deleteTyre(helper.getSelectedTyre());
+				break;
+			case R.id.activity_tyre_change_scheme_button_tyre_uninstall:
+				uninstallTyre(helper.getSelectedTyre());
+				break;
+			case R.id.activity_tyre_change_scheme_button_save:
+				Intent returnIntent = new Intent();
+				returnIntent.putExtra(INTENT_TYRE_ENTRY, tyreEntry);
+				setResult(RESULT_OK, returnIntent);
+				finish();
+				break;
 		}
 	}
 }

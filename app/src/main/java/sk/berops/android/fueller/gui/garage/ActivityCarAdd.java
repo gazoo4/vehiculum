@@ -12,7 +12,7 @@ import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.dataModel.UnitConstants.DistanceUnit;
 import sk.berops.android.fueller.dataModel.UnitConstants.VolumeUnit;
-import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
+import sk.berops.android.fueller.dataModel.expense.FieldEmptyException;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityRecordAdd;
 
@@ -100,7 +100,7 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 		}
 		try {
 			super.saveFieldsAndPersist(view);
-		} catch (FieldsEmptyException e) {
+		} catch (FieldEmptyException e) {
 			e.throwAlert();
 		}
 	}

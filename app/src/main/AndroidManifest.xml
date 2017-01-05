@@ -75,13 +75,13 @@
             android:name="sk.berops.android.fueller.gui.maintenance.ActivityPartEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.maintenance.ActivityTyreAdd"
+            android:name="sk.berops.android.fueller.gui.tyres.ActivityTyreAdd"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.maintenance.ActivityTyreChange"
+            android:name="sk.berops.android.fueller.gui.tyres.ActivityTyreChange"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.maintenance.ActivityTyreChangeScheme"
+            android:name="sk.berops.android.fueller.gui.tyres.ActivityTyreChangeScheme"
             android:label="@string/app_name"/>
         <activity
             android:name="sk.berops.android.fueller.gui.service.ActivityServiceAdd"

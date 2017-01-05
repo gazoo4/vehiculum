@@ -18,6 +18,22 @@ public class Expense extends Record {
 	private Currency.Unit currency;
 	
 	protected Car car;
+
+	public Expense() {
+		super();
+	}
+
+	/**
+	 * Copy constructor
+	 * @param expense
+	 */
+	public Expense(Expense expense) {
+		super(expense);
+		this.eventDate = expense.eventDate;
+		this.cost = expense.cost;
+		this.currency = expense.currency;
+		this.car = expense.car;
+	}
 	
 	public void initAfterLoad(Car car) {
 		setCar(car);

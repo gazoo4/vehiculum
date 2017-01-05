@@ -10,17 +10,13 @@ import sk.berops.android.fueller.dataModel.expense.Expense;
 public abstract class GenericPart extends Expense {
 	@Element(name="condition")
 	private Condition condition;
-	@Element(name="quantity", required=false)
-	protected int quantity;
 	@Element(name="brand", required=false)
 	private String brand;
 	@Element(name="producerPartID", required=false)
 	private String producerPartID;
 	@Element(name="carmakerPartID", required=false)
 	private String carmakerPartID;
-	//@Element(category="category")
-	//private ??? category 
-	
+
 	public enum Condition {
 		NEW(0, "new"),
 		USED(1, "used"),
@@ -65,20 +61,31 @@ public abstract class GenericPart extends Expense {
 		}
 	}
 
+	/**
+	 * Constructor
+	 */
+	public GenericPart() {
+		super();
+	}
+
+	/**
+	 * Copy constructor
+	 * @param genericPart
+	 */
+	public GenericPart(GenericPart genericPart) {
+		super(genericPart);
+		this.condition = genericPart.condition;
+		this.brand = genericPart.brand;
+		this.producerPartID = genericPart.producerPartID;
+		this.carmakerPartID = genericPart.carmakerPartID;
+	}
+
 	public Condition getCondition() {
 		return condition;
 	}
 
 	public void setCondition(Condition condition) {
 		this.condition = condition;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}
 	
 	public String getBrand() {

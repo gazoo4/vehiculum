@@ -10,7 +10,7 @@ import sk.berops.android.fueller.gui.bureaucratic.ActivityBureaucraticAdd;
 import sk.berops.android.fueller.gui.fuelling.ActivityRefuel;
 import sk.berops.android.fueller.gui.insurance.ActivityInsuranceAdd;
 import sk.berops.android.fueller.gui.maintenance.ActivityMaintenanceAdd;
-import sk.berops.android.fueller.gui.maintenance.ActivityTyreChange;
+import sk.berops.android.fueller.gui.tyres.ActivityTyreChange;
 import sk.berops.android.fueller.gui.service.ActivityServiceAdd;
 import sk.berops.android.fueller.gui.toll.ActivityTollAdd;
 

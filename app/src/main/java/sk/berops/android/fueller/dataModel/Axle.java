@@ -3,6 +3,7 @@ package sk.berops.android.fueller.dataModel;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +12,7 @@ import java.util.UUID;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.gui.MainActivity;
 
-public class Axle {
+public class Axle implements Serializable {
 	
 	@Element(name="axleType")
 	private AxleType axleType;

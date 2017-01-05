@@ -11,20 +11,20 @@
         android:id="@+id/activity_tyre_change_scheme_top_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/activity_tyre_change_scheme_inner_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.6"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <RelativeLayout
                 android:id="@+id/activity_tyre_change_scheme_graphical_layout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.6" >
+                android:layout_weight="0.6">
             </RelativeLayout>
 
             <LinearLayout
@@ -32,7 +32,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.4"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <ListView
                     android:id="@+id/activity_tyre_change_scheme_tyre_pool_list_view"
@@ -46,7 +46,7 @@
             android:id="@+id/activity_tyre_change_scheme_tyre_details"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.4" >
+            android:layout_weight="0.4">
 
             <Button
                 android:id="@+id/activity_tyre_change_scheme_button_tyre_delete"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button"
                 android:onClick="onClick"
-                android:text="@string/activity_tyre_change_scheme_button_tyre_delete" />
+                android:text="@string/activity_tyre_change_scheme_button_tyre_delete"/>
 
             <Button
                 android:id="@+id/activity_tyre_change_scheme_button_tyre_uninstall"
@@ -65,7 +65,7 @@
                 android:layout_toRightOf="@id/activity_tyre_change_scheme_button_tyre_delete"
                 android:background="@drawable/transparent_button"
                 android:onClick="onClick"
-                android:text="@string/activity_tyre_change_scheme_button_tyre_move" />
+                android:text="@string/activity_tyre_change_scheme_button_tyre_move"/>
 
             <Button
                 android:id="@+id/activity_tyre_change_scheme_button_tyre_add"
@@ -75,7 +75,7 @@
                 android:layout_toRightOf="@id/activity_tyre_change_scheme_button_tyre_uninstall"
                 android:background="@drawable/transparent_button"
                 android:onClick="onClick"
-                android:text="@string/activity_tyre_change_scheme_button_tyre_add" />
+                android:text="@string/activity_tyre_change_scheme_button_tyre_add"/>
 
             <TextView
                 android:id="@+id/activity_tyre_change_scheme_brand_model"
@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_tyre_change_scheme_button_tyre_delete"
-                android:text="@string/activity_tyre_change_scheme_brand_model_text" />
+                android:text="@string/activity_tyre_change_scheme_brand_model_text"/>
 
             <TextView
                 android:id="@+id/activity_tyre_change_scheme_brand_model_value"
@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_tyre_change_scheme_button_tyre_delete"
-                android:layout_toRightOf="@id/activity_tyre_change_scheme_brand_model" />
+                android:layout_toRightOf="@id/activity_tyre_change_scheme_brand_model"/>
 
             <TextView
                 android:id="@+id/activity_tyre_change_scheme_dimensions"
@@ -99,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_tyre_change_scheme_brand_model"
-                android:text="@string/activity_tyre_change_scheme_dimensions_text" />
+                android:text="@string/activity_tyre_change_scheme_dimensions_text"/>
 
             <TextView
                 android:id="@+id/activity_tyre_change_scheme_dimensions_value"
@@ -107,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_tyre_change_scheme_brand_model_value"
-                android:layout_toRightOf="@id/activity_tyre_change_scheme_dimensions" />
+                android:layout_toRightOf="@id/activity_tyre_change_scheme_dimensions"/>
 
             <TextView
                 android:id="@+id/activity_tyre_change_scheme_dot_year_wear"
@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_tyre_change_scheme_dimensions"
-                android:text="@string/activity_tyre_change_scheme_dot_year_wear_text" />
+                android:text="@string/activity_tyre_change_scheme_dot_year_wear_text"/>
 
             <TextView
                 android:id="@+id/activity_tyre_change_scheme_dot_year_wear_value"
@@ -123,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_tyre_change_scheme_dimensions_value"
-                android:layout_toRightOf="@id/activity_tyre_change_scheme_dot_year_wear" />
+                android:layout_toRightOf="@id/activity_tyre_change_scheme_dot_year_wear"/>
 
             <TextView
                 android:id="@+id/activity_tyre_change_scheme_pattern"
@@ -131,7 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_tyre_change_scheme_dot_year_wear"
-                android:text="@string/activity_tyre_change_scheme_pattern_text" />
+                android:text="@string/activity_tyre_change_scheme_pattern_text"/>
 
             <TextView
                 android:id="@+id/activity_tyre_change_scheme_pattern_value"
@@ -139,7 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_tyre_change_scheme_dot_year_wear_value"
-                android:layout_toRightOf="@id/activity_tyre_change_scheme_pattern" />
+                android:layout_toRightOf="@id/activity_tyre_change_scheme_pattern"/>
 
             <TextView
                 android:id="@+id/activity_tyre_change_scheme_mileage"
@@ -147,7 +147,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_tyre_change_scheme_pattern"
-                android:text="@string/activity_tyre_change_scheme_mileage_text" />
+                android:text="@string/activity_tyre_change_scheme_mileage_text"/>
 
             <TextView
                 android:id="@+id/activity_tyre_change_scheme_mileage_value"
@@ -155,8 +155,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_tyre_change_scheme_pattern_value"
-                android:layout_toRightOf="@id/activity_tyre_change_scheme_mileage" />
+                android:layout_toRightOf="@id/activity_tyre_change_scheme_mileage"/>
         </RelativeLayout>
+
+        <Button
+            android:id="@+id/activity_tyre_change_scheme_button_save"
+            style="@style/button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/transparent_button"
+            android:onClick="onClick"
+            android:text="@string/activity_tyre_change_scheme_button_save"/>
     </LinearLayout>
 
 </RelativeLayout>

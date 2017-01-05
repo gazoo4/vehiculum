@@ -2,13 +2,14 @@ package sk.berops.android.fueller.dataModel.calculation;
 
 import com.github.mikephil.charting.data.Entry;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
 import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.fueller.engine.charts.IntoPieChartExtractable;
 
-public class Consumption implements IntoPieChartExtractable {
+public class Consumption implements IntoPieChartExtractable, Serializable {
 	private double totalCostAllEntries;										//cumulated cost across all entries
 	private TreeMap<ExpenseType, Double> totalCostPerEntryType;				//cumulated cost within the entries
 	private double averageCostAllEntries;									//average cost of all entries per distance

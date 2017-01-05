@@ -20,7 +20,7 @@ import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.UnitConstants;
 import sk.berops.android.fueller.dataModel.expense.Entry;
-import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
+import sk.berops.android.fueller.dataModel.expense.FieldEmptyException;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.fueller.gui.MainActivity;
@@ -132,7 +132,7 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
         }
     }
 
-    private void updateFuelVolume() throws NotFoundException, FieldsEmptyException {
+    private void updateFuelVolume() throws NotFoundException, FieldEmptyException {
         double volume = 0;
         UnitConstants.VolumeUnit volumeUnit;
         volumeUnit = UnitConstants.VolumeUnit.getVolumeUnit(spinnerVolumeUnit.getSelectedItemPosition());
@@ -155,7 +155,7 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
                 try {
                     super.saveFieldsAndPersist(view);
                     startActivity(new Intent(this, MainActivity.class));
-                } catch (FieldsEmptyException ex) {
+                } catch (FieldEmptyException ex) {
                     ex.throwAlert();
                 }
                 break;
@@ -163,7 +163,7 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
     }
 
     @Override
-    protected void updateFields() throws FieldsEmptyException {
+    protected void updateFields() throws FieldEmptyException {
         super.updateFields();
         updateFuelVolume();
         updateFuelType();

@@ -128,14 +128,38 @@
         
         <!--  TODO: add threadMin/threadMax infos 
         	+ add input value check into the logic -->
-        <EditText 
+       <LinearLayout
+           android:id="@+id/activity_tyre_add_condition_layout"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/activity_tyre_add_season"
+           android:paddingLeft="10dp"
+           android:orientation="horizontal">
+
+           <TextView
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight=".3"
+               style="@style/plain_text"
+               android:text="@string/activity_generic_part_add_condition_hint"/>
+
+           <Spinner
+               android:id="@+id/activity_tyre_add_condition"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight=".7"
+               android:entries="@array/activity_generic_part_add_condition"
+               android:prompt="@string/activity_generic_part_add_condition_hint"/>
+       </LinearLayout>
+
+        <EditText
             android:id="@+id/activity_tyre_add_thread_level"
             style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_add_season"
+            android:layout_below="@id/activity_tyre_add_condition_layout"
             android:hint="@string/activity_tyre_add_thread_level_hint"
-            android:inputType="textCapCharacters"/>
+            android:inputType="numberDecimal"/>
         
         <LinearLayout
             android:id="@+id/activity_tyre_add_cost_layout"
@@ -171,34 +195,11 @@
 	            android:prompt="@string/activity_expense_add_currency_hint" />
         </LinearLayout>
         
-        <LinearLayout
-            android:id="@+id/activity_tyre_add_condition_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_add_cost_layout"
-            android:orientation="horizontal">
-            
-	        <TextView 
-	            android:layout_width="0dp"
-	            android:layout_height="wrap_content"
-	            android:layout_weight=".3"
-	            style="@style/plain_text"
-	            android:text="@string/activity_generic_part_add_condition_hint"/>
-	        
-	        <Spinner 
-	            android:id="@+id/activity_tyre_add_condition"
-	            android:layout_width="0dp"
-	            android:layout_height="wrap_content"
-	            android:layout_weight=".7"
-	            android:entries="@array/activity_generic_part_add_condition"
-	            android:prompt="@string/activity_generic_part_add_condition_hint"/>
-        </LinearLayout>
-        
         <EditText 
             android:id="@+id/activity_tyre_add_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_add_condition_layout"
+            android:layout_below="@id/activity_tyre_add_cost_layout"
             android:hint="@string/activity_generic_comment_hint"
             android:inputType="textMultiLine"
             style="@style/plain_text" />

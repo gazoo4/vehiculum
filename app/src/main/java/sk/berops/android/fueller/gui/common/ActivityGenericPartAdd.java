@@ -5,7 +5,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import sk.berops.android.fueller.R;
-import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
+import sk.berops.android.fueller.dataModel.expense.FieldEmptyException;
 import sk.berops.android.fueller.dataModel.maintenance.GenericPart;
 import sk.berops.android.fueller.dataModel.maintenance.GenericPart.Condition;
 
@@ -26,15 +26,14 @@ public abstract class ActivityGenericPartAdd extends ActivityExpenseAdd {
 	}
 
 	@Override
-	protected void updateFields() throws FieldsEmptyException {
+	protected void updateFields() throws FieldEmptyException {
 		super.updateFields();
 		updateBrand();
 		updatePartsId();
-		updateQuantity();
 		updateCondition();
 	}
 	
-	protected void updateBrand() {
+	protected void updateBrand() throws FieldEmptyException {
 		if (editTextBrand.getText() != null) {
 			genericPart.setBrand(editTextBrand.getText().toString());
 		}
@@ -49,19 +48,6 @@ public abstract class ActivityGenericPartAdd extends ActivityExpenseAdd {
 		if (editTextProducerPartId != null
 				&& editTextProducerPartId.getText() != null) {
 			genericPart.setProducerPartID(editTextProducerPartId.getText().toString());
-		}
-	}
-	
-	protected void updateQuantity() throws FieldsEmptyException {
-		try {
-			if (editTextQuantity.getText() == null) {
-				// If user doesn't enter a quantifier, we assume he means 1 piece
-				genericPart.setQuantity(1);
-			} else {
-				genericPart.setQuantity(GuiUtils.extractInteger(editTextQuantity));
-			}
-		} catch (NumberFormatException ex) {
-			throwAlertFieldsEmpty(R.string.activity_generic_part_add_quantity_hint);
 		}
 	}
 	

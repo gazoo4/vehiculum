@@ -37,8 +37,11 @@ public class Tyre extends GenericPart {
 	private double mileageNonDriveAxle;
 	private double mileageNonDriveAxleSI;
 
-	private static final int NEW_TYRE_THREAD_LEVEL = 9; // in mm
+	public static final int NEW_TYRE_THREAD_LEVEL = 9; // in mm
 
+	/**
+	 * Constructor
+	 */
 	public Tyre() {
 		this(NEW_TYRE_THREAD_LEVEL);
 		if (getCreationDate() == null) {
@@ -46,14 +49,38 @@ public class Tyre extends GenericPart {
 		}
 	}
 
+	/**
+	 * Customized constructor to create a tyre with a defined thread level
+	 * @param threadLevel
+	 */
 	public Tyre(int threadLevel) {
-		super();
 		this.threadLevel = threadLevel;
 		if (threadLevel == NEW_TYRE_THREAD_LEVEL) {
 			this.setCondition(Condition.NEW);
 		} else {
 			this.setCondition(Condition.USED);
 		}
+	}
+
+	/**
+	 * Copy constructor
+	 * @param tyre
+	 */
+	public Tyre(Tyre tyre) {
+		super(tyre);
+		this.model = tyre.model;
+		this.width = tyre.width;
+		this.height = tyre.height;
+		this.diameter = tyre.diameter;
+		this.weightIndex = tyre.weightIndex;
+		this.speedIndex = tyre.speedIndex;
+		this.dot = tyre.dot;
+		this.season = tyre.season;
+		this.threadLevel = tyre.threadLevel;
+		this.threadMin = tyre.threadMin;
+		this.threadMax = tyre.threadMax;
+		this.mileageDriveAxle = tyre.mileageDriveAxle;
+		this.mileageNonDriveAxle = tyre.mileageNonDriveAxle;
 	}
 
 	public enum Season {

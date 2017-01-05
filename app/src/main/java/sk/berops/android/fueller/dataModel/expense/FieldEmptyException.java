@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import sk.berops.android.fueller.R;
 
-public class FieldsEmptyException extends Exception {
+public class FieldEmptyException extends Exception {
 
 	/**
 	 * 
@@ -17,7 +17,7 @@ public class FieldsEmptyException extends Exception {
 	private int fieldID;
 	private Context context;
 
-	public FieldsEmptyException(Context context, int fieldID) {
+	public FieldEmptyException(Context context, int fieldID) {
 		super();
 		this.setFieldID(fieldID);
 		this.setContext(context);

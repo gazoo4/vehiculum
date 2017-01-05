@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.util.Collection;
 
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
-import sk.berops.android.fueller.gui.maintenance.TyreGUIContainer;
+import sk.berops.android.fueller.gui.tyres.TyreGUIContainer;
 
 public class GuiUtils {
 	
@@ -36,10 +36,15 @@ public class GuiUtils {
 	}
 
 	public static boolean isEmptyEditText(EditText e) {
-		if (e == null || e.getText().equals("")) {
+		try {
+			if (e.getText().toString().equals("")) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (NullPointerException npe) {
+			// if EditText is null, we consider the string being empty
 			return true;
-		} else {
-			return false;
 		}
 	}
 	
