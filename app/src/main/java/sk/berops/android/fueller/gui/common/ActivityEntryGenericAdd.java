@@ -18,7 +18,7 @@ import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.Expense;
-import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
+import sk.berops.android.fueller.dataModel.expense.FieldEmptyException;
 import sk.berops.android.fueller.dataModel.tags.Tag;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.tags.FragmentTagManager;
@@ -86,7 +86,7 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 		buttonDate.setText(DateFormat.getDateInstance().format(entry.getEventDate()));
 	}
 
-	private void updateMileage() throws FieldsEmptyException {
+	private void updateMileage() throws FieldEmptyException {
 		Car car = MainActivity.garage.getActiveCar();
 		double mileage = 0;
 		try {
@@ -107,12 +107,12 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 		updateTextAddEventDate();
 	}
 
-	protected void updateFields() throws FieldsEmptyException {
+	protected void updateFields() throws FieldEmptyException {
 		super.updateFields();
 		updateMileage();
 	}
 
-	public void saveFieldsAndPersist(View view) throws FieldsEmptyException {
+	public void saveFieldsAndPersist(View view) throws FieldEmptyException {
 		Car car = MainActivity.garage.getActiveCar();
 		entry.setCar(car);
 		if (!editMode) {

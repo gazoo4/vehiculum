@@ -10,7 +10,9 @@ import java.util.UUID;
 
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Currency;
+import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
+import sk.berops.android.fueller.gui.MainActivity;
 
 public class TyreChangeEntry extends Entry {
 	
@@ -35,7 +37,7 @@ public class TyreChangeEntry extends Entry {
 	 * List of tyres bought 
 	 */
 	@ElementList(inline=true, required=false)
-	private ArrayList<UUID> boughtTyresIDs;
+	private ArrayList<Tyre> boughtTyres;
 	
 	/**
 	 * List of tyres thrown away
@@ -51,12 +53,16 @@ public class TyreChangeEntry extends Entry {
 
 	public TyreChangeEntry() {
 		super();
+		boughtTyres = new ArrayList<>();
+		deletedTyreIDs = new ArrayList<>();
+		threadLevelUpdate = new HashMap<>();
 	}
 	
 	@Override
 	public void initAfterLoad(Car car) {
 		super.initAfterLoad(car);
 		this.car = car;
+		tyreScheme.initAfterLoad(car);
 	}
 
 	public Car getCar() {
@@ -111,12 +117,12 @@ public class TyreChangeEntry extends Entry {
 		this.tyreScheme = tyreScheme;
 	}
 
-	public ArrayList<UUID> getBoughtTyresIDs() {
-		return boughtTyresIDs;
+	public ArrayList<Tyre> getBoughtTyres() {
+		return boughtTyres;
 	}
 
-	public void setBoughtTyresIDs(ArrayList<UUID> boughtTyresIDs) {
-		this.boughtTyresIDs = boughtTyresIDs;
+	public void setBoughtTyres(ArrayList<Tyre> boughtTyres) {
+		this.boughtTyres = boughtTyres;
 	}
 
 	public ArrayList<UUID> getDeletedTyreIDs() {
@@ -125,6 +131,10 @@ public class TyreChangeEntry extends Entry {
 
 	public void setDeletedTyreIDs(ArrayList<UUID> deletedTyreIDs) {
 		this.deletedTyreIDs = deletedTyreIDs;
+	}
+
+	public ArrayList<Tyre> getDeletedTyres() {
+		return MainActivity.garage.getTyresByIDs(getDeletedTyreIDs());
 	}
 
 	/**

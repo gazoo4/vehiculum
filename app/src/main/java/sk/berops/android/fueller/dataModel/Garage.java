@@ -13,21 +13,17 @@ import java.util.LinkedList;
 import java.util.UUID;
 
 import sk.berops.android.fueller.dataModel.expense.Entry;
+import sk.berops.android.fueller.dataModel.expense.History;
 import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.dataModel.tags.Tag;
+import sk.berops.android.fueller.gui.MainActivity;
 
 @Root
 public class Garage {
 	
 	@ElementList(inline = true, required = false)
 	private LinkedList<Car> cars;
-
-	/**
-	 * The list of tyres bought, used and trashed for the entire history of the garage
-	 */
-	@ElementList(inline = true, required = false)
-	private ArrayList<Tyre> tyreInventory;
 
 	@Element(name = "activeCar", required = false)
 	private int activeCarId;
@@ -38,7 +34,6 @@ public class Garage {
 	public Garage() {
 		super();
 		cars = new LinkedList<Car>();
-		tyreInventory = new ArrayList<Tyre>();
 		activeCarId = -1;
 
 		Tag root = getRootTag();
@@ -69,10 +64,15 @@ public class Garage {
 	 * @return ArrayList<Tyre> collection of tyres
 	 */
 	public ArrayList<Tyre> getAllTyres() {
-		if (tyreInventory == null) {
-			tyreInventory = new ArrayList<Tyre>();
+		ArrayList<Tyre> tyres = new ArrayList<>();
+
+		for (Car c: getCars()) {
+			for (TyreChangeEntry e: c.getHistory().getTyreChangeEntries()) {
+				tyres.addAll(e.getBoughtTyres());
+			}
 		}
-		return tyreInventory;
+
+		return tyres;
 	}
 
 	/**
@@ -91,59 +91,35 @@ public class Garage {
 	}
 
 	/**
-	 * Get a snapshot of the tyre inventory from just before a specific date
-	 * @param date from which a snapshot is required
+	 * Get a snapshot of the tyre inventory (i.e. available tyres - not installed and not trashed)
+	 * from just before a specific date
+	 * @param dateTo date to which a snapshot is required
 	 * @return ArrayList<Tyre> tyre inventory snapshot
 	 */
-	public ArrayList<Tyre> getTyreInventoryToDate(Date date) {
-		ArrayList<Tyre> inventory = new ArrayList<Tyre>();
-		Tyre t;
+	public ArrayList<Tyre> getAvailableTyresToDate(Date dateTo) {
+		ArrayList<Tyre> availableTyres = new ArrayList<Tyre>();
+		ArrayList<UUID> deletedTyre = new ArrayList<>();
 
-		if (date == null) {
-			Log.d("DEBUG", "Called getTyreInventoryToDate(null). Returning null.");
-			return null;
-		}
-
-		TyreChangeEntry last = null;
-		// Need to scan all tyre change entries for added/removed tyres
-		for (TyreChangeEntry e : getActiveCar().getHistory().getTyreChangeEntries()) {
-			last = e;
-			if (e.getEventDate().compareTo(date) < 0) {
-
-				// Add bought tyres to the list of available tyres
-				for (UUID id : e.getBoughtTyresIDs()) {
-					t = getTyreById(id);
-					if (t != null) {
-						inventory.add(t);
-					}
+		LinkedList<TyreChangeEntry> entries;
+		for (Car c: MainActivity.garage.getCars()) {
+			// Iterate through all the cars
+			entries = c.getHistory().getTyreChangeEntries();
+			// Filter the entries to defined date
+			History.filterEntriesByDate(entries, null, dateTo);
+			for (TyreChangeEntry e: entries) {
+				// For entry add the bought tyres
+				availableTyres.addAll(e.getBoughtTyres());
+				// If the tyre has been trashed by the user, it's not available
+				availableTyres.removeAll(e.getDeletedTyres());
 				}
 
-				// Remove trashed tyres from the list of available tyres
-				for (UUID id : e.getDeletedTyreIDs()) {
-					t = getTyreById(id);
-					if (t != null) {
-						inventory.remove(t);
-					}
-				}
-			}
-
-			// Events are sorted chronologically. Once we get over the event date, we don't need to consider the newer events
-			break;
-		}
-
-		// Need to remove the tyres from this list, which are installed on the car now
-		if (last != null) {
-			for (Axle a : last.getTyreScheme().getAxles()) {
-				for (UUID id : a.getTyreIDs()) {
-					if (id != null) {
-						t = getTyreById(id);
-						inventory.remove(t);
-					}
-				}
+			// Also, if the tyres are installed on a car, they are not available
+			if (entries.size() > 0) {
+				availableTyres.removeAll(entries.getLast().getTyreScheme().getInstalledTyres());
 			}
 		}
 
-		return inventory;
+		return availableTyres;
 	}
 
 	/**
@@ -151,8 +127,11 @@ public class Garage {
 	 * @param entry determining the event
 	 * @return ArrayList<Tyre> tyre inventory snapshot
 	 */
-	public ArrayList<Tyre> getTyreInventoryToEntry(Entry entry) {
-		return getTyreInventoryToDate(entry.getEventDate());
+	public ArrayList<Tyre> getAvailableTyresToEntry(Entry entry) {
+		if (entry == null) {
+			return getAvailableTyresToDate(null);
+		}
+		return getAvailableTyresToDate(entry.getEventDate());
 	}
 
 	/**
@@ -160,7 +139,7 @@ public class Garage {
 	 * @return ArrayList<Tyre> of available tyres
 	 */
 	public ArrayList<Tyre> getAvailableTyres() {
-		return getTyreInventoryToDate(new Date());
+		return getAvailableTyresToDate(null);
 	}
 
 	public Car getActiveCar() {
@@ -210,20 +189,21 @@ public class Garage {
 		this.rootTag.initAfterLoad();
 	}
 
-	public ArrayList<Tyre> getTyresByIDs(Collection<UUID> c) {
+	/**
+	 * Get a list of tyres from the supplied list of tyre UUIDs
+	 * @param uuids
+	 * @return
+	 */
+	public ArrayList<Tyre> getTyresByIDs(Collection<UUID> uuids) {
 		ArrayList<Tyre> tyres = new ArrayList<>();
-		for (UUID l : c) {
-			if (l == null) {
+		for (UUID u : uuids) {
+			if (u == null) {
 				tyres.add(null);
 				continue;
 			}
-			tyres.add(getTyreById(l));
+			tyres.add(getTyreById(u));
 		}
 		return tyres;
-	}
-
-	public void addNewTyre(Tyre tyre) {
-		tyreInventory.add(tyre);
 	}
 
 	/**

@@ -9,6 +9,8 @@ public class ReplacementPart extends GenericPart {
 
 	@Element(name="originality")
 	private Originality originality;
+	@Element(name="quantity", required=false)
+	protected int quantity;
 	
 	public enum Originality{
 		OEM(0, "oem"),
@@ -69,5 +71,13 @@ public class ReplacementPart extends GenericPart {
 
 	public void setOriginality(Originality originality) {
 		this.originality = originality;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 }
