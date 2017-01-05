@@ -1,13 +1,14 @@
-package sk.berops.android.fueller.gui.maintenance;
+package sk.berops.android.fueller.gui.tyres;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import sk.berops.android.fueller.R;
-import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
+import sk.berops.android.fueller.dataModel.expense.FieldEmptyException;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre.Season;
 import sk.berops.android.fueller.gui.common.ActivityGenericPartAdd;
@@ -26,9 +27,12 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 	private EditText editTextDot;
 	private EditText editTextThreadLevel;
 	private Spinner spinnerSeason;
-	
+
 	protected boolean editMode;
 	protected Tyre tyre;
+
+	public static final String INTENT_TYRE = "add tyre";
+	public static final String INTENT_COUNT = "tyres count";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +85,47 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 		mapSpinners.put(R.array.activity_tyre_add_season, spinnerSeason);
 	}
 
-	private void updateModel() {
+	@Override
+	protected void initializeGuiObjects() {
+		spinnerCondition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+				if (spinnerCondition.getSelectedItemPosition() == 0) {
+					// If the tyre is new, we don't need to bother with the threadLevel.
+					editTextThreadLevel.setVisibility(View.GONE);
+				} else {
+					editTextThreadLevel.setVisibility(View.VISIBLE);
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> adapterView) {
+
+			}
+		});
+	}
+
+	/**
+	 * Method to update the brand of the tyre. This is a mandatory field, that's why an exception
+	 * is thrown if this information is not supplied.
+	 * @throws FieldEmptyException
+	 */
+	@Override
+	protected void updateBrand() throws FieldEmptyException {
+		if (isEmptyEditText(editTextBrand)) {
+			throwAlertFieldsEmpty(R.string.activity_tyre_add_brand_hint);
+		}
+		super.updateBrand();
+	}
+
+	/**
+	 * Method to update the model name of the tyre. This is a mandatory field, that's why an
+	 * exception is thrown if this information is not supplied.
+	 * @throws FieldEmptyException
+	 */
+	private void updateModel() throws FieldEmptyException {
 		if (isEmptyEditText(editTextModel)) {
-			return;
+			throwAlertFieldsEmpty(R.string.activity_tyre_add_model_hint);
 		}
 		tyre.setModel(editTextModel.getText().toString());
 	}
@@ -131,10 +173,14 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 	}
 	
 	private void updateThreadLevel() {
-		if (isEmptyEditText(editTextThreadLevel)) {
+		if (spinnerCondition.getSelectedItemPosition() == 0) {
+			// If the tyre is new, set threadLevel to max and we're done here
+			tyre.setThreadLevel(tyre.NEW_TYRE_THREAD_LEVEL);
+		} else if (isEmptyEditText(editTextThreadLevel)) {
 			return;
+		} else {
+			tyre.setThreadLevel(GuiUtils.extractDouble(editTextThreadLevel));
 		}
-		tyre.setThreadLevel(GuiUtils.extractDouble(editTextThreadLevel));
 	}
 	
 	private void updateSeason() {
@@ -142,7 +188,7 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 		tyre.setSeason(season);
 	}
 	
-	protected void updateFields() throws FieldsEmptyException {
+	protected void updateFields() throws FieldEmptyException {
 		super.updateFields();
 		updateModel();
 		updateWidth();
@@ -160,16 +206,24 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 		}
 	}
 
+	private int getTyreCount() {
+		if (isEmptyEditText(editTextQuantity)) {
+			return 1;
+		}
+		return GuiUtils.extractInteger(editTextQuantity);
+	}
+
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.activity_tyre_add_button_commit:
 			try {
 				updateFields();
 				Intent returnIntent = new Intent();
-				returnIntent.putExtra("tyre", tyre);
+				returnIntent.putExtra(INTENT_TYRE, tyre);
+				returnIntent.putExtra(INTENT_COUNT, getTyreCount());
 				setResult(RESULT_OK, returnIntent);
 				finish();
-			} catch (FieldsEmptyException e) {
+			} catch (FieldEmptyException e) {
 				e.throwAlert();
 			}
 			break;

@@ -4,7 +4,9 @@ package sk.berops.android.fueller.dataModel.expense;
 import org.simpleframework.xml.ElementList;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -138,5 +140,26 @@ public class History implements Serializable {
 			cost += e.getCost();
 		}
 		return cost;
+	}
+
+	/**
+	 * Method used to filter the entries by date. !!! NEEDS TO BE TESTED !!! (especially this '?' magic).
+	 * This
+	 * @param entries to filter
+	 * @param from beginning of the time interval. If null, no entry will be filtered on this parameter.
+	 * @param to end of the time interval. If null, no entry will be filtered on this parameter.
+	 * @return ArrayList where all entries have eventDate in the interval (from, to)
+	 */
+	public static void filterEntriesByDate(LinkedList<? extends Entry> entries, Date from, Date to) {
+		for (Entry e: entries) {
+			if (from == null || from.before(e.getEventDate())) {
+				if (to == null || to.after(e.getEventDate())) {
+					// If Entry e has EventDate within the defined interval, check the next item
+					continue;
+				}
+			}
+			// Otherwise remove Entry e from the list
+			entries.remove(e);
+		}
 	}
 }

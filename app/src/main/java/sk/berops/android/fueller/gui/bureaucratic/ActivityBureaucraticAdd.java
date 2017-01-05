@@ -12,7 +12,7 @@ import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.dataModel.expense.BureaucraticEntry;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
-import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
+import sk.berops.android.fueller.dataModel.expense.FieldEmptyException;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 
@@ -64,7 +64,7 @@ public class ActivityBureaucraticAdd extends ActivityEntryGenericAdd {
 	}
 	
 	@Override
-	protected void updateFields() throws FieldsEmptyException {
+	protected void updateFields() throws FieldEmptyException {
 		super.updateFields();
 		// To be updated once more fields are added to BureaucraticEntry
 	}
@@ -75,7 +75,7 @@ public class ActivityBureaucraticAdd extends ActivityEntryGenericAdd {
 			try {
 				super.saveFieldsAndPersist(view);
 				startActivity(new Intent(this, MainActivity.class));
-			} catch (FieldsEmptyException ex) {
+			} catch (FieldEmptyException ex) {
 				ex.throwAlert();
 			}
 			break;

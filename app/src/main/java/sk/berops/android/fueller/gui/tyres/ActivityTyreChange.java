@@ -1,4 +1,4 @@
-package sk.berops.android.fueller.gui.maintenance;
+package sk.berops.android.fueller.gui.tyres;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,8 +15,9 @@ import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
-import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
+import sk.berops.android.fueller.dataModel.expense.FieldEmptyException;
 import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
+import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
@@ -59,8 +60,9 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 			tyreChangeEntry = new TyreChangeEntry();
 		}
 		tyreChangeEntry.setExpenseType(ExpenseType.TYRES);
+		tyreChangeEntry.setCar(car);
 		
-		super.entry = (Entry) this.tyreChangeEntry;
+		super.entry = this.tyreChangeEntry;
 		super.onCreate(savedInstanceState);
 	}
 
@@ -139,7 +141,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	}
 	
 	@Override
-	protected void updateFields() throws FieldsEmptyException {
+	protected void updateFields() throws FieldEmptyException {
 		super.updateFields();
 		calculateCost();
 	}
@@ -151,6 +153,10 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	}
 	
 	private void reloadTyresCost() {
+		double cost = 0.0;
+		for (Tyre t: tyreChangeEntry.getBoughtTyres()) {
+			cost += t.getCost();
+		}
 		editTextTyresCost.setText(((Double) tyreChangeEntry.getTyresCost()).toString());
 	}
 	
@@ -158,8 +164,8 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		switch (view.getId()) {
 		case R.id.activity_tyre_change_button_advanced:
 			Intent i = new Intent(this, ActivityTyreChangeScheme.class);
-			if (tyreChangeEntry.getTyreScheme() != null) {
-				i.putExtra("entry", tyreChangeEntry);
+			if (tyreChangeEntry != null) {
+				i.putExtra(ActivityTyreChangeScheme.INTENT_TYRE_ENTRY, tyreChangeEntry);
 			}
 			startActivityForResult(i, SCHEME);
 			break;
@@ -167,23 +173,30 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 			try {
 				super.saveFieldsAndPersist(view);
 				startActivity(new Intent(this, MainActivity.class));
-			} catch (FieldsEmptyException e) {
+			} catch (FieldEmptyException e) {
 				e.throwAlert();
 			}
 			break;
 		}
 	}
-	
+
+	/**
+	 * Callback method from follow-up activities
+	 * @param requestCode
+	 * @param resultCode
+	 * @param data
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case SCHEME:
+			// We're coming back from ActivityTyreChangeScheme
 			if (resultCode == RESULT_OK) {
-				tyreChangeEntry.setTyreScheme((TyreConfigurationScheme) data.getExtras().getSerializable("scheme"));
-				tyreChangeEntry.setTyresCost(data.getExtras().getDouble(("tyres cost")));
+				tyreChangeEntry = (TyreChangeEntry) data.getExtras().getSerializable(ActivityTyreChangeScheme.INTENT_TYRE_ENTRY);
 				reloadTyresCost();
 			} else if (resultCode == RESULT_CANCELED) {
 				// nothing needed to be done if the scheme addition was cancelled
+				reloadTyresCost();
 			}
 			break;
 		}

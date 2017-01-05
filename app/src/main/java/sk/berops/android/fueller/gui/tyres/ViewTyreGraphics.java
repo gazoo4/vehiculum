@@ -1,4 +1,4 @@
-package sk.berops.android.fueller.gui.maintenance;
+package sk.berops.android.fueller.gui.tyres;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -31,7 +31,7 @@ public class ViewTyreGraphics extends View implements Runnable {
 		tyreGUIContainer.setWidth((int) (y * 0.5));
 		tyreGUIContainer.setHeight(y);
 		tyreDrawer.drawTyre(canvas, tyreGUIContainer);
-		postDelayed(this, 10);
+		postDelayed(this, 40);
 	}
 
 	@Override

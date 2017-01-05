@@ -23,7 +23,7 @@ import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.expense.Entry;
 import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
-import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
+import sk.berops.android.fueller.dataModel.expense.FieldEmptyException;
 import sk.berops.android.fueller.dataModel.expense.MaintenanceEntry;
 import sk.berops.android.fueller.dataModel.expense.MaintenanceEntry.Type;
 import sk.berops.android.fueller.dataModel.maintenance.ReplacementPart;
@@ -215,12 +215,12 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 	}
 	
 	@Override
-	protected void updateFields() throws FieldsEmptyException {
+	protected void updateFields() throws FieldEmptyException {
 		super.updateFields();
 		updateType();
 	}
 
-	private void updateType() throws FieldsEmptyException {
+	private void updateType() throws FieldEmptyException {
 		MaintenanceEntry.Type type;
 		switch (radioGroupType.getCheckedRadioButtonId()) {
 		case R.id.activity_maintenance_type_planned:
@@ -250,7 +250,7 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 			try {
 				super.saveFieldsAndPersist(view);
 				startActivity(new Intent(this, MainActivity.class));
-			} catch (FieldsEmptyException ex) {
+			} catch (FieldEmptyException ex) {
 				ex.throwAlert();
 			}
 			break;

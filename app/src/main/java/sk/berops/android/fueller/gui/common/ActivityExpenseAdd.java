@@ -10,7 +10,7 @@ import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.configuration.Preferences;
 import sk.berops.android.fueller.dataModel.Currency;
 import sk.berops.android.fueller.dataModel.expense.Expense;
-import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
+import sk.berops.android.fueller.dataModel.expense.FieldEmptyException;
 
 public abstract class ActivityExpenseAdd extends ActivityRecordAdd {
 
@@ -37,12 +37,12 @@ public abstract class ActivityExpenseAdd extends ActivityRecordAdd {
 	}
 	
 	@Override
-	protected void updateFields() throws FieldsEmptyException {
+	protected void updateFields() throws FieldEmptyException {
 		super.updateFields();
 		updateCost();
 	}
 	
-	private void updateCost() throws FieldsEmptyException {
+	private void updateCost() throws FieldEmptyException {
 		try {
 			Currency.Unit currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
 			expense.setCost(GuiUtils.extractDouble(editTextCost), currency);

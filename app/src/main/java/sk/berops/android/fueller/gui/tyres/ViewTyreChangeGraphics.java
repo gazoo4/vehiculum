@@ -1,4 +1,4 @@
-package sk.berops.android.fueller.gui.maintenance;
+package sk.berops.android.fueller.gui.tyres;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -50,7 +50,7 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 		
 		tyreDrawer = TyreDrawer.getInstance();
 		helper = TyreSchemeHelper.getInstance();
-		tyreObjects = new LinkedList<TyreGUIContainer>();
+		tyreObjects = new LinkedList<>();
 	}
 	
 	@Override
@@ -59,7 +59,7 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 		drawBackground(canvas);
 		drawChasis(canvas);
 		//TODO drawEngine(canvas)
-		postDelayed(this, 10);
+		postDelayed(this, 40);
 	}
 	
 	@Override

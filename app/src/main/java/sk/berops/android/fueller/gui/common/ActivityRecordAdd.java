@@ -8,7 +8,7 @@ import java.util.Calendar;
 
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.Record;
-import sk.berops.android.fueller.dataModel.expense.FieldsEmptyException;
+import sk.berops.android.fueller.dataModel.expense.FieldEmptyException;
 import sk.berops.android.fueller.gui.DefaultActivity;
 import sk.berops.android.fueller.gui.MainActivity;
 
@@ -26,11 +26,11 @@ public abstract class ActivityRecordAdd extends DefaultActivity {
 		super.onCreate(savedInstanceState);
 	}
 	
-	public void throwAlertFieldsEmpty(int id) throws FieldsEmptyException {
-		throw new FieldsEmptyException(this, id); 
+	public void throwAlertFieldsEmpty(int id) throws FieldEmptyException {
+		throw new FieldEmptyException(this, id);
 	}
 	
-	protected void updateFields() throws FieldsEmptyException {
+	protected void updateFields() throws FieldEmptyException {
 		updateComment();
 		if (record.getCreationDate() == null) {
 			updateCreationDate();
@@ -55,7 +55,7 @@ public abstract class ActivityRecordAdd extends DefaultActivity {
 		record.setModifiedDate(c.getTime());
 	}
 	
-	public void saveFieldsAndPersist(View view) throws FieldsEmptyException {
+	public void saveFieldsAndPersist(View view) throws FieldEmptyException {
 		updateFields();
 		persistGarage();
 	}

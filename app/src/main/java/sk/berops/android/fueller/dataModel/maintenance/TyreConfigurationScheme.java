@@ -24,7 +24,7 @@ import sk.berops.android.fueller.dataModel.Car.CarType;
 public class TyreConfigurationScheme implements Serializable, Cloneable {
 
 	/**
-	 * Axles in this tyre configuration
+	 * Axles in this tyre configuration, linked from front to back
 	 */
 	@ElementList(inline=true, required=false)
 	private LinkedList<Axle> axles;
@@ -33,6 +33,7 @@ public class TyreConfigurationScheme implements Serializable, Cloneable {
 	
 	public TyreConfigurationScheme(Car car) {
 		this.car = car;
+		createAxles(car.getType());
 	}
 	
 	public void initAfterLoad(Car car) {
@@ -41,9 +42,13 @@ public class TyreConfigurationScheme implements Serializable, Cloneable {
 			a.initAfterLoad(car);
 		}
 	}
-	
-	public LinkedList<Axle> createAxles(CarType type) {
-		LinkedList<Axle> axles = new LinkedList<Axle>();
+
+	/**
+	 * Method to generate the axle structures based on the type of the car
+	 * @param type of the car
+	 */
+	public void createAxles(CarType type) {
+		LinkedList<Axle> axles = new LinkedList<>();
 		switch (type) {
 		case CITY_CAR:
 		case COUPE:
@@ -72,9 +77,11 @@ public class TyreConfigurationScheme implements Serializable, Cloneable {
 			axles.add(new Axle(Axle.AxleType.STANDARD));
 			break;
 		case TRUCK:
-		case TRUCK_TRACTOR:
 			axles.add(new Axle(Axle.AxleType.STANDARD));
 			axles.add(new Axle(Axle.AxleType.TANDEM));
+			axles.add(new Axle(Axle.AxleType.TANDEM));
+		case TRUCK_TRACTOR:
+			axles.add(new Axle(Axle.AxleType.STANDARD));
 			axles.add(new Axle(Axle.AxleType.TANDEM));
 			break;
 		default: 
@@ -82,12 +89,12 @@ public class TyreConfigurationScheme implements Serializable, Cloneable {
 			break;
 		}
 		
-		return axles;
+		setAxles(axles);
 	}
 	
 	public LinkedList<Axle> getAxles() {
 		if (axles == null) {
-			return createAxles(car.getType());
+			createAxles(car.getType());
 		}
 		return axles;
 	}
@@ -101,5 +108,19 @@ public class TyreConfigurationScheme implements Serializable, Cloneable {
 		TyreConfigurationScheme scheme = new TyreConfigurationScheme(car);
 		scheme.setAxles(new LinkedList<Axle>(getAxles()));
 		return scheme;
+	}
+
+	/**
+	 * Method used to return the list of tyres installed in the defined scheme
+	 * @return list of tyres installed
+	 */
+	public LinkedList<Tyre> getInstalledTyres() {
+		LinkedList<Tyre> result = new LinkedList<>();
+
+		for (Axle a: getAxles()) {
+			result.addAll(a.getTyres());
+		}
+
+		return result;
 	}
 }

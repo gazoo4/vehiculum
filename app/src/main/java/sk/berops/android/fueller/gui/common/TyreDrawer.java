@@ -7,8 +7,8 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.Log;
 
-import sk.berops.android.fueller.gui.maintenance.TyreGUIContainer;
-import sk.berops.android.fueller.gui.maintenance.TyreSchemeHelper;
+import sk.berops.android.fueller.gui.tyres.TyreGUIContainer;
+import sk.berops.android.fueller.gui.tyres.TyreSchemeHelper;
 
 public class TyreDrawer {
 	private Paint tyrePaint;

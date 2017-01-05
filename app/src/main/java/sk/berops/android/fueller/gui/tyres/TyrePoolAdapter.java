@@ -1,4 +1,4 @@
-package sk.berops.android.fueller.gui.maintenance;
+package sk.berops.android.fueller.gui.tyres;
 
 import android.content.Context;
 import android.view.LayoutInflater;

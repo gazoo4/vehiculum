@@ -16,8 +16,23 @@ public abstract class Record implements Serializable, Identifiable {
 	@Element(name="uuid", required=false)
 	private UUID uuid;
 
+	/**
+	 * Constructor
+	 */
 	public Record() {
 		setCreationDate(new Date());
+	}
+
+	/**
+	 * Copy constructor
+	 * @param record
+	 */
+	public Record(Record record) {
+		this.comment = record.comment;
+		this.creationDate = record.creationDate;
+		this.modifiedDate = record.modifiedDate;
+		// When using copy constructor, we want to use new UUID for the newly created object.
+		this.uuid = getUuid();
 	}
 
 	public String getComment() {
