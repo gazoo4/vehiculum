@@ -29,9 +29,9 @@ public class ServiceConsumption extends Consumption {
 			super.reloadChartData(data);
 			return;
 		}
-		pieChartLegend = new ArrayList<String>();
-		pieChartVals = new ArrayList<Entry>();
-		pieChartColors = new ArrayList<Integer>();
+		pieChartLegend = new ArrayList<>();
+		pieChartVals = new ArrayList<>();
+		pieChartColors = new ArrayList<>();
 
 		for (ServiceEntry.Type t : ServiceEntry.Type.values()) {
 			if (getTotalCostPerServiceType().get(t) == null) {

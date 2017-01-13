@@ -72,9 +72,9 @@ public class FuelConsumption extends Consumption {
 			super.reloadChartData(data);
 			return;
 		}
-		pieChartLegend = new ArrayList<String>();
-		pieChartVals = new ArrayList<Entry>();
-		pieChartColors = new ArrayList<Integer>();
+		pieChartLegend = new ArrayList<>();
+		pieChartVals = new ArrayList<>();
+		pieChartColors = new ArrayList<>();
 
 		for (FuelType t : FuelType.values()) {
 			if (getTotalFuelCostPerFuelType().get(t) == null) {

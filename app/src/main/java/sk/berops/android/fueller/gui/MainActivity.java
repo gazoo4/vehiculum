@@ -38,6 +38,7 @@ import sk.berops.android.fueller.gui.garage.ActivityGarageManagement;
 import sk.berops.android.fueller.gui.preferences.PreferenceWithHeaders;
 import sk.berops.android.fueller.gui.report.ActivityReportsNavigate;
 import sk.berops.android.fueller.io.DataHandler;
+import sk.berops.android.fueller.io.xml.GaragePersistException;
 import sk.berops.android.fueller.io.xml.XMLHandler;
 
 public class MainActivity extends DefaultActivity {
@@ -54,8 +55,14 @@ public class MainActivity extends DefaultActivity {
 
 
 	public static void saveGarage(Activity activity) {
-		getDataHandler().persistGarage(activity);
-		Toast.makeText(activity.getApplication(), activity.getResources().getString(R.string.activity_main_garage_saved_toast), Toast.LENGTH_LONG).show();
+		String toast;
+		try {
+			getDataHandler().persistGarage(activity);
+			toast = activity.getResources().getString(R.string.activity_main_garage_saved_toast);
+		} catch (GaragePersistException e) {
+			toast = activity.getResources().getString(R.string.activity_main_garage_saving_error_toast);
+		}
+		Toast.makeText(activity.getApplication(), toast, Toast.LENGTH_SHORT).show();
 	}
 
 
@@ -80,8 +87,8 @@ public class MainActivity extends DefaultActivity {
 		if (garage == null) {
 			try {
 				garage = dataHandler.loadGarage(this);
-				Log.d("DEBUG", garage.getActiveCar().getNickname());
-				Toast.makeText(getApplicationContext(), "Loaded car: "+ garage.getActiveCar().getNickname(), Toast.LENGTH_LONG).show();
+				garage.initAfterLoad();
+				Toast.makeText(getApplicationContext(), "Car loaded: "+ garage.getActiveCar().getNickname() +". Garage initialized.", Toast.LENGTH_LONG).show();
 			} catch (FileNotFoundException e) {
 				Log.d("DEBUG", "Could not load garage.xml");
 				Log.d("DEBUG", e.getMessage());

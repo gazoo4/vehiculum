@@ -152,8 +152,12 @@ public class History implements Serializable {
 	 */
 	public static void filterEntriesByDate(LinkedList<? extends Entry> entries, Date from, Date to) {
 		for (Entry e: entries) {
-			if (from == null || from.before(e.getEventDate())) {
-				if (to == null || to.after(e.getEventDate())) {
+			if (from == null
+					|| from.before(e.getEventDate())
+					|| from.equals(e.getEventDate())) {
+				if (to == null
+						|| to.after(e.getEventDate())
+						|| to.equals(e.getEventDate())) {
 					// If Entry e has EventDate within the defined interval, check the next item
 					continue;
 				}

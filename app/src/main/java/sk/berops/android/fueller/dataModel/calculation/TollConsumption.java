@@ -29,9 +29,9 @@ public class TollConsumption extends Consumption {
 			super.reloadChartData(data);
 			return;
 		}
-		pieChartLegend = new ArrayList<String>();
-		pieChartVals = new ArrayList<Entry>();
-		pieChartColors = new ArrayList<Integer>();
+		pieChartLegend = new ArrayList<>();
+		pieChartVals = new ArrayList<>();
+		pieChartColors = new ArrayList<>();
 
 		for (TollEntry.Type t : TollEntry.Type.values()) {
 			if (getTotalCostPerTollType().get(t) == null) {

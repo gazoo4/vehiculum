@@ -63,43 +63,48 @@ public class XMLHandler extends DataHandler {
 			long endTime = System.nanoTime();
 			
 			Log.d("DEBUG", "Garage loaded in "+ (endTime - startTime)/1000000 +" ms");
-			
-			startTime = System.nanoTime();
-			garage.initAfterLoad();
-			endTime = System.nanoTime();
-			
-			Log.d("DEBUG", "Garage initalized in "+ (endTime - startTime)/1000000 +" ms");
 			return garage;
 		} catch (FileNotFoundException ex) {
 			throw ex;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("Could not load Garage!");
+		Log.d("ERROR", "Failed loading garage");
 		return null;
 	}
 	
-	public void persistGarage(Activity activity) {
+	public void persistGarage(Activity activity) throws XMLWriteException {
 		persistGarage(activity, MainActivity.garage);
 	}
 	
-	public void persistGarage(Activity activity, Garage garage) {
+	public void persistGarage(Activity activity, Garage garage) throws XMLWriteException {
 		persistGarage(activity, garage, "" + defaultFileName);
 	}
 	
-	public void persistGarage(Activity activity, Garage garage, String fileName) {
+	public void persistGarage(Activity activity, Garage garage, String fileName) throws XMLWriteException {
 		Serializer serializer = new Persister(new FuellerCustomMatcher());
 		
 		fileName = getFullFileName(fileName);
 		
 		File file = new File(fileName);
+		File temp = new File(fileName +".temp");
 		try {
+			// First, let's try to persist against a temporary file so that we don't corrupt the main .xml file
 			verifyPermissions(activity);
-			dateOutFiles(fileName);
-			serializer.write(garage, file);
+			serializer.write(garage, temp);
 		} catch (Exception e) {
-			System.out.println("An exception during an automated serialization and persistence of an object");
+			Log.d("ERROR", "File serialization problem occurred");
 			e.printStackTrace();
+			throw new XMLWriteException("Failed serializing the garage");
+		}
+
+		// If the serialization to the temp file is successful, move the content here:
+		dateOutFiles(fileName);
+		boolean success = temp.renameTo(file);
+		if (!success) {
+			XMLWriteException e = new XMLWriteException("Failed renaming "+ temp.getName() +" to "+ file.getName());
+			Log.d("ERROR", "File saving problem occurred");
+			throw e;
 		}
 	}
 	

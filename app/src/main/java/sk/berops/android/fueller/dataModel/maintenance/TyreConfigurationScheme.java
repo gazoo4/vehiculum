@@ -30,12 +30,24 @@ public class TyreConfigurationScheme implements Serializable, Cloneable {
 	private LinkedList<Axle> axles;
 	
 	private Car car;
-	
+
+	public TyreConfigurationScheme() {
+
+	}
+
+	/**
+	 * Constructor
+	 * @param car
+	 */
 	public TyreConfigurationScheme(Car car) {
 		this.car = car;
-		createAxles(car.getType());
+		createAxles(car);
 	}
-	
+
+	/**
+	 * Method that's called after the objects are loaded
+	 * @param car
+	 */
 	public void initAfterLoad(Car car) {
 		this.car = car;
 		for (Axle a : axles) {
@@ -44,11 +56,12 @@ public class TyreConfigurationScheme implements Serializable, Cloneable {
 	}
 
 	/**
-	 * Method to generate the axle structures based on the type of the car
-	 * @param type of the car
+	 * Method to generate the axle structures based on the car
+	 * @param car to generate the Axles for
 	 */
-	public void createAxles(CarType type) {
+	public void createAxles(Car car) {
 		LinkedList<Axle> axles = new LinkedList<>();
+		CarType type = car.getType();
 		switch (type) {
 		case CITY_CAR:
 		case COUPE:
@@ -60,29 +73,29 @@ public class TyreConfigurationScheme implements Serializable, Cloneable {
 		case SUV:
 		case TRACTOR:
 		case VAN:
-			axles.add(new Axle(Axle.AxleType.STANDARD));
-			axles.add(new Axle(Axle.AxleType.STANDARD));
+			axles.add(new Axle(Axle.Type.STANDARD));
+			axles.add(new Axle(Axle.Type.STANDARD));
 			break;
 		case MOTORBIKE:
-			axles.add(new Axle(Axle.AxleType.SINGLE));
-			axles.add(new Axle(Axle.AxleType.SINGLE));
+			axles.add(new Axle(Axle.Type.SINGLE));
+			axles.add(new Axle(Axle.Type.SINGLE));
 			break;
 		case SEMI_TRAILER:
-			axles.add(new Axle(Axle.AxleType.STANDARD));
-			axles.add(new Axle(Axle.AxleType.STANDARD));
-			axles.add(new Axle(Axle.AxleType.STANDARD));
+			axles.add(new Axle(Axle.Type.STANDARD));
+			axles.add(new Axle(Axle.Type.STANDARD));
+			axles.add(new Axle(Axle.Type.STANDARD));
 			break;
 		case THREE_WHEELER:
-			axles.add(new Axle(Axle.AxleType.SINGLE));
-			axles.add(new Axle(Axle.AxleType.STANDARD));
+			axles.add(new Axle(Axle.Type.SINGLE));
+			axles.add(new Axle(Axle.Type.STANDARD));
 			break;
 		case TRUCK:
-			axles.add(new Axle(Axle.AxleType.STANDARD));
-			axles.add(new Axle(Axle.AxleType.TANDEM));
-			axles.add(new Axle(Axle.AxleType.TANDEM));
+			axles.add(new Axle(Axle.Type.STANDARD));
+			axles.add(new Axle(Axle.Type.TANDEM));
+			axles.add(new Axle(Axle.Type.TANDEM));
 		case TRUCK_TRACTOR:
-			axles.add(new Axle(Axle.AxleType.STANDARD));
-			axles.add(new Axle(Axle.AxleType.TANDEM));
+			axles.add(new Axle(Axle.Type.STANDARD));
+			axles.add(new Axle(Axle.Type.TANDEM));
 			break;
 		default: 
 			Log.d("WARN", "Wrong CarType specified");
@@ -94,7 +107,7 @@ public class TyreConfigurationScheme implements Serializable, Cloneable {
 	
 	public LinkedList<Axle> getAxles() {
 		if (axles == null) {
-			createAxles(car.getType());
+			createAxles(car);
 		}
 		return axles;
 	}
@@ -110,17 +123,5 @@ public class TyreConfigurationScheme implements Serializable, Cloneable {
 		return scheme;
 	}
 
-	/**
-	 * Method used to return the list of tyres installed in the defined scheme
-	 * @return list of tyres installed
-	 */
-	public LinkedList<Tyre> getInstalledTyres() {
-		LinkedList<Tyre> result = new LinkedList<>();
 
-		for (Axle a: getAxles()) {
-			result.addAll(a.getTyres());
-		}
-
-		return result;
-	}
 }

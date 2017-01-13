@@ -12,8 +12,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import sk.berops.android.fueller.R;
+import sk.berops.android.fueller.dataModel.Axle;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
@@ -25,7 +27,7 @@ import sk.berops.android.fueller.gui.common.GuiUtils;
 public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCallbackInterface {
 
 	private Car car;
-	private ArrayList<Tyre> tyreList;
+	private LinkedList<Tyre> tyreList;
 
 	private RelativeLayout tyreSchemeLayout;
 	private ListView listView;
@@ -66,7 +68,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 
 		tyreScheme = tyreEntry.getTyreScheme();
 		if (tyreScheme == null) {
-			tyreScheme = new TyreConfigurationScheme(car);
+			tyreScheme = car.getCurrentTyreScheme().clone(); // .clone() so that we don't overwrite the tyreScheme of the last valid entry
 			tyreEntry.setTyreScheme(tyreScheme);
 		}
 
@@ -102,8 +104,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 	}
 
 	private void buildDynamicLayout() {
-		TyreConfigurationScheme tyreScheme = car.getCurrentTyreScheme().clone();
-		graphics = new ViewTyreChangeGraphics(this, car, tyreScheme);
+		graphics = new ViewTyreChangeGraphics(this, car, tyreEntry);
 		graphics.setOnTouchListener(new TyreTouchListener(this));
 		graphics.setPadding(3, 3, 3, 3);
 
@@ -112,9 +113,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		tyreSchemeLayout.addView(graphics);
 
 		listView = (ListView) findViewById(R.id.activity_tyre_change_scheme_tyre_pool_list_view);
-
-		tyreList = MainActivity.garage.getAvailableTyresToEntry(tyreEntry);
-		tyreList.addAll(tyreEntry.getBoughtTyres());
+		tyreList = tyreEntry.getAvailableTyres();
 		adapter = new TyrePoolAdapter(this, tyreList);
 		listView.setAdapter(adapter);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -201,7 +200,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 				text += tyre.getMileageDriveAxle() + " (engine driven axle) ";
 			}
 			if (tyre.getMileageNonDriveAxle() != 0.0) {
-				text += tyre.getMileageDriveAxle() + " (engine non-driven axle) ";
+				text += tyre.getMileageDriveAxle() + " (non-driven axle) ";
 			}
 			if (tyre.getMileageDriveAxle() != 0.0 && tyre.getMileageNonDriveAxle() != 0.0) {
 				text += (tyre.getMileageDriveAxle() + tyre.getMileageNonDriveAxle()) + " (total)";
