@@ -23,6 +23,7 @@ import sk.berops.android.fueller.dataModel.tags.Tag;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.tags.FragmentTagManager;
 import sk.berops.android.fueller.gui.tags.LinearTagAdapter;
+import sk.berops.android.fueller.io.xml.GaragePersistException;
 
 public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd implements DatePickerDialog.OnDateSetListener, FragmentTagManager.TagAttachControlListener {
 
@@ -138,7 +139,11 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 			entry.addTag(tag);
 			linearTagAdapter.notifyTagAdded(tag);
 			toast += getString(R.string.activity_generic_tag_toast_end);
-			MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
+			try {
+				MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
+			} catch (GaragePersistException e) {
+				toast = "Saving failed";
+			}
 		}
 
 		Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
@@ -150,6 +155,11 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 	 */
 	public void onTagDeleted(Tag tag) {
 		linearTagAdapter.notifyTagDeleted(tag);
-		MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
+		try {
+			MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
+		} catch (GaragePersistException e) {
+			String toast = "Saving failed";
+			Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
+		}
 	}
 }

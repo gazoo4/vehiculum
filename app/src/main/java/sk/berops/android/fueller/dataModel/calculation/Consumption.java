@@ -34,9 +34,9 @@ public class Consumption implements IntoPieChartExtractable, Serializable {
 	 */
 	public void reloadChartData(int depth) {
 		// As we're on depth level 0 and there's nothing above us, we don't really bother with the depth level
-		pieChartLegend = new ArrayList<String>();
-		pieChartVals = new ArrayList<Entry>();
-		pieChartColors = new ArrayList<Integer>();
+		pieChartLegend = new ArrayList<>();
+		pieChartVals = new ArrayList<>();
+		pieChartColors = new ArrayList<>();
 
 		int i = 0;
 		for (sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType t : sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType.values()) {
@@ -66,6 +66,11 @@ public class Consumption implements IntoPieChartExtractable, Serializable {
 		}
 
 		return pieChartVals;
+	}
+
+	@Override
+	public void setPieChartVals(ArrayList<Entry> pieChartVals) {
+		this.pieChartVals = pieChartVals;
 	}
 
 	@Override

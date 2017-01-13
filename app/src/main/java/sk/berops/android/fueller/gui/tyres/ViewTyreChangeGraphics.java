@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import sk.berops.android.fueller.dataModel.Axle;
-import sk.berops.android.fueller.dataModel.Axle.AxleType;
+import sk.berops.android.fueller.dataModel.Axle.Type;
 import sk.berops.android.fueller.dataModel.Car;
+import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
-import sk.berops.android.fueller.gui.common.TyreDrawer;
 
 public class ViewTyreChangeGraphics extends View implements Runnable {
 
@@ -25,18 +25,19 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 	private Car car;
 	private Paint backgroundPaint;
 	private Paint chasisPaint;
-	private TyreDrawer tyreDrawer;
 	private TyreSchemeHelper helper;
 	private Context context;
+	private TyreChangeEntry entry;
 	private TyreConfigurationScheme tyreScheme;
 	private LinkedList<TyreGUIContainer> tyreObjects;
 	private boolean chasisUpdated = true;
 	
-	public ViewTyreChangeGraphics(Context context, Car car, TyreConfigurationScheme tyreScheme) {
+	public ViewTyreChangeGraphics(Context context, Car car, TyreChangeEntry entry) {
 		super(context);
 		this.car = car;
 		this.context = context;
-		this.tyreScheme = tyreScheme;
+		this.entry = entry;
+		this.tyreScheme = entry.getTyreScheme();
 		init();
 	}
 	
@@ -47,8 +48,7 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 		
 		chasisPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		chasisPaint.setStyle(Paint.Style.FILL);
-		
-		tyreDrawer = TyreDrawer.getInstance();
+
 		helper = TyreSchemeHelper.getInstance();
 		tyreObjects = new LinkedList<>();
 	}
@@ -97,8 +97,8 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 	}
 	
 	private void parseAxle(Axle axle, int width, int yOffset, int height, int axlePosition) {
-		ArrayList<Tyre> tyres = axle.getTyres();
-		AxleType type = axle.getAxleType();
+		LinkedList<Tyre> tyres = entry.getTyresByIDs(axle.getTyreIDs());
+		Type type = axle.getType();
 		
 		int x = 0;
 		int y = 0;
@@ -114,7 +114,7 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 				break;
 		}
 		
-		if (type == AxleType.SINGLE) {
+		if (type == Axle.Type.SINGLE) {
 			x = (int) (1.0 * width/2 - 1.0 * width/2 * tyreWidth);
 			TyreGUIContainer tc = new TyreGUIContainer(context, tyres.get(0), x, y + yOffset, (int) (width * tyreWidth), (int) (height * tyreHeight), axle, 0);
 			tyreObjects.add(tc);

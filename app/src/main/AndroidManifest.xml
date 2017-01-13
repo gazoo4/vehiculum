@@ -81,6 +81,9 @@
             android:name="sk.berops.android.fueller.gui.tyres.ActivityTyreChange"
             android:label="@string/app_name"/>
         <activity
+            android:name="sk.berops.android.fueller.gui.tyres.ActivityTyreChangeEdit"
+            android:label="@string/app_name"/>
+        <activity
             android:name="sk.berops.android.fueller.gui.tyres.ActivityTyreChangeScheme"
             android:label="@string/app_name"/>
         <activity

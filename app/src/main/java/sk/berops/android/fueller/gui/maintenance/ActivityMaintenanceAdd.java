@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -32,6 +33,7 @@ import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.fueller.gui.common.FragmentEntryEditDelete;
 import sk.berops.android.fueller.gui.common.GuiUtils;
 import sk.berops.android.fueller.gui.common.TextFormatter;
+import sk.berops.android.fueller.io.xml.GaragePersistException;
 
 public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		FragmentEntryEditDelete.EntryEditDeleteDialogListener {
@@ -271,7 +273,11 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		ReplacementPart part = parts.get(parts.size() - 1 - getSelectedPartPosition());
 		System.out.println("Removing part with ID " + (parts.size() - 1 - getSelectedPartPosition()));  
 		parts.remove(part);
-		MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
+		try {
+			MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
+		} catch (GaragePersistException e) {
+			Log.d("ERROR", "Problem when saving changes");
+		}
 		adapter.notifyDataSetChanged();
 		reloadCost();
 	}
