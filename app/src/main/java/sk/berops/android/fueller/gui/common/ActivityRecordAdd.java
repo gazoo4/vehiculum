@@ -1,6 +1,7 @@
 package sk.berops.android.fueller.gui.common;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -11,6 +12,7 @@ import sk.berops.android.fueller.dataModel.Record;
 import sk.berops.android.fueller.dataModel.expense.FieldEmptyException;
 import sk.berops.android.fueller.gui.DefaultActivity;
 import sk.berops.android.fueller.gui.MainActivity;
+import sk.berops.android.fueller.io.xml.GaragePersistException;
 
 public abstract class ActivityRecordAdd extends DefaultActivity {
 
@@ -61,7 +63,11 @@ public abstract class ActivityRecordAdd extends DefaultActivity {
 	}
 	
 	public void persistGarage() {
-		MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
+		try {
+			MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
+		} catch (GaragePersistException e) {
+			Log.d("ERROR", "Problem when saving the changes");
+		}
 		MainActivity.garage.initAfterLoad();
 	}
 }

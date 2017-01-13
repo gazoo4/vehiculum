@@ -18,7 +18,6 @@ import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.fueller.dataModel.expense.FieldEmptyException;
 import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
-import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.fueller.gui.common.GuiUtils;
@@ -29,7 +28,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 
 		@Override
 		public void afterTextChanged(Editable s) {
-			refreshCosts();
+			updateTotalCost();
 		}
 
 		@Override
@@ -42,8 +41,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 				int count) {
 		}
 	}
-	
-	Double cost = 0.0;
+
 	Double laborCost, extraMaterialCost, tyresCost;
 	
 	private Car car;
@@ -54,7 +52,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	
 	protected static final int SCHEME = 1;
 	
-	public void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		car = MainActivity.garage.getActiveCar();
 		if (tyreChangeEntry == null) {
 			tyreChangeEntry = new TyreChangeEntry();
@@ -109,9 +107,22 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		editTextLaborCost.addTextChangedListener(priceCalculator);
 		editTextSmallPartsCost.addTextChangedListener(priceCalculator);
 	}
-	
-	private void readCosts() {
-		cost = 0.0;
+
+	protected void updateTyresCost() {
+		double cost = 0.0;
+		if (editTextTyresCost.getText().toString().equals("")
+				|| GuiUtils.extractDouble(editTextTyresCost) == 0.0) {
+			for (Tyre t : tyreChangeEntry.getBoughtTyres()) {
+				cost += t.getCost();
+			}
+			tyreChangeEntry.setTyresCost(cost);
+			editTextTyresCost.setText(((Double) tyreChangeEntry.getTyresCost()).toString());
+		}
+		updateTotalCost();
+	}
+
+	private double getTotalCosts() {
+		double cost = 0.0;
 		try {
 			laborCost = GuiUtils.extractDouble(editTextLaborCost);
 			tyreChangeEntry.setLaborCost(laborCost);
@@ -133,31 +144,42 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		} catch (NumberFormatException ex) {
 			Log.d("DEBUG", "Reading costs, hit an empty field: "+ getResources().getString(R.string.activity_tyre_change_small_parts_cost_hint));
 		}
+
+		return cost;
 	}
-	
-	protected void refreshCosts() {
-		readCosts();
-		editTextCost.setText(cost.toString());
+
+	protected void updateTotalCost() {
+		editTextCost.setText(Double.toString(getTotalCosts()));
 	}
-	
+
+	private void updateExtraMaterialsCost() throws FieldEmptyException {
+		double cost = 0.0;
+		try {
+			 cost = Double.parseDouble(editTextSmallPartsCost.getText().toString());
+		} catch (NumberFormatException ex) {
+			// This is not a mandatory field
+		}
+
+		tyreChangeEntry.setExtraMaterialCost(cost);
+	}
+
+	private void updateLaborCost() throws FieldEmptyException {
+		double cost = 0.0;
+		try {
+			cost = Double.parseDouble(editTextLaborCost.getText().toString());
+		} catch (NumberFormatException ex) {
+			// This is not a mandatory field
+		}
+
+		tyreChangeEntry.setLaborCost(cost);
+	}
+
 	@Override
 	protected void updateFields() throws FieldEmptyException {
 		super.updateFields();
-		calculateCost();
-	}
-	
-	protected void calculateCost() {
-		// TODO: normally updateCost is in ActivityAddExpense superclass 
-		readCosts();
-		//entry.setCost(cost);
-	}
-	
-	private void reloadTyresCost() {
-		double cost = 0.0;
-		for (Tyre t: tyreChangeEntry.getBoughtTyres()) {
-			cost += t.getCost();
-		}
-		editTextTyresCost.setText(((Double) tyreChangeEntry.getTyresCost()).toString());
+		updateTyresCost();
+		updateExtraMaterialsCost();
+		updateLaborCost();
 	}
 	
 	public void onClick(View view) {
@@ -165,6 +187,14 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		case R.id.activity_tyre_change_button_advanced:
 			Intent i = new Intent(this, ActivityTyreChangeScheme.class);
 			if (tyreChangeEntry != null) {
+				// Ugly hack:
+				// We need to remove Consumption object as it contains elements from external libraries which can't be serialized
+				tyreChangeEntry.setConsumption(null);
+				for (Entry e: tyreChangeEntry.getCar().getHistory().getEntries()) {
+					if (e.getConsumption() != null) {
+						e.getConsumption().setPieChartVals(null);
+					}
+				}
 				i.putExtra(ActivityTyreChangeScheme.INTENT_TYRE_ENTRY, tyreChangeEntry);
 			}
 			startActivityForResult(i, SCHEME);
@@ -193,10 +223,9 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 			// We're coming back from ActivityTyreChangeScheme
 			if (resultCode == RESULT_OK) {
 				tyreChangeEntry = (TyreChangeEntry) data.getExtras().getSerializable(ActivityTyreChangeScheme.INTENT_TYRE_ENTRY);
-				reloadTyresCost();
+				updateTyresCost();
 			} else if (resultCode == RESULT_CANCELED) {
 				// nothing needed to be done if the scheme addition was cancelled
-				reloadTyresCost();
 			}
 			break;
 		}

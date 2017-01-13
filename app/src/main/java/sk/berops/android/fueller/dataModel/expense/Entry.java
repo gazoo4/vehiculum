@@ -20,7 +20,7 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
     /**
      * Reference to the Car to which this Entry is attached to.
      */
-    private Car car;
+    protected Car car;
 
     /**
      * Structure to hold the tags assigned to this entry.

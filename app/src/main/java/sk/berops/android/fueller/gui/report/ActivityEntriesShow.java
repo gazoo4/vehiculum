@@ -25,6 +25,9 @@ import sk.berops.android.fueller.gui.insurance.ActivityInsuranceEdit;
 import sk.berops.android.fueller.gui.maintenance.ActivityMaintenanceEdit;
 import sk.berops.android.fueller.gui.service.ActivityServiceEdit;
 import sk.berops.android.fueller.gui.toll.ActivityTollEdit;
+import sk.berops.android.fueller.gui.tyres.ActivityTyreChange;
+import sk.berops.android.fueller.gui.tyres.ActivityTyreChangeEdit;
+import sk.berops.android.fueller.io.xml.GaragePersistException;
 
 public class ActivityEntriesShow extends DefaultActivity implements FragmentEntryEditDelete.EntryEditDeleteDialogListener {
 	private int selectedEntryPosition;
@@ -120,6 +123,7 @@ public class ActivityEntriesShow extends DefaultActivity implements FragmentEntr
 			newIntent = new Intent(this, ActivityServiceEdit.class);
 			break;
 		case TYRES:
+			newIntent = new Intent(this, ActivityTyreChangeEdit.class);
 			break;
 		case BUREAUCRATIC:
 			newIntent = new Intent(this, ActivityBureaucraticEdit.class);
@@ -141,7 +145,11 @@ public class ActivityEntriesShow extends DefaultActivity implements FragmentEntr
 		System.out.println("Removing entry with ID " + entry.getDynamicId());  
 		entries.remove(entry);
 		MainActivity.garage.getActiveCar().getHistory().removeEntry(entry);
-		MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
+		try {
+			MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
+		} catch (GaragePersistException e) {
+			Log.d("ERROR", "Problem when saving the changes");
+		}
 		adapter.notifyDataSetChanged();
 	}
 	

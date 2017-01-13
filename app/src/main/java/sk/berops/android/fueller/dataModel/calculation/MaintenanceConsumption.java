@@ -37,9 +37,9 @@ public class MaintenanceConsumption extends Consumption {
 			super.reloadChartData(data);
 			return;
 		}
-		pieChartLegend = new ArrayList<String>();
-		pieChartVals = new ArrayList<Entry>();
-		pieChartColors = new ArrayList<Integer>();
+		pieChartLegend = new ArrayList<>();
+		pieChartVals = new ArrayList<>();
+		pieChartColors = new ArrayList<>();
 
 		for (MaintenanceEntry.Type t : MaintenanceEntry.Type.values()) {
 			if (getTotalCostPerMaintenanceType().get(t) == null) {

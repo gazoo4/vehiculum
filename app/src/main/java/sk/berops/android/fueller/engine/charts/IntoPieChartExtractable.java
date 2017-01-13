@@ -21,6 +21,12 @@ public interface IntoPieChartExtractable {
      */
     public ArrayList<Entry> getPieChartVals();
 
+	/**
+	 * Setter for pieChartVals
+	 * @param pieChartVals
+	 */
+	public void setPieChartVals(ArrayList<Entry> pieChartVals);
+
     /**
      * @return ArrayList of colors for the displayable data
      */

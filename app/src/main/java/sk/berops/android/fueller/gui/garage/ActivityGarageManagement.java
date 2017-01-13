@@ -3,6 +3,7 @@ package sk.berops.android.fueller.gui.garage;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -17,6 +18,7 @@ import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.gui.DefaultActivity;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.FragmentEntryEditDeleteActivate;
+import sk.berops.android.fueller.io.xml.GaragePersistException;
 
 public class ActivityGarageManagement extends DefaultActivity implements FragmentEntryEditDeleteActivate.EntryEditDeleteActivateDialogListener {
 
@@ -84,14 +86,22 @@ public class ActivityGarageManagement extends DefaultActivity implements Fragmen
 		Car car = cars.get(getSelectedCarPosition());
 		System.out.println("Removing car ID " + getSelectedCarPosition());
 		cars.remove(car);
-		MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
+		try {
+			MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
+		} catch (GaragePersistException e) {
+			Log.d("ERROR", "Problem when saving changes");
+		}
 		adapter.notifyDataSetChanged();
 	}
 	
 	@Override
 	public void OnDialogActivateClick(DialogFragment dialog) {
 		MainActivity.garage.setActiveCarId(getSelectedCarPosition());
-		MainActivity.dataHandler.persistGarage(this);
+		try {
+			MainActivity.dataHandler.persistGarage(this);
+		} catch (GaragePersistException e) {
+			Log.d("ERROR", "Problem when saving changes");
+		}
 		startActivity(new Intent(this, MainActivity.class));
 	}
 	

@@ -29,9 +29,9 @@ public class InsuranceConsumption extends Consumption {
 			super.reloadChartData(data);
 			return;
 		}
-		pieChartLegend = new ArrayList<String>();
-		pieChartVals = new ArrayList<Entry>();
-		pieChartColors = new ArrayList<Integer>();
+		pieChartLegend = new ArrayList<>();
+		pieChartVals = new ArrayList<>();
+		pieChartColors = new ArrayList<>();
 
 		for (InsuranceEntry.Type t : InsuranceEntry.Type.values()) {
 			if (getTotalCostPerInsuranceType().get(t) == null) {

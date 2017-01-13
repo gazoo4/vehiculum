@@ -14,8 +14,8 @@ import sk.berops.android.fueller.gui.MainActivity;
 
 public class Axle implements Serializable {
 	
-	@Element(name="axleType")
-	private AxleType axleType;
+	@Element(name="type")
+	private Type type;
 	@Element(name="drivable")
 	private boolean drivable;
 
@@ -27,61 +27,63 @@ public class Axle implements Serializable {
 	private ArrayList<UUID> tyreIDs;
 
 	private Car car;
-	
+
 	public Axle() {
-		this(AxleType.STANDARD);
+		super();
+		setType(Type.STANDARD);
+		createTyres();
 	}
 	
-	public Axle(AxleType type) {
+	public Axle(Type type) {
 		super();
-		setAxleType(type);
+		setType(type);
 		createTyres();
 	}
 	
 	public void initAfterLoad(Car car) {
-		Tyre tyre;
 		this.car = car;
-		for (UUID id : tyreIDs) {
-			tyre = MainActivity.garage.getTyreById(id);
-			tyre.initAfterLoad(car);
+		for (Tyre tyre: MainActivity.garage.getTyresByIDs(tyreIDs)) {
+			if (tyre != null) {
+				tyre.initAfterLoad(car);
+			}
 		}
 	}
 	
-	public enum AxleType{
+	public enum Type {
 		STANDARD(0, "standard"), 
 		TANDEM(1, "tandem"), //tandem axis for trucks
 		SINGLE(2, "single"); //for motorbikes or three-wheelers
 		private int id;
-		private String axleType;	
-		AxleType(int id, String axleType) {
+		private String type;
+		Type(int id, String type) {
 			this.setId(id);
-			this.setAxleType(axleType);
+			this.setType(type);
 		}
 		
-		private static Map<Integer, AxleType> idToAxleTypeMapping;
+		private static Map<Integer, Type> idToAxleTypeMapping;
 
-		public static AxleType getAxleType(int id) {
+		public static Type getType(int id) {
 			if (idToAxleTypeMapping == null) {
 				initMapping();
 			}
 			
-			AxleType result = null;
+			Type result = null;
 			result = idToAxleTypeMapping.get(id);
 			return result;
 		}
 		
 		private static void initMapping() {
-			idToAxleTypeMapping = new HashMap<Integer, AxleType>();
-			for (AxleType type : values()) {
+			idToAxleTypeMapping = new HashMap<Integer, Type>();
+			for (Axle.Type type : values()) {
 				idToAxleTypeMapping.put(type.id, type);
 			}
 		}
 	
-		public String getAxleType() {
-			return axleType;
+		public String getType() {
+			return type;
 		}
-		public void setAxleType(String axleType) {
-			this.axleType = axleType;
+		public void setType(String type) {
+			this.type = type;
 		}
 		public int getId() {
 			return id;
@@ -93,7 +95,7 @@ public class Axle implements Serializable {
 	
 	private void createTyres() {
 		tyreIDs = new ArrayList<>();
-		switch (getAxleType()) {
+		switch (getType()) {
 		case SINGLE:
 			tyreIDs.add(null);
 			break;
@@ -112,11 +114,11 @@ public class Axle implements Serializable {
 		}
 	}
 	
-	public AxleType getAxleType() {
-		return axleType;
+	public Type getType() {
+		return type;
 	}
-	public void setAxleType(AxleType axleType) {
-		this.axleType = axleType;
+	public void setType(Type type) {
+		this.type = type;
 	}
 
 	public boolean isDrivable() {
@@ -134,12 +136,16 @@ public class Axle implements Serializable {
 	public void setTyreIDs(ArrayList<UUID> tyreIDs) {
 		this.tyreIDs = tyreIDs;
 	}
-	
+
+	/**
+	 * Method to return Tyres installed on this axle.
+	 * @return tyres installed on the axle
+	 */
 	public ArrayList<Tyre> getTyres() {
 		return MainActivity.garage.getTyresByIDs(getTyreIDs());
 	}
 	
 	public void installTyre(Tyre tyre, int position) {
-		getTyreIDs().add(position, tyre.getUuid());
+		getTyreIDs().set(position, tyre.getUuid());
 	}
 }

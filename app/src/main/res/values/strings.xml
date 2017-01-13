@@ -21,6 +21,7 @@
     <string name="activity_car_edit_label"							>Edit your car</string>
 
     <string name="activity_entries_list_type_hint"					>Filter: </string>
+    <string name="activity_entries_tyres_new_count"					>New tyres: </string>
 
     <string name="activity_entry_add_button_bureaucratic"			>Bureaucracy</string>
     <string name="activity_entry_add_button_insurance"				>Insurance payment</string>
@@ -74,6 +75,7 @@
     <string name="activity_main_consumption_combined"				>Combined</string>
     <string name="activity_main_garage_empty"						>Your garage is empty</string>
     <string name="activity_main_garage_saved_toast"					>The changes have been saved</string>
+    <string name="activity_main_garage_saving_error_toast"			>Problem occurred when saving changes</string>
     <string name="activity_main_header"								>Manage your enthusiasm!</string>
     <string name="activity_main_relative_costs"						>Relative costs</string>
     <string name="activity_main_relative_costs_fuel"				>Relative costs for </string>

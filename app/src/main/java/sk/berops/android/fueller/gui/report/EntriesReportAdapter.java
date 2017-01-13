@@ -22,6 +22,7 @@ import sk.berops.android.fueller.dataModel.expense.InsuranceEntry;
 import sk.berops.android.fueller.dataModel.expense.MaintenanceEntry;
 import sk.berops.android.fueller.dataModel.expense.ServiceEntry;
 import sk.berops.android.fueller.dataModel.expense.TollEntry;
+import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.gui.common.GuiUtils;
 import sk.berops.android.fueller.gui.common.TextFormatter;
@@ -56,8 +57,7 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		case SERVICE:
 			return getViewServiceEntry((ServiceEntry) entry, convertView, parent);
 		case TYRES:
-			// return getViewTyreEntry((TyreEntry) entry, convertView, parent);
-			break;
+			return getViewTyreEntry((TyreChangeEntry) entry, convertView, parent);
 		case BUREAUCRATIC:
 			return getViewBureaucraticEntry((BureaucraticEntry) entry, convertView, parent);
 		case INSURANCE:
@@ -196,10 +196,46 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		
 		return rowView;
 	}
+
+	private View getViewTyreEntry(TyreChangeEntry entry, View convertView, ViewGroup parent) {
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View rowView = inflater.inflate(R.layout.list_stats_tyres, parent, false);
+
+		TextView dynamicId = (TextView) rowView.findViewById(R.id.list_stats_tyres_dynamic_id);
+		TextView mileage = (TextView) rowView.findViewById(R.id.list_stats_tyres_mileage);
+		TextView date = (TextView) rowView.findViewById(R.id.list_stats_tyres_date);
+		TextView newTyres = (TextView) rowView.findViewById(R.id.list_stats_tyres_new_count);
+		TextView totalCost = (TextView) rowView.findViewById(R.id.list_stats_tyres_cost);
+		TextView totalCostUnit = (TextView) rowView.findViewById(R.id.list_stats_tyres_cost_unit);
+		TextView entryType = (TextView) rowView.findViewById(R.id.list_stats_tyres_entry_type);
+		TextView comment = (TextView) rowView.findViewById(R.id.list_stats_tyres_comment);
+
+		dynamicId.setText(Integer.toString(entry.getDynamicId()));
+
+		mileage.setText(TextFormatter.format(entry.getMileage(), "#######.#") + " "
+				+ MainActivity.garage.getActiveCar().getDistanceUnit().getUnit());
+
+		date.setText(DateFormat.getDateInstance(DateFormat.MEDIUM).format(entry.getEventDate()));
+
+		int tyresCount = entry.getBoughtTyres().size();
+		if (tyresCount == 0) {
+			newTyres.setVisibility(View.INVISIBLE);
+		} else {
+			newTyres.setText(context.getResources().getString(R.string.activity_entries_tyres_new_count));
+		}
+
+		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
+		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
+		totalCostUnit.setText(preferences.getCurrency().getUnit());
+
+		entryType.setText(entry.getExpenseType().getExpenseType());
+		comment.setText(entry.getComment());
+
+		return rowView;
+	}
 	
 	private View getViewInsuranceEntry(InsuranceEntry entry, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		// TODO: listen to the warning below for smoother scrolling
 		View rowView = inflater.inflate(R.layout.list_stats_insurance, parent, false);
 
 		TextView dynamicId = (TextView) rowView.findViewById(R.id.list_stats_insurance_dynamic_id);
