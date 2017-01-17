@@ -1,7 +1,9 @@
 package sk.berops.android.fueller.dataModel;
 
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementArray;
 import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.ElementMap;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,15 +25,18 @@ public class Axle implements Serializable {
 	 * TyreIDs belonging to the tyres from left to right (from the birds perspective view).
 	 * Null means there's an empty slot for the tyre.
 	 */
-	@ElementList(inline=true, required=false)
+	@ElementList(required=false, inline=true, empty=false)
 	private ArrayList<UUID> tyreIDs;
 
 	private Car car;
 
+	/**
+	 * Empty constructor for serialization/de-serialization purposes
+	 */
 	public Axle() {
 		super();
 		setType(Type.STANDARD);
-		createTyres();
+		setTyreIDs(new ArrayList<UUID>());
 	}
 	
 	public Axle(Type type) {

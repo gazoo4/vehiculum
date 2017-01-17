@@ -25,7 +25,6 @@ public class ActivityInsuranceAdd extends ActivityEntryGenericAdd {
 	protected void onCreate(Bundle savedInstanceState) {
 		if (insuranceEntry == null) {
 			insuranceEntry = new InsuranceEntry();
-			insuranceEntry.setExpenseType(ExpenseType.INSURANCE);
 		}
 
 		super.entry = (Entry) this.insuranceEntry;

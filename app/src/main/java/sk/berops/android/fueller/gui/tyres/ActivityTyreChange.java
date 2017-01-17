@@ -57,10 +57,9 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		if (tyreChangeEntry == null) {
 			tyreChangeEntry = new TyreChangeEntry();
 		}
-		tyreChangeEntry.setExpenseType(ExpenseType.TYRES);
 		tyreChangeEntry.setCar(car);
 		
-		super.entry = this.tyreChangeEntry;
+		entry = tyreChangeEntry;
 		super.onCreate(savedInstanceState);
 	}
 
@@ -149,7 +148,8 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	}
 
 	protected void updateTotalCost() {
-		editTextCost.setText(Double.toString(getTotalCosts()));
+		double totalCost = getTotalCosts();
+		editTextCost.setText(Double.toString(totalCost));
 	}
 
 	private void updateExtraMaterialsCost() throws FieldEmptyException {
@@ -172,6 +172,12 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		}
 
 		tyreChangeEntry.setLaborCost(cost);
+	}
+
+	@Override
+	protected void reloadReferences() {
+		entry = tyreChangeEntry;
+		super.reloadReferences();
 	}
 
 	@Override
@@ -201,7 +207,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 			break;
 		case R.id.activity_tyre_change_button_commit:
 			try {
-				super.saveFieldsAndPersist(view);
+				saveFieldsAndPersist(view);
 				startActivity(new Intent(this, MainActivity.class));
 			} catch (FieldEmptyException e) {
 				e.throwAlert();
@@ -223,6 +229,8 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 			// We're coming back from ActivityTyreChangeScheme
 			if (resultCode == RESULT_OK) {
 				tyreChangeEntry = (TyreChangeEntry) data.getExtras().getSerializable(ActivityTyreChangeScheme.INTENT_TYRE_ENTRY);
+				// After a deserialization tyreChangeEntry is a new object. Updating the reference.
+				reloadReferences();
 				updateTyresCost();
 			} else if (resultCode == RESULT_CANCELED) {
 				// nothing needed to be done if the scheme addition was cancelled

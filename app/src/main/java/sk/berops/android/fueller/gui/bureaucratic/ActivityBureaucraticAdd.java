@@ -24,7 +24,6 @@ public class ActivityBureaucraticAdd extends ActivityEntryGenericAdd {
 	protected void onCreate(Bundle savedInstanceState) {
 		if (bureaucraticEntry == null) {
 			bureaucraticEntry = new BureaucraticEntry();
-			bureaucraticEntry.setExpenseType(ExpenseType.BUREAUCRATIC);
 		}
 
 		super.entry = (Entry) this.bureaucraticEntry;

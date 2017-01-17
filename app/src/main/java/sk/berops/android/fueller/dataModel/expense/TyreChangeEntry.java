@@ -58,6 +58,7 @@ public class TyreChangeEntry extends Entry {
 		boughtTyres = new ArrayList<>();
 		deletedTyreIDs = new ArrayList<>();
 		threadLevelUpdate = new HashMap<>();
+		setExpenseType(ExpenseType.TYRES);
 	}
 	
 	@Override
@@ -136,7 +137,7 @@ public class TyreChangeEntry extends Entry {
 			t = MainActivity.garage.getTyreByID(tUUID);
 			if (t == null) {
 				for (Tyre bt: getBoughtTyres()) {
-					if (bt.getUuid() == tUUID) {
+					if (bt.getUuid().equals(tUUID)) {
 						t = bt;
 					}
 				}
@@ -227,7 +228,7 @@ public class TyreChangeEntry extends Entry {
 	 */
 	public Tyre getTyreByID(UUID id) {
 		for (Tyre t : getAllTyres()) {
-			if (id == t.getUuid()) {
+			if (t.getUuid().equals(id)) {
 				return t;
 			}
 		}
@@ -252,7 +253,7 @@ public class TyreChangeEntry extends Entry {
 				continue;
 			}
 			for (Tyre t: tyrePool) {
-				if (t.getUuid() == u) {
+				if (t.getUuid().equals(u)) {
 					tyres.add(t);
 					break;
 				}

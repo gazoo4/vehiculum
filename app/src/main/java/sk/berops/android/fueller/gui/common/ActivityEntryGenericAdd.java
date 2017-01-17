@@ -38,7 +38,7 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.expense = (Expense) this.entry;
+		super.expense = this.entry;
 		super.onCreate(savedInstanceState);
 
 		updateTextAddEventDate();
@@ -108,6 +108,12 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 		updateTextAddEventDate();
 	}
 
+	@Override
+	protected void reloadReferences() {
+		expense = entry;
+		super.reloadReferences();
+	}
+
 	protected void updateFields() throws FieldEmptyException {
 		super.updateFields();
 		updateMileage();
@@ -116,9 +122,13 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 	public void saveFieldsAndPersist(View view) throws FieldEmptyException {
 		Car car = MainActivity.garage.getActiveCar();
 		entry.setCar(car);
-		if (!editMode) {
-			car.getHistory().getEntries().add(entry);
+		if (editMode) {
+			// As the object references might get broken (there might be serialization
+			// and deserialization of the entry happening), we need to remove the entry by UUID
+			// (and other fields used in Entry.equals() and then to add it again to the list below
+			car.getHistory().getEntries().remove(entry);
 		}
+		car.getHistory().getEntries().add(entry);
 		super.saveFieldsAndPersist(view);
 	}
 

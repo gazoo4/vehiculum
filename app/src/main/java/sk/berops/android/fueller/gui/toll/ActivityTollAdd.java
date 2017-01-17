@@ -25,10 +25,9 @@ public class ActivityTollAdd extends ActivityEntryGenericAdd {
 	protected void onCreate(Bundle savedInstanceState) {
 		if (tollEntry == null) {
 			tollEntry = new TollEntry();
-			tollEntry.setExpenseType(ExpenseType.TOLL);
 		}
 
-		super.entry = (Entry) this.tollEntry;
+		entry = tollEntry;
 		super.onCreate(savedInstanceState);
 	}
 

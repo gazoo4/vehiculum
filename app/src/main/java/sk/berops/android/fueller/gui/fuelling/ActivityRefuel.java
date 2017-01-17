@@ -40,7 +40,6 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
         if (fuellingEntry == null) {
             fuellingEntry = new FuellingEntry();
         }
-        fuellingEntry.setExpenseType(Entry.ExpenseType.FUEL);
         super.entry = this.fuellingEntry;
 
         super.onCreate(savedInstanceState);
