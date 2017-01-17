@@ -35,6 +35,14 @@ public abstract class ActivityExpenseAdd extends ActivityRecordAdd {
 		}
 		spinnerCurrency.setSelection(currency.getId());
 	}
+
+	/**
+	 * This method is used usually after deserialization of the Expense object so that the link to
+	 * the Record (parent object) in the parent ActivityRecordAd  points correctly to this Expense
+	 */
+	protected void reloadReferences() {
+		record = expense;
+	}
 	
 	@Override
 	protected void updateFields() throws FieldEmptyException {

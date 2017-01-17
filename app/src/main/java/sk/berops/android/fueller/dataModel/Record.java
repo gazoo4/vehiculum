@@ -20,6 +20,7 @@ public abstract class Record implements Serializable, Identifiable {
 	 * Constructor
 	 */
 	public Record() {
+		setUuid(getUuid());
 		setCreationDate(new Date());
 	}
 
@@ -33,6 +34,38 @@ public abstract class Record implements Serializable, Identifiable {
 		this.modifiedDate = record.modifiedDate;
 		// When using copy constructor, we want to use new UUID for the newly created object.
 		this.uuid = getUuid();
+	}
+
+	/**
+	 * Override method hashCode
+	 * @return hashcode of this object
+	 */
+	@Override
+	public int hashCode() {
+		return uuid.hashCode();
+	}
+
+	/**
+	 * Overriden method equals for comparing 2 Records
+	 * @param obj
+	 * @return true is objects are equal. Otherwise false.
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		// Basic checks
+		if (obj == null) {
+			return false;
+		}
+		if (!Record.class.isAssignableFrom(obj.getClass())) {
+			return false;
+		}
+
+
+		final Record other = (Record) obj;
+		if ((this.uuid == null) ? (other.uuid != null) : (!this.uuid.equals(other.uuid))) {
+			return false;
+		}
+		return true;
 	}
 
 	public String getComment() {
@@ -54,10 +87,16 @@ public abstract class Record implements Serializable, Identifiable {
 		this.modifiedDate = modifiedDate;
 	}
 
+	private void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
+
 	public UUID getUuid() {
 		if (uuid == null) {
 			uuid = UUID.randomUUID();
 		}
 		return uuid;
 	}
+
+
 }

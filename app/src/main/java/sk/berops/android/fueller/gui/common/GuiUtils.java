@@ -112,7 +112,7 @@ public class GuiUtils {
 				ArrayList<UUID> uuids = o.getParentAxle().getTyreIDs();
 				for (int i = 0; i < uuids.size(); i++) {
 					// Check the parent axle from the tyre that's being removed
-					if (uuids.get(i) == tyre.getUuid()) {
+					if (uuids.get(i).equals(tyre.getUuid())) {
 						// Clear the UUID from the parent axle as well
 						uuids.set(i, null);
 						break;

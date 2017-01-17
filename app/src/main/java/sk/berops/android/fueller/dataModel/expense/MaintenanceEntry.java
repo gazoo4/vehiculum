@@ -26,6 +26,7 @@ public class MaintenanceEntry extends Entry {
 	public MaintenanceEntry() {
 		super();
 		this.setExpenseType(Entry.ExpenseType.MAINTENANCE);
+		this.setParts(new LinkedList<ReplacementPart>());
 	}
 	
 	public enum Type{
