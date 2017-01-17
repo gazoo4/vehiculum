@@ -213,8 +213,8 @@ public class TyreChangeEntry extends Entry {
 		LinkedList<Tyre> list = new LinkedList<>();
 
 		for (Axle a: getTyreScheme().getAxles()) {
-			for (UUID u: a.getTyreIDs()) {
-				list.add(getTyreByID(u));
+			for (int i = 0; i < a.getType().getTyreCount(); i ++) {
+				list.add(getTyreByID(a.getTyreIDs().get(i)));
 			}
 		}
 
@@ -227,6 +227,8 @@ public class TyreChangeEntry extends Entry {
 	 * @return Tyre instance of the matching tyre. If tyre not found, returns null.
 	 */
 	public Tyre getTyreByID(UUID id) {
+		if (id == null) return null;
+
 		for (Tyre t : getAllTyres()) {
 			if (t.getUuid().equals(id)) {
 				return t;
