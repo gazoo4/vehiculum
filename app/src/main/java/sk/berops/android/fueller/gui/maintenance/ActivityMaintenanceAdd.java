@@ -87,12 +87,10 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 	protected void onCreate(Bundle savedInstanceState) {
 		if (maintenanceEntry == null) {
 			maintenanceEntry = new MaintenanceEntry();
-			maintenanceEntry.setExpenseType(ExpenseType.MAINTENANCE);
-			maintenanceEntry.setParts(new LinkedList<ReplacementPart>());
 		}
 		parts = maintenanceEntry.getParts();
 
-		super.entry = (Entry) this.maintenanceEntry;
+		entry = maintenanceEntry;
 		super.onCreate(savedInstanceState);
 	}
 

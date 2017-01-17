@@ -45,9 +45,69 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
         setCost(getCost(), getCurrency());
     }
 
+	/**
+	 * Overriding the compareTo method from Comparable interface in order to correctly compare Entries
+	 * @param e entry to be compared
+	 * @return -1 if Entry is older than the argument
+	 * 1 if Entry is newer than the argument
+	 * 0 if both are equally chronologically old
+	 */
+	@Override
     public int compareTo(Entry e) {
-        return Double.valueOf(this.getMileage()).compareTo(Double.valueOf(e.getMileage()));
+	    // Mileage is the main comparison variable
+	    int result = Double.valueOf(this.getMileage()).compareTo(Double.valueOf(e.getMileage()));
+	    if (result == 0) {
+		    // EventDate is the secondary comparison variable
+		    result = this.getEventDate().compareTo(e.getEventDate());
+	    }
+	    if (result == 0) {
+		    // CreationDate is the tertiary comparison variable
+		    result = this.getCreationDate().compareTo(getCreationDate());
+	    }
+        return result;
     }
+
+	/**
+	 * Override method hashCode
+	 * @return hashcode of this object
+	 */
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		long temp;
+		temp = Double.doubleToLongBits(mileage);
+		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		result = 31 * result + expenseType.hashCode();
+		return result;
+	}
+
+	/**
+	 * Overriden method equals for comparing 2 Entries
+	 * @param obj
+	 * @return true is objects are equal. Otherwise false.
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		// Basic checks
+		if (obj == null) {
+			return false;
+		}
+		if (!Entry.class.isAssignableFrom(obj.getClass())) {
+			return false;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+
+		final Entry other = (Entry) obj;
+		if (this.mileage != other.mileage) {
+			return false;
+		}
+		if (this.expenseType != other.expenseType) {
+			return false;
+		}
+		return true;
+	}
 
     public int getDynamicId() {
         return dynamicId;

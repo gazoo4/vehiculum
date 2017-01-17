@@ -25,10 +25,9 @@ public class ActivityServiceAdd extends ActivityEntryGenericAdd {
 	protected void onCreate(Bundle savedInstanceState) {
 		if (serviceEntry == null) {
 			serviceEntry = new ServiceEntry();
-			serviceEntry.setExpenseType(ExpenseType.SERVICE);
 		}
 
-		super.entry = (Entry) this.serviceEntry;
+		entry = serviceEntry;
 		super.onCreate(savedInstanceState);
 	}
 
