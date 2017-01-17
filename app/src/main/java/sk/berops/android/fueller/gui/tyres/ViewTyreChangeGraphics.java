@@ -97,7 +97,7 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 	}
 	
 	private void parseAxle(Axle axle, int width, int yOffset, int height, int axlePosition) {
-		LinkedList<Tyre> tyres = entry.getTyresByIDs(axle.getTyreIDs());
+		LinkedList<Tyre> tyres = entry.getTyresByIDs(axle.getTyreIDs().values());
 		Type type = axle.getType();
 		
 		int x = 0;

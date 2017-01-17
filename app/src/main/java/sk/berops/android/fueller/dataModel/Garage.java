@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.UUID;
 
 import sk.berops.android.fueller.dataModel.expense.Entry;
@@ -112,14 +113,14 @@ public class Garage {
 	 * @param uuids
 	 * @return
 	 */
-	public ArrayList<Tyre> getTyresByIDs(Collection<UUID> uuids) {
+	public ArrayList<Tyre> getTyresByIDs(Map<Integer, UUID> uuids) {
 		ArrayList<Tyre> tyres = new ArrayList<>();
-		for (UUID u : uuids) {
-			if (u == null) {
+		for (Integer i : uuids.keySet()) {
+			if (uuids.get(i) == null) {
 				tyres.add(null);
 				continue;
 			}
-			tyres.add(getTyreByID(u));
+			tyres.add(getTyreByID(uuids.get(i)));
 		}
 		return tyres;
 	}

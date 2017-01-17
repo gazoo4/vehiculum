@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.UUID;
 
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
@@ -25,8 +26,8 @@ public class Axle implements Serializable {
 	 * TyreIDs belonging to the tyres from left to right (from the birds perspective view).
 	 * Null means there's an empty slot for the tyre.
 	 */
-	@ElementList(required=false, inline=true, empty=false)
-	private ArrayList<UUID> tyreIDs;
+	@ElementMap(required=false, inline=true)
+	private TreeMap<Integer, UUID> tyreIDs;
 
 	private Car car;
 
@@ -36,7 +37,7 @@ public class Axle implements Serializable {
 	public Axle() {
 		super();
 		setType(Type.STANDARD);
-		setTyreIDs(new ArrayList<UUID>());
+		setTyreIDs(new TreeMap<Integer, UUID>());
 	}
 	
 	public Axle(Type type) {
@@ -55,14 +56,16 @@ public class Axle implements Serializable {
 	}
 	
 	public enum Type {
-		STANDARD(0, "standard"), 
-		TANDEM(1, "tandem"), //tandem axis for trucks
-		SINGLE(2, "single"); //for motorbikes or three-wheelers
+		STANDARD(0, "standard", 2),
+		TANDEM(1, "tandem", 4), //tandem axis for trucks
+		SINGLE(2, "single", 1); //for motorbikes or three-wheelers
 		private int id;
 		private String type;
-		Type(int id, String type) {
+		private int tyreCount;
+		Type(int id, String type, int tyreCount) {
 			this.setId(id);
 			this.setType(type);
+			this.setTyreCount(tyreCount);
 		}
 		
 		private static Map<Integer, Type> idToAxleTypeMapping;
@@ -87,35 +90,28 @@ public class Axle implements Serializable {
 		public String getType() {
 			return type;
 		}
-		public void setType(String type) {
+		private void setType(String type) {
 			this.type = type;
 		}
 		public int getId() {
 			return id;
 		}
-		public void setId(int id) {
+		private void setId(int id) {
 			this.id = id;
+		}
+		public int getTyreCount() {
+			return tyreCount;
+		}
+		private void setTyreCount(int tyreCount) {
+			this.tyreCount = tyreCount;
 		}
 	}
 	
 	private void createTyres() {
-		tyreIDs = new ArrayList<>();
-		switch (getType()) {
-		case SINGLE:
-			tyreIDs.add(null);
-			break;
-		case STANDARD:
-			tyreIDs.add(null);
-			tyreIDs.add(null);
-			break;
-		case TANDEM:
-			tyreIDs.add(null);
-			tyreIDs.add(null);
-			tyreIDs.add(null);
-			tyreIDs.add(null);
-			break;
-		default:
-			break;
+		tyreIDs = new TreeMap<>();
+
+		for (int i = 0; i < getType().getTyreCount(); i++) {
+			tyreIDs.put(i, null);
 		}
 	}
 	
@@ -134,11 +130,11 @@ public class Axle implements Serializable {
 		this.drivable = drivable;
 	}
 
-	public ArrayList<UUID> getTyreIDs() {
+	public TreeMap<Integer, UUID> getTyreIDs() {
 		return tyreIDs;
 	}
 
-	public void setTyreIDs(ArrayList<UUID> tyreIDs) {
+	public void setTyreIDs(TreeMap<Integer, UUID> tyreIDs) {
 		this.tyreIDs = tyreIDs;
 	}
 
@@ -151,6 +147,6 @@ public class Axle implements Serializable {
 	}
 	
 	public void installTyre(Tyre tyre, int position) {
-		getTyreIDs().set(position, tyre.getUuid());
+		getTyreIDs().put(position, tyre.getUuid());
 	}
 }

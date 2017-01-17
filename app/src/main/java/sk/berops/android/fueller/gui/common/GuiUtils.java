@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.TreeMap;
 import java.util.UUID;
 
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
@@ -105,16 +106,20 @@ public class GuiUtils {
 	
 	public static void removeTyreFromContainer(Tyre tyre, Collection<TyreGUIContainer> objects) {
 		for (TyreGUIContainer o : objects) {
-			if (o.getTyre() == tyre) {
+			if (o.getTyre() == null) {
+				return;
+			}
+			
+			if (o.getTyre().equals(tyre)) {
 				// We've found the container with the correct tyre
 
 				// UUIDs of the tyres mounted on the parent axle of the tyre container in focus
-				ArrayList<UUID> uuids = o.getParentAxle().getTyreIDs();
-				for (int i = 0; i < uuids.size(); i++) {
+				TreeMap<Integer, UUID> tyreIDs = o.getParentAxle().getTyreIDs();
+				for (int i = 0; i < o.getParentAxle().getType().getTyreCount(); i++) {
 					// Check the parent axle from the tyre that's being removed
-					if (uuids.get(i).equals(tyre.getUuid())) {
+					if (tyreIDs.get(i).equals(tyre.getUuid())) {
 						// Clear the UUID from the parent axle as well
-						uuids.set(i, null);
+						tyreIDs.put(i, null);
 						break;
 					}
 				}
