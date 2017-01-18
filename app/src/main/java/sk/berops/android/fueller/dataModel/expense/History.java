@@ -151,6 +151,7 @@ public class History implements Serializable {
 	 * @return ArrayList where all entries have eventDate in the interval (from, to)
 	 */
 	public static void filterEntriesByDate(LinkedList<? extends Entry> entries, Date from, Date to) {
+		LinkedList<Entry> outOfScope = new LinkedList<>();
 		for (Entry e: entries) {
 			if (from == null
 					|| from.before(e.getEventDate())
@@ -158,12 +159,14 @@ public class History implements Serializable {
 				if (to == null
 						|| to.after(e.getEventDate())
 						|| to.equals(e.getEventDate())) {
-					// If Entry e has EventDate within the defined interval, check the next item
+					// If Entry e has EventDate within the defined interval, it passed the filter
 					continue;
 				}
 			}
-			// Otherwise remove Entry e from the list
-			entries.remove(e);
+			// Otherwise plan for removal of the Entry e from the list
+			outOfScope.add(e);
 		}
+
+		entries.removeAll(outOfScope);
 	}
 }

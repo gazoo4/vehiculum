@@ -258,7 +258,7 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 	}
 
 	@Override
-	public void OnDialogEditClick(DialogFragment dialog) {
+	public void onDialogEditClick(DialogFragment dialog) {
 		int position = parts.size() - 1 - getSelectedPartPosition();
 		System.out.println("Editing entry in position " + getSelectedPartPosition());
 		Intent newIntent = new Intent(this, ActivityPartEdit.class);
@@ -267,7 +267,7 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 	}
 
 	@Override
-	public void OnDialogDeleteClick(DialogFragment dialog) {
+	public void onDialogDeleteClick(DialogFragment dialog) {
 		ReplacementPart part = parts.get(parts.size() - 1 - getSelectedPartPosition());
 		System.out.println("Removing part with ID " + (parts.size() - 1 - getSelectedPartPosition()));  
 		parts.remove(part);
