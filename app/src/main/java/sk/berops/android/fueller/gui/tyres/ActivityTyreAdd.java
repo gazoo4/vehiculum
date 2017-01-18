@@ -18,15 +18,15 @@ import static sk.berops.android.fueller.gui.common.GuiUtils.isEmptyEditText;
 
 public class ActivityTyreAdd extends ActivityGenericPartAdd {
 
-	private EditText editTextModel;
-	private EditText editTextWidth;
-	private EditText editTextHeight;
-	private EditText editTextDiameter;
-	private EditText editTextWeightIndex;
-	private EditText editTextSpeedIndex;
-	private EditText editTextDot;
-	private EditText editTextThreadLevel;
-	private Spinner spinnerSeason;
+	protected EditText editTextModel;
+	protected EditText editTextWidth;
+	protected EditText editTextHeight;
+	protected EditText editTextDiameter;
+	protected EditText editTextWeightIndex;
+	protected EditText editTextSpeedIndex;
+	protected EditText editTextDot;
+	protected EditText editTextThreadLevel;
+	protected Spinner spinnerSeason;
 
 	protected boolean editMode;
 	protected Tyre tyre;

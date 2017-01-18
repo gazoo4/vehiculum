@@ -58,6 +58,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 	private Button buttonDelete;
 
 	public static final int ADD_TYRE = 1;
+	public static final int EDIT_TYRE = 2;
 	public static final String INTENT_TYRE_ENTRY = "tyre entry";
 
 	@Override
@@ -127,7 +128,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-				Tyre tyre = tyreList.get(position);
+				setSelectedTyrePosition(position);
 				DialogFragment dialog = new FragmentEntryEditDelete();
 				dialog.show(getFragmentManager(), "FragmentEntryEditDelete");
 				return true;
@@ -295,22 +296,34 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 
 	/**
 	 * Once the new tyres details are entered, we need to make the entry aware of them.
+	 * If this concerns an update of an existing tyre, replace the old tyre by the updated tyre.
 	 * @param tyre Tyre which was bought
 	 * @param count of tyres added
 	 */
 	private void registerNewTyres(Tyre tyre, int count) {
 		Tyre newTyre;
+		int index = tyreList.size() - 1;
+		if (tyreList.contains(tyre)) {
+			// If we're updating an existing tyre, remember where it's located as into the same place
+			// we'll be adding new tyre.
+			index = tyreList.indexOf(tyre);
+			tyreList.remove(tyre);
+		}
+
 		for (int i = 0; i < count; i++) {
 			newTyre = new Tyre(tyre);
 			tyreEntry.getBoughtTyres().add(newTyre);
-			tyreList.add(newTyre);
+			tyreList.add(index, newTyre);
 		}
 		adapter.notifyDataSetChanged();
 	}
 
 	@Override
 	public void onDialogEditClick(DialogFragment dialog) {
-
+		int position = tyreList.size() - 1 - getSelectedTyrePosition();
+		Intent newIntent = new Intent(this, ActivityTyreEdit.class);
+		newIntent.putExtra(ActivityTyreEdit.INTENT_TYRE, tyreList.get(position));
+		startActivityForResult(newIntent, EDIT_TYRE);
 	}
 
 	@Override
@@ -336,6 +349,9 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 			case ADD_TYRE:
+				// this is intended as for both ADD_TYRE and EDIT_TYRE we have the same handling
+				// the differences are handled inside registerNewTyres() method
+			case EDIT_TYRE:
 				if (resultCode == RESULT_OK) {
 					Tyre tyre = (Tyre) data.getExtras().getSerializable(ActivityTyreAdd.INTENT_TYRE);
 					int count = (Integer) data.getExtras().getSerializable(ActivityTyreAdd.INTENT_COUNT);
