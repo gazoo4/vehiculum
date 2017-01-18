@@ -11,7 +11,6 @@ public class ActivityPartEdit extends ActivityPartAdd {
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent intent = getIntent();
 		part = (ReplacementPart) intent.getExtras().get("ReplacementPart");
-		super.part = part;
 		super.editMode = true;
 		super.onCreate(savedInstanceState);
 	}
