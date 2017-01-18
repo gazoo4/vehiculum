@@ -105,11 +105,11 @@ public class TyreChangeEntry extends Entry {
 	
 	public TyreConfigurationScheme getTyreScheme() {
 		if (tyreScheme == null) {
-			tyreScheme = new TyreConfigurationScheme(car);
+			tyreScheme = car.getTyreSchemeByDate(getEventDate()).clone();
 		}
 		return tyreScheme;
 	}
-	
+
 	public void setTyreScheme(TyreConfigurationScheme tyreScheme) {
 		this.tyreScheme = tyreScheme;
 	}

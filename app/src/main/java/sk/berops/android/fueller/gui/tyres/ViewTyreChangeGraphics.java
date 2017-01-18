@@ -20,7 +20,7 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 
 	private static final double tyreWidth = 0.2; //percentages of the canvas block
 	private static final double tyreHeight = 0.5; //percentages of the canvas block
-	private static final int tyrePadding = 0; //pixels padding between tandem tires
+	private static final int tyrePadding = 2; //pixels padding between tandem tires
 	
 	private Car car;
 	private Paint backgroundPaint;
@@ -100,7 +100,7 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 		LinkedList<Tyre> tyres = entry.getTyresByIDs(axle.getTyreIDs().values());
 		Type type = axle.getType();
 		
-		int x = 0;
+		int x;
 		int y = 0;
 		
 		switch (axlePosition) {
@@ -120,16 +120,29 @@ public class ViewTyreChangeGraphics extends View implements Runnable {
 			tyreObjects.add(tc);
 		} else {
 			for (int i = 0; i < tyres.size(); i++) {
-				int j = i - tyres.size()/2;
-				x = (int) (1.0 * j * width * tyreWidth);
-				if (j == -2) {
-					x -= tyrePadding;
-				} else if (j == 1) {
-					x += tyrePadding;
+				int size = tyres.size();
+
+				int sign;
+				if (i < (size/2.0)) {
+					// For wheels on the left
+					sign = 1;
+				} else {
+					// For wheels on the right
+					sign = -1;
 				}
-				if (j < 0) {
-					x += width;
-				}
+				// Width Multiplier
+				int wMult = (int) Math.floor((i * 2.0 / size));
+				// Padding Multiplier
+				// pMult = (int) -abs(i - size/2 - 0.5) + size/2 - 1
+				int pMult = (int) (((-1) * Math.floor(Math.abs(i - size/2.0 + 0.5))) + (size/2.0 - 1));
+				// Tyre Multiplier
+				// tMult = (int) -abs(i - size/2) + size/2
+				int tMult =  (int) (((-1) * Math.abs(i - (size/2.0))) + (size/2.0));
+				x = wMult * width + sign * (pMult * tyrePadding + (int) (tMult * tyreWidth * width));
+				System.out.println("TYRE");
+				System.out.println("wMult: "+ wMult +" pMult: "+ pMult +" tMult: "+ tMult + " sign: "+ sign);
+				System.out.println("Width: "+ width +" X: "+ x);
+
 				Tyre tyre = tyres.get(i);
 				TyreGUIContainer tc = new TyreGUIContainer(context, tyre, x, y + yOffset, (int) (width * tyreWidth), (int) (height * tyreHeight), axle, i);
 				tyreObjects.add(tc);

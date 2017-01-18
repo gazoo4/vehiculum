@@ -109,7 +109,7 @@ public class GuiUtils {
 			if (o.getTyre() == null) {
 				return;
 			}
-			
+
 			if (o.getTyre().equals(tyre)) {
 				// We've found the container with the correct tyre
 
