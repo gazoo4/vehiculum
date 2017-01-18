@@ -26,7 +26,7 @@ public class ActivityPartAdd extends ActivityGenericPartAdd {
 			part = new ReplacementPart();
 		}
 
-		super.genericPart = (GenericPart) this.part;
+		super.genericPart = this.part;
 		super.onCreate(savedInstanceState);
 	}
 
