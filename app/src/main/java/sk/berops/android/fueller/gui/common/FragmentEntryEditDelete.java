@@ -13,8 +13,8 @@ import sk.berops.android.fueller.R;
 public class FragmentEntryEditDelete extends DialogFragment {
 
 	public interface EntryEditDeleteDialogListener {
-		public void OnDialogEditClick(DialogFragment dialog);
-		public void OnDialogDeleteClick(DialogFragment dialog);
+		public void onDialogEditClick(DialogFragment dialog);
+		public void onDialogDeleteClick(DialogFragment dialog);
 	}
 	
 	EntryEditDeleteDialogListener listener;
@@ -39,7 +39,7 @@ public class FragmentEntryEditDelete extends DialogFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				Toast.makeText(getActivity(), R.string.fragment_entry_edit_delete_edit_toast, Toast.LENGTH_SHORT)
 				.show();
-				listener.OnDialogEditClick(FragmentEntryEditDelete.this);
+				listener.onDialogEditClick(FragmentEntryEditDelete.this);
 			}
 		});
 		builder.setNegativeButton(R.string.fragment_entry_edit_delete_delete_button, new DialogInterface.OnClickListener() {
@@ -48,7 +48,7 @@ public class FragmentEntryEditDelete extends DialogFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				Toast.makeText(getActivity(), R.string.fragment_entry_edit_delete_delete_toast, Toast.LENGTH_SHORT)
 						.show();
-				listener.OnDialogDeleteClick(FragmentEntryEditDelete.this);
+				listener.onDialogDeleteClick(FragmentEntryEditDelete.this);
 			}
 		});
 		return builder.create();

@@ -3,6 +3,7 @@ package sk.berops.android.fueller.dataModel;
 import org.simpleframework.xml.Element;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -315,10 +316,25 @@ public class Car extends Record implements Serializable {
 		this.initialTyreScheme = initialTyreScheme;
 	}
 
+	/**
+	 * Method to provide the latest TyreConfigurationScheme
+	 * @return TyreConfigurationScheme
+	 */
 	public TyreConfigurationScheme getCurrentTyreScheme() {
+		return getTyreSchemeByDate(null);
+	}
+
+	/**
+	 * Method to provide the TyreConfigurationScheme in a specific moment in the history.
+	 * @param date in which you want to get the TyreConfigurationScheme
+	 *             (if null, the method will provide the latest TyreConfigurationScheme)
+	 * @return TyreConfigurationScheme
+	 */
+	public TyreConfigurationScheme getTyreSchemeByDate(Date date) {
 		TyreConfigurationScheme scheme;
-		
+
 		LinkedList<TyreChangeEntry> entries = this.getHistory().getTyreChangeEntries();
+		History.filterEntriesByDate(entries, null, date);
 		if (entries.size() > 0) {
 			scheme = entries.getLast().getTyreScheme();
 		} else {

@@ -104,7 +104,7 @@ public class ActivityEntriesShow extends DefaultActivity implements FragmentEntr
 	}
 	
 	@Override
-	public void OnDialogEditClick(DialogFragment dialog) {
+	public void onDialogEditClick(DialogFragment dialog) {
 		int position = entries.size() - 1 - getSelectedEntryPosition();
 		System.out.println("Editing entry in position " + getSelectedEntryPosition());
 		
@@ -139,7 +139,7 @@ public class ActivityEntriesShow extends DefaultActivity implements FragmentEntr
 	}
 
 	@Override
-	public void OnDialogDeleteClick(DialogFragment dialog) {
+	public void onDialogDeleteClick(DialogFragment dialog) {
 		Entry entry;
 		entry = entries.get(entries.size() - 1 - getSelectedEntryPosition());
 		System.out.println("Removing entry with ID " + entry.getDynamicId());  

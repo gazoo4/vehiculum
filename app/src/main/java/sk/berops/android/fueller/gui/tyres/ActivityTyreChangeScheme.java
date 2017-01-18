@@ -1,5 +1,7 @@
 package sk.berops.android.fueller.gui.tyres;
 
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -22,15 +24,17 @@ import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
 import sk.berops.android.fueller.gui.DefaultActivity;
 import sk.berops.android.fueller.gui.MainActivity;
+import sk.berops.android.fueller.gui.common.FragmentEntryEditDelete;
 import sk.berops.android.fueller.gui.common.GuiUtils;
 
-public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCallbackInterface {
+public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCallbackInterface, FragmentEntryEditDelete.EntryEditDeleteDialogListener {
 
 	private Car car;
 	private LinkedList<Tyre> tyreList;
 
 	private RelativeLayout tyreSchemeLayout;
 	private ListView listView;
+	private int selectedTyrePosition;
 	private ViewTyreChangeGraphics graphics;
 
 	private TyreSchemeHelper helper;
@@ -67,10 +71,6 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		}
 
 		tyreScheme = tyreEntry.getTyreScheme();
-		if (tyreScheme == null) {
-			tyreScheme = car.getCurrentTyreScheme().clone(); // .clone() so that we don't overwrite the tyreScheme of the last valid entry
-			tyreEntry.setTyreScheme(tyreScheme);
-		}
 
 		helper = TyreSchemeHelper.getInstance();
 
@@ -101,22 +101,19 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 
 		listButtons.add(buttonDelete);
 		listButtons.add(buttonUninstall);
-	}
-
-	private void buildDynamicLayout() {
-		graphics = new ViewTyreChangeGraphics(this, car, tyreEntry);
-		graphics.setOnTouchListener(new TyreTouchListener(this));
-		graphics.setPadding(3, 3, 3, 3);
 
 		tyreSchemeLayout = (RelativeLayout) findViewById(R.id.activity_tyre_change_scheme_graphical_layout);
-		tyreSchemeLayout.removeAllViews();
-		tyreSchemeLayout.addView(graphics);
-
 		listView = (ListView) findViewById(R.id.activity_tyre_change_scheme_tyre_pool_list_view);
+	}
+
+	@Override
+	protected void initializeGuiObjects() {
+		super.initializeGuiObjects();
 		tyreList = tyreEntry.getAvailableTyres();
 		adapter = new TyrePoolAdapter(this, tyreList);
 		listView.setAdapter(adapter);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -127,8 +124,27 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 			}
 		});
 
+		listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				Tyre tyre = tyreList.get(position);
+				DialogFragment dialog = new FragmentEntryEditDelete();
+				dialog.show(getFragmentManager(), "FragmentEntryEditDelete");
+				return true;
+			}
+		});
+
 		buttonDelete.setVisibility(View.INVISIBLE);
 		buttonUninstall.setVisibility(View.INVISIBLE);
+	}
+
+	private void buildDynamicLayout() {
+		graphics = new ViewTyreChangeGraphics(this, car, tyreEntry);
+		graphics.setOnTouchListener(new TyreTouchListener(this));
+		graphics.setPadding(3, 3, 3, 3);
+
+		tyreSchemeLayout.removeAllViews();
+		tyreSchemeLayout.addView(graphics);
 	}
 
 	private void tyreClicked(Tyre tyre) {
@@ -290,6 +306,24 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 			tyreList.add(newTyre);
 		}
 		adapter.notifyDataSetChanged();
+	}
+
+	@Override
+	public void onDialogEditClick(DialogFragment dialog) {
+
+	}
+
+	@Override
+	public void onDialogDeleteClick(DialogFragment dialog) {
+
+	}
+
+	private void setSelectedTyrePosition(int selectedTyrePosition) {
+		this.selectedTyrePosition = selectedTyrePosition;
+	}
+
+	protected int getSelectedTyrePosition() {
+		return selectedTyrePosition;
 	}
 
 	/**
