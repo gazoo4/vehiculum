@@ -130,23 +130,6 @@ public class TyreChangeEntry extends Entry {
 		this.deletedTyreIDs = deletedTyreIDs;
 	}
 
-	public ArrayList<Tyre> getDeletedTyres() {
-		ArrayList<Tyre> list = new ArrayList<>();
-		Tyre t;
-		for (UUID tUUID: getDeletedTyreIDs()) {
-			t = MainActivity.garage.getTyreByID(tUUID);
-			if (t == null) {
-				for (Tyre bt: getBoughtTyres()) {
-					if (bt.getUuid().equals(tUUID)) {
-						t = bt;
-					}
-				}
-			}
-			list.add(t);
-		}
-		return list;
-	}
-
 	/**
 	 * Map of tyre IDs with new thread levels of the respective tyres
 	 */
@@ -186,9 +169,20 @@ public class TyreChangeEntry extends Entry {
 				entries.add(this);
 			}
 			History.filterEntriesByDate(entries, null, dateTo);
+			LinkedList<Tyre> deletedTyres;
 			for (TyreChangeEntry e: entries) {
+				// The entry carries Tyre boughtTyres(), so we can access them directly
 				tyres.addAll(e.getBoughtTyres());
-				tyres.removeAll(e.getDeletedTyres());
+				// For the deletedTyres the entry carries only UUIDs so we can't access them directly
+				deletedTyres = new LinkedList<>();
+				for (UUID uuid: e.getDeletedTyreIDs()) {
+					for (Tyre t: tyres) {
+						if (uuid.equals(t.getUuid())) {
+							deletedTyres.add(t);
+						}
+					}
+				}
+				tyres.removeAll(deletedTyres);
 			}
 		}
 

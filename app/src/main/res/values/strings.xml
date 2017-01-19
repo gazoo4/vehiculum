@@ -47,6 +47,7 @@
     <string name="activity_generic_button_entry_save"				>Save</string>
     <string name="activity_generic_comment_hint"					>Additional comment</string>
     <string name="activity_generic_cost_hint"						>Total cost</string>
+    <string name="activity_generic_failure_hint"                    >Failure!</string>
     <string name="activity_generic_linear_tag_deletion_alert_1"		>Are you sure you want to remove tag</string>
     <string name="activity_generic_linear_tag_deletion_alert_2"		>from this entry?</string>
     <string name="activity_generic_mileage_hint"					>Mileage</string>
@@ -146,6 +147,9 @@
     <string name="activity_tyre_change_scheme_dot_year_wear_text"	>DOT: </string>
     <string name="activity_tyre_change_scheme_mileage_text"			>Mileage: </string>
     <string name="activity_tyre_change_scheme_pattern_text"			>Tread pattern: </string>
+    <string name="activity_tyre_change_scheme_tyre_used_alert_1"	>Can\'t delete the tyre as it\'s in use by Entry ID #</string> <!-- entry.getDynamicID() -->
+    <string name="activity_tyre_change_scheme_tyre_used_alert_2"	> from </string> <!-- entry.getEventDate() -->
+    <string name="activity_tyre_change_scheme_tyre_used_alert_3"	> on car </string> <!-- entry.getCar() -->
     <string name="activity_tyre_change_total_cost_hint"				>Total cost</string>
     <string name="activity_tyre_change_tyres_cost_hint"				>Tyres price</string>
 

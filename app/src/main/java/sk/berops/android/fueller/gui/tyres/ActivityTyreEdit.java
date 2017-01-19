@@ -27,10 +27,10 @@ public class ActivityTyreEdit extends ActivityTyreAdd {
 		super.initializeGuiObjects();
 		editTextBrand.setText(tyre.getBrand());
 		editTextModel.setText(tyre.getModel());
-		editTextWidth.setText(tyre.getWidth());
-		editTextHeight.setText(tyre.getHeight());
+		editTextWidth.setText(Integer.toString(tyre.getWidth()));
+		editTextHeight.setText(Integer.toString(tyre.getHeight()));
 		editTextDiameter.setText(Double.toString(tyre.getDiameter()));
-		editTextWeightIndex.setText(tyre.getWeightIndex());
+		editTextWeightIndex.setText(Integer.toString(tyre.getWeightIndex()));
 		editTextSpeedIndex.setText(tyre.getSpeedIndex());
 		editTextDot.setText(tyre.getDot());
 		editTextQuantity.setText(Integer.toString(1));

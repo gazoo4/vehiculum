@@ -107,9 +107,17 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		editTextSmallPartsCost.addTextChangedListener(priceCalculator);
 	}
 
-	protected void updateTyresCost() {
+	/**
+	 * Method to update the cost of the tyres. If the editTextTyresCost field is empty this method
+	 * will read the boughtTyres list and calculate and populate the tyreEntry.tyresCost field
+	 * accordingly.
+	 * @param forceUpdate Forces the update of the cost of the tyres by reading the cost of the bought
+	 *                    tyres.
+	 */
+	protected void updateTyresCost(boolean forceUpdate) {
 		double cost = 0.0;
-		if (editTextTyresCost.getText().toString().equals("")
+		if (forceUpdate
+				|| editTextTyresCost.getText().toString().equals("")
 				|| GuiUtils.extractDouble(editTextTyresCost) == 0.0) {
 			for (Tyre t : tyreChangeEntry.getBoughtTyres()) {
 				cost += t.getCost();
@@ -120,6 +128,10 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		updateTotalCost();
 	}
 
+	/**
+	 * Method to calculate the total cost of the entry (laborCost + extraMaterials + tyresCost).
+	 * @return Total cost
+	 */
 	private double getTotalCosts() {
 		double cost = 0.0;
 		try {
@@ -147,12 +159,18 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		return cost;
 	}
 
+	/**
+	 * Updates the editTextCost field by the overall cost calculated from the entry.
+	 */
 	protected void updateTotalCost() {
 		double totalCost = getTotalCosts();
 		editTextCost.setText(Double.toString(totalCost));
 	}
 
-	private void updateExtraMaterialsCost() throws FieldEmptyException {
+	/**
+	 * Method to extract the cost of the "small parts/extra materials"
+	 */
+	private void updateExtraMaterialsCost() {
 		double cost = 0.0;
 		try {
 			 cost = Double.parseDouble(editTextSmallPartsCost.getText().toString());
@@ -163,7 +181,10 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		tyreChangeEntry.setExtraMaterialCost(cost);
 	}
 
-	private void updateLaborCost() throws FieldEmptyException {
+	/**
+	 * Method to extract the cost of the labor within the tyre change entry
+	 */
+	private void updateLaborCost() {
 		double cost = 0.0;
 		try {
 			cost = Double.parseDouble(editTextLaborCost.getText().toString());
@@ -183,11 +204,15 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	@Override
 	protected void updateFields() throws FieldEmptyException {
 		super.updateFields();
-		updateTyresCost();
+		updateTyresCost(false);
 		updateExtraMaterialsCost();
 		updateLaborCost();
 	}
-	
+
+	/**
+	 * Method to handle the clicks on the buttons in the activity
+	 * @param view as passed by activity
+	 */
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.activity_tyre_change_button_advanced:
@@ -231,7 +256,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 				tyreChangeEntry = (TyreChangeEntry) data.getExtras().getSerializable(ActivityTyreChangeScheme.INTENT_TYRE_ENTRY);
 				// After a deserialization tyreChangeEntry is a new object. Updating the reference.
 				reloadReferences();
-				updateTyresCost();
+				updateTyresCost(true);
 			} else if (resultCode == RESULT_CANCELED) {
 				// nothing needed to be done if the scheme addition was cancelled
 			}
