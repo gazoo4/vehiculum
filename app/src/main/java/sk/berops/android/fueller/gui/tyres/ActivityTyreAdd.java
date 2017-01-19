@@ -129,49 +129,70 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 		}
 		tyre.setModel(editTextModel.getText().toString());
 	}
-	
+
+	/**
+	 * Method to update the width of the tyre from the EditText field.
+	 */
 	private void updateWidth() {
 		if (isEmptyEditText(editTextWidth)) {
 			return;
 		}
 		tyre.setWidth(GuiUtils.extractInteger(editTextWidth));
 	}
-	
+
+	/**
+	 * Method to update the width of the height from the EditText field.
+	 */
 	private void updateHeight() {
 		if (isEmptyEditText(editTextHeight)) {
 			return;
 		}
 		tyre.setHeight(GuiUtils.extractInteger(editTextHeight));
 	}
-	
+
+	/**
+	 * Method to update the diameter of the tyre from the EditText field.
+	 */
 	private void updateDiameter() {
 		if (isEmptyEditText(editTextDiameter)) {
 			return;
 		}
 		tyre.setDiameter(GuiUtils.extractDouble(editTextDiameter));
 	}
-	
+
+	/**
+	 * Method to update the weight index of the tyre from the EditText field.
+	 */
 	private void updateWeightIndex() {
 		if (isEmptyEditText(editTextWeightIndex)) {
 			return;
 		}
 		tyre.setWeightIndex(GuiUtils.extractInteger(editTextWeightIndex));
 	}
-	
+
+	/**
+	 * Method to update the speed index of the tyre from the EditText field.
+	 */
 	private void updateSpeedIndex() {
 		if (isEmptyEditText(editTextSpeedIndex)) {
 			return;
 		}
 		tyre.setSpeedIndex(editTextSpeedIndex.getText().toString());
 	}
-	
+
+	/**
+	 * Method to update the DOT of the tyre from the EditText field.
+	 */
 	private void updateDot() {
 		if (isEmptyEditText(editTextDot)) {
 			return;
 		}
 		tyre.setDot(editTextDot.getText().toString());
 	}
-	
+
+	/**
+	 * Method to update the thread level (thread wear) of the tyre from the EditText field.
+	 */
 	private void updateThreadLevel() {
 		if (spinnerCondition.getSelectedItemPosition() == 0) {
 			// If the tyre is new, set threadLevel to max and we're done here
@@ -182,12 +203,20 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 			tyre.setThreadLevel(GuiUtils.extractDouble(editTextThreadLevel));
 		}
 	}
-	
+
+	/**
+	 * Method to update the seasonality of the tyre from the EditText field.
+	 */
 	private void updateSeason() {
 		Season season = Season.getSeason(spinnerSeason.getSelectedItemPosition());
 		tyre.setSeason(season);
 	}
-	
+
+	/**
+	 * Method to read the values from the form as filled by user
+	 * @throws FieldEmptyException in case a mandatory field is not filled-in
+	 */
+	@Override
 	protected void updateFields() throws FieldEmptyException {
 		super.updateFields();
 		updateModel();
@@ -206,6 +235,10 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 		}
 	}
 
+	/**
+	 * Method to read the number of tyres bought
+	 * @return
+	 */
 	private int getTyreCount() {
 		if (isEmptyEditText(editTextQuantity)) {
 			return 1;
@@ -213,6 +246,10 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 		return GuiUtils.extractInteger(editTextQuantity);
 	}
 
+	/**
+	 * Method to handle the clicks on the buttons in the form
+	 * @param view as passed by Activity
+	 */
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.activity_tyre_add_button_commit:

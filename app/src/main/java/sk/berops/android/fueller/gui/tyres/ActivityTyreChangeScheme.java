@@ -1,7 +1,9 @@
 package sk.berops.android.fueller.gui.tyres;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,12 +15,18 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
+import java.util.TimeZone;
+import java.util.UUID;
 
 import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.dataModel.Axle;
 import sk.berops.android.fueller.dataModel.Car;
+import sk.berops.android.fueller.dataModel.expense.History;
 import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
 import sk.berops.android.fueller.dataModel.maintenance.TyreConfigurationScheme;
@@ -64,8 +72,6 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		car = MainActivity.garage.getActiveCar();
-		super.onCreate(savedInstanceState);
-
 		tyreEntry = (TyreChangeEntry) getIntent().getSerializableExtra(INTENT_TYRE_ENTRY);
 		if (tyreEntry == null) {
 			tyreEntry = new TyreChangeEntry();
@@ -74,6 +80,8 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		tyreScheme = tyreEntry.getTyreScheme();
 
 		helper = TyreSchemeHelper.getInstance();
+
+		super.onCreate(savedInstanceState);
 
 		buildDynamicLayout();
 	}
@@ -139,6 +147,9 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		buttonUninstall.setVisibility(View.INVISIBLE);
 	}
 
+	/**
+	 * Metod to create the graphical objects on this activity
+	 */
 	private void buildDynamicLayout() {
 		graphics = new ViewTyreChangeGraphics(this, car, tyreEntry);
 		graphics.setOnTouchListener(new TyreTouchListener(this));
@@ -148,15 +159,21 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		tyreSchemeLayout.addView(graphics);
 	}
 
+	/**
+	 * If a tyre is clicked, this method is responsible to handle tyre selection
+	 * @param tyre
+	 */
 	private void tyreClicked(Tyre tyre) {
 		if (helper.getSelectedTyre() == tyre) {
 			deselectTyre();
 		} else {
 			selectTyre(tyre);
 		}
-		reloadTyreStats(helper.getSelectedTyre());
 	}
 
+	/**
+	 * Method responsible for all the steps that are necessary when a tyre is deselected.
+	 */
 	private void deselectTyre() {
 		helper.setSelectedTyre(null);
 		helper.setFlashingMode(false);
@@ -166,8 +183,12 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		listView.clearChoices();
 		listView.setSelector(new ColorDrawable(0x0));
 		adapter.notifyDataSetChanged();
+		reloadTyreStats(null);
 	}
 
+	/**
+	 * Method responsible for all the steps that are necessary when a tyre is selected.
+	 */
 	private void selectTyre(Tyre tyre) {
 		helper.setSelectedTyre(tyre);
 		helper.setFlashingMode(true);
@@ -178,8 +199,14 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		} else {
 			buttonUninstall.setVisibility(View.VISIBLE);
 		}
+		reloadTyreStats(tyre);
 	}
 
+	/**
+	 * Method responsible to update the textviews in the activity which show the details of the
+	 * selected tyre
+	 * @param tyre which has been selected
+	 */
 	private void reloadTyreStats(Tyre tyre) {
 		String text;
 		try {
@@ -234,14 +261,20 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		reloadSingleTyreStat(text, textViewPatternHint, textViewPatternValue);
 	}
 
-	private void reloadSingleTyreStat(String text, TextView hint, TextView value) {
+	/**
+	 * Method to add a single line to the stats of the selected tyre
+	 * @param text text to enter
+	 * @param hintView view carrying the text hint (e.g. brand, model)
+	 * @param valueView view carrying the values (e.g. UnitedTyres, WinterWind T100)
+	 */
+	private void reloadSingleTyreStat(String text, TextView hintView, TextView valueView) {
 		if (text == null || text == "") {
-			hint.setVisibility(View.GONE);
-			value.setVisibility(View.GONE);
+			hintView.setVisibility(View.GONE);
+			valueView.setVisibility(View.GONE);
 		} else {
-			value.setText(" " + text);
-			hint.setVisibility(View.VISIBLE);
-			value.setVisibility(View.VISIBLE);
+			valueView.setText(" " + text);
+			hintView.setVisibility(View.VISIBLE);
+			valueView.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -278,7 +311,68 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		}
 	}
 
-	private void deleteTyre(Tyre tyre) {
+	/**
+	 * Method responsible for checking if it's safe to delete a selected tyre. It checks if there's
+	 * any newer entry which works with the tyre we want to delete.
+	 * @param tyre to be checked for
+	 * @return true if it's safe to delete the tyre; false otherwise
+	 */
+	private boolean isSafeToDelete(Tyre tyre) {
+		for (Car c: MainActivity.garage.getCars()) {
+			// Check all the cars
+			LinkedList<TyreChangeEntry> entries = c.getHistory().getTyreChangeEntries();
+			Date filteringDate = new Date();
+			// we need to shift the time by 1 ms for filtering so that it doesn't scream if on our own entry
+			filteringDate.setTime(tyreEntry.getEventDate().getTime() + 1);
+			History.filterEntriesByDate(entries, filteringDate, null);
+			for (TyreChangeEntry e: entries) {
+				if (e.getTyreScheme() == null) {
+					continue;
+				}
+				// All the TyreChangeEntries after current date
+				for (Axle a: e.getTyreScheme().getAxles()) {
+					// All the axles
+					for (UUID uuid: a.getTyreIDs().values()) {
+						// And all the tyres
+						if (uuid.equals(tyre.getUuid())) {
+							String message = getResources().getString(R.string.activity_tyre_change_scheme_tyre_used_alert_1);
+							message += e.getDynamicId() + " ";
+							message += getResources().getString(R.string.activity_tyre_change_scheme_tyre_used_alert_2);
+							SimpleDateFormat format = new SimpleDateFormat();
+							format.setTimeZone(TimeZone.getDefault());
+							message += " " + DateFormat.getDateInstance().format(e.getEventDate()) + " "; // Format in device's locale
+							message += getResources().getString(R.string.activity_tyre_change_scheme_tyre_used_alert_3);
+							message += " " + c.getNickname();
+							// And verify that the tyre the user wants to delete is not installed
+							AlertDialog alertDialog = new AlertDialog.Builder(this)
+								.setTitle(R.string.activity_generic_failure_hint)
+								.setMessage(message)
+								.setNeutralButton(R.string.activity_generic_ok_hint,
+									new DialogInterface.OnClickListener() {
+										public void onClick(DialogInterface dialog, int which) {
+											dialog.dismiss();
+										}
+									}
+								)
+								.create();
+							alertDialog.show();
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Method to delete the tyre from tyreList list and from the graphical tyreContainer.
+	 * @param tyre Tyre to be deleted.
+	 * @return True if tyre has been successfully deleted. False otherwise.
+	 */
+	private boolean deleteTyre(Tyre tyre) {
+		if (!isSafeToDelete(tyre)) return false;
+
 		if (tyreList.contains(tyre)) {
 			tyreList.remove(tyre);
 		} else {
@@ -286,8 +380,13 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		}
 		tyreEntry.getDeletedTyreIDs().add(tyre.getUuid());
 		deselectTyre();
+		return true;
 	}
 
+	/**
+	 * Removes the tyre from the graphical TyreContainer and puts it back to the pool.
+	 * @param tyre
+	 */
 	private void uninstallTyre(Tyre tyre) {
 		GuiUtils.removeTyreFromContainer(tyre, graphics.getTyreGUIObjects());
 		tyreList.add(tyre);
@@ -302,7 +401,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 	 */
 	private void registerNewTyres(Tyre tyre, int count) {
 		Tyre newTyre;
-		int index = tyreList.size() - 1;
+		int index = tyreList.size();
 		if (tyreList.contains(tyre)) {
 			// If we're updating an existing tyre, remember where it's located as into the same place
 			// we'll be adding new tyre.
@@ -320,21 +419,44 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 
 	@Override
 	public void onDialogEditClick(DialogFragment dialog) {
-		int position = tyreList.size() - 1 - getSelectedTyrePosition();
 		Intent newIntent = new Intent(this, ActivityTyreEdit.class);
-		newIntent.putExtra(ActivityTyreEdit.INTENT_TYRE, tyreList.get(position));
+		newIntent.putExtra(ActivityTyreEdit.INTENT_TYRE, tyreList.get(getSelectedTyrePosition()));
 		startActivityForResult(newIntent, EDIT_TYRE);
 	}
 
 	@Override
 	public void onDialogDeleteClick(DialogFragment dialog) {
-
+		// this calls deleteTyre(Tyre tyre)
+		// and removes the tyre from the boughtTyres as well
+		Tyre tyre = tyreList.get(getSelectedTyrePosition());
+		if (deleteTyre(tyre)) {
+			// Try to delete the tyre from tyreList. If successfully deleted from tyreList,
+			// delete it from the boughtTyres and deletedTyres as well as we're completely clearing
+			// the history now
+			for (Car c : MainActivity.garage.getCars()) {
+				for (TyreChangeEntry e : c.getHistory().getTyreChangeEntries()) {
+					if (e.getBoughtTyres().contains(tyre)) {
+						e.getBoughtTyres().remove(tyre);
+						break;
+					}
+				}
+			}
+			tyreEntry.getDeletedTyreIDs().remove(tyre.getUuid());
+		}
 	}
 
+	/**
+	 * Setter
+	 * @param selectedTyrePosition
+	 */
 	private void setSelectedTyrePosition(int selectedTyrePosition) {
 		this.selectedTyrePosition = selectedTyrePosition;
 	}
 
+	/**
+	 * Getter
+	 * @return value
+	 */
 	protected int getSelectedTyrePosition() {
 		return selectedTyrePosition;
 	}
@@ -356,6 +478,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 					Tyre tyre = (Tyre) data.getExtras().getSerializable(ActivityTyreAdd.INTENT_TYRE);
 					int count = (Integer) data.getExtras().getSerializable(ActivityTyreAdd.INTENT_COUNT);
 					registerNewTyres(tyre, count);
+					reloadTyreStats(helper.getSelectedTyre());
 					adapter.notifyDataSetChanged();
 				} else if (resultCode == RESULT_CANCELED) {
 					// If no result, no issue
