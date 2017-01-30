@@ -62,7 +62,7 @@ public class ActivityInsuranceAdd extends ActivityEntryGenericAdd {
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
-		initializeTags(R.id.activity_insurance_button_tag_add);
+		initializeTags(R.id.activity_insurance_tags_recyclerview);
 	}
 	
 	@Override
