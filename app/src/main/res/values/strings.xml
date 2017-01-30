@@ -93,7 +93,7 @@
     <string name="activity_maintenance_type_accident_repair_label"	>Accident repair</string>
     <string name="activity_maintenance_type_hint"					>Maintenance type</string>
     <string name="activity_maintenance_type_planned_label"			>Planned</string>
-    <string name="activity_maintenance_type_unplanned_label"		>Unlanned</string>
+    <string name="activity_maintenance_type_unplanned_label"		>Unplanned</string>
 
     <string name="activity_part_add_carmaker_part_id_hint"			>Carmaker part No.</string>
     <string name="activity_part_add_manufacturer_part_id_hint"		>Manufacturer part No.</string>
@@ -228,7 +228,7 @@
     </string-array>
     
     <string-array name="activity_insurance_type">
-        <item>Basic (required by law)</item>
+        <item>Basic (mandatory by law)</item>
         <item>Other</item>
     </string-array>
     
