@@ -21,6 +21,8 @@ import sk.berops.android.fueller.io.xml.XMLHandler;
 import sk.berops.android.fueller.io.xml.XMLWriteException;
 
 /**
+ * Class responsible for managing a backup of the garage to external storage destination.
+ *
  * @author Bernard Halas
  * @date 2/2/17
  */
