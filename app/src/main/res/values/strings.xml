@@ -2,8 +2,6 @@
 <resources>
     <string name="app_name"											>Fueller</string>
 
-    <string name="action_settings"									>Settings</string>
-
     <string name="activity_bureaucratic_header"				    	>Bureaucracy expense</string>
 
     <string name="activity_car_add_brand_hint"						>Brand</string>
@@ -180,6 +178,10 @@
 
     <string name="list_tree_tags_new_tag_hint"			            >Create a new tag here</string>
 
+    <string name="menu_action_backup"								>Backup data</string>
+    <string name="menu_action_restore"								>Restore data</string>
+    <string name="menu_action_settings"								>Settings</string>
+
     <string name="preferences_units"								>Units</string>
     <string name="preferences_units_consumption"					>Consumption</string>
     <string name="preferences_units_consumption_dialog"				>Select consumption units for reporting</string>
@@ -191,6 +193,9 @@
     <string name="preferences_units_title"							>Units in reports</string>
     <string name="preferences_units_volume"							>Volume</string>
     <string name="preferences_units_volume_dialog"					>Select volume units for reporting</string>
+
+    <string name="toast_menu_backup_not_saved_successfully"         >Backup failed!</string>
+    <string name="toast_menu_backup_saved_successfully"             >Backup file saved to: </string>
     
     <string-array name="activity_car_add_distance_units">
         <item>Kilometer</item>

@@ -14,7 +14,6 @@ import android.widget.TextView;
 import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.dataModel.Car;
 import sk.berops.android.fueller.dataModel.expense.Entry;
-import sk.berops.android.fueller.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.fueller.dataModel.expense.FieldEmptyException;
 import sk.berops.android.fueller.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.fueller.dataModel.maintenance.Tyre;
@@ -50,7 +49,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	protected EditText editTextLaborCost;
 	protected EditText editTextSmallPartsCost;
 	
-	protected static final int SCHEME = 1;
+	protected static final int REQUEST_CODE_SCHEME = 1;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		car = MainActivity.garage.getActiveCar();
@@ -228,7 +227,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 				}
 				i.putExtra(ActivityTyreChangeScheme.INTENT_TYRE_ENTRY, tyreChangeEntry);
 			}
-			startActivityForResult(i, SCHEME);
+			startActivityForResult(i, REQUEST_CODE_SCHEME);
 			break;
 		case R.id.activity_tyre_change_button_commit:
 			try {
@@ -250,7 +249,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
-		case SCHEME:
+		case REQUEST_CODE_SCHEME:
 			// We're coming back from ActivityTyreChangeScheme
 			if (resultCode == RESULT_OK) {
 				tyreChangeEntry = (TyreChangeEntry) data.getExtras().getSerializable(ActivityTyreChangeScheme.INTENT_TYRE_ENTRY);
