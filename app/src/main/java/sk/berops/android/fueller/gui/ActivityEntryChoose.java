@@ -14,7 +14,7 @@ import sk.berops.android.fueller.gui.tyres.ActivityTyreChange;
 import sk.berops.android.fueller.gui.service.ActivityServiceAdd;
 import sk.berops.android.fueller.gui.toll.ActivityTollAdd;
 
-public class ActivityEntryAdd extends DefaultActivity {
+public class ActivityEntryChoose extends DefaultActivity {
 
 	Button buttonRefuel;
 	Button buttonTyres;

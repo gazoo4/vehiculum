@@ -45,7 +45,7 @@
             android:name="sk.berops.android.fueller.gui.report.ActivityCharts"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.ActivityEntryAdd"
+            android:name="sk.berops.android.fueller.gui.ActivityEntryChoose"
             android:label="@string/activity_entry_add_label"/>
         <activity
             android:name="sk.berops.android.fueller.gui.fuelling.ActivityFuellingEdit"
@@ -109,8 +109,7 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-    
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     
     <uses-sdk

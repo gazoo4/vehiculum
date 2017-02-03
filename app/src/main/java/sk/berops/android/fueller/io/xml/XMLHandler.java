@@ -2,9 +2,12 @@ package sk.berops.android.fueller.io.xml;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.pm.PackageManager;
+import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
@@ -13,11 +16,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import sk.berops.android.fueller.Fueller;
+import sk.berops.android.fueller.R;
 import sk.berops.android.fueller.dataModel.Garage;
 import sk.berops.android.fueller.gui.MainActivity;
 import sk.berops.android.fueller.io.DataHandler;
 
 public class XMLHandler extends DataHandler {
+	private Activity activity;
 	private static final int fileHistory = 100;
 	static String defaultFileName = "garage.xml";
 
@@ -41,6 +46,14 @@ public class XMLHandler extends DataHandler {
 			// We don't have permission so prompt the user
 			ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
 		}
+	}
+
+	public boolean isExternalStorageWritable() {
+		String state = Environment.getExternalStorageState();
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+			return true;
+		}
+		return false;
 	}
 	
 	public static String getFullFileName(String fileName) {
@@ -72,39 +85,53 @@ public class XMLHandler extends DataHandler {
 		Log.d("ERROR", "Failed loading garage");
 		return null;
 	}
-	
+
 	public void persistGarage(Activity activity) throws XMLWriteException {
 		persistGarage(activity, MainActivity.garage);
 	}
-	
+
 	public void persistGarage(Activity activity, Garage garage) throws XMLWriteException {
-		persistGarage(activity, garage, "" + defaultFileName);
+		persistGarageToInternal(activity, garage, "" + defaultFileName);
 	}
-	
-	public void persistGarage(Activity activity, Garage garage, String fileName) throws XMLWriteException {
-		Serializer serializer = new Persister(new FuellerCustomMatcher());
+
+	public void persistGarageToInternal(Activity activity, Garage garage, String fileName) throws XMLWriteException {
 		
 		fileName = getFullFileName(fileName);
 		
 		File file = new File(fileName);
 		File temp = new File(fileName +".temp");
-		try {
-			// First, let's try to persist against a temporary file so that we don't corrupt the main .xml file
-			verifyPermissions(activity);
-			serializer.write(garage, temp);
-		} catch (Exception e) {
-			Log.d("ERROR", "File serialization problem occurred");
-			e.printStackTrace();
-			throw new XMLWriteException("Failed serializing the garage");
-		}
 
+		persistGarage(activity, garage, temp);
 		// If the serialization to the temp file is successful, move the content here:
 		dateOutFiles(fileName);
 		boolean success = temp.renameTo(file);
 		if (!success) {
 			XMLWriteException e = new XMLWriteException("Failed renaming "+ temp.getName() +" to "+ file.getName());
-			Log.d("ERROR", "File saving problem occurred");
+			Log.e("ERROR", "File saving problem occurred");
 			throw e;
+		}
+	}
+
+	public void persistGarageToExternal(Activity activity, Garage garage, File folder, String filename)  throws XMLWriteException {
+		if (isExternalStorageWritable()) {
+			File file = new File(folder, filename + ".xml");
+			persistGarage(activity, garage, file);
+		} else {
+
+		}
+	}
+
+	public void persistGarage(Activity activity, Garage garage, File file) throws XMLWriteException {
+		Serializer serializer = new Persister(new FuellerCustomMatcher());
+
+		try {
+			verifyPermissions(activity);
+			serializer.write(garage, file);
+		} catch (Exception ex) {
+			Log.e("ERROR", "File serialization problem occurred");
+			XMLWriteException xmlEx = new XMLWriteException("Failed serializing the garage");
+			xmlEx.setStackTrace(ex.getStackTrace());
+			throw xmlEx;
 		}
 	}
 	
