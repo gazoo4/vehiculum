@@ -1,7 +1,6 @@
 package sk.berops.android.fueller.gui.tyres;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.TimeZone;
@@ -65,8 +63,8 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 	private Button buttonUninstall;
 	private Button buttonDelete;
 
-	public static final int ADD_TYRE = 1;
-	public static final int EDIT_TYRE = 2;
+	public static final int REQUEST_CODE_ADD_TYRE = 1;
+	public static final int REQUEST_CODE_EDIT_TYRE = 2;
 	public static final String INTENT_TYRE_ENTRY = "tyre entry";
 
 	@Override
@@ -421,7 +419,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 	public void onDialogEditClick(DialogFragment dialog) {
 		Intent newIntent = new Intent(this, ActivityTyreEdit.class);
 		newIntent.putExtra(ActivityTyreEdit.INTENT_TYRE, tyreList.get(getSelectedTyrePosition()));
-		startActivityForResult(newIntent, EDIT_TYRE);
+		startActivityForResult(newIntent, REQUEST_CODE_EDIT_TYRE);
 	}
 
 	@Override
@@ -470,10 +468,10 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
-			case ADD_TYRE:
-				// this is intended as for both ADD_TYRE and EDIT_TYRE we have the same handling
+			case REQUEST_CODE_ADD_TYRE:
+				// this is intended as for both REQUEST_CODE_ADD_TYRE and REQUEST_CODE_EDIT_TYRE we have the same handling
 				// the differences are handled inside registerNewTyres() method
-			case EDIT_TYRE:
+			case REQUEST_CODE_EDIT_TYRE:
 				if (resultCode == RESULT_OK) {
 					Tyre tyre = (Tyre) data.getExtras().getSerializable(ActivityTyreAdd.INTENT_TYRE);
 					int count = (Integer) data.getExtras().getSerializable(ActivityTyreAdd.INTENT_COUNT);
@@ -494,7 +492,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.id.activity_tyre_change_scheme_button_tyre_add:
-				startActivityForResult(new Intent(this, ActivityTyreAdd.class), ADD_TYRE);
+				startActivityForResult(new Intent(this, ActivityTyreAdd.class), REQUEST_CODE_ADD_TYRE);
 				break;
 			case R.id.activity_tyre_change_scheme_button_tyre_delete:
 				deleteTyre(helper.getSelectedTyre());

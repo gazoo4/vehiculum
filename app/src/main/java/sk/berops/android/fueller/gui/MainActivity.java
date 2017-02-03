@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -32,6 +33,7 @@ import sk.berops.android.fueller.dataModel.calculation.FuelConsumption;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.fueller.engine.calculation.Calculator;
+import sk.berops.android.fueller.gui.backupRestore.ExternalBackupHandler;
 import sk.berops.android.fueller.gui.common.GuiUtils;
 import sk.berops.android.fueller.gui.common.TextFormatter;
 import sk.berops.android.fueller.gui.garage.ActivityGarageManagement;
@@ -53,6 +55,7 @@ public class MainActivity extends DefaultActivity {
 	private TableLayout statsTable;
 	private TextView textViewHeader;
 
+	protected final static int REQUEST_CODE_RESTORE = 1;
 
 	public static void saveGarage(Activity activity) {
 		String toast;
@@ -384,9 +387,32 @@ public class MainActivity extends DefaultActivity {
 		switch (item.getItemId()) {
 		case R.id.menu_main_action_settings:
 			startActivity(new Intent(this, PreferenceWithHeaders.class));
-			return true;
+				return true;
+			case R.id.menu_main_action_backup:
+				ExternalBackupHandler external = new ExternalBackupHandler(this);
+				external.persistXMLCompressed(garage);
+				return true;
+			case R.id.menu_main_action_restore:
+				Intent intent = new Intent()
+						.setType("*/*")
+						.setAction(Intent.ACTION_OPEN_DOCUMENT);
+				startActivityForResult(Intent.createChooser(intent, "select the file to load"), REQUEST_CODE_RESTORE);
+				return true;
 		default:
 			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+			case REQUEST_CODE_RESTORE:
+				if (resultCode == RESULT_OK) {
+					Uri selectedFile = data.getData();
+					System.out.println("got the data!");
+					// Ensure a load here...
+				}
+				break;
 		}
 	}
 	
@@ -398,7 +424,7 @@ public class MainActivity extends DefaultActivity {
 	public void onClick(View view) {
 		switch(view.getId()) {
 		case R.id.activity_main_button_entry_add:
-			startActivity(new Intent(this, ActivityEntryAdd.class));
+			startActivity(new Intent(this, ActivityEntryChoose.class));
 			break;
 		case R.id.activity_main_button_stats_view:
 			startActivity(new Intent(this, ActivityReportsNavigate.class));
