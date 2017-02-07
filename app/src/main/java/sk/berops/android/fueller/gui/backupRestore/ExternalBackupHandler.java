@@ -46,20 +46,20 @@ public class ExternalBackupHandler {
 		File folder = activity.getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
 		String filename = generateFileName();
 		String toast;
+		String path = folder.getPath().toString() + "/" + filename;
 		try {
 			persistXML(garage, folder, filename);
 			compressXML(folder, filename);
 			cleanUpXML(folder, filename);
 			toast = activity.getResources().getString(R.string.toast_menu_backup_saved_successfully);
-			toast += folder.getPath();
-			toast += filename;
-			Log.i(LOG_TAG, "File successfully saved to "+ folder.getPath().toString() + "/" + filename.toString());
+			toast += " " + path;
+			Log.i(LOG_TAG, "File successfully saved to " + path);
 		} catch (XMLWriteException | IOException ex) {
-			Log.e(LOG_TAG, "Couldn't write to "+ filename);
+			Log.e(LOG_TAG, "Couldn't write to "+ path);
 			Log.e(LOG_TAG, ex.getStackTrace().toString());
 			toast = activity.getResources().getString(R.string.toast_menu_backup_not_saved_successfully);
 		}
-		Toast.makeText(activity.getApplicationContext(), toast, Toast.LENGTH_LONG);
+		Toast.makeText(activity.getApplicationContext(), toast, Toast.LENGTH_LONG).show();
 	}
 
 	/**
