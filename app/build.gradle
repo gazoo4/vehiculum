@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: "androidsvgdrawable"
+apply plugin: 'androidsvgdrawable'
 
 android {
     adbOptions {
@@ -17,12 +17,13 @@ android {
             storePassword property_storePassword
         }
     }
-    compileSdkVersion 22
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "sk.berops.android.fueller"
         minSdkVersion 21
-        targetSdkVersion 22
+        targetSdkVersion 25
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -51,6 +52,7 @@ repositories {
 dependencies {
     compile 'com.android.support:recyclerview-v7:+'
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.5'
+    compile 'com.google.android.gms:play-services:10.0.1'
     compile 'com.jjoe64:graphview:3.1.4'
     compile 'com.larswerkman:lobsterpicker:1.0.1'
     compile 'org.apache.commons:commons-math3:3.5'

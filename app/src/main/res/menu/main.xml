@@ -17,5 +17,16 @@
         android:orderInCategory="300"
         android:showAsAction="never"
         android:title="@string/menu_action_restore"/>
+    <item
+        android:id="@+id/menu_main_action_gdrive_backup"
+        android:orderInCategory="300"
+        android:showAsAction="never"
+        android:title="@string/menu_action_gdrive_backup"/>
+    <item
+        android:id="@+id/menu_main_action_gdrive_restore"
+        android:orderInCategory="300"
+        android:showAsAction="never"
+        android:title="@string/menu_action_gdrive_restore"/>
+
 
 </menu>
