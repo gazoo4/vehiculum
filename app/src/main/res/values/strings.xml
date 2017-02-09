@@ -75,6 +75,7 @@
     <string name="activity_main_garage_empty"						>Your garage is empty</string>
     <string name="activity_main_garage_saved_toast"					>The changes have been saved</string>
     <string name="activity_main_garage_saving_error_toast"			>Problem occurred when saving changes</string>
+    <string name="activity_main_google_services_cnx_error_toast"	>A problem occurred when connecting to Google Services</string>
     <string name="activity_main_header"								>Manage your enthusiasm!</string>
     <string name="activity_main_relative_costs"						>Relative costs</string>
     <string name="activity_main_relative_costs_fuel"				>Relative costs for </string>
@@ -179,6 +180,8 @@
     <string name="list_tree_tags_new_tag_hint"			            >Create a new tag here</string>
 
     <string name="menu_action_backup"								>Backup data</string>
+    <string name="menu_action_gdrive_backup"						>Backup to Google Drive</string>
+    <string name="menu_action_gdrive_restore"						>Restore from Google Drive</string>
     <string name="menu_action_restore"								>Restore data</string>
     <string name="menu_action_settings"								>Settings</string>
 

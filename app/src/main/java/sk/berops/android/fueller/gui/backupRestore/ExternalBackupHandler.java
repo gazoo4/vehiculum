@@ -2,16 +2,13 @@ package sk.berops.android.fueller.gui.backupRestore;
 
 import android.app.Activity;
 import android.os.Environment;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -27,13 +24,10 @@ import sk.berops.android.fueller.io.xml.XMLWriteException;
  * @date 2/2/17
  */
 
-public class ExternalBackupHandler {
-	private static final String FILE_PREFIX = "crml";
-	private static final String LOG_TAG = "Storage";
-	private Activity activity;
+public class ExternalBackupHandler extends BackupHandler {
 
 	public ExternalBackupHandler(Activity activity){
-		this.activity = activity;
+		super(activity);
 	}
 
 	/**
@@ -42,7 +36,8 @@ public class ExternalBackupHandler {
 	 * /storage/emulated/0/Android/data/sk.berops.android.fueller/files/Documents/
 	 * @param garage to be persisted
 	 */
-	public void persistXMLCompressed(Garage garage) {
+	@Override
+	public void backup(Garage garage) {
 		File folder = activity.getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
 		String filename = generateFileName();
 		String toast;
@@ -60,18 +55,6 @@ public class ExternalBackupHandler {
 			toast = activity.getResources().getString(R.string.toast_menu_backup_not_saved_successfully);
 		}
 		Toast.makeText(activity.getApplicationContext(), toast, Toast.LENGTH_LONG).show();
-	}
-
-	/**
-	 * Method used to persist the garage object in a xml file
-	 * @param garage to be persisted
-	 * @param folder to store the file in
-	 * @param filename of the target file (without the ".xml" suffix)
-	 * @throws XMLWriteException
-	 */
-	private void persistXML(Garage garage, File folder, String filename) throws XMLWriteException {
-		XMLHandler xmlHandler = new XMLHandler();
-		xmlHandler.persistGarageToExternal(activity, garage, folder, filename);
 	}
 
 	/**
@@ -110,16 +93,9 @@ public class ExternalBackupHandler {
 		xmlFile.delete();
 	}
 
-	/**
-	 * Method to generate the filename for backing up the garage object. Consists of 2 parts:
-	 * 1) FILE_PREFIX
-	 * 2) date+time suffix
-	 * @return filename
-	 */
-	private String generateFileName() {
-		String name = FILE_PREFIX;
-		DateFormat dateFormat = new DateFormat();
-		name += "-" + dateFormat.format("yyyyMMdd.HHmmss", Calendar.getInstance().getTime());
-		return name;
+	// TODO
+	@Override
+	public Garage restore() {
+		return null;
 	}
 }
