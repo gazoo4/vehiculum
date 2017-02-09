@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -17,6 +20,10 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -34,6 +41,7 @@ import sk.berops.android.fueller.dataModel.expense.FuellingEntry;
 import sk.berops.android.fueller.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.fueller.engine.calculation.Calculator;
 import sk.berops.android.fueller.gui.backupRestore.ExternalBackupHandler;
+import sk.berops.android.fueller.gui.backupRestore.GDriveBackupHandler;
 import sk.berops.android.fueller.gui.common.GuiUtils;
 import sk.berops.android.fueller.gui.common.TextFormatter;
 import sk.berops.android.fueller.gui.garage.ActivityGarageManagement;
@@ -43,11 +51,13 @@ import sk.berops.android.fueller.io.DataHandler;
 import sk.berops.android.fueller.io.xml.GaragePersistException;
 import sk.berops.android.fueller.io.xml.XMLHandler;
 
-public class MainActivity extends DefaultActivity {
+public class MainActivity extends DefaultActivity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 	
 	public static Garage garage;
 	public static DataHandler dataHandler;
 	private static Preferences preferences = Preferences.getInstance();
+
+	private GDriveBackupHandler gDriveBackupHandler;
 
 	private Button buttonRecordEvent;
 	private Button buttonViewStats;
@@ -55,7 +65,12 @@ public class MainActivity extends DefaultActivity {
 	private TableLayout statsTable;
 	private TextView textViewHeader;
 
-	protected final static int REQUEST_CODE_RESTORE = 1;
+	public final static int REQUEST_CODE_BACKUP = 1;
+	public final static int REQUEST_CODE_RESTORE = 2;
+	public final static int REQUEST_CODE_RESOLUTION = 3;
+	public final static int REQUEST_CODE_CREATOR = 4;
+
+	private final static String LOG_TAG = "General Error";
 
 	public static void saveGarage(Activity activity) {
 		String toast;
@@ -113,8 +128,20 @@ public class MainActivity extends DefaultActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
+		if (gDriveBackupHandler == null) {
+			gDriveBackupHandler = new GDriveBackupHandler(this);
+		}
+		gDriveBackupHandler.onResume();
 		refreshStats();
 		generateStatTable();
+	}
+
+	@Override
+	public void onPause() {
+		if (gDriveBackupHandler != null) {
+			gDriveBackupHandler.onPause();
+		}
+		super.onPause();
 	}
 
 	@Override
@@ -390,13 +417,25 @@ public class MainActivity extends DefaultActivity {
 				return true;
 			case R.id.menu_main_action_backup:
 				ExternalBackupHandler external = new ExternalBackupHandler(this);
-				external.persistXMLCompressed(garage);
+				external.backup(garage);
 				return true;
 			case R.id.menu_main_action_restore:
 				Intent intent = new Intent()
 						.setType("*/*")
 						.setAction(Intent.ACTION_OPEN_DOCUMENT);
 				startActivityForResult(Intent.createChooser(intent, "select the file to load"), REQUEST_CODE_RESTORE);
+				return true;
+			case R.id.menu_main_action_gdrive_backup:
+				if (gDriveBackupHandler == null) {
+					gDriveBackupHandler = new GDriveBackupHandler(this);
+				}
+				gDriveBackupHandler.setBackupRequested(true);
+				return true;
+			case R.id.menu_main_action_gdrive_restore:
+				if (gDriveBackupHandler == null) {
+					gDriveBackupHandler = new GDriveBackupHandler(this);
+				}
+				gDriveBackupHandler.setRestoreRequested(true);
 				return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -411,6 +450,18 @@ public class MainActivity extends DefaultActivity {
 					Uri selectedFile = data.getData();
 					System.out.println("got the data!");
 					// Ensure a load here...
+				}
+				break;
+			case REQUEST_CODE_CREATOR:
+				// Called after a file is saved to GDrive
+				if (resultCode == RESULT_OK) {
+					Log.i(LOG_TAG, "Backup successfully saved to GDrive");
+					gDriveBackupHandler.setBackupRequested(false);
+				}
+				break;
+			case REQUEST_CODE_RESOLUTION:
+				if (resultCode == RESULT_OK) {
+					Log.i(LOG_TAG, "GoogleApiClient authenticated successfully");
 				}
 				break;
 		}
@@ -433,5 +484,49 @@ public class MainActivity extends DefaultActivity {
 			startActivity(new Intent(this, ActivityGarageManagement.class));
 			break;
 		}
+	}
+
+	/**
+	 * Method implemented from the OnConnectionFailedListener to deal with the unresolvable connection
+	 * errors to Google Services API
+	 * @param result
+	 */
+	@Override
+	public void onConnectionFailed(@NonNull ConnectionResult result) {
+		Toast.makeText(this, "Problems connecting to Google Services", Toast.LENGTH_LONG);
+		Log.i(LOG_TAG, "GoogleApiClient connection failed: "+ result.toString());
+		if (!result.hasResolution()) {
+			GoogleApiAvailability.getInstance().getErrorDialog(this, result.getErrorCode(), 0).show();
+			return;
+		}
+
+		// The failure has a resolution, try to resolve it. Usually this means that the app is not
+		// yet authorized so an authorization dialogue to be displayed to the user.
+		try {
+			result.startResolutionForResult(this, REQUEST_CODE_RESOLUTION);
+		} catch (IntentSender.SendIntentException ex) {
+			Log.e(LOG_TAG, "Exception while starting the resolution activity", ex);
+		}
+	}
+
+	@Override
+	public void onConnected(@Nullable Bundle bundle) {
+		Log.d(LOG_TAG, "GoogleApiClient connected");
+		if (gDriveBackupHandler == null) {
+			gDriveBackupHandler = new GDriveBackupHandler(this);
+		}
+		// Always do backup before restore
+		if (gDriveBackupHandler.isBackupRequested()) {
+			gDriveBackupHandler.backup(garage);
+		}
+		if (gDriveBackupHandler.isRestoreRequested()) {
+			garage = gDriveBackupHandler.restore();
+			gDriveBackupHandler.setRestoreRequested(false);
+		}
+	}
+
+	@Override
+	public void onConnectionSuspended(int i) {
+		Log.d(LOG_TAG, "GoogleApiClient connection suspended");
 	}
 }
