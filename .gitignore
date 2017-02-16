@@ -19,6 +19,16 @@ build/
 # Local configuration file (sdk path, etc)
 local.properties
 
+# Windows thumbnail DB
+Thumbs.db
+
+# OSX files
+.DS_Store
+
+# Eclipse project files
+.classpath
+.project
+
 # Build passwords
 gradle.properties
 
@@ -35,5 +45,8 @@ proguard/
 # Settings are not necessary
 .settings/
 
-# Library configs
-.idea/libraries/
+# Android Studio
+*.iml
+.idea/
+
+
