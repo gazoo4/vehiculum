@@ -35,5 +35,6 @@ proguard/
 # Settings are not necessary
 .settings/
 
-# Library configs
-.idea/libraries/
+# Android Studio
+.idea/
+*.iml
