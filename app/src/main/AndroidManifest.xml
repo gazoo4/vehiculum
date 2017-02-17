@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sk.berops.android.fueller"
-    android:versionCode="4"
-    android:versionName="0.0.Daytona" >
+    package="sk.berops.android.caramel"
+    android:versionCode="5"
+    android:versionName="E-Type" >
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/mb_icon"
         android:label="@string/app_name"
-        android:name="sk.berops.android.fueller.Fueller"
+        android:name="sk.berops.android.caramel.Caramel"
         android:theme="@style/AppTheme">
         
         <activity
-            android:name="sk.berops.android.fueller.gui.MainActivity"
+            android:name="sk.berops.android.caramel.gui.MainActivity"
             android:label="@string/app_name"
             android:configChanges="orientation|keyboardHidden|keyboard" android:launchMode="singleTop">
             <intent-filter>
@@ -27,82 +27,82 @@
             android:name=".gui.bureaucratic.ActivityBureaucraticEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.common.pictures.CameraHandler"
+            android:name="sk.berops.android.caramel.gui.common.pictures.CameraHandler"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.garage.ActivityCarAdd"
+            android:name="sk.berops.android.caramel.gui.garage.ActivityCarAdd"
             android:label="@string/activity_car_add_label"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.garage.ActivityCarEdit"
+            android:name="sk.berops.android.caramel.gui.garage.ActivityCarEdit"
             android:label="@string/activity_car_edit_label"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.insurance.ActivityInsuranceAdd"
+            android:name="sk.berops.android.caramel.gui.insurance.ActivityInsuranceAdd"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.insurance.ActivityInsuranceEdit"
+            android:name="sk.berops.android.caramel.gui.insurance.ActivityInsuranceEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.report.ActivityCharts"
+            android:name="sk.berops.android.caramel.gui.report.ActivityCharts"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.ActivityEntryChoose"
+            android:name="sk.berops.android.caramel.gui.ActivityEntryChoose"
             android:label="@string/activity_entry_add_label"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.fuelling.ActivityFuellingEdit"
+            android:name="sk.berops.android.caramel.gui.fuelling.ActivityFuellingEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.garage.ActivityGarageManagement"
+            android:name="sk.berops.android.caramel.gui.garage.ActivityGarageManagement"
             android:label="@string/activity_garage_management_label"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.fuelling.ActivityRefuel"
+            android:name="sk.berops.android.caramel.gui.fuelling.ActivityRefuel"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.report.ActivityEntriesShow"
+            android:name="sk.berops.android.caramel.gui.report.ActivityEntriesShow"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.report.ActivityReportsNavigate"
+            android:name="sk.berops.android.caramel.gui.report.ActivityReportsNavigate"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.maintenance.ActivityMaintenanceAdd"
+            android:name="sk.berops.android.caramel.gui.maintenance.ActivityMaintenanceAdd"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.maintenance.ActivityMaintenanceEdit"
+            android:name="sk.berops.android.caramel.gui.maintenance.ActivityMaintenanceEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.maintenance.ActivityPartAdd"
+            android:name="sk.berops.android.caramel.gui.maintenance.ActivityPartAdd"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.maintenance.ActivityPartEdit"
+            android:name="sk.berops.android.caramel.gui.maintenance.ActivityPartEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.tyres.ActivityTyreAdd"
+            android:name="sk.berops.android.caramel.gui.tyres.ActivityTyreAdd"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.tyres.ActivityTyreChange"
+            android:name="sk.berops.android.caramel.gui.tyres.ActivityTyreChange"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.tyres.ActivityTyreChangeEdit"
+            android:name="sk.berops.android.caramel.gui.tyres.ActivityTyreChangeEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.tyres.ActivityTyreChangeScheme"
+            android:name="sk.berops.android.caramel.gui.tyres.ActivityTyreChangeScheme"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.tyres.ActivityTyreEdit"
+            android:name="sk.berops.android.caramel.gui.tyres.ActivityTyreEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.service.ActivityServiceAdd"
+            android:name="sk.berops.android.caramel.gui.service.ActivityServiceAdd"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.service.ActivityServiceEdit"
+            android:name="sk.berops.android.caramel.gui.service.ActivityServiceEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.toll.ActivityTollAdd"
+            android:name="sk.berops.android.caramel.gui.toll.ActivityTollAdd"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.toll.ActivityTollEdit"
+            android:name="sk.berops.android.caramel.gui.toll.ActivityTollEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.fueller.gui.preferences.PreferenceWithHeaders"
+            android:name="sk.berops.android.caramel.gui.preferences.PreferenceWithHeaders"
             android:label="@string/app_name"/>
     </application>
 

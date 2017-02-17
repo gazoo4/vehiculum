@@ -72,7 +72,7 @@
             android:title="string - launch_preferences">
 
         <PreferenceScreen
-                android:fragment="sk.berops.android.fueller.gui.preferences.PreferenceWithHeaders$Prefs1FragmentInner"
+                android:fragment="sk.berops.android.caramel.gui.preferences.PreferenceWithHeaders$Prefs1FragmentInner"
                 android:title="string - title_fragment_preference"
                 android:summary="string - summary_fragment_preference">
             <extra android:name="someKey" android:value="somePrefValue" />
