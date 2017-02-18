@@ -1,6 +1,5 @@
 #!/bin/bash
-# Ugly tool to trigger automatic conversion from *.svg images to all sizes of *.png images
-# TODO: to be tested on Linux
+# Ugly tool to trigger automatic conversion from *.svg images to all necessary sizes of *.png images
 #
 
 #
