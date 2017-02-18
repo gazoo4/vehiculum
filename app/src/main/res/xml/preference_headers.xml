@@ -2,11 +2,11 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <header android:id="@+id/preferences_units_item" 
-        android:fragment="sk.berops.android.caramel.gui.preferences.PreferenceWithHeaders$Units"
+        android:fragment="sk.berops.android.vehiculum.gui.preferences.PreferenceWithHeaders$Units"
         android:title="@string/preferences_units"
         android:summary="@string/preferences_units_summary" />
 <!-- 
-    <header android:fragment="sk.berops.android.caramel.gui.preferences.PreferenceWithHeaders$Prefs2Fragment"
+    <header android:fragment="sk.berops.android.vehiculum.gui.preferences.PreferenceWithHeaders$Prefs2Fragment"
             android:icon="@drawable/mb_icon"
             android:title="Prefs 2"
             android:summary="Some other preferences you can see.">
@@ -17,7 +17,7 @@
             android:title="Intent"
             android:summary="Launches an Intent.">
         <intent android:action="android.intent.action.VIEW"
-                android:data="https://www.caramel.com" />
+                android:data="https://www.vehiculum.com" />
     </header>
  -->
 </preference-headers>
