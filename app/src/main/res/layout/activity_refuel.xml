@@ -12,46 +12,8 @@
         android:background="@drawable/background_blue"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/activity_refuel_date_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="3dp">
-
-            <Button
-                android:id="@+id/activity_refuel_date_button"
-                style="@style/button_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:drawableLeft="@drawable/calendar"
-                android:drawablePadding="5dp"
-                android:drawableStart="@drawable/calendar"
-                android:gravity="center_vertical"
-                android:onClick="onClickShowDatePickerDialog"/>
-
-            <Button
-                android:id="@+id/activity_refuel_button_tag_add"
-                style="@style/button_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:drawableLeft="@drawable/add_tag"
-                android:drawableStart="@drawable/add_tag"
-                android:gravity="center_vertical"
-                android:onClick="onClickTagAdd"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/activity_refuel_tags_recyclerview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/activity_refuel_button_tag_add"
-                android:layout_toStartOf="@id/activity_refuel_button_tag_add"
-                android:gravity="center"
-                android:scrollbars="horizontal"/>
-        </RelativeLayout>
+        <include
+            layout="@layout/activity_new_event_common_header" />
 
         <GridLayout
             android:layout_width="match_parent"

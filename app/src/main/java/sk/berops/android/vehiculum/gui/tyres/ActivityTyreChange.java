@@ -69,6 +69,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 
 	@Override
 	protected void attachGuiObjects() {
+		super.attachGuiObjects();
 		editTextTyresCost = (EditText) findViewById(R.id.activity_tyre_change_tyres_cost);
 		editTextLaborCost = (EditText) findViewById(R.id.activity_tyre_change_labor_cost);
 		editTextSmallPartsCost = (EditText) findViewById(R.id.activity_tyre_change_small_parts_cost);
@@ -77,14 +78,8 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		editTextComment = (EditText) findViewById(R.id.activity_tyre_change_comment);
 
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_tyre_change_distance_unit);
-
-		buttonDate = (Button) findViewById(R.id.activity_tyre_change_date_button);
-		buttonTagAdd = (Button) findViewById(R.id.activity_tyre_change_button_tag_add);
 		
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_tyre_change_total_cost_currency);
-
-		listButtons.add(buttonDate);
-		listButtons.add(buttonTagAdd);
 
 		listEditTexts.add(editTextTyresCost);
 		listEditTexts.add(editTextLaborCost);
@@ -99,7 +94,6 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
-		initializeTags(R.id.activity_tyre_change_tags_recyclerview);
 		PriceCalculateListener priceCalculator = new PriceCalculateListener();
 		editTextTyresCost.addTextChangedListener(priceCalculator);
 		editTextLaborCost.addTextChangedListener(priceCalculator);

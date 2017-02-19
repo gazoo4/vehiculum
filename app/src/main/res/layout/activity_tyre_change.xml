@@ -1,64 +1,24 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_blue"
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_blue"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/activity_tyre_change_date_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:padding="3dp">
-
-            <Button
-                android:id="@+id/activity_tyre_change_date_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:gravity="center_vertical"
-                android:drawableLeft="@drawable/calendar"
-                android:drawableStart="@drawable/calendar"
-                android:drawablePadding="5dp"
-                android:onClick="onClickShowDatePickerDialog"
-                style="@style/button_text"/>
-
-            <Button
-                android:id="@+id/activity_tyre_change_button_tag_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:gravity="center_vertical"
-                android:drawableLeft="@drawable/add_tag"
-                android:drawableStart="@drawable/add_tag"
-                android:onClick="onClickTagAdd"
-                style="@style/button_text"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/activity_tyre_change_tags_recyclerview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/activity_tyre_change_button_tag_add"
-                android:layout_toStartOf="@id/activity_tyre_change_button_tag_add"
-                android:gravity="center"
-                android:scrollbars="horizontal" />
-
-        </RelativeLayout>
+        <include
+            layout="@layout/activity_new_event_common_header" />
 
         <LinearLayout
             android:id="@+id/activity_tyre_change_mileage_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_change_date_layout"
             android:orientation="horizontal" >
 
             <EditText
@@ -83,7 +43,6 @@
             style="@style/button_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_change_mileage_layout"
             android:background="@drawable/transparent_button"
             android:onClick="onClick"
             android:text="@string/activity_tyre_change_button_advanced" />
@@ -93,7 +52,6 @@
             style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_change_button_advanced"
             android:hint="@string/activity_tyre_change_tyres_cost_hint"
             android:inputType="numberDecimal" />
 
@@ -102,7 +60,6 @@
             style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_change_tyres_cost"
             android:hint="@string/activity_tyre_change_small_parts_cost_hint"
             android:inputType="numberDecimal" />
 
@@ -111,7 +68,6 @@
             style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_change_small_parts_cost"
             android:hint="@string/activity_tyre_change_labor_cost_hint"
             android:inputType="numberDecimal" />
 
@@ -119,7 +75,6 @@
             android:id="@+id/activity_tyre_change_total_cost_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_change_labor_cost"
             android:orientation="horizontal" >
 
             <EditText
@@ -145,7 +100,6 @@
             style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_change_total_cost_layout"
             android:hint="@string/activity_tyre_change_comment_hint"
             android:inputType="textMultiLine" />
 
@@ -154,10 +108,9 @@
             style="@style/button_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_change_comment"
             android:background="@drawable/transparent_button"
             android:onClick="onClick"
             android:text="@string/activity_tyre_change_button_entry_save" />
-    </RelativeLayout>
 
+    </LinearLayout>
 </ScrollView>

@@ -36,18 +36,15 @@ public class ActivityTollAdd extends ActivityEntryGenericAdd {
 	
 	@Override
 	protected void attachGuiObjects() {
+		super.attachGuiObjects();
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_toll_distance_unit);
 		
 		editTextMileage = (EditText) findViewById(R.id.activity_toll_mileage);
 		editTextCost = (EditText) findViewById(R.id.activity_toll_cost);
 		editTextComment = (EditText) findViewById(R.id.activity_toll_comment);
 
-		buttonDate = (Button) findViewById(R.id.activity_toll_date_button);
-
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_toll_currency);
 		spinnerTollType = (Spinner) findViewById(R.id.activity_toll_type);
-
-		listButtons.add(buttonDate);
 
 		listEditTexts.add(editTextMileage);
 		listEditTexts.add(editTextCost);
@@ -55,12 +52,6 @@ public class ActivityTollAdd extends ActivityEntryGenericAdd {
 
 		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
 		mapSpinners.put(R.array.activity_toll_type, spinnerTollType);
-	}
-
-	@Override
-	protected void initializeGuiObjects() {
-		super.initializeGuiObjects();
-		initializeTags(R.id.activity_toll_tags_recyclerview);
 	}
 	
 	@Override

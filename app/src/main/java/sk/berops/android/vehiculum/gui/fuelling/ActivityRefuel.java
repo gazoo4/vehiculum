@@ -51,6 +51,7 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
 
     @Override
     protected void attachGuiObjects() {
+	    super.attachGuiObjects();
         textViewDistanceUnit = (TextView) findViewById(R.id.activity_refuel_distance_unit);
         textViewPrice = (TextView) findViewById(R.id.activity_refuel_price_text);
 
@@ -59,15 +60,9 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
         editTextComment = (EditText) findViewById(R.id.activity_refuel_comment);
         editTextVolume = (EditText) findViewById(R.id.activity_refuel_volume);
 
-        buttonDate = (Button) findViewById(R.id.activity_refuel_date_button);
-        buttonTagAdd = (Button) findViewById(R.id.activity_refuel_button_tag_add);
-
         spinnerFuelType = (Spinner) findViewById(R.id.activity_refuel_fuel_type);
         spinnerCurrency = (Spinner) findViewById(R.id.activity_refuel_currency);
         spinnerVolumeUnit = (Spinner) findViewById(R.id.activity_refuel_volume_unit);
-
-        listButtons.add(buttonDate);
-        listButtons.add(buttonTagAdd);
 
         listEditTexts.add(editTextMileage);
         listEditTexts.add(editTextCost);
@@ -82,7 +77,6 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
     @Override
     protected void initializeGuiObjects() {
         super.initializeGuiObjects();
-        initializeTags(R.id.activity_refuel_tags_recyclerview);
 
         FuelType fuelType;
         try {

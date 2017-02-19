@@ -36,29 +36,20 @@ public class ActivityBureaucraticAdd extends ActivityEntryGenericAdd {
 	
 	@Override
 	protected void attachGuiObjects() {
+		super.attachGuiObjects();
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_bureaucratic_distance_unit);
 		
 		editTextMileage = (EditText) findViewById(R.id.activity_bureaucratic_mileage);
 		editTextCost = (EditText) findViewById(R.id.activity_bureaucratic_cost);
 		editTextComment = (EditText) findViewById(R.id.activity_bureaucratic_comment);
 
-		buttonDate = (Button) findViewById(R.id.activity_bureaucratic_date_button);
-
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_bureaucratic_currency);
-
-		listButtons.add(buttonDate);
 
 		listEditTexts.add(editTextMileage);
 		listEditTexts.add(editTextCost);
 		listEditTexts.add(editTextComment);
 
 		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
-	}
-
-	@Override
-	protected void initializeGuiObjects() {
-		super.initializeGuiObjects();
-		initializeTags(R.id.activity_bureaucratic_tags_recyclerview);
 	}
 	
 	@Override

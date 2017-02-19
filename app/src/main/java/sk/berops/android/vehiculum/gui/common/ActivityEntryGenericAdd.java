@@ -44,8 +44,18 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 	}
 
 	@Override
+	protected void attachGuiObjects() {
+		buttonDate = (Button) findViewById(R.id.activity_new_event_common_button_date);
+		buttonTagAdd = (Button) findViewById(R.id.activity_new_event_common_button_tag_add);
+
+		listButtons.add(buttonDate);
+		listButtons.add(buttonTagAdd);
+	}
+
+	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
+		initializeTags(R.id.activity_new_event_common_tags_recyclerview);
 		textViewDistanceUnit.setText(car.getDistanceUnit().getUnit());
 
 		if (editMode) {

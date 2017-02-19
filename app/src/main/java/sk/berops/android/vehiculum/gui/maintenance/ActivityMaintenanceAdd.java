@@ -99,6 +99,7 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 
 	@Override
 	protected void attachGuiObjects() {
+		super.attachGuiObjects();
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_maintenance_distance_unit);
 		textViewPartsCost = (TextView) findViewById(R.id.activity_maintenance_parts_cost);
 		textViewTotalCost = (TextView) findViewById(R.id.activity_maintenance_total_cost);
@@ -107,8 +108,6 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		editTextLaborCost = (EditText) findViewById(R.id.activity_maintenance_labor_cost);
 		editTextCost = (EditText) findViewById(R.id.activity_maintenance_cost);
 		editTextComment = (EditText) findViewById(R.id.activity_maintenance_comment);
-
-		buttonDate = (Button) findViewById(R.id.activity_maintenance_date_button);
 
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_maintenance_currency);
 		spinnerLaborCostCurrency = (Spinner) findViewById(R.id.activity_maintenance_labor_cost_currency);
@@ -132,8 +131,6 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 			}
 		});
 
-		listButtons.add(buttonDate);
-
 		listEditTexts.add(editTextMileage);
 		listEditTexts.add(editTextLaborCost);
 		listEditTexts.add(editTextCost);
@@ -146,7 +143,6 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
-		initializeTags(R.id.activity_maintenance_tags_recyclerview);
 		spinnerCurrency.setSelection(0);
 
 		CostCalculateListener costCalculator = new CostCalculateListener();

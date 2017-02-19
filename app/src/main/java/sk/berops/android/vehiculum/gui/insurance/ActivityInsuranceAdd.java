@@ -37,18 +37,15 @@ public class ActivityInsuranceAdd extends ActivityEntryGenericAdd {
 	
 	@Override
 	protected void attachGuiObjects() {
+		super.attachGuiObjects();
 		textViewDistanceUnit = (TextView) findViewById(R.id.activity_insurance_distance_unit);
 		
 		editTextMileage = (EditText) findViewById(R.id.activity_insurance_mileage);
 		editTextCost = (EditText) findViewById(R.id.activity_insurance_cost);
 		editTextComment = (EditText) findViewById(R.id.activity_insurance_comment);
 
-		buttonDate = (Button) findViewById(R.id.activity_insurance_date_button);
-
 		spinnerCurrency = (Spinner) findViewById(R.id.activity_insurance_currency);
 		spinnerInsuranceType = (Spinner) findViewById(R.id.activity_insurance_type);
-
-		listButtons.add(buttonDate);
 
 		listEditTexts.add(editTextMileage);
 		listEditTexts.add(editTextCost);
@@ -56,12 +53,6 @@ public class ActivityInsuranceAdd extends ActivityEntryGenericAdd {
 
 		mapSpinners.put(R.array.activity_insurance_type, spinnerInsuranceType);
 		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
-	}
-
-	@Override
-	protected void initializeGuiObjects() {
-		super.initializeGuiObjects();
-		initializeTags(R.id.activity_insurance_tags_recyclerview);
 	}
 	
 	@Override
