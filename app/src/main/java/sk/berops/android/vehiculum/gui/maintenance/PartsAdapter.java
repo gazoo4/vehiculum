@@ -1,6 +1,7 @@
 package sk.berops.android.vehiculum.gui.maintenance;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ public class PartsAdapter extends ArrayAdapter<ReplacementPart> {
 	}
 
 	@Override
+	@SuppressWarnings("deprecated")
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ReplacementPart part = parts.get(parts.size() - 1 - position);
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -37,12 +39,20 @@ public class PartsAdapter extends ArrayAdapter<ReplacementPart> {
 		TextView textViewQuantity = (TextView) rowView.findViewById(R.id.list_maintenance_parts_quantity);
 		TextView textViewPrice = (TextView) rowView.findViewById(R.id.list_maintenance_parts_price);
 		TextView textViewCurrency = (TextView) rowView.findViewById(R.id.list_maintenance_parts_currency);
-		
-		textViewID.setTextAppearance(context, R.style.plain_text);
-		textViewComment.setTextAppearance(context, R.style.plain_text);
-		textViewQuantity.setTextAppearance(context, R.style.plain_text);
-		textViewPrice.setTextAppearance(context, R.style.plain_text);
-		textViewCurrency.setTextAppearance(context, R.style.plain_text);
+
+		if (Build.VERSION.SDK_INT < 23) {
+			textViewID.setTextAppearance(context, R.style.plain_text);
+			textViewComment.setTextAppearance(context, R.style.plain_text);
+			textViewQuantity.setTextAppearance(context, R.style.plain_text);
+			textViewPrice.setTextAppearance(context, R.style.plain_text);
+			textViewCurrency.setTextAppearance(context, R.style.plain_text);
+		} else {
+			textViewID.setTextAppearance(R.style.plain_text);
+			textViewComment.setTextAppearance(R.style.plain_text);
+			textViewQuantity.setTextAppearance(R.style.plain_text);
+			textViewPrice.setTextAppearance(R.style.plain_text);
+			textViewCurrency.setTextAppearance(R.style.plain_text);
+		}
 		
 		textViewID.setText(part.getProducerPartID());
 		textViewComment.setText(part.getComment());

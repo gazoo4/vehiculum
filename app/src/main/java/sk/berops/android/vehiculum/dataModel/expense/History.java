@@ -13,16 +13,14 @@ import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType;
 
 public class History implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -850435628372657221L;
 	@ElementList(inline=true, required=false)
 	private LinkedList<Entry> entries;
 	
 	public History() {
 		super();
-		entries = new LinkedList<Entry>();
+		entries = new LinkedList<>();
 	}
 	
 	public void initAfterLoad(Car car) {
@@ -43,7 +41,8 @@ public class History implements Serializable {
 		
 		return null;
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	private <T extends Entry> LinkedList<T> getEntriesOfType(T entry) {
 		LinkedList<T> entriesOfType = new LinkedList<T>();
 		for (Entry e: getEntries()) {

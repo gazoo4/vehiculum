@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -359,7 +360,8 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 	private TableRow createStatRow(String description, String value, String unit) {
 		return createStatRow(description, value, unit, 0xFFFFFFFF);
 	}
-	
+
+	@SuppressWarnings("deprecated")
 	private TableRow createStatRow(String description, String value, String unit, int valueColor) {
 		TableRow row = new TableRow(this);
 		TextView descriptionView = new TextView(this);
@@ -373,10 +375,19 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 		if (unit != null) {
 			unitView.setText(unit);
 		}
-		
-		descriptionView.setTextAppearance(this, R.style.plain_text);
-		valueView.setTextAppearance(this, R.style.plain_text_big);
-		unitView.setTextAppearance(this, R.style.plain_text);
+
+		// setTextAppearance(context, resID)
+		// got deprecated in SDK version 23 in favor of
+		// setTextAppearance(resID)
+		if (Build.VERSION.SDK_INT < 23) {
+			descriptionView.setTextAppearance(this, R.style.plain_text);
+			valueView.setTextAppearance(this, R.style.plain_text_big);
+			unitView.setTextAppearance(this, R.style.plain_text);
+		} else {
+			descriptionView.setTextAppearance(R.style.plain_text);
+			valueView.setTextAppearance(R.style.plain_text_big);
+			unitView.setTextAppearance(R.style.plain_text);
+		}
 		
 		valueView.setTextColor(valueColor);
 		valueView.setShadowLayer(15, 0, 0, valueColor);
