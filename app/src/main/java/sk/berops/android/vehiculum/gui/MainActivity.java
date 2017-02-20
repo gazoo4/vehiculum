@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.TextViewCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -361,7 +362,6 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 		return createStatRow(description, value, unit, 0xFFFFFFFF);
 	}
 
-	@SuppressWarnings("deprecated")
 	private TableRow createStatRow(String description, String value, String unit, int valueColor) {
 		TableRow row = new TableRow(this);
 		TextView descriptionView = new TextView(this);
@@ -380,9 +380,9 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 		// got deprecated in SDK version 23 in favor of
 		// setTextAppearance(resID)
 		if (Build.VERSION.SDK_INT < 23) {
-			descriptionView.setTextAppearance(this, R.style.plain_text);
-			valueView.setTextAppearance(this, R.style.plain_text_big);
-			unitView.setTextAppearance(this, R.style.plain_text);
+			TextViewCompat.setTextAppearance(descriptionView, R.style.plain_text);
+			TextViewCompat.setTextAppearance(valueView, R.style.plain_text_big);
+			TextViewCompat.setTextAppearance(unitView, R.style.plain_text);
 		} else {
 			descriptionView.setTextAppearance(R.style.plain_text);
 			valueView.setTextAppearance(R.style.plain_text_big);

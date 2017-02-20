@@ -8,6 +8,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphView.LegendAlign;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
+import com.jjoe64.graphview.GraphViewStyle;
 import com.jjoe64.graphview.LineGraphView;
 
 import java.util.ArrayList;
@@ -81,8 +82,9 @@ public class ActivityCharts extends DefaultActivity {
 		}
 		
 		HistoryViewData[] data = new HistoryViewData[0];
-		GraphViewSeriesStyle style;
+		GraphViewSeriesStyle seriesStyle;
 		GraphViewSeries series;
+		GraphViewStyle viewStyle = new GraphViewStyle();
 		int viewportThreshold = 10; //TODO add this to settings
 		if (splineInterpolation) viewportThreshold *= resolution;
 		// add all the data series to the chart
@@ -92,8 +94,8 @@ public class ActivityCharts extends DefaultActivity {
 			if (splineInterpolation) {
 				data = ChartInterpolator.applySpline(data, resolution);
 			}
-			style = new GraphViewSeriesStyle(type.getColor(), 4);
-			series = new GraphViewSeries(type.getType(), style, data);
+			seriesStyle = new GraphViewSeriesStyle(type.getColor(), 4);
+			series = new GraphViewSeries(type.getType(), seriesStyle, data);
 			graphView.addSeries(series);
 		}
 		
@@ -113,7 +115,8 @@ public class ActivityCharts extends DefaultActivity {
 		graphView.setScalable(true);
 		graphView.setShowLegend(true);
 		graphView.setLegendAlign(LegendAlign.BOTTOM);
-		graphView.setLegendWidth(200);
+		viewStyle.setLegendWidth(200);
+		graphView.setGraphViewStyle(viewStyle);
 		
 		RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_charts_layout);
 		layout.addView(graphView);
