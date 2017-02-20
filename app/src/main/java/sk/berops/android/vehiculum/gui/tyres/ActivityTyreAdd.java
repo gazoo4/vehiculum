@@ -86,23 +86,16 @@ public class ActivityTyreAdd extends ActivityGenericPartAdd {
 	}
 
 	@Override
-	protected void initializeGuiObjects() {
-		spinnerCondition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-			@Override
-			public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-				if (spinnerCondition.getSelectedItemPosition() == 0) {
-					// If the tyre is new, we don't need to bother with the threadLevel.
-					editTextThreadLevel.setVisibility(View.GONE);
-				} else {
-					editTextThreadLevel.setVisibility(View.VISIBLE);
-				}
+	public void onItemSelected(AdapterView<?> parent, View view, int position, long id)  {
+		super.onItemSelected(parent, view, position, id);
+		if (parent == spinnerCondition) {
+			if (spinnerCondition.getSelectedItemPosition() == 0) {
+				// If the tyre is new, we don't need to bother with the threadLevel.
+				editTextThreadLevel.setVisibility(View.GONE);
+			} else {
+				editTextThreadLevel.setVisibility(View.VISIBLE);
 			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> adapterView) {
-
-			}
-		});
+		}
 	}
 
 	/**

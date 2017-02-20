@@ -89,13 +89,25 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
         UnitConstants.VolumeUnit volumeUnit;
         volumeUnit = car.getVolumeUnit();
         spinnerVolumeUnit.setSelection(volumeUnit.getId());
-
-        PriceCalculateListener priceCalculator = new PriceCalculateListener();
-        editTextCost.addTextChangedListener(priceCalculator);
-        editTextVolume.addTextChangedListener(priceCalculator);
-        spinnerCurrency.setOnItemSelectedListener(priceCalculator);
-        spinnerVolumeUnit.setOnItemSelectedListener(priceCalculator);
     }
+
+	@Override
+	public void afterTextChanged(Editable s) {
+		super.afterTextChanged(s);
+		if (s == editTextVolume.getText()
+				|| s == editTextCost.getText()) {
+			refreshPrice();
+		}
+	}
+
+	@Override
+	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+		super.onItemSelected(parent, view, position, id);
+		if (parent == spinnerCurrency
+				|| parent == spinnerVolumeUnit) {
+			refreshPrice();
+		}
+	}
 
     protected void refreshPrice() {
         double volume;
@@ -159,35 +171,5 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
         super.updateFields();
         updateFuelVolume();
         updateFuelType();
-    }
-
-    class PriceCalculateListener implements TextWatcher, OnItemSelectedListener {
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            refreshPrice();
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count,
-                                      int after) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before,
-                                  int count) {
-        }
-
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view,
-                                   int position, long id) {
-            refreshPrice();
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-            // TODO Auto-generated method stub
-
-        }
     }
 }

@@ -22,24 +22,6 @@ import sk.berops.android.vehiculum.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.vehiculum.gui.common.GuiUtils;
 
 public class ActivityTyreChange extends ActivityEntryGenericAdd {
-	
-	class PriceCalculateListener implements TextWatcher {
-
-		@Override
-		public void afterTextChanged(Editable s) {
-			updateTotalCost();
-		}
-
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count,
-				int after) {
-		}
-
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before,
-				int count) {
-		}
-	}
 
 	Double laborCost, extraMaterialCost, tyresCost;
 	
@@ -92,12 +74,13 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	}
 
 	@Override
-	protected void initializeGuiObjects() {
-		super.initializeGuiObjects();
-		PriceCalculateListener priceCalculator = new PriceCalculateListener();
-		editTextTyresCost.addTextChangedListener(priceCalculator);
-		editTextLaborCost.addTextChangedListener(priceCalculator);
-		editTextSmallPartsCost.addTextChangedListener(priceCalculator);
+	public void afterTextChanged(Editable s) {
+		super.afterTextChanged(s);
+		if (s == editTextTyresCost.getText()
+				|| s == editTextLaborCost.getText()
+				|| s == editTextSmallPartsCost.getText()) {
+			updateTotalCost();
+		}
 	}
 
 	/**
@@ -250,6 +233,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 				// After a deserialization tyreChangeEntry is a new object. Updating the reference.
 				reloadReferences();
 				updateTyresCost(true);
+				setUpdateOngoing(true);
 			} else if (resultCode == RESULT_CANCELED) {
 				// nothing needed to be done if the scheme addition was cancelled
 			}

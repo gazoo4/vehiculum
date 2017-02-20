@@ -27,6 +27,7 @@ public abstract class ActivityExpenseAdd extends ActivityRecordAdd {
 
 	@Override
 	protected void initializeGuiObjects() {
+		super.initializeGuiObjects();
 		Currency.Unit currency;
 		try {
 			currency = car.getHistory().getEntries().getLast().getCurrency();

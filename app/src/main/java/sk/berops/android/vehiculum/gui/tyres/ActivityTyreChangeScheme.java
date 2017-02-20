@@ -478,6 +478,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 					registerNewTyres(tyre, count);
 					reloadTyreStats(helper.getSelectedTyre());
 					adapter.notifyDataSetChanged();
+					setUpdateOngoing(true);
 				} else if (resultCode == RESULT_CANCELED) {
 					// If no result, no issue
 				}

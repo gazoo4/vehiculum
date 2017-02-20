@@ -43,8 +43,11 @@
     <string name="activity_generic_button_new_tag_add"				>Add new tag</string>
     <string name="activity_generic_button_date_change"				>Change date</string>
     <string name="activity_generic_button_entry_save"				>Save</string>
+    <string name="activity_generic_cancel_hint"			    		>Cancel</string>
     <string name="activity_generic_comment_hint"					>Additional comment</string>
     <string name="activity_generic_cost_hint"						>Total cost</string>
+    <string name="activity_generic_discard_changes_warning"			>You have unsaved changes. Do you really want to discard them?</string>
+    <string name="activity_generic_discard_hint"					>Discard</string>
     <string name="activity_generic_failure_hint"                    >Failure!</string>
     <string name="activity_generic_linear_tag_deletion_alert_1"		>Are you sure you want to remove tag</string>
     <string name="activity_generic_linear_tag_deletion_alert_2"		>from this entry?</string>

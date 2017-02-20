@@ -36,35 +36,6 @@ import sk.berops.android.vehiculum.io.xml.GaragePersistException;
 public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		FragmentEntryEditDelete.EntryEditDeleteDialogListener {
 
-	class CostCalculateListener implements TextWatcher, OnItemSelectedListener {
-
-		@Override
-		public void afterTextChanged(Editable s) {
-			reloadCost();
-		}
-
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			// TODO Auto-generated method stub
-		}
-
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before, int count) {
-			// TODO Auto-generated method stub
-		}
-
-		@Override
-		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-			reloadCost();
-		}
-
-		@Override
-		public void onNothingSelected(AdapterView<?> arg0) {
-			// TODO Auto-generated method stub
-
-		}
-	}
-
 	protected static final int ADD_PART = 1;
 	protected static final int EDIT_PART = 2;
 
@@ -138,18 +109,30 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 
 		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
 		mapSpinners.put(R.array.activity_expense_add_currency, spinnerLaborCostCurrency);
+
+		listRadioGroups.add(radioGroupType);
 	}
 
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
 		spinnerCurrency.setSelection(0);
+	}
 
-		CostCalculateListener costCalculator = new CostCalculateListener();
-		editTextLaborCost.addTextChangedListener(costCalculator);
-		spinnerLaborCostCurrency.setOnItemSelectedListener(costCalculator);
-		
-		reloadCost();
+	@Override
+	public void afterTextChanged(Editable s) {
+		super.afterTextChanged(s);
+		if (s == editTextLaborCost.getText()) {
+			reloadCost();
+		}
+	}
+
+	@Override
+	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+		super.onItemSelected(parent, view, position, id);
+		if (parent == spinnerLaborCostCurrency) {
+			reloadCost();
+		}
 	}
 
 	@Override
@@ -161,8 +144,8 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 				ReplacementPart result = (ReplacementPart) data.getExtras().getSerializable("part");
 				maintenanceEntry.getParts().add(result);
 				reloadCost();
-			}
-			if (resultCode == RESULT_CANCELED) {
+				setUpdateOngoing(true);
+			} else if (resultCode == RESULT_CANCELED) {
 				// If no result, no issue
 			}
 			break;
@@ -172,8 +155,8 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 				maintenanceEntry.getParts().remove(selectedPartPosition);
 				maintenanceEntry.getParts().add(selectedPartPosition, result);
 				reloadCost();
-			}
-			if (resultCode == RESULT_CANCELED) {
+				setUpdateOngoing(true);
+			} else if (resultCode == RESULT_CANCELED) {
 				// If no result, no issue
 			}
 			break;
