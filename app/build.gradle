@@ -5,6 +5,9 @@ android {
     adbOptions {
         timeOutInMs = 30 * 1000;
     }
+    dexOptions {
+        javaMaxHeapSize "2g"
+    }
     signingConfigs {
         debug {
             keyAlias 'androiddebugkey'
