@@ -47,6 +47,8 @@ android {
         }
         debug {
             signingConfig signingConfigs.debug
+            // Disable fabric build ID generation for debug builds
+            ext.enableCrashlytics = false
         }
     }
 }
@@ -61,7 +63,9 @@ repositories {
     maven {
         url "https://jitpack.io"
     }
-    maven { url 'https://maven.fabric.io/public' }
+    maven {
+        url 'https://maven.fabric.io/public'
+    }
 }
 
 dependencies {
