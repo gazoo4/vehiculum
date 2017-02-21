@@ -34,6 +34,9 @@ public class ActivityEntriesShow extends DefaultActivity implements FragmentEntr
 	EntriesReportAdapter adapter;
 	ListView listView;
 	Spinner spinnerEntriesType;
+
+	public final String LOG_TAG = "Show Entries";
+	public final int REQUEST_CODE_EDIT_DELETE = 1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +69,6 @@ public class ActivityEntriesShow extends DefaultActivity implements FragmentEntr
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, final View view,
 					int position, long id) {
-				Toast.makeText(getApplicationContext(),
-						"Click ListItem Number " + position, Toast.LENGTH_LONG)
-						.show();
 				setSelectedEntryPosition(position);
 				DialogFragment dialog = new FragmentEntryEditDelete();
 				dialog.show(getFragmentManager(), "FragmentEntryEditDelete");

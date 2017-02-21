@@ -1,11 +1,15 @@
 package sk.berops.android.vehiculum.gui.common;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import sk.berops.android.vehiculum.R;
@@ -18,19 +22,32 @@ public class FragmentEntryEditDeleteActivate extends DialogFragment {
 		public void OnDialogActivateClick(DialogFragment dialog);
 	}
 	
-	EntryEditDeleteActivateDialogListener listener;
-	
+	private EntryEditDeleteActivateDialogListener listener;
+	public static final String LOG_TAG = "E/D/A fragment";
+
+	@TargetApi(23)
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		onAttachToContext(context);
+	}
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		
-		try {
-			listener = (EntryEditDeleteActivateDialogListener) activity;
-		} catch (ClassCastException e) {
-			System.out.println("Class doesn't implement EntryEditDeleteActivateDialogListener");
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+			onAttachToContext(activity);
 		}
 	}
-	
+
+	protected void onAttachToContext(Context context) {
+		try {
+			listener = (EntryEditDeleteActivateDialogListener) context;
+		} catch (ClassCastException e) {
+			Log.e(LOG_TAG, ""+ context.toString() + " must implement FragmentEntryEditDeleteActivate.EntryEditDeleteActivateDialogListener");
+		}
+	}
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
