@@ -27,7 +27,7 @@ function convert {
 	out_filename=`echo ${in_filename} | sed 's/\.svg/\.png/g'`
 
 	in_file="${src_dir}${divider}${in_filename}"
-	out_file="${dst_dir}${divider}drawable-${resolution}${divider}${out_filename}"
+	out_file="${dst_dir}drawable-${resolution}${divider}${out_filename}"
 
 	# It's only necessary to re-create the .png files if they are missing or the .svg has been updated
 	if [ "${out_file}" -ot "${in_file}" ]; then
@@ -38,6 +38,16 @@ function convert {
 			--export-area-drawing"
 		inkscape_cmd="${inkscape_bin} ${inkscape_params} >/dev/null"
 		eval ${inkscape_cmd}
+
+		# Test if optipng is installed.
+		# If so, use it for the picture minification.
+		hash optipng 2>/dev/null
+		optipng_installed=$?
+		if [ "${optipng_installed}" -eq "0" ]; then
+			optipng -o7 -clobber -preserve ${out_file}
+		else
+			echo >&2 "WARN: optipng missing for picture minify. Skipping."
+		fi
 		echo "${in_filename} ${resolution} updated";
 	else
 		echo "${in_filename} ${resolution} is already up-to-date"
@@ -45,7 +55,7 @@ function convert {
 }
 
 # Set paths based on the system
-case "$system" in
+case "${system}" in
         "Linux")
 		divider="/"
 		src_dir="${1}"
@@ -69,6 +79,6 @@ done
 
 # Optimize
 
-find ${dst_dir} -iname "*png" -exec optipng -o7 -clobber -preserve {} \;
+#find . -iname "*png" -print0 | xargs -0 -n 1 -P 4 optipng -o7 -clobber -preserve
 
 exit 0
