@@ -104,6 +104,9 @@
         <activity
             android:name="sk.berops.android.vehiculum.gui.preferences.PreferenceWithHeaders"
             android:label="@string/app_name"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="16a1ab2f9cb030da7a6355d12d0336c022f256e8" />
     </application>
 
     <uses-feature
@@ -116,4 +119,5 @@
         android:minSdkVersion="21"
         android:targetSdkVersion="22" />
     
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
