@@ -3,20 +3,22 @@
     <item
         android:id="@+id/menu_main_action_settings"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom"
+        android:showAsAction="never"
         android:title="@string/menu_action_settings"/>
 
     <item
-        android:id="@+id/menu_main_action_backup"
+        android:id="@+id/menu_main_action_export"
         android:orderInCategory="200"
         android:showAsAction="never"
         android:title="@string/menu_action_backup"/>
 
+    <!--
     <item
         android:id="@+id/menu_main_action_restore"
         android:orderInCategory="300"
         android:showAsAction="never"
         android:title="@string/menu_action_restore"/>
+
     <item
         android:id="@+id/menu_main_action_gdrive_backup"
         android:orderInCategory="300"
@@ -27,6 +29,6 @@
         android:orderInCategory="300"
         android:showAsAction="never"
         android:title="@string/menu_action_gdrive_restore"/>
-
+    -->
 
 </menu>

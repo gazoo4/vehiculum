@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sk.berops.android.vehiculum"
-    android:versionCode="5"
-    android:versionName="E-Type" >
+          package="sk.berops.android.vehiculum"
+          android:installLocation="auto"
+          android:versionCode="5"
+          android:versionName="E-Type">
 
+    <!-- Backup is limited to 25 MB of data per app! -->
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"

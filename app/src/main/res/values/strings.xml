@@ -182,7 +182,7 @@
 
     <string name="list_tree_tags_new_tag_hint"			            >Create a new tag here</string>
 
-    <string name="menu_action_backup"								>Backup data</string>
+    <string name="menu_action_export"								>Export data</string>
     <string name="menu_action_gdrive_backup"						>Backup to Google Drive</string>
     <string name="menu_action_gdrive_restore"						>Restore from Google Drive</string>
     <string name="menu_action_restore"								>Restore data</string>

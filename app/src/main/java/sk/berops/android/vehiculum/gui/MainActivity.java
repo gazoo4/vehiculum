@@ -427,13 +427,14 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 		case R.id.menu_main_action_settings:
 			startActivity(new Intent(this, PreferenceWithHeaders.class));
 				return true;
-			case R.id.menu_main_action_backup:
+			case R.id.menu_main_action_export:
 				ExternalBackupHandler external = new ExternalBackupHandler(this);
 				external.backup(garage);
 				return true;
+			/*
 			case R.id.menu_main_action_restore:
 				Intent intent = new Intent()
-						.setType("*/*")
+						.setType("*")
 						.setAction(Intent.ACTION_OPEN_DOCUMENT);
 				startActivityForResult(Intent.createChooser(intent, "select the file to load"), REQUEST_CODE_RESTORE);
 				return true;
@@ -449,6 +450,7 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 				}
 				gDriveBackupHandler.setRestoreRequested(true);
 				return true;
+				*/
 		default:
 			return super.onOptionsItemSelected(item);
 		}
