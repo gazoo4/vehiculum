@@ -4,13 +4,10 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioGroup;
@@ -18,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 import sk.berops.android.vehiculum.R;
@@ -31,7 +29,6 @@ import sk.berops.android.vehiculum.gui.common.ActivityEntryGenericAdd;
 import sk.berops.android.vehiculum.gui.common.FragmentEntryEditDelete;
 import sk.berops.android.vehiculum.gui.common.GuiUtils;
 import sk.berops.android.vehiculum.gui.common.TextFormatter;
-import sk.berops.android.vehiculum.io.xml.GaragePersistException;
 
 public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		FragmentEntryEditDelete.EntryEditDeleteDialogListener {
@@ -249,9 +246,9 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		System.out.println("Removing part with ID " + (parts.size() - 1 - getSelectedPartPosition()));  
 		parts.remove(part);
 		try {
-			MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
-		} catch (GaragePersistException e) {
-			Log.d("ERROR", "Problem when saving changes");
+			MainActivity.dataHandler.saveGarage(MainActivity.garage);
+		} catch (IOException ex) {
+			Log.d("ERROR", "Problem when saving changes: "+ ex.getMessage());
 		}
 		adapter.notifyDataSetChanged();
 		reloadCost();

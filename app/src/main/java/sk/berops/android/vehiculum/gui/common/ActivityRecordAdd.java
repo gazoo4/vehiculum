@@ -1,14 +1,11 @@
 package sk.berops.android.vehiculum.gui.common;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.Spinner;
 
+import java.io.IOException;
 import java.util.Calendar;
 
 import sk.berops.android.vehiculum.dataModel.Car;
@@ -16,7 +13,6 @@ import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.expense.FieldEmptyException;
 import sk.berops.android.vehiculum.gui.DefaultActivity;
 import sk.berops.android.vehiculum.gui.MainActivity;
-import sk.berops.android.vehiculum.io.xml.GaragePersistException;
 
 public abstract class ActivityRecordAdd extends DefaultActivity {
 
@@ -68,9 +64,9 @@ public abstract class ActivityRecordAdd extends DefaultActivity {
 	
 	public void persistGarage() {
 		try {
-			MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
-		} catch (GaragePersistException e) {
-			Log.d("ERROR", "Problem when saving the changes");
+			MainActivity.dataHandler.saveGarage(MainActivity.garage);
+		} catch (IOException ex) {
+			Log.d("ERROR", "Problem when saving the changes: "+ ex.getMessage());
 		}
 		MainActivity.garage.initAfterLoad();
 	}

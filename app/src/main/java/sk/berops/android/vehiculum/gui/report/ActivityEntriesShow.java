@@ -10,8 +10,8 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 import sk.berops.android.vehiculum.R;
@@ -26,7 +26,6 @@ import sk.berops.android.vehiculum.gui.maintenance.ActivityMaintenanceEdit;
 import sk.berops.android.vehiculum.gui.service.ActivityServiceEdit;
 import sk.berops.android.vehiculum.gui.toll.ActivityTollEdit;
 import sk.berops.android.vehiculum.gui.tyres.ActivityTyreChangeEdit;
-import sk.berops.android.vehiculum.io.xml.GaragePersistException;
 
 public class ActivityEntriesShow extends DefaultActivity implements FragmentEntryEditDelete.EntryEditDeleteDialogListener {
 	private int selectedEntryPosition;
@@ -145,9 +144,9 @@ public class ActivityEntriesShow extends DefaultActivity implements FragmentEntr
 		entries.remove(entry);
 		MainActivity.garage.getActiveCar().getHistory().removeEntry(entry);
 		try {
-			MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
-		} catch (GaragePersistException e) {
-			Log.d("ERROR", "Problem when saving the changes");
+			MainActivity.dataHandler.saveGarage(MainActivity.garage);
+		} catch (IOException ex) {
+			Log.d("ERROR", "Problem when saving the changes: "+ ex.getMessage());
 		}
 		adapter.notifyDataSetChanged();
 	}

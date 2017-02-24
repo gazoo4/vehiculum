@@ -84,9 +84,7 @@ public abstract class DefaultActivity extends Activity  implements TextWatcher, 
      */
     protected void styleGuiObjects() {
         for (Button b: listButtons) {
-            System.out.print("Flashing button "+ b.getText());
             UtilsActivity.styleButton(b);
-            System.out.println(" flashed!");
         }
 
         for (EditText e: listEditTexts) {

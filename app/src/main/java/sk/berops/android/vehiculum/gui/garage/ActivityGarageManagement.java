@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 import sk.berops.android.vehiculum.R;
@@ -18,7 +19,6 @@ import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.gui.DefaultActivity;
 import sk.berops.android.vehiculum.gui.MainActivity;
 import sk.berops.android.vehiculum.gui.common.FragmentEntryEditDeleteActivate;
-import sk.berops.android.vehiculum.io.xml.GaragePersistException;
 
 public class ActivityGarageManagement extends DefaultActivity implements FragmentEntryEditDeleteActivate.EntryEditDeleteActivateDialogListener {
 
@@ -87,9 +87,9 @@ public class ActivityGarageManagement extends DefaultActivity implements Fragmen
 		System.out.println("Removing car ID " + getSelectedCarPosition());
 		cars.remove(car);
 		try {
-			MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
-		} catch (GaragePersistException e) {
-			Log.d("ERROR", "Problem when saving changes");
+			MainActivity.dataHandler.saveGarage(MainActivity.garage);
+		} catch (IOException ex) {
+			Log.d("ERROR", "Problem when saving changes: "+ ex.getMessage());
 		}
 		adapter.notifyDataSetChanged();
 	}
@@ -98,9 +98,9 @@ public class ActivityGarageManagement extends DefaultActivity implements Fragmen
 	public void OnDialogActivateClick(DialogFragment dialog) {
 		MainActivity.garage.setActiveCarId(getSelectedCarPosition());
 		try {
-			MainActivity.dataHandler.persistGarage(this);
-		} catch (GaragePersistException e) {
-			Log.d("ERROR", "Problem when saving changes");
+			MainActivity.dataHandler.saveGarage(MainActivity.garage);
+		} catch (IOException ex) {
+			Log.d("ERROR", "Problem when saving changes: "+ ex.getMessage());
 		}
 		startActivity(new Intent(this, MainActivity.class));
 	}

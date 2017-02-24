@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Calendar;
 
@@ -22,7 +24,6 @@ import sk.berops.android.vehiculum.dataModel.tags.Tag;
 import sk.berops.android.vehiculum.gui.MainActivity;
 import sk.berops.android.vehiculum.gui.tags.FragmentTagManager;
 import sk.berops.android.vehiculum.gui.tags.LinearTagAdapter;
-import sk.berops.android.vehiculum.io.xml.GaragePersistException;
 
 public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd implements DatePickerDialog.OnDateSetListener, FragmentTagManager.TagAttachControlListener {
 
@@ -159,8 +160,9 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 			linearTagAdapter.notifyTagAdded(tag);
 			toast += getString(R.string.activity_generic_tag_toast_end);
 			try {
-				MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
-			} catch (GaragePersistException e) {
+				MainActivity.dataHandler.saveGarage(MainActivity.garage);
+			} catch (IOException ex) {
+				Log.e("ERROR", "Tag saving failed: "+ ex.getMessage());
 				toast = "Saving failed";
 			}
 		}
@@ -175,8 +177,9 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 	public void onTagDeleted(Tag tag) {
 		linearTagAdapter.notifyTagDeleted(tag);
 		try {
-			MainActivity.dataHandler.persistGarage(this, MainActivity.garage);
-		} catch (GaragePersistException e) {
+			MainActivity.dataHandler.saveGarage(MainActivity.garage);
+		} catch (IOException ex) {
+			Log.e("ERROR", "Tag deletion failed: "+ ex.getMessage());
 			String toast = "Saving failed";
 			Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
 		}

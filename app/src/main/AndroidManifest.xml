@@ -8,6 +8,7 @@
     <!-- Backup is limited to 25 MB of data per app! -->
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:name="sk.berops.android.vehiculum.Vehiculum"

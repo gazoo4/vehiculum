@@ -17,14 +17,15 @@ import java.io.OutputStream;
 
 import sk.berops.android.vehiculum.dataModel.Garage;
 import sk.berops.android.vehiculum.gui.MainActivity;
-import sk.berops.android.vehiculum.io.xml.XMLWriteException;
 
 /**
  * @author Bernard Halas
  * @date 2/3/17
  */
 
-public class GDriveBackupHandler extends BackupHandler {
+public class GDriveBackupHandler {
+
+	/*
 	protected MainActivity activity;
 
 	private GoogleApiClient mGoogleApiClient;
@@ -134,4 +135,6 @@ public class GDriveBackupHandler extends BackupHandler {
 	public void setRestoreRequested(boolean restoreRequested) {
 		this.restoreRequested = restoreRequested;
 	}
+
+	*/
 }

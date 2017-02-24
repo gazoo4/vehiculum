@@ -23,12 +23,11 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.crashlytics.android.answers.Answers;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
@@ -43,15 +42,13 @@ import sk.berops.android.vehiculum.dataModel.calculation.FuelConsumption;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.vehiculum.engine.calculation.Calculator;
-import sk.berops.android.vehiculum.gui.backupRestore.ExternalBackupHandler;
-import sk.berops.android.vehiculum.gui.backupRestore.GDriveBackupHandler;
 import sk.berops.android.vehiculum.gui.common.GuiUtils;
 import sk.berops.android.vehiculum.gui.common.TextFormatter;
 import sk.berops.android.vehiculum.gui.garage.ActivityGarageManagement;
 import sk.berops.android.vehiculum.gui.preferences.PreferenceWithHeaders;
 import sk.berops.android.vehiculum.gui.report.ActivityReportsNavigate;
-import sk.berops.android.vehiculum.io.DataHandler;
-import sk.berops.android.vehiculum.io.xml.GaragePersistException;
+import sk.berops.android.vehiculum.io.xml.ArchiveDataHandler;
+import sk.berops.android.vehiculum.io.xml.DataHandler;
 import sk.berops.android.vehiculum.io.xml.XMLHandler;
 
 public class MainActivity extends DefaultActivity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
@@ -59,8 +56,6 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 	public static Garage garage;
 	public static DataHandler dataHandler;
 	private static Preferences preferences = Preferences.getInstance();
-
-	private GDriveBackupHandler gDriveBackupHandler;
 
 	private Button buttonRecordEvent;
 	private Button buttonViewStats;
@@ -78,18 +73,18 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 	public static void saveGarage(Activity activity) {
 		String toast;
 		try {
-			getDataHandler().persistGarage(activity);
+			getDataHandler(activity).saveGarage(garage);
 			toast = activity.getResources().getString(R.string.activity_main_garage_saved_toast);
-		} catch (GaragePersistException e) {
+		} catch (IOException e) {
 			toast = activity.getResources().getString(R.string.activity_main_garage_saving_error_toast);
 		}
 		Toast.makeText(activity.getApplication(), toast, Toast.LENGTH_SHORT).show();
 	}
 
 
-	private static DataHandler getDataHandler() {
+	private static DataHandler getDataHandler(Activity activity) {
 		if (dataHandler == null) {
-			return new XMLHandler();
+			return new XMLHandler(activity);
 		}
 
 		return dataHandler;
@@ -101,27 +96,12 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		dataHandler = getDataHandler();
 		attachGuiObjects();
 		styleGuiObjects();
 
+		dataHandler = getDataHandler(this);
 		if (garage == null) {
-			try {
-				garage = dataHandler.loadGarage(this);
-				garage.initAfterLoad();
-				Toast.makeText(getApplicationContext(), "Car loaded: "+ garage.getActiveCar().getNickname() +". Garage initialized.", Toast.LENGTH_LONG).show();
-			} catch (FileNotFoundException e) {
-				Log.d("DEBUG", "Could not load garage.xml");
-				Log.d("DEBUG", e.getMessage());
-				e.printStackTrace();
-				throwAlertCreateGarage();
-			} catch (NullPointerException e) {
-				if (garage == null) {
-					Log.d("DEBUG", "Garage failed to load");
-				} else if (garage.getActiveCar() == null) {
-					Log.d("DEBUG", "No car loaded");
-				}
-			}
+			loadGarage();
 		}
 		
 		refreshStats();
@@ -131,20 +111,41 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 	@Override
 	public void onResume() {
 		super.onResume();
+		/*
 		if (gDriveBackupHandler == null) {
 			gDriveBackupHandler = new GDriveBackupHandler(this);
 		}
 		gDriveBackupHandler.onResume();
+		*/
 		refreshStats();
 		generateStatTable();
 	}
 
 	@Override
 	public void onPause() {
+		/*
 		if (gDriveBackupHandler != null) {
 			gDriveBackupHandler.onPause();
 		}
+		*/
 		super.onPause();
+	}
+
+	private void loadGarage() {
+		try {
+			garage = dataHandler.loadGarage();
+			initAfterLoad();
+		} catch (IOException | NullPointerException e) {
+			Log.d("DEBUG", "Could not load garage.xml");
+			Log.d("DEBUG", e.getMessage());
+			e.printStackTrace();
+			throwAlertCreateGarage();
+		}
+	}
+
+	private void initAfterLoad() {
+		garage.initAfterLoad();
+		Toast.makeText(getApplicationContext(), "Garage initialized. Car loaded: "+ garage.getActiveCar().getNickname(), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -428,16 +429,20 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 			startActivity(new Intent(this, PreferenceWithHeaders.class));
 				return true;
 			case R.id.menu_main_action_export:
-				ExternalBackupHandler external = new ExternalBackupHandler(this);
-				external.backup(garage);
+				ArchiveDataHandler archiveDataHandler = new ArchiveDataHandler(this);
+				try {
+					archiveDataHandler.saveToExternal(garage);
+				} catch (IOException ex) {
+					Log.d("ERROR", "Archiving failed: "+ ex.getMessage());
+				}
 				return true;
-			/*
 			case R.id.menu_main_action_restore:
 				Intent intent = new Intent()
-						.setType("*")
-						.setAction(Intent.ACTION_OPEN_DOCUMENT);
+						.setType("v-garage*/zip")
+						.setAction(Intent.ACTION_GET_CONTENT);
 				startActivityForResult(Intent.createChooser(intent, "select the file to load"), REQUEST_CODE_RESTORE);
 				return true;
+			/*
 			case R.id.menu_main_action_gdrive_backup:
 				if (gDriveBackupHandler == null) {
 					gDriveBackupHandler = new GDriveBackupHandler(this);
@@ -450,7 +455,7 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 				}
 				gDriveBackupHandler.setRestoreRequested(true);
 				return true;
-				*/
+			*/
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -461,16 +466,20 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 		switch (requestCode) {
 			case REQUEST_CODE_RESTORE:
 				if (resultCode == RESULT_OK) {
-					Uri selectedFile = data.getData();
-					System.out.println("got the data!");
-					// Ensure a load here...
+					ArchiveDataHandler archiveDataHandler = new ArchiveDataHandler(this);
+					try {
+						garage = archiveDataHandler.restoreFrom(data.getData());
+						initAfterLoad();
+					} catch (IOException ex) {
+						Log.e("ERROR", "Problem during restoring the archive: "+ ex.getMessage());
+					}
 				}
 				break;
 			case REQUEST_CODE_CREATOR:
 				// Called after a file is saved to GDrive
 				if (resultCode == RESULT_OK) {
 					Log.i(LOG_TAG, "Backup successfully saved to GDrive");
-					gDriveBackupHandler.setBackupRequested(false);
+					//gDriveBackupHandler.setBackupRequested(false);
 				}
 				break;
 			case REQUEST_CODE_RESOLUTION:
@@ -525,6 +534,7 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 
 	@Override
 	public void onConnected(@Nullable Bundle bundle) {
+		/*
 		Log.d(LOG_TAG, "GoogleApiClient connected");
 		if (gDriveBackupHandler == null) {
 			gDriveBackupHandler = new GDriveBackupHandler(this);
@@ -537,6 +547,7 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 			garage = gDriveBackupHandler.restore();
 			gDriveBackupHandler.setRestoreRequested(false);
 		}
+		*/
 	}
 
 	@Override
