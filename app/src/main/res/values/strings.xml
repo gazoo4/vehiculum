@@ -183,6 +183,10 @@
     <string name="list_tree_tags_new_tag_hint"			            >Create a new tag here</string>
 
     <string name="menu_action_export"								>Export data</string>
+    <string name="menu_action_feedback"								>Give feedback to the authors</string>
+    <string name="menu_action_feedback_address"						>vehiculum@berops.com</string>
+    <string name="menu_action_feedback_body"						>Hi there, I'd like to say that Vehiculum is...</string>
+    <string name="menu_action_feedback_title"						>Vehiculum feedback</string>
     <string name="menu_action_gdrive_backup"						>Backup to Google Drive</string>
     <string name="menu_action_gdrive_restore"						>Restore from Google Drive</string>
     <string name="menu_action_restore"								>Restore data</string>

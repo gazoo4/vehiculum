@@ -442,6 +442,15 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 						.setAction(Intent.ACTION_GET_CONTENT);
 				startActivityForResult(Intent.createChooser(intent, "select the file to load"), REQUEST_CODE_RESTORE);
 				return true;
+			case R.id.menu_main_action_feedback:
+				Intent i = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
+				i.setType("message/rfc822");
+				i.putExtra(Intent.EXTRA_SUBJECT, "Veihculum Feedback");
+				i.putExtra(Intent.EXTRA_TEXT, "Hi there, vehiculum...");
+				i.setData(Uri.parse("mailto:vehiculum@berops.com")); // or just "mailto:" for blank
+				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
+				startActivity(i);
+				return true;
 			/*
 			case R.id.menu_main_action_gdrive_backup:
 				if (gDriveBackupHandler == null) {

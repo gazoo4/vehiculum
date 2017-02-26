@@ -17,6 +17,11 @@
         android:orderInCategory="300"
         android:showAsAction="never"
         android:title="@string/menu_action_restore"/>
+    <item
+        android:id="@+id/menu_main_action_feedback"
+        android:orderInCategory="300"
+        android:showAsAction="never"
+        android:title="@string/menu_action_feedback"/>
     <!--
     <item
         android:id="@+id/menu_main_action_gdrive_backup"
