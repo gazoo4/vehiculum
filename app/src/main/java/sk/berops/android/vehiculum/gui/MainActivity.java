@@ -51,7 +51,7 @@ import sk.berops.android.vehiculum.io.xml.ArchiveDataHandler;
 import sk.berops.android.vehiculum.io.xml.DataHandler;
 import sk.berops.android.vehiculum.io.xml.XMLHandler;
 
-public class MainActivity extends DefaultActivity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+public class MainActivity extends DefaultActivity {
 	
 	public static Garage garage;
 	public static DataHandler dataHandler;
@@ -111,12 +111,7 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 	@Override
 	public void onResume() {
 		super.onResume();
-		/*
-		if (gDriveBackupHandler == null) {
-			gDriveBackupHandler = new GDriveBackupHandler(this);
-		}
-		gDriveBackupHandler.onResume();
-		*/
+
 		refreshStats();
 		generateStatTable();
 	}
@@ -144,7 +139,12 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 	}
 
 	private void initAfterLoad() {
-		garage.initAfterLoad();
+		if (garage != null) {
+			garage.initAfterLoad();
+		} else {
+			buttonRecordEvent.setVisibility(View.GONE);
+			buttonViewStats.setVisibility(View.GONE);
+		}
 		Toast.makeText(getApplicationContext(), "Garage initialized. Car loaded: "+ garage.getActiveCar().getNickname(), Toast.LENGTH_SHORT).show();
 	}
 
@@ -426,9 +426,11 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_main_action_settings:
-			startActivity(new Intent(this, PreferenceWithHeaders.class));
+				// Open settings activity
+				startActivity(new Intent(this, PreferenceWithHeaders.class));
 				return true;
 			case R.id.menu_main_action_export:
+				// Export garage to a file
 				ArchiveDataHandler archiveDataHandler = new ArchiveDataHandler(this);
 				try {
 					archiveDataHandler.saveToExternal(garage);
@@ -437,34 +439,22 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 				}
 				return true;
 			case R.id.menu_main_action_restore:
+				// Restore garage from a file
 				Intent intent = new Intent()
 						.setType("v-garage*/zip")
 						.setAction(Intent.ACTION_GET_CONTENT);
 				startActivityForResult(Intent.createChooser(intent, "select the file to load"), REQUEST_CODE_RESTORE);
 				return true;
 			case R.id.menu_main_action_feedback:
-				Intent i = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
+				// Send a feedback to the authors
+				Intent i = new Intent(Intent.ACTION_SENDTO);
 				i.setType("message/rfc822");
-				i.putExtra(Intent.EXTRA_SUBJECT, "Veihculum Feedback");
-				i.putExtra(Intent.EXTRA_TEXT, "Hi there, vehiculum...");
+				i.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.menu_action_feedback_title));
+				i.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.menu_action_feedback_body));
 				i.setData(Uri.parse("mailto:vehiculum@berops.com")); // or just "mailto:" for blank
 				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
 				startActivity(i);
 				return true;
-			/*
-			case R.id.menu_main_action_gdrive_backup:
-				if (gDriveBackupHandler == null) {
-					gDriveBackupHandler = new GDriveBackupHandler(this);
-				}
-				gDriveBackupHandler.setBackupRequested(true);
-				return true;
-			case R.id.menu_main_action_gdrive_restore:
-				if (gDriveBackupHandler == null) {
-					gDriveBackupHandler = new GDriveBackupHandler(this);
-				}
-				gDriveBackupHandler.setRestoreRequested(true);
-				return true;
-			*/
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -516,51 +506,5 @@ public class MainActivity extends DefaultActivity implements GoogleApiClient.OnC
 			startActivity(new Intent(this, ActivityGarageManagement.class));
 			break;
 		}
-	}
-
-	/**
-	 * Method implemented from the OnConnectionFailedListener to deal with the unresolvable connection
-	 * errors to Google Services API
-	 * @param result
-	 */
-	@Override
-	public void onConnectionFailed(@NonNull ConnectionResult result) {
-		Toast.makeText(this, "Problems connecting to Google Services", Toast.LENGTH_LONG);
-		Log.i(LOG_TAG, "GoogleApiClient connection failed: "+ result.toString());
-		if (!result.hasResolution()) {
-			GoogleApiAvailability.getInstance().getErrorDialog(this, result.getErrorCode(), 0).show();
-			return;
-		}
-
-		// The failure has a resolution, try to resolve it. Usually this means that the app is not
-		// yet authorized so an authorization dialogue to be displayed to the user.
-		try {
-			result.startResolutionForResult(this, REQUEST_CODE_RESOLUTION);
-		} catch (IntentSender.SendIntentException ex) {
-			Log.e(LOG_TAG, "Exception while starting the resolution activity", ex);
-		}
-	}
-
-	@Override
-	public void onConnected(@Nullable Bundle bundle) {
-		/*
-		Log.d(LOG_TAG, "GoogleApiClient connected");
-		if (gDriveBackupHandler == null) {
-			gDriveBackupHandler = new GDriveBackupHandler(this);
-		}
-		// Always do backup before restore
-		if (gDriveBackupHandler.isBackupRequested()) {
-			gDriveBackupHandler.backup(garage);
-		}
-		if (gDriveBackupHandler.isRestoreRequested()) {
-			garage = gDriveBackupHandler.restore();
-			gDriveBackupHandler.setRestoreRequested(false);
-		}
-		*/
-	}
-
-	@Override
-	public void onConnectionSuspended(int i) {
-		Log.d(LOG_TAG, "GoogleApiClient connection suspended");
 	}
 }
