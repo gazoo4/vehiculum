@@ -40,9 +40,9 @@
     <string name="activity_garage_management_button_car_add"		>Add a new car</string>
     <string name="activity_garage_management_info_text"				>List of cars in your garage:</string>
 
-    <string name="activity_generic_button_new_tag_add"				>Add new tag</string>
     <string name="activity_generic_button_date_change"				>Change date</string>
     <string name="activity_generic_button_entry_save"				>Save</string>
+    <string name="activity_generic_button_new_tag_add"				>Add new tag</string>
     <string name="activity_generic_cancel_hint"			    		>Cancel</string>
     <string name="activity_generic_comment_hint"					>Additional comment</string>
     <string name="activity_generic_cost_hint"						>Total cost</string>
@@ -68,13 +68,13 @@
 
     <string name="activity_main_average"							>Average</string>
     <string name="activity_main_average_consumption"				>Average consumption</string>
-    <string name="activity_main_combined_average"				    >Combined average consumption</string>
     <string name="activity_main_button_entry_add"					>Record a new event</string>
     <string name="activity_main_button_stats_view"					>View statistics</string>
     <string name="activity_main_button_garage_enter"				>Enter garage</string>
     <string name="activity_main_car"								>Car</string>
-    <string name="activity_main_create_garage_alert"				>You didn\'t setup your garage yet. Prepare one now.</string>
+    <string name="activity_main_combined_average"				    >Combined average consumption</string>
     <string name="activity_main_consumption_combined"				>Combined</string>
+    <string name="activity_main_create_garage_alert"				>You didn\'t setup your garage yet. Prepare one now.</string>
     <string name="activity_main_garage_empty"						>Your garage is empty</string>
     <string name="activity_main_garage_saved_toast"					>The changes have been saved</string>
     <string name="activity_main_garage_saving_error_toast"			>Problem occurred when saving changes</string>
@@ -155,6 +155,10 @@
     <string name="activity_tyre_change_total_cost_hint"				>Total cost</string>
     <string name="activity_tyre_change_tyres_cost_hint"				>Tyres price</string>
 
+    <string name="fragment_donate_button_copy_btc_address"		    >Copy bitcoin address</string>
+    <string name="fragment_donate_message"		                    >The authors are building this app in their free time. If you like it, donate so that they can buy more coffee to keep them going.</string>
+    <string name="fragment_donate_title"		                    >Donate BTC to the authors</string>
+
     <string name="fragment_entry_edit_delete_activate_button"		>Activate</string>
     <string name="fragment_entry_edit_delete_activate_toast"		>Activating entry</string>
     <string name="fragment_entry_edit_delete_delete_button"			>Delete</string>
@@ -182,6 +186,7 @@
 
     <string name="list_tree_tags_new_tag_hint"			            >Create a new tag here</string>
 
+    <string name="menu_action_donate"		        				>Donate</string>
     <string name="menu_action_export"								>Export data</string>
     <string name="menu_action_feedback"								>Give feedback to the authors</string>
     <string name="menu_action_feedback_address"						>vehiculum@berops.com</string>

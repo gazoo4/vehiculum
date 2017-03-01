@@ -2,6 +2,10 @@ package sk.berops.android.vehiculum.gui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipDescription;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -69,6 +73,7 @@ public class MainActivity extends DefaultActivity {
 	public final static int REQUEST_CODE_CREATOR = 4;
 
 	private final static String LOG_TAG = "General Error";
+	private final static String BTC_WALLET_ADDRESS = "12bSs49JDWp6oR1ywSJ8HmjP1UCPYpU8KC";
 
 	public static void saveGarage(Activity activity) {
 		String toast;
@@ -141,6 +146,8 @@ public class MainActivity extends DefaultActivity {
 	private void initAfterLoad() {
 		if (garage != null) {
 			garage.initAfterLoad();
+			buttonRecordEvent.setVisibility(View.VISIBLE);
+			buttonViewStats.setVisibility(View.VISIBLE);
 		} else {
 			buttonRecordEvent.setVisibility(View.GONE);
 			buttonViewStats.setVisibility(View.GONE);
@@ -454,6 +461,34 @@ public class MainActivity extends DefaultActivity {
 				i.setData(Uri.parse("mailto:vehiculum@berops.com")); // or just "mailto:" for blank
 				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
 				startActivity(i);
+				return true;
+			case R.id.menu_main_action_donate:
+				AlertDialog dialog = new AlertDialog.Builder(this)
+						.setPositiveButton(R.string.fragment_donate_button_copy_btc_address, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+								Uri bitcoinUri = new Uri.Builder()
+										.scheme("bitcoin")
+										.path(BTC_WALLET_ADDRESS)
+										.build();
+								ClipData.Item item = new ClipData.Item(bitcoinUri);
+								String[] mimeTypes = {"text/plain"};
+								ClipDescription description = new ClipDescription("Donation wallet", mimeTypes);
+								ClipData data = new ClipData(description, item);
+								clipboard.setPrimaryClip(data);
+							}
+						})
+						.setNegativeButton(R.string.activity_generic_cancel_hint, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.dismiss();
+							}
+						})
+						.setTitle(R.string.fragment_donate_title)
+						.setMessage(R.string.fragment_donate_message)
+						.create();
+				dialog.show();
 				return true;
 		default:
 			return super.onOptionsItemSelected(item);

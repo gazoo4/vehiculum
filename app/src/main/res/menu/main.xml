@@ -19,8 +19,14 @@
         android:title="@string/menu_action_restore"/>
     <item
         android:id="@+id/menu_main_action_feedback"
-        android:orderInCategory="300"
+        android:orderInCategory="400"
         android:showAsAction="never"
         android:title="@string/menu_action_feedback"/>
-
+    <!--
+    <item
+        android:id="@+id/menu_main_action_donate"
+        android:orderInCategory="500"
+        android:showAsAction="never"
+        android:title="@string/menu_action_donate"/>
+        -->
 </menu>
