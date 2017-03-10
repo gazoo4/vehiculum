@@ -21,7 +21,7 @@ public class ActivityFuellingEdit extends ActivityRefuel {
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
-		editTextVolume.setText(Double.valueOf(fuellingEntry.getFuelVolume()).toString());
+		editTextQuantity.setText(Double.valueOf(fuellingEntry.getFuelQuantity()).toString());
 		spinnerFuelType.setSelection(fuellingEntry.getFuelType().getId());
 		refreshPrice();
 	}

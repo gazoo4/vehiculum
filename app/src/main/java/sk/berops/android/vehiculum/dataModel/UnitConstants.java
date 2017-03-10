@@ -5,7 +5,10 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
+import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.configuration.Preferences;
+import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry.FuelType;
+import sk.berops.android.vehiculum.gui.MainActivity;
 
 public class UnitConstants {
 	// all the default units here are mapped against: kilometer, liter
@@ -15,39 +18,132 @@ public class UnitConstants {
 	public static final double MPG_US = 0;
 	
 	static Preferences preferences = Preferences.getInstance();
+
+	public enum Substance{
+		LIQUID(0),
+		GAS(1),
+		ELECTRIC(2);
+
+		private int id;
+
+		Substance(int id) {
+			this.id = id;
+		}
+
+		private static Map<Integer, Substance> idToSubstanceMapping;
+
+		public static Substance getConsistency(int id) {
+			if (idToSubstanceMapping == null) {
+				initMapping();
+			}
+
+			return idToSubstanceMapping.get(id);
+		}
+
+		private static void initMapping() {
+			idToSubstanceMapping = new HashMap<>();
+			for (Substance substance: Substance.values()) {
+				idToSubstanceMapping.put(substance.getId(), substance);
+			}
+		}
+
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+	}
 	
-	public enum VolumeUnit{
-		SI(-1,1.0, "ltr", "liters"),
-		LITER(0, 1.0, "ltr", "liters"), 
-		US_GALLON(1, 3.78541, "gal", "US gallons"),
-		IMPERIAL_GALLON(2, 4.54609, "gal", "Imperial gallons");
+	public enum QuantityUnit {
+		LITER(
+				0,
+				1.0,
+				true,
+				MainActivity.getContext().getString(R.string.generic_unit_quantity_liter_short),
+				MainActivity.getContext().getString(R.string.generic_unit_quantity_liter_long),
+				Substance.LIQUID),
+		US_GALLON(
+				1,
+				3.78541,
+				false,
+				MainActivity.getContext().getString(R.string.generic_unit_quantity_gallon_short),
+				MainActivity.getContext().getString(R.string.generic_unit_quantity_gallon_us_long),
+				Substance.LIQUID),
+		IMPERIAL_GALLON(
+				2,
+				4.54609,
+				false,
+				MainActivity.getContext().getString(R.string.generic_unit_quantity_gallon_short),
+				MainActivity.getContext().getString(R.string.generic_unit_quantity_gallon_imperial_long),
+				Substance.LIQUID),
+		KILOGRAM(
+				10,
+				1.0,
+				true,
+				MainActivity.getContext().getString(R.string.generic_unit_quantity_kilogram_short),
+				MainActivity.getContext().getString(R.string.generic_unit_quantity_kilogram_long),
+				Substance.GAS),
+		POUND(
+				11,
+				0.453592,
+				false,
+				MainActivity.getContext().getString(R.string.generic_unit_quantity_pound_short),
+				MainActivity.getContext().getString(R.string.generic_unit_quantity_pound_long),
+				Substance.GAS),
+		KILOWATT_HOUR(
+				20,
+				1.0,
+				true,
+				MainActivity.getContext().getString(R.string.generic_unit_quantity_kilowatthour_short),
+				MainActivity.getContext().getString(R.string.generic_unit_quantity_kilowatthour_long),
+				Substance.ELECTRIC);
 		
 		private int id;
 		private double coef;
+		private boolean si;
 		private String unit;	
 		private String longUnit;
-		VolumeUnit(int id, double coef, String unit, String longUnit) {
+		private Substance substance;
+
+		QuantityUnit(int id, double coef, boolean si, String unit, String longUnit, Substance substance) {
 			this.setId(id);
 			this.setCoef(coef);
+			this.setSi(si);
 			this.setUnit(unit);
 			this.setLongUnit(longUnit);
+			this.setSubstance(substance);
+		}
+
+		public static QuantityUnit getDefaultQuantityUnit(FuelType type) {
+			switch(type.getSubstance()) {
+				case LIQUID:
+					return LITER;
+				case GAS:
+					return KILOGRAM;
+				case ELECTRIC:
+					return KILOWATT_HOUR;
+				default:
+					Log.d("ERROR", "Unknown substance type. Silently changing to Liter");
+					return LITER;
+			}
 		}
 		
-		private static Map<Integer, VolumeUnit> idToUnitMapping;
+		private static Map<Integer, QuantityUnit> idToUnitMapping;
 
-		public static VolumeUnit getVolumeUnit(int id) {
+		public static QuantityUnit getQuantityUnit(int id) {
 			if (idToUnitMapping == null) {
 				initMapping();
 			}
 			
-			VolumeUnit result = null;
+			QuantityUnit result = null;
 			result = idToUnitMapping.get(id);
 			return result;
 		}
 		
 		private static void initMapping() {
-			idToUnitMapping = new HashMap<Integer, VolumeUnit>();
-			for (VolumeUnit unit : values()) {
+			idToUnitMapping = new HashMap<Integer, QuantityUnit>();
+			for (QuantityUnit unit : values()) {
 				idToUnitMapping.put(unit.id, unit);
 			}
 		}
@@ -57,6 +153,12 @@ public class UnitConstants {
 		}
 		public void setCoef(double coef) {
 			this.coef = coef;
+		}
+		public boolean isSI() {
+			return si;
+		}
+		public void setSi(boolean si) {
+			this.si = si;
 		}
 		public String getUnit() {
 			return unit;
@@ -76,20 +178,37 @@ public class UnitConstants {
 		public void setLongUnit(String longUnit) {
 			this.longUnit = longUnit;
 		}
+		public Substance getSubstance() {
+			return substance;
+		}
+		public void setSubstance(Substance substance) {
+			this.substance = substance;
+		}
 	}
 	
 	public enum DistanceUnit{
-		SI(-1, 1.0, "km", "kilometers"),
-		KILOMETER(0, 1.0, "km", "kilometers"), 
-		MILE(1, 1.609344, "mil", "miles");
-		
+		KILOMETER(
+				0,
+				1.0,
+				true,
+				MainActivity.getContext().getString(R.string.generic_unit_distance_kilometer_short),
+				MainActivity.getContext().getString(R.string.generic_unit_distance_kilometer_short)),
+		MILE(
+				1,
+				1.609344,
+				false,
+				MainActivity.getContext().getString(R.string.generic_unit_distance_mile_short),
+				MainActivity.getContext().getString(R.string.generic_unit_distance_mile_long));
+
 		private int id;
 		private double coef;
+		private boolean si;
 		private String unit;	
 		private String longUnit;
-		DistanceUnit(int id, double coef, String unit, String longUnit) {
+		DistanceUnit(int id, double coef, boolean si, String unit, String longUnit) {
 			this.setId(id);
 			this.setCoef(coef);
+			this.setSi(si);
 			this.setUnit(unit);
 			this.setLongUnit(longUnit);
 		}
@@ -119,6 +238,12 @@ public class UnitConstants {
 		public void setCoef(double coef) {
 			this.coef = coef;
 		}
+		public boolean isSi() {
+			return si;
+		}
+		public void setSi(boolean si) {
+			this.si = si;
+		}
 		public String getUnit() {
 			return unit;
 		}
@@ -138,42 +263,42 @@ public class UnitConstants {
 			this.longUnit = longUnit;
 		}
 	}
-	
-	public enum ConsumptionUnit{
-		SI(-1, 1.0, "l/100 km"),
-		LITRE_PER_100KM(0, 1.0, "l/100 km"), 
-		KM_PER_LITRE(1, 1.0, "km/l"),
-		MPG_US(2, 1.0, "mpg"),
-		MPG_IMPERIAL(3, 1.0, "mpg");
-		
+
+	public enum ConsumptionScheme {
+		FUEL_PER_DISTANCE(0, 1.0, "/"),
+		DISTANCE_PER_FUEL(1, 1.0, "/"),
+		FUEL_PER_100DISTANCE(2, 1.0, "/100");
+
 		private int id;
 		private double coef;
-		private String unit;	
-		ConsumptionUnit(int id, double coef, String unit) {
+		private boolean si;
+		private String unit;
+
+		ConsumptionScheme(int id, double coef, String unit) {
 			this.setId(id);
 			this.setCoef(coef);
 			this.setUnit(unit);
 		}
-		
-		private static Map<Integer, ConsumptionUnit> idToUnitMapping;
 
-		public static ConsumptionUnit getConsumptionUnit(int id) {
+		private static Map<Integer, ConsumptionScheme> idToUnitMapping;
+
+		public static ConsumptionScheme getConsumptionUnit(int id) {
 			if (idToUnitMapping == null) {
 				initMapping();
 			}
-			
-			ConsumptionUnit result = null;
+
+			ConsumptionScheme result = null;
 			result = idToUnitMapping.get(id);
 			return result;
 		}
-		
+
 		private static void initMapping() {
-			idToUnitMapping = new HashMap<Integer, ConsumptionUnit>();
-			for (ConsumptionUnit unit : values()) {
+			idToUnitMapping = new HashMap<Integer, ConsumptionScheme>();
+			for (ConsumptionScheme unit : values()) {
 				idToUnitMapping.put(unit.id, unit);
 			}
 		}
-	
+
 		public double getCoef() {
 			return coef;
 		}
@@ -195,7 +320,6 @@ public class UnitConstants {
 	}
 	
 	public enum CostUnit{
-		SI(-1, 1.0, "/"),
 		COST_PER_DISTANCE(0, 1.0, "/"),
 		COST_PER_100_DISTANCE(1, 100.0, "/100 "),
 		DISTANCE_PER_COST(2, 1.0, "/"),
@@ -246,8 +370,6 @@ public class UnitConstants {
 			case DISTANCE_PER_100_COST:
 			case DISTANCE_PER_COST:
 				return ""+ distanceUnit.getUnit() + unit + currency.getUnit();
-			case SI:
-				break;
 			default:
 				Log.d("DEBUG", "Unexpected CostUnit value");
 			}
@@ -263,90 +385,97 @@ public class UnitConstants {
 			this.id = id;
 		}
 	}
-	
-	public static double convertUnitConsumption(double fromValue) {
-		return convertUnitConsumption(fromValue, null, null);
+
+	public static String toConsumptionUnitLong(ConsumptionScheme scheme, DistanceUnit distance, QuantityUnit quantity) {
+		if ((scheme == ConsumptionScheme.DISTANCE_PER_FUEL)
+			&& (distance == DistanceUnit.MILE)) {
+			if (quantity == QuantityUnit.IMPERIAL_GALLON) {
+				return MainActivity.getContext().getString(R.string.generic_unit_consumption_mpg_imperial_long);
+			} else if (quantity == QuantityUnit.US_GALLON) {
+				return MainActivity.getContext().getString(R.string.generic_unit_consumption_mpg_us_long);
+			}
+		}
+
+		return "";
 	}
 
-	public static double convertUnitConsumption(double fromValue, ConsumptionUnit fromUnit, ConsumptionUnit toUnit) {
-		if (fromUnit == null) {
-			fromUnit = ConsumptionUnit.SI;
+	public static String toConsumptionUnitShort(ConsumptionScheme scheme, DistanceUnit distance, QuantityUnit quantity) {
+		if ((scheme == ConsumptionScheme.DISTANCE_PER_FUEL)
+			&& (distance == DistanceUnit.MILE)) {
+			if ((quantity == QuantityUnit.IMPERIAL_GALLON)
+				|| (quantity == QuantityUnit.US_GALLON)) {
+				return MainActivity.getContext().getString(R.string.generic_unit_consumption_mpg_short);
+			}
 		}
-		if (toUnit == null) {
-			toUnit = preferences.getConsumptionUnit();
+
+		return "";
+	}
+	
+	public static double convertUnitConsumptionFromSI(FuelType type, double fromValue) {
+		return convertUnitConsumptionFromSI(type, fromValue, preferences.getQuantityUnit(type), preferences.getConsumptionUnit(), preferences.getDistanceUnit());
+	}
+
+	public static double convertUnitConsumptionFromSI(FuelType type, double fromValue,
+	                                                  QuantityUnit toQuantity, ConsumptionScheme toConsumption, DistanceUnit toDistance) {
+		return convertUnitConsumption(
+				fromValue,
+				QuantityUnit.getDefaultQuantityUnit(type),
+				ConsumptionScheme.FUEL_PER_100DISTANCE,
+				DistanceUnit.KILOMETER,
+				toQuantity,
+				toConsumption,
+				toDistance);
+	}
+
+	public static double convertUnitConsumption(double fromValue,
+	                                            QuantityUnit fromQuantity,
+	                                            ConsumptionScheme fromConsumption,
+	                                            DistanceUnit fromDistance,
+	                                            QuantityUnit toQuantity,
+	                                            ConsumptionScheme toConsumption,
+	                                            DistanceUnit toDistance) {
+
+		if (fromQuantity.getSubstance() != toQuantity.getSubstance()) {
+			Log.d("ERROR", "We can't convert between volume/mass/energy units. Silently exiting with zero return");
+			return 0.0;
 		}
-		
-		switch (fromUnit) {
-		case KM_PER_LITRE:
-			switch (toUnit) {
-			case KM_PER_LITRE:
-				return fromValue;
-			case SI:
-			case LITRE_PER_100KM:
-				return (100/fromValue);
-			case MPG_IMPERIAL:
-				return (2.82481*fromValue);
-			case MPG_US:
-				return (2.35215*fromValue);
-			default:
-				Log.d("DEBUG", "Conversion method missing to: "+toUnit.getUnit());
-				break;		
-			}
-			break;
-		case SI:
-		case LITRE_PER_100KM:
-			switch (toUnit) {
-			case KM_PER_LITRE:
-				return (100/fromValue);
-			case SI:
-			case LITRE_PER_100KM:
-				return fromValue;
-			case MPG_IMPERIAL:
-				return (282.481/fromValue);
-			case MPG_US:
-				return (235.215/fromValue);
-			default:
-				Log.d("DEBUG", "Conversion method missing to: "+toUnit.getUnit());
-				break;		
-			}
-			break;
-		case MPG_IMPERIAL:
-			switch (toUnit) {
-			case KM_PER_LITRE:
-				return (fromValue/2.82481);
-			case SI:
-			case LITRE_PER_100KM:
-				return (282.481/fromValue);
-			case MPG_IMPERIAL:
-				return fromValue;
-			case MPG_US:
-				return (fromValue/1.20095042);
-			default:
-				Log.d("DEBUG", "Conversion method missing to: "+toUnit.getUnit());
-				break;	
-			}
-			break;
-		case MPG_US:
-			switch (toUnit) {
-			case KM_PER_LITRE:
-				return (fromValue/2.35215);
-			case SI:
-			case LITRE_PER_100KM:
-				return (235.215/fromValue);
-			case MPG_IMPERIAL:
-				return (fromValue*1.20095042);
-			case MPG_US:
-				return fromValue;
-			default:
-				Log.d("DEBUG", "Conversion method missing to: "+toUnit.getUnit());
-				break;	
-			}
-			break;
-		default:
-			Log.d("DEBUG", "Conversion method missing from: "+fromUnit.getUnit());
-			break;
+
+		double value = fromValue;
+
+		// First we need to convert towards the SI units
+		switch(fromConsumption) {
+			case FUEL_PER_DISTANCE:
+				value *= 100.0;
+				break;
+			case DISTANCE_PER_FUEL:
+				value = 1.0/value;
+				value *= 100.0;
+				break;
+			case FUEL_PER_100DISTANCE:
+				break;
 		}
-		return 0.0;
+
+		value *= fromQuantity.getCoef();
+		value /= fromDistance.getCoef();
+
+		// Now in value variable we should have the SI values.
+		// Starting to convert towards desired consumption unit.
+		value /= toQuantity.getCoef();
+		value *= toDistance.getCoef();
+
+		switch(toConsumption) {
+			case FUEL_PER_DISTANCE:
+				value /= 100.0;
+				break;
+			case DISTANCE_PER_FUEL:
+				value /= 100.0;
+				value = 1.0/value;
+				break;
+			case FUEL_PER_100DISTANCE:
+				break;
+		}
+
+		return value;
 	}
 
 	public static double convertUnitCost(double fromValue) {
@@ -355,7 +484,7 @@ public class UnitConstants {
 	
 	public static double convertUnitCost(double fromValue, CostUnit fromUnit, CostUnit toUnit) {
 		if (fromUnit == null) {
-			fromUnit = CostUnit.SI;
+			fromUnit = CostUnit.COST_PER_DISTANCE;
 		}
 		if (toUnit == null) {
 			toUnit = preferences.getCostUnit();
@@ -369,12 +498,10 @@ public class UnitConstants {
 		switch (fromUnit) {
 		case COST_PER_100_DISTANCE:
 			coefFrom = 100;
-		case SI:
 		case COST_PER_DISTANCE:
 			switch (toUnit) {
 			case COST_PER_100_DISTANCE:
 				coefTo = 100;
-			case SI:
 			case COST_PER_DISTANCE:
 				return coefTo*(fromValue*distanceCoef/coefFrom);
 			case DISTANCE_PER_100_COST:
@@ -392,7 +519,6 @@ public class UnitConstants {
 			switch (toUnit) {
 			case COST_PER_100_DISTANCE:
 				coefTo = 100;
-			case SI:
 			case COST_PER_DISTANCE:
 				return coefTo/(fromValue*distanceCoef/coefFrom);
 			case DISTANCE_PER_100_COST:

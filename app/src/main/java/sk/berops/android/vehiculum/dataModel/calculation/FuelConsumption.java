@@ -7,14 +7,13 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import sk.berops.android.vehiculum.dataModel.UnitConstants;
-import sk.berops.android.vehiculum.dataModel.UnitConstants.ConsumptionUnit;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry.FuelType;
 
 public class FuelConsumption extends Consumption {
 	//TODO: create also MaintenanceConsumption, FeeConsumption, etc...
 	private FuelType lastRefuelType;
-	private Double totalVolume;												//total fuel volume bought
-	private TreeMap<FuelType, Double> totalVolumePerFuelType;				//total fuel type volume bought
+	private Double totalQuantity;												//total fuel quantity bought
+	private TreeMap<FuelType, Double> totalQuantityPerFuelType;				//total fuel type quantity bought
 	private int fuellingCount;												//amount of fuelling counts
 	private TreeMap<FuelType, Integer> fuellingCountPerFuelType;			//amount of fuelling counts per fuel type
 	private double averageSinceLast;										//average consumption since last refuelling
@@ -40,8 +39,8 @@ public class FuelConsumption extends Consumption {
 	public FuelConsumption() {
 		super();
 		lastRefuelType = FuelType.GASOLINE;
-		totalVolume = 0.0;
-		totalVolumePerFuelType = new TreeMap<FuelType, Double>();
+		totalQuantity = 0.0;
+		totalQuantityPerFuelType = new TreeMap<FuelType, Double>();
 		fuellingCount = 0;
 		fuellingCountPerFuelType = new TreeMap<FuelType, Integer>();
 		averageSinceLast = 0.0;
@@ -95,18 +94,18 @@ public class FuelConsumption extends Consumption {
 		this.lastRefuelType = lastRefuelType;
 	}
 
-	public Double getTotalVolume() {
-		return totalVolume;
+	public Double getTotalQuantity() {
+		return totalQuantity;
 	}
-	public void setTotalVolume(Double totalVolume) {
-		this.totalVolume = totalVolume;
+	public void setTotalQuantity(Double totalQuantity) {
+		this.totalQuantity = totalQuantity;
 	}
-	public TreeMap<FuelType, Double> getTotalVolumePerFuelType() {
-		return totalVolumePerFuelType;
+	public TreeMap<FuelType, Double> getTotalQuantityPerFuelType() {
+		return totalQuantityPerFuelType;
 	}
 
-	public void setTotalVolumePerFuelType(TreeMap<FuelType, Double> totalVolumePerFuelType) {
-		this.totalVolumePerFuelType = totalVolumePerFuelType;
+	public void setTotalQuantityPerFuelType(TreeMap<FuelType, Double> totalQuantityPerFuelType) {
+		this.totalQuantityPerFuelType = totalQuantityPerFuelType;
 	}
 
 	public int getFuellingCount() {
@@ -294,7 +293,7 @@ public class FuelConsumption extends Consumption {
 		return getFuellingCountPerFuelType().keySet();
 	}
 	
-		public FuelConsumption getConsumptionNonSI(ConsumptionUnit cu) {
+		public FuelConsumption getConsumptionNonSI(UnitConstants.ConsumptionScheme cu) {
 		FuelConsumption consumption = new FuelConsumption();
 		double value = 0;
 		double coef = 0;

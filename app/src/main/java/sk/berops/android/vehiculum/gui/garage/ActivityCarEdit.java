@@ -28,6 +28,5 @@ public class ActivityCarEdit extends ActivityCarAdd {
 		editTextModelYear.setText(Integer.valueOf(car.getModelYear()).toString());
 		editTextNickname.setText(car.getNickname());
 		spinnerDistanceUnit.setSelection(car.getDistanceUnit().getId());
-		spinnerVolumeUnit.setSelection(car.getVolumeUnit().getId());
 	}
 }

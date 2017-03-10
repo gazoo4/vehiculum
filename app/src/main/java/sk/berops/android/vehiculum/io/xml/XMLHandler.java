@@ -66,7 +66,8 @@ public class XMLHandler extends FileDataHandler {
 		} catch (Exception ex) {
 			IOException ioEx = new IOException("Problem during deserialization of the garage from "+ inFile.getPath());
 			ioEx.setStackTrace(ex.getStackTrace());
-			Log.e("ERROR", ioEx.getMessage());
+			Log.e("ERROR", ex.getMessage());
+			Log.e("ERROR", ex.getStackTrace().toString());
 			throw ioEx;
 		}
 	}

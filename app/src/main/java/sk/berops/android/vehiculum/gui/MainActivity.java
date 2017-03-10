@@ -2,19 +2,13 @@ package sk.berops.android.vehiculum.gui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ClipData;
-import android.content.ClipDescription;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.TextViewCompat;
 import android.util.Log;
 import android.view.Gravity;
@@ -27,19 +21,16 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.configuration.Preferences;
 import sk.berops.android.vehiculum.dataModel.Garage;
 import sk.berops.android.vehiculum.dataModel.UnitConstants;
-import sk.berops.android.vehiculum.dataModel.UnitConstants.ConsumptionUnit;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.CostUnit;
 import sk.berops.android.vehiculum.dataModel.calculation.Consumption;
 import sk.berops.android.vehiculum.dataModel.calculation.FuelConsumption;
@@ -48,6 +39,7 @@ import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.vehiculum.engine.calculation.Calculator;
 import sk.berops.android.vehiculum.gui.common.GuiUtils;
 import sk.berops.android.vehiculum.gui.common.TextFormatter;
+import sk.berops.android.vehiculum.gui.donation.DonationActivity;
 import sk.berops.android.vehiculum.gui.garage.ActivityGarageManagement;
 import sk.berops.android.vehiculum.gui.preferences.PreferenceWithHeaders;
 import sk.berops.android.vehiculum.gui.report.ActivityReportsNavigate;
@@ -72,8 +64,8 @@ public class MainActivity extends DefaultActivity {
 	public final static int REQUEST_CODE_RESOLUTION = 3;
 	public final static int REQUEST_CODE_CREATOR = 4;
 
+	private static Context context;
 	private final static String LOG_TAG = "General Error";
-	private final static String BTC_WALLET_ADDRESS = "12bSs49JDWp6oR1ywSJ8HmjP1UCPYpU8KC";
 
 	public static void saveGarage(Activity activity) {
 		String toast;
@@ -84,6 +76,10 @@ public class MainActivity extends DefaultActivity {
 			toast = activity.getResources().getString(R.string.activity_main_garage_saving_error_toast);
 		}
 		Toast.makeText(activity.getApplication(), toast, Toast.LENGTH_SHORT).show();
+	}
+
+	public static Context getContext() {
+		return context;
 	}
 
 
@@ -99,7 +95,7 @@ public class MainActivity extends DefaultActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		this.context = getApplicationContext();
 
 		attachGuiObjects();
 		styleGuiObjects();
@@ -112,23 +108,13 @@ public class MainActivity extends DefaultActivity {
 		refreshStats();
 		generateStatTable();
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
 
 		refreshStats();
 		generateStatTable();
-	}
-
-	@Override
-	public void onPause() {
-		/*
-		if (gDriveBackupHandler != null) {
-			gDriveBackupHandler.onPause();
-		}
-		*/
-		super.onPause();
 	}
 
 	private void loadGarage() {
@@ -243,7 +229,7 @@ public class MainActivity extends DefaultActivity {
 		String description;
 		double valueSI;
 		double valueReport;
-		ConsumptionUnit unit;
+		UnitConstants.ConsumptionScheme unit;
 		unit = preferences.getConsumptionUnit();
 		
 		// we should buy at least 2 different fuels in order to display the stats separately
@@ -254,14 +240,24 @@ public class MainActivity extends DefaultActivity {
 				map.put(t,  avgConsumption);
 			}
 		}
-		
+
+		Set<UnitConstants.Substance> substances = new HashSet<>();
+		for (FuelType key: map.keySet()) {
+			substances.add(key.getSubstance());
+		}
+		// We can only aggregate consumption across the same fuel substances (liquids vs. gasses vs. electricity)
+		if (substances.size() > 1) {
+			return;
+		}
+
 		if (map.size() >= 2) {
+			// If we still have several fuels, but of the same substance, we can make a combined average
 			for (FuelType t: map.keySet()) {
 				description = getString(R.string.activity_main_average);
 				description += " ";
 				description += t.getType();
 				valueSI = map.get(t);
-				valueReport = UnitConstants.convertUnitConsumption(valueSI);
+				valueReport = UnitConstants.convertUnitConsumptionFromSI(t, valueSI);
 					
 				layout.addView(createStatRow(description, valueReport, unit.getUnit()));
 			}
@@ -271,7 +267,7 @@ public class MainActivity extends DefaultActivity {
 		}
 
 		valueSI = c.getGrandAverage();
-		valueReport = UnitConstants.convertUnitConsumption(valueSI);
+		valueReport = UnitConstants.convertUnitConsumptionFromSI(c.getFuelTypes().iterator().next(), valueSI);
 		layout.addView(createStatRow(description, valueReport, unit.getUnit()));
 	}
 	
@@ -463,32 +459,21 @@ public class MainActivity extends DefaultActivity {
 				startActivity(i);
 				return true;
 			case R.id.menu_main_action_donate:
+				/*
 				AlertDialog dialog = new AlertDialog.Builder(this)
-						.setPositiveButton(R.string.fragment_donate_button_copy_btc_address, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-								Uri bitcoinUri = new Uri.Builder()
-										.scheme("bitcoin")
-										.path(BTC_WALLET_ADDRESS)
-										.build();
-								ClipData.Item item = new ClipData.Item(bitcoinUri);
-								String[] mimeTypes = {"text/plain"};
-								ClipDescription description = new ClipDescription("Donation wallet", mimeTypes);
-								ClipData data = new ClipData(description, item);
-								clipboard.setPrimaryClip(data);
-							}
-						})
-						.setNegativeButton(R.string.activity_generic_cancel_hint, new DialogInterface.OnClickListener() {
+						.setTitle(R.string.fragment_donate_title)
+						.setMessage(R.string.fragment_donate_message)
+						.setNeutralButton(R.string.activity_generic_ok_hint, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								dialog.dismiss();
+								startActivity(new Intent(MainActivity.this, DonationActivity.class));
 							}
 						})
-						.setTitle(R.string.fragment_donate_title)
-						.setMessage(R.string.fragment_donate_message)
 						.create();
 				dialog.show();
+				*/
+				startActivity(new Intent(this, DonationActivity.class));
 				return true;
 		default:
 			return super.onOptionsItemSelected(item);

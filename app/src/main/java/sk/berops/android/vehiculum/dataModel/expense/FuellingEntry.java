@@ -5,55 +5,55 @@ import org.simpleframework.xml.Element;
 import java.util.HashMap;
 import java.util.Map;
 
-import sk.berops.android.vehiculum.dataModel.UnitConstants.VolumeUnit;
+import sk.berops.android.vehiculum.dataModel.UnitConstants;
+import sk.berops.android.vehiculum.dataModel.UnitConstants.QuantityUnit;
 import sk.berops.android.vehiculum.dataModel.calculation.FuelConsumption;
 
 public class FuellingEntry extends Entry {
-	@Element(name="fuelVolume")
-	private double fuelVolume;
-	private double fuelVolumeSI;
-	@Element(name="volumeUnit", required=false)
-	private VolumeUnit volumeUnit;
+	@Element(name="fuelQuantity")
+	private double fuelQuantity;
+	private double fuelQuantitySI;
+	@Element(name="quantityUnit", required=false)
+	private UnitConstants.QuantityUnit quantityUnit;
 	@Element(name="fuelType")
 	private FuelType fuelType;
 	@Element(name="fuelPrice", required=false)
 	private double fuelPrice;
+
 	public enum FuelType{
-		GASOLINE(0, "gasoline", 0xFFDA3BB0),
-		LPG(1, "lpg", 0xFFDA680A),
-		DIESEL(2, "diesel", 0xFF4C4C4C),
-		CNG(3, "cng", 0xFF2C712C),
-		ELECTRICITY(4, "electricity", 0xFF02A9BC);
+		GASOLINE(0, "gasoline", 0xFFDA3BB0, UnitConstants.Substance.LIQUID),
+		LPG(1, "lpg", 0xFFDA680A, UnitConstants.Substance.LIQUID),
+		DIESEL(2, "diesel", 0xFF4C4C4C, UnitConstants.Substance.LIQUID),
+		CNG(3, "cng", 0xFF2C712C, UnitConstants.Substance.GAS),
+		ELECTRICITY(4, "electricity", 0xFF02A9BC, UnitConstants.Substance.ELECTRIC);
 		private int id;
 		private String type;	
 		private int color;
+		private UnitConstants.Substance substance;
 
-		FuelType(int id, String fuelType) {
-			this(id, fuelType, (int) (Math.random() * Integer.MAX_VALUE));
-		}
-
-		FuelType(int id, String type, int color) {
+		FuelType(int id, String type, int color, UnitConstants.Substance substance) {
 			this.setId(id);
 			this.setType(type);
 			this.setColor(color);
+			this.setSubstance(substance);
 		}
 		
-		private static Map<Integer, FuelType> idToDescriptionMapping;
+		private static Map<Integer, FuelType> idToTypeMapping;
 
 		public static FuelType getFuelType(int id) {
-			if (idToDescriptionMapping == null) {
+			if (idToTypeMapping == null) {
 				initMapping();
 			}
 			
 			FuelType result = null;
-			result = idToDescriptionMapping.get(id);
+			result = idToTypeMapping.get(id);
 			return result;
 		}
 
 		private static void initMapping() {
-			idToDescriptionMapping = new HashMap<Integer, FuellingEntry.FuelType>();
+			idToTypeMapping = new HashMap<Integer, FuellingEntry.FuelType>();
 			for (FuelType ft : values()) {
-				idToDescriptionMapping.put(ft.id, ft);
+				idToTypeMapping.put(ft.id, ft);
 			}
 		}
 	
@@ -78,12 +78,18 @@ public class FuellingEntry extends Entry {
 		public void setColor(int color) {
 			this.color = color;
 		}
+		public UnitConstants.Substance getSubstance() {
+			return substance;
+		}
+		public void setSubstance(UnitConstants.Substance substance) {
+			this.substance = substance;
+		}
 	}
 	
 	@Override
 	public void generateSI() {
 		super.generateSI();
-		setFuelVolume(getFuelVolume(), getVolumeUnit());
+		setFuelQuantity(getFuelQuantity(), getQuantityUnit());
 	}
 	
 	public int compareTo(FuellingEntry e) {
@@ -99,17 +105,17 @@ public class FuellingEntry extends Entry {
 	public void setFuelType(FuelType fuelType) {
 		this.fuelType = fuelType;
 	}
-	public double getFuelVolume() {
-		return fuelVolume;
+	public double getFuelQuantity() {
+		return fuelQuantity;
 	}
-	public void setFuelVolume(double fuelVolume, VolumeUnit unit) {
-		this.fuelVolume = fuelVolume;
-		this.volumeUnit = unit;
-		setFuelVolumeSI(fuelVolume * unit.getCoef());
+	public void setFuelQuantity(double fuelQuantity, QuantityUnit unit) {
+		this.fuelQuantity = fuelQuantity;
+		this.quantityUnit = unit;
+		setFuelQuantitySI(fuelQuantity * unit.getCoef());
 	}
 	public double getFuelPrice() {
 		if (fuelPrice == 0.0) {
-			return getCostSI()/getFuelVolumeSI();
+			return getCostSI()/getFuelQuantitySI();
 		} else {
 			return fuelPrice;
 		}
@@ -117,19 +123,19 @@ public class FuellingEntry extends Entry {
 	public void setFuelPrice(double fuelPrice) {
 		this.fuelPrice = fuelPrice;
 	}
-	public double getFuelVolumeSI() {
-		return fuelVolumeSI;
+	public double getFuelQuantitySI() {
+		return fuelQuantitySI;
 	}
-	public void setFuelVolumeSI(double fuelVolumeSI) {
-		this.fuelVolumeSI = fuelVolumeSI;
+	public void setFuelQuantitySI(double fuelQuantitySI) {
+		this.fuelQuantitySI = fuelQuantitySI;
 	}
-	public VolumeUnit getVolumeUnit() {
-		if (volumeUnit == null) volumeUnit = VolumeUnit.LITER;
-		return volumeUnit;
+	public QuantityUnit getQuantityUnit() {
+		if (quantityUnit == null) quantityUnit = QuantityUnit.LITER;
+		return quantityUnit;
 	}
 
-	public void setVolumeUnit(VolumeUnit volumeUnit) {
-		this.volumeUnit = volumeUnit;
+	public void setQuantityUnit(QuantityUnit quantityUnit) {
+		this.quantityUnit = quantityUnit;
 	}
 	public FuelConsumption getFuelConsumption() {
 		return (FuelConsumption) this.getConsumption();

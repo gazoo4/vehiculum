@@ -35,6 +35,8 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "sk.berops.android.fueller"
+        versionCode 6
+        versionName "Flying Spur"
         minSdkVersion 21
         targetSdkVersion 25
         multiDexEnabled true
@@ -44,11 +46,17 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+            buildConfigField 'String', 'APP_API', "$appApi"
+            buildConfigField 'String', 'OBFUSCATE_KEY', "$obfuscateKey"
         }
         debug {
             signingConfig signingConfigs.debug
             // Disable fabric build ID generation for debug builds
+            // If you get io.fabric.sdk android.services.concurrency.UnmetDependencyException: This app relies on Crashlytics
+            // uncomment this line for at least one run. This usually happens after a Crashlytics version upgrade
             ext.enableCrashlytics = false
+            buildConfigField 'String', 'APP_API', "$appApi"
+            buildConfigField 'String', 'OBFUSCATE_KEY', "$obfuscateKey"
         }
     }
 }
@@ -69,17 +77,15 @@ repositories {
 }
 
 dependencies {
-    compile 'com.android.support:recyclerview-v7:25.1.1'
-    // this needs to be the of the same version as compileSDK indicator
-    compile 'com.android.support:support-v4:25.1.1'
-    // this needs to be the of the same version as compileSDK indicator
+    compile 'com.android.support:appcompat-v7:25.2.0'       // this needs to be the of the same version as compileSDK indicator
+    compile 'com.android.support:recyclerview-v7:25.2.0'    // this needs to be the of the same version as compileSDK indicator
+    compile 'com.android.support:support-v4:25.2.0'         // this needs to be the of the same version as compileSDK indicator
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.5'
-    compile 'com.google.android.gms:play-services:10.2.0'
     compile 'com.jjoe64:graphview:3.1.4'
     compile 'com.larswerkman:lobsterpicker:1.0.1'
     compile 'org.apache.commons:commons-math3:3.5'
     compile 'org.simpleframework:simple-xml:2.7.1'
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.6@aar') {
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
         transitive = true;
     }
 }

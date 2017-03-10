@@ -81,8 +81,8 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		TextView totalPriceUnit = (TextView) rowView.findViewById(R.id.list_stats_fuelling_total_price_unit);
 		TextView unitPrice = (TextView) rowView.findViewById(R.id.list_stats_fuelling_unit_price);
 		TextView unitPriceUnit = (TextView) rowView.findViewById(R.id.list_stats_fuelling_unit_price_unit);
-		TextView volume = (TextView) rowView.findViewById(R.id.list_stats_fuelling_volume);
-		TextView volumeUnit = (TextView) rowView.findViewById(R.id.list_stats_fuelling_volume_unit);
+		TextView quantity = (TextView) rowView.findViewById(R.id.list_stats_fuelling_quantity);
+		TextView quantityUnit = (TextView) rowView.findViewById(R.id.list_stats_fuelling_quantity_unit);
 		TextView fuel = (TextView) rowView.findViewById(R.id.list_stats_fuelling_fuel);
 		TextView consumption = (TextView) rowView.findViewById(R.id.list_stats_fuelling_consumption);
 		TextView consumptionUnit = (TextView) rowView.findViewById(R.id.list_stats_fuelling_consumption_unit);
@@ -99,10 +99,10 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 
 		unitPrice.setText(TextFormatter.format(entry.getFuelPrice(), "####0.000"));
 		unitPriceUnit.setText(preferences.getCurrency().getUnit() + "/"
-				+ preferences.getVolumeUnit().getUnit());
+				+ preferences.getQuantityUnit(entry.getFuelType()));
 
-		volume.setText(TextFormatter.format(entry.getFuelVolume(), "###0.00"));
-		volumeUnit.setText(preferences.getVolumeUnit().getUnit() + "s");
+		quantity.setText(TextFormatter.format(entry.getFuelQuantity(), "###0.00"));
+		quantityUnit.setText(preferences.getQuantityUnit(entry.getFuelType()) + "s");
 
 		fuel.setText(entry.getFuelType().toString());
 

@@ -28,9 +28,9 @@ import sk.berops.android.vehiculum.gui.common.GuiUtils;
 
 public class ActivityRefuel extends ActivityEntryGenericAdd {
 
-    protected EditText editTextVolume;
+    protected EditText editTextQuantity;
     protected Spinner spinnerFuelType;
-    protected Spinner spinnerVolumeUnit;
+    protected Spinner spinnerQuantityUnit;
     protected FuellingEntry fuellingEntry;
     private TextView textViewPrice;
 
@@ -58,20 +58,20 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
         editTextMileage = (EditText) findViewById(R.id.activity_refuel_mileage);
         editTextCost = (EditText) findViewById(R.id.activity_refuel_cost);
         editTextComment = (EditText) findViewById(R.id.activity_refuel_comment);
-        editTextVolume = (EditText) findViewById(R.id.activity_refuel_volume);
+        editTextQuantity = (EditText) findViewById(R.id.activity_refuel_quantity);
 
         spinnerFuelType = (Spinner) findViewById(R.id.activity_refuel_fuel_type);
         spinnerCurrency = (Spinner) findViewById(R.id.activity_refuel_currency);
-        spinnerVolumeUnit = (Spinner) findViewById(R.id.activity_refuel_volume_unit);
+        spinnerQuantityUnit = (Spinner) findViewById(R.id.activity_refuel_quantity_unit);
 
         listEditTexts.add(editTextMileage);
         listEditTexts.add(editTextCost);
         listEditTexts.add(editTextComment);
-        listEditTexts.add(editTextVolume);
+        listEditTexts.add(editTextQuantity);
 
         mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
         mapSpinners.put(R.array.activity_refuel_fuel_type, spinnerFuelType);
-        mapSpinners.put(R.array.activity_refuel_volume_unit, spinnerVolumeUnit);
+        mapSpinners.put(R.array.activity_refuel_quantity_unit, spinnerQuantityUnit);
     }
 
     @Override
@@ -84,17 +84,15 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
         } catch (NoSuchElementException e) {
             fuelType = FuelType.getFuelType(0);
         }
-        spinnerFuelType.setSelection(fuelType.getId());
 
-        UnitConstants.VolumeUnit volumeUnit;
-        volumeUnit = car.getVolumeUnit();
-        spinnerVolumeUnit.setSelection(volumeUnit.getId());
+	    spinnerFuelType.setSelection(fuelType.getId());
+        refreshFuelType(fuelType);
     }
 
 	@Override
 	public void afterTextChanged(Editable s) {
 		super.afterTextChanged(s);
-		if (s == editTextVolume.getText()
+		if (s == editTextQuantity.getText()
 				|| s == editTextCost.getText()) {
 			refreshPrice();
 		}
@@ -104,23 +102,33 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
 	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 		super.onItemSelected(parent, view, position, id);
 		if (parent == spinnerCurrency
-				|| parent == spinnerVolumeUnit) {
+				|| parent == spinnerQuantityUnit) {
 			refreshPrice();
+		}
+
+		if (parent == spinnerFuelType) {
+			refreshFuelType(FuelType.getFuelType(spinnerFuelType.getId()));
 		}
 	}
 
+	protected void refreshFuelType(FuelType type) {
+		UnitConstants.QuantityUnit quantityUnit;
+		quantityUnit = preferences.getQuantityUnit(type);
+		spinnerQuantityUnit.setSelection(quantityUnit.getId());
+	}
+
     protected void refreshPrice() {
-        double volume;
+        double quantity;
         double cost;
         double price;
         Currency.Unit currency;
-        UnitConstants.VolumeUnit volumeUnit;
+        UnitConstants.QuantityUnit quantityUnit;
 
         try {
             //TODO: here we should reflect the units we've bought in here
-            volume = GuiUtils.extractDouble(editTextVolume);
+            quantity = GuiUtils.extractDouble(editTextQuantity);
             cost = GuiUtils.extractDouble(editTextCost);
-            price = cost / volume;
+            price = cost / quantity;
 
             String formattedPrice;
             String unit;
@@ -128,24 +136,24 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
             formattedPrice = df.format(price);
 
             currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
-            volumeUnit = UnitConstants.VolumeUnit.getVolumeUnit(spinnerVolumeUnit.getSelectedItemPosition());
-            unit = "" + currency.getUnit() + "/" + volumeUnit.getUnit();
+            quantityUnit = UnitConstants.QuantityUnit.getQuantityUnit(spinnerQuantityUnit.getSelectedItemPosition());
+            unit = "" + currency.getUnit() + "/" + quantityUnit.getUnit();
             textViewPrice.setText(formattedPrice + " " + unit);
         } catch (NumberFormatException e) {
-            // Both the fields need to be filled-in (volume, cost)
+            // Both the fields need to be filled-in (quantity, cost)
         }
     }
 
-    private void updateFuelVolume() throws NotFoundException, FieldEmptyException {
-        double volume = 0;
-        UnitConstants.VolumeUnit volumeUnit;
-        volumeUnit = UnitConstants.VolumeUnit.getVolumeUnit(spinnerVolumeUnit.getSelectedItemPosition());
+    private void updateFuelQuantity() throws NotFoundException, FieldEmptyException {
+        double quantity = 0;
+        UnitConstants.QuantityUnit quantityUnit;
+        quantityUnit = UnitConstants.QuantityUnit.getQuantityUnit(spinnerQuantityUnit.getSelectedItemPosition());
         try {
-            volume = GuiUtils.extractDouble(editTextVolume);
+            quantity = GuiUtils.extractDouble(editTextQuantity);
         } catch (NumberFormatException ex) {
-            throwAlertFieldsEmpty(R.string.activity_refuel_volume_hint);
+            throwAlertFieldsEmpty(R.string.activity_refuel_quantity_hint);
         }
-        fuellingEntry.setFuelVolume(volume, volumeUnit);
+        fuellingEntry.setFuelQuantity(quantity, quantityUnit);
     }
 
     private void updateFuelType() {
@@ -169,7 +177,7 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
     @Override
     protected void updateFields() throws FieldEmptyException {
         super.updateFields();
-        updateFuelVolume();
+        updateFuelQuantity();
         updateFuelType();
     }
 }

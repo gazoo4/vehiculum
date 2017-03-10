@@ -9,9 +9,9 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
-import sk.berops.android.vehiculum.dataModel.UnitConstants.ConsumptionUnit;
+import sk.berops.android.vehiculum.dataModel.UnitConstants.ConsumptionScheme;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.DistanceUnit;
-import sk.berops.android.vehiculum.dataModel.UnitConstants.VolumeUnit;
+import sk.berops.android.vehiculum.dataModel.UnitConstants.QuantityUnit;
 import sk.berops.android.vehiculum.dataModel.calculation.Consumption;
 import sk.berops.android.vehiculum.dataModel.calculation.FuelConsumption;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry.FuelType;
@@ -45,12 +45,10 @@ public class Car extends Record implements Serializable {
 	@Element(name = "currentMileage")
 	private double currentMileage;
 	private double currentMileageSI;
-	@Element(name = "volumeUnit", required = false)
-	private VolumeUnit volumeUnit;
 	@Element(name = "distanceUnit", required = false)
 	private DistanceUnit distanceUnit;
-	@Element(name = "consumptionUnit", required = false)
-	private ConsumptionUnit consumptionUnit;
+	@Element(name = "consumptionScheme", required = false)
+	private ConsumptionScheme consumptionScheme;
 	@Element(name = "type", required = false)
 	private CarType type;
 	
@@ -130,8 +128,7 @@ public class Car extends Record implements Serializable {
 		super();
 		setHistory(new History());
 		this.setDistanceUnit(DistanceUnit.getDistanceUnit(0));
-		this.setVolumeUnit(VolumeUnit.getVolumeUnit(0));
-		this.setConsumptionUnit(ConsumptionUnit.getConsumptionUnit(0));
+		this.setConsumptionScheme(ConsumptionScheme.getConsumptionUnit(0));
 		this.setType(type);
 	}
 
@@ -144,13 +141,10 @@ public class Car extends Record implements Serializable {
 		this.setNickname(nickname);
 	}
 
-	public Car(CarType type, String nickname, DistanceUnit du, VolumeUnit vu) {
+	public Car(CarType type, String nickname, DistanceUnit du, QuantityUnit qu) {
 		this(type, nickname);
 		if (du != null) {
 			this.setDistanceUnit(du);
-		}
-		if (vu != null) {
-			this.setVolumeUnit(vu);
 		}
 	}
 
@@ -230,16 +224,6 @@ public class Car extends Record implements Serializable {
 		setCurrentMileageSI(currentMileage * getDistanceUnit().getCoef());
 	}
 
-	public VolumeUnit getVolumeUnit() {
-		if (volumeUnit == null)
-			return VolumeUnit.getVolumeUnit(0);
-		return volumeUnit;
-	}
-
-	public void setVolumeUnit(VolumeUnit volumeUnit) {
-		this.volumeUnit = volumeUnit;
-	}
-
 	public DistanceUnit getDistanceUnit() {
 		if (distanceUnit == null)
 			return DistanceUnit.getDistanceUnit(0);
@@ -272,14 +256,14 @@ public class Car extends Record implements Serializable {
 		return getHistory().getEntries().getLast().getConsumption();
 	}
 
-	public ConsumptionUnit getConsumptionUnit() {
-		if (consumptionUnit == null)
-			return ConsumptionUnit.getConsumptionUnit(0);
-		return consumptionUnit;
+	public UnitConstants.ConsumptionScheme getConsumptionScheme() {
+		if (consumptionScheme == null)
+			return UnitConstants.ConsumptionScheme.getConsumptionUnit(0);
+		return consumptionScheme;
 	}
 
-	public void setConsumptionUnit(ConsumptionUnit consumptionUnit) {
-		this.consumptionUnit = consumptionUnit;
+	public void setConsumptionScheme(ConsumptionScheme consumptionScheme) {
+		this.consumptionScheme = consumptionScheme;
 	}
 
 	public FuelConsumption getFuelConsumption() {

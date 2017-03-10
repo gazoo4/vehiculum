@@ -83,21 +83,12 @@
 	        android:entries="@array/activity_car_add_distance_units"
 	        android:prompt="@string/activity_car_add_distance_units_hint"
 	        style="@style/plain_text" />
-	    
-	    <Spinner 
-	        android:id="@+id/activity_car_add_volume_unit"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@id/activity_car_add_distance_unit" 
-	        android:entries="@array/activity_car_add_distance_units"
-	        android:prompt="@string/activity_car_add_distance_units_hint"
-	        style="@style/plain_text" />
-	    
+
 	    <Button
 	        android:id="@+id/activity_car_add_button_commit"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_below="@id/activity_car_add_volume_unit"
+	        android:layout_below="@id/activity_car_add_distance_unit"
 	        android:text="@string/activity_car_add_button_add" 
 	        android:onClick="onClick"
 	        style="@style/button_text"

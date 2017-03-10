@@ -5,6 +5,10 @@
           android:versionCode="5"
           android:versionName="E-Type">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+
     <!-- Backup is limited to 25 MB of data per app! -->
     <application
         android:allowBackup="true"
@@ -30,82 +34,85 @@
             android:name=".gui.bureaucratic.ActivityBureaucraticEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.common.pictures.CameraHandler"
+            android:name=".gui.common.pictures.CameraHandler"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.garage.ActivityCarAdd"
+            android:name=".gui.donation.DonationActivity"
+            android:label="@string/app_name"/>
+        <activity
+            android:name=".gui.garage.ActivityCarAdd"
             android:label="@string/activity_car_add_label"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.garage.ActivityCarEdit"
+            android:name=".gui.garage.ActivityCarEdit"
             android:label="@string/activity_car_edit_label"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.insurance.ActivityInsuranceAdd"
+            android:name=".gui.insurance.ActivityInsuranceAdd"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.insurance.ActivityInsuranceEdit"
+            android:name=".gui.insurance.ActivityInsuranceEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.report.ActivityCharts"
+            android:name=".gui.report.ActivityCharts"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.ActivityEntryChoose"
+            android:name=".gui.ActivityEntryChoose"
             android:label="@string/activity_entry_add_label"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.fuelling.ActivityFuellingEdit"
+            android:name=".gui.fuelling.ActivityFuellingEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.garage.ActivityGarageManagement"
+            android:name=".gui.garage.ActivityGarageManagement"
             android:label="@string/activity_garage_management_label"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.fuelling.ActivityRefuel"
+            android:name=".gui.fuelling.ActivityRefuel"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.report.ActivityEntriesShow"
+            android:name=".gui.report.ActivityEntriesShow"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.report.ActivityReportsNavigate"
+            android:name=".gui.report.ActivityReportsNavigate"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.maintenance.ActivityMaintenanceAdd"
+            android:name=".gui.maintenance.ActivityMaintenanceAdd"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.maintenance.ActivityMaintenanceEdit"
+            android:name=".gui.maintenance.ActivityMaintenanceEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.maintenance.ActivityPartAdd"
+            android:name=".gui.maintenance.ActivityPartAdd"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.maintenance.ActivityPartEdit"
+            android:name=".gui.maintenance.ActivityPartEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.tyres.ActivityTyreAdd"
+            android:name=".gui.tyres.ActivityTyreAdd"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.tyres.ActivityTyreChange"
+            android:name=".gui.tyres.ActivityTyreChange"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.tyres.ActivityTyreChangeEdit"
+            android:name=".gui.tyres.ActivityTyreChangeEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.tyres.ActivityTyreChangeScheme"
+            android:name=".gui.tyres.ActivityTyreChangeScheme"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.tyres.ActivityTyreEdit"
+            android:name=".gui.tyres.ActivityTyreEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.service.ActivityServiceAdd"
+            android:name=".gui.service.ActivityServiceAdd"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.service.ActivityServiceEdit"
+            android:name=".gui.service.ActivityServiceEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.toll.ActivityTollAdd"
+            android:name=".gui.toll.ActivityTollAdd"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.toll.ActivityTollEdit"
+            android:name=".gui.toll.ActivityTollEdit"
             android:label="@string/app_name"/>
         <activity
-            android:name="sk.berops.android.vehiculum.gui.preferences.PreferenceWithHeaders"
+            android:name=".gui.preferences.PreferenceWithHeaders"
             android:label="@string/app_name"/>
         <meta-data
             android:name="io.fabric.ApiKey"
@@ -115,12 +122,10 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     
     <uses-sdk
         android:minSdkVersion="21"
         android:targetSdkVersion="22" />
     
-    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

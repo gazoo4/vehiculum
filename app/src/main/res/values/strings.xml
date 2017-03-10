@@ -15,8 +15,17 @@
     <string name="activity_car_add_model_hint"						>Model</string>
     <string name="activity_car_add_model_year_hint"					>Model Year</string>
     <string name="activity_car_add_nickname_hint"					>Nickname (optional)</string>
-    <string name="activity_car_add_volume_units_hint"				>Volume units</string>
+    <string name="activity_car_add_quantity_units_hint"				>Quantity units</string>
     <string name="activity_car_edit_label"							>Edit your car</string>
+
+    <string name="activity_donate_donation_period"					>To change your donation, select your new donation program</string>
+    <string name="activity_donate_period_monthly"					>This much coffee should keep us going for a month. Thank you.</string>
+    <string name="activity_donate_period_prompt"					>Select your donation volume</string>
+    <string name="activity_donate_period_yearly"					>Wow, this is enough coffee for us for the whole year!</string>
+    <string name="activity_donate_prompt_cancel"					>Continue</string>
+    <string name="activity_donate_prompt_continue"					>Cancel</string>
+    <string name="activity_donate_resignup_prompt"					>To renew your donation, select your donation volume</string>
+    <string name="activity_donate_update_prompt"					>To change your donation, select your new donation period</string>
 
     <string name="activity_entries_list_type_hint"					>Filter: </string>
     <string name="activity_entries_tyres_new_count"					>New tyres: </string>
@@ -105,8 +114,8 @@
     <string name="activity_refuel_fuel_type_hint"					>Fuel type</string>
     <string name="activity_refuel_header"							>Enter your bill details</string>
     <string name="activity_refuel_price_hint"						>Price per liter</string>
-    <string name="activity_refuel_volume_hint"						>Fuel volume bought</string>
-    <string name="activity_refuel_volume_unit_hint"					>Volume unit</string>
+    <string name="activity_refuel_quantity_hint"					>Fuel quantity bought</string>
+    <string name="activity_refuel_quantity_unit_hint"				>Quantity unit</string>
 
     <string name="activity_reports_navigate_chart_title"			>overall</string>
 
@@ -155,9 +164,8 @@
     <string name="activity_tyre_change_total_cost_hint"				>Total cost</string>
     <string name="activity_tyre_change_tyres_cost_hint"				>Tyres price</string>
 
-    <string name="fragment_donate_button_copy_btc_address"		    >Copy bitcoin address</string>
-    <string name="fragment_donate_message"		                    >The authors are building this app in their free time. If you like it, donate so that they can buy more coffee to keep them going.</string>
-    <string name="fragment_donate_title"		                    >Donate BTC to the authors</string>
+    <string name="fragment_donate_message"		                    >The authors are building this app in their free time. If you like it, donate so that they can buy more coffee which keep them going :)</string>
+    <string name="fragment_donate_title"		                    >Donate to the authors</string>
 
     <string name="fragment_entry_edit_delete_activate_button"		>Activate</string>
     <string name="fragment_entry_edit_delete_activate_toast"		>Activating entry</string>
@@ -180,6 +188,25 @@
     <string name="fragment_tag_manager_edit_button"                 >Edit</string>
     <string name="fragment_tag_manager_select_button"               >Select</string>
     <string name="fragment_tag_manager_select_tag_hint"             >Select a tag</string>
+
+    <string name="generic_unit_consumption_mpg_imperial_long"       >miles per gallon (imperial)</string>
+    <string name="generic_unit_consumption_mpg_short"               >mpg</string>
+    <string name="generic_unit_consumption_mpg_us_long"             >miles per gallon (US)</string>
+    <string name="generic_unit_distance_kilometer_long"             >kilometer</string>
+    <string name="generic_unit_distance_kilometer_short"            >km</string>
+    <string name="generic_unit_distance_mile_long"                  >nuke</string>
+    <string name="generic_unit_distance_mile_short"                 >mil</string>
+    <string name="generic_unit_quantity_gallon_imperial_long"       >imperial gallon</string>
+    <string name="generic_unit_quantity_gallon_short"               >gal</string>
+    <string name="generic_unit_quantity_gallon_us_long"             >US gallon</string>
+    <string name="generic_unit_quantity_kilogram_long"              >kilogram</string>
+    <string name="generic_unit_quantity_kilogram_short"             >kg</string>
+    <string name="generic_unit_quantity_kilowatthour_long"          >kilowatt-hour</string>
+    <string name="generic_unit_quantity_kilowatthour_short"         >kWh</string>
+    <string name="generic_unit_quantity_liter_long"                 >liter</string>
+    <string name="generic_unit_quantity_liter_short"                >ltr</string>
+    <string name="generic_unit_quantity_pound_long"                 >pound</string>
+    <string name="generic_unit_quantity_pound_short"                >lb</string>
 
     <string name="list_stats_maintenance_parts_cost_hint"			>Parts cost: </string>
     <string name="list_stats_maintenance_total_cost_hint"			>Total cost: </string>
@@ -204,6 +231,8 @@
     <string name="preferences_units_cost_dialog"					>Select cost units for reporting</string>
     <string name="preferences_units_distance"						>Distance</string>
     <string name="preferences_units_distance_dialog"				>Select distance units for reporting</string>
+    <string name="preferences_units_gas_weight"						>Gas weight</string>
+    <string name="preferences_units_gas_weight_dialog"				>Select weight units for reporting gas (CNG) consumption</string>
     <string name="preferences_units_summary"						>Distance, volume, consumption</string>
     <string name="preferences_units_title"							>Units in reports</string>
     <string name="preferences_units_volume"							>Volume</string>
@@ -217,7 +246,7 @@
         <item>Mile</item>
     </string-array>
     
-    <string-array name="activity_car_add_volume_units">
+    <string-array name="activity_car_add_quantity_units">
         <item>Liter</item>
         <item>US Gallon</item>
         <item>Imperial Gallon</item>
@@ -266,7 +295,7 @@
         <item>Electricity</item>
     </string-array>
     
-    <string-array name="activity_refuel_volume_unit">
+    <string-array name="activity_refuel_quantity_unit">
         <item>ltr</item>
         <item>gal (US)</item>
         <item>gal (IMP)</item>
@@ -292,17 +321,15 @@
     </string-array>
     
     <string-array name="preferences_units_consumption_entries">
-        <item>Litre per 100 km</item>
-        <item>Km per Litre</item>
-        <item>Miles per Gallon (US)</item>
-        <item>Miles per Gallon (Imperial)</item>
+        <item>Fuel units per distance (e.g. litre per km)</item>
+        <item>Distance per fuel unit (e.g. mile per litre)</item>
+        <item>Fuel units per 100*distance (e.g. litre per 100 km)</item>
     </string-array>
     
     <string-array name="preferences_units_consumption_values">
         <item>0</item>
         <item>1</item>
         <item>2</item>
-        <item>3</item>
     </string-array>
     
     <string-array name="preferences_units_cost_entries">
@@ -327,6 +354,16 @@
     <string-array name="preferences_units_distance_values">
         <item>0</item>
         <item>1</item>
+    </string-array>
+
+    <string-array name="preferences_units_gas_weight_entries">
+        <item>Kilogram</item>
+        <item>Pound</item>
+    </string-array>
+
+    <string-array name="preferences_units_gas_weight_values">
+        <item>10</item>
+        <item>11</item>
     </string-array>
     
     <string-array name="preferences_units_volume_entries">

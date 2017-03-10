@@ -21,7 +21,7 @@
                 android:entryValues="@array/preferences_units_distance_values"
                 android:dialogTitle="@string/preferences_units_distance_dialog"
                 android:defaultValue="0" />
-        
+
         <ListPreference
                 android:key="volume_unit_key"
                 android:title="@string/preferences_units_volume"
@@ -30,6 +30,15 @@
                 android:entryValues="@array/preferences_units_volume_values"
                 android:dialogTitle="@string/preferences_units_volume_dialog"
                 android:defaultValue="0" />
+
+        <ListPreference
+            android:key="gas_weight_unit_key"
+            android:title="@string/preferences_units_volume"
+            android:summary="%s"
+            android:entries="@array/preferences_units_gas_weight_entries"
+            android:entryValues="@array/preferences_units_gas_weight_values"
+            android:dialogTitle="@string/preferences_units_gas_weight_dialog"
+            android:defaultValue="0" />
         
         <ListPreference
             	android:key="cost_unit_key"

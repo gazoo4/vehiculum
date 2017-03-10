@@ -8,6 +8,7 @@ import android.widget.EditText;
 import java.io.IOException;
 import java.util.Calendar;
 
+import sk.berops.android.vehiculum.configuration.Preferences;
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.expense.FieldEmptyException;
@@ -17,7 +18,9 @@ import sk.berops.android.vehiculum.gui.MainActivity;
 public abstract class ActivityRecordAdd extends DefaultActivity {
 
 	protected EditText editTextComment;
-	
+
+	protected Preferences preferences = Preferences.getInstance();
+
 	protected Car car;
 	protected Record record;
 	protected boolean editMode;

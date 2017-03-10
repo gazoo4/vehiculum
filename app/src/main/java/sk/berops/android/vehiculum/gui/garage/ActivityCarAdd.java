@@ -11,7 +11,7 @@ import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.DistanceUnit;
-import sk.berops.android.vehiculum.dataModel.UnitConstants.VolumeUnit;
+import sk.berops.android.vehiculum.dataModel.UnitConstants.QuantityUnit;
 import sk.berops.android.vehiculum.dataModel.expense.FieldEmptyException;
 import sk.berops.android.vehiculum.gui.MainActivity;
 import sk.berops.android.vehiculum.gui.common.ActivityRecordAdd;
@@ -20,8 +20,7 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 	
 	protected Car car;
 	protected boolean editMode;
-	private View addCarView;
-	
+
 	protected Button buttonCommit;
 	protected EditText editTextBrand;
 	protected EditText editTextModel;
@@ -30,7 +29,6 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 	protected EditText editTextModelYear;
 	protected EditText editTextNickname;
 	protected Spinner spinnerDistanceUnit;
-	protected Spinner spinnerVolumeUnit;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +56,6 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 		editTextNickname = (EditText)findViewById(R.id.activity_car_add_nickname);
 		
 		spinnerDistanceUnit = (Spinner) findViewById(R.id.activity_car_add_distance_unit);
-		spinnerVolumeUnit = (Spinner) findViewById(R.id.activity_car_add_volume_unit);
 
 		listButtons.add(buttonCommit);
 
@@ -70,7 +67,6 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 		listEditTexts.add(editTextNickname);
 
 		mapSpinners.put(R.array.activity_car_add_distance_units, spinnerDistanceUnit);
-		mapSpinners.put(R.array.activity_car_add_volume_units, spinnerVolumeUnit);
 	}
 
 	public void saveEntry(View view) {
@@ -93,7 +89,6 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 			ex.printStackTrace();
 		}
 		car.setDistanceUnit(DistanceUnit.getDistanceUnit(spinnerDistanceUnit.getSelectedItemPosition()));
-		car.setVolumeUnit(VolumeUnit.getVolumeUnit(spinnerVolumeUnit.getSelectedItemPosition()));
 		
 		if (!editMode) {
 			MainActivity.garage.addCar(car);

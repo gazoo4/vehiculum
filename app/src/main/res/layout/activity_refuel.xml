@@ -56,21 +56,21 @@
             <!-- new row -->
 
             <EditText
-                android:id="@+id/activity_refuel_volume"
+                android:id="@+id/activity_refuel_quantity"
                 style="@style/plain_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="2"
-                android:hint="@string/activity_refuel_volume_hint"
+                android:hint="@string/activity_refuel_quantity_hint"
                 android:inputType="numberDecimal"/>
 
             <Spinner
-                android:id="@+id/activity_refuel_volume_unit"
+                android:id="@+id/activity_refuel_quantity_unit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                android:entries="@array/activity_refuel_volume_unit"
-                android:prompt="@string/activity_refuel_volume_unit_hint"/>
+                android:entries="@array/activity_refuel_quantity_unit"
+                android:prompt="@string/activity_refuel_quantity_unit_hint"/>
 
             <!-- new row -->
 
