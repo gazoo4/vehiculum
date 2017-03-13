@@ -229,37 +229,34 @@ public class MainActivity extends DefaultActivity {
 		String description;
 		double valueSI;
 		double valueReport;
-		UnitConstants.ConsumptionScheme unit;
-		unit = preferences.getConsumptionUnit();
+		UnitConstants.ConsumptionUnit unit;
+		unit = preferences.getConsumptionUnit(c.getLastRefuelType());
 		
 		// we should buy at least 2 different fuels in order to display the stats separately
 		HashMap<FuelType, Double> map = new HashMap<>();
+		Set<UnitConstants.Substance> substances = new HashSet<>();
 		for (FuelType t: c.getFuelTypes()) {
 			avgConsumption = c.getAveragePerFuelType().get(t);
 			if (avgConsumption != 0.0) {
-				map.put(t,  avgConsumption);
+				map.put(t, avgConsumption);
+				substances.add(t.getSubstance());
 			}
 		}
 
-		Set<UnitConstants.Substance> substances = new HashSet<>();
-		for (FuelType key: map.keySet()) {
-			substances.add(key.getSubstance());
-		}
-		// We can only aggregate consumption across the same fuel substances (liquids vs. gasses vs. electricity)
+		// If we use several fuels, but of different substances, we can't make a combined average
 		if (substances.size() > 1) {
 			return;
 		}
 
 		if (map.size() >= 2) {
-			// If we still have several fuels, but of the same substance, we can make a combined average
 			for (FuelType t: map.keySet()) {
 				description = getString(R.string.activity_main_average);
 				description += " ";
 				description += t.getType();
 				valueSI = map.get(t);
 				valueReport = UnitConstants.convertUnitConsumptionFromSI(t, valueSI);
-					
-				layout.addView(createStatRow(description, valueReport, unit.getUnit()));
+
+				layout.addView(createStatRow(description, valueReport, unit.toUnitShort()));
 			}
 			description = getString(R.string.activity_main_combined_average);
 		} else {
@@ -268,7 +265,7 @@ public class MainActivity extends DefaultActivity {
 
 		valueSI = c.getGrandAverage();
 		valueReport = UnitConstants.convertUnitConsumptionFromSI(c.getFuelTypes().iterator().next(), valueSI);
-		layout.addView(createStatRow(description, valueReport, unit.getUnit()));
+		layout.addView(createStatRow(description, valueReport, unit.toUnitShort()));
 	}
 	
 	private void generateRowTotalRelativeCosts(TableLayout layout) {
@@ -329,7 +326,7 @@ public class MainActivity extends DefaultActivity {
 		int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange); //orange in the middle
 		
 		String description = getString(R.string.activity_main_since_last_refuel);
-		String unit = preferences.getConsumptionUnit().getUnit();
+		UnitConstants.ConsumptionUnit unit = preferences.getConsumptionUnit();
 		
 		double lastConsumptionReport = UnitConstants.convertUnitConsumption(lastConsumptionSI);
 		layout.addView(createStatRow(description, lastConsumptionReport, unit, color));

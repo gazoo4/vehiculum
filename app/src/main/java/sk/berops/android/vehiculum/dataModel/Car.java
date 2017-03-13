@@ -128,7 +128,7 @@ public class Car extends Record implements Serializable {
 		super();
 		setHistory(new History());
 		this.setDistanceUnit(DistanceUnit.getDistanceUnit(0));
-		this.setConsumptionScheme(ConsumptionScheme.getConsumptionUnit(0));
+		this.setConsumptionScheme(ConsumptionScheme.getConsumptionScheme(0));
 		this.setType(type);
 	}
 
@@ -258,7 +258,7 @@ public class Car extends Record implements Serializable {
 
 	public UnitConstants.ConsumptionScheme getConsumptionScheme() {
 		if (consumptionScheme == null)
-			return UnitConstants.ConsumptionScheme.getConsumptionUnit(0);
+			return UnitConstants.ConsumptionScheme.getConsumptionScheme(0);
 		return consumptionScheme;
 	}
 

@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 
 import sk.berops.android.vehiculum.Vehiculum;
 import sk.berops.android.vehiculum.dataModel.Currency;
+import sk.berops.android.vehiculum.dataModel.UnitConstants;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.ConsumptionScheme;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.CostUnit;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.DistanceUnit;
@@ -49,8 +50,8 @@ public class Preferences {
     	return Integer.valueOf(mPreferences.getString(key, Integer.valueOf(defValue).toString()));
     }
     
-    public ConsumptionScheme getConsumptionUnit() {
-    	return ConsumptionScheme.getConsumptionUnit(getInt(CONSUMPTION_UNIT_KEY, 2));
+    public ConsumptionScheme getConsumptionScheme() {
+    	return ConsumptionScheme.getConsumptionScheme(getInt(CONSUMPTION_UNIT_KEY, 2));
     }
     
     public CostUnit getCostUnit() {
@@ -60,6 +61,10 @@ public class Preferences {
     public Currency.Unit getCurrency() {
     	return Currency.Unit.getUnit(getInt(CURRENCY_KEY, 0));
     }
+
+	public UnitConstants.ConsumptionUnit getConsumptionUnit(FuellingEntry.FuelType type) {
+		return new UnitConstants.ConsumptionUnit(getConsumptionScheme(), getQuantityUnit(type), getDistanceUnit());
+	}
     
     public DistanceUnit getDistanceUnit() {
     	return DistanceUnit.getDistanceUnit(getInt(DISTANCE_UNIT_KEY, 0));

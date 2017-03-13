@@ -34,8 +34,6 @@ public class FuelConsumption extends Consumption {
 	private double averageFuelPrice;										//average unit price
 	private TreeMap<FuelType, Double> averageFuelPricePerFuelType;			//average unit price per fuel type
 	
-	private TreeMap<FuelType, Double> averagePerFuelTypeOld;
-	
 	public FuelConsumption() {
 		super();
 		lastRefuelType = FuelType.GASOLINE;
@@ -59,9 +57,7 @@ public class FuelConsumption extends Consumption {
 		costSinceLastRefuel = 0.0;
 		costSinceLastRefuelPerFuelType = new TreeMap<FuelType, Double>();
 		averageFuelPrice = 0.0;							
-		averageFuelPricePerFuelType = new TreeMap<FuelType, Double>();			
-		
-		averagePerFuelTypeOld = new TreeMap<FuelType, Double>();
+		averageFuelPricePerFuelType = new TreeMap<FuelType, Double>();
 	}
 
 	@Override
@@ -280,46 +276,9 @@ public class FuelConsumption extends Consumption {
 	public void setAverageFuelPricePerFuelType(TreeMap<FuelType, Double> averageFuelPricePerFuelType) {
 		this.averageFuelPricePerFuelType = averageFuelPricePerFuelType;
 	}
-
-	public TreeMap<FuelType, Double> getAveragePerFuelTypeOld() {
-		return averagePerFuelTypeOld;
-	}
-	
-	public void setAveragePerFuelTypeOld(TreeMap<FuelType, Double> averagePerFuelTypeOld) {
-		this.averagePerFuelTypeOld = averagePerFuelTypeOld;
-	}
 	
 	public Set<FuelType> getFuelTypes() {
 		return getFuellingCountPerFuelType().keySet();
 	}
-	
-		public FuelConsumption getConsumptionNonSI(UnitConstants.ConsumptionScheme cu) {
-		FuelConsumption consumption = new FuelConsumption();
-		double value = 0;
-		double coef = 0;
-		
-		switch (cu) {
-		case KM_PER_LITRE:
-			coef = UnitConstants.KM_PER_LITRE;
-			break;
-		case LITRE_PER_100KM:
-			coef = UnitConstants.LITRE_PER_100KM;
-			break;
-		case MPG_IMPERIAL:
-			coef = UnitConstants.MPG_IMPERIAL;
-			break;
-		case MPG_US:
-			coef = UnitConstants.MPG_US;
-			break;
-		default:
-			break;
-		}
-		
-		// to be redesigned for all the entry types:
-		for (FuelType type : this.getAveragePerFuelTypeOld().keySet()) {
-			value = this.getAveragePerFuelTypeOld().get(type);
-			consumption.getAveragePerFuelTypeOld().put(type, value*coef);
-		}
-		return consumption;
-	}
+
 }

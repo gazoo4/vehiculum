@@ -70,6 +70,10 @@ public class DonationActivity extends DefaultActivity implements IabBroadcastRec
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		String key = BuildConfig.APP_API;
+		String result = obfuscate(key, BuildConfig.OBFUSCATE_KEY);
+		Log.d("OBFUSCATE", result);
+
 
 		/* base64EncodedPublicKey should be YOUR APPLICATION'S PUBLIC KEY
          * (that you got from the Google Play developer console). This is not your

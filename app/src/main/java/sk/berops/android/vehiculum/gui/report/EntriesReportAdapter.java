@@ -106,7 +106,7 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 
 		fuel.setText(entry.getFuelType().toString());
 
-		consumptionUnit.setText(preferences.getConsumptionUnit().getUnit());
+		consumptionUnit.setText(preferences.getConsumptionScheme().getUnit());
 
 		FuelConsumption c = entry.getFuelConsumption();
 		if (c.getAverageSinceLast() == 0.0) {

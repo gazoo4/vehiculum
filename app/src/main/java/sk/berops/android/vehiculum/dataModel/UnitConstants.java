@@ -7,16 +7,70 @@ import java.util.Map;
 
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.configuration.Preferences;
+import sk.berops.android.vehiculum.dataModel.calculation.Consumption;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.vehiculum.gui.MainActivity;
 
 public class UnitConstants {
+	public static class ConsumptionUnit {
+		private ConsumptionScheme cs;
+		private QuantityUnit qu;
+		private DistanceUnit du;
+
+		public ConsumptionUnit(ConsumptionScheme cs, QuantityUnit qu, DistanceUnit du) {
+			this.cs = cs;
+			this.qu = qu;
+			this.du = du;
+		}
+
+		public ConsumptionScheme getConsumptionScheme() {
+			return cs;
+		}
+
+		public QuantityUnit getQuantityUnit() {
+			return qu;
+		}
+
+		public DistanceUnit getDistanceUnit() {
+			return du;
+		}
+
+		public String toUnitLong() {
+			return toConsumptionUnitLong(cs, du, qu);
+		}
+
+		public String toUnitShort() {
+			return toConsumptionUnitShort(cs, du, qu);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			// Basic checks
+			if (obj == null) {
+				return false;
+			}
+			if (!ConsumptionUnit.class.isAssignableFrom(obj.getClass())) {
+				return false;
+			}
+
+
+			final ConsumptionUnit other = (ConsumptionUnit) obj;
+			// Here it's faster and safer to compare enums via == or !=
+			// (3rd expression evaluation)
+			if ((this.cs == null) ? (other.cs != null) : (this.cs != other.cs)) {
+				return false;
+			}
+			if ((this.du == null) ? (other.du != null) : (this.du != other.du)) {
+				return false;
+			}
+			if ((this.qu == null) ? (other.qu != null) : (this.qu != other.qu)) {
+				return false;
+			}
+			return true;
+		}
+	}
+
 	// all the default units here are mapped against: kilometer, liter
-	public static final double LITRE_PER_100KM = 1.0;
-	public static final double KM_PER_LITRE = 0;
-	public static final double MPG_IMPERIAL = 0;
-	public static final double MPG_US = 0;
-	
 	static Preferences preferences = Preferences.getInstance();
 
 	public enum Substance{
@@ -272,30 +326,30 @@ public class UnitConstants {
 		private int id;
 		private double coef;
 		private boolean si;
-		private String unit;
+		private String scheme;
 
-		ConsumptionScheme(int id, double coef, String unit) {
+		ConsumptionScheme(int id, double coef, String scheme) {
 			this.setId(id);
 			this.setCoef(coef);
-			this.setUnit(unit);
+			this.setScheme(scheme);
 		}
 
-		private static Map<Integer, ConsumptionScheme> idToUnitMapping;
+		private static Map<Integer, ConsumptionScheme> idToSchemeMapping;
 
-		public static ConsumptionScheme getConsumptionUnit(int id) {
-			if (idToUnitMapping == null) {
+		public static ConsumptionScheme getConsumptionScheme(int id) {
+			if (idToSchemeMapping == null) {
 				initMapping();
 			}
 
 			ConsumptionScheme result = null;
-			result = idToUnitMapping.get(id);
+			result = idToSchemeMapping.get(id);
 			return result;
 		}
 
 		private static void initMapping() {
-			idToUnitMapping = new HashMap<Integer, ConsumptionScheme>();
-			for (ConsumptionScheme unit : values()) {
-				idToUnitMapping.put(unit.id, unit);
+			idToSchemeMapping = new HashMap<Integer, ConsumptionScheme>();
+			for (ConsumptionScheme scheme : values()) {
+				idToSchemeMapping.put(scheme.id, scheme);
 			}
 		}
 
@@ -305,11 +359,11 @@ public class UnitConstants {
 		public void setCoef(double coef) {
 			this.coef = coef;
 		}
-		public String getUnit() {
-			return unit;
+		public String getScheme() {
+			return scheme;
 		}
-		public void setUnit(String unit) {
-			this.unit = unit;
+		public void setScheme(String unit) {
+			this.scheme = scheme;
 		}
 		public int getId() {
 			return id;
@@ -412,19 +466,29 @@ public class UnitConstants {
 	}
 	
 	public static double convertUnitConsumptionFromSI(FuelType type, double fromValue) {
-		return convertUnitConsumptionFromSI(type, fromValue, preferences.getQuantityUnit(type), preferences.getConsumptionUnit(), preferences.getDistanceUnit());
+		return convertUnitConsumptionFromSI(type, fromValue, preferences.getConsumptionUnit(type));
 	}
 
 	public static double convertUnitConsumptionFromSI(FuelType type, double fromValue,
-	                                                  QuantityUnit toQuantity, ConsumptionScheme toConsumption, DistanceUnit toDistance) {
+	                                                  ConsumptionUnit to) {
+		ConsumptionUnit from = new ConsumptionUnit(
+				ConsumptionScheme.FUEL_PER_100DISTANCE,
+				QuantityUnit.getDefaultQuantityUnit(type),
+				DistanceUnit.KILOMETER);
+		return convertUnitConsumption(fromValue, from, to);
+	}
+
+	public static double convertUnitConsumption(double fromValue,
+	                                            ConsumptionUnit from,
+	                                            ConsumptionUnit to) {
 		return convertUnitConsumption(
 				fromValue,
-				QuantityUnit.getDefaultQuantityUnit(type),
-				ConsumptionScheme.FUEL_PER_100DISTANCE,
-				DistanceUnit.KILOMETER,
-				toQuantity,
-				toConsumption,
-				toDistance);
+				from.getQuantityUnit(),
+				from.getConsumptionScheme(),
+				from.getDistanceUnit(),
+				to.getQuantityUnit(),
+				to.getConsumptionScheme(),
+				to.getDistanceUnit());
 	}
 
 	public static double convertUnitConsumption(double fromValue,
