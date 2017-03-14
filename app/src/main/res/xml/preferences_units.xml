@@ -33,7 +33,7 @@
 
         <ListPreference
             android:key="gas_weight_unit_key"
-            android:title="@string/preferences_units_volume"
+            android:title="@string/preferences_units_weight"
             android:summary="%s"
             android:entries="@array/preferences_units_gas_weight_entries"
             android:entryValues="@array/preferences_units_gas_weight_values"

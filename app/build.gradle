@@ -54,7 +54,7 @@ android {
             // Disable fabric build ID generation for debug builds
             // If you get io.fabric.sdk android.services.concurrency.UnmetDependencyException: This app relies on Crashlytics
             // uncomment this line for at least one run. This usually happens after a Crashlytics version upgrade
-            ext.enableCrashlytics = false
+            // ext.enableCrashlytics = false
             buildConfigField 'String', 'APP_API', "$appApi"
             buildConfigField 'String', 'OBFUSCATE_KEY', "$obfuscateKey"
         }

@@ -15,6 +15,7 @@
         android:orientation="vertical">
 
         <View
+            android:id="@+id/activity_main_line_entry_add"
             android:layout_width="wrap_content"
             android:layout_height="2dp"
             android:background="@drawable/white_gradient_line"/>
@@ -33,6 +34,7 @@
             android:text="@string/activity_main_button_entry_add"/>
 
         <View
+            android:id="@+id/activity_main_line_stats_view"
             android:layout_width="wrap_content"
             android:layout_height="2dp"
             android:background="@drawable/white_gradient_line"/>
@@ -51,6 +53,7 @@
             android:text="@string/activity_main_button_stats_view" />
 
         <View
+            android:id="@+id/activity_main_line_garage_enter"
             android:layout_width="wrap_content"
             android:layout_height="2dp"
             android:background="@drawable/white_gradient_line"/>

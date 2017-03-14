@@ -6,19 +6,26 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.UnitConstants;
+import sk.berops.android.vehiculum.dataModel.UnitConstants.QuantityUnit;
+import sk.berops.android.vehiculum.dataModel.UnitConstants.Substance;
 import sk.berops.android.vehiculum.dataModel.expense.FieldEmptyException;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry.FuelType;
@@ -32,6 +39,7 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
     protected Spinner spinnerFuelType;
     protected Spinner spinnerQuantityUnit;
     protected FuellingEntry fuellingEntry;
+	protected FuelUnitAdapter fuelUnitAdapter;
     private TextView textViewPrice;
 
     @Override
@@ -71,7 +79,7 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
 
         mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
         mapSpinners.put(R.array.activity_refuel_fuel_type, spinnerFuelType);
-        mapSpinners.put(R.array.activity_refuel_quantity_unit, spinnerQuantityUnit);
+        //mapSpinners.put(R.array.activity_refuel_quantity_unit, spinnerQuantityUnit);
     }
 
     @Override
@@ -86,6 +94,10 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
         }
 
 	    spinnerFuelType.setSelection(fuelType.getId());
+	    CharSequence[] unitList = getResources().getStringArray(R.array.activity_refuel_quantity_unit);
+	    fuelUnitAdapter = new FuelUnitAdapter(this, R.layout.spinner_white, unitList);
+	    fuelUnitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	    spinnerQuantityUnit.setAdapter(fuelUnitAdapter);
         refreshFuelType(fuelType);
     }
 
@@ -107,11 +119,12 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
 		}
 
 		if (parent == spinnerFuelType) {
-			refreshFuelType(FuelType.getFuelType(spinnerFuelType.getId()));
+			refreshFuelType(FuelType.getFuelType(spinnerFuelType.getSelectedItemPosition()));
 		}
 	}
 
 	protected void refreshFuelType(FuelType type) {
+		fuelUnitAdapter.mask(type);
 		UnitConstants.QuantityUnit quantityUnit;
 		quantityUnit = preferences.getQuantityUnit(type);
 		spinnerQuantityUnit.setSelection(quantityUnit.getId());

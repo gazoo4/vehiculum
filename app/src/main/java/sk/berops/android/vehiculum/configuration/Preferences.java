@@ -26,6 +26,7 @@ public class Preferences {
 	private static final String COST_UNIT_KEY = "cost_unit_key";
 	private static final String CURRENCY_KEY = "currency_key";
 	private static final String DISTANCE_UNIT_KEY = "distance_unit_key";
+	private static final String ELECTRICITY_UNIT_KEY = "electricity_unit_key";
 	private static final String GAS_WEIGHT_UNIT_KEY = "gas_weight_unit_key";
 	private static final String VOLUME_UNIT_KEY = "volume_unit_key";
 
@@ -71,6 +72,10 @@ public class Preferences {
     }
     
     public QuantityUnit getQuantityUnit(FuellingEntry.FuelType type) {
+	    if (type == null) {
+		    return getVolumeUnit();
+	    }
+
 	    switch (type.getSubstance()) {
 		    case LIQUID:
 			    return getVolumeUnit();
@@ -84,14 +89,14 @@ public class Preferences {
     }
 
     public QuantityUnit getVolumeUnit() {
-	    return QuantityUnit.getQuantityUnit(getInt(VOLUME_UNIT_KEY, 0));
+	    return QuantityUnit.getQuantityUnit(getInt(VOLUME_UNIT_KEY, QuantityUnit.LITER.getId()));
     }
 
 	public QuantityUnit getGasWeightUnit() {
-		return QuantityUnit.getQuantityUnit(getInt(GAS_WEIGHT_UNIT_KEY, 10));
+		return QuantityUnit.getQuantityUnit(getInt(GAS_WEIGHT_UNIT_KEY, QuantityUnit.KILOGRAM.getId()));
 	}
 
 	public QuantityUnit getElectricityUnit() {
-		return QuantityUnit.KILOWATT_HOUR; //ID 20
+		return QuantityUnit.getQuantityUnit(getInt(ELECTRICITY_UNIT_KEY, QuantityUnit.KILOWATT_HOUR.getId()));
 	}
 }

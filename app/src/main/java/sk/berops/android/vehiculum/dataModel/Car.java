@@ -47,8 +47,6 @@ public class Car extends Record implements Serializable {
 	private double currentMileageSI;
 	@Element(name = "distanceUnit", required = false)
 	private DistanceUnit distanceUnit;
-	@Element(name = "consumptionScheme", required = false)
-	private ConsumptionScheme consumptionScheme;
 	@Element(name = "type", required = false)
 	private CarType type;
 	
@@ -128,7 +126,6 @@ public class Car extends Record implements Serializable {
 		super();
 		setHistory(new History());
 		this.setDistanceUnit(DistanceUnit.getDistanceUnit(0));
-		this.setConsumptionScheme(ConsumptionScheme.getConsumptionScheme(0));
 		this.setType(type);
 	}
 
@@ -254,16 +251,6 @@ public class Car extends Record implements Serializable {
 		if (getHistory().getEntries().size() == 0)
 			return null;
 		return getHistory().getEntries().getLast().getConsumption();
-	}
-
-	public UnitConstants.ConsumptionScheme getConsumptionScheme() {
-		if (consumptionScheme == null)
-			return UnitConstants.ConsumptionScheme.getConsumptionScheme(0);
-		return consumptionScheme;
-	}
-
-	public void setConsumptionScheme(ConsumptionScheme consumptionScheme) {
-		this.consumptionScheme = consumptionScheme;
 	}
 
 	public FuelConsumption getFuelConsumption() {

@@ -89,6 +89,7 @@
     <string name="activity_main_garage_saving_error_toast"			>Problem occurred when saving changes</string>
     <string name="activity_main_google_services_cnx_error_toast"	>A problem occurred when connecting to Google Services</string>
     <string name="activity_main_header"								>Manage your enthusiasm!</string>
+    <string name="activity_main_no_expenses_message"				>Record some events.\nThere\'s nothing to be displayed yet.</string>
     <string name="activity_main_relative_costs"						>Relative costs</string>
     <string name="activity_main_relative_costs_fuel"				>Relative costs for </string>
     <string name="activity_main_relative_since_last_refuel"			>Costs since last refuel</string>
@@ -204,7 +205,7 @@
     <string name="generic_unit_quantity_kilowatthour_long"          >kilowatt-hour</string>
     <string name="generic_unit_quantity_kilowatthour_short"         >kWh</string>
     <string name="generic_unit_quantity_liter_long"                 >liter</string>
-    <string name="generic_unit_quantity_liter_short"                >ltr</string>
+    <string name="generic_unit_quantity_liter_short"                >l</string>
     <string name="generic_unit_quantity_pound_long"                 >pound</string>
     <string name="generic_unit_quantity_pound_short"                >lb</string>
 
@@ -237,6 +238,7 @@
     <string name="preferences_units_title"							>Units in reports</string>
     <string name="preferences_units_volume"							>Volume</string>
     <string name="preferences_units_volume_dialog"					>Select volume units for reporting</string>
+    <string name="preferences_units_weight"							>Weight</string>
 
     <string name="toast_menu_backup_not_saved_successfully"         >Backup failed!</string>
     <string name="toast_menu_backup_saved_successfully"             >Backup file saved to: </string>
@@ -245,13 +247,7 @@
         <item>Kilometer</item>
         <item>Mile</item>
     </string-array>
-    
-    <string-array name="activity_car_add_quantity_units">
-        <item>Liter</item>
-        <item>US Gallon</item>
-        <item>Imperial Gallon</item>
-    </string-array>
-    
+
     <string-array name="activity_entries_list_types">
         <item>ALL</item>
         <item>Fuelling</item>
@@ -294,13 +290,16 @@
         <item>CNG</item>
         <item>Electricity</item>
     </string-array>
-    
+
     <string-array name="activity_refuel_quantity_unit">
         <item>ltr</item>
         <item>gal (US)</item>
         <item>gal (IMP)</item>
+        <item>kg</item>
+        <item>lb</item>
+        <item>kWh</item>
     </string-array>
-    
+
     <string-array name="activity_service_type">
         <item>Towing service</item>
         <item>Replacement vehicle</item>
@@ -321,9 +320,9 @@
     </string-array>
     
     <string-array name="preferences_units_consumption_entries">
-        <item>Fuel units per distance (e.g. litre per km)</item>
-        <item>Distance per fuel unit (e.g. mile per litre)</item>
-        <item>Fuel units per 100*distance (e.g. litre per 100 km)</item>
+        <item>Fuel units per distance (e.g. l/km)</item>
+        <item>Distance per fuel unit (e.g. mpg)</item>
+        <item>Fuel units per 100*distance (e.g. l/100 km)</item>
     </string-array>
     
     <string-array name="preferences_units_consumption_values">
@@ -362,8 +361,9 @@
     </string-array>
 
     <string-array name="preferences_units_gas_weight_values">
-        <item>10</item>
-        <item>11</item>
+        <!-- Need to keep this in sync with UnitConstants.QuantityUnit -->
+        <item>3</item>
+        <item>4</item>
     </string-array>
     
     <string-array name="preferences_units_volume_entries">
@@ -373,6 +373,7 @@
     </string-array>
     
     <string-array name="preferences_units_volume_values">
+        <!-- Need to keep this in sync with UnitConstants.QuantityUnit -->
         <item>0</item>
         <item>1</item>
         <item>2</item>

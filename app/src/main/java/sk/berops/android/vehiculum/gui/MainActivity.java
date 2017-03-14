@@ -56,6 +56,9 @@ public class MainActivity extends DefaultActivity {
 	private Button buttonRecordEvent;
 	private Button buttonViewStats;
 	private Button buttonEnterGarage;
+	private View lineRecordEvent;
+	private View lineViewStats;
+	private View lineEnterGarage;
 	private TableLayout statsTable;
 	private TextView textViewHeader;
 
@@ -130,15 +133,24 @@ public class MainActivity extends DefaultActivity {
 	}
 
 	private void initAfterLoad() {
-		if (garage != null) {
+		if (garage == null) {
+			buttonRecordEvent.setVisibility(View.GONE);
+			lineRecordEvent.setVisibility(View.GONE);
+			buttonViewStats.setVisibility(View.GONE);
+			lineViewStats.setVisibility(View.GONE);
+		} else if (garage.getActiveCar().getHistory().getEntries().size() == 0) {
+			buttonRecordEvent.setVisibility(View.VISIBLE);
+			lineRecordEvent.setVisibility(View.VISIBLE);
+			buttonViewStats.setVisibility(View.GONE);
+			lineViewStats.setVisibility(View.GONE);
+		} else {
 			garage.initAfterLoad();
 			buttonRecordEvent.setVisibility(View.VISIBLE);
+			lineRecordEvent.setVisibility(View.VISIBLE);
 			buttonViewStats.setVisibility(View.VISIBLE);
-		} else {
-			buttonRecordEvent.setVisibility(View.GONE);
-			buttonViewStats.setVisibility(View.GONE);
+			lineViewStats.setVisibility(View.VISIBLE);
+			Toast.makeText(getApplicationContext(), "Garage initialized. Car loaded: "+ garage.getActiveCar().getNickname(), Toast.LENGTH_SHORT).show();
 		}
-		Toast.makeText(getApplicationContext(), "Garage initialized. Car loaded: "+ garage.getActiveCar().getNickname(), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -153,6 +165,10 @@ public class MainActivity extends DefaultActivity {
 		buttonRecordEvent = (Button) findViewById(R.id.activity_main_button_entry_add);
 		buttonViewStats = (Button) findViewById(R.id.activity_main_button_stats_view);
 		buttonEnterGarage = (Button) findViewById(R.id.activity_main_button_garage_enter);
+
+		lineRecordEvent = findViewById(R.id.activity_main_line_entry_add);
+		lineViewStats = findViewById(R.id.activity_main_line_stats_view);
+		lineEnterGarage = findViewById(R.id.activity_main_line_garage_enter);
 
 		listButtons.add(buttonRecordEvent);
 		listButtons.add(buttonViewStats);
@@ -212,8 +228,12 @@ public class MainActivity extends DefaultActivity {
 	
 	private void generateRowTotalCosts(TableLayout layout) {
 		Consumption c = garage.getActiveCar().getConsumption();
-		if (c == null) return;
-		
+		if (c == null) {
+			String message = getString(R.string.activity_main_no_expenses_message);
+			layout.addView(createStatRow(message, null));
+			return;
+		}
+
 		String description = getString(R.string.activity_main_total_costs);
 		double value = c.getTotalCost();
 		String unit = preferences.getCurrency().getUnit();
@@ -326,10 +346,10 @@ public class MainActivity extends DefaultActivity {
 		int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange); //orange in the middle
 		
 		String description = getString(R.string.activity_main_since_last_refuel);
-		UnitConstants.ConsumptionUnit unit = preferences.getConsumptionUnit();
+		UnitConstants.ConsumptionUnit unit = preferences.getConsumptionUnit(type);
 		
-		double lastConsumptionReport = UnitConstants.convertUnitConsumption(lastConsumptionSI);
-		layout.addView(createStatRow(description, lastConsumptionReport, unit, color));
+		double lastConsumptionReport = UnitConstants.convertUnitConsumptionFromSI(type, lastConsumptionSI);
+		layout.addView(createStatRow(description, lastConsumptionReport, unit.toUnitShort(), color));
 	}
 	
 	private TableRow createStatRow(String description, double value) {
@@ -365,18 +385,15 @@ public class MainActivity extends DefaultActivity {
 	}
 
 	private TableRow createStatRow(String description, String value, String unit, int valueColor) {
+		if (description == null) {
+			return null;
+		}
 		TableRow row = new TableRow(this);
 		TextView descriptionView = new TextView(this);
 		TextView valueView = new TextView(this);
 		TextView unitView = new TextView(this);
 		valueView.setGravity(Gravity.END);
 		unitView.setGravity(Gravity.START);
-				
-		descriptionView.setText(description);
-		valueView.setText(value);
-		if (unit != null) {
-			unitView.setText(unit);
-		}
 
 		// setTextAppearance(context, resID)
 		// got deprecated in SDK version 23 in favor of
@@ -390,6 +407,10 @@ public class MainActivity extends DefaultActivity {
 			valueView.setTextAppearance(R.style.plain_text_big);
 			unitView.setTextAppearance(R.style.plain_text);
 		}
+
+		descriptionView.setText(description);
+		valueView.setText(value);
+		unitView.setText(unit);
 		
 		valueView.setTextColor(valueColor);
 		valueView.setShadowLayer(15, 0, 0, valueColor);
@@ -397,16 +418,24 @@ public class MainActivity extends DefaultActivity {
 		row.addView(descriptionView);
 		
 		TableRow.LayoutParams params;
-		
-		if (unit == null) {
+
+		if (value == null) {
+			// We just want to show the description
+			// and we want to ignore value and unit
+			params = (TableRow.LayoutParams) descriptionView.getLayoutParams();
+			params.span = 3;
+			descriptionView.setLayoutParams(params);
+		} else if (unit == null) {
+			// If value is non-zero, let's display it,
+			// but ignore units
 			valueView.setPadding(3, 3, 3, 3);
 			row.addView(valueView);
-			
+
 			params = (TableRow.LayoutParams) valueView.getLayoutParams();
 			params.span = 2;
 			valueView.setLayoutParams(params);
-			
 		} else {
+			// Show description, value and unit
 			row.addView(valueView);
 			unitView.setPadding(3, 3, 3, 3);
 			row.addView(unitView);

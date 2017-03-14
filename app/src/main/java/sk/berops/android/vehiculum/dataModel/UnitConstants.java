@@ -110,6 +110,10 @@ public class UnitConstants {
 	}
 	
 	public enum QuantityUnit {
+		// Need to keep this in sync with preference_units.xml value arrays:
+		// preferences_units_gas_weight_values
+		// preferences_units_volume_values
+		// Alternatively we could change this to strings and pull it from preferences via "getString"
 		LITER(
 				0,
 				1.0,
@@ -132,21 +136,21 @@ public class UnitConstants {
 				MainActivity.getContext().getString(R.string.generic_unit_quantity_gallon_imperial_long),
 				Substance.LIQUID),
 		KILOGRAM(
-				10,
+				3,
 				1.0,
 				true,
 				MainActivity.getContext().getString(R.string.generic_unit_quantity_kilogram_short),
 				MainActivity.getContext().getString(R.string.generic_unit_quantity_kilogram_long),
 				Substance.GAS),
 		POUND(
-				11,
+				4,
 				0.453592,
 				false,
 				MainActivity.getContext().getString(R.string.generic_unit_quantity_pound_short),
 				MainActivity.getContext().getString(R.string.generic_unit_quantity_pound_long),
 				Substance.GAS),
 		KILOWATT_HOUR(
-				20,
+				5,
 				1.0,
 				true,
 				MainActivity.getContext().getString(R.string.generic_unit_quantity_kilowatthour_short),
@@ -450,7 +454,17 @@ public class UnitConstants {
 			}
 		}
 
-		return "";
+		switch(scheme) {
+			case FUEL_PER_DISTANCE:
+				return quantity.getLongUnit() + " per " + distance.getLongUnit();
+			case DISTANCE_PER_FUEL:
+				return  distance.getLongUnit() + " per " + quantity.getLongUnit();
+			case FUEL_PER_100DISTANCE:
+				return quantity.getLongUnit() + " per 100 " + distance.getLongUnit();
+			default:
+				Log.w("WARN", "Unknown consumption scheme: "+ scheme.getScheme() +". Silently ignoring.");
+				return "";
+		}
 	}
 
 	public static String toConsumptionUnitShort(ConsumptionScheme scheme, DistanceUnit distance, QuantityUnit quantity) {
@@ -462,7 +476,17 @@ public class UnitConstants {
 			}
 		}
 
-		return "";
+		switch(scheme) {
+			case FUEL_PER_DISTANCE:
+				return quantity.getUnit() + "/" + distance.getUnit();
+			case DISTANCE_PER_FUEL:
+				return  distance.getUnit() + "/" + quantity.getUnit();
+			case FUEL_PER_100DISTANCE:
+				return quantity.getUnit() + "/100 " + distance.getUnit();
+			default:
+				Log.w("WARN", "Unknown consumption scheme: "+ scheme.getScheme() +". Silently ignoring.");
+				return "";
+		}
 	}
 	
 	public static double convertUnitConsumptionFromSI(FuelType type, double fromValue) {
