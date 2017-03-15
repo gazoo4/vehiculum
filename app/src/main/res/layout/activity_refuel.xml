@@ -1,137 +1,143 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_blue"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin">
+            android:background="@drawable/background_blue"
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_blue"
-        android:orientation="vertical">
+            <include
+                layout="@layout/activity_new_event_common_header"/>
 
-        <include
-            layout="@layout/activity_new_event_common_header" />
-
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="2">
-
-            <TextView
-                style="@style/plain_text"
-                android:layout_width="wrap_content"
+            <GridLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="2"
-                android:text="@string/activity_refuel_fuel_type_hint"/>
+                android:columnCount="2">
 
-            <Spinner
-                android:id="@+id/activity_refuel_fuel_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:entries="@array/activity_refuel_fuel_type"
-                android:prompt="@string/activity_refuel_fuel_type_hint"/>
+                <TextView
+                    style="@style/plain_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="@string/activity_refuel_fuel_type_hint"/>
 
-            <!-- New row -->
+                <Spinner
+                    android:id="@+id/activity_refuel_fuel_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:entries="@array/activity_refuel_fuel_type"
+                    android:prompt="@string/activity_refuel_fuel_type_hint"/>
+
+                <!-- New row -->
+
+                <EditText
+                    android:id="@+id/activity_refuel_mileage"
+                    style="@style/plain_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:hint="@string/activity_generic_mileage_hint"
+                    android:inputType="number"/>
+
+                <TextView
+                    android:id="@+id/activity_refuel_distance_unit"
+                    style="@style/plain_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"/>
+
+                <!-- new row -->
+
+                <EditText
+                    android:id="@+id/activity_refuel_quantity"
+                    style="@style/plain_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:hint="@string/activity_refuel_quantity_hint"
+                    android:inputType="numberDecimal"/>
+
+                <Spinner
+                    android:id="@+id/activity_refuel_quantity_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:entries="@array/activity_refuel_quantity_unit"
+                    android:prompt="@string/activity_refuel_quantity_unit_hint"/>
+
+                <!-- new row -->
+
+                <EditText
+                    android:id="@+id/activity_refuel_cost"
+                    style="@style/plain_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:hint="@string/activity_generic_cost_hint"
+                    android:inputType="numberDecimal"/>
+
+                <Spinner
+                    android:id="@+id/activity_refuel_currency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:entries="@array/activity_expense_add_currency"
+                    android:prompt="@string/activity_expense_add_currency_hint"/>
+
+                <!-- new row -->
+
+                <TextView
+                    android:id="@+id/activity_refuel_price_hint"
+                    style="@style/plain_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="@string/activity_refuel_price_hint"/>
+
+                <TextView
+                    android:id="@+id/activity_refuel_price_text"
+                    style="@style/plain_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:textIsSelectable="true"/>
+
+            </GridLayout>
 
             <EditText
-                android:id="@+id/activity_refuel_mileage"
+                android:id="@+id/activity_refuel_comment"
                 style="@style/plain_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="2"
-                android:hint="@string/activity_generic_mileage_hint"
-                android:inputType="number"/>
+                android:hint="@string/activity_generic_comment_hint"
+                android:inputType="textMultiLine"/>
 
-            <TextView
-                android:id="@+id/activity_refuel_distance_unit"
-                style="@style/plain_text"
+            <View
                 android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:background="@drawable/white_gradient_line"/>
+
+            <Button
+                android:id="@+id/activity_refuel_button_commit"
+                style="@style/button_text"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"/>
+                android:background="@drawable/transparent_button"
+                android:onClick="onClick"
+                android:text="@string/activity_generic_button_entry_save"/>
 
-            <!-- new row -->
-
-            <EditText
-                android:id="@+id/activity_refuel_quantity"
-                style="@style/plain_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="2"
-                android:hint="@string/activity_refuel_quantity_hint"
-                android:inputType="numberDecimal"/>
-
-            <Spinner
-                android:id="@+id/activity_refuel_quantity_unit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:entries="@array/activity_refuel_quantity_unit"
-                android:prompt="@string/activity_refuel_quantity_unit_hint"/>
-
-            <!-- new row -->
-
-            <EditText
-                android:id="@+id/activity_refuel_cost"
-                style="@style/plain_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="2"
-                android:hint="@string/activity_generic_cost_hint"
-                android:inputType="numberDecimal"/>
-
-            <Spinner
-                android:id="@+id/activity_refuel_currency"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:entries="@array/activity_expense_add_currency"
-                android:prompt="@string/activity_expense_add_currency_hint"/>
-
-            <!-- new row -->
-
-            <TextView
-                android:id="@+id/activity_refuel_price_hint"
-                style="@style/plain_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="2"
-                android:text="@string/activity_refuel_price_hint"/>
-
-            <TextView
-                android:id="@+id/activity_refuel_price_text"
-                style="@style/plain_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:textIsSelectable="true"/>
-
-        </GridLayout>
-
-        <EditText
-            android:id="@+id/activity_refuel_comment"
-            style="@style/plain_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/activity_generic_comment_hint"
-            android:inputType="textMultiLine"/>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="2dp"
-            android:background="@drawable/white_gradient_line"/>
-
-        <Button
-            android:id="@+id/activity_refuel_button_commit"
-            style="@style/button_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/transparent_button"
-            android:onClick="onClick"
-            android:text="@string/activity_generic_button_entry_save"/>
-
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

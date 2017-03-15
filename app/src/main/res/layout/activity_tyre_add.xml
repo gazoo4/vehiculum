@@ -1,219 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_blue"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_blue"
-			android:paddingBottom="@dimen/activity_vertical_margin"
-			android:paddingLeft="@dimen/activity_horizontal_margin"
-			android:paddingRight="@dimen/activity_horizontal_margin"
-			android:paddingTop="@dimen/activity_vertical_margin">
+            android:layout_height="wrap_content">
 
-   <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+            <TextView
+                android:id="@+id/activity_tyre_add_header"
+                style="@style/caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_tyre_add_header"/>
 
-        <TextView
-            android:id="@+id/activity_tyre_add_header"
-            style="@style/caption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/activity_tyre_add_header" />
-        
-        <EditText 
-            android:id="@+id/activity_tyre_add_brand"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_add_header"
-            android:hint="@string/activity_tyre_add_brand_hint"
-            android:inputType="textCapWords"/>
-        
-        <EditText 
-            android:id="@+id/activity_tyre_add_model"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_add_brand"
-            android:hint="@string/activity_tyre_add_model_hint"
-            android:inputType="textCapWords"/>
-
-	   <LinearLayout
-		   android:id="@+id/activity_tyre_add_dimensions"
-		   android:layout_width="match_parent"
-		   android:layout_height="wrap_content"
-		   android:layout_below="@id/activity_tyre_add_model"
-		   android:orientation="horizontal">
-        
-			<EditText
-				android:id="@+id/activity_tyre_add_width"
-				style="@style/EditText"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="0.3"
-				android:hint="@string/activity_tyre_add_width_hint"
-				android:inputType="number"/>
-
-			<TextView
-				android:id="@+id/activity_tyre_add_dimension_slash1"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="0.05"
-				android:textIsSelectable="false"
-				android:text="@string/activity_tyre_add_dimension_separator_1"
-				style="@style/plain_text" />
-
-			<EditText
-				android:id="@+id/activity_tyre_add_height"
-				style="@style/EditText"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="0.3"
-				android:hint="@string/activity_tyre_add_height_hint"
-				android:inputType="number"/>
-
-			<TextView
-				android:id="@+id/activity_tyre_add_dimension_slash2"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="0.05"
-				android:textIsSelectable="false"
-				android:text="@string/activity_tyre_add_dimension_separator_2"
-				style="@style/plain_text" />
-
-			<EditText
-				android:id="@+id/activity_tyre_add_diameter"
-				style="@style/EditText"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="0.3"
-				android:hint="@string/activity_tyre_add_diameter_hint"
-				android:inputType="number"/>
-
-	   </LinearLayout>
-
-        <EditText 
-            android:id="@+id/activity_tyre_add_weight_index"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_add_dimensions"
-            android:hint="@string/activity_tyre_add_weight_index_hint"
-            android:inputType="number"/>
-        
-        <EditText 
-            android:id="@+id/activity_tyre_add_speed_index"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_add_weight_index"
-            android:hint="@string/activity_tyre_add_speed_index_hint"
-            android:inputType="textCapCharacters"/>
-        
-        <EditText 
-            android:id="@+id/activity_tyre_add_dot"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_add_speed_index"
-            android:hint="@string/activity_tyre_add_dot_hint"
-            android:inputType="textCapCharacters"/>
-        
-        <Spinner
-	        android:id="@+id/activity_tyre_add_season"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@id/activity_tyre_add_dot"
-	        android:entries="@array/activity_tyre_add_season"
-	        android:prompt="@string/activity_tyre_add_season_hint" />
-        
-        <!--  TODO: add threadMin/threadMax infos 
-        	+ add input value check into the logic -->
-       <LinearLayout
-           android:id="@+id/activity_tyre_add_condition_layout"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@id/activity_tyre_add_season"
-           android:paddingLeft="10dp"
-           android:orientation="horizontal">
-
-           <TextView
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:layout_weight=".3"
-               style="@style/plain_text"
-               android:text="@string/activity_generic_part_add_condition_hint"/>
-
-           <Spinner
-               android:id="@+id/activity_tyre_add_condition"
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:layout_weight=".7"
-               android:entries="@array/activity_generic_part_add_condition"
-               android:prompt="@string/activity_generic_part_add_condition_hint"/>
-       </LinearLayout>
-
-        <EditText
-            android:id="@+id/activity_tyre_add_thread_level"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_add_condition_layout"
-            android:hint="@string/activity_tyre_add_thread_level_hint"
-            android:inputType="numberDecimal"/>
-        
-        <LinearLayout
-            android:id="@+id/activity_tyre_add_cost_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_add_thread_level"
-            android:orientation="horizontal">
-            
             <EditText
-	            android:id="@+id/activity_tyre_add_quantity"
-	            android:layout_width="0dp"
-	            android:layout_height="wrap_content"
-	            android:layout_weight=".50"
-	            android:hint="@string/activity_generic_part_add_quantity_hint"
-	            android:inputType="number"
-	            style="@style/plain_text" />
-            
-	        <EditText
-	            android:id="@+id/activity_tyre_add_price"
-	            android:layout_width="0dp"
-	            android:layout_height="wrap_content"
-	            android:layout_weight=".50"
-	            android:hint="@string/activity_expense_add_price_hint"
-	            android:inputType="numberDecimal"
-	            style="@style/plain_text" />
-	        
-	        <Spinner
-	            android:id="@+id/activity_tyre_add_currency"
-	            android:layout_width="0dp"
-	            android:layout_height="wrap_content"
-	            android:layout_weight=".20"
-	            android:entries="@array/activity_expense_add_currency"
-	            android:prompt="@string/activity_expense_add_currency_hint" />
-        </LinearLayout>
-        
-        <EditText 
-            android:id="@+id/activity_tyre_add_comment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_tyre_add_cost_layout"
-            android:hint="@string/activity_generic_comment_hint"
-            android:inputType="textMultiLine"
-            style="@style/plain_text" />
-        
-        <Button
-	        android:id="@+id/activity_tyre_add_button_commit"
-	        style="@style/button_text"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@id/activity_tyre_add_comment"
-	        android:background="@drawable/transparent_button"
-	        android:onClick="onClick"
-	        android:text="@string/activity_tyre_add_button_entry_save" />
-        
-    </RelativeLayout>
+                android:id="@+id/activity_tyre_add_brand"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_tyre_add_header"
+                android:hint="@string/activity_tyre_add_brand_hint"
+                android:inputType="textCapWords"/>
 
-</ScrollView>
+            <EditText
+                android:id="@+id/activity_tyre_add_model"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_tyre_add_brand"
+                android:hint="@string/activity_tyre_add_model_hint"
+                android:inputType="textCapWords"/>
+
+            <LinearLayout
+                android:id="@+id/activity_tyre_add_dimensions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_tyre_add_model"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/activity_tyre_add_width"
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:hint="@string/activity_tyre_add_width_hint"
+                    android:inputType="number"/>
+
+                <TextView
+                    android:id="@+id/activity_tyre_add_dimension_slash1"
+                    style="@style/plain_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.05"
+                    android:text="@string/activity_tyre_add_dimension_separator_1"
+                    android:textIsSelectable="false"/>
+
+                <EditText
+                    android:id="@+id/activity_tyre_add_height"
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:hint="@string/activity_tyre_add_height_hint"
+                    android:inputType="number"/>
+
+                <TextView
+                    android:id="@+id/activity_tyre_add_dimension_slash2"
+                    style="@style/plain_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.05"
+                    android:text="@string/activity_tyre_add_dimension_separator_2"
+                    android:textIsSelectable="false"/>
+
+                <EditText
+                    android:id="@+id/activity_tyre_add_diameter"
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:hint="@string/activity_tyre_add_diameter_hint"
+                    android:inputType="number"/>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/activity_tyre_add_weight_index"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_tyre_add_dimensions"
+                android:hint="@string/activity_tyre_add_weight_index_hint"
+                android:inputType="number"/>
+
+            <EditText
+                android:id="@+id/activity_tyre_add_speed_index"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_tyre_add_weight_index"
+                android:hint="@string/activity_tyre_add_speed_index_hint"
+                android:inputType="textCapCharacters"/>
+
+            <EditText
+                android:id="@+id/activity_tyre_add_dot"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_tyre_add_speed_index"
+                android:hint="@string/activity_tyre_add_dot_hint"
+                android:inputType="textCapCharacters"/>
+
+            <Spinner
+                android:id="@+id/activity_tyre_add_season"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_tyre_add_dot"
+                android:entries="@array/activity_tyre_add_season"
+                android:prompt="@string/activity_tyre_add_season_hint"/>
+
+            <!--  TODO: add threadMin/threadMax infos
+                + add input value check into the logic -->
+            <LinearLayout
+                android:id="@+id/activity_tyre_add_condition_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_tyre_add_season"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
+
+                <TextView
+                    style="@style/plain_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3"
+                    android:text="@string/activity_generic_part_add_condition_hint"/>
+
+                <Spinner
+                    android:id="@+id/activity_tyre_add_condition"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".7"
+                    android:entries="@array/activity_generic_part_add_condition"
+                    android:prompt="@string/activity_generic_part_add_condition_hint"/>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/activity_tyre_add_thread_level"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_tyre_add_condition_layout"
+                android:hint="@string/activity_tyre_add_thread_level_hint"
+                android:inputType="numberDecimal"/>
+
+            <LinearLayout
+                android:id="@+id/activity_tyre_add_cost_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_tyre_add_thread_level"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/activity_tyre_add_quantity"
+                    style="@style/plain_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:hint="@string/activity_generic_part_add_quantity_hint"
+                    android:inputType="number"/>
+
+                <EditText
+                    android:id="@+id/activity_tyre_add_price"
+                    style="@style/plain_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:hint="@string/activity_expense_add_price_hint"
+                    android:inputType="numberDecimal"/>
+
+                <Spinner
+                    android:id="@+id/activity_tyre_add_currency"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".20"
+                    android:entries="@array/activity_expense_add_currency"
+                    android:prompt="@string/activity_expense_add_currency_hint"/>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/activity_tyre_add_comment"
+                style="@style/plain_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_tyre_add_cost_layout"
+                android:hint="@string/activity_generic_comment_hint"
+                android:inputType="textMultiLine"/>
+
+            <Button
+                android:id="@+id/activity_tyre_add_button_commit"
+                style="@style/button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_tyre_add_comment"
+                android:background="@drawable/transparent_button"
+                android:onClick="onClick"
+                android:text="@string/activity_tyre_add_button_entry_save"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+</RelativeLayout>
