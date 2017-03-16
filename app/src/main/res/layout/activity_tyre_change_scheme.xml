@@ -7,9 +7,27 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin">
 
+    <!-- Ugly hack - apparently <include> tag has issues in relative layout
+        hence wrapped in LinearLayout -->
+    <LinearLayout
+        android:id="@+id/activity_tyre_change_scheme_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/activity_common_new_record_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/activity_tyre_add_footer">
 
         <LinearLayout
             android:id="@+id/activity_tyre_change_scheme_top_layout"
@@ -162,14 +180,6 @@
                     android:layout_toRightOf="@id/activity_tyre_change_scheme_mileage"/>
             </RelativeLayout>
 
-            <Button
-                android:id="@+id/activity_tyre_change_scheme_button_save"
-                style="@style/button_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/transparent_button"
-                android:onClick="onClick"
-                android:text="@string/activity_tyre_change_scheme_button_save"/>
         </LinearLayout>
 
     </RelativeLayout>

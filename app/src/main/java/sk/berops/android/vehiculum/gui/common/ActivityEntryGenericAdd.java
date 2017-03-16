@@ -1,6 +1,7 @@
 package sk.berops.android.vehiculum.gui.common;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -46,8 +47,8 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 
 	@Override
 	protected void attachGuiObjects() {
-		buttonDate = (Button) findViewById(R.id.activity_new_event_common_button_date);
-		buttonTagAdd = (Button) findViewById(R.id.activity_new_event_common_button_tag_add);
+		buttonDate = (Button) findViewById(R.id.activity_common_new_record_button_date);
+		buttonTagAdd = (Button) findViewById(R.id.activity_common_new_record_button_tag_add);
 
 		listButtons.add(buttonDate);
 		listButtons.add(buttonTagAdd);
@@ -140,6 +141,26 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 		}
 		car.getHistory().getEntries().add(entry);
 		super.saveFieldsAndPersist(view);
+	}
+
+	/**
+	 * Method used to handle button clicks, mainly for saving the records
+	 * @param view
+	 * @return true if the click has been handled in this method
+	 */
+	public boolean onClick(View view) {
+		switch(view.getId()) {
+			case R.id.activity_common_new_record_button_save:
+				try {
+					saveFieldsAndPersist(view);
+					return true;
+				} catch (FieldEmptyException ex) {
+					ex.throwAlert();
+				}
+				break;
+		}
+
+		return false;
 	}
 
 	/*

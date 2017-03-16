@@ -66,17 +66,14 @@ public class ActivityTollAdd extends ActivityEntryGenericAdd {
 		type = TollEntry.Type.getType(spinnerTollType.getSelectedItemPosition());
 		tollEntry.setType(type);
 	}
-	
-	public void onClick(View view) {
-		switch (view.getId()) {
-		case R.id.activity_toll_button_commit:
-			try {
-				super.saveFieldsAndPersist(view);
-				startActivity(new Intent(this, MainActivity.class));
-			} catch (FieldEmptyException ex) {
-				ex.throwAlert();
-			}
-			break;
+
+	@Override
+	public boolean onClick(View view) {
+		if (super.onClick(view)) {
+			startActivity(new Intent(this, MainActivity.class));
+			return true;
 		}
+
+		return false;
 	}
 }

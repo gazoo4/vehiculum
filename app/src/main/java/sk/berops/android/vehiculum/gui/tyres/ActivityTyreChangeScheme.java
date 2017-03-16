@@ -501,7 +501,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 			case R.id.activity_tyre_change_scheme_button_tyre_uninstall:
 				uninstallTyre(helper.getSelectedTyre());
 				break;
-			case R.id.activity_tyre_change_scheme_button_save:
+			case R.id.activity_common_new_record_button_save:
 				Intent returnIntent = new Intent();
 				returnIntent.putExtra(INTENT_TYRE_ENTRY, tyreEntry);
 				setResult(RESULT_OK, returnIntent);

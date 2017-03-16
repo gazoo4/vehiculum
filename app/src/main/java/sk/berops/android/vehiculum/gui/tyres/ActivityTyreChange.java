@@ -189,32 +189,32 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	 * Method to handle the clicks on the buttons in the activity
 	 * @param view as passed by activity
 	 */
-	public void onClick(View view) {
-		switch (view.getId()) {
-		case R.id.activity_tyre_change_button_advanced:
-			Intent i = new Intent(this, ActivityTyreChangeScheme.class);
-			if (tyreChangeEntry != null) {
-				// Ugly hack:
-				// We need to remove Consumption object as it contains elements from external libraries which can't be serialized
-				tyreChangeEntry.setConsumption(null);
-				for (Entry e: tyreChangeEntry.getCar().getHistory().getEntries()) {
-					if (e.getConsumption() != null) {
-						e.getConsumption().setPieChartVals(null);
-					}
-				}
-				i.putExtra(ActivityTyreChangeScheme.INTENT_TYRE_ENTRY, tyreChangeEntry);
-			}
-			startActivityForResult(i, REQUEST_CODE_SCHEME);
-			break;
-		case R.id.activity_tyre_change_button_commit:
-			try {
-				saveFieldsAndPersist(view);
-				startActivity(new Intent(this, MainActivity.class));
-			} catch (FieldEmptyException e) {
-				e.throwAlert();
-			}
-			break;
+	@Override
+	public boolean onClick(View view) {
+		if (super.onClick(view)) {
+			startActivity(new Intent(this, MainActivity.class));
+			return true;
 		}
+
+		switch (view.getId()) {
+			case R.id.activity_tyre_change_button_advanced:
+				Intent i = new Intent(this, ActivityTyreChangeScheme.class);
+				if (tyreChangeEntry != null) {
+					// Ugly hack:
+					// We need to remove Consumption object as it contains elements from external libraries which can't be serialized
+					tyreChangeEntry.setConsumption(null);
+					for (Entry e : tyreChangeEntry.getCar().getHistory().getEntries()) {
+						if (e.getConsumption() != null) {
+							e.getConsumption().setPieChartVals(null);
+						}
+					}
+					i.putExtra(ActivityTyreChangeScheme.INTENT_TYRE_ENTRY, tyreChangeEntry);
+				}
+				startActivityForResult(i, REQUEST_CODE_SCHEME);
+				return true;
+		}
+
+		return false;
 	}
 
 	/**

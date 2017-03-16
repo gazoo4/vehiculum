@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_new_event_date_header"
+    android:id="@+id/activity_common_new_record_date_header"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="3dp">
 
     <Button
-        android:id="@+id/activity_new_event_common_button_date"
+        android:id="@+id/activity_common_new_record_button_date"
         style="@style/button_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:onClick="onClickShowDatePickerDialog"/>
 
     <Button
-        android:id="@+id/activity_new_event_common_button_tag_add"
+        android:id="@+id/activity_common_new_record_button_tag_add"
         style="@style/button_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,15 +35,15 @@
         android:id="@+id/activity_new_event_common_tags_recyclerview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/activity_new_event_common_button_date"
-        android:layout_toLeftOf="@id/activity_new_event_common_button_tag_add"
-        android:layout_toRightOf="@id/activity_new_event_common_button_date"
-        android:layout_toStartOf="@id/activity_new_event_common_button_tag_add"
+        android:layout_toEndOf="@id/activity_common_new_record_button_date"
+        android:layout_toLeftOf="@id/activity_common_new_record_button_tag_add"
+        android:layout_toRightOf="@id/activity_common_new_record_button_date"
+        android:layout_toStartOf="@id/activity_common_new_record_button_tag_add"
         android:gravity="center"
         android:scrollbars="horizontal"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/activity_new_event_common_button_date"
+        android:layout_below="@id/activity_common_new_record_button_date"
         android:background="@android:color/holo_blue_light" />
 </RelativeLayout>

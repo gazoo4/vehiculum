@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/activity_common_new_record_footer"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:orientation="vertical"
+              android:padding="3dp">
+
+    <View
+        android:id="@+id/activity_common_new_record_line_save"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:background="@drawable/white_gradient_line"/>
+
+    <Button
+        android:id="@+id/activity_common_new_record_button_save"
+        style="@style/button_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/transparent_button"
+        android:onClick="onClick"
+        android:text="@string/activity_generic_button_entry_save"/>
+
+</LinearLayout>

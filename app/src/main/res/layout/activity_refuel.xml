@@ -7,9 +7,27 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin">
 
+    <!-- Ugly hack - apparently <include> tag has issues in relative layout
+        hence wrapped in LinearLayout -->
+    <LinearLayout
+        android:id="@+id/activity_refuel_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/activity_common_new_record_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_above="@id/activity_refuel_footer">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,7 +36,7 @@
             android:orientation="vertical">
 
             <include
-                layout="@layout/activity_new_event_common_header"/>
+                layout="@layout/activity_common_new_record_header"/>
 
             <GridLayout
                 android:layout_width="match_parent"
@@ -128,15 +146,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="2dp"
                 android:background="@drawable/white_gradient_line"/>
-
-            <Button
-                android:id="@+id/activity_refuel_button_commit"
-                style="@style/button_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/transparent_button"
-                android:onClick="onClick"
-                android:text="@string/activity_generic_button_entry_save"/>
 
         </LinearLayout>
     </ScrollView>

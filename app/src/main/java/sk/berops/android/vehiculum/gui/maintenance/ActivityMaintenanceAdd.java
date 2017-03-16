@@ -213,22 +213,22 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		maintenanceEntry.setType(type);
 	}
 
-	public void onClick(View view) {
-		switch (view.getId()) {
-		case R.id.activity_maintenance_button_add:
-			startActivityForResult(new Intent(this, ActivityPartAdd.class), ADD_PART);
-			break;
-		case R.id.activity_maintenance_button_delete:
-			break;
-		case R.id.activity_maintenance_button_commit:
-			try {
-				super.saveFieldsAndPersist(view);
-				startActivity(new Intent(this, MainActivity.class));
-			} catch (FieldEmptyException ex) {
-				ex.throwAlert();
-			}
-			break;
+	@Override
+	public boolean onClick(View view) {
+		if (super.onClick(view)) {
+			startActivity(new Intent(this, MainActivity.class));
+			return true;
 		}
+
+		switch (view.getId()) {
+			case R.id.activity_maintenance_button_add:
+				startActivityForResult(new Intent(this, ActivityPartAdd.class), ADD_PART);
+				return true;
+			case R.id.activity_maintenance_button_delete:
+				return true;
+		}
+
+		return false;
 	}
 
 	@Override

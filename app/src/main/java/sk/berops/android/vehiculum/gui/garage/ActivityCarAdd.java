@@ -11,7 +11,6 @@ import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.DistanceUnit;
-import sk.berops.android.vehiculum.dataModel.UnitConstants.QuantityUnit;
 import sk.berops.android.vehiculum.dataModel.expense.FieldEmptyException;
 import sk.berops.android.vehiculum.gui.MainActivity;
 import sk.berops.android.vehiculum.gui.common.ActivityRecordAdd;
@@ -100,12 +99,14 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 		}
 	}
 	
-	public void onClick(View view) {
+	public boolean onClick(View view) {
 		saveEntry(view);
 		switch(view.getId()) {
-		case R.id.activity_car_add_button_commit:
+		case R.id.activity_common_new_record_button_save:
 			startActivity(new Intent(this, MainActivity.class));
-			break;
+			return true;
 		}
+
+		return false;
 	}
 }

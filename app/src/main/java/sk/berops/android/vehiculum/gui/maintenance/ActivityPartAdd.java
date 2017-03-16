@@ -84,7 +84,7 @@ public class ActivityPartAdd extends ActivityGenericPartAdd {
 
 	public void onClick(View view) {
 		switch (view.getId()) {
-		case R.id.activity_part_add_button_commit:
+		case R.id.activity_common_new_record_button_save:
 			try {
 			updateFields();
 			Intent returnIntent = new Intent();

@@ -57,17 +57,14 @@ public class ActivityBureaucraticAdd extends ActivityEntryGenericAdd {
 		super.updateFields();
 		// To be updated once more fields are added to BureaucraticEntry
 	}
-	
-	public void onClick(View view) {
-		switch (view.getId()) {
-		case R.id.activity_bureaucratic_button_commit:
-			try {
-				super.saveFieldsAndPersist(view);
-				startActivity(new Intent(this, MainActivity.class));
-			} catch (FieldEmptyException ex) {
-				ex.throwAlert();
-			}
-			break;
+
+	@Override
+	public boolean onClick(View view) {
+		if (super.onClick(view)) {
+			startActivity(new Intent(this, MainActivity.class));
+			return true;
 		}
+
+		return false;
 	}
 }
