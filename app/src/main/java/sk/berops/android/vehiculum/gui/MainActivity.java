@@ -29,6 +29,7 @@ import java.util.Set;
 
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.configuration.Preferences;
+import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Garage;
 import sk.berops.android.vehiculum.dataModel.UnitConstants;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.CostUnit;
@@ -48,7 +49,7 @@ import sk.berops.android.vehiculum.io.xml.DataHandler;
 import sk.berops.android.vehiculum.io.xml.XMLHandler;
 
 public class MainActivity extends DefaultActivity {
-	
+
 	public static Garage garage;
 	public static DataHandler dataHandler;
 	private static Preferences preferences = Preferences.getInstance();
@@ -60,7 +61,6 @@ public class MainActivity extends DefaultActivity {
 	private View lineViewStats;
 	private View lineEnterGarage;
 	private TableLayout statsTable;
-	private TextView textViewHeader;
 
 	public final static int REQUEST_CODE_BACKUP = 1;
 	public final static int REQUEST_CODE_RESTORE = 2;
@@ -107,7 +107,7 @@ public class MainActivity extends DefaultActivity {
 		if (garage == null) {
 			loadGarage();
 		}
-		
+
 		refreshStats();
 		generateStatTable();
 	}
@@ -149,7 +149,7 @@ public class MainActivity extends DefaultActivity {
 			lineRecordEvent.setVisibility(View.VISIBLE);
 			buttonViewStats.setVisibility(View.VISIBLE);
 			lineViewStats.setVisibility(View.VISIBLE);
-			Toast.makeText(getApplicationContext(), "Garage initialized. Car loaded: "+ garage.getActiveCar().getNickname(), Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "Garage initialized. Car loaded: " + garage.getActiveCar().getNickname(), Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -161,7 +161,6 @@ public class MainActivity extends DefaultActivity {
 	@Override
 	public void attachGuiObjects() {
 		statsTable = (TableLayout) findViewById(R.id.activity_main_stats_table);
-		textViewHeader = (TextView) findViewById(R.id.activity_main_header);
 		buttonRecordEvent = (Button) findViewById(R.id.activity_main_button_entry_add);
 		buttonViewStats = (Button) findViewById(R.id.activity_main_button_stats_view);
 		buttonEnterGarage = (Button) findViewById(R.id.activity_main_button_garage_enter);
@@ -176,7 +175,7 @@ public class MainActivity extends DefaultActivity {
 	}
 
 	public void throwAlertCreateGarage() {
-		AlertDialog.Builder alertDialog= new AlertDialog.Builder(this);
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 		alertDialog.setMessage(getResources().getString(R.string.activity_main_create_garage_alert));
 		alertDialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
 
@@ -187,7 +186,7 @@ public class MainActivity extends DefaultActivity {
 				startActivity(new Intent(MainActivity.this, ActivityGarageManagement.class));
 			}
 		});
-		
+
 		alertDialog.show();
 	}
 
@@ -196,14 +195,14 @@ public class MainActivity extends DefaultActivity {
 			Calculator.calculateAll(garage.getActiveCar().getHistory());
 		}
 	}
-	
+
 	private void generateStatTable() {
 		statsTable.removeAllViews();
 		TableLayout.LayoutParams tableParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
 		TableRow.LayoutParams rowParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
-		
+
 		//TODO: this view shall be generated based on the settings
-		
+
 		generateRowCarSummary(statsTable);
 		if ((garage != null) && (garage.getActiveCar() != null)) {
 			generateRowTotalCosts(statsTable);
@@ -214,18 +213,18 @@ public class MainActivity extends DefaultActivity {
 			generateRowLastConsumption(statsTable);
 		}
 	}
-	
+
 	private void generateRowCarSummary(TableLayout layout) {
-		
+
 		if (garage != null && garage.getActiveCar() != null) {
 			String description = getString(R.string.activity_main_car);
 			String nickname = garage.getActiveCar().getNickname();
 			layout.addView(createStatRow(description, nickname));
 		} else {
-			layout.addView(createStatRow(getString(R.string.activity_main_garage_empty),""));
+			layout.addView(createStatRow(getString(R.string.activity_main_garage_empty), ""));
 		}
 	}
-	
+
 	private void generateRowTotalCosts(TableLayout layout) {
 		Consumption c = garage.getActiveCar().getConsumption();
 		if (c == null) {
@@ -237,25 +236,25 @@ public class MainActivity extends DefaultActivity {
 		String description = getString(R.string.activity_main_total_costs);
 		double value = c.getTotalCost();
 		String unit = preferences.getCurrency().getUnit();
-		
+
 		layout.addView(createStatRow(description, value, unit));
 	}
-	
+
 	private void generateRowAverageConsumption(TableLayout layout) {
 		double avgConsumption;
 		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
 		if (c == null) return;
-		
+
 		String description;
 		double valueSI;
 		double valueReport;
 		UnitConstants.ConsumptionUnit unit;
 		unit = preferences.getConsumptionUnit(c.getLastRefuelType());
-		
+
 		// we should buy at least 2 different fuels in order to display the stats separately
 		HashMap<FuelType, Double> map = new HashMap<>();
 		Set<UnitConstants.Substance> substances = new HashSet<>();
-		for (FuelType t: c.getFuelTypes()) {
+		for (FuelType t : c.getFuelTypes()) {
 			avgConsumption = c.getAveragePerFuelType().get(t);
 			if (avgConsumption != 0.0) {
 				map.put(t, avgConsumption);
@@ -263,19 +262,14 @@ public class MainActivity extends DefaultActivity {
 			}
 		}
 
-		// If we use several fuels, but of different substances, we can't make a combined average
-		if (substances.size() > 1) {
-			return;
-		}
-
 		if (map.size() >= 2) {
-			for (FuelType t: map.keySet()) {
+			for (FuelType t : map.keySet()) {
 				description = getString(R.string.activity_main_average);
 				description += " ";
 				description += t.getType();
 				valueSI = map.get(t);
 				valueReport = UnitConstants.convertUnitConsumptionFromSI(t, valueSI);
-
+				unit = preferences.getConsumptionUnit(t);
 				layout.addView(createStatRow(description, valueReport, unit.toUnitShort()));
 			}
 			description = getString(R.string.activity_main_combined_average);
@@ -283,15 +277,20 @@ public class MainActivity extends DefaultActivity {
 			description = getString(R.string.activity_main_average_consumption);
 		}
 
+		// If we use several fuels, but of different substances, we can't make a combined average
+		if (substances.size() > 1) {
+			return;
+		}
+
 		valueSI = c.getGrandAverage();
 		valueReport = UnitConstants.convertUnitConsumptionFromSI(c.getFuelTypes().iterator().next(), valueSI);
 		layout.addView(createStatRow(description, valueReport, unit.toUnitShort()));
 	}
-	
+
 	private void generateRowTotalRelativeCosts(TableLayout layout) {
 		Consumption c = garage.getActiveCar().getConsumption();
 		if (c == null) return;
-		
+
 		String description = getString(R.string.activity_main_relative_costs);
 		double valueSI = c.getAverageCost();
 		CostUnit unit = preferences.getCostUnit();
@@ -299,26 +298,33 @@ public class MainActivity extends DefaultActivity {
 		double valueReport = UnitConstants.convertUnitCost(valueSI);
 		layout.addView(createStatRow(description, valueReport, unit.getUnit()));
 	}
-	
+
 	private void generateRowRelativeCosts(TableLayout layout) {
 		FuelType t = garage.getActiveCar().getHistory().getFuellingEntries().getLast().getFuelType();
 		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
-		
+
 		String description = getString(R.string.activity_main_relative_costs_fuel);
 		description += " ";
 		description += t.toString();
 		double valueSI = c.getAverageFuelCostPerFuelType().get(t);
 		CostUnit unit = preferences.getCostUnit();
-		
+
 		double valueReport = UnitConstants.convertUnitCost(valueSI);
 		layout.addView(createStatRow(description, valueReport, unit.getUnit()));
 	}
-	
+
 	private void generateRowLastCosts(TableLayout layout) {
+		Car activeCar = garage.getActiveCar();
+		FuellingEntry e = activeCar.getHistory().getFuellingEntries().getLast();
+		FuelConsumption c = activeCar.getFuelConsumption();
+		FuelType type = e.getFuelType();
+
+		if (activeCar.getHistory().getFuellingEntriesFiltered(e.getFuelType()).size() <= 1) {
+			// We can't calculate the consumption if just one refuelling has been made
+			return;
+		}
+
 		try {
-			FuellingEntry e = garage.getActiveCar().getHistory().getFuellingEntries().getLast();
-			FuelConsumption c = garage.getActiveCar().getFuelConsumption();
-			FuelType type = e.getFuelType();
 			double avgCostSI = c.getAverageFuelCostPerFuelType().get(type);
 			double lastCostSI = c.getCostSinceLastRefuelPerFuelType().get(type);
 			double relativeChange = (lastCostSI / avgCostSI - 0.8) / 0.4;
@@ -333,53 +339,58 @@ public class MainActivity extends DefaultActivity {
 			Log.d("DEBUG", "Not enough history to generate stats");
 		}
 	}
-	
+
 	private void generateRowLastConsumption(TableLayout layout) {
-		if (garage.getActiveCar().getHistory().getFuellingEntries().size() == 0) return;
-		
-		FuellingEntry e = garage.getActiveCar().getHistory().getFuellingEntries().getLast();
-		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
+		Car activeCar = garage.getActiveCar();
+		FuellingEntry e = activeCar.getHistory().getFuellingEntries().getLast();
+		FuelConsumption c = activeCar.getFuelConsumption();
 		FuelType type = e.getFuelType();
+
+		if (activeCar.getHistory().getFuellingEntriesFiltered(e.getFuelType()).size() <= 1) {
+			// We can't calculate the consumption if just one refuelling has been made
+			return;
+		}
+
 		double avgConsumptionSI = c.getAveragePerFuelType().get(type);
 		double lastConsumptionSI = c.getAverageSinceLast();
 		double relativeChange = (lastConsumptionSI / avgConsumptionSI - 0.8) / 0.4;
 		int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange); //orange in the middle
-		
+
 		String description = getString(R.string.activity_main_since_last_refuel);
 		UnitConstants.ConsumptionUnit unit = preferences.getConsumptionUnit(type);
-		
+
 		double lastConsumptionReport = UnitConstants.convertUnitConsumptionFromSI(type, lastConsumptionSI);
 		layout.addView(createStatRow(description, lastConsumptionReport, unit.toUnitShort(), color));
 	}
-	
+
 	private TableRow createStatRow(String description, double value) {
 		String textValue = TextFormatter.format(value, "######.##");
-		
+
 		return createStatRow(description, textValue, null);
 	}
-	
+
 	private TableRow createStatRow(String description, double value, String unit) {
 		String textValue = TextFormatter.format(value, "######.##");
-		
+
 		return createStatRow(description, textValue, unit);
 	}
-	
+
 	private TableRow createStatRow(String description, double value, int valueColor) {
 		String textValue = TextFormatter.format(value, "######.##");
-		
+
 		return createStatRow(description, textValue, null, valueColor);
 	}
-	
+
 	private TableRow createStatRow(String description, double value, String unit, int valueColor) {
 		String textValue = TextFormatter.format(value, "######.##");
-		
+
 		return createStatRow(description, textValue, unit, valueColor);
 	}
-	
+
 	private TableRow createStatRow(String description, String value) {
 		return createStatRow(description, value, null, 0xFFFFFFFF);
 	}
-	
+
 	private TableRow createStatRow(String description, String value, String unit) {
 		return createStatRow(description, value, unit, 0xFFFFFFFF);
 	}
@@ -411,12 +422,12 @@ public class MainActivity extends DefaultActivity {
 		descriptionView.setText(description);
 		valueView.setText(value);
 		unitView.setText(unit);
-		
+
 		valueView.setTextColor(valueColor);
 		valueView.setShadowLayer(15, 0, 0, valueColor);
-		
+
 		row.addView(descriptionView);
-		
+
 		TableRow.LayoutParams params;
 
 		if (value == null) {
@@ -440,7 +451,7 @@ public class MainActivity extends DefaultActivity {
 			unitView.setPadding(3, 3, 3, 3);
 			row.addView(unitView);
 		}
-		
+
 		return row;
 	}
 
@@ -450,11 +461,11 @@ public class MainActivity extends DefaultActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.menu_main_action_settings:
+			case R.id.menu_main_action_settings:
 				// Open settings activity
 				startActivity(new Intent(this, PreferenceWithHeaders.class));
 				return true;
@@ -464,7 +475,7 @@ public class MainActivity extends DefaultActivity {
 				try {
 					archiveDataHandler.saveToExternal(garage);
 				} catch (IOException ex) {
-					Log.d("ERROR", "Archiving failed: "+ ex.getMessage());
+					Log.d("ERROR", "Archiving failed: " + ex.getMessage());
 				}
 				return true;
 			case R.id.menu_main_action_restore:
@@ -501,8 +512,8 @@ public class MainActivity extends DefaultActivity {
 				*/
 				startActivity(new Intent(this, DonationActivity.class));
 				return true;
-		default:
-			return super.onOptionsItemSelected(item);
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 	}
 
@@ -516,7 +527,7 @@ public class MainActivity extends DefaultActivity {
 						garage = archiveDataHandler.restoreFrom(data.getData());
 						initAfterLoad();
 					} catch (IOException ex) {
-						Log.e("ERROR", "Problem during restoring the archive: "+ ex.getMessage());
+						Log.e("ERROR", "Problem during restoring the archive: " + ex.getMessage());
 					}
 				}
 				break;
@@ -534,23 +545,23 @@ public class MainActivity extends DefaultActivity {
 				break;
 		}
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		startActivity(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME));
 	}
-	
+
 	public void onClick(View view) {
-		switch(view.getId()) {
-		case R.id.activity_main_button_entry_add:
-			startActivity(new Intent(this, ActivityEntryChoose.class));
-			break;
-		case R.id.activity_main_button_stats_view:
-			startActivity(new Intent(this, ActivityReportsNavigate.class));
-			break;
-		case R.id.activity_main_button_garage_enter:
-			startActivity(new Intent(this, ActivityGarageManagement.class));
-			break;
+		switch (view.getId()) {
+			case R.id.activity_main_button_entry_add:
+				startActivity(new Intent(this, ActivityEntryChoose.class));
+				break;
+			case R.id.activity_main_button_stats_view:
+				startActivity(new Intent(this, ActivityReportsNavigate.class));
+				break;
+			case R.id.activity_main_button_garage_enter:
+				startActivity(new Intent(this, ActivityGarageManagement.class));
+				break;
 		}
 	}
 }

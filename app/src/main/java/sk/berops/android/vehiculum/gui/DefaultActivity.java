@@ -25,7 +25,8 @@ import sk.berops.android.vehiculum.gui.common.UtilsActivity;
  * Created by bernard.halas on 06/08/2016.
  *
  * Activity holding the collections of buttons, textViews, editTexts, icons,... ensuring a single
- * place for modifying the visual style of the application
+ * place for modifying the visual style of the application. Also this creates the frame for throwing
+ * visual alerts.
  */
 public abstract class DefaultActivity extends Activity  implements TextWatcher, AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener {
 
@@ -169,6 +170,8 @@ public abstract class DefaultActivity extends Activity  implements TextWatcher, 
 		return userInteracted;
 	}
 
+	/* Implementation of interface TextWatcher starts here */
+
 	@Override
 	public void afterTextChanged(Editable s) {
 		setUpdateOngoing(true);
@@ -184,6 +187,8 @@ public abstract class DefaultActivity extends Activity  implements TextWatcher, 
 	                          int count) {
 	}
 
+	/* Implementation of interface AdapterView.OnItemSelectedListener starts here */
+
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 		if (isUserInteracted()) {
@@ -195,6 +200,8 @@ public abstract class DefaultActivity extends Activity  implements TextWatcher, 
 	public void onNothingSelected(AdapterView<?> parent) {
 		// TODO Auto-generated method stub
 	}
+
+	/* Implementation of interface RadioGroup.OnCheckedChangeListener starts here */
 
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {

@@ -45,7 +45,7 @@ public class ActivityCarAdd extends ActivityRecordAdd {
 
 	@Override
 	protected void attachGuiObjects() {
-		buttonCommit = (Button)findViewById(R.id.activity_car_add_button_commit);
+		buttonCommit = (Button)findViewById(R.id.activity_common_new_record_button_save);
 
 		editTextBrand = (EditText)findViewById(R.id.activity_car_add_brand);
 		editTextModel = (EditText)findViewById(R.id.activity_car_add_model);

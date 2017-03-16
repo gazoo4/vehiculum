@@ -57,7 +57,6 @@ public class ActivityGarageManagement extends DefaultActivity implements Fragmen
 			@Override
 			public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
 				setSelectedCarPosition(position);
-				Toast.makeText(getApplicationContext(), "Clicked car "+ position, Toast.LENGTH_LONG).show();
 				DialogFragment dialog = new FragmentEntryEditDeleteActivate();
 				dialog.show(getFragmentManager(), "FragmentEntryEditDeleteActivate");
 			}
@@ -75,7 +74,6 @@ public class ActivityGarageManagement extends DefaultActivity implements Fragmen
 	@Override
 	public void OnDialogEditClick(DialogFragment dialog) {
 		Car car = cars.get(getSelectedCarPosition());
-		System.out.println("Editing car ID " + getSelectedCarPosition());
 		Intent newIntent = new Intent(this, ActivityCarEdit.class);
 		newIntent.putExtra("position", getSelectedCarPosition());
 		startActivity(newIntent);
@@ -84,7 +82,6 @@ public class ActivityGarageManagement extends DefaultActivity implements Fragmen
 	@Override
 	public void OnDialogDeleteClick(DialogFragment dialog) {
 		Car car = cars.get(getSelectedCarPosition());
-		System.out.println("Removing car ID " + getSelectedCarPosition());
 		cars.remove(car);
 		try {
 			MainActivity.dataHandler.saveGarage(MainActivity.garage);
@@ -99,6 +96,7 @@ public class ActivityGarageManagement extends DefaultActivity implements Fragmen
 		MainActivity.garage.setActiveCarId(getSelectedCarPosition());
 		try {
 			MainActivity.dataHandler.saveGarage(MainActivity.garage);
+			Toast.makeText(getApplicationContext(), getString(R.string.activity_garage_management_car_activated_toast), Toast.LENGTH_LONG).show();
 		} catch (IOException ex) {
 			Log.d("ERROR", "Problem when saving changes: "+ ex.getMessage());
 		}
