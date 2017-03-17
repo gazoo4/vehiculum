@@ -584,6 +584,10 @@ public class UnitConstants {
 				value *= 100.0;
 				break;
 			case DISTANCE_PER_FUEL:
+				if (value == 0.0) {
+					// we shall not divide by zero in the next step
+					break;
+				}
 				value = 1.0/value;
 				value *= 100.0;
 				break;
@@ -604,6 +608,10 @@ public class UnitConstants {
 				value /= 100.0;
 				break;
 			case DISTANCE_PER_FUEL:
+				if (value == 0.0) {
+					// we shall not divide by zero in the next step
+					break;
+				}
 				value /= 100.0;
 				value = 1.0/value;
 				break;
