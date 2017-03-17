@@ -444,6 +444,14 @@ public class UnitConstants {
 		}
 	}
 
+	/**
+	 * Method to generate the name of the consumption unit (full name) based on the input units given and based on the consumption scheme
+	 * Special care is taken for miles per gallon
+	 * @param scheme ConsumptionScheme
+	 * @param distance DistanceUnit
+	 * @param quantity QuantityUnit
+	 * @return String
+	 */
 	public static String toConsumptionUnitLong(ConsumptionScheme scheme, DistanceUnit distance, QuantityUnit quantity) {
 		if ((scheme == ConsumptionScheme.DISTANCE_PER_FUEL)
 			&& (distance == DistanceUnit.MILE)) {
@@ -467,6 +475,14 @@ public class UnitConstants {
 		}
 	}
 
+	/**
+	 * Method to generate the name of the consumption unit (full name) based on the input units given and based on the consumption scheme
+	 * Special care is taken for miles per gallon, i.e. mpg
+	 * @param scheme ConsumptionScheme
+	 * @param distance DistanceUnit
+	 * @param quantity QuantityUnit
+	 * @return String
+	 */
 	public static String toConsumptionUnitShort(ConsumptionScheme scheme, DistanceUnit distance, QuantityUnit quantity) {
 		if ((scheme == ConsumptionScheme.DISTANCE_PER_FUEL)
 			&& (distance == DistanceUnit.MILE)) {
@@ -488,11 +504,25 @@ public class UnitConstants {
 				return "";
 		}
 	}
-	
+
+	/**
+	 * Method to convert the consumption value from the SI (as stored in the app) to the consumption unit
+	 * as stored in the preferences.
+	 * @param type FuelType
+	 * @param fromValue consumption SI value
+	 * @return value converted to the consumption unit from the preferences
+	 */
 	public static double convertUnitConsumptionFromSI(FuelType type, double fromValue) {
 		return convertUnitConsumptionFromSI(type, fromValue, preferences.getConsumptionUnit(type));
 	}
 
+	/**
+	 * Method to convert the consumption value from the SI to the consumption unit provided
+	 * @param type FuelType
+	 * @param fromValue consumption SI value
+	 * @param to target consumption unit
+	 * @return value converted to the consumption unit provided
+	 */
 	public static double convertUnitConsumptionFromSI(FuelType type, double fromValue,
 	                                                  ConsumptionUnit to) {
 		ConsumptionUnit from = new ConsumptionUnit(
@@ -502,6 +532,13 @@ public class UnitConstants {
 		return convertUnitConsumption(fromValue, from, to);
 	}
 
+	/**
+	 * Method to convert consumption value from the consumption unit provided in the 'from' to consumption unit provided in the 'to' variable
+	 * @param fromValue consumption as quantified by the 'from' consumption unit
+	 * @param from consumption unit in which the source value is quantified
+	 * @param to consumption unit to which to convert the value
+	 * @return converted consumption value
+	 */
 	public static double convertUnitConsumption(double fromValue,
 	                                            ConsumptionUnit from,
 	                                            ConsumptionUnit to) {
@@ -515,6 +552,17 @@ public class UnitConstants {
 				to.getDistanceUnit());
 	}
 
+	/**
+	 * Method to convert the consumption value based on the provided distance/quantity/scheme units
+	 * @param fromValue input value for conversion
+	 * @param fromQuantity quantity unit of the input consumption
+	 * @param fromConsumption scheme of the input consumption
+	 * @param fromDistance distance unit of the input consumption
+	 * @param toQuantity quantity unit of the output consumption
+	 * @param toConsumption scheme of the output consumption
+	 * @param toDistance distance unit of the output consumption
+	 * @return converted value
+	 */
 	public static double convertUnitConsumption(double fromValue,
 	                                            QuantityUnit fromQuantity,
 	                                            ConsumptionScheme fromConsumption,
@@ -566,10 +614,22 @@ public class UnitConstants {
 		return value;
 	}
 
+	/**
+	 * Convert the cost value from the SI value internally used to the cost unit defined in the preferences
+	 * @param fromValue internal value
+	 * @return value after the conversion
+	 */
 	public static double convertUnitCost(double fromValue) {
 		return convertUnitCost(fromValue, null, null);
 	}
-	
+
+	/**
+	 * Method to convert the cost value according to the provided input and output cost units.
+	 * @param fromValue value to convert
+	 * @param fromUnit cost unit of the input value. If null, COST_PER_DISTANCE is used.
+	 * @param toUnit cost unit of the desired output value. If null, value from user preferences is used.
+	 * @return
+	 */
 	public static double convertUnitCost(double fromValue, CostUnit fromUnit, CostUnit toUnit) {
 		if (fromUnit == null) {
 			fromUnit = CostUnit.COST_PER_DISTANCE;
