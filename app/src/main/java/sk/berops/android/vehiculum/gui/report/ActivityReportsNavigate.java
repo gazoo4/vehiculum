@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.Legend.LegendPosition;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
@@ -77,18 +77,20 @@ public class ActivityReportsNavigate extends DefaultActivity {
      */
     private void initializeChart() {
         chartManager = new ExpenseDistributionPieChart();
-        chart.setData(chartManager.getPieData());
         chart.setUsePercentValues(true);
         chart.setCenterTextSize(TEXT_SIZE);
 
-        chart.setDescriptionColor(Color.WHITE);
-        chart.setDescriptionTextSize(TEXT_SIZE);
+	    chart.setCenterTextColor(Color.WHITE);
+	    chart.setCenterTextSize(TEXT_SIZE);
+
+	    chart.setEntryLabelColor(Color.WHITE);
+	    chart.setEntryLabelTextSize(TEXT_SIZE);
 
         chart.setExtraOffsets(5, 10, 5, 5);
         chart.setDragDecelerationFrictionCoef(0.7f);
 
         chart.setDrawHoleEnabled(true);
-        chart.setHoleColorTransparent(true);
+	    chart.setHoleColor(0x00000000);
 
         chart.setTransparentCircleColor(Color.WHITE);
         chart.setTransparentCircleAlpha(0);
@@ -101,37 +103,31 @@ public class ActivityReportsNavigate extends DefaultActivity {
         chart.setRotationAngle(0);
         chart.setRotationEnabled(true);
 
-        updateDescription(-1);
+	    chart.highlightValues(null);
+
+	    Description description = new Description();
+	    description.setText(MainActivity.garage.getActiveCar().getNickname());
+	    description.setTextSize(TEXT_SIZE);
+	    description.setTextColor(Color.WHITE);
+	    chart.setDescription(description);
 
         // listener to allow a deep dive into the chart values by clicking on the pie section of interest
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-                Integer typeId = (Integer) e.getData();
-                chartManager.invokeSelection(typeId);
-                updateDescription(typeId);
-                redrawChart();
-            }
+	        @Override
+	        public void onValueSelected(Entry e, Highlight h) {
+		        Integer typeId = (Integer) e.getData();
+		        chartManager.invokeSelection(typeId);
+		        redrawChart();
+	        }
 
-            @Override
+	        @Override
             public void onNothingSelected() {
                 reset();
             }
         });
 
-        Legend legend = chart.getLegend();
-        legend.setPosition(LegendPosition.LEFT_OF_CHART);
-        legend.setDirection(Legend.LegendDirection.LEFT_TO_RIGHT);
-        legend.setXEntrySpace(3);
-        legend.setYEntrySpace(0);
-        legend.setYOffset(0);
-        legend.setTextColor(Color.WHITE);
-        legend.setTextSize(TEXT_SIZE);
-        legend.setForm(Legend.LegendForm.LINE);
-
-        chart.animateXY(ANIMATE_MILLIS, ANIMATE_MILLIS);
-        chart.highlightValues(null);
-        chart.invalidate();
+        initLegend();
+	    redrawChart();
     }
 
     /**
@@ -143,38 +139,26 @@ public class ActivityReportsNavigate extends DefaultActivity {
         chart.invalidate();
     }
 
+    private void initLegend() {
+	    Legend legend = chart.getLegend();
+	    legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+	    legend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+	    legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+	    legend.setDirection(Legend.LegendDirection.LEFT_TO_RIGHT);
+	    legend.setXEntrySpace(3);
+	    legend.setYEntrySpace(0);
+	    legend.setYOffset(0);
+	    legend.setTextColor(Color.WHITE);
+	    legend.setTextSize(TEXT_SIZE);
+	    legend.setForm(Legend.LegendForm.LINE);
+    }
+
     /**
      * Reset the chart view to defaults
      */
     private void reset() {
-        chartManager.reset();
-        updateDescription(-1);
+        chartManager.init();
         redrawChart();
-    }
-
-    /**
-     * Generate chart description based on the scope of the displayed expense data
-     * @param typeId -1 if looking at the overall view, otherwise the ExpenseType id
-     */
-    private void updateDescription(int typeId) {
-        String description;
-        double costs = 0.0;
-        History history = MainActivity.garage.getActiveCar().getHistory();
-
-        // If -1, we're reviewing the whole expense dataset.
-        if (typeId == -1) {
-            description = getString(R.string.activity_reports_navigate_chart_title);
-            costs = history.getTotalCost();
-        } else {
-            sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType type = sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType.getExpenseType(typeId);
-            description = type.getExpenseType();
-            costs = history.getEntries().getLast().getConsumption().getTotalCostPerEntryType().get(type);
-        }
-
-        // Null for automatic currency format chooser.
-        // TODO: add currency here. Ideally from locales.
-        description += ": " + TextFormatter.format(costs, null);
-        chart.setDescription(description);
     }
 
     public void onClick(View view) {
@@ -194,10 +178,11 @@ public class ActivityReportsNavigate extends DefaultActivity {
      */
     @Override
     public void onBackPressed() {
-        if (chartManager.getDepth() != 0) {
-            reset();
+        if (chartManager.getDepth() == 0) {
+	        super.onBackPressed();
         } else {
-            super.onBackPressed();
+	        // TODO: instead of reset we should go one level higher
+	        reset();
         }
     }
 }

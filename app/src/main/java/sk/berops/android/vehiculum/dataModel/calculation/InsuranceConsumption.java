@@ -1,6 +1,6 @@
 package sk.berops.android.vehiculum.dataModel.calculation;
 
-import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -29,7 +29,6 @@ public class InsuranceConsumption extends Consumption {
 			super.reloadChartData(data);
 			return;
 		}
-		pieChartLegend = new ArrayList<>();
 		pieChartVals = new ArrayList<>();
 		pieChartColors = new ArrayList<>();
 
@@ -38,10 +37,17 @@ public class InsuranceConsumption extends Consumption {
 				continue;
 			}
 			double value = getTotalCostPerInsuranceType().get(t);
-			pieChartLegend.add(t.getType());
-			pieChartVals.add(new Entry((float) value, t.getId()));
+			pieChartVals.add(new PieEntry((float) value, t.getType(), t.getId()));
 			pieChartColors.add(t.getColor());
 		}
+	}
+
+	@Override
+	public double getLabelValue(int depth) {
+		if (depth < 1) {
+			return super.getLabelValue(depth);
+		}
+		return getTotalInsuranceCost();
 	}
 
 	public double getTotalInsuranceCost() {

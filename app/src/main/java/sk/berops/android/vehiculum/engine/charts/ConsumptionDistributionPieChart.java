@@ -2,6 +2,7 @@ package sk.berops.android.vehiculum.engine.charts;
 
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
 
@@ -22,8 +23,8 @@ public class ConsumptionDistributionPieChart {
      * @return Costs per expense type
      */
     public static PieDataSet getPieDataSet() {
-        ArrayList<Entry> entries = new ArrayList<com.github.mikephil.charting.data.Entry>();
-        ArrayList<Integer> colors = new ArrayList<Integer>();
+        ArrayList<PieEntry> entries = new ArrayList<>();
+        ArrayList<Integer> colors = new ArrayList<>();
         History history = MainActivity.garage.getActiveCar().getHistory();
         Consumption consumption = history.getEntries().getLast().getConsumption();
         for (sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType t : sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType.values()) {
@@ -31,7 +32,7 @@ public class ConsumptionDistributionPieChart {
                 continue;
             }
             double value = consumption.getTotalCostPerEntryType().get(t);
-            com.github.mikephil.charting.data.Entry entry = new com.github.mikephil.charting.data.Entry(
+            com.github.mikephil.charting.data.PieEntry entry = new com.github.mikephil.charting.data.PieEntry(
                     (float) value, t.getId());
             entries.add(entry);
             colors.add(t.getColor());

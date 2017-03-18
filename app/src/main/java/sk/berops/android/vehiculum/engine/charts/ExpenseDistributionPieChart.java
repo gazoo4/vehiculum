@@ -8,6 +8,8 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 
 import java.util.ArrayList;
 
+import sk.berops.android.vehiculum.configuration.Preferences;
+import sk.berops.android.vehiculum.dataModel.UnitConstants;
 import sk.berops.android.vehiculum.dataModel.calculation.Consumption;
 import sk.berops.android.vehiculum.dataModel.expense.Entry;
 import sk.berops.android.vehiculum.gui.MainActivity;
@@ -28,7 +30,7 @@ public class ExpenseDistributionPieChart {
      * Constructor
      */
     public ExpenseDistributionPieChart() {
-        reset();
+	    init();
     }
 
     /**
@@ -39,7 +41,14 @@ public class ExpenseDistributionPieChart {
         if (entry == null) {
             return null;
         }
-        PieDataSet dataSet = new PieDataSet(consumption.getPieChartVals(), MainActivity.garage.getActiveCar().getNickname());
+        String label = "";
+	    double cost = 0.0;
+	    if (depth == 0) {
+		    label = "overall: ";
+		    cost = consumption.getTotalCost();
+	    }
+	    label = label + UnitConstants.convertUnitCost(cost);
+        PieDataSet dataSet = new PieDataSet(consumption.getPieChartVals(), consumption.getPieChartLabel(depth));
         dataSet.setSliceSpace(2);
         dataSet.setSelectionShift(0);
         dataSet.setValueFormatter(new PercentFormatter());
@@ -52,40 +61,28 @@ public class ExpenseDistributionPieChart {
     }
 
     /**
-     * Method to help to provide the legend for the chart.
-     * @return Expense types
-     */
-    private ArrayList<String> getLegend() {
-        if (consumption == null) {
-            return null;
-        }
-
-        return consumption.getPieChartLegend();
-    }
-
-    /**
      * Method for resetting the chart view and to display the expenses at the root level
      */
-    public void reset() {
+    public void init() {
         depth = 0;
-        entry = MainActivity.garage.getActiveCar().getHistory().getEntries().getLast();
-        consumption = entry.getConsumption();
-        consumption.reloadChartData(getDepth());
+	    entry = MainActivity.garage.getActiveCar().getHistory().getEntries().getLast();
+	    consumption = entry.getConsumption();
+	    consumption.reloadChartData(depth);
     }
+
+	public void invokeSelection(Integer i) {
+		Entry.ExpenseType type = Entry.ExpenseType.getExpenseType(i);
+		entry = MainActivity.garage.getActiveCar().getHistory().getEntriesFiltered(type).getLast();
+		consumption = entry.getConsumption();
+		consumption.reloadChartData(++depth);
+	}
 
     /**
      * Method for merging the x-values and the legend for pie chart together
      * @return values and the legend for a pie chart
      */
     public PieData getPieData() {
-        return new PieData(getLegend(), getPieDataSet());
-    }
-
-    public void invokeSelection(Integer i) {
-        Entry.ExpenseType type = Entry.ExpenseType.getExpenseType(i);
-        entry = MainActivity.garage.getActiveCar().getHistory().getEntriesFiltered(type).getLast();
-        consumption = entry.getConsumption();
-        consumption.reloadChartData(depth = getDepth() + 1);
+        return new PieData(getPieDataSet());
     }
 
     public int getDepth() {

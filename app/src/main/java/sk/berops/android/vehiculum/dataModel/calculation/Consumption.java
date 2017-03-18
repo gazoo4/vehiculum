@@ -1,13 +1,17 @@
 package sk.berops.android.vehiculum.dataModel.calculation;
 
-import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieEntry;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+import sk.berops.android.vehiculum.R;
+import sk.berops.android.vehiculum.dataModel.UnitConstants;
 import sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.vehiculum.engine.charts.IntoPieChartExtractable;
+import sk.berops.android.vehiculum.gui.MainActivity;
+import sk.berops.android.vehiculum.gui.common.TextFormatter;
 
 public class Consumption implements IntoPieChartExtractable, Serializable {
 	private double totalCostAllEntries;										//cumulated cost across all entries
@@ -18,14 +22,13 @@ public class Consumption implements IntoPieChartExtractable, Serializable {
 	
 	public Consumption() {
 		totalCostAllEntries = 0.0;
-		totalCostPerEntryType = new TreeMap<ExpenseType, Double>();
+		totalCostPerEntryType = new TreeMap<>();
 		averageCostAllEntries = 0.0;
-		averageCostPerEntryType = new TreeMap<ExpenseType, Double>();
+		averageCostPerEntryType = new TreeMap<>();
 		lastEntryType = ExpenseType.FUEL;
 	}
 
-	protected ArrayList<String> pieChartLegend;
-	protected ArrayList<Entry> pieChartVals;
+	protected ArrayList<PieEntry> pieChartVals;
 	protected ArrayList<Integer> pieChartColors;
 
 	/**
@@ -34,33 +37,21 @@ public class Consumption implements IntoPieChartExtractable, Serializable {
 	 */
 	public void reloadChartData(int depth) {
 		// As we're on depth level 0 and there's nothing above us, we don't really bother with the depth level
-		pieChartLegend = new ArrayList<>();
 		pieChartVals = new ArrayList<>();
 		pieChartColors = new ArrayList<>();
 
-		int i = 0;
 		for (sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType t : sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType.values()) {
 			if (getTotalCostPerEntryType().get(t) == null) {
 				continue;
 			}
 			double value = getTotalCostPerEntryType().get(t);
-			pieChartLegend.add(t.getExpenseType());
-			pieChartVals.add(new Entry((float) value, i++, t.getId()));
+			pieChartVals.add(new PieEntry((float) value, t.getExpenseType(), t.getId()));
 			pieChartColors.add(t.getColor());
 		}
 	}
 
 	@Override
-	public ArrayList<String> getPieChartLegend() {
-		if (pieChartLegend == null) {
-			reloadChartData(0);
-		}
-
-		return pieChartLegend;
-	}
-
-	@Override
-	public ArrayList<Entry> getPieChartVals() {
+	public ArrayList<PieEntry> getPieChartVals() {
 		if (pieChartVals == null) {
 			reloadChartData(0);
 		}
@@ -69,7 +60,7 @@ public class Consumption implements IntoPieChartExtractable, Serializable {
 	}
 
 	@Override
-	public void setPieChartVals(ArrayList<Entry> pieChartVals) {
+	public void setPieChartVals(ArrayList<PieEntry> pieChartVals) {
 		this.pieChartVals = pieChartVals;
 	}
 
@@ -80,6 +71,21 @@ public class Consumption implements IntoPieChartExtractable, Serializable {
 		}
 
 		return pieChartColors;
+	}
+
+	@Override
+	public String getPieChartLabel(int depth) {
+		double cost = getLabelValue(depth);
+		return getLabelText() + ": " + TextFormatter.format(cost, "#####.##");
+	}
+
+	public String getLabelText() {
+		return MainActivity.getContext().getString(R.string.generic_charts_total);
+	}
+
+	public double getLabelValue(int depth) {
+		// We're at level 0, so return the total cost
+		return getTotalCost();
 	}
 
 	public double getTotalCost() {

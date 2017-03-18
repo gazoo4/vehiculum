@@ -1,6 +1,7 @@
 package sk.berops.android.vehiculum.engine.charts;
 
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
 
@@ -12,23 +13,23 @@ import java.util.ArrayList;
 public interface IntoPieChartExtractable {
 
     /**
-     * @return ArrayList<String> consisting of the legends of the recorded child consumption instances
-     */
-    public ArrayList<String> getPieChartLegend();
-
-    /**
      * @return DataSet containing the values from the child consumption instances
      */
-    public ArrayList<Entry> getPieChartVals();
+    ArrayList<PieEntry> getPieChartVals();
 
 	/**
 	 * Setter for pieChartVals
 	 * @param pieChartVals
 	 */
-	public void setPieChartVals(ArrayList<Entry> pieChartVals);
+	void setPieChartVals(ArrayList<PieEntry> pieChartVals);
 
     /**
      * @return ArrayList of colors for the displayable data
      */
-    public ArrayList<Integer> getPieChartColors();
+    ArrayList<Integer> getPieChartColors();
+
+	/**
+	 * @return the label for the legend (i.e. current focus + cost, e.g. fuel: 3500,-)
+	 */
+	String getPieChartLabel(int depth);
 }
