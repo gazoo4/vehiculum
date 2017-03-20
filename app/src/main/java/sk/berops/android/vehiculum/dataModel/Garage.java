@@ -1,5 +1,7 @@
 package sk.berops.android.vehiculum.dataModel;
 
+import android.os.Build;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
@@ -9,6 +11,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.UUID;
 
+import sk.berops.android.vehiculum.BuildConfig;
 import sk.berops.android.vehiculum.dataModel.expense.Entry;
 import sk.berops.android.vehiculum.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.vehiculum.dataModel.maintenance.Tyre;
@@ -25,6 +28,13 @@ public class Garage {
 
 	@Element(name = "rootTag", required = false)
 	private Tag rootTag;
+
+	/**
+	 * SW version the persisted garage object is written for. This is used then in the later stages
+	 * to convert garage data stored in one of the previous version of the app for the newer vehiculum version
+	 */
+	@Element(name = "vehiculumVersion", required = false)
+	private static final int vehiculumVersion = BuildConfig.VERSION_CODE;
 
 	public Garage() {
 		super();

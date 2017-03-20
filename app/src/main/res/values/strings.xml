@@ -12,6 +12,7 @@
     <string name="activity_car_add_header"							>Enter the details about your car</string>
     <string name="activity_car_add_label"							>Add a new car</string>
     <string name="activity_car_add_license_plate_hint"				>License plate</string>
+    <string name="activity_car_add_odometer_units_text"				>Odometer units</string>
     <string name="activity_car_add_model_hint"						>Model</string>
     <string name="activity_car_add_model_year_hint"					>Model Year</string>
     <string name="activity_car_add_nickname_hint"					>Nickname (optional)</string>

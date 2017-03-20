@@ -692,4 +692,27 @@ public class UnitConstants {
 		}
 		return 0.0;
 	}
+
+	public static double convertDistanceFromSI(double value) {
+		return convertDistanceFromSI(value, null);
+	}
+
+	public static double convertDistanceFromSI(double value, DistanceUnit to) {
+		return convertDistance(value, null, to);
+	}
+
+	public static double convertDistance(double value, DistanceUnit from, DistanceUnit to) {
+		if (from == null) {
+			from = DistanceUnit.KILOMETER;
+		}
+
+		if (to == null) {
+			to = preferences.getDistanceUnit();
+		}
+
+		value *= from.getCoef();
+		value /= to.getCoef();
+
+		return value;
+	}
 }

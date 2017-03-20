@@ -35,8 +35,8 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "sk.berops.android.fueller"
-        versionCode 6
-        versionName "Flying Spur"
+        versionCode 8
+        versionName "Hot Rod"
         minSdkVersion 21
         targetSdkVersion 25
         multiDexEnabled true

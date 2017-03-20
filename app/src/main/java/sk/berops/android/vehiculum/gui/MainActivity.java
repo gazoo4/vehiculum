@@ -24,6 +24,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -116,6 +117,7 @@ public class MainActivity extends DefaultActivity {
 	public void onResume() {
 		super.onResume();
 
+		initAfterLoad();
 		refreshStats();
 		generateStatTable();
 	}
@@ -133,7 +135,8 @@ public class MainActivity extends DefaultActivity {
 	}
 
 	private void initAfterLoad() {
-		if (garage == null) {
+		if ((garage == null)
+				|| garage.getActiveCar() == null) {
 			buttonRecordEvent.setVisibility(View.GONE);
 			lineRecordEvent.setVisibility(View.GONE);
 			buttonViewStats.setVisibility(View.GONE);
@@ -315,12 +318,19 @@ public class MainActivity extends DefaultActivity {
 
 	private void generateRowLastCosts(TableLayout layout) {
 		Car activeCar = garage.getActiveCar();
-		FuellingEntry e = activeCar.getHistory().getFuellingEntries().getLast();
+		LinkedList<FuellingEntry> entries = activeCar.getHistory().getFuellingEntries();
+
+		if (entries.size() <= 1) {
+			// We can't calculate the consumption if just one refuelling has been made
+			return;
+		}
+
+		FuellingEntry e = entries.getLast();
 		FuelConsumption c = activeCar.getFuelConsumption();
 		FuelType type = e.getFuelType();
 
 		if (activeCar.getHistory().getFuellingEntriesFiltered(e.getFuelType()).size() <= 1) {
-			// We can't calculate the consumption if just one refuelling has been made
+			// We can't calculate the consumption if just one refuelling of this type has been made
 			return;
 		}
 
@@ -342,12 +352,19 @@ public class MainActivity extends DefaultActivity {
 
 	private void generateRowLastConsumption(TableLayout layout) {
 		Car activeCar = garage.getActiveCar();
-		FuellingEntry e = activeCar.getHistory().getFuellingEntries().getLast();
+		LinkedList<FuellingEntry> entries = activeCar.getHistory().getFuellingEntries();
+
+		if (entries.size() <= 1) {
+			// We can't calculate the consumption if just one refuelling has been made
+			return;
+		}
+
+		FuellingEntry e = entries.getLast();
 		FuelConsumption c = activeCar.getFuelConsumption();
 		FuelType type = e.getFuelType();
 
 		if (activeCar.getHistory().getFuellingEntriesFiltered(e.getFuelType()).size() <= 1) {
-			// We can't calculate the consumption if just one refuelling has been made
+			// We can't calculate the consumption if just one refuelling of this type has been made
 			return;
 		}
 
@@ -481,7 +498,7 @@ public class MainActivity extends DefaultActivity {
 			case R.id.menu_main_action_restore:
 				// Restore garage from a file
 				Intent intent = new Intent()
-						.setType("v-garage*/zip")
+						.setType("application/zip")
 						.setAction(Intent.ACTION_GET_CONTENT);
 				startActivityForResult(Intent.createChooser(intent, "select the file to load"), REQUEST_CODE_RESTORE);
 				return true;
@@ -495,8 +512,8 @@ public class MainActivity extends DefaultActivity {
 				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
 				startActivity(i);
 				return true;
+			/*
 			case R.id.menu_main_action_donate:
-				/*
 				AlertDialog dialog = new AlertDialog.Builder(this)
 						.setTitle(R.string.fragment_donate_title)
 						.setMessage(R.string.fragment_donate_message)
@@ -509,9 +526,9 @@ public class MainActivity extends DefaultActivity {
 						})
 						.create();
 				dialog.show();
-				*/
 				startActivity(new Intent(this, DonationActivity.class));
 				return true;
+				*/
 			default:
 				return super.onOptionsItemSelected(item);
 		}
