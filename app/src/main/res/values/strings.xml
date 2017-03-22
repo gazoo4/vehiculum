@@ -118,7 +118,7 @@
     <string name="activity_refuel_header"							>Enter your bill details</string>
     <string name="activity_refuel_price_hint"						>Price per liter</string>
     <string name="activity_refuel_quantity_hint"					>Fuel quantity bought</string>
-    <string name="activity_refuel_quantity_unit_hint"				>Quantity unit</string>
+    <string name="activity_refuel_quantity_unit_hint"				>Quantity unitIsoCode</string>
 
     <string name="activity_reports_navigate_chart_title"			>overall</string>
 
@@ -322,7 +322,7 @@
     
     <string-array name="preferences_units_consumption_entries">
         <item>Fuel units per distance (e.g. l/km)</item>
-        <item>Distance per fuel unit (e.g. mpg)</item>
+        <item>Distance per fuel unitIsoCode (e.g. mpg)</item>
         <item>Fuel units per 100*distance (e.g. l/100 km)</item>
     </string-array>
     

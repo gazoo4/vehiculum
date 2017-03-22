@@ -7,7 +7,6 @@ import java.util.Map;
 
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.configuration.Preferences;
-import sk.berops.android.vehiculum.dataModel.calculation.Consumption;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.vehiculum.gui.MainActivity;
 
@@ -424,10 +423,10 @@ public class UnitConstants {
 			switch (this) {
 			case COST_PER_100_DISTANCE:
 			case COST_PER_DISTANCE:
-				return ""+ currency.getUnit() + unit + distanceUnit.getUnit();
+				return ""+ currency.getUnitIsoCode() + unit + distanceUnit.getUnit();
 			case DISTANCE_PER_100_COST:
 			case DISTANCE_PER_COST:
-				return ""+ distanceUnit.getUnit() + unit + currency.getUnit();
+				return ""+ distanceUnit.getUnit() + unit + currency.getUnitIsoCode();
 			default:
 				Log.d("DEBUG", "Unexpected CostUnit value");
 			}

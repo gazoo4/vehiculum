@@ -16,6 +16,11 @@ public class Expense extends Record {
 	private double cost;
 	@Element(name="currency", required=false)
 	private Currency.Unit currency;
+	/**
+	 * Cost of the expense converted to EUR
+	 */
+	@Element(name="costEur", required=false)
+	private double costEur;
 	
 	protected Car car;
 
@@ -127,5 +132,13 @@ public class Expense extends Record {
 
 	public void setCar(Car car) {
 		this.car = car;
+	}
+
+	public void setCostEur(double costEur) {
+		this.costEur = costEur;
+	}
+
+	public double getCostEur() {
+		return this.costEur;
 	}
 }

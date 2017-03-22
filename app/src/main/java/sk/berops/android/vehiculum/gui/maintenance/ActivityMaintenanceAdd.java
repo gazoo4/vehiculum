@@ -178,12 +178,12 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		double totalCostNative = Currency.convert(totalCostSI, Currency.Unit.getUnit(0), currency,
 				entry.getEventDate());
 		textViewTotalCost.setText(TextFormatter.format(totalCostNative, "#######.##") + " "
-				+ currency.getUnit());
+				+ currency.getUnitIsoCode());
 		editTextCost.setText(Double.toString(totalCostNative));
 		
 		double partsCostNative = Currency.convert(partsCostSI, Currency.Unit.getUnit(0), currency, entry.getEventDate());
 		textViewPartsCost.setText(TextFormatter.format(partsCostNative, "#######.##") + " "
-				+ currency.getUnit());
+				+ currency.getUnitIsoCode());
 		
 		adapter.notifyDataSetChanged();
 	}

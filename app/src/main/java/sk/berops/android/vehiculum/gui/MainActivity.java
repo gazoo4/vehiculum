@@ -41,7 +41,6 @@ import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.vehiculum.engine.calculation.Calculator;
 import sk.berops.android.vehiculum.gui.common.GuiUtils;
 import sk.berops.android.vehiculum.gui.common.TextFormatter;
-import sk.berops.android.vehiculum.gui.donation.DonationActivity;
 import sk.berops.android.vehiculum.gui.garage.ActivityGarageManagement;
 import sk.berops.android.vehiculum.gui.preferences.PreferenceWithHeaders;
 import sk.berops.android.vehiculum.gui.report.ActivityReportsNavigate;
@@ -238,7 +237,7 @@ public class MainActivity extends DefaultActivity {
 
 		String description = getString(R.string.activity_main_total_costs);
 		double value = c.getTotalCost();
-		String unit = preferences.getCurrency().getUnit();
+		String unit = preferences.getCurrency().getUnitIsoCode();
 
 		layout.addView(createStatRow(description, value, unit));
 	}

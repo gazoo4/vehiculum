@@ -95,10 +95,10 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		date.setText(DateFormat.getDateInstance(DateFormat.MEDIUM).format(entry.getEventDate()));
 
 		totalPrice.setText(TextFormatter.format(entry.getCost(), "####0.00"));
-		totalPriceUnit.setText(entry.getCurrency().getUnit());
+		totalPriceUnit.setText(entry.getCurrency().getUnitIsoCode());
 
 		unitPrice.setText(TextFormatter.format(entry.getFuelPrice(), "####0.000"));
-		unitPriceUnit.setText(preferences.getCurrency().getUnit() + "/"
+		unitPriceUnit.setText(preferences.getCurrency().getUnitIsoCode() + "/"
 				+ preferences.getQuantityUnit(entry.getFuelType()));
 
 		quantity.setText(TextFormatter.format(entry.getFuelQuantity(), "###0.00"));
@@ -152,11 +152,11 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		double partsCostNative = Currency.convert(entry.getPartsCostSI(), Currency.Unit.getUnit(0),
 				preferences.getCurrency(), entry.getEventDate());
 		partsCost.setText(TextFormatter.format(partsCostNative, "####0.00"));
-		partsCostUnit.setText(preferences.getCurrency().getUnit());
+		partsCostUnit.setText(preferences.getCurrency().getUnitIsoCode());
 
 		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
 		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
-		totalCostUnit.setText(preferences.getCurrency().getUnit());
+		totalCostUnit.setText(preferences.getCurrency().getUnitIsoCode());
 		
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
@@ -189,7 +189,7 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		
 		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
 		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
-		totalCostUnit.setText(preferences.getCurrency().getUnit());
+		totalCostUnit.setText(preferences.getCurrency().getUnitIsoCode());
 		
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
@@ -226,7 +226,7 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 
 		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
 		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
-		totalCostUnit.setText(preferences.getCurrency().getUnit());
+		totalCostUnit.setText(preferences.getCurrency().getUnitIsoCode());
 
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
@@ -258,7 +258,7 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		
 		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
 		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
-		totalCostUnit.setText(preferences.getCurrency().getUnit());
+		totalCostUnit.setText(preferences.getCurrency().getUnitIsoCode());
 		
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
@@ -291,7 +291,7 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		
 		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
 		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
-		totalCostUnit.setText(preferences.getCurrency().getUnit());
+		totalCostUnit.setText(preferences.getCurrency().getUnitIsoCode());
 		
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
@@ -321,7 +321,7 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		
 		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
 		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
-		totalCostUnit.setText(preferences.getCurrency().getUnit());
+		totalCostUnit.setText(preferences.getCurrency().getUnitIsoCode());
 		
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());

@@ -4,28 +4,18 @@ import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.UnitConstants;
-import sk.berops.android.vehiculum.dataModel.UnitConstants.QuantityUnit;
-import sk.berops.android.vehiculum.dataModel.UnitConstants.Substance;
 import sk.berops.android.vehiculum.dataModel.expense.FieldEmptyException;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry.FuelType;
@@ -150,7 +140,7 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
 
             currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
             quantityUnit = UnitConstants.QuantityUnit.getQuantityUnit(spinnerQuantityUnit.getSelectedItemPosition());
-            unit = "" + currency.getUnit() + "/" + quantityUnit.getUnit();
+            unit = "" + currency.getUnitIsoCode() + "/" + quantityUnit.getUnit();
             textViewPrice.setText(formattedPrice + " " + unit);
         } catch (NumberFormatException e) {
             // Both the fields need to be filled-in (quantity, cost)
