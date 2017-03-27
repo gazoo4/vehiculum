@@ -14,6 +14,7 @@ public class ConversionRunnable implements Runnable {
 	 */
 	@Override
 	public void run() {
+		// Moves the current thread into the background
 		android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
 	}
 }
