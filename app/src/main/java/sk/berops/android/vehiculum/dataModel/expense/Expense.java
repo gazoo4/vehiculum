@@ -43,7 +43,7 @@ public class Expense extends Record {
 	public void initAfterLoad(Car car) {
 		setCar(car);
 		if (getCurrency() == null) {
-			setCurrency(Currency.Unit.EURO);
+			setCurrency(Currency.Unit.EUR);
 		}
 		generateSI();
 	}

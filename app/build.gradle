@@ -83,11 +83,14 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'com.jjoe64:graphview:3.1.4'
     compile 'com.larswerkman:lobsterpicker:1.0.1'
-    compile 'org.apache.commons:commons-math3:3.5'
-    compile 'org.simpleframework:simple-xml:2.7.1'
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
+    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true;
     }
+    compile 'org.apache.commons:commons-math3:3.5'
+    compile 'org.simpleframework:simple-xml:2.7.1'
 }
 
 afterEvaluate {
