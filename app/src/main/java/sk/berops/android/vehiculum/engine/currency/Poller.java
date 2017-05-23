@@ -16,16 +16,22 @@ import retrofit2.Retrofit;
 import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.engine.currency.fixerIo.*;
 
+import static sk.berops.android.vehiculum.io.internet.Connectivity.isOnline;
+
 /**
  * @author Bernard Halas
  * @date 5/17/17
  */
 
+/**
+ * Thread-safe class for creating the REST client polling object for the currency conversion tasks
+ */
 public class Poller {
 
 	private static final String LOG_TAG = "CurrencyPoller";
-	private static Poller instance;
+	private static Poller instance = null;
 	private static String FIXER_IO_BASE_URL = "https://api.fixer.io/";
+	private static Object mutex = new Object();
 
 	/**
 	 * 2-level cache HashMap: date & currency:
@@ -35,7 +41,12 @@ public class Poller {
 
 	public static Poller getInstance() {
 		if (instance == null) {
-			instance = new Poller();
+			// The only synchronized part is the instance creation; no need to synchronize the whole getInstance method
+			synchronized(mutex) {
+				if (instance == null) {
+					instance = new Poller();
+				}
+			}
 		}
 		return instance;
 	}
@@ -64,11 +75,9 @@ public class Poller {
 	/**
 	 * Method for Currency conversion.
 	 * @param request Containing Date for the conversion and From value/currency pair and To currency
-	 * @param callback
 	 * @return
 	 */
-	public double convert(ConvertingService.ConversionRequest request,
-	                    Callback<DataPackage> callback) {
+	public synchronized double convert(ConvertingService.Request request) {
 
 		if (!isOnline()) {
 			// TODO

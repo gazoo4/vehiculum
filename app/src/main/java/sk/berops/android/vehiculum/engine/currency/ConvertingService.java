@@ -19,9 +19,9 @@ import sk.berops.android.vehiculum.engine.currency.fixerIo.DataPackage;
  * @date 5/17/17
  */
 
-public class ConvertingService extends IntentService implements Callback<DataPackage> {
+public class ConvertingService implements Runnable {
 
-	public class ConversionRequest {
+	public static class Request {
 		private double fromValue;
 		private Currency.Unit fromSymbol;
 		private Currency.Unit toSymbol;
@@ -61,40 +61,20 @@ public class ConvertingService extends IntentService implements Callback<DataPac
 	}
 
 	private String LOG_TAG = "ConvertingService";
+	private ConversionCallback callback;
+	private Request request;
 
-	private ConversionRequest nextRequest;
-	private Poller poller;
-
-	/**
-	 * Default constructor
-	 */
-	public ConvertingService() {
-		super("ConvertingService");
-		poller = new Poller(this);
-	}
-
-	/**
-	 * The IntentService calls this method from the default worker thread with
-	 * the intent that started the service. When this method returns, IntentService
-	 * stops the service, as appropriate.
-	 */
-	@Override
-	protected void onHandleIntent(@Nullable Intent intent) {
-		if (nextRequest == null) {
-			Log.w(LOG_TAG, "Conversion request not specified");
-			return;
-		}
-		poller.execute(nextRequest);
-		nextRequest = null;
+	public ConvertingService(ConversionCallback callback, Request request) {
+		super();
+		this.callback = callback;
+		this.request = request;
 	}
 
 	@Override
-	public void onResponse(Call<DataPackage> call, Response<DataPackage> response) {
+	public void run() {
 
-	}
-
-	@Override
-	public void onFailure(Call<DataPackage> call, Throwable t) {
-
+		Poller poller = Poller.getInstance();
+		double result = poller.convert(request);
+		callback.rateDelivery(result);
 	}
 }

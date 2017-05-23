@@ -53,6 +53,7 @@ public class MainActivity extends DefaultActivity {
 	public static Garage garage;
 	public static DataHandler dataHandler;
 	private static Preferences preferences = Preferences.getInstance();
+	private static MainController controller = MainController.getInstance();
 
 	private Button buttonRecordEvent;
 	private Button buttonViewStats;
