@@ -5,8 +5,10 @@ import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.UUID;
 
+import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.gui.MainActivity;
 
@@ -243,5 +245,21 @@ public class Tag extends Record implements Comparable<Tag> {
 	@Override
 	public int compareTo(Tag another) {
 		return this.getName().compareTo(another.getName());
+	}
+
+	/****************************** Searchable interface methods follow ***************************/
+
+	public Record getRecordByUUID(UUID uuid) {
+		// Are they looking for me? Delegate task to Record.getRecordByUUID to find out.
+		Record result = super.getRecordByUUID(uuid);
+
+		Iterator<Tag> t = children.iterator();
+
+		// Search for UUID among children
+		while (result == null && t.hasNext()) {
+			result = t.next().getRecordByUUID(uuid);
+		}
+
+		return result;
 	}
 }

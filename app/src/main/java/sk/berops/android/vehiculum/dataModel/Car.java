@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.UnitConstants.ConsumptionScheme;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.DistanceUnit;
@@ -52,7 +53,7 @@ public class Car extends Record implements Serializable {
 	
 	/**
 	 * Car's initial tyreScheme. TODO: Not used yet. So far we assume that the
-	 * initiall tyreScheme is always null (meaning no tyres installed).
+	 * initial tyreScheme is always null (meaning no tyres installed).
 	 */
 	@Element(name = "initialTyreScheme", required = false)
 	private TyreConfigurationScheme initialTyreScheme;
@@ -312,5 +313,19 @@ public class Car extends Record implements Serializable {
 			scheme = getInitialTyreScheme();
 		}
 		return scheme;
+	}
+
+	/****************************** Searchable interface methods follow ***************************/
+
+	public Record getRecordByUUID(UUID uuid) {
+		// Are they looking for me? Delegate task to Record.getRecordByUUID to find out.
+		Record result = super.getRecordByUUID(uuid);
+
+		// Search in the history of this garage for the right object
+		if (result == null) {
+			result = history.getRecordByUUID(uuid);
+		}
+
+		return result;
 	}
 }

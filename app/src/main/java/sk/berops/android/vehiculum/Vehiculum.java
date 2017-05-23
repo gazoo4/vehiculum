@@ -14,10 +14,10 @@ public class Vehiculum extends Application {
 	public void onCreate() {
 		super.onCreate();
 
+		// Initializing Fabric with the debug-disabled crashlytics.
 		Crashlytics crashlyticsKit = new Crashlytics.Builder()
 				.core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
 				.build();
-		// Initialize Fabric with the debug-disabled crashlytics.
 		Fabric.with(this, crashlyticsKit, new Crashlytics());
 
 		Vehiculum.context = getApplicationContext();

@@ -13,7 +13,7 @@ import java.util.UUID;
 import sk.berops.android.vehiculum.dataModel.maintenance.Tyre;
 import sk.berops.android.vehiculum.gui.MainActivity;
 
-public class Axle implements Serializable {
+public class Axle extends Record implements Serializable {
 	
 	@Element(name="type")
 	private Type type;

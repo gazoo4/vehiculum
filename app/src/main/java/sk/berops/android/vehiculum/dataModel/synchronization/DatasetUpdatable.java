@@ -7,6 +7,6 @@ import sk.berops.android.vehiculum.dataModel.synchronization.DatasetChange;
  * @date 5/22/17
  */
 
-public interface Updatable {
+public interface DatasetUpdatable {
 	void enqueueUpdate(DatasetChange update);
 }

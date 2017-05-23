@@ -3,14 +3,14 @@ package sk.berops.android.vehiculum.gui;
 import java.util.LinkedList;
 
 import sk.berops.android.vehiculum.dataModel.synchronization.DatasetChange;
-import sk.berops.android.vehiculum.dataModel.synchronization.Updatable;
+import sk.berops.android.vehiculum.dataModel.synchronization.DatasetUpdatable;
 
 /**
  * @author Bernard Halas
  * @date 5/22/17
  */
 
-public class MainController implements Updatable {
+public class MainController implements DatasetUpdatable {
 	private static MainController instance;
 	private static Object mutex = new Object();
 	private static LinkedList<DatasetChange> incomingUpdates;
@@ -58,7 +58,7 @@ public class MainController implements Updatable {
 
 	private boolean updateLocalDataset(DatasetChange change) {
 		// TODO
-		// return true if dataset was successfully updated
+		// return true if local dataset was successfully updated
 		return false;
 	}
 

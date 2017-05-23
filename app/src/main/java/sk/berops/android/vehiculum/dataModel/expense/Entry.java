@@ -5,10 +5,12 @@ import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Car;
+import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.calculation.Consumption;
 import sk.berops.android.vehiculum.dataModel.tags.Tag;
 import sk.berops.android.vehiculum.dataModel.tags.Taggable;
@@ -290,4 +292,20 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
 	    }
 	    this.tagUuids = tagUuids;
     }
+
+	/****************************** Searchable interface methods follow ***************************/
+
+	/**
+	 * Method used to search for an object by its UUID within the Object tree of this Object.
+	 * @param uuid of the searched object
+	 * @return Record that matches the searched UUID
+	 */
+	public Record getRecordByUUID(UUID uuid) {
+		// Are they looking for me? Delegate task to Record.getRecordByUUID to find out.
+		Record result = super.getRecordByUUID(uuid);
+
+		// There's nothing more in this to search for UUIDs. The tagUUIDs Linked-List has been
+		// parsed directly from the Garage object, no need to parse the same tags again.
+		return result;
+	}
 }

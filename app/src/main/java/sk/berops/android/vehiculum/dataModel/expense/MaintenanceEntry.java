@@ -4,11 +4,14 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.Currency.Unit;
+import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.maintenance.ReplacementPart;
 
 public class MaintenanceEntry extends Entry {
@@ -139,5 +142,26 @@ public class MaintenanceEntry extends Entry {
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	/****************************** Searchable interface methods follow ***************************/
+
+	/**
+	 * Method used to search for an object by its UUID within the Object tree of this Object.
+	 * @param uuid of the searched object
+	 * @return Record that matches the searched UUID
+	 */
+	public Record getRecordByUUID(UUID uuid) {
+		// Are they looking for me? Delegate task to Record.getRecordByUUID to find out.
+		Record result = super.getRecordByUUID(uuid);
+
+		Iterator<ReplacementPart> p = parts.iterator();
+
+		// Search deeper to find the right object
+		while (result == null && p.hasNext()) {
+			result = p.next().getRecordByUUID(uuid);
+		}
+
+		return result;
 	}
 }

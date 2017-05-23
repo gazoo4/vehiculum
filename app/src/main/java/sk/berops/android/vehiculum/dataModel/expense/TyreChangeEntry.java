@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Axle;
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Currency;
+import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.maintenance.Tyre;
 import sk.berops.android.vehiculum.dataModel.maintenance.TyreConfigurationScheme;
 import sk.berops.android.vehiculum.gui.MainActivity;
@@ -256,5 +258,30 @@ public class TyreChangeEntry extends Entry {
 			}
 		}
 		return tyres;
+	}
+
+	/****************************** Searchable interface methods follow ***************************/
+
+	/**
+	 * Method used to search for an object by its UUID within the Object tree of this Object.
+	 * @param uuid of the searched object
+	 * @return Record that matches the searched UUID
+	 */
+	public Record getRecordByUUID(UUID uuid) {
+		// Are they looking for me? Delegate task to Record.getRecordByUUID to find out.
+		Record result = super.getRecordByUUID(uuid);
+
+		// Check if the object is in the TyreConfigurationScheme
+		if (result == null) {
+			result = tyreScheme.getRecordByUUID(uuid);
+		}
+
+		Iterator<Tyre> t = boughtTyres.iterator();
+		// Check if the object is among the boughtTyres
+		while (result == null && t.hasNext()) {
+			result = t.next().getRecordByUUID(uuid);
+		}
+
+		return result;
 	}
 }

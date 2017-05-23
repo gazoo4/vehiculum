@@ -7,6 +7,7 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.UUID;
@@ -16,9 +17,10 @@ import sk.berops.android.vehiculum.dataModel.expense.Entry;
 import sk.berops.android.vehiculum.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.vehiculum.dataModel.maintenance.Tyre;
 import sk.berops.android.vehiculum.dataModel.tags.Tag;
+import sk.berops.android.vehiculum.engine.Searchable;
 
 @Root
-public class Garage {
+public class Garage implements Searchable {
 	
 	@ElementList(inline = true, required = false)
 	private LinkedList<Car> cars;
@@ -173,5 +175,20 @@ public class Garage {
 
 	public void setRootTag(Tag rootTag) {
 		this.rootTag = rootTag;
+	}
+
+	/****************************** Searchable interface methods follow ***************************/
+
+	public Record getRecordByUUID(UUID uuid) {
+		// Search for UUID among tags
+		Record result = rootTag.getRecordByUUID(uuid);
+
+		// Search for UUID among in Car object trees
+		Iterator<Car> c = cars.iterator();
+		while (result == null && c.hasNext()) {
+			result = c.next().getRecordByUUID(uuid);
+		}
+
+		return result;
 	}
 }

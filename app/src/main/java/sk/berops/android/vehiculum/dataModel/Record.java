@@ -6,7 +6,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-public abstract class Record implements Serializable, Identifiable {
+import sk.berops.android.vehiculum.engine.Searchable;
+
+public abstract class Record implements Serializable, Identifiable, Searchable {
 	@Element(name="comment", required=false)
 	private String comment;
 	@Element(name="creationDate")
@@ -93,10 +95,27 @@ public abstract class Record implements Serializable, Identifiable {
 
 	public UUID getUuid() {
 		if (uuid == null) {
-			uuid = UUID.randomUUID();
+			generateNewUuid();
 		}
 		return uuid;
 	}
 
+	public void generateNewUuid() {
+		uuid = UUID.randomUUID();
+	}
 
+	/****************************** Searchable interface methods follow ***************************/
+
+	/**
+	 * Method used to search for an object by its UUID within the Object tree of this Object.
+	 * @param uuid of the searched object
+	 * @return Record that matches the searched UUID
+	 */
+	public Record getRecordByUUID(UUID uuid) {
+		if (this.getUuid().equals(uuid)) {
+			return this;
+		} else {
+			return null;
+		}
+	}
 }

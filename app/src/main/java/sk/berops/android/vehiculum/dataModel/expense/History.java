@@ -8,11 +8,14 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Car;
+import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType;
+import sk.berops.android.vehiculum.engine.Searchable;
 
-public class History implements Serializable {
+public class History implements Serializable, Searchable {
 
 	private static final long serialVersionUID = -850435628372657221L;
 	@ElementList(inline=true, required=false)
@@ -166,5 +169,23 @@ public class History implements Serializable {
 		}
 
 		entries.removeAll(outOfScope);
+	}
+
+	/****************************** Searchable interface methods follow ***************************/
+
+	/**
+	 * Method used to search for an object by its UUID within the Object tree of this Object.
+	 * @param uuid of the searched object
+	 * @return Record that matches the searched UUID
+	 */
+	public Record getRecordByUUID(UUID uuid) {
+		Record result = null;
+		Iterator<Entry> e = entries.iterator();
+
+		while (result == null && e.hasNext()) {
+			result = e.next().getRecordByUUID(uuid);
+		}
+
+		return result;
 	}
 }
