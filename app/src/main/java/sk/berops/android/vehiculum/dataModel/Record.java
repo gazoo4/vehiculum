@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import sk.berops.android.vehiculum.engine.Searchable;
+import sk.berops.android.vehiculum.engine.controllers.RecordController;
 
 public abstract class Record implements Serializable, Identifiable, Searchable {
 	@Element(name="comment", required=false)
@@ -36,6 +37,10 @@ public abstract class Record implements Serializable, Identifiable, Searchable {
 		this.modifiedDate = record.modifiedDate;
 		// When using copy constructor, we want to use new UUID for the newly created object.
 		this.uuid = getUuid();
+	}
+
+	public RecordController getController() {
+		return new RecordController(this);
 	}
 
 	/**

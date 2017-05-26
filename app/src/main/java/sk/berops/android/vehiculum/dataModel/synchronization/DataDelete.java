@@ -7,7 +7,7 @@ import java.util.UUID;
  * @date 5/22/17
  */
 
-public class DataDelete extends DatasetChange {
+public class DataDelete extends DatasetChangeItem {
 
 	private UUID uuid;
 

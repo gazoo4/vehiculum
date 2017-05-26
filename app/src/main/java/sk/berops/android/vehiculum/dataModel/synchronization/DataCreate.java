@@ -9,11 +9,10 @@ import sk.berops.android.vehiculum.dataModel.Record;
  * @date 5/22/17
  */
 
-public class DataCreate extends DatasetChange {
+public class DataCreate extends DatasetChangeItem {
 
 	private Record newRecord;
 	private UUID parent;
-	private Class recordType;
 
 	public DataCreate() {
 		setChangeType(ChangeType.CREATE);
@@ -33,13 +32,5 @@ public class DataCreate extends DatasetChange {
 
 	public void setParent(UUID parent) {
 		this.parent = parent;
-	}
-
-	public Class getRecordType() {
-		return recordType;
-	}
-
-	public void setRecordType(Class recordType) {
-		this.recordType = recordType;
 	}
 }

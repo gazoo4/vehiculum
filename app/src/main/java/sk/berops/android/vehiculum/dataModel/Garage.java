@@ -18,9 +18,10 @@ import sk.berops.android.vehiculum.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.vehiculum.dataModel.maintenance.Tyre;
 import sk.berops.android.vehiculum.dataModel.tags.Tag;
 import sk.berops.android.vehiculum.engine.Searchable;
+import sk.berops.android.vehiculum.engine.Updatable;
 
 @Root
-public class Garage implements Searchable {
+public class Garage extends Record {
 	
 	@ElementList(inline = true, required = false)
 	private LinkedList<Car> cars;
@@ -179,6 +180,11 @@ public class Garage implements Searchable {
 
 	/****************************** Searchable interface methods follow ***************************/
 
+	/**
+	 * Method used to search for an object by its UUID within the Object tree of this Object.
+	 * @param uuid of the searched object
+	 * @return Record that matches the searched UUID
+	 */
 	public Record getRecordByUUID(UUID uuid) {
 		// Search for UUID among tags
 		Record result = rootTag.getRecordByUUID(uuid);

@@ -11,21 +11,23 @@ import java.util.Map;
  * @date 5/22/17
  */
 
-public abstract class DatasetChange {
+public abstract class DatasetChangeItem {
 	protected ChangeType changeType;
 
 	public enum ChangeType {
-		CREATE(0, "create"),
-		UPDATE(1, "update"),
-		DELETE(2, "delete");
+		CREATE(0, "create", DataCreate.class),
+		UPDATE(1, "update", DataUpdate.class),
+		DELETE(2, "delete", DataDelete.class);
 
 		private static Map<Integer, ChangeType> idToChangeTypeMapping;
 		private int id;
 		private String changeType;
+		private Class aClass;
 
-		ChangeType(int id, String changeType) {
+		ChangeType(int id, String changeType, Class aClass) {
 			this.setId(id);
 			this.setChangeType(changeType);
+			this.setAClass(aClass);
 		}
 
 		public static ChangeType getChangeType(int id) {
@@ -59,6 +61,14 @@ public abstract class DatasetChange {
 
 		public void setId(int id) {
 			this.id = id;
+		}
+
+		public Class<DatasetChangeItem> getAClass() {
+			return aClass;
+		}
+
+		public void setAClass(Class<DatasetChangeItem> aClass) {
+			this.aClass = aClass;
 		}
 	}
 	

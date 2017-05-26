@@ -7,7 +7,7 @@ import sk.berops.android.vehiculum.dataModel.Record;
  * @date 5/22/17
  */
 
-public class DataUpdate extends DatasetChange {
+public class DataUpdate extends DatasetChangeItem {
 
 	private Record updatedRecord;
 

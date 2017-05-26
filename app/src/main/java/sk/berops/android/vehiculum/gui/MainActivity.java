@@ -38,6 +38,7 @@ import sk.berops.android.vehiculum.dataModel.calculation.Consumption;
 import sk.berops.android.vehiculum.dataModel.calculation.FuelConsumption;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry.FuelType;
+import sk.berops.android.vehiculum.engine.MainController;
 import sk.berops.android.vehiculum.engine.calculation.Calculator;
 import sk.berops.android.vehiculum.gui.common.GuiUtils;
 import sk.berops.android.vehiculum.gui.common.TextFormatter;
