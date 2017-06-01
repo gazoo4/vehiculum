@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-import sk.berops.android.vehiculum.dataModel.UnitConstants.ConsumptionScheme;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.DistanceUnit;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.QuantityUnit;
 import sk.berops.android.vehiculum.dataModel.calculation.Consumption;
@@ -19,6 +18,7 @@ import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.vehiculum.dataModel.expense.History;
 import sk.berops.android.vehiculum.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.vehiculum.dataModel.maintenance.TyreConfigurationScheme;
+import sk.berops.android.vehiculum.engine.synchronization.controllers.CarController;
 
 public class Car extends Record implements Serializable {
 	/**
@@ -151,6 +151,11 @@ public class Car extends Record implements Serializable {
 		setCurrentMileageSI(getCurrentMileage() * getDistanceUnit().getCoef());
 
 		history.initAfterLoad(this);
+	}
+
+	@Override
+	public CarController getController() {
+		return new CarController(this);
 	}
 
 	public String getBrand() {
@@ -317,6 +322,11 @@ public class Car extends Record implements Serializable {
 
 	/****************************** Searchable interface methods follow ***************************/
 
+	/**
+	 * Method used to search for an object by its UUID within the Object tree of this Object.
+	 * @param uuid of the searched object
+	 * @return Record that matches the searched UUID
+	 */
 	public Record getRecordByUUID(UUID uuid) {
 		// Are they looking for me? Delegate task to Record.getRecordByUUID to find out.
 		Record result = super.getRecordByUUID(uuid);

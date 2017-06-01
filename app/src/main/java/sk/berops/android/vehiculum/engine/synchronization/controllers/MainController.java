@@ -1,4 +1,4 @@
-package sk.berops.android.vehiculum.engine;
+package sk.berops.android.vehiculum.engine.synchronization.controllers;
 
 import android.util.Log;
 

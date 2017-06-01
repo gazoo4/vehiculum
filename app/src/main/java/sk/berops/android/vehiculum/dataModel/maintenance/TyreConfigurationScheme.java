@@ -23,7 +23,7 @@ import sk.berops.android.vehiculum.dataModel.Record;
  *
  * @author bernard
  */
-public class TyreConfigurationScheme extends Record implements Serializable, Cloneable {
+public class TyreConfigurationScheme extends Record implements Cloneable {
 
 	/**
 	 * Axles in this tyre configuration, linked from front to back

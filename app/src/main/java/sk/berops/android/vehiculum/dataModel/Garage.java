@@ -1,7 +1,5 @@
 package sk.berops.android.vehiculum.dataModel;
 
-import android.os.Build;
-
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
@@ -17,8 +15,7 @@ import sk.berops.android.vehiculum.dataModel.expense.Entry;
 import sk.berops.android.vehiculum.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.vehiculum.dataModel.maintenance.Tyre;
 import sk.berops.android.vehiculum.dataModel.tags.Tag;
-import sk.berops.android.vehiculum.engine.Searchable;
-import sk.berops.android.vehiculum.engine.Updatable;
+import sk.berops.android.vehiculum.engine.synchronization.controllers.GarageController;
 
 @Root
 public class Garage extends Record {
@@ -52,6 +49,11 @@ public class Garage extends Record {
 			root.setParent(null);
 			setRootTag(root);
 		}
+	}
+
+	@Override
+	public GarageController getController() {
+		return new GarageController(this);
 	}
 
 	public LinkedList<Car> getCars() {

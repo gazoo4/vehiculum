@@ -47,52 +47,6 @@ public class Expense extends Record {
 		}
 		generateSI();
 	}
-
-	/**
-	 * Override method hashCode
-	 * @return hashcode of this object
-	 */
-	@Override
-	public int hashCode() {
-		int result = super.hashCode();
-		long temp;
-		result = 31 * result + (eventDate != null ? eventDate.hashCode() : 0);
-		temp = Double.doubleToLongBits(cost);
-		result = 31 * result + (int) (temp ^ (temp >>> 32));
-		result = 31 * result + (currency != null ? currency.hashCode() : 0);
-		return result;
-	}
-
-	/**
-	 * Overriden method equals for comparing 2 Expenses
-	 * @param obj
-	 * @return true is objects are equal. Otherwise false.
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		// Basic checks
-		if (obj == null) {
-			return false;
-		}
-		if (!Expense.class.isAssignableFrom(obj.getClass())) {
-			return false;
-		}
-		if (!super.equals(obj)) {
-			return false;
-		}
-
-		final Expense other = (Expense) obj;
-		if ((this.eventDate == null) ? (other.eventDate != null) : !this.eventDate.equals(other.eventDate)) {
-			return false;
-		}
-		if (this.cost != other.cost) {
-			return false;
-		}
-		if ((this.currency == null) ? (other.currency != null) : !this.currency.equals(other.currency)) {
-			return false;
-		}
-		return true;
-	}
 	
 	public void generateSI() {
 		setCost(getCost(), getCurrency());

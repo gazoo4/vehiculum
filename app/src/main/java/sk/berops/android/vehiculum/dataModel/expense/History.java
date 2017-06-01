@@ -15,7 +15,7 @@ import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.vehiculum.engine.Searchable;
 
-public class History implements Serializable, Searchable {
+public class History extends Record {
 
 	private static final long serialVersionUID = -850435628372657221L;
 	@ElementList(inline=true, required=false)

@@ -7,9 +7,24 @@ import java.util.Date;
 import java.util.UUID;
 
 import sk.berops.android.vehiculum.engine.Searchable;
-import sk.berops.android.vehiculum.engine.controllers.RecordController;
+import sk.berops.android.vehiculum.engine.synchronization.controllers.RecordController;
 
-public abstract class Record implements Serializable, Identifiable, Searchable {
+public class Record implements Serializable, Identifiable, Searchable {
+	// largest signed integer (31bit) prime
+	protected static int EMPTY_RECORD_HASH_CODE = 0x7FFFFFFF;
+
+	/**
+	 * Define an empty Record container, so that in case an axle doesn't have wheels installed,
+	 * we don't use "null" references as these are not synchronized during the updates
+	 */
+	public static final Record NULL;
+	static {
+		NULL = new Record();
+		NULL.setEmpty(true);
+	}
+
+	@Element(name="empty", required=false)
+	private boolean empty;
 	@Element(name="comment", required=false)
 	private String comment;
 	@Element(name="creationDate")
@@ -49,6 +64,11 @@ public abstract class Record implements Serializable, Identifiable, Searchable {
 	 */
 	@Override
 	public int hashCode() {
+		if (isEmpty()) {
+			// all the empty Records should return this value as we don't distinguish between empty
+			// car or empty garage; this depends on the context
+			return EMPTY_RECORD_HASH_CODE;
+		}
 		return uuid.hashCode();
 	}
 
@@ -69,12 +89,21 @@ public abstract class Record implements Serializable, Identifiable, Searchable {
 
 
 		final Record other = (Record) obj;
+		if (this.isEmpty() && other.isEmpty()) {
+			return true;
+		}
 		if ((this.uuid == null) ? (other.uuid != null) : (!this.uuid.equals(other.uuid))) {
 			return false;
 		}
 		return true;
 	}
 
+	public boolean isEmpty() {
+		return empty;
+	}
+	public void setEmpty(boolean empty) {
+		this.empty = empty;
+	}
 	public String getComment() {
 		return comment;
 	}

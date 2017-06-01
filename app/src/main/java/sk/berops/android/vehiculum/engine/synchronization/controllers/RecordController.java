@@ -1,4 +1,4 @@
-package sk.berops.android.vehiculum.engine.controllers;
+package sk.berops.android.vehiculum.engine.synchronization.controllers;
 
 import android.util.Log;
 
@@ -26,20 +26,20 @@ public class RecordController {
 	}
 
 	public boolean updateRecord(Record recordUpdate) {
-		boolean updateDone = false;
+		boolean updated = false;
 		if (!record.getComment().equals(recordUpdate.getComment())) {
 			logUpdate("comment");
 			record.setComment(recordUpdate.getComment());
-			updateDone = true;
+			updated = true;
 		}
 
 		if (!record.getModifiedDate().equals(recordUpdate.getModifiedDate())) {
 			logUpdate("modifiedDate");
 			record.setModifiedDate(recordUpdate.getModifiedDate());
-			updateDone = true;
+			updated = true;
 		}
 
-		return updateDone;
+		return updated;
 	}
 
 	public boolean deleteRecursively(UUID deleteUUID) {
@@ -49,5 +49,13 @@ public class RecordController {
 
 	public static void logUpdate(String component) {
 		Log.d(LOG_TAG, "Updating "+ component);
+	}
+
+	public static void logFailure(Record record) {
+		logFailure(record.getUuid());
+	}
+
+	public static void logFailure(UUID uuid) {
+		Log.w(LOG_TAG, "Failure processing "+ uuid.toString());
 	}
 }

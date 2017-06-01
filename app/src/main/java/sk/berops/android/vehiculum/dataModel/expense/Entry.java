@@ -69,48 +69,6 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
         return result;
     }
 
-	/**
-	 * Override method hashCode
-	 * @return hashcode of this object
-	 */
-	@Override
-	public int hashCode() {
-		int result = super.hashCode();
-		long temp;
-		temp = Double.doubleToLongBits(mileage);
-		result = 31 * result + (int) (temp ^ (temp >>> 32));
-		result = 31 * result + expenseType.hashCode();
-		return result;
-	}
-
-	/**
-	 * Overriden method equals for comparing 2 Entries
-	 * @param obj
-	 * @return true is objects are equal. Otherwise false.
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		// Basic checks
-		if (obj == null) {
-			return false;
-		}
-		if (!Entry.class.isAssignableFrom(obj.getClass())) {
-			return false;
-		}
-		if (!super.equals(obj)) {
-			return false;
-		}
-
-		final Entry other = (Entry) obj;
-		if (this.mileage != other.mileage) {
-			return false;
-		}
-		if (this.expenseType != other.expenseType) {
-			return false;
-		}
-		return true;
-	}
-
     public int getDynamicId() {
         return dynamicId;
     }
