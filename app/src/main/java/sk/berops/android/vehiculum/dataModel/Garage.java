@@ -51,11 +51,6 @@ public class Garage extends Record {
 		}
 	}
 
-	@Override
-	public GarageController getController() {
-		return new GarageController(this);
-	}
-
 	public LinkedList<Car> getCars() {
 		return cars;
 	}
@@ -178,6 +173,17 @@ public class Garage extends Record {
 
 	public void setRootTag(Tag rootTag) {
 		this.rootTag = rootTag;
+	}
+
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	@Override
+	public GarageController getController() {
+		return new GarageController(this);
 	}
 
 	/****************************** Searchable interface methods follow ***************************/

@@ -22,9 +22,8 @@ public class GarageController extends RecordController {
 	}
 
 	@Override
-	public boolean createRecord(Record child) {
-		boolean updated = false;
-		updated = super.createRecord(child);
+	public boolean createRecord(Record child) throws SynchronizationException {
+		boolean updated = super.createRecord(child);
 
 		if (!(child instanceof Car)) {
 			logFailure(child);
@@ -39,9 +38,8 @@ public class GarageController extends RecordController {
 	}
 
 	@Override
-	public boolean updateRecord(Record recordUpdate) {
-		boolean updated = false;
-		updated = super.updateRecord(recordUpdate);
+	public boolean updateRecord(Record recordUpdate) throws SynchronizationException {
+		boolean updated = super.updateRecord(recordUpdate);
 
 		if (!(recordUpdate instanceof Garage)) {
 			logFailure(recordUpdate);
@@ -50,29 +48,38 @@ public class GarageController extends RecordController {
 
 		Garage garageUpdate = (Garage) recordUpdate;
 		if (garage.getActiveCarId() != garageUpdate.getActiveCarId()) {
-			logUpdate("activeCarID");
 			garage.setActiveCarId(garageUpdate.getActiveCarId());
+			logUpdate("activeCarID");
+			updated = true;
 		}
 
 		if (!garage.getRootTag().equals(garageUpdate.getRootTag())) {
-			logUpdate("rootTag");
 			garage.setRootTag(garageUpdate.getRootTag());
+			logUpdate("rootTag");
+			updated = true;
 		}
 
 		return updated;
 	}
 
 	@Override
-	public boolean deleteRecursively(UUID deleteUUID) {
-		boolean updated = false;
-		updated = super.deleteRecursively(deleteUUID);
+	public boolean deleteRecord(UUID deleteUUID) throws SynchronizationException {
+		boolean updated = super.deleteRecord(deleteUUID);
 
+		Record forDeletion = null;
 		for (Record r: garage.getCars()) {
 			if (r.getUuid().equals(deleteUUID)) {
-				garage.getCars().remove(r);
-				updated = true;
+				forDeletion = r;
 				break;
 			}
+		}
+
+		if (forDeletion != null) {
+			garage.getCars().remove(forDeletion);
+			logUpdate("deleted car");
+			updated = true;
+		} else {
+			logFailure(deleteUUID);
 		}
 
 		return updated;

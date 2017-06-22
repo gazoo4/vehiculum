@@ -33,4 +33,12 @@ public class DataCreate extends DatasetChangeItem {
 	public void setParent(UUID parent) {
 		this.parent = parent;
 	}
+
+	public UUID getBaseRecordUUID() {
+		return parent;
+	}
+
+	public String toString() {
+		return super.toString() + " Child: " + newRecord.getUuid().toString();
+	}
 }

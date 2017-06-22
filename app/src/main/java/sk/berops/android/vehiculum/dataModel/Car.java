@@ -153,11 +153,6 @@ public class Car extends Record implements Serializable {
 		history.initAfterLoad(this);
 	}
 
-	@Override
-	public CarController getController() {
-		return new CarController(this);
-	}
-
 	public String getBrand() {
 		return brand;
 	}
@@ -319,6 +314,18 @@ public class Car extends Record implements Serializable {
 		}
 		return scheme;
 	}
+
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	@Override
+	public CarController getController() {
+		return new CarController(this);
+	}
+
 
 	/****************************** Searchable interface methods follow ***************************/
 

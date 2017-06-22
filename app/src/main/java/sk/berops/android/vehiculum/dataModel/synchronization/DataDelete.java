@@ -10,6 +10,7 @@ import java.util.UUID;
 public class DataDelete extends DatasetChangeItem {
 
 	private UUID uuid;
+	private UUID parent;
 
 	public DataDelete() {
 		setChangeType(ChangeType.DELETE);
@@ -21,5 +22,21 @@ public class DataDelete extends DatasetChangeItem {
 
 	public void setUuid(UUID uuid) {
 		this.uuid = uuid;
+	}
+
+	public UUID getParent() {
+		return parent;
+	}
+
+	public void setParent(UUID parent) {
+		this.parent = parent;
+	}
+
+	public UUID getBaseRecordUUID() {
+		return parent;
+	}
+
+	public String toString() {
+		return super.toString() + " Child: " + uuid.toString();
 	}
 }

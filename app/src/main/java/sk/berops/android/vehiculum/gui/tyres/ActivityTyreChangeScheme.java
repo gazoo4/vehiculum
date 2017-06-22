@@ -372,8 +372,10 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 		if (!isSafeToDelete(tyre)) return false;
 
 		if (tyreList.contains(tyre)) {
+			// Tyre is stored in the pool of available tyres
 			tyreList.remove(tyre);
 		} else {
+			// Tyre is installed on the vehicle
 			GuiUtils.removeTyreFromContainer(tyre, graphics.getTyreGUIObjects());
 		}
 		tyreEntry.getDeletedTyreIDs().add(tyre.getUuid());

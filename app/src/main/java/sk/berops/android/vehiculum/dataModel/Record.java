@@ -6,8 +6,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
+import sk.berops.android.vehiculum.dataModel.synchronization.DatasetChangeItem;
 import sk.berops.android.vehiculum.engine.Searchable;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.RecordController;
+import sk.berops.android.vehiculum.engine.synchronization.controllers.SynchronizationException;
 
 public class Record implements Serializable, Identifiable, Searchable {
 	// largest signed integer (31bit) prime
@@ -52,10 +54,6 @@ public class Record implements Serializable, Identifiable, Searchable {
 		this.modifiedDate = record.modifiedDate;
 		// When using copy constructor, we want to use new UUID for the newly created object.
 		this.uuid = getUuid();
-	}
-
-	public RecordController getController() {
-		return new RecordController(this);
 	}
 
 	/**
@@ -136,6 +134,26 @@ public class Record implements Serializable, Identifiable, Searchable {
 
 	public void generateNewUuid() {
 		uuid = UUID.randomUUID();
+	}
+
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	public RecordController getController() {
+		return new RecordController(this);
+	}
+
+	/**
+	 * Method to dispatch to controller the call to properly synchronize new updates on this object
+	 * @param change
+	 * @return true if synchronization updates properly processed. False otherwise.
+	 * @throws SynchronizationException TODO: most likely to be completely removed
+	 */
+	public boolean updateBy(DatasetChangeItem change) throws SynchronizationException {
+		return getController().processUpdate(change);
 	}
 
 	/****************************** Searchable interface methods follow ***************************/

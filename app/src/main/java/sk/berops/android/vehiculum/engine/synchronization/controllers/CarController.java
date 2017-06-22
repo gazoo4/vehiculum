@@ -14,7 +14,7 @@ import sk.berops.android.vehiculum.engine.synchronization.controllers.RecordCont
  */
 
 public class CarController extends RecordController {
-	public static String LOG_TAG = "RecordController";
+	public static String LOG_TAG = "CarController";
 
 	private Car car;
 
@@ -24,9 +24,8 @@ public class CarController extends RecordController {
 	}
 
 	@Override
-	public boolean createRecord(Record child) {
-		boolean updated = false;
-		updated = super.createRecord(child);
+	public boolean createRecord(Record child) throws SynchronizationException {
+		boolean updated = super.createRecord(child);
 
 		// Technically the only record we can possibly add to the Car is the TyreConfigurationScheme
 		if (!(child instanceof TyreConfigurationScheme)) {
@@ -35,9 +34,9 @@ public class CarController extends RecordController {
 		}
 
 		if (car.getInitialTyreScheme() == null) {
+			car.setInitialTyreScheme((TyreConfigurationScheme) child);
 			logUpdate("tyreConfigurationScheme");
 			updated = true;
-			car.setInitialTyreScheme((TyreConfigurationScheme) child);
 		} else {
 			logFailure(child);
 		}
@@ -46,9 +45,8 @@ public class CarController extends RecordController {
 	}
 
 	@Override
-	public boolean updateRecord(Record recordUpdate) {
-		boolean updated = false;
-		updated = super.updateRecord(recordUpdate);
+	public boolean updateRecord(Record recordUpdate) throws SynchronizationException {
+		boolean updated = super.updateRecord(recordUpdate);
 
 		if (!(recordUpdate instanceof Car)) {
 			logFailure(recordUpdate);
@@ -57,18 +55,17 @@ public class CarController extends RecordController {
 
 		Car carUpdate = (Car) recordUpdate;
 		if (!car.getNickname().equals(carUpdate.getNickname())) {
-			logUpdate("nickname");
 			car.setNickname(carUpdate.getNickname());
+			logUpdate("nickname");
+			updated = true;
 		}
-
 
 		return updated;
 	}
 
 	@Override
-	public boolean deleteRecursively(UUID deleteUUID) {
+	public boolean deleteRecord(UUID deleteUUID) {
 		boolean updated = false;
-		updated = super.deleteRecursively(deleteUUID);
 
 		if (car.getRecordByUUID(deleteUUID) == car.getInitialTyreScheme()) {
 			car.setInitialTyreScheme(null);
@@ -77,6 +74,7 @@ public class CarController extends RecordController {
 		} else {
 			logFailure(deleteUUID);
 		}
+
 		return updated;
 	}
 }

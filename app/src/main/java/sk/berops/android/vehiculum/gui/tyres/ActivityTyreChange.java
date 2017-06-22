@@ -129,7 +129,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 			tyreChangeEntry.setTyresCost(tyresCost);
 			cost += tyresCost;
 		} catch (NumberFormatException ex) {
-			Log.d("DEBUG", "Reading costs, hit an empty field: "+ getResources().getString(R.string.activity_tyre_change_small_parts_cost_hint));
+			Log.d("DEBUG", "Reading costs, hit an empty field: "+ getResources().getString(R.string.activity_tyre_change_tyres_cost_hint));
 		}
 
 		return cost;

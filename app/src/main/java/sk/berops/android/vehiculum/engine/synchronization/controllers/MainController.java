@@ -49,53 +49,34 @@ public class MainController implements DatasetUpdatable {
 		// https://stackoverflow.com/questions/11508613/how-does-push-notification-technology-work-on-android
 	}
 
-	public void processIncomingUpdates() {
+	/**
+	 *
+	 */
+	public synchronized void processIncomingUpdates() {
 		if (incomingUpdates.size() > 0) {
 			// We need to process the incoming updates to the dataset
 			LinkedList<DatasetChangeItem> successfulUpdates = new LinkedList<>();
-			for (DatasetChangeItem change: incomingUpdates) {
-				if (updateLocalDataset(change)) {
-					// We can't alter the list we crawl through
-					successfulUpdates.add(change);
+			for (DatasetChangeItem change : incomingUpdates) {
+				try {
+					if (updateLocalDataset(change)) {
+						// We can't alter the list we crawl through
+						successfulUpdates.add(change);
+					}
+				} catch (SynchronizationException ex) {
+					Log.e(LOG_TAG, "Data synchronization failed for "+ change.getBaseRecordUUID().toString());
 				}
 			}
 
-			// Remove processed updates from the incoming queue
-			for (DatasetChangeItem change: successfulUpdates) {
+			// Remove the successfully processed updates from the incoming queue
+			for (DatasetChangeItem change : successfulUpdates) {
 				incomingUpdates.remove(change);
 			}
 		}
 	}
 
-	/**
-	 * Method to update the local dataset based on the change request received
-	 * @param change request
-	 * @return true if dataset was successfully updated
-	 */
-	private boolean updateLocalDataset(DatasetChangeItem change) {
-		// Check for a potential ClassCastException
-		if (!change.getChangeType().getAClass().isInstance(change)) {
-			return false;
-		}
-
-		Record record, parent;
-		switch (change.getChangeType()) {
-			case CREATE:
-				DataCreate createRequest = (DataCreate) change;
-				parent = getRecordByUUID(createRequest.getParent());
-				return parent.getController().createRecord(createRequest.getNewRecord());
-			case UPDATE:
-				DataUpdate updateRequest = (DataUpdate) change;
-				record = getRecordByUUID(updateRequest.getUpdatedRecord().getUuid());
-				return record.getController().updateRecord(updateRequest.getUpdatedRecord());
-			case DELETE:
-				DataDelete deleteRequest = (DataDelete) change;
-				return MainActivity.garage.getController().deleteRecursively(deleteRequest.getUuid());
-			default:
-				Log.w(LOG_TAG, "Unable to process this DatasetChangeItem request");
-				// we haven't been able to process the update
-				return false;
-		}
+	private boolean updateLocalDataset(DatasetChangeItem change) throws SynchronizationException {
+		Record record = getRecordByUUID(change.getBaseRecordUUID());
+		return record.updateBy(change);
 	}
 
 	private Record getRecordByUUID(UUID uuid) {

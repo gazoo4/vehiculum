@@ -2,6 +2,9 @@ package sk.berops.android.vehiculum.dataModel.synchronization;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+
+import sk.berops.android.vehiculum.dataModel.Record;
 
 /**
  * This class represents an information update done on the garage dataset. This information is usually used
@@ -71,6 +74,8 @@ public abstract class DatasetChangeItem {
 			this.aClass = aClass;
 		}
 	}
+
+	public abstract UUID getBaseRecordUUID();
 	
 	public ChangeType getChangeType() {
 		return changeType;
@@ -78,5 +83,10 @@ public abstract class DatasetChangeItem {
 
 	public void setChangeType(ChangeType changeType) {
 		this.changeType = changeType;
+	}
+
+	public String toString() {
+		String result = "Parent: " + getBaseRecordUUID().toString() + " & Action: " + changeType.toString();
+		return result;
 	}
 }

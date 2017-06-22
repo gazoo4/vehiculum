@@ -1,5 +1,7 @@
 package sk.berops.android.vehiculum.dataModel.synchronization;
 
+import java.util.UUID;
+
 import sk.berops.android.vehiculum.dataModel.Record;
 
 /**
@@ -21,5 +23,9 @@ public class DataUpdate extends DatasetChangeItem {
 
 	public void setUpdatedRecord(Record updatedRecord) {
 		this.updatedRecord = updatedRecord;
+	}
+
+	public UUID getBaseRecordUUID() {
+		return updatedRecord.getUuid();
 	}
 }

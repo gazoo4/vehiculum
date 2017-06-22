@@ -14,6 +14,7 @@ import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.calculation.Consumption;
 import sk.berops.android.vehiculum.dataModel.tags.Tag;
 import sk.berops.android.vehiculum.dataModel.tags.Taggable;
+import sk.berops.android.vehiculum.engine.synchronization.controllers.EntryController;
 
 public abstract class Entry extends Expense implements Comparable<Entry>, Taggable {
     private int dynamicId;
@@ -250,6 +251,17 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
 	    }
 	    this.tagUuids = tagUuids;
     }
+
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	@Override
+	public EntryController getController() {
+		return new EntryController(this);
+	}
 
 	/****************************** Searchable interface methods follow ***************************/
 

@@ -14,6 +14,7 @@ import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.vehiculum.engine.Searchable;
+import sk.berops.android.vehiculum.engine.synchronization.controllers.HistoryController;
 
 public class History extends Record {
 
@@ -30,7 +31,6 @@ public class History extends Record {
 		for (Entry e : getEntries()) {
 			e.initAfterLoad(car);
 		}
-		
 	}
 	
 	public Entry getEntry(int dynamicID) {
@@ -169,6 +169,17 @@ public class History extends Record {
 		}
 
 		entries.removeAll(outOfScope);
+	}
+
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	@Override
+	public HistoryController getController() {
+		return new HistoryController(this);
 	}
 
 	/****************************** Searchable interface methods follow ***************************/
