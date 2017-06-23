@@ -152,6 +152,7 @@
     <string name="activity_tyre_change_comment_hint"				>Additional comment</string>
     <string name="activity_tyre_change_labor_cost_hint"				>Labor cost</string>
     <string name="activity_tyre_change_small_parts_cost_hint"		>Cost of small parts</string>
+    <string name="activity_tyre_change_scheme_axle_text"			>axle</string>
     <string name="activity_tyre_change_scheme_brand_model_text"		>Brand, model: </string>
     <string name="activity_tyre_change_scheme_button_save"		    >Save scheme</string>
     <string name="activity_tyre_change_scheme_button_tyre_add"		>Add new</string>
@@ -159,8 +160,11 @@
     <string name="activity_tyre_change_scheme_button_tyre_move"		>==&gt;&gt;</string>
     <string name="activity_tyre_change_scheme_dimensions_text"		>Dimensions: </string>
     <string name="activity_tyre_change_scheme_dot_year_wear_text"	>DOT: </string>
+    <string name="activity_tyre_change_scheme_driven_text"		    >driven</string>
     <string name="activity_tyre_change_scheme_mileage_text"			>Mileage: </string>
+    <string name="activity_tyre_change_scheme_nondriven_text"		>non-driven</string>
     <string name="activity_tyre_change_scheme_pattern_text"			>Tread pattern: </string>
+    <string name="activity_tyre_change_scheme_pattern_tread_left"	>tread left</string>
     <string name="activity_tyre_change_scheme_tyre_used_alert_1"	>Can\'t delete the tyre as it\'s in use by Entry ID #</string> <!-- entry.getDynamicID() -->
     <string name="activity_tyre_change_scheme_tyre_used_alert_2"	> from </string> <!-- entry.getEventDate() -->
     <string name="activity_tyre_change_scheme_tyre_used_alert_3"	> on car </string> <!-- entry.getCar() -->

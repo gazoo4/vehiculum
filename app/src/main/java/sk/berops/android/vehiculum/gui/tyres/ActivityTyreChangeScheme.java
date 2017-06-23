@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -207,7 +208,9 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 	 */
 	private void reloadTyreStats(Tyre tyre) {
 		String text;
-		try {
+		if (tyre.equals(Tyre.NULL)) {
+			text = null;
+		} else {
 			text = "";
 			if (tyre.getBrand() != null) {
 				text = tyre.getBrand() + " ";
@@ -215,46 +218,55 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 			if (tyre.getModel() != null) {
 				text += tyre.getModel();
 			}
-		} catch (NullPointerException e) {
-			text = null;
 		}
 		reloadSingleTyreStat(text, textViewBrandModelHint, textViewBrandModelValue);
-		try {
-			text = "";
-			if (tyre.getWidth() == 0 && tyre.getHeight() == 0 && tyre.getDiameter() == 0.0)
-				throw new NullPointerException();
-			text = "" + tyre.getWidth() + "/" + tyre.getHeight() + "/R" + tyre.getDiameter();
-		} catch (NullPointerException e) {
+
+		if (tyre.equals(Tyre.NULL)) {
 			text = null;
+		} else {
+			text = "";
+			text += (tyre.getWidth() == 0) ? "-" : tyre.getWidth();
+			text += "/";
+			text += (tyre.getHeight() == 0) ? "-" : tyre.getHeight();
+			text += " R";
+			text += (tyre.getDiameter() == 0) ? "-" : tyre.getDiameter();
 		}
 		reloadSingleTyreStat(text, textViewDimensionsHint, textViewDimensionsValue);
-		try {
-			text = "";
-			if (tyre.getDot() == null) throw new NullPointerException();
-			text = tyre.getDot() + " " + tyre.getYear() + " (" + (100 - tyre.getWearLevel()) + "% tread left)";
-		} catch (NullPointerException e) {
+
+		if (tyre.equals(Tyre.NULL)) {
 			text = null;
+		} else {
+			text = "DOT ";
+			text += (tyre.getDot() == null || tyre.getDot().equals("")) ? "----" : tyre.getDot();
+			text += " ";
+			text += (tyre.getYear() == 0) ? "----" : tyre.getYear();
+			text += " ";
+			text += (tyre.getWearLevel() == 0) ?
+					"" :
+					" (" + (100 - tyre.getWearLevel()) + "% " + getString(R.string.activity_tyre_change_scheme_pattern_tread_left) + ")";
 		}
 		reloadSingleTyreStat(text, textViewDotYearWearHint, textViewDotYearWearValue);
-		try {
-			text = "";
-			if (tyre.getMileageDriveAxle() != 0.0) {
-				text += tyre.getMileageDriveAxle() + " (engine driven axle) ";
-			}
-			if (tyre.getMileageNonDriveAxle() != 0.0) {
-				text += tyre.getMileageDriveAxle() + " (non-driven axle) ";
-			}
-			if (tyre.getMileageDriveAxle() != 0.0 && tyre.getMileageNonDriveAxle() != 0.0) {
-				text += (tyre.getMileageDriveAxle() + tyre.getMileageNonDriveAxle()) + " (total)";
-			}
-		} catch (NullPointerException e) {
+
+		if (tyre.equals(Tyre.NULL)) {
 			text = null;
+		} else {
+			text = "";
+			double mileage = tyre.getMileageDriveAxle() + tyre.getMileageNonDriveAxle();
+			if (mileage != 0.0) {
+				text += getString(R.string.activity_tyre_change_scheme_mileage_text) + ": " + mileage;
+				int drivenMileage = (int) (100 * tyre.getMileageDriveAxle() / mileage);
+				int nonDrivenMileage = (int) (100 * tyre.getMileageNonDriveAxle() / mileage);
+				text += " (" + drivenMileage + "% " + getString(R.string.activity_tyre_change_scheme_driven_text);
+				text += "/" + nonDrivenMileage + "% " + getString(R.string.activity_tyre_change_scheme_nondriven_text);
+				text += getString(R.string.activity_tyre_change_scheme_axle_text)+ ")";
+			}
 		}
 		reloadSingleTyreStat(text, textViewMileageHint, textViewMileageValue);
-		try {
-			text = tyre.getSeason().getSeason();
-		} catch (NullPointerException e) {
+
+		if (tyre.equals(Tyre.NULL)) {
 			text = null;
+		} else {
+			text = tyre.getSeason().getSeason();
 		}
 		reloadSingleTyreStat(text, textViewPatternHint, textViewPatternValue);
 	}
@@ -265,7 +277,7 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 	 * @param hintView view carrying the text hint (e.g. brand, model)
 	 * @param valueView view carrying the values (e.g. UnitedTyres, WinterWind T100)
 	 */
-	private void reloadSingleTyreStat(String text, TextView hintView, TextView valueView) {
+	private void reloadSingleTyreStat(@Nullable String text, TextView hintView, TextView valueView) {
 		if (text == null || text == "") {
 			hintView.setVisibility(View.GONE);
 			valueView.setVisibility(View.GONE);
@@ -275,7 +287,6 @@ public class ActivityTyreChangeScheme extends DefaultActivity implements TouchCa
 			valueView.setVisibility(View.VISIBLE);
 		}
 	}
-
 
 	@Override
 	public void touchCallback(float x, float y) {

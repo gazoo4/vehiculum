@@ -12,9 +12,7 @@ import sk.berops.android.vehiculum.dataModel.expense.Entry;
  * @date 6/21/17
  */
 
-public class EntryController extends RecordController {
-	public static String LOG_TAG = "EntryController";
-
+public class EntryController extends ExpenseController {
 	private Entry entry;
 
 	public EntryController(Entry entry) {
@@ -26,7 +24,7 @@ public class EntryController extends RecordController {
 	public boolean createRecord(Record child) throws SynchronizationException {
 		boolean updated = super.createRecord(child);
 
-		// There's no child record attached to Entry
+		// There are no child references possible from Entry object
 		return updated;
 	}
 

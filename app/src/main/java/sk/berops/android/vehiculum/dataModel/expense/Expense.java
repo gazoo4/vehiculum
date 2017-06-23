@@ -7,6 +7,7 @@ import java.util.Date;
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.Record;
+import sk.berops.android.vehiculum.engine.synchronization.controllers.ExpenseController;
 
 public class Expense extends Record {
 
@@ -94,5 +95,16 @@ public class Expense extends Record {
 
 	public double getCostEur() {
 		return this.costEur;
+	}
+
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	@Override
+	public ExpenseController getController() {
+		return new ExpenseController(this);
 	}
 }
