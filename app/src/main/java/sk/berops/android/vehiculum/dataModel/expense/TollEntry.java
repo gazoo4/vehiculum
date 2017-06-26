@@ -5,6 +5,8 @@ import org.simpleframework.xml.Element;
 import java.util.HashMap;
 import java.util.Map;
 
+import sk.berops.android.vehiculum.engine.synchronization.controllers.TollEntryController;
+
 public class TollEntry extends Entry {
 	@Element(name="type")
 	private Type type;
@@ -80,5 +82,16 @@ public class TollEntry extends Entry {
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	@Override
+	public TollEntryController getController() {
+		return new TollEntryController(this);
 	}
 }

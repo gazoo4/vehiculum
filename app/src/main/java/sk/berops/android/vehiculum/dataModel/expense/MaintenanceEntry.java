@@ -13,6 +13,7 @@ import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.Currency.Unit;
 import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.maintenance.ReplacementPart;
+import sk.berops.android.vehiculum.engine.synchronization.controllers.MaintenanceEntryController;
 
 public class MaintenanceEntry extends Entry {
 	@Element(name="type")
@@ -127,6 +128,7 @@ public class MaintenanceEntry extends Entry {
 
 	public void setLaborCostCurrency(Currency.Unit laborCostCurrency) {
 		this.laborCostCurrency = laborCostCurrency;
+		setLaborCostSI(Currency.convertToSI(getLaborCost(), getLaborCostCurrency(), getEventDate()));
 	}
 
 	public LinkedList<ReplacementPart> getParts() {
@@ -142,6 +144,17 @@ public class MaintenanceEntry extends Entry {
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	@Override
+	public MaintenanceEntryController getController() {
+		return new MaintenanceEntryController(this);
 	}
 
 	/****************************** Searchable interface methods follow ***************************/

@@ -16,6 +16,7 @@ import sk.berops.android.vehiculum.dataModel.Axle;
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Car.CarType;
 import sk.berops.android.vehiculum.dataModel.Record;
+import sk.berops.android.vehiculum.engine.synchronization.controllers.TyreConfigurationSchemeController;
 
 /**
  * This object holds the configuration of the tyres on the car
@@ -125,6 +126,16 @@ public class TyreConfigurationScheme extends Record implements Cloneable {
 		return scheme;
 	}
 
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	@Override
+	public TyreConfigurationSchemeController getController() {
+		return new TyreConfigurationSchemeController(this);
+	}
 
 	/****************************** Searchable interface methods follow ***************************/
 

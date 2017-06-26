@@ -18,6 +18,7 @@ import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.maintenance.Tyre;
 import sk.berops.android.vehiculum.dataModel.maintenance.TyreConfigurationScheme;
+import sk.berops.android.vehiculum.engine.synchronization.controllers.TyreChangeEntryController;
 import sk.berops.android.vehiculum.gui.MainActivity;
 
 public class TyreChangeEntry extends Entry {
@@ -258,6 +259,17 @@ public class TyreChangeEntry extends Entry {
 			}
 		}
 		return tyres;
+	}
+
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	@Override
+	public TyreChangeEntryController getController() {
+		return new TyreChangeEntryController(this);
 	}
 
 	/****************************** Searchable interface methods follow ***************************/

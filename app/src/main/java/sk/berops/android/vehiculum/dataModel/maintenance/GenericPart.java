@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import sk.berops.android.vehiculum.dataModel.expense.Expense;
+import sk.berops.android.vehiculum.engine.synchronization.controllers.GenericPartController;
 
 public abstract class GenericPart extends Expense {
 	@Element(name="condition")
@@ -105,5 +106,16 @@ public abstract class GenericPart extends Expense {
 	}
 	public void setCarmakerPartID(String carmakerPartID) {
 		this.carmakerPartID = carmakerPartID;
+	}
+
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	@Override
+	public GenericPartController getController() {
+		return new GenericPartController(this);
 	}
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Record;
+import sk.berops.android.vehiculum.engine.synchronization.controllers.ReplacementPartController;
 
 public class ReplacementPart extends GenericPart {
 
@@ -82,5 +83,16 @@ public class ReplacementPart extends GenericPart {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	@Override
+	public ReplacementPartController getController() {
+		return new ReplacementPartController(this);
 	}
 }

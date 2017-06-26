@@ -68,6 +68,7 @@ public class Expense extends Record {
 	public void setCost(double cost, Currency.Unit currency) {
 		this.cost = cost;
 		this.currency = currency;
+		// TODO: setCostEur based on the conversionRate of the date
 	}
 	public double getCostSI() {
 		return Currency.convertToSI(getCost(), getCurrency(), getEventDate());

@@ -1,7 +1,6 @@
 package sk.berops.android.vehiculum.engine.synchronization.controllers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Record;
@@ -47,7 +46,6 @@ public class EntryController extends ExpenseController {
 		// Any UUIDs being deleted?
 		tags.retainAll(tagsUpdate);
 		if (tags.size() != size) {
-			size = tags.size();
 			logUpdate("tag");
 			updated = true;
 		}

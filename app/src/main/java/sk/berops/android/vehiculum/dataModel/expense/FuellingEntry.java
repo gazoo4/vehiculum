@@ -8,6 +8,7 @@ import java.util.Map;
 import sk.berops.android.vehiculum.dataModel.UnitConstants;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.QuantityUnit;
 import sk.berops.android.vehiculum.dataModel.calculation.FuelConsumption;
+import sk.berops.android.vehiculum.engine.synchronization.controllers.FuellingEntryController;
 
 public class FuellingEntry extends Entry {
 	@Element(name="fuelQuantity")
@@ -136,8 +137,20 @@ public class FuellingEntry extends Entry {
 
 	public void setQuantityUnit(QuantityUnit quantityUnit) {
 		this.quantityUnit = quantityUnit;
+		setFuelQuantitySI(fuelQuantity * quantityUnit.getCoef());
 	}
 	public FuelConsumption getFuelConsumption() {
 		return (FuelConsumption) this.getConsumption();
+	}
+
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	@Override
+	public FuellingEntryController getController() {
+		return new FuellingEntryController(this);
 	}
 }
