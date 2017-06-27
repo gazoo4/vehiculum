@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import sk.berops.android.vehiculum.engine.synchronization.controllers.TyreController;
+
 public class Tyre extends GenericPart {
 
 	@Element(name = "model", required = false)
@@ -29,7 +31,7 @@ public class Tyre extends GenericPart {
 	@Element(name = "threadMin", required = false)
 	private double threadMin; // in mm
 	@Element(name = "threadMax", required = false)
-	private int threadMax; // in mm
+	private double threadMax; // in mm
 	@Element(name = "mileageDriveAxle", required = false)
 	private double mileageDriveAxle;
 	private double mileageDriveAxleSI;
@@ -272,14 +274,25 @@ public class Tyre extends GenericPart {
 		this.threadMin = threadMin;
 	}
 
-	public int getThreadMax() {
+	public double getThreadMax() {
 		if (threadMax == 0) {
 			setThreadMax(NEW_TYRE_THREAD_LEVEL);
 		}
 		return threadMax;
 	}
 
-	public void setThreadMax(int threadMax) {
+	public void setThreadMax(double threadMax) {
 		this.threadMax = threadMax;
+	}
+
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	@Override
+	public TyreController getController() {
+		return new TyreController(this);
 	}
 }

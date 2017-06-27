@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Record;
+import sk.berops.android.vehiculum.engine.synchronization.controllers.TagController;
 import sk.berops.android.vehiculum.gui.MainActivity;
 
 /**
@@ -245,6 +246,17 @@ public class Tag extends Record implements Comparable<Tag> {
 	@Override
 	public int compareTo(Tag another) {
 		return this.getName().compareTo(another.getName());
+	}
+
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	@Override
+	public TagController getController() {
+		return new TagController(this);
 	}
 
 	/****************************** Searchable interface methods follow ***************************/
