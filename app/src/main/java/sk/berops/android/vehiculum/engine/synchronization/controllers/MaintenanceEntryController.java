@@ -53,15 +53,9 @@ public class MaintenanceEntryController extends EntryController {
 			updated = true;
 		}
 
-		if (maintenanceEntry.getLaborCost() != entryUpdate.getLaborCost()) {
-			maintenanceEntry.setLaborCost(entryUpdate.getLaborCost(), maintenanceEntry.getLaborCostCurrency());
+		if (! maintenanceEntry.getLaborCost().equals(entryUpdate.getLaborCost())) {
+			maintenanceEntry.setLaborCost(entryUpdate.getLaborCost());
 			logUpdate("laborCost");
-			updated = true;
-		}
-
-		if (! maintenanceEntry.getLaborCostCurrency().equals(entryUpdate.getLaborCostCurrency())) {
-			maintenanceEntry.setLaborCostCurrency(((MaintenanceEntry) recordUpdate).getLaborCostCurrency());
-			logUpdate("laborCostCurrency");
 			updated = true;
 		}
 

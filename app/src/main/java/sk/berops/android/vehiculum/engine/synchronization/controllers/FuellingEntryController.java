@@ -55,7 +55,7 @@ public class FuellingEntryController extends EntryController {
 			updated = true;
 		}
 
-		if (fuellingEntry.getFuelPrice() != entryUpdate.getFuelPrice()) {
+		if (! fuellingEntry.getFuelPrice().equals(entryUpdate.getFuelPrice())) {
 			fuellingEntry.setFuelPrice(entryUpdate.getFuelPrice());
 			logUpdate("fuelPrice");
 			updated = true;

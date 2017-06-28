@@ -2,6 +2,7 @@ package sk.berops.android.vehiculum.engine.synchronization.controllers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeSet;
 import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Record;
@@ -92,12 +93,16 @@ public class TyreChangeEntryController extends EntryController {
 		HashMap<UUID, Double> mapUpdate = entryUpdate.getThreadLevelUpdate();
 
 		// Any values being deleted?
+		TreeSet<UUID> removeSet = new TreeSet<>();
 		for (UUID key: map.keySet()) {
 			if (! mapUpdate.containsKey(key)) {
-				map.remove(key);
+				removeSet.add(key);
 				logUpdate("threadLevel");
 				updated = true;
 			}
+		}
+		for (UUID key: removeSet) {
+			map.remove(key);
 		}
 
 		// Any new values being added?

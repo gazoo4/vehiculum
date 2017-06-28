@@ -49,9 +49,6 @@ public class MainController implements DatasetUpdatable {
 		// https://stackoverflow.com/questions/11508613/how-does-push-notification-technology-work-on-android
 	}
 
-	/**
-	 *
-	 */
 	public synchronized void processIncomingUpdates() {
 		if (incomingUpdates.size() > 0) {
 			// We need to process the incoming updates to the dataset

@@ -16,7 +16,7 @@ public class Record implements Serializable, Identifiable, Searchable {
 	protected static int EMPTY_RECORD_HASH_CODE = 0x7FFFFFFF;
 
 	/**
-	 * Define an empty Record container, so that in case an axle doesn't have wheels installed,
+	 * Define an empty Record container, so that e.g. in case an axle doesn't have wheels installed,
 	 * we don't use "null" references as these are not synchronized during the updates
 	 */
 	public static final Record NULL;

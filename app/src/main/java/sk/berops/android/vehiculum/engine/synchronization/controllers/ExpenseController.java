@@ -43,20 +43,8 @@ public class ExpenseController extends RecordController {
 		}
 
 		if (expense.getCost() != expenseUpdate.getCost()) {
-			expense.setCost(expenseUpdate.getCost(), expense.getCurrency());
+			expense.setCost(expenseUpdate.getCost());
 			logUpdate("cost");
-			updated = true;
-		}
-
-		if (! expense.getCurrency().equals(expenseUpdate.getCurrency())) {
-			expense.setCurrency(expenseUpdate.getCurrency());
-			logUpdate("currency");
-			updated = true;
-		}
-
-		if (expense.getCostEur() != expenseUpdate.getCostEur()) {
-			expense.setCostEur(expenseUpdate.getCostEur());
-			logUpdate("costEur");
 			updated = true;
 		}
 

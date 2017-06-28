@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Currency;
@@ -19,11 +20,7 @@ public class MaintenanceEntry extends Entry {
 	@Element(name="type")
 	private Type type;
 	@Element(name="laborCost", required=false)
-	private double laborCost;
-	@Element(name="laborCostSI", required=false)
-	private double laborCostSI;
-	@Element(name="laborCostCurrency", required=false)
-	private Currency.Unit laborCostCurrency;
+	private Cost laborCost;
 	@ElementList(inline=true, required=false)
 	private LinkedList<ReplacementPart> parts;
 	
@@ -91,44 +88,44 @@ public class MaintenanceEntry extends Entry {
 		}
 	}
 	
-	public double getPartsCostSI() {
-		if (getParts() == null) return 0;
-		
-		double partsCost = 0;
-			for (ReplacementPart p : getParts()) {
-				partsCost += p.getCostSI() * p.getQuantity();
+	public Cost getPartsCostSI() {
+		Cost result = new Cost();
+		if ((getParts() == null)
+			|| (getParts().size() == 0)) {
+			return result;
+		}
+
+		for (Currency.Unit unit: getParts().getFirst().getCost().getCosts().keySet()) {
+			for (ReplacementPart p: getParts()) {
+				if (p.getCost().getCosts().get(unit) == null) {
+					// If there's no price of all the parts in the desired currency, don't do a calculation for this currency
+					continue;
+				}
 			}
-			
-		return partsCost;
+			result.getCosts().put(unit, 0.0);
+		}
+
+		double cost;
+		for (ReplacementPart p : getParts()) {
+			for (Currency.Unit unit: result.getCosts().keySet()) {
+				cost = result.getCost(unit);
+				cost += p.getCost().getCosts().get(unit) * p.getQuantity();
+				result.getCosts().put(unit, cost);
+			}
+		}
+
+		return result;
 	}
 	
 	public int compareTo(MaintenanceEntry e) {
 		return super.compareTo(e);
 	}
 	
-	public double getLaborCost() {
+	public Cost getLaborCost() {
 		return laborCost;
 	}
-	public void setLaborCost(double laborCost, Unit currency) {
+	public void setLaborCost(Cost laborCost) {
 		this.laborCost = laborCost;
-		this.laborCostCurrency = currency;
-		setLaborCostSI(Currency.convertToSI(getLaborCost(), getLaborCostCurrency(), getEventDate()));
-	}
-	public double getLaborCostSI() {
-		return laborCostSI;
-	}
-
-	public void setLaborCostSI(double laborCostSI) {
-		this.laborCostSI = laborCostSI;
-	}
-
-	public Currency.Unit getLaborCostCurrency() {
-		return laborCostCurrency;
-	}
-
-	public void setLaborCostCurrency(Currency.Unit laborCostCurrency) {
-		this.laborCostCurrency = laborCostCurrency;
-		setLaborCostSI(Currency.convertToSI(getLaborCost(), getLaborCostCurrency(), getEventDate()));
 	}
 
 	public LinkedList<ReplacementPart> getParts() {

@@ -5,6 +5,7 @@ import org.simpleframework.xml.Element;
 import java.util.HashMap;
 import java.util.Map;
 
+import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.UnitConstants;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.QuantityUnit;
 import sk.berops.android.vehiculum.dataModel.calculation.FuelConsumption;
@@ -19,7 +20,7 @@ public class FuellingEntry extends Entry {
 	@Element(name="fuelType")
 	private FuelType fuelType;
 	@Element(name="fuelPrice", required=false)
-	private double fuelPrice;
+	private Cost fuelPrice;
 
 	public enum FuelType{
 		GASOLINE(0, "gasoline", 0xFFDA3BB0, UnitConstants.Substance.LIQUID),
@@ -114,14 +115,19 @@ public class FuellingEntry extends Entry {
 		this.quantityUnit = unit;
 		setFuelQuantitySI(fuelQuantity * unit.getCoef());
 	}
-	public double getFuelPrice() {
-		if (fuelPrice == 0.0) {
-			return getCostSI()/getFuelQuantitySI();
-		} else {
-			return fuelPrice;
+	public Cost getFuelPrice() {
+		if (fuelPrice == null) {
+			fuelPrice = new Cost();
+			Double price;
+			for (Currency.Unit unit: getCost().getCosts().keySet()) {
+				price = getCost().getCosts().get(unit) / getFuelQuantitySI();
+				fuelPrice.getCosts().put(unit, price);
+			}
 		}
+
+		return fuelPrice;
 	}
-	public void setFuelPrice(double fuelPrice) {
+	public void setFuelPrice(Cost fuelPrice) {
 		this.fuelPrice = fuelPrice;
 	}
 	public double getFuelQuantitySI() {

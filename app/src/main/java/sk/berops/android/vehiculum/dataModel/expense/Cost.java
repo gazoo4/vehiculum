@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.TreeMap;
 
 import sk.berops.android.vehiculum.dataModel.Currency;
+import sk.berops.android.vehiculum.dataModel.Record;
+import sk.berops.android.vehiculum.engine.synchronization.controllers.CostController;
 
 /**
  * @author Bernard Halas
@@ -20,7 +22,7 @@ import sk.berops.android.vehiculum.dataModel.Currency;
  * This class records also the prices in other currencies (if a conversion is done).
  */
 
-public class Cost {
+public class Cost extends Record {
 	/**
 	 * Map that holds value in various currencies (after conversion has been done)
 	 */
@@ -68,6 +70,9 @@ public class Cost {
 	}
 
 	public Currency.Unit getRecordUnit() {
+		if (recordUnit == null) {
+			recordUnit = Currency.Unit.EUR;
+		}
 		return recordUnit;
 	}
 
@@ -111,15 +116,38 @@ public class Cost {
 		return true;
 	}
 
+	/**
+	 *
+	 * @param other
+	 * @return
+	 */
 	public int compareTo(Cost other) {
 		HashSet<Currency.Unit> units = new HashSet<>();
 		units.add(Currency.Unit.EUR);
 		units.add(recordUnit);
 		units.add(other.recordUnit);
 
-		for (Currency.Unit c: units) {
-			if ()
+		for (Currency.Unit u: units) {
+			Double value1 = costs.get(u);
+			Double value2 = other.costs.get(u);
+			if ((value1 != null)
+				&& (value2 != null)) {
+				return value1.compareTo(value2);
+			}
 		}
-		return 0;
+
+		Log.w(this.getClass().toString(), "Cost comparison failure");
+		throw new NullPointerException("Unable to find non-null values for comparison");
+	}
+
+	/****************************** Controller-relevant methods ***********************************/
+
+	/**
+	 * This method creates and provides a controller that will do all the synchronization updates on this object
+	 * @return controller
+	 */
+	@Override
+	public CostController getController() {
+		return new CostController(this);
 	}
 }

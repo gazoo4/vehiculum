@@ -231,6 +231,11 @@ public class Currency {
 		public void setLongUnit(String longUnit) {
 			this.longUnit = longUnit;
 		}
+
+		@Override
+		public String toString() {
+			return getUnitIsoCode();
+		}
 	}
 
 	public Unit getUnit() {

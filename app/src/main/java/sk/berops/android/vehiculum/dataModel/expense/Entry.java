@@ -5,7 +5,6 @@ import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
@@ -43,9 +42,7 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
 
     @Override
     public void generateSI() {
-        super.generateSI();
         setMileage(getMileage());
-        setCost(getCost(), getCurrency());
     }
 
 	/**

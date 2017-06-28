@@ -2,9 +2,11 @@ package sk.berops.android.vehiculum.engine.synchronization.controllers;
 
 import java.util.HashMap;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Axle;
+import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.Record;
 
 /**
@@ -55,12 +57,16 @@ public class AxleController extends RecordController {
 		TreeMap<Integer, UUID> mapUpdate = axleUpdate.getTyreIDs();
 
 		// Any object being removed from the map?
+		TreeSet<Integer> removeSet = new TreeSet<>();
 		for (Integer key: map.keySet()) {
 			if (! mapUpdate.containsKey(key)) {
-				map.remove(key);
+				removeSet.add(key);
 				logUpdate("tyre");
 				updated = true;
 			}
+		}
+		for (Integer key: removeSet) {
+			map.remove(key);
 		}
 
 		// Any object being added to the map?

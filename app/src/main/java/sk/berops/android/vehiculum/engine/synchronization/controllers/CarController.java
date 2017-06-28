@@ -54,12 +54,59 @@ public class CarController extends RecordController {
 		}
 
 		Car carUpdate = (Car) recordUpdate;
-		if (!car.getNickname().equals(carUpdate.getNickname())) {
+		if (! car.getNickname().equals(carUpdate.getNickname())) {
 			car.setNickname(carUpdate.getNickname());
 			logUpdate("nickname");
 			updated = true;
 		}
 
+		if (! car.getBrand().equals(carUpdate.getBrand())) {
+			car.setBrand(carUpdate.getBrand());
+			logUpdate("brand");
+			updated = true;
+		}
+
+		if (! car.getModel().equals(carUpdate.getModel())) {
+			car.setModel(carUpdate.getModel());
+			logUpdate("model");
+			updated = true;
+		}
+
+		if (car.getModelYear() != carUpdate.getModelYear()) {
+			car.setModelYear(carUpdate.getModelYear());
+			logUpdate("modelYear");
+			updated = true;
+		}
+
+		if (! car.getLicensePlate().equals(carUpdate.getLicensePlate())) {
+			car.setLicensePlate(carUpdate.getLicensePlate());
+			logUpdate("licensePlate");
+			updated = true;
+		}
+
+		if (car.getInitialMileage() != carUpdate.getInitialMileage()) {
+			car.setInitialMileage(carUpdate.getInitialMileage());
+			logUpdate("initialMileage");
+			updated = true;
+		}
+
+		if (car.getCurrentMileage() != carUpdate.getCurrentMileage()) {
+			car.setCurrentMileage(carUpdate.getCurrentMileage());
+			logUpdate("currentMileage");
+			updated = true;
+		}
+
+		if (! car.getDistanceUnit().equals(carUpdate.getDistanceUnit())) {
+			car.setDistanceUnit(carUpdate.getDistanceUnit());
+			logUpdate("distanceUnit");
+			updated = true;
+		}
+
+		if (! car.getType().equals(carUpdate.getType())) {
+			car.setType(carUpdate.getType());
+			logUpdate("carType");
+			updated = true;
+		}
 		return updated;
 	}
 
