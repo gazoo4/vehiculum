@@ -119,9 +119,9 @@ public class FuellingEntry extends Entry {
 		if (fuelPrice == null) {
 			fuelPrice = new Cost();
 			Double price;
-			for (Currency.Unit unit: getCost().getCosts().keySet()) {
-				price = getCost().getCosts().get(unit) / getFuelQuantitySI();
-				fuelPrice.getCosts().put(unit, price);
+			for (Currency.Unit unit: getCost().getValues().keySet()) {
+				price = getCost().getValues().get(unit) / getFuelQuantitySI();
+				fuelPrice.getValues().put(unit, price);
 			}
 		}
 

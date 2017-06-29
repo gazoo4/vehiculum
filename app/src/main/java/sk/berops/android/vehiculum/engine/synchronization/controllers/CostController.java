@@ -1,6 +1,5 @@
 package sk.berops.android.vehiculum.engine.synchronization.controllers;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.TreeMap;
 import java.util.UUID;
@@ -46,8 +45,8 @@ public class CostController extends RecordController {
 			updated = true;
 		}
 
-		TreeMap<Currency.Unit, Double> map = cost.getCosts();
-		TreeMap<Currency.Unit, Double> mapUpdate = costUpdate.getCosts();
+		TreeMap<Currency.Unit, Double> map = cost.getValues();
+		TreeMap<Currency.Unit, Double> mapUpdate = costUpdate.getValues();
 
 		// Check which Currency units are being removed
 		HashSet<Currency.Unit> removeSet = new HashSet<>();
@@ -65,7 +64,7 @@ public class CostController extends RecordController {
 		// Check which units are being added
 		for (Currency.Unit u: mapUpdate.keySet()) {
 			if (! map.containsKey(u)) {
-				map.put(u, costUpdate.getCosts().get(u));
+				map.put(u, costUpdate.getValues().get(u));
 				logUpdate("currencyUnit "+ u.toString());
 				updated = true;
 			}

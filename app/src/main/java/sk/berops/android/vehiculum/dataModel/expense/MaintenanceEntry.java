@@ -7,11 +7,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Currency;
-import sk.berops.android.vehiculum.dataModel.Currency.Unit;
 import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.maintenance.ReplacementPart;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.MaintenanceEntryController;
@@ -88,29 +86,30 @@ public class MaintenanceEntry extends Entry {
 		}
 	}
 	
-	public Cost getPartsCostSI() {
+	public Cost getPartsCost() {
 		Cost result = new Cost();
 		if ((getParts() == null)
 			|| (getParts().size() == 0)) {
 			return result;
 		}
 
-		for (Currency.Unit unit: getParts().getFirst().getCost().getCosts().keySet()) {
+
+		for (Currency.Unit unit: getParts().getFirst().getCost().getValues().keySet()) {
 			for (ReplacementPart p: getParts()) {
-				if (p.getCost().getCosts().get(unit) == null) {
+				if (p.getCost().getValues().get(unit) == null) {
 					// If there's no price of all the parts in the desired currency, don't do a calculation for this currency
 					continue;
 				}
 			}
-			result.getCosts().put(unit, 0.0);
+			result.getValues().put(unit, 0.0);
 		}
 
 		double cost;
 		for (ReplacementPart p : getParts()) {
-			for (Currency.Unit unit: result.getCosts().keySet()) {
+			for (Currency.Unit unit: result.getValues().keySet()) {
 				cost = result.getCost(unit);
-				cost += p.getCost().getCosts().get(unit) * p.getQuantity();
-				result.getCosts().put(unit, cost);
+				cost += p.getCost().getValues().get(unit) * p.getQuantity();
+				result.getValues().put(unit, cost);
 			}
 		}
 

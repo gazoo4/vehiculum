@@ -24,13 +24,13 @@ import sk.berops.android.vehiculum.gui.MainActivity;
 public class TyreChangeEntry extends Entry {
 	
 	@Element(name="laborCost", required=false)
-	private double laborCost;
+	private Cost laborCost;
 
 	@Element(name="extraMaterialCost", required=false)
-	private double extraMaterialCost;
+	private Cost extraMaterialCost;
 
 	@Element(name="tyresCost", required=false)
-	private double tyresCost;
+	private Cost tyresCost;
 
 	/**
 	 * Car's initial tyreScheme. Not used yet. So far we assume that the initiall tyreScheme is always null (meaning no tyres installed). 
@@ -70,11 +70,11 @@ public class TyreChangeEntry extends Entry {
 		getTyreScheme().initAfterLoad(car);
 	}
 
-	public double getLaborCost() {
+	public Cost getLaborCost() {
 		return laborCost;
 	}
 
-	public void setLaborCost(double laborCost) {
+	public void setLaborCost(Cost laborCost) {
 		this.laborCost = laborCost;
 	}
 	

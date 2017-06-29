@@ -5,10 +5,13 @@ import android.util.Log;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementMap;
 
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.Record;
@@ -23,11 +26,53 @@ import sk.berops.android.vehiculum.engine.synchronization.controllers.CostContro
  */
 
 public class Cost extends Record {
+
+	/**
+	 * Method to provide a sum of costs across multiple Cost objects. The sum is reported only in the currencies,
+	 * which are recorded in all Cost objects. E.g. if there's a Cost object that doesn't have the cost listed
+	 * in USD, the result will not contain the cost sum in USD either.
+	 * @param input collection of Costs across which the sum should be made
+	 * @return sum across all the relevant currencies
+	 */
+	public static Cost sum(Collection<Cost> input) {
+		Cost result = new Cost();
+
+		if ((input == null)
+				|| (input.size() == 0)) {
+			return result;
+		}
+
+		// Take the first Cost item in the collection, look at its the currencies and take them as a base.
+		input.iterator().next().getValues().keySet()
+				.stream()
+				.forEach(unit -> result.addCost(unit, 0.0));
+
+		TreeMap<Currency.Unit, Double> values = result.getValues();
+		Iterator<Currency.Unit> i = values.keySet().iterator();
+		// Iterate through the currencies from the first cost object and sum the costs across all the Cost objects.
+		while (i.hasNext()) {
+			Currency.Unit unit = i.next();
+			try {
+				input.stream()
+						.forEach(cost -> {
+							values.put(unit, values.get(unit) + cost.getValues().get(unit));
+						});
+			} catch (NullPointerException ex) {
+				// If a Cost object doesn't have a record in this specific currency, we can't report the sum for this whole currency.
+				// It's OK to remove the key from the keySet, as this is backed by the map and this means that the key with the
+				// respective element is removed from the map itself as well.
+				i.remove();
+			}
+		}
+
+		return result;
+	}
+
 	/**
 	 * Map that holds value in various currencies (after conversion has been done)
 	 */
 	@ElementMap(inline = true, required = false)
-	private TreeMap<Currency.Unit, Double> costs;
+	private TreeMap<Currency.Unit, Double> values;
 
 	/**
 	 * Unit that indicates in which currency the cost was recorded by the client
@@ -36,37 +81,37 @@ public class Cost extends Record {
 	private Currency.Unit recordUnit;
 
 	public Cost() {
-		costs = new TreeMap<>();
+		values = new TreeMap<>();
 	}
 
 	public Cost(Double value, Currency.Unit unit) {
 		this();
 		setRecordUnit(unit);
-		getCosts().put(unit, value);
+		values.put(unit, value);
 	}
 
 	public Double getCost(Currency.Unit unit) {
-		if (! costs.containsKey(unit)) {
+		if (! values.containsKey(unit)) {
 			Log.w(this.getClass().toString(), "Required unit value hasn't been recorded yet.");
 		}
-		return costs.get(unit);
+		return values.get(unit);
 	}
 
-	public void addCost(Double value, Currency.Unit unit) {
-		if (costs.get(unit) != value) {
+	public void addCost(Currency.Unit unit, Double value) {
+		if (values.get(unit) != value) {
 			Log.i(this.getClass().toString(), "Updating an existing value. Discarding all previously recorded values.");
-			costs = new TreeMap<>();
+			values = new TreeMap<>();
 		}
 
-		costs.put(unit, value);
+		values.put(unit, value);
 	}
 
-	public TreeMap<Currency.Unit, Double> getCosts() {
-		return costs;
+	public TreeMap<Currency.Unit, Double> getValues() {
+		return values;
 	}
 
-	public void setCosts(TreeMap<Currency.Unit, Double> costs) {
-		this.costs = costs;
+	public void setValues(TreeMap<Currency.Unit, Double> values) {
+		this.values = values;
 	}
 
 	public Currency.Unit getRecordUnit() {
@@ -87,7 +132,7 @@ public class Cost extends Record {
 	@Override
 	public int hashCode() {
 		int result = 197 * recordUnit.getId();
-		result += costs.hashCode();
+		result += values.hashCode();
 
 		return result;
 	}
@@ -107,7 +152,7 @@ public class Cost extends Record {
 		}
 
 		final Cost other = (Cost) obj;
-		if ((this.costs == null) ? (other.costs != null) : (! this.costs.equals(other.costs))) {
+		if ((this.values == null) ? (other.values != null) : (! this.values.equals(other.values))) {
 			return false;
 		}
 		if ((this.recordUnit == null) ? (other.recordUnit != null) : (! this.recordUnit.equals(other.recordUnit))) {
@@ -128,8 +173,8 @@ public class Cost extends Record {
 		units.add(other.recordUnit);
 
 		for (Currency.Unit u: units) {
-			Double value1 = costs.get(u);
-			Double value2 = other.costs.get(u);
+			Double value1 = values.get(u);
+			Double value2 = other.values.get(u);
 			if ((value1 != null)
 				&& (value2 != null)) {
 				return value1.compareTo(value2);

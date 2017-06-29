@@ -92,11 +92,11 @@
     <string name="activity_main_google_services_cnx_error_toast"	>A problem occurred when connecting to Google Services</string>
     <string name="activity_main_header"								>Manage your enthusiasm!</string>
     <string name="activity_main_no_expenses_message"				>Record some events.\nThere\'s nothing to be displayed yet.</string>
-    <string name="activity_main_relative_costs"						>Relative costs</string>
-    <string name="activity_main_relative_costs_fuel"				>Relative costs for </string>
+    <string name="activity_main_relative_costs"						>Relative values</string>
+    <string name="activity_main_relative_costs_fuel"				>Relative values for </string>
     <string name="activity_main_relative_since_last_refuel"			>Costs since last refuel</string>
     <string name="activity_main_since_last_refuel"					>Consumption since the last refuel</string>
-    <string name="activity_main_total_costs"						>Total costs</string>
+    <string name="activity_main_total_costs"						>Total values</string>
 
     <string name="activity_maintenance_button_add"					>+</string>
     <string name="activity_maintenance_button_delete"				>-</string>
