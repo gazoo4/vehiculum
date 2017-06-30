@@ -5,10 +5,12 @@ import android.util.Log;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementMap;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -43,7 +45,8 @@ public class Cost extends Record {
 		}
 
 		// Take the first Cost item in the collection, look at its the currencies and take them as a base.
-		input.iterator().next().getValues().keySet()
+		Cost first = input.iterator().next();
+		first.getValues().keySet()
 				.stream()
 				.forEach(unit -> result.addCost(unit, 0.0));
 
@@ -54,17 +57,31 @@ public class Cost extends Record {
 			Currency.Unit unit = i.next();
 			try {
 				input.stream()
-						.forEach(cost -> {
-							values.put(unit, values.get(unit) + cost.getValues().get(unit));
-						});
+						.forEach(cost -> values.put(unit, values.get(unit) + cost.getValues().get(unit)));
 			} catch (NullPointerException ex) {
 				// If a Cost object doesn't have a record in this specific currency, we can't report the sum for this whole currency.
-				// It's OK to remove the key from the keySet, as this is backed by the map and this means that the key with the
+				// It's OK to stop here, remove the key from the keySet, as this is backed by the map and this means that the key with the
 				// respective element is removed from the map itself as well.
 				i.remove();
 			}
 		}
 
+		// Set the recordUnit as a base (if it's defined in the first Cost object)
+		result.setRecordUnit(first.getRecordUnit());
+		// And check if it's a consistent recordUnit across the whole input (if not, set to null)
+		input.stream()
+				.filter(c -> (result.getRecordUnit() != null) && (c.getRecordUnit() != result.getRecordUnit()))
+				.forEach(c -> result.setRecordUnit(null));
+
+		return result;
+	}
+
+	public static Cost multiply(Cost cost, double multiplier) {
+		Cost result = new Cost();
+		result.setRecordUnit(cost.getRecordUnit());
+
+		cost.getValues().keySet().stream()
+				.forEach(c -> result.addCost(c, cost.getCost(c) * multiplier));
 		return result;
 	}
 
