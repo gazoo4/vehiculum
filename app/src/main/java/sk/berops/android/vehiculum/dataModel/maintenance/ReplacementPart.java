@@ -68,6 +68,9 @@ public class ReplacementPart extends GenericPart {
 		super();
 		this.quantity = quantity;
 	}
+	public void generateSI() {
+
+	}
 
 	public Originality getOriginality() {
 		return originality;

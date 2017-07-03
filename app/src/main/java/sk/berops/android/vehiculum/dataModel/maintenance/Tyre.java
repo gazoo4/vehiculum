@@ -85,6 +85,11 @@ public class Tyre extends GenericPart {
 		this.mileageNonDriveAxle = tyre.mileageNonDriveAxle;
 	}
 
+	public void generateSI() {
+		setMileageDriveAxle(getMileageDriveAxle());
+		setMileageNonDriveAxle(getMileageNonDriveAxle());
+	}
+
 	public enum Season {
 		SUMMER(0, "summer", 1.6), ALL_SEASON(1, "all season", 4.0), WINTER(2, "winter", 4.0), SPIKES(3,
 				"winter with spikes", 4.0);
@@ -229,6 +234,7 @@ public class Tyre extends GenericPart {
 
 	public void setMileageDriveAxle(double mileageDriveAxle) {
 		this.mileageDriveAxle = mileageDriveAxle;
+		setMileageDriveAxleSI(mileageDriveAxle * car.getDistanceUnit().getCoef());
 	}
 
 	public double getMileageDriveAxleSI() {
@@ -245,6 +251,7 @@ public class Tyre extends GenericPart {
 
 	public void setMileageNonDriveAxle(double mileageNonDriveAxle) {
 		this.mileageNonDriveAxle = mileageNonDriveAxle;
+		setMileageNonDriveAxleSI(mileageNonDriveAxle * car.getDistanceUnit().getCoef());
 	}
 
 	public double getMileageNonDriveAxleSI() {

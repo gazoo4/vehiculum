@@ -33,7 +33,7 @@ public class TyreChangeEntry extends Entry {
 	private Cost tyresCost;
 
 	/**
-	 * Car's initial tyreScheme. Not used yet. So far we assume that the initiall tyreScheme is always null (meaning no tyres installed). 
+	 * Car's initial tyreScheme. Not used yet. So far we assume that the initial tyreScheme is always null (meaning no tyres installed).
 	 */
 	@Element(name="tyreScheme", required=false)
 	private TyreConfigurationScheme tyreScheme;
@@ -77,33 +77,21 @@ public class TyreChangeEntry extends Entry {
 	public void setLaborCost(Cost laborCost) {
 		this.laborCost = laborCost;
 	}
-	
-	public double getLaborCostSI() {
-		return Currency.convertToSI(getLaborCost(), getCurrency(), getEventDate());
-	}
 
-	public double getExtraMaterialCost() {
+	public Cost getExtraMaterialCost() {
 		return extraMaterialCost;
 	}
 
-	public void setExtraMaterialCost(double extraMaterialCost) {
+	public void setExtraMaterialCost(Cost extraMaterialCost) {
 		this.extraMaterialCost = extraMaterialCost;
 	}
-	
-	public double getExtraMaterialCostSI() {
-		return Currency.convertToSI(getExtraMaterialCost(), getCurrency(), getEventDate());
-	}
 
-	public double getTyresCost() {
+	public Cost getTyresCost() {
 		return tyresCost;
 	}
 
-	public void setTyresCost(double tyresCost) {
+	public void setTyresCost(Cost tyresCost) {
 		this.tyresCost = tyresCost;
-	}
-	
-	public double getTyresCostSI() {
-		return Currency.convertToSI(getTyresCost(), getCurrency(), getEventDate());
 	}
 	
 	public TyreConfigurationScheme getTyreScheme() {
@@ -279,9 +267,22 @@ public class TyreChangeEntry extends Entry {
 	 * @param uuid of the searched object
 	 * @return Record that matches the searched UUID
 	 */
+	@Override
 	public Record getRecordByUUID(UUID uuid) {
 		// Are they looking for me? Delegate task to Record.getRecordByUUID to find out.
 		Record result = super.getRecordByUUID(uuid);
+
+		if (result == null) {
+			result = laborCost.getRecordByUUID(uuid);
+		}
+
+		if (result == null) {
+			result = extraMaterialCost.getRecordByUUID(uuid);
+		}
+
+		if (result == null) {
+			result = tyresCost.getRecordByUUID(uuid);
+		}
 
 		// Check if the object is in the TyreConfigurationScheme
 		if (result == null) {

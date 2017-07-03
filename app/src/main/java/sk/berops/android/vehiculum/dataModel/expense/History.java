@@ -6,6 +6,8 @@ import org.simpleframework.xml.ElementList;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.UUID;
@@ -134,13 +136,13 @@ public class History extends Record {
 		}
 	}
 
-	public double getTotalCost() {
-		double cost = 0;
+	public Cost getTotalCost() {
+		HashSet<Cost> costs = new HashSet<>();
 		LinkedList<Entry> entries = this.getEntries();
 		for (Entry e: entries) {
-			cost += e.getCost();
+			costs.add(e.getCost());
 		}
-		return cost;
+		return Cost.sum(costs);
 	}
 
 	/**
@@ -189,6 +191,7 @@ public class History extends Record {
 	 * @param uuid of the searched object
 	 * @return Record that matches the searched UUID
 	 */
+	@Override
 	public Record getRecordByUUID(UUID uuid) {
 		Record result = null;
 		Iterator<Entry> e = entries.iterator();

@@ -34,7 +34,7 @@ public class Cost extends Record {
 	 * which are recorded in all Cost objects. E.g. if there's a Cost object that doesn't have the cost listed
 	 * in USD, the result will not contain the cost sum in USD either.
 	 * @param input collection of Costs across which the sum should be made
-	 * @return sum across all the relevant currencies
+	 * @return a new Cost object that holds the sum across all the relevant currencies
 	 */
 	public static Cost sum(Collection<Cost> input) {
 		Cost result = new Cost();
@@ -76,6 +76,12 @@ public class Cost extends Record {
 		return result;
 	}
 
+	/**
+	 * Method to multiply the Cost object by double number and return that in a
+	 * @param cost
+	 * @param multiplier
+	 * @return a new Cost object
+	 */
 	public static Cost multiply(Cost cost, double multiplier) {
 		Cost result = new Cost();
 		result.setRecordUnit(cost.getRecordUnit());

@@ -3,6 +3,7 @@ package sk.berops.android.vehiculum.dataModel.expense;
 import org.simpleframework.xml.Element;
 
 import java.util.Date;
+import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Currency;
@@ -74,5 +75,22 @@ public abstract class Expense extends Record {
 	@Override
 	public ExpenseController getController() {
 		return new ExpenseController(this);
+	}
+
+	/**
+	 * Method used to search for an object by its UUID within the Object tree of this Object.
+	 * @param uuid of the searched object
+	 * @return Record that matches the searched UUID
+	 */
+	@Override
+	public Record getRecordByUUID(UUID uuid) {
+		// Are they looking for me? Delegate task to Record.getRecordByUUID to find out.
+		Record result = super.getRecordByUUID(uuid);
+
+		if (result == null) {
+			result = cost.getRecordByUUID(uuid);
+		}
+
+		return result;
 	}
 }

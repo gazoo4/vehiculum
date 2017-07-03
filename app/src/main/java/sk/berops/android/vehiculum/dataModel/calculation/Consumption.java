@@ -7,23 +7,24 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 import sk.berops.android.vehiculum.R;
-import sk.berops.android.vehiculum.dataModel.UnitConstants;
+import sk.berops.android.vehiculum.configuration.Preferences;
+import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.vehiculum.engine.charts.IntoPieChartExtractable;
 import sk.berops.android.vehiculum.gui.MainActivity;
 import sk.berops.android.vehiculum.gui.common.TextFormatter;
 
 public class Consumption implements IntoPieChartExtractable, Serializable {
-	private double totalCostAllEntries;										//cumulated cost across all entries
-	private TreeMap<ExpenseType, Double> totalCostPerEntryType;				//cumulated cost within the entries
-	private double averageCostAllEntries;									//average cost of all entries per distance
-	private TreeMap<ExpenseType, Double> averageCostPerEntryType;			//average cost within the entry type per distance
+	private Cost totalCostAllEntries;										//cumulated cost across all entries
+	private TreeMap<ExpenseType, Cost> totalCostPerEntryType;				//cumulated cost within the entries
+	private Cost averageCostAllEntries;									//average cost of all entries per distance
+	private TreeMap<ExpenseType, Cost> averageCostPerEntryType;			//average cost within the entry type per distance
 	private ExpenseType lastEntryType;
 	
 	public Consumption() {
-		totalCostAllEntries = 0.0;
+		totalCostAllEntries = new Cost();
 		totalCostPerEntryType = new TreeMap<>();
-		averageCostAllEntries = 0.0;
+		averageCostAllEntries = new Cost();
 		averageCostPerEntryType = new TreeMap<>();
 		lastEntryType = ExpenseType.FUEL;
 	}
@@ -44,7 +45,7 @@ public class Consumption implements IntoPieChartExtractable, Serializable {
 			if (getTotalCostPerEntryType().get(t) == null) {
 				continue;
 			}
-			double value = getTotalCostPerEntryType().get(t);
+			double value = getTotalCostPerEntryType().get(t).getCost(Preferences.getInstance().getCurrency());
 			pieChartVals.add(new PieEntry((float) value, t.getExpenseType(), t.getId()));
 			pieChartColors.add(t.getColor());
 		}
@@ -88,37 +89,37 @@ public class Consumption implements IntoPieChartExtractable, Serializable {
 		return getTotalCost();
 	}
 
-	public double getTotalCost() {
+	public Cost getTotalCost() {
 		return totalCostAllEntries;
 	}
 
-	public void setTotalCost(double totalCost) {
+	public void setTotalCost(Cost totalCost) {
 		this.totalCostAllEntries = totalCost;
 	}
 
-	public TreeMap<ExpenseType, Double> getTotalCostPerEntryType() {
+	public TreeMap<ExpenseType, Cost> getTotalCostPerEntryType() {
 		return totalCostPerEntryType;
 	}
 
 	public void setTotalCostPerEntryType(
-			TreeMap<ExpenseType, Double> totalCostPerEntryType) {
+			TreeMap<ExpenseType, Cost> totalCostPerEntryType) {
 		this.totalCostPerEntryType = totalCostPerEntryType;
 	}
 
-	public double getAverageCost() {
+	public Cost getAverageCost() {
 		return averageCostAllEntries;
 	}
 
-	public void setAverageCost(double averageCost) {
+	public void setAverageCost(Cost averageCost) {
 		this.averageCostAllEntries = averageCost;
 	}
 
-	public TreeMap<ExpenseType, Double> getAverageCostPerEntryType() {
+	public TreeMap<ExpenseType, Cost> getAverageCostPerEntryType() {
 		return averageCostPerEntryType;
 	}
 
 	public void setAverageCostPerEntryType(
-			TreeMap<ExpenseType, Double> averageCostPerEntryType) {
+			TreeMap<ExpenseType, Cost> averageCostPerEntryType) {
 		this.averageCostPerEntryType = averageCostPerEntryType;
 	}
 

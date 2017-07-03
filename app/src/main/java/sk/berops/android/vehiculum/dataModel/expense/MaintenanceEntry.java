@@ -96,7 +96,7 @@ public class MaintenanceEntry extends Entry {
 
 		HashSet<Cost> costs = new HashSet<>();
 		getParts().stream()
-				.forEach(p -> costs.add(Cost.multiply(p.getCost(), p.getQuantity()));
+				.forEach(p -> costs.add(Cost.multiply(p.getCost(), p.getQuantity())));
 
 		return Cost.sum(costs);
 	}
@@ -148,6 +148,10 @@ public class MaintenanceEntry extends Entry {
 	public Record getRecordByUUID(UUID uuid) {
 		// Are they looking for me? Delegate task to Record.getRecordByUUID to find out.
 		Record result = super.getRecordByUUID(uuid);
+
+		if (result == null) {
+			result = laborCost.getRecordByUUID(uuid);
+		}
 
 		Iterator<ReplacementPart> p = parts.iterator();
 
