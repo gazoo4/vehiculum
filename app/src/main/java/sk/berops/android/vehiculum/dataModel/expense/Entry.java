@@ -76,12 +76,17 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
     }
 
     public Consumption getConsumption() {
-        return consumption;
+	    if (consumption == null) {
+		    consumption = generateConsumption();
+	    }
+	    return consumption;
     }
 
     public void setConsumption(Consumption consumption) {
         this.consumption = consumption;
     }
+
+    public abstract Consumption generateConsumption();
 
     public Car getCar() {
         return car;

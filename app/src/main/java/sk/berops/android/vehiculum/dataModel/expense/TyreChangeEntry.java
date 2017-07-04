@@ -16,6 +16,7 @@ import sk.berops.android.vehiculum.dataModel.Axle;
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.Record;
+import sk.berops.android.vehiculum.dataModel.calculation.TyreConsumption;
 import sk.berops.android.vehiculum.dataModel.maintenance.Tyre;
 import sk.berops.android.vehiculum.dataModel.maintenance.TyreConfigurationScheme;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.TyreChangeEntryController;
@@ -247,6 +248,10 @@ public class TyreChangeEntry extends Entry {
 			}
 		}
 		return tyres;
+	}
+
+	public TyreConsumption generateConsumption() {
+		return new TyreConsumption();
 	}
 
 	/****************************** Controller-relevant methods ***********************************/

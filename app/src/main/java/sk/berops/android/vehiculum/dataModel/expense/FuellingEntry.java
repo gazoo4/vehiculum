@@ -145,8 +145,13 @@ public class FuellingEntry extends Entry {
 		this.quantityUnit = quantityUnit;
 		setFuelQuantitySI(fuelQuantity * quantityUnit.getCoef());
 	}
+
 	public FuelConsumption getFuelConsumption() {
 		return (FuelConsumption) this.getConsumption();
+	}
+
+	public FuelConsumption generateConsumption() {
+		return new FuelConsumption();
 	}
 
 	/****************************** Controller-relevant methods ***********************************/

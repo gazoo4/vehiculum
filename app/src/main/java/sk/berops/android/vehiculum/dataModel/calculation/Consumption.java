@@ -15,18 +15,16 @@ import sk.berops.android.vehiculum.gui.MainActivity;
 import sk.berops.android.vehiculum.gui.common.TextFormatter;
 
 public class Consumption implements IntoPieChartExtractable, Serializable {
-	private Cost totalCostAllEntries;										//cumulated cost across all entries
-	private TreeMap<ExpenseType, Cost> totalCostPerEntryType;				//cumulated cost within the entries
+	private Cost totalCostAllEntries;									//cumulated cost across all entries
+	private TreeMap<ExpenseType, Cost> totalCostPerEntryType;			//cumulated cost within the entry types
 	private Cost averageCostAllEntries;									//average cost of all entries per distance
 	private TreeMap<ExpenseType, Cost> averageCostPerEntryType;			//average cost within the entry type per distance
-	private ExpenseType lastEntryType;
 	
 	public Consumption() {
 		totalCostAllEntries = new Cost();
 		totalCostPerEntryType = new TreeMap<>();
 		averageCostAllEntries = new Cost();
 		averageCostPerEntryType = new TreeMap<>();
-		lastEntryType = ExpenseType.FUEL;
 	}
 
 	protected ArrayList<PieEntry> pieChartVals;
@@ -121,13 +119,5 @@ public class Consumption implements IntoPieChartExtractable, Serializable {
 	public void setAverageCostPerEntryType(
 			TreeMap<ExpenseType, Cost> averageCostPerEntryType) {
 		this.averageCostPerEntryType = averageCostPerEntryType;
-	}
-
-	public ExpenseType getLastEntryType() {
-		return lastEntryType;
-	}
-
-	public void setLastEntryType(ExpenseType lastEntryType) {
-		this.lastEntryType = lastEntryType;
 	}
 }

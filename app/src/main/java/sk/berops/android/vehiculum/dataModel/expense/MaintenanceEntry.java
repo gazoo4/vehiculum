@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.Record;
+import sk.berops.android.vehiculum.dataModel.calculation.MaintenanceConsumption;
 import sk.berops.android.vehiculum.dataModel.maintenance.ReplacementPart;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.MaintenanceEntryController;
 
@@ -125,6 +126,10 @@ public class MaintenanceEntry extends Entry {
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	public MaintenanceConsumption generateConsumption() {
+		return new MaintenanceConsumption();
 	}
 
 	/****************************** Controller-relevant methods ***********************************/

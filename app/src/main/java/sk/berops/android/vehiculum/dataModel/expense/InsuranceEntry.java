@@ -5,6 +5,7 @@ import org.simpleframework.xml.Element;
 import java.util.HashMap;
 import java.util.Map;
 
+import sk.berops.android.vehiculum.dataModel.calculation.InsuranceConsumption;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.InsuranceEntryController;
 
 public class InsuranceEntry extends Entry {
@@ -82,6 +83,10 @@ public class InsuranceEntry extends Entry {
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	public InsuranceConsumption generateConsumption() {
+		return new InsuranceConsumption();
 	}
 
 	/****************************** Controller-relevant methods ***********************************/

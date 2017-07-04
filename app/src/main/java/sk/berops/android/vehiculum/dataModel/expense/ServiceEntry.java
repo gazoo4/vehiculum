@@ -5,6 +5,7 @@ import org.simpleframework.xml.Element;
 import java.util.HashMap;
 import java.util.Map;
 
+import sk.berops.android.vehiculum.dataModel.calculation.ServiceConsumption;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.ServiceEntryController;
 
 public class ServiceEntry extends Entry {
@@ -82,6 +83,10 @@ public class ServiceEntry extends Entry {
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	public ServiceConsumption generateConsumption() {
+		return new ServiceConsumption();
 	}
 
 	/****************************** Controller-relevant methods ***********************************/

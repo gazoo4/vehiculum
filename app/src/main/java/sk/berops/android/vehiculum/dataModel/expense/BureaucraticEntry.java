@@ -1,5 +1,6 @@
 package sk.berops.android.vehiculum.dataModel.expense;
 
+import sk.berops.android.vehiculum.dataModel.calculation.BureaucraticConsumption;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.BureaucraticEntryController;
 
 public class BureaucraticEntry extends Entry {
@@ -7,6 +8,10 @@ public class BureaucraticEntry extends Entry {
 	public BureaucraticEntry() {
 		super();
 		setExpenseType(ExpenseType.BUREAUCRATIC);
+	}
+
+	public BureaucraticConsumption generateConsumption() {
+		return new BureaucraticConsumption();
 	}
 
 	/****************************** Controller-relevant methods ***********************************/
