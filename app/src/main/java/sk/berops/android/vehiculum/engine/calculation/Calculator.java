@@ -2,82 +2,66 @@ package sk.berops.android.vehiculum.engine.calculation;
 
 import android.util.Log;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-
 import sk.berops.android.vehiculum.dataModel.calculation.Consumption;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.Entry;
 
 public class Calculator {
-	public static void calculateAll(Collection<Entry> entries) {
+	private static Calculator instance;
+	private Entry initEntry;
+	private Entry previousEntry;
+	private static Object mutex1 = new Object();
 
-		HashMap<Entry.ExpenseType, LinkedList<Entry>> catLists = new HashMap<>();
-		Entry.ExpenseType key;
-
-		for (Entry e: entries) {
-			key = e.getExpenseType();
-			// Initialize the lists
-			if (catLists.get(key) == null) {
-				catLists.put(key, new LinkedList<>());
-			}
-			// Sort entries based on the ExpenseType
-			catLists.get(key).add(e);
-		}
-
-		Entry initEntry;
-		Entry oldEntry;
-		Entry newEntry;
-		// Serve the entries filtered by type into the calculation method
-		for (Entry.ExpenseType type: catLists.keySet()) {
-			initEntry = catLists.get(type).getFirst();
-			newEntry = null;
-			for (Entry e: catLists.get(type)) {
-				oldEntry = newEntry;
-				newEntry = e;
-				calculateNext(initEntry, oldEntry, newEntry);
-			}
-		}
+	private Calculator() {
+		initEntry = null;
+		previousEntry = null;
 	}
 
-	/**
-	 *
-	 * @param previous
-	 * @param next
-	 */
-	public static void calculateNext(Entry init, Entry previous, Entry next) {
+	public static Calculator getInstance() {
+		if (instance == null) {
+			synchronized (mutex1) {
+				if (instance == null) {
+					instance = new Calculator();
+				}
+			}
+		}
 
-		// Perform initial checks
-		if (init == null
-				|| next == null
-				|| previous.getConsumption() == null
-				|| ! init.getExpenseType().equals(next.getExpenseType())
-				|| ! previous.getExpenseType().equals(next.getExpenseType())) {
-			Log.d(Calculator.class.toString(), "Initial checks failed in the calculateNext method");
+		return instance;
+	}
+
+	public void setInitEntry(Entry e) {
+		initEntry = e;
+	}
+
+	public void setPreviousEntry(Entry e) {
+		previousEntry = e;
+	}
+
+	public void calculateNext(Entry e) {
+		if (e == null) {
+			Log.e(this.getClass().toString(), "Can't run calculation for null entry");
 			return;
 		}
 
-		Consumption prevC;
-		Consumption nextC;
+		Consumption prevC = (previousEntry == null) ? null : previousEntry.getConsumption();
+		Consumption nextC = e.getConsumption();
 
-		if (previous == null) {
-			prevC = null;
-		} else if (previous.getConsumption() == null) {
-			Log.d(Calculator.class.toString(), "Detected first Entry in a History with no Consumption data.");
-			prevC = null;
-		} else {
-			prevC = previous.getConsumption();
-		}
-		nextC = next.getConsumption();
-
-		// Total Cost
-		Cost previousCost = (previous == null) ? (null) : prevC.getTotalCost();
-		Cost total = Cost.add(previousCost, next.getCost());
+		// Total cost
+		Cost total = (prevC == null) ? new Cost() : prevC.getTotalCost();
+		total = Cost.add(total, e.getCost());
 		nextC.setTotalCost(total);
 
-		// Average Cost
-		Cost average = Cost.subtract(total, init.getCost());
-		nextC.setAverageCost(average);
+		// Average cost
+		if (initEntry == null) {
+			initEntry = e;
+		} else {
+			Double mileage = e.getMileageSI() - initEntry.getMileageSI();
+			Cost average = Cost.divide(total, mileage);
+			nextC.setAverageCost(average);
+		}
+
+		previousEntry = e;
+
+
 	}
 }
