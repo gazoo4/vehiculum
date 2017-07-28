@@ -13,11 +13,12 @@ import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.calculation.Consumption;
 import sk.berops.android.vehiculum.dataModel.tags.Tag;
 import sk.berops.android.vehiculum.dataModel.tags.Taggable;
+import sk.berops.android.vehiculum.engine.calculation.NewGenConsumption;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.EntryController;
 
 public abstract class Entry extends Expense implements Comparable<Entry>, Taggable {
     private int dynamicId;
-    private Consumption consumption;
+    private NewGenConsumption consumption;
 
     /**
      * Reference to the Car to which this Entry is attached to.
@@ -75,18 +76,18 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
         this.dynamicId = dynamicId;
     }
 
-    public Consumption getConsumption() {
+    public NewGenConsumption getConsumption() {
 	    if (consumption == null) {
 		    consumption = generateConsumption();
 	    }
 	    return consumption;
     }
 
-    public void setConsumption(Consumption consumption) {
+    public void setConsumption(NewGenConsumption consumption) {
         this.consumption = consumption;
     }
 
-    public abstract Consumption generateConsumption();
+    public abstract NewGenConsumption generateConsumption();
 
     public Car getCar() {
         return car;
