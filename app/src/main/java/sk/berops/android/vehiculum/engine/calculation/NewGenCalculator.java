@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.Collection;
 import java.util.HashMap;
 
+import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.expense.Entry;
 
 /**
@@ -15,15 +16,15 @@ import sk.berops.android.vehiculum.dataModel.expense.Entry;
 public abstract class NewGenCalculator {
 	public static HashMap<Entry.ExpenseType, NewGenCalculator> typeCalculators = new HashMap<>();
 
-	public static void calculateAll(Collection<Entry> entries){
+	public static void calculateAll(Car car){
 		NewGenEntryCalculator calculator = new NewGenEntryCalculator();
-		for (Entry e: entries) {
+		for (Entry e: car.getHistory().getEntries()) {
 			calculator.processNext(e);
 			getCalculator(e.getExpenseType()).processNext(e);
 		}
 	}
 
-	public static NewGenCalculator getCalculator(Entry.ExpenseType type) {
+	private static NewGenCalculator getCalculator(Entry.ExpenseType type) {
 		if (typeCalculators.get(type) == null) {
 			typeCalculators.put(type, getNewInstance(type));
 		}
@@ -31,7 +32,7 @@ public abstract class NewGenCalculator {
 		return typeCalculators.get(type);
 	}
 
-	public static NewGenCalculator getNewInstance(Entry.ExpenseType type) {
+	private static NewGenCalculator getNewInstance(Entry.ExpenseType type) {
 		switch (type) {
 			case FUEL: return new NewGenFuelCalculator();
 			case MAINTENANCE: return new NewGenMaintenanceCalculator();

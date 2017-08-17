@@ -6,11 +6,13 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementMap;
 
 import java.util.Collection;
+import java.util.TreeMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.TreeMap;
 import java.util.function.BiFunction;
 
+import sk.berops.android.vehiculum.configuration.Preferences;
 import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.CostController;
@@ -114,8 +116,8 @@ public class Cost extends Record {
 
 	public static Cost executeBinary(Cost c1, Cost c2, BiFunction<Double, Double, Double> operation) {
 		Cost result = new Cost();
-		if (c1.getRecordUnit().equals(c2.getRecordUnit())) {
-			result.setRecordUnit(c1.getRecordUnit());
+		if (c1.getRecordedUnit().equals(c2.getRecordedUnit())) {
+			result.setRecordedUnit(c1.getRecordedUnit());
 		}
 
 		// If the cost is completely empty, initialize it to zeroes and match the other cost currencies
@@ -135,7 +137,7 @@ public class Cost extends Record {
 
 	public static Cost executeUnary(Cost cost, double x, BiFunction<Double, Double, Double> operation) {
 		Cost result = new Cost();
-		result.setRecordUnit(cost.getRecordUnit());
+		result.setRecordedUnit(cost.getRecordedUnit());
 
 		cost.getValues().keySet().stream()
 				.forEach(unit -> result.addCost(unit, operation.apply(cost.getCost(unit), x)));
@@ -152,8 +154,8 @@ public class Cost extends Record {
 	/**
 	 * Unit that indicates in which currency the cost was recorded by the client
 	 */
-	@Element(name = "recordUnit", required = false)
-	private Currency.Unit recordUnit;
+	@Element(name = "recordedUnit", required = false)
+	private Currency.Unit recordedUnit;
 
 	public Cost() {
 		values = new TreeMap<>();
@@ -161,7 +163,7 @@ public class Cost extends Record {
 
 	public Cost(Double value, Currency.Unit unit) {
 		this();
-		setRecordUnit(unit);
+		setRecordedUnit(unit);
 		values.put(unit, value);
 	}
 
@@ -172,7 +174,7 @@ public class Cost extends Record {
 			return;
 		}
 
-		setRecordUnit(cost.getRecordUnit());
+		setRecordedUnit(cost.getRecordedUnit());
 		for (Currency.Unit u: cost.getValues().keySet()) {
 			values.put(u, cost.getCost(u));
 		}
@@ -193,6 +195,52 @@ public class Cost extends Record {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Get the Cost value in the unit in which this Cost object was recorded.
+	 * Alternatively resort back to preferred unit by the user (from Preferences) or to the random
+	 * unit from the set (in this order).
+	 * @return double value
+	 */
+	public Double getRecordedValue() {
+		Currency.Unit u = getRecordedUnit();
+		if (u == null) u = getPreferredUnit();
+		if (u == null) u = getValues().firstKey();
+
+		if (u == null) {
+			return 0.0;
+		} else {
+			return getValues().get(u);
+		}
+	}
+
+	/**
+	 * Get the Cost value in the unit which is preferred by the user (from Preferences) or unit in
+	 * which this Cost was recorded, or any other random unit (in this order).
+	 * @return double value
+	 */
+	public Double getPreferredValue() {
+		Currency.Unit u = getPreferredUnit();
+
+		if (u == null) {
+			return 0.0;
+		} else {
+			return getValues().get(u);
+		}
+	}
+
+	/**
+	 * Return the currency unit which is preferred by the user (from Preferences), or in which
+	 * this Cost was recorded, or a random unit from the set (in this order).
+	 * @return currency unit
+	 */
+	public Currency.Unit getPreferredUnit() {
+		Currency.Unit u = Preferences.getInstance().getCurrency();
+		if (u == null) u = getRecordedUnit();
+		if (u == null) u = getValues().firstKey();
+
+		return u;
 	}
 
 	public Double getCost(Currency.Unit unit) {
@@ -219,16 +267,18 @@ public class Cost extends Record {
 		this.values = values;
 	}
 
-	public Currency.Unit getRecordUnit() {
-		if (recordUnit == null) {
-			recordUnit = Currency.Unit.EUR;
+	public Currency.Unit getRecordedUnit() {
+		if (recordedUnit == null) {
+			recordedUnit = Currency.Unit.EUR;
 		}
-		return recordUnit;
+		return recordedUnit;
 	}
 
-	public void setRecordUnit(Currency.Unit recordUnit) {
-		this.recordUnit = recordUnit;
+	public void setRecordedUnit(Currency.Unit recordedUnit) {
+		this.recordedUnit = recordedUnit;
 	}
+
+	/************************** hashCode, equals, compareTo methods *******************************/
 
 	/**
 	 * Override method hashCode
@@ -236,7 +286,7 @@ public class Cost extends Record {
 	 */
 	@Override
 	public int hashCode() {
-		int result = 197 * recordUnit.getId();
+		int result = 197 * recordedUnit.getId();
 		result += values.hashCode();
 
 		return result;
@@ -260,7 +310,7 @@ public class Cost extends Record {
 		if ((this.values == null) ? (other.values != null) : (! this.values.equals(other.values))) {
 			return false;
 		}
-		if ((this.recordUnit == null) ? (other.recordUnit != null) : (! this.recordUnit.equals(other.recordUnit))) {
+		if ((this.recordedUnit == null) ? (other.recordedUnit != null) : (! this.recordedUnit.equals(other.recordedUnit))) {
 			return false;
 		}
 		return true;
@@ -274,8 +324,8 @@ public class Cost extends Record {
 	public int compareTo(Cost other) {
 		HashSet<Currency.Unit> units = new HashSet<>();
 		units.add(Currency.Unit.EUR);
-		units.add(recordUnit);
-		units.add(other.recordUnit);
+		units.add(recordedUnit);
+		units.add(other.recordedUnit);
 
 		for (Currency.Unit u: units) {
 			Double value1 = values.get(u);
