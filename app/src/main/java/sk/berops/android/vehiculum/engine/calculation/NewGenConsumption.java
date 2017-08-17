@@ -8,11 +8,31 @@ import sk.berops.android.vehiculum.dataModel.expense.Cost;
  */
 
 public class NewGenConsumption {
+	/**
+	 * Total cost of the all the entries including the current one
+	 */
 	private Cost totalCost;
+	/**
+	 * Average cost (per distance unit) of all the entries including the current one
+	 */
 	private Cost averageCost;
+	/**
+	 * Total count of the entries by now (including the current one)
+	 */
+	private int count;
 
+	/**
+	 * Total cost of all the entries of the same type as current one (including the current one)
+	 */
 	private Cost totalTypeCost;
+	/**
+	 * Average cost (per distance unit) of all the entries of the same type as current one (including the current one)
+	 */
 	private Cost averageTypeCost;
+	/**
+	 * Total count of the entries of the same type as current one by now (including the current one)
+	 */
+	private int typeCount;
 
 	public Cost getTotalCost() {
 		return totalCost;
@@ -44,5 +64,22 @@ public class NewGenConsumption {
 
 	public void setAverageTypeCost(Cost averageTypeCost) {
 		this.averageTypeCost = averageTypeCost;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+
+	public int getTypeCount() {
+		return typeCount;
+	}
+
+	public void setTypeCount(int typeCount) {
+		this.typeCount = typeCount;
 	}
 }

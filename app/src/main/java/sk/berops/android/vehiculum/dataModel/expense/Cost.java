@@ -60,8 +60,10 @@ public class Cost extends Record {
 	 * @return a new Cost object
 	 */
 	public static Cost add(Cost c1, Cost c2) {
-		if (c1 == null || c1.isZero()) return c2;
-		if (c2 == null || c2.isZero()) return c1;
+		if (c1 == null && c2 == null) return new Cost();
+
+		if (c1 == null || c1.isZero()) return new Cost(c2);
+		if (c2 == null || c2.isZero()) return new Cost(c1);
 
 		return executeBinary(c1, c2, (a, b) -> a + b);
 	}
@@ -161,6 +163,19 @@ public class Cost extends Record {
 		this();
 		setRecordUnit(unit);
 		values.put(unit, value);
+	}
+
+	public Cost(Cost cost) {
+		this();
+
+		if (cost == null) {
+			return;
+		}
+
+		setRecordUnit(cost.getRecordUnit());
+		for (Currency.Unit u: cost.getValues().keySet()) {
+			values.put(u, cost.getCost(u));
+		}
 	}
 
 	/**

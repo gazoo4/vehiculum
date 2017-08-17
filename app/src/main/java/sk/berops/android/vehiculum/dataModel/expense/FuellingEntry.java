@@ -9,6 +9,7 @@ import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.UnitConstants;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.QuantityUnit;
 import sk.berops.android.vehiculum.dataModel.calculation.FuelConsumption;
+import sk.berops.android.vehiculum.engine.calculation.NewGenFuelConsumption;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.FuellingEntryController;
 
 public class FuellingEntry extends Entry {
@@ -146,12 +147,12 @@ public class FuellingEntry extends Entry {
 		setFuelQuantitySI(fuelQuantity * quantityUnit.getCoef());
 	}
 
-	public FuelConsumption getFuelConsumption() {
-		return (FuelConsumption) this.getConsumption();
+	public NewGenFuelConsumption getFuelConsumption() {
+		return (NewGenFuelConsumption) this.getConsumption();
 	}
 
-	public FuelConsumption generateConsumption() {
-		return new FuelConsumption();
+	public NewGenFuelConsumption generateConsumption() {
+		return new NewGenFuelConsumption();
 	}
 
 	/****************************** Controller-relevant methods ***********************************/

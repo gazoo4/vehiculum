@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import sk.berops.android.vehiculum.dataModel.calculation.TollConsumption;
+import sk.berops.android.vehiculum.engine.calculation.NewGenTollConsumption;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.TollEntryController;
 
 public class TollEntry extends Entry {
@@ -85,8 +86,12 @@ public class TollEntry extends Entry {
 		this.type = type;
 	}
 
-	public TollConsumption generateConsumption() {
-		return new TollConsumption();
+	public NewGenTollConsumption getTollConsumption() {
+		return (NewGenTollConsumption) getConsumption();
+	}
+
+	public NewGenTollConsumption generateConsumption() {
+		return new NewGenTollConsumption();
 	}
 
 	/****************************** Controller-relevant methods ***********************************/

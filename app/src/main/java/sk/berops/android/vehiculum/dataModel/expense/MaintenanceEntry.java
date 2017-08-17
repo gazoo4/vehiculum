@@ -15,6 +15,7 @@ import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.calculation.MaintenanceConsumption;
 import sk.berops.android.vehiculum.dataModel.maintenance.ReplacementPart;
+import sk.berops.android.vehiculum.engine.calculation.NewGenMaintenanceConsumption;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.MaintenanceEntryController;
 
 public class MaintenanceEntry extends Entry {
@@ -128,8 +129,12 @@ public class MaintenanceEntry extends Entry {
 		this.type = type;
 	}
 
-	public MaintenanceConsumption generateConsumption() {
-		return new MaintenanceConsumption();
+	public NewGenMaintenanceConsumption getMaintenanceConsumption() {
+		return (NewGenMaintenanceConsumption) this.getConsumption();
+	}
+
+	public NewGenMaintenanceConsumption generateConsumption() {
+		return new NewGenMaintenanceConsumption();
 	}
 
 	/****************************** Controller-relevant methods ***********************************/
