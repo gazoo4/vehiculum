@@ -30,8 +30,8 @@ public class ActivityMaintenanceEdit extends ActivityMaintenanceAdd {
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
-		editTextLaborCost.setText(Double.toString(maintenanceEntry.getLaborCost()));
-		spinnerLaborCostCurrency.setSelection(maintenanceEntry.getLaborCostCurrency().getId());
+		editTextLaborCost.setText(Double.toString(maintenanceEntry.getLaborCost().getRecordedValue()));
+		spinnerLaborCostCurrency.setSelection(maintenanceEntry.getLaborCost().getRecordedUnit().getId());
 
 		RadioButton button;
 		switch (maintenanceEntry.getType()) {

@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.configuration.Preferences;
 import sk.berops.android.vehiculum.dataModel.Currency;
+import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.Expense;
 import sk.berops.android.vehiculum.dataModel.expense.FieldEmptyException;
 
@@ -30,7 +31,7 @@ public abstract class ActivityExpenseAdd extends ActivityRecordAdd {
 		super.initializeGuiObjects();
 		Currency.Unit currency;
 		try {
-			currency = car.getHistory().getEntries().getLast().getCurrency();
+			currency = car.getHistory().getEntries().getLast().getCost().getRecordedUnit();
 		} catch (NoSuchElementException e) {
 			currency = Preferences.getInstance().getCurrency();
 		}
@@ -53,8 +54,9 @@ public abstract class ActivityExpenseAdd extends ActivityRecordAdd {
 	
 	private void updateCost() throws FieldEmptyException {
 		try {
-			Currency.Unit currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
-			expense.setCost(GuiUtils.extractDouble(editTextCost), currency);
+			Currency.Unit unit = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
+			double value = GuiUtils.extractDouble(editTextCost);
+			expense.setCost(new Cost(value, unit));
 		} catch (NumberFormatException ex) {
 			throwAlertFieldsEmpty(R.string.activity_expense_add_cost_hint);
 		}

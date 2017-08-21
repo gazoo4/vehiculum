@@ -128,7 +128,6 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
         UnitConstants.QuantityUnit quantityUnit;
 
         try {
-            //TODO: here we should reflect the units we've bought in here
             quantity = GuiUtils.extractDouble(editTextQuantity);
             cost = GuiUtils.extractDouble(editTextCost);
             price = cost / quantity;

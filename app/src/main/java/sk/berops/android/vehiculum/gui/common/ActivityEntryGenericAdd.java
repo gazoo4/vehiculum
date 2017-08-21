@@ -63,9 +63,9 @@ public abstract class ActivityEntryGenericAdd extends ActivityExpenseAdd impleme
 		if (editMode) {
 			buttonDate.setText(DateFormat.getDateInstance().format(entry.getEventDate()));
 			editTextMileage.setText(Double.valueOf(entry.getMileage()).toString());
-			editTextCost.setText(Double.valueOf(entry.getCost()).toString());
+			editTextCost.setText(Double.valueOf(entry.getCost().getRecordedValue()).toString());
 			editTextComment.setText(entry.getComment());
-			spinnerCurrency.setSelection(entry.getCurrency().getId());
+			spinnerCurrency.setSelection(entry.getCost().getRecordedUnit().getId());
 		}
 	}
 

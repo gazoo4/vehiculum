@@ -49,8 +49,8 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
 	/**
 	 * Overriding the compareTo method from Comparable interface in order to correctly compare Entries
 	 * @param e entry to be compared
-	 * @return -1 if Entry is older than the argument
-	 * 1 if Entry is newer than the argument
+	 * @return -1 if this Entry is older than the one from the argument
+	 * 1 if this Entry is newer than the one from the argument
 	 * 0 if both are equally chronologically old
 	 */
 	@Override
