@@ -2,12 +2,10 @@ package sk.berops.android.vehiculum.engine.calculation;
 
 import android.util.Log;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 
 import sk.berops.android.vehiculum.dataModel.UnitConstants;
-import sk.berops.android.vehiculum.dataModel.calculation.FuelConsumption;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.Entry;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;
@@ -27,8 +25,10 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 	private HashMap<UnitConstants.Substance, FuellingEntry> previousBySubstance = new HashMap<>();
 	private HashMap<FuellingEntry.FuelType, FuellingEntry> previousByFuelType = new HashMap<>();
 
-	private HashMap<UnitConstants.Substance, LinkedList<FuellingEntry>> movingEntries = new HashMap<>();
-	private HashMap<UnitConstants.Substance, LinkedList<FuellingEntry>> floatingEntries = new HashMap<>();
+	private HashMap<UnitConstants.Substance, LinkedList<FuellingEntry>> movingEntriesBySubstance = new HashMap<>();
+	private HashMap<FuellingEntry.FuelType, LinkedList<FuellingEntry>> movingEntriesByType = new HashMap<>();
+	private HashMap<UnitConstants.Substance, LinkedList<FuellingEntry>> floatingEntriesBySubstance = new HashMap<>();
+	private HashMap<FuellingEntry.FuelType, LinkedList<FuellingEntry>> floatingEntriesByType = new HashMap<>();
 
 	@Override
 	public void calculateNext(Entry entry) {
@@ -50,19 +50,23 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 
 		nextC.setCostLastRefuel(calculateCostLastRefuel(fEntry));
 
-		nextC.setTotalVolume(calculateTotalVolume(prevC, fEntry));
-		nextC.setTotalTypeVolume(calculateTotalTypeVolume(prevC, fEntry));
+		nextC.setTotalVolumeBySubstance(calculateTotalVolume(prevC, fEntry));
+		nextC.setTotalVolumeByType(calculateTotalTypeVolume(prevC, fEntry));
 
 		nextC.setAverageConsumption(calculateAverageConsumption(prevC, fEntry));
 		nextC.setLastConsumption(calculateLastConsumption(fEntry));
 
 		nextC.setAverageTypeConsumption(calculateAverageTypeConsumption(prevC, fEntry));
 
-		slide(movingEntries, fEntry, MOVING_AVG_COUNT);
-		slide(floatingEntries, fEntry, FLOATING_AVG_COUNT);
+		slideBySubstance(movingEntriesBySubstance, fEntry, MOVING_AVG_COUNT);
+		slideByType(movingEntriesByType, fEntry, MOVING_AVG_COUNT);
+		slideBySubstance(floatingEntriesBySubstance, fEntry, FLOATING_AVG_COUNT);
+		slideByType(floatingEntriesByType, fEntry, FLOATING_AVG_COUNT);
 
-		nextC.setMovingConsumption(calculateMovingConsumption(prevC, fEntry));
-		nextC.setFloatingConsumption(calculateFloatingConsumption(prevC, fEntry));
+		nextC.setMovingConsumptionBySubstance(calculateMovingConsumptionBySubstance(prevC, fEntry));
+		nextC.setMovingConsumptionByType(calculateMovingConsumptionByType(prevC, fEntry));
+		nextC.setFloatingConsumptionBySubstance(calculateFloatingConsumptionBySubstance(prevC, fEntry));
+		nextC.setFloatingConsumptionByType(calculateFloatingConsumptionByType(prevC, fEntry));
 	}
 
 	@Override
@@ -73,8 +77,8 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		FuellingEntry.FuelType type = f.getFuelType();
 		UnitConstants.Substance substance = f.getFuelType().getSubstance();
 
-		if (initialByFuelType.get(type) == null) initialByFuelType.put(type, f);
-		if (initialBySubstance.get(substance) == null) initialBySubstance.put(substance, f);
+		initialByFuelType.putIfAbsent(type, f);
+		initialBySubstance.putIfAbsent(substance, f);
 
 		previousByFuelType.put(type, f);
 		previousBySubstance.put(substance, f);
@@ -94,7 +98,7 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 	private HashMap<UnitConstants.Substance, Double> calculateTotalVolume(NewGenFuelConsumption prevC, FuellingEntry entry) {
 		// Total volume
 		HashMap<UnitConstants.Substance, Double> result;
-		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getTotalVolume());
+		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getTotalVolumeBySubstance());
 
 		// Fuel substance needs to be taken into the account (as we can't combine liquids, solid, electricity,...)
 		UnitConstants.Substance substance = entry.getFuelType().getSubstance();
@@ -106,7 +110,7 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 
 	private HashMap<FuellingEntry.FuelType, Double> calculateTotalTypeVolume(NewGenFuelConsumption prevC, FuellingEntry entry) {
 		HashMap<FuellingEntry.FuelType, Double> result;
-		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getTotalTypeVolume());
+		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getTotalVolumeByType());
 
 		FuellingEntry.FuelType type = entry.getFuelType();
 		double volume = (result.get(type) == null) ? 0 : result.get(type);
@@ -126,7 +130,7 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		} else {
 			// At this moment the totalVolume needs to be calculated
 			double mileage = entry.getMileageSI() - initial.getMileageSI();
-			double volume = ((NewGenFuelConsumption) entry.getConsumption()).getTotalVolume().get(substance);
+			double volume = ((NewGenFuelConsumption) entry.getConsumption()).getTotalVolumeBySubstance().get(substance);
 			result.put(substance, volume / (mileage * 100));
 		}
 		return result;
@@ -155,18 +159,18 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		} else {
 			// At this moment the totalVolume needs to be calculated
 			double mileage = entry.getMileageSI() - initial.getMileageSI();
-			double volume = ((NewGenFuelConsumption) entry.getConsumption()).getTotalTypeVolume().get(type);
+			double volume = ((NewGenFuelConsumption) entry.getConsumption()).getTotalVolumeByType().get(type);
 			result.put(type, volume / (mileage * 100));
 		}
 		return result;
 	}
 
-	private HashMap<UnitConstants.Substance, Double> calculateMovingConsumption(NewGenFuelConsumption prevC, FuellingEntry entry) {
+	private HashMap<UnitConstants.Substance, Double> calculateMovingConsumptionBySubstance(NewGenFuelConsumption prevC, FuellingEntry entry) {
 		HashMap<UnitConstants.Substance, Double> result;
-		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getMovingConsumption());
+		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getMovingConsumptionBySubstance());
 
 		UnitConstants.Substance substance = entry.getFuelType().getSubstance();
-		LinkedList<FuellingEntry> queue = movingEntries.get(substance);
+		LinkedList<FuellingEntry> queue = movingEntriesBySubstance.get(substance);
 		if (queue == null || queue.size() <= 1) {
 			result.put(substance, 0.0);
 		} else {
@@ -182,15 +186,14 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		}
 
 		return result;
-
 	}
 
-	private HashMap<UnitConstants.Substance, Double> calculateFloatingConsumption(NewGenFuelConsumption prevC, FuellingEntry entry) {
+	private HashMap<UnitConstants.Substance, Double> calculateFloatingConsumptionBySubstance(NewGenFuelConsumption prevC, FuellingEntry entry) {
 		HashMap<UnitConstants.Substance, Double> result;
-		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getFloatingConsumption());
+		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getFloatingConsumptionBySubstance());
 
 		UnitConstants.Substance substance = entry.getFuelType().getSubstance();
-		LinkedList<FuellingEntry> queue = floatingEntries.get(substance);
+		LinkedList<FuellingEntry> queue = floatingEntriesBySubstance.get(substance);
 		int minLength = (FLOATING_AVG_CUT * 2) + 1;
 		if (queue == null || queue.size() <= minLength) {
 			result.put(substance, 0.0);
@@ -222,13 +225,88 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		return result;
 	}
 
-	private void slide(HashMap<UnitConstants.Substance, LinkedList<FuellingEntry>> entries, FuellingEntry entry, int length) {
+	private HashMap<FuellingEntry.FuelType, Double> calculateMovingConsumptionByType(NewGenFuelConsumption prevC, FuellingEntry entry) {
+		HashMap<FuellingEntry.FuelType, Double> result;
+		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getMovingConsumptionByType());
+
+		FuellingEntry.FuelType type = entry.getFuelType();
+		LinkedList<FuellingEntry> queue = movingEntriesBySubstance.get(type);
+		if (queue == null || queue.size() <= 1) {
+			result.put(type, 0.0);
+		} else {
+			double mileage = queue.getLast().getMileageSI() - queue.getFirst().getMileageSI();
+			double volume = 0.0;
+			for (FuellingEntry e : queue) {
+				volume += e.getFuelQuantitySI();
+			}
+			volume -= queue.getFirst().getFuelQuantitySI();
+
+			double consumption = volume / (mileage * 100);
+			result.put(type, consumption);
+		}
+
+		return result;
+	}
+
+	private HashMap<FuellingEntry.FuelType, Double> calculateFloatingConsumptionByType(NewGenFuelConsumption prevC, FuellingEntry entry) {
+		HashMap<FuellingEntry.FuelType, Double> result;
+		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getFloatingConsumptionByType());
+
+		FuellingEntry.FuelType type = entry.getFuelType();
+		LinkedList<FuellingEntry> queue = floatingEntriesBySubstance.get(type);
+		int minLength = (FLOATING_AVG_CUT * 2) + 1;
+		if (queue == null || queue.size() <= minLength) {
+			result.put(type, 0.0);
+		} else {
+			LinkedList<Double> values = new LinkedList<>();
+			// Load all the values
+			for (FuellingEntry e: queue) {
+				values.add(e.getFuelConsumption().getLastConsumption());
+			}
+			// Sort all the values
+			values.sort((Double d1, Double d2) -> Double.compare(d1, d2));
+
+			// Cut min & max values
+			for (int i = 0; i < FLOATING_AVG_CUT; i++) {
+				values.removeFirst();
+				values.removeLast();
+			}
+
+			double consumption = 0.0;
+			// Calculate the average consumption
+			for (Double d: values) {
+				consumption += d;
+			}
+			consumption /= values.size();
+
+			result.put(type, consumption);
+		}
+
+		return result;
+	}
+
+	private void slideBySubstance(HashMap<UnitConstants.Substance, LinkedList<FuellingEntry>> entries, FuellingEntry entry, int length) {
 		UnitConstants.Substance substance = entry.getFuelType().getSubstance();
 		LinkedList<FuellingEntry> queue = entries.get(substance);
 
 		if (queue == null) {
 			queue = new LinkedList<>();
 			entries.put(substance, queue);
+		}
+
+		queue.add(entry);
+		if (queue.size() > length) {
+			queue.removeFirst();
+		}
+	}
+
+	private void slideByType(HashMap<FuellingEntry.FuelType, LinkedList<FuellingEntry>> entries, FuellingEntry entry, int length) {
+		FuellingEntry.FuelType type = entry.getFuelType();
+		LinkedList<FuellingEntry> queue = entries.get(type);
+
+		if (queue == null) {
+			queue = new LinkedList<>();
+			entries.put(type, queue);
 		}
 
 		queue.add(entry);

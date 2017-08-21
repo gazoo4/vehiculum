@@ -167,7 +167,7 @@ public class ActivityReportsNavigate extends DefaultActivity {
                 startActivity(new Intent(this, ActivityEntriesShow.class));
                 break;
             case R.id.activity_stats_show_button_charts:
-                startActivity(new Intent(this, ActivityCharts.class));
+                startActivity(new Intent(this, ActivityCharts2.class));
                 break;
         }
     }

@@ -87,7 +87,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.2.0'       // this needs to be the of the same version as compileSDK indicator
     compile 'com.android.support:recyclerview-v7:25.2.0'    // this needs to be the of the same version as compileSDK indicator
     compile 'com.android.support:support-v4:25.2.0'         // this needs to be the of the same version as compileSDK indicator
-    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     compile 'com.jjoe64:graphview:3.1.4'
     compile 'com.larswerkman:lobsterpicker:1.0.1'
     compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'

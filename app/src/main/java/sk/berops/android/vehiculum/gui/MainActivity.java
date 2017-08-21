@@ -110,9 +110,6 @@ public class MainActivity extends DefaultActivity {
 		if (garage == null) {
 			loadGarage();
 		}
-
-		refreshStats();
-		generateStatTable();
 	}
 
 	@Override
