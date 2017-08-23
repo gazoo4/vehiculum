@@ -160,7 +160,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	 * Method to extract the cost of the "small parts/extra materials"
 	 */
 	private void updateExtraMaterialsCost() {
-		double cost = 0.0;
+		Cost cost = new Cost();
 		try {
 			 cost = Double.parseDouble(editTextSmallPartsCost.getText().toString());
 		} catch (NumberFormatException ex) {
