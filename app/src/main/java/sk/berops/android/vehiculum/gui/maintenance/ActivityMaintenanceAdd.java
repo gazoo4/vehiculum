@@ -20,6 +20,7 @@ import java.util.LinkedList;
 
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.dataModel.Currency;
+import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.FieldEmptyException;
 import sk.berops.android.vehiculum.dataModel.expense.MaintenanceEntry;
 import sk.berops.android.vehiculum.dataModel.expense.MaintenanceEntry.Type;
@@ -162,13 +163,13 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 
 	protected void reloadCost() {
 		double partsCostSI = maintenanceEntry.getPartsCostSI();
-		double totalCostSI = 0;
+		double totalCostSI;
 
 		Currency.Unit currency = Currency.Unit.getUnit(spinnerLaborCostCurrency.getSelectedItemPosition());
 
 		try {
 			double laborCost = GuiUtils.extractDouble(editTextLaborCost);
-			maintenanceEntry.setLaborCost(laborCost, currency);
+			maintenanceEntry.setLaborCost(new Cost(laborCost, currency));
 		} catch (NumberFormatException ex) {
 			// if editTextLaborCost is empty, it should not be an issue
 		} finally {

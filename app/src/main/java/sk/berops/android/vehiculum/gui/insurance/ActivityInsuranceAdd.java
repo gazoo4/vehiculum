@@ -26,7 +26,7 @@ public class ActivityInsuranceAdd extends ActivityEntryGenericAdd {
 			insuranceEntry = new InsuranceEntry();
 		}
 
-		super.entry = (Entry) this.insuranceEntry;
+		super.entry = this.insuranceEntry;
 		super.onCreate(savedInstanceState);
 	}
 
