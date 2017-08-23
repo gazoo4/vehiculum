@@ -20,6 +20,7 @@ import java.util.LinkedList;
 
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.dataModel.Currency;
+import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.FieldEmptyException;
 import sk.berops.android.vehiculum.dataModel.expense.MaintenanceEntry;
 import sk.berops.android.vehiculum.dataModel.expense.MaintenanceEntry.Type;
@@ -161,29 +162,33 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 	}
 
 	protected void reloadCost() {
-		double partsCostSI = maintenanceEntry.getPartsCostSI();
-		double totalCostSI = 0;
-
-		Currency.Unit currency = Currency.Unit.getUnit(spinnerLaborCostCurrency.getSelectedItemPosition());
+		Cost partsCost = maintenanceEntry.getPartsCost();
+		Cost totalCost;
+		Cost laborCost;
+		Currency.Unit currency;
 
 		try {
-			double laborCost = GuiUtils.extractDouble(editTextLaborCost);
-			maintenanceEntry.setLaborCost(laborCost, currency);
+			// Try reading the labor cost
+			double value = GuiUtils.extractDouble(editTextLaborCost);
+			currency = Currency.Unit.getUnit(spinnerLaborCostCurrency.getSelectedItemPosition());
+			laborCost = new Cost(value, currency);
 		} catch (NumberFormatException ex) {
 			// if editTextLaborCost is empty, it should not be an issue
-		} finally {
-			totalCostSI = partsCostSI + maintenanceEntry.getLaborCostSI();
+			laborCost = new Cost();
 		}
 
-		double totalCostNative = Currency.convert(totalCostSI, Currency.Unit.getUnit(0), currency,
-				entry.getEventDate());
-		textViewTotalCost.setText(TextFormatter.format(totalCostNative, "#######.##") + " "
-				+ currency.getUnitIsoCode());
-		editTextCost.setText(Double.toString(totalCostNative));
-		
-		double partsCostNative = Currency.convert(partsCostSI, Currency.Unit.getUnit(0), currency, entry.getEventDate());
-		textViewPartsCost.setText(TextFormatter.format(partsCostNative, "#######.##") + " "
-				+ currency.getUnitIsoCode());
+		maintenanceEntry.setLaborCost(laborCost);
+		totalCost = Cost.add(partsCost, laborCost);
+
+		textViewTotalCost.setText(TextFormatter.format(totalCost.getPreferredValue(), "#######.##")
+				+ " " + totalCost.getPreferredUnit().getUnitIsoCode());
+		textViewPartsCost.setText(TextFormatter.format(partsCost.getPreferredValue(), "#######.##")
+				+ " " + partsCost.getPreferredUnit().getUnitIsoCode());
+		// TODO: currently the total cost is not editable (it's a textview), but we have a hidden
+		// editTextCost here as well (due to inheritance from ActivityEntryGenericAdd
+		// so it would make sense to get rid of textview and switch the totalCost into the editText
+		// so that it can be corrected as well
+		editTextCost.setText(Double.toString(totalCost.getPreferredValue()));
 		
 		adapter.notifyDataSetChanged();
 	}

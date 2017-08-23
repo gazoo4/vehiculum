@@ -22,10 +22,10 @@ public class ActivityPartEdit extends ActivityPartAdd {
 		editTextProducerPartId.setText(part.getProducerPartID());
 		editTextCarmakerPartId.setText(part.getCarmakerPartID());
 		editTextComment.setText(part.getComment());
-		editTextCost.setText(Double.toString(part.getCost()));
+		editTextCost.setText(Double.toString(part.getCost().getRecordedValue()));
 		editTextQuantity.setText(Integer.toString(part.getQuantity()));
 		
-		spinnerCurrency.setSelection(part.getCurrency().getId());
+		spinnerCurrency.setSelection(part.getCost().getRecordedUnit().getId());
 		spinnerCondition.setSelection(part.getCondition().getId());
 		spinnerOriginality.setSelection(part.getOriginality().getId());
 	}

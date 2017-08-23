@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.dataModel.Car;
+import sk.berops.android.vehiculum.dataModel.Currency;
+import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.Entry;
 import sk.berops.android.vehiculum.dataModel.expense.FieldEmptyException;
 import sk.berops.android.vehiculum.dataModel.expense.TyreChangeEntry;
@@ -23,7 +25,9 @@ import sk.berops.android.vehiculum.gui.common.GuiUtils;
 
 public class ActivityTyreChange extends ActivityEntryGenericAdd {
 
-	Double laborCost, extraMaterialCost, tyresCost;
+	Cost laborCost;
+	Cost extraMaterialCost;
+	Cost tyresCost;
 	
 	private Car car;
 	protected TyreChangeEntry tyreChangeEntry;
@@ -91,16 +95,17 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	 *                    tyres.
 	 */
 	protected void updateTyresCost(boolean forceUpdate) {
-		double cost = 0.0;
+		Cost cost = new Cost();
 		if (forceUpdate
 				|| editTextTyresCost.getText().toString().equals("")
 				|| GuiUtils.extractDouble(editTextTyresCost) == 0.0) {
 			for (Tyre t : tyreChangeEntry.getBoughtTyres()) {
-				cost += t.getCost();
+				cost = Cost.add(cost, t.getCost());
 			}
 			tyreChangeEntry.setTyresCost(cost);
-			editTextTyresCost.setText(((Double) tyreChangeEntry.getTyresCost()).toString());
+			editTextTyresCost.setText(cost.getPreferredValue().toString() + " " + cost.getPreferredUnit().getSymbol());
 		}
+
 		updateTotalCost();
 	}
 
@@ -108,26 +113,33 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	 * Method to calculate the total cost of the entry (laborCost + extraMaterials + tyresCost).
 	 * @return Total cost
 	 */
-	private double getTotalCosts() {
-		double cost = 0.0;
+	private Cost getTotalCosts() {
+		Cost cost = new Cost();
+		Currency.Unit currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
+
 		try {
-			laborCost = GuiUtils.extractDouble(editTextLaborCost);
+			double value = GuiUtils.extractDouble(editTextLaborCost);
+			laborCost = new Cost(value, currency);
 			tyreChangeEntry.setLaborCost(laborCost);
-			cost += laborCost;
+			cost = Cost.add(cost, laborCost);
 		} catch (NumberFormatException ex) {
 			Log.d("DEBUG", "Reading costs, hit an empty field: "+ getResources().getString(R.string.activity_tyre_change_labor_cost_hint));
 		}
+
 		try {
-			extraMaterialCost = GuiUtils.extractDouble(editTextSmallPartsCost);
+			double value = GuiUtils.extractDouble(editTextSmallPartsCost);
+			extraMaterialCost = new Cost(value, currency);
 			tyreChangeEntry.setExtraMaterialCost(extraMaterialCost);
-			cost += extraMaterialCost;
+			cost = Cost.add(cost, extraMaterialCost);
 		} catch (NumberFormatException ex) {
 			Log.d("DEBUG", "Reading costs, hit an empty field: "+ getResources().getString(R.string.activity_tyre_change_small_parts_cost_hint));
 		}
+
 		try {
-			tyresCost = GuiUtils.extractDouble(editTextTyresCost);
+			double value = GuiUtils.extractDouble(editTextTyresCost);
+			tyresCost = new Cost(value, currency);
 			tyreChangeEntry.setTyresCost(tyresCost);
-			cost += tyresCost;
+			cost = Cost.add(cost, tyresCost);
 		} catch (NumberFormatException ex) {
 			Log.d("DEBUG", "Reading costs, hit an empty field: "+ getResources().getString(R.string.activity_tyre_change_tyres_cost_hint));
 		}
@@ -139,8 +151,9 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	 * Updates the editTextCost field by the overall cost calculated from the entry.
 	 */
 	protected void updateTotalCost() {
-		double totalCost = getTotalCosts();
-		editTextCost.setText(Double.toString(totalCost));
+		Cost totalCost = getTotalCosts();
+		editTextCost.setText(totalCost.getPreferredValue().toString());
+		spinnerCurrency.setSelection(totalCost.getRecordedUnit().getId());
 	}
 
 	/**
