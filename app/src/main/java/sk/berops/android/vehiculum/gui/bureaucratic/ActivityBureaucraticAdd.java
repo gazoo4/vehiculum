@@ -25,7 +25,7 @@ public class ActivityBureaucraticAdd extends ActivityEntryGenericAdd {
 			bureaucraticEntry = new BureaucraticEntry();
 		}
 
-		super.entry = (Entry) this.bureaucraticEntry;
+		super.entry = this.bureaucraticEntry;
 		super.onCreate(savedInstanceState);
 	}
 
