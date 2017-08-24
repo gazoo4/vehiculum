@@ -1,10 +1,13 @@
 package sk.berops.android.vehiculum.engine.calculation;
 
+import android.util.Log;
+
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
 
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
+import sk.berops.android.vehiculum.dataModel.expense.Entry;
 
 /**
  * @author Bernard Halas
@@ -37,11 +40,6 @@ public class NewGenConsumption {
 	 * Total count of the entries of the same type as current one by now (including the current one)
 	 */
 	private int typeCount;
-
-	protected ArrayList<PieEntry> pieChartVals;
-	protected ArrayList<Integer> pieChartColors;
-
-	public void reloadChartData
 
 	public Cost getTotalCost() {
 		return totalCost;

@@ -218,11 +218,6 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 					// Ugly hack:
 					// We need to remove Consumption object as it contains elements from external libraries which can't be serialized
 					tyreChangeEntry.setConsumption(null);
-					for (Entry e : tyreChangeEntry.getCar().getHistory().getEntries()) {
-						if (e.getConsumption() != null) {
-							e.getConsumption().setPieChartVals(null);
-						}
-					}
 					i.putExtra(ActivityTyreChangeScheme.INTENT_TYRE_ENTRY, tyreChangeEntry);
 				}
 				startActivityForResult(i, REQUEST_CODE_SCHEME);

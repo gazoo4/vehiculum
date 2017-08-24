@@ -10,11 +10,11 @@ import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.configuration.Preferences;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType;
-import sk.berops.android.vehiculum.engine.charts.IntoPieChartExtractable;
+import sk.berops.android.vehiculum.engine.charts.PieChartDrawable;
 import sk.berops.android.vehiculum.gui.MainActivity;
 import sk.berops.android.vehiculum.gui.common.TextFormatter;
 
-public class Consumption implements IntoPieChartExtractable, Serializable {
+public class Consumption implements PieChartDrawable, Serializable {
 	private Cost totalCostAllEntries;									//cumulated cost across all entries
 	private TreeMap<ExpenseType, Cost> totalCostPerEntryType;			//cumulated cost within the entry types
 	private Cost averageCostAllEntries;									//average cost of all entries per distance
