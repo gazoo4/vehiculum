@@ -160,28 +160,30 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 	 * Method to extract the cost of the "small parts/extra materials"
 	 */
 	private void updateExtraMaterialsCost() {
-		Cost cost = new Cost();
+		double value = 0.0;
+		Currency.Unit currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
 		try {
-			 cost = Double.parseDouble(editTextSmallPartsCost.getText().toString());
+			 value = Double.parseDouble(editTextSmallPartsCost.getText().toString());
 		} catch (NumberFormatException ex) {
 			// This is not a mandatory field
 		}
 
-		tyreChangeEntry.setExtraMaterialCost(cost);
+		tyreChangeEntry.setExtraMaterialCost(new Cost(value, currency));
 	}
 
 	/**
 	 * Method to extract the cost of the labor within the tyre change entry
 	 */
 	private void updateLaborCost() {
-		double cost = 0.0;
+		double value = 0.0;
+		Currency.Unit currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
 		try {
-			cost = Double.parseDouble(editTextLaborCost.getText().toString());
+			value = Double.parseDouble(editTextLaborCost.getText().toString());
 		} catch (NumberFormatException ex) {
 			// This is not a mandatory field
 		}
 
-		tyreChangeEntry.setLaborCost(cost);
+		tyreChangeEntry.setLaborCost(new Cost(value, currency));
 	}
 
 	@Override
