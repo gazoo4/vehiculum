@@ -14,6 +14,8 @@ import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Record;
+import sk.berops.android.vehiculum.dataModel.charting.Charter;
+import sk.berops.android.vehiculum.dataModel.charting.HistoryCharter;
 import sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.vehiculum.engine.Searchable;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.HistoryController;
@@ -23,7 +25,13 @@ public class History extends Record {
 	private static final long serialVersionUID = -850435628372657221L;
 	@ElementList(inline=true, required=false)
 	private LinkedList<Entry> entries;
-	
+
+	/**
+	 * Charter is a class that's responsible for turning data contained in this object
+	 * to data understandable by chart drawer.
+	 */
+	protected Charter charter;
+
 	public History() {
 		super();
 		entries = new LinkedList<>();
@@ -171,6 +179,14 @@ public class History extends Record {
 		}
 
 		entries.removeAll(outOfScope);
+	}
+
+	public Charter getCharter() {
+		return (charter == null) ? generateCharter() : charter;
+	}
+
+	public Charter generateCharter() {
+		return new HistoryCharter(this);
 	}
 
 	/****************************** Controller-relevant methods ***********************************/

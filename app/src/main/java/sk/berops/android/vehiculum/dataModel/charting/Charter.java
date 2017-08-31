@@ -10,20 +10,16 @@ import java.util.ArrayList;
  * This abstract class ensures that we're able to extract the data values and the legend information from the entry for a use in charts
  */
 
-public abstract class EntryCharter {
+public abstract class Charter {
 
-	EntryCharter relay;
+	Charter relay;
 
 	/**
-	 * Method to get the values for the consumption pie chart (either to calculate them or to relay the calculation to another charter)
+	 * Method to get the values for the consumption pie chart (either to calculate them or to relay the calculation to another Charter)
 	 * @return DataSet of the values
 	 */
 	public ArrayList<PieEntry> getPieChartVals() {
-		if (relay != null) {
-			return relay.getPieChartVals();
-		} else {
-			return generatePieChartVals();
-		}
+		return (relay == null) ? generatePieChartVals() : relay.getPieChartVals();
 	}
 
 	/**
@@ -33,15 +29,11 @@ public abstract class EntryCharter {
 	public abstract ArrayList<PieEntry> generatePieChartVals();
 
 	/**
-	 * Method to get the colors for the consumption pie chart (either to extract them or to relay the extraction to another charter)
+	 * Method to get the colors for the consumption pie chart (either to extract them or to relay the extraction to another Charter)
 	 * @return list of the colors
 	 */
 	public ArrayList<Integer> getPieChartColors() {
-		if (relay != null) {
-			return relay.getPieChartColors();
-		} else {
-			return generatePieChartColors();
-		}
+		return (relay == null) ? generatePieChartColors() : relay.getPieChartColors();
 	}
 
 	/**
@@ -51,15 +43,11 @@ public abstract class EntryCharter {
 	public abstract ArrayList<Integer> generatePieChartColors();
 
 	/**
-	 * Method to get the label for the consumption pie chart (either to extract it or to relay the extraction to another charter)
+	 * Method to get the label for the consumption pie chart (either to extract it or to relay the extraction to another Charter)
 	 * @return label
 	 */
 	public String getPieChartLabel() {
-		if (relay != null) {
-			return relay.getPieChartLabel();
-		} else {
-			return generatePieChartLabel();
-		}
+		return (relay == null) ? generatePieChartLabel() : relay.getPieChartLabel();
 	}
 
 	/**
@@ -72,7 +60,7 @@ public abstract class EntryCharter {
 	 * Method used to tunnel information extraction from a relay instead of this object
 	 * @param target
 	 */
-	public void changeFocus(EntryCharter target) {
+	public void changeFocus(Charter target) {
 		this.relay = target;
 	}
 }

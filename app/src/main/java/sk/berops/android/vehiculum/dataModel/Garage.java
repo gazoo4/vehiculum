@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import sk.berops.android.vehiculum.BuildConfig;
+import sk.berops.android.vehiculum.dataModel.charting.Charter;
+import sk.berops.android.vehiculum.dataModel.charting.HistoryCharter;
 import sk.berops.android.vehiculum.dataModel.expense.Entry;
 import sk.berops.android.vehiculum.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.vehiculum.dataModel.maintenance.Tyre;

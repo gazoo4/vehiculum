@@ -12,7 +12,7 @@ import sk.berops.android.vehiculum.engine.calculation.NewGenFuelConsumption;
  * @date 8/24/17
  */
 
-public class FuellingCharter extends EntryCharter {
+public class FuellingCharter extends Charter {
 
 	FuellingEntry fEntry;
 	NewGenFuelConsumption fConsumption;
@@ -22,29 +22,21 @@ public class FuellingCharter extends EntryCharter {
 	}
 
 	@Override
-	public ArrayList<PieEntry> getPieChartVals() {
-		if (relay != null) return relay.getPieChartVals();
-
+	public ArrayList<PieEntry> generatePieChartVals() {
 		ArrayList<PieEntry> result =  new ArrayList<>();
 		return result;
 	}
 
 	@Override
-	public ArrayList<Integer> getPieChartColors() {
-		ArrayList<Integer> result = super.getPieChartColors();
-		if (result != null) return result;
-
-		result = new ArrayList<>();
+	public ArrayList<Integer> generatePieChartColors() {
+		ArrayList<Integer> result = new ArrayList<>();
 
 		return result;
 	}
 
 	@Override
-	public String getPieChartLabel() {
-		String result = super.getPieChartLabel();
-		if (result != null) return result;
-
-
+	public String generatePieChartLabel() {
+		String result = "";
 
 		return result;
 	}

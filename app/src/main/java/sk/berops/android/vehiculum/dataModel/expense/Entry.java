@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Car;
-import sk.berops.android.vehiculum.dataModel.charting.EntryCharter;
 import sk.berops.android.vehiculum.dataModel.Record;
+import sk.berops.android.vehiculum.dataModel.charting.Charter;
 import sk.berops.android.vehiculum.dataModel.tags.Tag;
 import sk.berops.android.vehiculum.dataModel.tags.Taggable;
 import sk.berops.android.vehiculum.engine.calculation.NewGenConsumption;
@@ -36,8 +36,6 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
     private double mileageSI;
     @Element(name = "expenseType")
     private ExpenseType expenseType;
-
-	EntryCharter charter;
 
     public Entry() {
         clearTags();
@@ -68,14 +66,6 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
 		    result = this.getCreationDate().compareTo(getCreationDate());
 	    }
         return result;
-    }
-
-    public EntryCharter getCharter() {
-	    if (charter == null) {
-		    charter = new EntryCharter(this);
-	    }
-
-	    return charter;
     }
 
     public int getDynamicId() {

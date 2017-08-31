@@ -6,6 +6,7 @@ import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
 
+import sk.berops.android.vehiculum.dataModel.charting.Charter;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.Entry;
 
@@ -14,7 +15,7 @@ import sk.berops.android.vehiculum.dataModel.expense.Entry;
  * @date 7/25/17
  */
 
-public class NewGenConsumption {
+public abstract class NewGenConsumption {
 	/**
 	 * Total cost of the all the entries including the current one
 	 */
@@ -40,6 +41,17 @@ public class NewGenConsumption {
 	 * Total count of the entries of the same type as current one by now (including the current one)
 	 */
 	private int typeCount;
+
+	/**
+	 * Reference to a class that's responsible for converting the consumption data into graphical data
+	 */
+	protected Charter charter;
+
+	public Charter getCharter() {
+		return (charter == null) ? generateCharter() : charter;
+	}
+
+	public abstract Charter generateCharter();
 
 	public Cost getTotalCost() {
 		return totalCost;
