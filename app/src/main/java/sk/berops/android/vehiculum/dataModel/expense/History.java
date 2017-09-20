@@ -1,12 +1,13 @@
 package sk.berops.android.vehiculum.dataModel.expense;
 
 
+import com.github.mikephil.charting.data.PieEntry;
+
 import org.simpleframework.xml.ElementList;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -14,13 +15,13 @@ import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Record;
+import sk.berops.android.vehiculum.dataModel.charting.PieChartable;
 import sk.berops.android.vehiculum.dataModel.charting.Charter;
 import sk.berops.android.vehiculum.dataModel.charting.HistoryCharter;
 import sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType;
-import sk.berops.android.vehiculum.engine.Searchable;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.HistoryController;
 
-public class History extends Record {
+public class History extends Record implements PieChartable {
 
 	private static final long serialVersionUID = -850435628372657221L;
 	@ElementList(inline=true, required=false)
@@ -181,14 +182,6 @@ public class History extends Record {
 		entries.removeAll(outOfScope);
 	}
 
-	public Charter getCharter() {
-		return (charter == null) ? generateCharter() : charter;
-	}
-
-	public Charter generateCharter() {
-		return new HistoryCharter(this);
-	}
-
 	/****************************** Controller-relevant methods ***********************************/
 
 	/**
@@ -217,5 +210,30 @@ public class History extends Record {
 		}
 
 		return result;
+	}
+
+	/****************************** PieChartable interface methods follow *************************/
+
+	public Charter getCharter() {
+		return (charter == null) ? generateCharter() : charter;
+	}
+
+	public Charter generateCharter() {
+		return new HistoryCharter(this);
+	}
+
+	@Override
+	public ArrayList<PieEntry> getPieChartVals() {
+		return getCharter().getPieChartVals();
+	}
+
+	@Override
+	public ArrayList<Integer> getPieChartColors() {
+		return getCharter().getPieChartColors();
+	}
+
+	@Override
+	public String getPieChartLabel() {
+		return getCharter().getPieChartLabel();
 	}
 }

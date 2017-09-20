@@ -7,6 +7,8 @@ import com.github.mikephil.charting.data.PieEntry;
 import java.util.ArrayList;
 
 import sk.berops.android.vehiculum.dataModel.charting.Charter;
+import sk.berops.android.vehiculum.dataModel.charting.HistoryCharter;
+import sk.berops.android.vehiculum.dataModel.charting.PieChartable;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.Entry;
 
@@ -15,7 +17,7 @@ import sk.berops.android.vehiculum.dataModel.expense.Entry;
  * @date 7/25/17
  */
 
-public abstract class NewGenConsumption {
+public abstract class NewGenConsumption implements PieChartable {
 	/**
 	 * Total cost of the all the entries including the current one
 	 */
@@ -100,5 +102,22 @@ public abstract class NewGenConsumption {
 
 	public void setTypeCount(int typeCount) {
 		this.typeCount = typeCount;
+	}
+
+	/****************************** PieChartable interface methods follow *************************/
+
+	@Override
+	public ArrayList<PieEntry> getPieChartVals() {
+		return getCharter().getPieChartVals();
+	}
+
+	@Override
+	public ArrayList<Integer> getPieChartColors() {
+		return getCharter().getPieChartColors();
+	}
+
+	@Override
+	public String getPieChartLabel() {
+		return getCharter().getPieChartLabel();
 	}
 }

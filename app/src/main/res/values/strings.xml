@@ -196,7 +196,7 @@
     <string name="fragment_tag_manager_select_button"               >Select</string>
     <string name="fragment_tag_manager_select_tag_hint"             >Select a tag</string>
 
-    <string name="generic_charts_total"                             >total</string>
+    <string name="generic_charts_total"                             >Total</string>
     <string name="generic_unit_consumption_mpg_imperial_long"       >miles per gallon (imperial)</string>
     <string name="generic_unit_consumption_mpg_short"               >mpg</string>
     <string name="generic_unit_consumption_mpg_us_long"             >miles per gallon (US)</string>
