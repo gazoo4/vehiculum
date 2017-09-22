@@ -39,8 +39,8 @@ public class CostController extends RecordController {
 		}
 
 		Cost costUpdate = (Cost) recordUpdate;
-		if (! cost.getRecordUnit().equals(costUpdate.getRecordUnit())) {
-			cost.setRecordUnit(costUpdate.getRecordUnit());
+		if (! cost.getRecordedUnit().equals(costUpdate.getRecordedUnit())) {
+			cost.setRecordedUnit(costUpdate.getRecordedUnit());
 			logUpdate("recordUnit");
 			updated = true;
 		}

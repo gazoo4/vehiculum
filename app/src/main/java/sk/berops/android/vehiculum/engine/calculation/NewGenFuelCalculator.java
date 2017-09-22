@@ -50,8 +50,13 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 
 		nextC.setCostLastRefuel(calculateCostLastRefuel(fEntry));
 
-		nextC.setTotalVolumeBySubstance(calculateTotalVolume(prevC, fEntry));
+		//is total volume missing?
+
+		nextC.setTotalVolumeBySubstance(calculateTotalSubstanceVolume(prevC, fEntry));
 		nextC.setTotalVolumeByType(calculateTotalTypeVolume(prevC, fEntry));
+
+		nextC.setTotalCostBySubstance(calculateTotalSubstanceCost(prevC, fEntry));
+		nextC.setTotalCostByType(calculateTotalTypeCost(prevC, fEntry));
 
 		nextC.setAverageConsumption(calculateAverageConsumption(prevC, fEntry));
 		nextC.setLastConsumption(calculateLastConsumption(fEntry));
@@ -95,7 +100,7 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		return result;
 	}
 
-	private HashMap<UnitConstants.Substance, Double> calculateTotalVolume(NewGenFuelConsumption prevC, FuellingEntry entry) {
+	private HashMap<UnitConstants.Substance, Double> calculateTotalSubstanceVolume(NewGenFuelConsumption prevC, FuellingEntry entry) {
 		// Total volume
 		HashMap<UnitConstants.Substance, Double> result;
 		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getTotalVolumeBySubstance());
@@ -115,6 +120,28 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		FuellingEntry.FuelType type = entry.getFuelType();
 		double volume = (result.get(type) == null) ? 0 : result.get(type);
 		result.put(type, volume + entry.getFuelQuantitySI());
+
+		return result;
+	}
+
+	private HashMap<UnitConstants.Substance, Cost> calculateTotalSubstanceCost(NewGenFuelConsumption prevC, FuellingEntry entry) {
+		HashMap<UnitConstants.Substance, Cost> result;
+		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getTotalCostBySubstance());
+
+		UnitConstants.Substance substance = entry.getFuelType().getSubstance();
+		Cost cost = (result.get(substance) == null) ? new Cost() : result.get(substance);
+		result.put(substance, Cost.add(cost, entry.getCost()));
+
+		return result;
+	}
+
+	private HashMap<FuellingEntry.FuelType, Cost> calculateTotalTypeCost(NewGenFuelConsumption prevC, FuellingEntry entry) {
+		HashMap<FuellingEntry.FuelType, Cost> result;
+		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getTotalCostByType());
+
+		FuellingEntry.FuelType type = entry.getFuelType();
+		Cost cost = (result.get(type) == null) ? new Cost() : result.get(type);
+		result.put(type, Cost.add(cost, entry.getCost()));
 
 		return result;
 	}

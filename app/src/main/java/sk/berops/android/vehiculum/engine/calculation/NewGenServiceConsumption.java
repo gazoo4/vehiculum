@@ -2,6 +2,8 @@ package sk.berops.android.vehiculum.engine.calculation;
 
 import java.util.HashMap;
 
+import sk.berops.android.vehiculum.dataModel.charting.Charter;
+import sk.berops.android.vehiculum.dataModel.charting.ServiceCharter;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.ServiceEntry;
 
@@ -12,6 +14,10 @@ import sk.berops.android.vehiculum.dataModel.expense.ServiceEntry;
 
 public class NewGenServiceConsumption extends NewGenConsumption {
 	private HashMap<ServiceEntry.Type, Cost> totalSTypeCost = new HashMap<>();
+
+	public Charter generateCharter() {
+		return new ServiceCharter(this);
+	}
 
 	public HashMap<ServiceEntry.Type, Cost> getTotalSTypeCost() {
 		return totalSTypeCost;

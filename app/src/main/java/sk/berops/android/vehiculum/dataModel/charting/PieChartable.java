@@ -15,4 +15,5 @@ public interface PieChartable {
 	ArrayList<PieEntry> getPieChartVals();
 	ArrayList<Integer> getPieChartColors();
 	String getPieChartLabel();
+	boolean invokeSelection(Integer i);
 }

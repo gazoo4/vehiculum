@@ -19,6 +19,10 @@ import sk.berops.android.vehiculum.dataModel.expense.Entry;
 
 public abstract class NewGenConsumption implements PieChartable {
 	/**
+	 * An entry this consumption is linked to
+	 */
+	protected Entry entry;
+	/**
 	 * Total cost of the all the entries including the current one
 	 */
 	private Cost totalCost;

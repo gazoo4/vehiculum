@@ -35,45 +35,25 @@ public class HistoryCharter extends Charter {
 	 * the last entries is that for each entry-type this variable holds accumulated consumption data
 	 * which is then used for charting.
 	 */
-	private void refreshData() {
+	@Override
+	public void refreshData() {
+		super.refreshData();
+
 		lastEntries = new HashMap<>();
 		for (Entry e: history.getEntries()) {
 			lastEntries.put(e.getExpenseType(), e);
 		}
 
-		vals = new ArrayList<>();
-		colors = new ArrayList<>();
 		for (Entry.ExpenseType t: lastEntries.keySet()) {
 			NewGenConsumption c = lastEntries.get(t).getConsumption();
 			vals.add(new PieEntry(c.getTotalTypeCost().getPreferredValue().floatValue()));
 			colors.add(t.getColor());
 		}
-	}
 
-	@Override
-	public ArrayList<PieEntry> extractPieChartVals() {
-		if (vals == null) {
-			refreshData();
-		}
-
-		return vals;
-	}
-
-	@Override
-	public ArrayList<Integer> extractPieChartColors() {
-		if (colors == null) {
-			refreshData();
-		}
-
-		return colors;
-	}
-
-	@Override
-	public String extractPieChartLabel() {
 		String total = Vehiculum.context.getString(R.string.generic_charts_total);
 		double value = history.getEntries().getLast().getConsumption().getTotalCost().getPreferredValue();
 		Currency.Unit unit = history.getEntries().getLast().getConsumption().getTotalCost().getPreferredUnit();
 
-		return total + ": " + TextFormatter.format(value, "######.##") + " " + unit.getSymbol();
+		label = total + ": " + TextFormatter.format(value, "######.##") + " " + unit.getSymbol();
 	}
 }

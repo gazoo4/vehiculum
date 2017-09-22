@@ -21,7 +21,10 @@ public abstract class Charter implements PieChartable {
 	/**
 	 * Method called when data objects {@link Charter#vals} and {@link Charter#colors} are empty and need to be populated with data for extraction
 	 */
-	public abstract void refreshData();
+	public void refreshData() {
+		vals = new ArrayList<>();
+		colors = new ArrayList<>();
+	}
 
 	/**
 	 * Method to get the values for the consumption pie chart (either to calculate them or to relay the calculation to another Charter)

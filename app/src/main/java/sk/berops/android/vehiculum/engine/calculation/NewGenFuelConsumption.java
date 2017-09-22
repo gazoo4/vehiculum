@@ -3,6 +3,8 @@ package sk.berops.android.vehiculum.engine.calculation;
 import java.util.HashMap;
 
 import sk.berops.android.vehiculum.dataModel.UnitConstants;
+import sk.berops.android.vehiculum.dataModel.charting.Charter;
+import sk.berops.android.vehiculum.dataModel.charting.FuellingCharter;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;
 
@@ -40,6 +42,14 @@ public class NewGenFuelConsumption extends NewGenConsumption {
 	 */
 	private HashMap<FuellingEntry.FuelType, Double> totalVolumeByType;
 	/**
+	 * Total cost of fuel bought by fuel substance
+	 */
+	private HashMap<UnitConstants.Substance, Cost> totalCostBySubstance;
+	/**
+	 * Total cost of fuel bought by fuel type
+	 */
+	private HashMap<FuellingEntry.FuelType, Cost> totalCostByType;
+	/**
 	 * Average fuel consumption per distance unit
 	 */
 	private HashMap<UnitConstants.Substance, Double> averageConsumption;
@@ -74,6 +84,10 @@ public class NewGenFuelConsumption extends NewGenConsumption {
 	 */
 	private HashMap<FuellingEntry.FuelType, Double> floatingConsumptionByType;
 
+	public Charter generateCharter() {
+		return new FuellingCharter(this);
+	}
+
 	public Cost getCostLastRefuel() {
 		return costLastRefuel;
 	}
@@ -96,6 +110,22 @@ public class NewGenFuelConsumption extends NewGenConsumption {
 
 	public void setTotalVolumeByType(HashMap<FuellingEntry.FuelType, Double> totalVolumeByType) {
 		this.totalVolumeByType = totalVolumeByType;
+	}
+
+	public HashMap<UnitConstants.Substance, Cost> getTotalCostBySubstance() {
+		return totalCostBySubstance;
+	}
+
+	public void setTotalCostBySubstance(HashMap<UnitConstants.Substance, Cost> totalCostBySubstance) {
+		this.totalCostBySubstance = totalCostBySubstance;
+	}
+
+	public HashMap<FuellingEntry.FuelType, Cost> getTotalCostByType() {
+		return totalCostByType;
+	}
+
+	public void setTotalCostByType(HashMap<FuellingEntry.FuelType, Cost> totalCostByType) {
+		this.totalCostByType = totalCostByType;
 	}
 
 	public HashMap<UnitConstants.Substance, Double> getAverageConsumption() {

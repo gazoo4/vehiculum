@@ -15,23 +15,20 @@ import sk.berops.android.vehiculum.engine.calculation.NewGenFuelConsumption;
 
 public class FuellingCharter extends Charter {
 
-	FuellingEntry fEntry;
-	NewGenFuelConsumption fConsumption;
+	private NewGenFuelConsumption fConsumption;
 
-	public FuellingCharter(FuellingEntry fEntry) {
-		fConsumption = fEntry.getFuelConsumption();
+	public FuellingCharter(NewGenFuelConsumption c) {
+		fConsumption = c;
 	}
 
 	@Override
 	public void refreshData() {
-		vals = new ArrayList<>();
-		colors = new ArrayList<>();
-		label = "";
+		super.refreshData();
 
 		fConsumption.getTotalVolumeByType().keySet()
 				.stream()
 				.peek(type -> colors.add(type.getColor()))
-				.map(type -> fConsumption.getTotalVolumeByType().get(type).floatValue())
-				.forEach(color -> vals.add(new PieEntry(color)));
+				.map(type -> fConsumption.getTotalCostByType().get(type).getPreferredValue().floatValue())
+				.forEach(value -> vals.add(new PieEntry(value)));
 	}
 }

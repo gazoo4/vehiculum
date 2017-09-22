@@ -2,6 +2,8 @@ package sk.berops.android.vehiculum.engine.calculation;
 
 import java.util.HashMap;
 
+import sk.berops.android.vehiculum.dataModel.charting.Charter;
+import sk.berops.android.vehiculum.dataModel.charting.MaintenanceCharter;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.MaintenanceEntry;
 
@@ -23,6 +25,10 @@ public class NewGenMaintenanceConsumption extends NewGenConsumption {
 	 * Total parts cost
 	 */
 	private Cost totalPartsCost;
+
+	public Charter generateCharter() {
+		return new MaintenanceCharter(this);
+	}
 
 	public HashMap<MaintenanceEntry.Type, Cost> getTotalMTypeCost() {
 		return totalMTypeCost;

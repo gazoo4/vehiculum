@@ -1,5 +1,7 @@
 package sk.berops.android.vehiculum.dataModel.maintenance;
 
+import android.graphics.Color;
+
 import org.simpleframework.xml.Element;
 
 import java.util.Date;
@@ -91,16 +93,20 @@ public class Tyre extends GenericPart {
 	}
 
 	public enum Season {
-		SUMMER(0, "summer", 1.6), ALL_SEASON(1, "all season", 4.0), WINTER(2, "winter", 4.0), SPIKES(3,
-				"winter with spikes", 4.0);
+		SUMMER(0, "summer", 1.6, 0xFFA500),
+		ALL_SEASON(1, "all season", 4.0, 0x808000),
+		WINTER(2, "winter", 4.0, 0x6A5ACD),
+		SPIKES(3, "winter with spikes", 4.0, 0x778899);
 		private int id;
 		private String season;
 		private double minThreadLevel;
+		private int color;
 
-		Season(int id, String season, double minThreadLevel) {
+		Season(int id, String season, double minThreadLevel, int color) {
 			this.setId(id);
 			this.setSeason(season);
 			this.setMinThreadLevel(minThreadLevel);
+			this.setColor(color);
 		}
 
 		private static Map<Integer, Season> idToSeasonMapping;
@@ -144,6 +150,14 @@ public class Tyre extends GenericPart {
 		
 		public void setMinThreadLevel(double minThreadLevel) {
 			this.minThreadLevel = minThreadLevel;
+		}
+
+		public int getColor() {
+			return color;
+		}
+
+		public void setColor(int color) {
+			this.color = color;
 		}
 	}
 

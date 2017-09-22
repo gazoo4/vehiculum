@@ -131,7 +131,7 @@ public class ActivityReportsNavigate extends DefaultActivity {
     }
 
     /**
-     * Display the new data loaded into the chartMananger
+     * Display the new data loaded into the chartManager
      */
     private void redrawChart() {
         chart.setData(chartManager.getPieData());

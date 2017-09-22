@@ -33,6 +33,12 @@ public class History extends Record implements PieChartable {
 	 */
 	protected Charter charter;
 
+	/**
+	 * If the user wants to zoom in into the PieChart, we relay the data collection to another PieChartable object
+	 * stored in relay property.
+	 */
+	private PieChartable relay;
+
 	public History() {
 		super();
 		entries = new LinkedList<>();
@@ -235,5 +241,32 @@ public class History extends Record implements PieChartable {
 	@Override
 	public String getPieChartLabel() {
 		return getCharter().getPieChartLabel();
+	}
+
+	@Override
+	public boolean invokeSelection(Integer selection) {
+		if (relay != null) {
+			boolean result = relay.invokeSelection(selection);
+			if (!result && selection == null) {
+				// Request to remove a leaf (i.e. to move the chart focus one level higher)
+				// Relay was asked to process the request, but it failed and the request was to shorten
+				// the relay path by 1 level (selection == null), i.e. to display the data of
+				// an element one level higher, it means we are becoming the leaf in the chain
+				relay = null;
+				return true;
+			} else {
+				// The relay either processed the result correctly or the request wasn't about shortening
+				// the relay path. So we're just passing the result of the operation up the chain
+				return result;
+			}
+		} else {
+			// relay == null
+			if (selection == null) {
+				// We are asked to cut the relay path by one level, however we're are the leaf
+				return false;
+			}
+		}
+
+		// Deep dive here and find new Relay PieChartable object based on the selection ID
 	}
 }

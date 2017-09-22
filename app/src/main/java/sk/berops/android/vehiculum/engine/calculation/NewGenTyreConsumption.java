@@ -2,6 +2,8 @@ package sk.berops.android.vehiculum.engine.calculation;
 
 import java.util.HashMap;
 
+import sk.berops.android.vehiculum.dataModel.charting.Charter;
+import sk.berops.android.vehiculum.dataModel.charting.TyreCharter;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.maintenance.Tyre;
 
@@ -11,9 +13,13 @@ import sk.berops.android.vehiculum.dataModel.maintenance.Tyre;
  */
 
 public class NewGenTyreConsumption extends NewGenConsumption {
-	private HashMap<Tyre.Season, Cost> tyreCost;
+	private HashMap<Tyre.Season, Cost> tyreCost = new HashMap<>();
 	private Cost materialCost;
 	private Cost laborCost;
+
+	public Charter generateCharter() {
+		return new TyreCharter(this);
+	}
 
 	public Cost getTotalTyreCost() {
 		Cost cost = new Cost();

@@ -307,6 +307,9 @@ public class Cost extends Record {
 		}
 
 		final Cost other = (Cost) obj;
+		if (this.isZero() && other.isZero()) {
+			return true;
+		}
 		if ((this.values == null) ? (other.values != null) : (! this.values.equals(other.values))) {
 			return false;
 		}
