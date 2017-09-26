@@ -25,6 +25,11 @@ public class HistoryCharter extends Charter {
 	 */
 	private HashMap<Entry.ExpenseType, Entry> lastEntries;
 
+	/**
+	 * Mapping between Integer (pie-chart data element IDs and ExpenseTypes they represent)
+	 */
+	private ArrayList<Entry.ExpenseType> types;
+
 	public HistoryCharter(History history) {
 		this.history = history;
 		refreshData();
@@ -39,6 +44,7 @@ public class HistoryCharter extends Charter {
 	public void refreshData() {
 		super.refreshData();
 
+		types = new ArrayList<>();
 		lastEntries = new HashMap<>();
 		for (Entry e: history.getEntries()) {
 			lastEntries.put(e.getExpenseType(), e);
@@ -48,6 +54,7 @@ public class HistoryCharter extends Charter {
 			NewGenConsumption c = lastEntries.get(t).getConsumption();
 			vals.add(new PieEntry(c.getTotalTypeCost().getPreferredValue().floatValue()));
 			colors.add(t.getColor());
+			types.add(t);
 		}
 
 		String total = Vehiculum.context.getString(R.string.generic_charts_total);

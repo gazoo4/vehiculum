@@ -1,13 +1,10 @@
 package sk.berops.android.vehiculum.engine.calculation;
 
-import android.util.Log;
-
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
 
 import sk.berops.android.vehiculum.dataModel.charting.Charter;
-import sk.berops.android.vehiculum.dataModel.charting.HistoryCharter;
 import sk.berops.android.vehiculum.dataModel.charting.PieChartable;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.Entry;
@@ -112,16 +109,16 @@ public abstract class NewGenConsumption implements PieChartable {
 
 	@Override
 	public ArrayList<PieEntry> getPieChartVals() {
-		return getCharter().getPieChartVals();
+		return getCharter().extractPieChartVals();
 	}
 
 	@Override
 	public ArrayList<Integer> getPieChartColors() {
-		return getCharter().getPieChartColors();
+		return getCharter().extractPieChartColors();
 	}
 
 	@Override
 	public String getPieChartLabel() {
-		return getCharter().getPieChartLabel();
+		return getCharter().extractPieChartLabel();
 	}
 }
