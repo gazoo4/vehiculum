@@ -2,8 +2,10 @@ package sk.berops.android.vehiculum.dataModel.charting;
 
 import com.github.mikephil.charting.data.PieEntry;
 
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;
 import sk.berops.android.vehiculum.engine.calculation.NewGenFuelConsumption;
 
 /**
@@ -11,7 +13,7 @@ import sk.berops.android.vehiculum.engine.calculation.NewGenFuelConsumption;
  * @date 8/24/17
  */
 
-public class FuellingCharter extends PieCharter {
+public class FuellingCharter extends EntryCharter {
 
 	private NewGenFuelConsumption fConsumption;
 
@@ -19,14 +21,20 @@ public class FuellingCharter extends PieCharter {
 		fConsumption = c;
 	}
 
-	@Override
-	public void refreshData() {
-		super.refreshData();
+	protected Stream<FuellingEntry.FuelType> getStream() {
+		return fConsumption.getTotalVolumeByType().keySet().stream();
+	}
 
-		fConsumption.getTotalVolumeByType().keySet()
-				.stream()
-				.peek(type -> colors.add(type.getColor()))
-				.map(type -> fConsumption.getTotalCostByType().get(type).getPreferredValue().floatValue())
-				.forEach(value -> vals.add(new PieEntry(value)));
+	protected Consumer<FuellingEntry.FuelType> addColor() {
+		return type -> colors.add(type.getColor());
+	}
+
+	protected Consumer<FuellingEntry.FuelType> addVals() {
+		return type -> vals.add(new PieEntry(fConsumption.getTotalCostByType().get(type).getPreferredValue().floatValue()));
+	}
+
+	protected Consumer<FuellingEntry.FuelType> addRelay() {
+		// There are no child relays to the FuellingCharter
+		return type -> {};
 	}
 }

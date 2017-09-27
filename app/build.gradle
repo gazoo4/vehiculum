@@ -37,7 +37,7 @@ android {
         applicationId "sk.berops.android.fueller"
         versionCode 9
         versionName "Ignition"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 25
         multiDexEnabled true
         jackOptions {
