@@ -11,7 +11,7 @@ import sk.berops.android.vehiculum.engine.calculation.NewGenTyreConsumption;
  * @date 9/21/17
  */
 
-public class TyreCharter extends Charter {
+public class TyreCharter extends PieCharter {
 
 	private NewGenTyreConsumption tConsumption;
 

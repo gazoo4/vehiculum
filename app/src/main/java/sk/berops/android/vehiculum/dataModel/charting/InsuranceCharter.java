@@ -9,7 +9,7 @@ import sk.berops.android.vehiculum.engine.calculation.NewGenInsuranceConsumption
  * @date 9/21/17
  */
 
-public class InsuranceCharter extends Charter {
+public class InsuranceCharter extends PieCharter {
 
 	NewGenInsuranceConsumption iConsumption;
 

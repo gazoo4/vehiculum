@@ -2,7 +2,7 @@ package sk.berops.android.vehiculum.engine.calculation;
 
 import java.util.HashMap;
 
-import sk.berops.android.vehiculum.dataModel.charting.Charter;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.dataModel.charting.MaintenanceCharter;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.MaintenanceEntry;
@@ -26,7 +26,7 @@ public class NewGenMaintenanceConsumption extends NewGenConsumption {
 	 */
 	private Cost totalPartsCost;
 
-	public Charter generateCharter() {
+	public PieCharter generateCharter() {
 		return new MaintenanceCharter(this);
 	}
 

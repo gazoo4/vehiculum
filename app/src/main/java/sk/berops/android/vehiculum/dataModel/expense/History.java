@@ -17,6 +17,7 @@ import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.charting.PieChartable;
 import sk.berops.android.vehiculum.dataModel.charting.HistoryCharter;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.HistoryController;
 
@@ -27,16 +28,10 @@ public class History extends Record implements PieChartable {
 	private LinkedList<Entry> entries;
 
 	/**
-	 * Charter is a class that's responsible for turning data contained in this object
-	 * to data understandable by chart drawer.
+	 * PieCharter is a class that's responsible for turning data contained in this object
+	 * to data understandable by chart drawer for PieChart visualization.
 	 */
 	protected HistoryCharter charter;
-
-	/**
-	 * If the user wants to zoom in into the PieChart, we relay the data collection to another PieChartable object
-	 * stored in relay property.
-	 */
-	private PieChartable relay;
 
 	public History() {
 		super();
@@ -219,31 +214,11 @@ public class History extends Record implements PieChartable {
 
 	/****************************** PieChartable interface methods follow *************************/
 
-	public HistoryCharter getCharter() {
-		return (charter == null) ? generateCharter() : charter;
+	public PieCharter getPieCharter() {
+		return (charter == null) ? generatePieCharter() : charter;
 	}
 
-	public HistoryCharter generateCharter() {
+	public HistoryCharter generatePieCharter() {
 		return new HistoryCharter(this);
-	}
-
-	@Override
-	public ArrayList<PieEntry> getPieChartVals() {
-		return getCharter().extractPieChartVals();
-	}
-
-	@Override
-	public ArrayList<Integer> getPieChartColors() {
-		return getCharter().extractPieChartColors();
-	}
-
-	@Override
-	public String getPieChartLabel() {
-		return getCharter().extractPieChartLabel();
-	}
-
-	@Override
-	public boolean invokeSelection(Integer selection) {
-		return getCharter().invokeSelection(selection);
 	}
 }

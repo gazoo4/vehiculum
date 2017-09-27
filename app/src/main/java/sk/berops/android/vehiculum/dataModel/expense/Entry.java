@@ -10,13 +10,14 @@ import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Record;
-import sk.berops.android.vehiculum.dataModel.charting.Charter;
+import sk.berops.android.vehiculum.dataModel.charting.PieChartable;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.dataModel.tags.Tag;
 import sk.berops.android.vehiculum.dataModel.tags.Taggable;
 import sk.berops.android.vehiculum.engine.calculation.NewGenConsumption;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.EntryController;
 
-public abstract class Entry extends Expense implements Comparable<Entry>, Taggable {
+public abstract class Entry extends Expense implements Comparable<Entry>, Taggable, PieChartable {
     private int dynamicId;
     private NewGenConsumption consumption;
 
@@ -36,6 +37,12 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
     private double mileageSI;
     @Element(name = "expenseType")
     private ExpenseType expenseType;
+
+	/**
+	 * PieCharter is a class that's responsible for turning data contained in this object
+	 * to data understandable by chart drawer for PieChart visualization.
+	 */
+	protected PieCharter charter;
 
     public Entry() {
         clearTags();
@@ -281,4 +288,12 @@ public abstract class Entry extends Expense implements Comparable<Entry>, Taggab
 		// parsed directly from the Garage object, no need to parse the same tags again.
 		return result;
 	}
+
+	/****************************** PieChartable interface methods follow *************************/
+
+	public PieCharter getPieCharter() {
+		return (charter == null) ? generatePieCharter() : charter;
+	}
+
+	public abstract PieCharter generatePieCharter();
 }

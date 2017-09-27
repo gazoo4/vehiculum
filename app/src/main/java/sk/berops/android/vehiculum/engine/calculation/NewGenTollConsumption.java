@@ -2,7 +2,7 @@ package sk.berops.android.vehiculum.engine.calculation;
 
 import java.util.HashMap;
 
-import sk.berops.android.vehiculum.dataModel.charting.Charter;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.dataModel.charting.TollCharter;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.TollEntry;
@@ -15,7 +15,7 @@ import sk.berops.android.vehiculum.dataModel.expense.TollEntry;
 public class NewGenTollConsumption extends NewGenConsumption {
 	private HashMap<TollEntry.Type, Cost> totalTTypeCost = new HashMap<>();
 
-	public Charter generateCharter() {
+	public PieCharter generateCharter() {
 		return new TollCharter(this);
 	}
 

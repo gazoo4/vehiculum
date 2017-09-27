@@ -7,7 +7,7 @@ import sk.berops.android.vehiculum.engine.calculation.NewGenBureaucraticConsumpt
  * @date 9/21/17
  */
 
-public class BurreaucraticCharter extends Charter {
+public class BurreaucraticCharter extends PieCharter {
 
 	private NewGenBureaucraticConsumption bConsumption;
 

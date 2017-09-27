@@ -4,7 +4,7 @@ import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
 
-import sk.berops.android.vehiculum.dataModel.charting.Charter;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.dataModel.charting.PieChartable;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.Entry;
@@ -48,13 +48,13 @@ public abstract class NewGenConsumption implements PieChartable {
 	/**
 	 * Reference to a class that's responsible for converting the consumption data into graphical data
 	 */
-	protected Charter charter;
+	protected PieCharter pieCharter;
 
-	public Charter getCharter() {
-		return (charter == null) ? generateCharter() : charter;
+	public PieCharter getPieCharter() {
+		return (pieCharter == null) ? generateCharter() : pieCharter;
 	}
 
-	public abstract Charter generateCharter();
+	public abstract PieCharter generateCharter();
 
 	public Cost getTotalCost() {
 		return totalCost;
@@ -96,29 +96,11 @@ public abstract class NewGenConsumption implements PieChartable {
 		this.count = count;
 	}
 
-
 	public int getTypeCount() {
 		return typeCount;
 	}
 
 	public void setTypeCount(int typeCount) {
 		this.typeCount = typeCount;
-	}
-
-	/****************************** PieChartable interface methods follow *************************/
-
-	@Override
-	public ArrayList<PieEntry> getPieChartVals() {
-		return getCharter().extractPieChartVals();
-	}
-
-	@Override
-	public ArrayList<Integer> getPieChartColors() {
-		return getCharter().extractPieChartColors();
-	}
-
-	@Override
-	public String getPieChartLabel() {
-		return getCharter().extractPieChartLabel();
 	}
 }

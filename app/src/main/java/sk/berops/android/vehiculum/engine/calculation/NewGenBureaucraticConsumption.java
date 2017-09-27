@@ -1,7 +1,7 @@
 package sk.berops.android.vehiculum.engine.calculation;
 
 import sk.berops.android.vehiculum.dataModel.charting.BurreaucraticCharter;
-import sk.berops.android.vehiculum.dataModel.charting.Charter;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 
 /**
  * @author Bernard Halas
@@ -10,7 +10,7 @@ import sk.berops.android.vehiculum.dataModel.charting.Charter;
 
 public class NewGenBureaucraticConsumption extends NewGenConsumption {
 
-	public Charter generateCharter() {
+	public PieCharter generateCharter() {
 		return new BurreaucraticCharter(this);
 	}
 }

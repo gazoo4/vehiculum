@@ -1,6 +1,6 @@
 package sk.berops.android.vehiculum.engine.calculation;
 
-import sk.berops.android.vehiculum.dataModel.charting.Charter;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.dataModel.charting.OtherCharter;
 
 /**
@@ -10,7 +10,7 @@ import sk.berops.android.vehiculum.dataModel.charting.OtherCharter;
 
 public class NewGenOtherConsumption extends NewGenConsumption {
 
-	public Charter generateCharter() {
+	public PieCharter generateCharter() {
 		return new OtherCharter(this);
 	}
 }

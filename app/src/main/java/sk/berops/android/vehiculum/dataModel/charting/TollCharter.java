@@ -9,7 +9,7 @@ import sk.berops.android.vehiculum.engine.calculation.NewGenTollConsumption;
  * @date 9/21/17
  */
 
-public class TollCharter extends Charter {
+public class TollCharter extends PieCharter {
 
 	private NewGenTollConsumption tConsumption;
 

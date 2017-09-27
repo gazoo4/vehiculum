@@ -3,6 +3,7 @@ package sk.berops.android.vehiculum.dataModel.charting;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Bernard Halas
@@ -11,28 +12,34 @@ import java.util.ArrayList;
  * This abstract class ensures that we're able to extract the data values and the legend information from the entry for a use in charts
  */
 
-public abstract class Charter {
+public abstract class PieCharter {
 
-	private Charter relay;
+	/**
+	 * If the user wants to zoom in into the PieChart, we relay the data collection to another PieChartable object
+	 * stored in relay property.
+	 */
+	private PieCharter relay;
 	protected ArrayList<PieEntry> vals;
 	protected ArrayList<Integer> colors;
+	protected ArrayList<PieCharter> relays;
 	protected String label;
 
 	/**
-	 * Method called when data objects {@link Charter#vals} and {@link Charter#colors} are empty and need to be populated with data for extraction
+	 * Method called when data objects {@link PieCharter#vals} and {@link PieCharter#colors} are empty and need to be populated with data for extraction
 	 */
 	public void refreshData() {
 		vals = new ArrayList<>();
 		colors = new ArrayList<>();
+		relays = new ArrayList<>();
 	}
 
 	/**
-	 * Method to get the values for the consumption pie chart (either to calculate them or to relay the calculation to another Charter)
+	 * Method to get the values for the consumption pie chart (either to calculate them or to relay the calculation to another PieCharter)
 	 * @return DataSet of the values
 	 */
-	public ArrayList<PieEntry> extractPieChartVals() {
+	public ArrayList<PieEntry> getPieChartVals() {
 		if (relay != null) {
-			return relay.extractPieChartVals();
+			return relay.getPieChartVals();
 		}
 
 		if (vals == null || vals.size() == 0) {
@@ -42,12 +49,12 @@ public abstract class Charter {
 	}
 
 	/**
-	 * Method to get the colors for the consumption pie chart (either to extract them or to relay the extraction to another Charter)
+	 * Method to get the colors for the consumption pie chart (either to extract them or to relay the extraction to another PieCharter)
 	 * @return list of the colors
 	 */
-	public ArrayList<Integer> extractPieChartColors() {
+	public ArrayList<Integer> getPieChartColors() {
 		if (relay != null) {
-			return relay.extractPieChartColors();
+			return relay.getPieChartColors();
 		}
 
 		if (colors == null || colors.size() == 0) {
@@ -57,12 +64,12 @@ public abstract class Charter {
 	}
 
 	/**
-	 * Method to get the label for the consumption pie chart (either to extract it or to relay the extraction to another Charter)
+	 * Method to get the label for the consumption pie chart (either to extract it or to relay the extraction to another PieCharter)
 	 * @return label
 	 */
-	public String extractPieChartLabel() {
+	public String getPieChartLabel() {
 		if (relay != null) {
-			return relay.extractPieChartLabel();
+			return relay.getPieChartLabel();
 		}
 
 		if (label == null) {
@@ -72,7 +79,8 @@ public abstract class Charter {
 	}
 
 	/**
-	 * In case of a zoom action in the chart, set the relay object and pull data from relay
+	 * In case of a zoom action in the chart, set the relay object and pull data from relay.
+	 * If null argument is given, go one level up
 	 * @param selection
 	 * @return true if operation was processed successfully
 	 */
@@ -95,6 +103,7 @@ public abstract class Charter {
 			// relay == null
 			if (selection == null) {
 				// We are asked to cut the relay path by one level, however we're are the leaf
+				// so we can't process the request.
 				return false;
 			} else {
 				// There's no relay and we've been asked to set one
@@ -105,10 +114,18 @@ public abstract class Charter {
 
 	/**
 	 * Method to assign the relay object based on the selection ID
-	 * This needs to be overriden in the child classes as for each child charter the ID will represent
+	 * This needs to be overriden in the child classes as for each child pieCharter the ID will represent
 	 * different categories (summer/winter tyres, fuel types, ...)
 	 * @param selection
 	 * @return true if request was processed successfully
 	 */
-	public abstract boolean setRelayByID(Integer selection);
+	public boolean setRelayByID(Integer selection) {
+		try {
+			relay = relays.get(selection);
+		} catch (IndexOutOfBoundsException | NullPointerException ex) {
+			return false;
+		}
+
+		return true;
+	}
 }

@@ -7,7 +7,7 @@ import sk.berops.android.vehiculum.engine.calculation.NewGenOtherConsumption;
  * @date 9/21/17
  */
 
-public class OtherCharter extends Charter {
+public class OtherCharter extends PieCharter {
 
 	private NewGenOtherConsumption oConsumption;
 

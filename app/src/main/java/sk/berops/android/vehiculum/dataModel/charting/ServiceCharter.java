@@ -9,7 +9,7 @@ import sk.berops.android.vehiculum.engine.calculation.NewGenServiceConsumption;
  * @date 9/21/17
  */
 
-public class ServiceCharter extends Charter {
+public class ServiceCharter extends PieCharter {
 
 	private NewGenServiceConsumption sConsumption;
 

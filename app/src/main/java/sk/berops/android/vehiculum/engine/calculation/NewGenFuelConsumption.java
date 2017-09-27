@@ -3,7 +3,7 @@ package sk.berops.android.vehiculum.engine.calculation;
 import java.util.HashMap;
 
 import sk.berops.android.vehiculum.dataModel.UnitConstants;
-import sk.berops.android.vehiculum.dataModel.charting.Charter;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.dataModel.charting.FuellingCharter;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;
@@ -84,7 +84,7 @@ public class NewGenFuelConsumption extends NewGenConsumption {
 	 */
 	private HashMap<FuellingEntry.FuelType, Double> floatingConsumptionByType;
 
-	public Charter generateCharter() {
+	public PieCharter generateCharter() {
 		return new FuellingCharter(this);
 	}
 

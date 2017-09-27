@@ -2,9 +2,6 @@ package sk.berops.android.vehiculum.dataModel.charting;
 
 import com.github.mikephil.charting.data.PieEntry;
 
-import sk.berops.android.vehiculum.dataModel.calculation.MaintenanceConsumption;
-import sk.berops.android.vehiculum.dataModel.expense.MaintenanceEntry;
-import sk.berops.android.vehiculum.engine.calculation.NewGenFuelConsumption;
 import sk.berops.android.vehiculum.engine.calculation.NewGenMaintenanceConsumption;
 
 /**
@@ -12,7 +9,7 @@ import sk.berops.android.vehiculum.engine.calculation.NewGenMaintenanceConsumpti
  * @date 9/21/17
  */
 
-public class MaintenanceCharter extends Charter {
+public class MaintenanceCharter extends PieCharter {
 
 	private NewGenMaintenanceConsumption mConsumption;
 

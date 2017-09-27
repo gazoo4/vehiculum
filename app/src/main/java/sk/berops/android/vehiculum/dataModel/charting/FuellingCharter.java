@@ -2,10 +2,8 @@ package sk.berops.android.vehiculum.dataModel.charting;
 
 import com.github.mikephil.charting.data.PieEntry;
 
-import java.util.ArrayList;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;
 import sk.berops.android.vehiculum.engine.calculation.NewGenFuelConsumption;
 
 /**
@@ -13,7 +11,7 @@ import sk.berops.android.vehiculum.engine.calculation.NewGenFuelConsumption;
  * @date 8/24/17
  */
 
-public class FuellingCharter extends Charter {
+public class FuellingCharter extends PieCharter {
 
 	private NewGenFuelConsumption fConsumption;
 

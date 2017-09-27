@@ -2,7 +2,7 @@ package sk.berops.android.vehiculum.engine.calculation;
 
 import java.util.HashMap;
 
-import sk.berops.android.vehiculum.dataModel.charting.Charter;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.dataModel.charting.InsuranceCharter;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.InsuranceEntry;
@@ -15,7 +15,7 @@ import sk.berops.android.vehiculum.dataModel.expense.InsuranceEntry;
 public class NewGenInsuranceConsumption extends NewGenConsumption {
 	private HashMap<InsuranceEntry.Type, Cost> totalITypeCost = new HashMap<>();
 
-	public Charter generateCharter() {
+	public PieCharter generateCharter() {
 		return new InsuranceCharter(this);
 	}
 

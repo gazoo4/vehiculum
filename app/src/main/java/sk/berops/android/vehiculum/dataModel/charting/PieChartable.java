@@ -12,8 +12,5 @@ import java.util.ArrayList;
  */
 
 public interface PieChartable {
-	ArrayList<PieEntry> getPieChartVals();
-	ArrayList<Integer> getPieChartColors();
-	String getPieChartLabel();
-	boolean invokeSelection(Integer selection);
+	PieCharter getPieCharter();
 }
