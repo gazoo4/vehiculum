@@ -1,5 +1,9 @@
 package sk.berops.android.vehiculum.dataModel.charting;
 
+import java.util.function.Consumer;
+import java.util.stream.Stream;
+
+import sk.berops.android.vehiculum.dataModel.expense.OtherEntry;
 import sk.berops.android.vehiculum.engine.calculation.NewGenOtherConsumption;
 
 /**
@@ -7,7 +11,7 @@ import sk.berops.android.vehiculum.engine.calculation.NewGenOtherConsumption;
  * @date 9/21/17
  */
 
-public class OtherCharter extends PieCharter {
+public class OtherCharter extends EntryCharter {
 
 	private NewGenOtherConsumption oConsumption;
 
@@ -15,8 +19,19 @@ public class OtherCharter extends PieCharter {
 		oConsumption = o;
 	}
 
-	@Override
-	public void refreshData() {
-		super.refreshData();
+	protected Stream getStream() {
+		return null;
+	}
+
+	protected Consumer addColor() {
+		return null;
+	}
+
+	protected Consumer addVals() {
+		return null;
+	}
+
+	protected Consumer addRelay() {
+		return null;
 	}
 }

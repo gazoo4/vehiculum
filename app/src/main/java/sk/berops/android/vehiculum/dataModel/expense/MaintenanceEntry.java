@@ -3,7 +3,6 @@ package sk.berops.android.vehiculum.dataModel.expense;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -11,9 +10,9 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.UUID;
 
-import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.Record;
-import sk.berops.android.vehiculum.dataModel.calculation.MaintenanceConsumption;
+import sk.berops.android.vehiculum.dataModel.charting.MaintenanceCharter;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.dataModel.maintenance.ReplacementPart;
 import sk.berops.android.vehiculum.engine.calculation.NewGenMaintenanceConsumption;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.MaintenanceEntryController;
@@ -171,5 +170,15 @@ public class MaintenanceEntry extends Entry {
 		}
 
 		return result;
+	}
+
+	/****************************** PieChartable interface methods follow *************************/
+
+	public PieCharter getPieCharter() {
+		return (charter == null) ? generatePieCharter() : charter;
+	}
+
+	public MaintenanceCharter generatePieCharter() {
+		return new MaintenanceCharter(getMaintenanceConsumption());
 	}
 }

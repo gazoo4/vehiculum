@@ -50,6 +50,14 @@ public class NewGenFuelConsumption extends NewGenConsumption {
 	 */
 	private HashMap<FuellingEntry.FuelType, Cost> totalCostByType;
 	/**
+	 * Average fuel cost per distance unit by fuel substance
+	 */
+	private HashMap<UnitConstants.Substance, Cost> averageCostBySubstance;
+	/**
+	 * Average fuel cost per distance unit by fuel type
+	 */
+	private HashMap<FuellingEntry.FuelType, Cost> averageCostByType;
+	/**
 	 * Average fuel consumption per distance unit
 	 */
 	private HashMap<UnitConstants.Substance, Double> averageConsumption;
@@ -61,6 +69,10 @@ public class NewGenFuelConsumption extends NewGenConsumption {
 	 * Average consumption from the last refuel
 	 */
 	private double lastConsumption;
+	/**
+	 * Average cost per disctance unit from the last refuel
+	 */
+	private Cost lastCost;
 	/**
 	 * Moving consumption for each fuel substance
 	 * (average consumption per distance across {@link NewGenFuelConsumption#MOVING_AVG_COUNT} refuellings)
@@ -128,6 +140,22 @@ public class NewGenFuelConsumption extends NewGenConsumption {
 		this.totalCostByType = totalCostByType;
 	}
 
+	public HashMap<UnitConstants.Substance, Cost> getAverageCostBySubstance() {
+		return averageCostBySubstance;
+	}
+
+	public void setAverageCostBySubstance(HashMap<UnitConstants.Substance, Cost> averageCostBySubstance) {
+		this.averageCostBySubstance = averageCostBySubstance;
+	}
+
+	public HashMap<FuellingEntry.FuelType, Cost> getAverageCostByType() {
+		return averageCostByType;
+	}
+
+	public void setAverageCostByType(HashMap<FuellingEntry.FuelType, Cost> averageCostByType) {
+		this.averageCostByType = averageCostByType;
+	}
+
 	public HashMap<UnitConstants.Substance, Double> getAverageConsumption() {
 		return averageConsumption;
 	}
@@ -150,6 +178,14 @@ public class NewGenFuelConsumption extends NewGenConsumption {
 
 	public void setLastConsumption(double lastConsumption) {
 		this.lastConsumption = lastConsumption;
+	}
+
+	public Cost getLastCost() {
+		return lastCost;
+	}
+
+	public void setLastCost(Cost lastCost) {
+		this.lastCost = lastCost;
 	}
 
 	public HashMap<UnitConstants.Substance, Double> getMovingConsumptionBySubstance() {

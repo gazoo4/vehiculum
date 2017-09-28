@@ -72,7 +72,7 @@ public class UnitConstants {
 	// all the default units here are mapped against: kilometer, liter
 	static Preferences preferences = Preferences.getInstance();
 
-	public enum Substance{
+	public enum Substance {
 		LIQUID(0),
 		GAS(1),
 		ELECTRIC(2);
@@ -173,7 +173,11 @@ public class UnitConstants {
 		}
 
 		public static QuantityUnit getDefaultQuantityUnit(FuelType type) {
-			switch(type.getSubstance()) {
+			return getDefaultQuantityUnit(type.getSubstance());
+		}
+
+		public static QuantityUnit getDefaultQuantityUnit(Substance substance) {
+			switch(substance) {
 				case LIQUID:
 					return LITER;
 				case GAS:
@@ -527,6 +531,34 @@ public class UnitConstants {
 		ConsumptionUnit from = new ConsumptionUnit(
 				ConsumptionScheme.FUEL_PER_100DISTANCE,
 				QuantityUnit.getDefaultQuantityUnit(type),
+				DistanceUnit.KILOMETER);
+		return convertUnitConsumption(fromValue, from, to);
+	}
+
+	/**
+	 * Method to convert the consumption value from the SI (as stored in the app) to the consumption unit
+	 * as stored in the preferences
+	 * @param substance substance of the fuel
+	 * @param fromValue consumption SI value
+	 * @return value converted to the consumption unit in the preferences
+	 */
+	public static double convertUnitConsumptionFromSI(Substance substance, double fromValue) {
+		return convertUnitConsumptionFromSI(substance, fromValue, preferences.getConsumptionUnit(substance));
+	}
+
+	/**
+	 * Method to convert the consumption value from the SI (as stored in the app) to the consumption
+	 * unit provided
+	 * @param substance substance of the fuel
+	 * @param fromValue consumption SI value
+	 * @param to target consumption unit
+	 * @return
+	 */
+	public static double convertUnitConsumptionFromSI(Substance substance, double fromValue,
+	                                                  ConsumptionUnit to) {
+		ConsumptionUnit from = new ConsumptionUnit(
+				ConsumptionScheme.FUEL_PER_100DISTANCE,
+				QuantityUnit.getDefaultQuantityUnit(substance),
 				DistanceUnit.KILOMETER);
 		return convertUnitConsumption(fromValue, from, to);
 	}

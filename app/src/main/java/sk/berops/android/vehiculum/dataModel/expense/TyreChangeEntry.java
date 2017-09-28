@@ -14,9 +14,9 @@ import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Axle;
 import sk.berops.android.vehiculum.dataModel.Car;
-import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.Record;
-import sk.berops.android.vehiculum.dataModel.calculation.TyreConsumption;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
+import sk.berops.android.vehiculum.dataModel.charting.TyreCharter;
 import sk.berops.android.vehiculum.dataModel.maintenance.Tyre;
 import sk.berops.android.vehiculum.dataModel.maintenance.TyreConfigurationScheme;
 import sk.berops.android.vehiculum.engine.calculation.NewGenTyreConsumption;
@@ -306,5 +306,15 @@ public class TyreChangeEntry extends Entry {
 		}
 
 		return result;
+	}
+
+	/****************************** PieChartable interface methods follow *************************/
+
+	public PieCharter getPieCharter() {
+		return (charter == null) ? generatePieCharter() : charter;
+	}
+
+	public TyreCharter generatePieCharter() {
+		return new TyreCharter(getTyreConsumption());
 	}
 }

@@ -1,5 +1,7 @@
 package sk.berops.android.vehiculum.dataModel.expense;
 
+import sk.berops.android.vehiculum.dataModel.charting.OtherCharter;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.engine.calculation.NewGenOtherConsumption;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.OtherEntryController;
 
@@ -27,5 +29,15 @@ public class OtherEntry extends Entry {
 	@Override
 	public OtherEntryController getController() {
 		return new OtherEntryController(this);
+	}
+
+	/****************************** PieChartable interface methods follow *************************/
+
+	public PieCharter getPieCharter() {
+		return (charter == null) ? generatePieCharter() : charter;
+	}
+
+	public OtherCharter generatePieCharter() {
+		return new OtherCharter(getOtherConsumption());
 	}
 }

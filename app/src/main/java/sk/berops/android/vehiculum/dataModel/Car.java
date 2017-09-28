@@ -12,12 +12,12 @@ import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.UnitConstants.DistanceUnit;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.QuantityUnit;
-import sk.berops.android.vehiculum.dataModel.calculation.Consumption;
-import sk.berops.android.vehiculum.dataModel.calculation.FuelConsumption;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.vehiculum.dataModel.expense.History;
 import sk.berops.android.vehiculum.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.vehiculum.dataModel.maintenance.TyreConfigurationScheme;
+import sk.berops.android.vehiculum.engine.calculation.NewGenConsumption;
+import sk.berops.android.vehiculum.engine.calculation.NewGenFuelConsumption;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.CarController;
 
 public class Car extends Record implements Serializable {
@@ -186,9 +186,6 @@ public class Car extends Record implements Serializable {
 	}
 
 	public String getNickname() {
-		if (nickname == null) {
-			return "" + getBrand() + " " + getModel() + " (" + getModelYear() + ")";
-		}
 		return nickname;
 	}
 
@@ -248,13 +245,13 @@ public class Car extends Record implements Serializable {
 		this.currentMileageSI = currentMileageSI;
 	}
 
-	public Consumption getConsumption() {
+	public NewGenConsumption getConsumption() {
 		if (getHistory().getEntries().size() == 0)
 			return null;
 		return getHistory().getEntries().getLast().getConsumption();
 	}
 
-	public FuelConsumption getFuelConsumption() {
+	public NewGenFuelConsumption getFuelConsumption() {
 		if (getHistory().getFuellingEntries().size() == 0)
 			return null;
 		return getHistory().getFuellingEntries().getLast().getFuelConsumption();
@@ -273,11 +270,6 @@ public class Car extends Record implements Serializable {
 		return distance;
 	}
 
-	public Set<FuelType> getFuelTypes() {
-		return getHistory().getFuellingEntries().getLast().getFuelConsumption().getFuellingCountPerFuelType()
-				.keySet();
-	}
-
 	public TyreConfigurationScheme getInitialTyreScheme() {
 		if (initialTyreScheme == null)
 			return new TyreConfigurationScheme(this);
@@ -286,6 +278,15 @@ public class Car extends Record implements Serializable {
 
 	public void setInitialTyreScheme(TyreConfigurationScheme initialTyreScheme) {
 		this.initialTyreScheme = initialTyreScheme;
+	}
+
+	@Override
+	public String toString() {
+		if (nickname == null || nickname.equals("")) {
+			return "" + getBrand() + " " + getModel() + " (" + getModelYear() + ")";
+		} else {
+			return nickname;
+		}
 	}
 
 	/**

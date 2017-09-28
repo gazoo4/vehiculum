@@ -14,7 +14,6 @@ import java.util.LinkedList;
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.configuration.Preferences;
 import sk.berops.android.vehiculum.dataModel.Currency;
-import sk.berops.android.vehiculum.dataModel.calculation.FuelConsumption;
 import sk.berops.android.vehiculum.dataModel.expense.BureaucraticEntry;
 import sk.berops.android.vehiculum.dataModel.expense.Entry;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;

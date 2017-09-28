@@ -8,7 +8,8 @@ import java.util.Map;
 import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.UnitConstants;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.QuantityUnit;
-import sk.berops.android.vehiculum.dataModel.calculation.FuelConsumption;
+import sk.berops.android.vehiculum.dataModel.charting.FuellingCharter;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.engine.calculation.NewGenFuelConsumption;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.FuellingEntryController;
 
@@ -164,5 +165,15 @@ public class FuellingEntry extends Entry {
 	@Override
 	public FuellingEntryController getController() {
 		return new FuellingEntryController(this);
+	}
+
+	/****************************** PieChartable interface methods follow *************************/
+
+	public PieCharter getPieCharter() {
+		return (charter == null) ? generatePieCharter() : charter;
+	}
+
+	public FuellingCharter generatePieCharter() {
+		return new FuellingCharter(getFuelConsumption());
 	}
 }

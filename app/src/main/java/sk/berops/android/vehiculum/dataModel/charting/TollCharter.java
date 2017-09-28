@@ -2,6 +2,10 @@ package sk.berops.android.vehiculum.dataModel.charting;
 
 import com.github.mikephil.charting.data.PieEntry;
 
+import java.util.function.Consumer;
+import java.util.stream.Stream;
+
+import sk.berops.android.vehiculum.dataModel.expense.TollEntry;
 import sk.berops.android.vehiculum.engine.calculation.NewGenTollConsumption;
 
 /**
@@ -9,7 +13,7 @@ import sk.berops.android.vehiculum.engine.calculation.NewGenTollConsumption;
  * @date 9/21/17
  */
 
-public class TollCharter extends PieCharter {
+public class TollCharter extends EntryCharter {
 
 	private NewGenTollConsumption tConsumption;
 
@@ -17,14 +21,20 @@ public class TollCharter extends PieCharter {
 		tConsumption = c;
 	}
 
-	@Override
-	public void refreshData() {
-		super.refreshData();
+	protected Stream<TollEntry.Type> getStream() {
+		return tConsumption.getTotalTTypeCost().keySet().stream();
+	}
 
-		tConsumption.getTotalTTypeCost().keySet()
-				.stream()
-				.peek(type -> colors.add(type.getColor()))
-				.map(type -> tConsumption.getTotalTTypeCost().get(type).getPreferredValue().floatValue())
-				.forEach(value -> vals.add(new PieEntry(value)));
+	protected Consumer<TollEntry.Type> addColor() {
+		return type -> colors.add(type.getColor());
+	}
+
+	protected Consumer<TollEntry.Type> addVals() {
+		return type -> vals.add(new PieEntry(tConsumption.getTotalTTypeCost().get(type).getPreferredValue().floatValue()));
+	}
+
+	protected Consumer<TollEntry.Type> addRelay() {
+		// There are no child relays to the FuellingCharter
+		return type -> {};
 	}
 }

@@ -22,10 +22,10 @@ import sk.berops.android.vehiculum.configuration.Preferences;
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Garage;
 import sk.berops.android.vehiculum.dataModel.UnitConstants;
-import sk.berops.android.vehiculum.dataModel.calculation.Consumption;
-import sk.berops.android.vehiculum.dataModel.calculation.FuelConsumption;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;
+import sk.berops.android.vehiculum.engine.calculation.NewGenConsumption;
+import sk.berops.android.vehiculum.engine.calculation.NewGenFuelConsumption;
 import sk.berops.android.vehiculum.gui.MainActivity;
 
 /**
@@ -49,7 +49,7 @@ public class StatsWriter {
 	}
 
 	public static void generateRowTotalCosts(TableLayout layout) {
-		Consumption c = garage.getActiveCar().getConsumption();
+		NewGenConsumption c = garage.getActiveCar().getConsumption();
 		if (c == null) {
 			String message = context.getString(R.string.activity_main_no_expenses_message);
 			layout.addView(createStatRow(message, null));
@@ -65,27 +65,27 @@ public class StatsWriter {
 
 	public static void generateRowAverageConsumption(TableLayout layout) {
 		double avgConsumption;
-		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
+		NewGenFuelConsumption c = garage.getActiveCar().getFuelConsumption();
 		if (c == null) return;
 
 		String description;
 		double valueSI;
 		double valueReport;
 		UnitConstants.ConsumptionUnit unit;
-		unit = preferences.getConsumptionUnit(c.getLastRefuelType());
+		unit = preferences.getConsumptionUnit(garage.getActiveCar().getHistory().getFuellingEntries().getLast().getFuelType());
 
 		// we should buy at least 2 different fuels in order to display the stats separately
 		HashMap<FuellingEntry.FuelType, Double> map = new HashMap<>();
 		Set<UnitConstants.Substance> substances = new HashSet<>();
-		for (FuellingEntry.FuelType t : c.getFuelTypes()) {
-			avgConsumption = c.getAveragePerFuelType().get(t);
+		for (FuellingEntry.FuelType t : FuellingEntry.FuelType.values()) {
+			avgConsumption = c.getAverageTypeConsumption().get(t);
 			if (avgConsumption != 0.0) {
 				map.put(t, avgConsumption);
 				substances.add(t.getSubstance());
 			}
 		}
 
-		if (map.size() >= 2) {
+		if (map.size() > 1) {
 			for (FuellingEntry.FuelType t : map.keySet()) {
 				description = context.getString(R.string.activity_main_average);
 				description += " ";
@@ -95,23 +95,24 @@ public class StatsWriter {
 				unit = preferences.getConsumptionUnit(t);
 				layout.addView(createStatRow(description, valueReport, unit.toUnitShort()));
 			}
-			description = context.getString(R.string.activity_main_combined_average);
-		} else {
+		}
+
+		if (substances.size() == 1) {
 			description = context.getString(R.string.activity_main_average_consumption);
+		} else {
+			description = context.getString(R.string.activity_main_combined_average);
 		}
 
-		// If we use several fuels, but of different substances, we can't make a combined average
-		if (substances.size() > 1) {
-			return;
+		for (UnitConstants.Substance s: substances) {
+			valueSI = c.getAverageConsumption().get(s);
+			valueReport = UnitConstants.convertUnitConsumptionFromSI(s, valueSI);
+			unit = preferences.getConsumptionUnit(s);
+			layout.addView(createStatRow(description + " " + s.name(), valueReport, unit.toUnitShort()));
 		}
-
-		valueSI = c.getGrandAverage();
-		valueReport = UnitConstants.convertUnitConsumptionFromSI(c.getFuelTypes().iterator().next(), valueSI);
-		layout.addView(createStatRow(description, valueReport, unit.toUnitShort()));
 	}
 
 	public static void generateRowTotalRelativeCosts(TableLayout layout) {
-		Consumption c = garage.getActiveCar().getConsumption();
+		NewGenConsumption c = garage.getActiveCar().getConsumption();
 		if (c == null) return;
 
 		String description = context.getString(R.string.activity_main_relative_costs);
@@ -124,12 +125,12 @@ public class StatsWriter {
 
 	public static void generateRowRelativeCosts(TableLayout layout) {
 		FuellingEntry.FuelType t = garage.getActiveCar().getHistory().getFuellingEntries().getLast().getFuelType();
-		FuelConsumption c = garage.getActiveCar().getFuelConsumption();
+		NewGenFuelConsumption c = garage.getActiveCar().getFuelConsumption();
 
 		String description = context.getString(R.string.activity_main_relative_costs_fuel);
 		description += " ";
 		description += t.toString();
-		double valueSI = c.getAverageFuelCostPerFuelType().get(t);
+		double valueSI = c.getAverageTypeConsumption().get(t);
 		UnitConstants.CostUnit unit = preferences.getCostUnit();
 
 		double valueReport = UnitConstants.convertUnitCost(valueSI);
@@ -146,7 +147,7 @@ public class StatsWriter {
 		}
 
 		FuellingEntry e = entries.getLast();
-		FuelConsumption c = activeCar.getFuelConsumption();
+		NewGenFuelConsumption c = activeCar.getFuelConsumption();
 		FuellingEntry.FuelType type = e.getFuelType();
 
 		if (activeCar.getHistory().getFuellingEntriesFiltered(e.getFuelType()).size() <= 1) {
@@ -155,15 +156,15 @@ public class StatsWriter {
 		}
 
 		try {
-			double avgCostSI = c.getAverageFuelCostPerFuelType().get(type);
-			double lastCostSI = c.getCostSinceLastRefuelPerFuelType().get(type);
-			double relativeChange = (lastCostSI / avgCostSI - 0.8) / 0.4;
+			double avgCost = c.getAverageCostByType().get(type).getPreferredValue();
+			double lastCost = c.getLastCost().getPreferredValue();
+			double relativeChange = (lastCost / avgCost - 0.8) / 0.4;
 			int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange);
 
 			String description = context.getString(R.string.activity_main_relative_since_last_refuel);
 			UnitConstants.CostUnit unit = preferences.getCostUnit();
 
-			double lastCostReport = UnitConstants.convertUnitCost(lastCostSI);
+			double lastCostReport = UnitConstants.convertUnitCost(lastCost);
 			layout.addView(createStatRow(description, lastCostReport, unit.getUnit(), color));
 		} catch (NoSuchElementException ex) {
 			Log.d("DEBUG", "Not enough history to generate stats");
@@ -180,7 +181,7 @@ public class StatsWriter {
 		}
 
 		FuellingEntry e = entries.getLast();
-		FuelConsumption c = activeCar.getFuelConsumption();
+		NewGenFuelConsumption c = activeCar.getFuelConsumption();
 		FuellingEntry.FuelType type = e.getFuelType();
 
 		if (activeCar.getHistory().getFuellingEntriesFiltered(e.getFuelType()).size() <= 1) {
@@ -188,15 +189,15 @@ public class StatsWriter {
 			return;
 		}
 
-		double avgConsumptionSI = c.getAveragePerFuelType().get(type);
-		double lastConsumptionSI = c.getAverageSinceLast();
-		double relativeChange = (lastConsumptionSI / avgConsumptionSI - 0.8) / 0.4;
+		double avgConsumption = c.getAverageTypeConsumption().get(type);
+		double lastConsumption = c.getLastConsumption();
+		double relativeChange = (lastConsumption / avgConsumption - 0.8) / 0.4;
 		int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange); //orange in the middle
 
 		String description = context.getString(R.string.activity_main_since_last_refuel);
 		UnitConstants.ConsumptionUnit unit = preferences.getConsumptionUnit(type);
 
-		double lastConsumptionReport = UnitConstants.convertUnitConsumptionFromSI(type, lastConsumptionSI);
+		double lastConsumptionReport = UnitConstants.convertUnitConsumptionFromSI(type, lastConsumption);
 		layout.addView(createStatRow(description, lastConsumptionReport, unit.toUnitShort(), color));
 	}
 

@@ -5,7 +5,8 @@ import org.simpleframework.xml.Element;
 import java.util.HashMap;
 import java.util.Map;
 
-import sk.berops.android.vehiculum.dataModel.calculation.InsuranceConsumption;
+import sk.berops.android.vehiculum.dataModel.charting.InsuranceCharter;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.engine.calculation.NewGenInsuranceConsumption;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.InsuranceEntryController;
 
@@ -103,5 +104,15 @@ public class InsuranceEntry extends Entry {
 	@Override
 	public InsuranceEntryController getController() {
 		return new InsuranceEntryController(this);
+	}
+
+	/****************************** PieChartable interface methods follow *************************/
+
+	public PieCharter getPieCharter() {
+		return (charter == null) ? generatePieCharter() : charter;
+	}
+
+	public InsuranceCharter generatePieCharter() {
+		return new InsuranceCharter(getInsuranceConsumption());
 	}
 }

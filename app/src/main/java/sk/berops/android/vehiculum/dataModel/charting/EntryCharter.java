@@ -1,5 +1,7 @@
 package sk.berops.android.vehiculum.dataModel.charting;
 
+import android.util.Log;
+
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
@@ -14,10 +16,12 @@ public abstract class EntryCharter extends PieCharter {
 	public void refreshData() {
 		super.refreshData();
 
-		getStream()
-				.forEach(addColor()
-						.andThen(addVals())
-						.andThen(addRelay()));
+		Stream s = getStream();
+		if (s != null) {
+			s.forEach(addColor()
+					.andThen(addVals())
+					.andThen(addRelay()));
+		}
 	}
 
 	protected abstract Stream getStream();

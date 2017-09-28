@@ -6,7 +6,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 
-import sk.berops.android.vehiculum.dataModel.charting.PieChartable;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.gui.MainActivity;
 import sk.berops.android.vehiculum.gui.report.ActivityReportsNavigate;
 
@@ -18,7 +18,7 @@ import sk.berops.android.vehiculum.gui.report.ActivityReportsNavigate;
 
 public class NGExpenseDistributionPieChart {
 
-	private PieChartable chartable;
+	private PieCharter charter;
 	/**
 	 * Constructor
 	 */
@@ -27,7 +27,7 @@ public class NGExpenseDistributionPieChart {
 	}
 
 	public void reload() {
-		chartable = MainActivity.garage.getActiveCar().getHistory();
+		charter = MainActivity.garage.getActiveCar().getHistory().getPieCharter();
 	}
 
 	public PieData getPieData() {
@@ -35,21 +35,23 @@ public class NGExpenseDistributionPieChart {
 	}
 
 	public PieDataSet getPieDataSet() {
-		if (chartable == null) return null;
-
-		PieDataSet dataSet = new PieDataSet(chartable.getPieChartVals(), chartable.getPieChartLabel());
+		PieDataSet dataSet = new PieDataSet(charter.getPieChartVals(), charter.getPieChartLabel());
 
 		dataSet.setSliceSpace(2);
 		dataSet.setSelectionShift(0);
 		dataSet.setValueFormatter(new PercentFormatter());
 		dataSet.setValueTextSize(ActivityReportsNavigate.TEXT_SIZE);
 		dataSet.setValueTextColor(Color.WHITE);
-		dataSet.setColors(chartable.getPieChartColors());
+		dataSet.setColors(charter.getPieChartColors());
 
 		return dataSet;
 	}
 
-	public boolean invokeSelection(Integer i) {
-		return chartable.invokeSelection(i);
+	public boolean zoomIn(Integer i) {
+		return charter.zoomIn(i);
+	}
+
+	public boolean onBackPressed() {
+		return charter.zoomOut();
 	}
 }

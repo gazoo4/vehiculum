@@ -5,7 +5,8 @@ import org.simpleframework.xml.Element;
 import java.util.HashMap;
 import java.util.Map;
 
-import sk.berops.android.vehiculum.dataModel.calculation.ServiceConsumption;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
+import sk.berops.android.vehiculum.dataModel.charting.ServiceCharter;
 import sk.berops.android.vehiculum.engine.calculation.NewGenServiceConsumption;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.ServiceEntryController;
 
@@ -103,5 +104,15 @@ public class ServiceEntry extends Entry {
 	@Override
 	public ServiceEntryController getController() {
 		return new ServiceEntryController(this);
+	}
+
+	/****************************** PieChartable interface methods follow *************************/
+
+	public PieCharter getPieCharter() {
+		return (charter == null) ? generatePieCharter() : charter;
+	}
+
+	public ServiceCharter generatePieCharter() {
+		return new ServiceCharter(getServiceConsumption());
 	}
 }

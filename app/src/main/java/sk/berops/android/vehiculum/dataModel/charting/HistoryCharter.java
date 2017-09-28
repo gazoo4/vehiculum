@@ -31,7 +31,6 @@ public class HistoryCharter extends PieCharter {
 	 */
 	public HistoryCharter(History history) {
 		this.history = history;
-		refreshData();
 	}
 
 	/**

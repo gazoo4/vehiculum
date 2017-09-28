@@ -3,7 +3,6 @@ package sk.berops.android.vehiculum.dataModel.charting;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * @author Bernard Halas
@@ -82,39 +81,38 @@ public abstract class PieCharter {
 	 * In case of a zoom action in the chart, set the relay object and pull data from relay.
 	 * If null argument is given, go one level up
 	 * @param selection
-	 * @return true if operation was processed successfully
+	 * @return true if operation was processed successfully, false if otherwise
 	 */
-	public boolean invokeSelection(Integer selection) {
-		if (relay != null) {
-			boolean result = relay.invokeSelection(selection);
-			if (!result && selection == null) {
-				// Request to remove a leaf (i.e. to move the chart focus one level higher)
-				// Relay was asked to process the request, but it failed and the request was to shorten
-				// the relay path by 1 level (selection == null), i.e. to display the data of
-				// an element one level higher, it means we are becoming the leaf in the chain
-				relay = null;
-				return true;
-			} else {
-				// The relay either processed the result correctly or the request wasn't about shortening
-				// the relay path. So we're just passing the result of the operation up the chain
-				return result;
-			}
-		} else {
-			// relay == null
-			if (selection == null) {
-				// We are asked to cut the relay path by one level, however we're are the leaf
-				// so we can't process the request.
-				return false;
-			} else {
-				// There's no relay and we've been asked to set one
-				return setRelayByID(selection);
-			}
+	public boolean zoomIn(Integer selection) {
+		// If we are relaying the charting, ask the relay (child) to zoom-in.
+		// Otherwise we are the leaf and we are asked to zoom-in.
+		return (relay == null) ? setRelayByID(selection) : relay.zoomIn(selection);
+	}
+
+	/**
+	 * The user requested to display PieChart data from a higher perspective (so we need to zoom-out)
+	 * @return true if operation was processed successfully, false if otherwise
+	 */
+	public boolean zoomOut() {
+		if (relay == null) {
+			// We can't cut the leaf, we are the leaf
+			return false;
 		}
+
+		boolean result = relay.zoomOut();
+
+		if (! result) {
+			// The child didn't process the request because the child is the leaf
+			// We are processing the request and cutting the leaf
+			relay = null;
+		}
+
+		return true;
 	}
 
 	/**
 	 * Method to assign the relay object based on the selection ID
-	 * This needs to be overriden in the child classes as for each child pieCharter the ID will represent
+	 * This needs to be overridden in the child classes as for each child pieCharter the ID will represent
 	 * different categories (summer/winter tyres, fuel types, ...)
 	 * @param selection
 	 * @return true if request was processed successfully

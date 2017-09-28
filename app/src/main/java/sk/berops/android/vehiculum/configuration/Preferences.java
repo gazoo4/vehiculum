@@ -66,6 +66,10 @@ public class Preferences {
 	public UnitConstants.ConsumptionUnit getConsumptionUnit(FuellingEntry.FuelType type) {
 		return new UnitConstants.ConsumptionUnit(getConsumptionScheme(), getQuantityUnit(type), getDistanceUnit());
 	}
+
+	public UnitConstants.ConsumptionUnit getConsumptionUnit(UnitConstants.Substance substance) {
+		return new UnitConstants.ConsumptionUnit(getConsumptionScheme(), getQuantityUnit(substance), getDistanceUnit());
+	}
     
     public DistanceUnit getDistanceUnit() {
     	return DistanceUnit.getDistanceUnit(getInt(DISTANCE_UNIT_KEY, 0));
@@ -76,7 +80,15 @@ public class Preferences {
 		    return getVolumeUnit();
 	    }
 
-	    switch (type.getSubstance()) {
+	    return getQuantityUnit(type.getSubstance());
+    }
+
+    public QuantityUnit getQuantityUnit(UnitConstants.Substance substance) {
+	    if (substance == null) {
+		    return getVolumeUnit();
+	    }
+
+	    switch (substance) {
 		    case LIQUID:
 			    return getVolumeUnit();
 		    case GAS:
@@ -84,7 +96,7 @@ public class Preferences {
 		    case ELECTRIC:
 			    return getElectricityUnit();
 		    default:
-		    	return getVolumeUnit();
+			    return getVolumeUnit();
 	    }
     }
 

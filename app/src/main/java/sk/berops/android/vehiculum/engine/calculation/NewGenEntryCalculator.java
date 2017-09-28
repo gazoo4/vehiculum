@@ -2,11 +2,6 @@ package sk.berops.android.vehiculum.engine.calculation;
 
 import android.util.Log;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.TreeMap;
-
-import sk.berops.android.vehiculum.dataModel.calculation.Consumption;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.Entry;
 

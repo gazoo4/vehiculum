@@ -14,11 +14,9 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import sk.berops.android.vehiculum.R;
-import sk.berops.android.vehiculum.dataModel.expense.History;
-import sk.berops.android.vehiculum.engine.charts.ExpenseDistributionPieChart;
+import sk.berops.android.vehiculum.engine.charts.NGExpenseDistributionPieChart;
 import sk.berops.android.vehiculum.gui.DefaultActivity;
 import sk.berops.android.vehiculum.gui.MainActivity;
-import sk.berops.android.vehiculum.gui.common.TextFormatter;
 
 public class ActivityReportsNavigate extends DefaultActivity {
 
@@ -43,7 +41,7 @@ public class ActivityReportsNavigate extends DefaultActivity {
     /**
      * Object responsible for extracting the PieDataSet structures from various Consumptions for the charting
      */
-    private ExpenseDistributionPieChart chartManager;
+    private NGExpenseDistributionPieChart chartManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +74,7 @@ public class ActivityReportsNavigate extends DefaultActivity {
      * Initialize the default chart state. This means, generate chart based on the top-level view of the expenses.
      */
     private void initializeChart() {
-        chartManager = new ExpenseDistributionPieChart();
+        chartManager = new NGExpenseDistributionPieChart();
         chart.setUsePercentValues(true);
         chart.setCenterTextSize(TEXT_SIZE);
 
@@ -116,13 +114,13 @@ public class ActivityReportsNavigate extends DefaultActivity {
 	        @Override
 	        public void onValueSelected(Entry e, Highlight h) {
 		        Integer typeId = (Integer) e.getData();
-		        chartManager.invokeSelection(typeId);
+		        chartManager.zoomIn(typeId);
 		        redrawChart();
 	        }
 
 	        @Override
             public void onNothingSelected() {
-                reset();
+                // TODO: any reset required here? To be tested while zooming in and out
             }
         });
 
@@ -153,14 +151,6 @@ public class ActivityReportsNavigate extends DefaultActivity {
 	    legend.setForm(Legend.LegendForm.LINE);
     }
 
-    /**
-     * Reset the chart view to defaults
-     */
-    private void reset() {
-        chartManager.init();
-        redrawChart();
-    }
-
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_stats_show_button_fuelling:
@@ -178,11 +168,8 @@ public class ActivityReportsNavigate extends DefaultActivity {
      */
     @Override
     public void onBackPressed() {
-        if (chartManager.getDepth() == 0) {
-	        super.onBackPressed();
-        } else {
-	        // TODO: instead of reset we should go one level higher
-	        reset();
-        }
+	    if (! chartManager.onBackPressed()) {
+		    super.onBackPressed();
+	    }
     }
 }

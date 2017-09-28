@@ -58,6 +58,10 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		nextC.setTotalCostBySubstance(calculateTotalSubstanceCost(prevC, fEntry));
 		nextC.setTotalCostByType(calculateTotalTypeCost(prevC, fEntry));
 
+		// Here we need the already calculated total costs (in the step above)
+		nextC.setAverageCostBySubstance(calculateAverageSubstanceCost(nextC, fEntry));
+		nextC.setAverageCostByType(calculateAverageTypeCost(nextC, fEntry));
+
 		nextC.setAverageConsumption(calculateAverageConsumption(prevC, fEntry));
 		nextC.setLastConsumption(calculateLastConsumption(fEntry));
 
@@ -94,7 +98,8 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		FuellingEntry.FuelType type = entry.getFuelType();
 		if (previousByFuelType.get(type) != null) {
 			double mileage = entry.getMileageSI() - previousByFuelType.get(entry).getMileageSI();
-			result = Cost.divide(entry.getCost(), (mileage * 100));
+			result = Cost.divide(entry.getCost(), mileage);
+			result = Cost.multiply(result, 100);
 		}
 
 		return result;
@@ -142,6 +147,56 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		FuellingEntry.FuelType type = entry.getFuelType();
 		Cost cost = (result.get(type) == null) ? new Cost() : result.get(type);
 		result.put(type, Cost.add(cost, entry.getCost()));
+
+		return result;
+	}
+
+	private HashMap<UnitConstants.Substance, Cost> calculateAverageSubstanceCost(NewGenFuelConsumption nextC, FuellingEntry entry) {
+		HashMap<UnitConstants.Substance, Cost> result = new HashMap<>();
+		HashMap<UnitConstants.Substance, Cost> tCosts = nextC.getTotalCostBySubstance();
+
+		for (UnitConstants.Substance s: tCosts.keySet()) {
+			FuellingEntry initial = initialBySubstance.get(s);
+			if (initial == null) {
+				continue;
+			}
+
+			double mileage = entry.getMileageSI() - initial.getMileageSI();
+			if (mileage == 0.0) {
+				continue;
+			}
+
+			// We need to subtract the initial refuelling from calculating average per distance
+			Cost cost = Cost.subtract(tCosts.get(s), initial.getCost());
+			cost = Cost.divide(cost, mileage);
+			cost = Cost.multiply(cost, 100);
+			result.put(s, cost);
+		}
+
+		return result;
+	}
+
+	private HashMap<FuellingEntry.FuelType, Cost> calculateAverageTypeCost(NewGenFuelConsumption nextC, FuellingEntry entry) {
+		HashMap<FuellingEntry.FuelType, Cost> result = new HashMap<>();
+		HashMap<FuellingEntry.FuelType, Cost> tCosts = nextC.getTotalCostByType();
+
+		for (FuellingEntry.FuelType t: tCosts.keySet()) {
+			FuellingEntry initial = initialByFuelType.get(t);
+			if (initial == null) {
+				continue;
+			}
+
+			double mileage = entry.getMileageSI() - initial.getMileageSI();
+			if (mileage == 0.0) {
+				continue;
+			}
+
+			// We need to subtract the initial refuelling from calculating average per distance
+			Cost cost = Cost.subtract(tCosts.get(t), initial.getCost());
+			cost = Cost.divide(cost, mileage);
+			cost = Cost.multiply(cost, 100);
+			result.put(t, cost);
+		}
 
 		return result;
 	}

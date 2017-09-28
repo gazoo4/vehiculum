@@ -5,7 +5,8 @@ import org.simpleframework.xml.Element;
 import java.util.HashMap;
 import java.util.Map;
 
-import sk.berops.android.vehiculum.dataModel.calculation.TollConsumption;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
+import sk.berops.android.vehiculum.dataModel.charting.TollCharter;
 import sk.berops.android.vehiculum.engine.calculation.NewGenTollConsumption;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.TollEntryController;
 
@@ -103,5 +104,15 @@ public class TollEntry extends Entry {
 	@Override
 	public TollEntryController getController() {
 		return new TollEntryController(this);
+	}
+
+	/****************************** PieChartable interface methods follow *************************/
+
+	public PieCharter getPieCharter() {
+		return (charter == null) ? generatePieCharter() : charter;
+	}
+
+	public TollCharter generatePieCharter() {
+		return new TollCharter(getTollConsumption());
 	}
 }
