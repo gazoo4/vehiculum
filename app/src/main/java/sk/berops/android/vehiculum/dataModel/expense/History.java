@@ -1,11 +1,8 @@
 package sk.berops.android.vehiculum.dataModel.expense;
 
 
-import com.github.mikephil.charting.data.PieEntry;
-
 import org.simpleframework.xml.ElementList;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -15,8 +12,8 @@ import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Record;
-import sk.berops.android.vehiculum.dataModel.charting.PieChartable;
 import sk.berops.android.vehiculum.dataModel.charting.HistoryCharter;
+import sk.berops.android.vehiculum.dataModel.charting.PieChartable;
 import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.dataModel.expense.Entry.ExpenseType;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.HistoryController;

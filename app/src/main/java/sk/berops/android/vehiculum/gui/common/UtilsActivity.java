@@ -7,6 +7,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.gui.Colors;
 
@@ -33,6 +35,14 @@ public class UtilsActivity {
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter
 				.createFromResource(context, arrayID, 
 						R.layout.spinner_white);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner.setAdapter(adapter);
+	}
+
+	public static void styleSpinner(Spinner spinner, Context context, ArrayList<CharSequence> array) {
+		if (spinner == null || context == null) return;
+
+		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(context, R.layout.spinner_white, array);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
 	}

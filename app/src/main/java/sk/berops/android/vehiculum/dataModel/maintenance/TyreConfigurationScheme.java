@@ -7,7 +7,6 @@ import android.util.Log;
 
 import org.simpleframework.xml.ElementList;
 
-import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.UUID;

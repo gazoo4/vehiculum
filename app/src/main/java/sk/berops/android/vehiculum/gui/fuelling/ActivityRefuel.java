@@ -67,7 +67,6 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
         listEditTexts.add(editTextComment);
         listEditTexts.add(editTextQuantity);
 
-        mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
         mapSpinners.put(R.array.activity_refuel_fuel_type, spinnerFuelType);
         //mapSpinners.put(R.array.activity_refuel_quantity_unit, spinnerQuantityUnit);
     }

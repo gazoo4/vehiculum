@@ -10,11 +10,11 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import sk.berops.android.vehiculum.dataModel.Currency;
-import sk.berops.android.vehiculum.engine.currency.fixerIo.*;
+import sk.berops.android.vehiculum.engine.currency.fixerIo.Api;
+import sk.berops.android.vehiculum.engine.currency.fixerIo.DataPackage;
+import sk.berops.android.vehiculum.engine.currency.fixerIo.JsonConverter;
 
 import static sk.berops.android.vehiculum.io.internet.Connectivity.isOnline;
 

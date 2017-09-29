@@ -64,7 +64,7 @@ public class ActivityCharts extends DefaultActivity {
 		for (FuellingEntry e : history.getFuellingEntries()) {
 			FuelType type = e.getFuelType();
 			double xValue = e.getMileage();
-			double averageSI = e.getFuelConsumption().getMovingAveragePerFuelType().get(type).doubleValue();
+			double averageSI = e.getFuelConsumption().getMovingConsumptionByType().get(type).doubleValue();
 			double yValue = UnitConstants.convertUnitConsumptionFromSI(type, averageSI);
 			// the first consumption cannot be calculated and is always 0
 			// we don't really expect to have another 0.0 consumption (that means we didn't refuel at all, right?)

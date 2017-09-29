@@ -1,8 +1,6 @@
 package sk.berops.android.vehiculum.gui.fuelling;
 
 import android.content.Context;
-import android.support.annotation.ArrayRes;
-import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -10,9 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.List;
-
-import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.dataModel.UnitConstants;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;
 

@@ -2,7 +2,6 @@ package sk.berops.android.vehiculum.engine.calculation;
 
 import android.util.Log;
 
-import java.util.Collection;
 import java.util.HashMap;
 
 import sk.berops.android.vehiculum.dataModel.Car;

@@ -7,7 +7,6 @@ import com.github.mikephil.charting.data.PieEntry;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-import sk.berops.android.vehiculum.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.vehiculum.dataModel.maintenance.Tyre;
 import sk.berops.android.vehiculum.engine.calculation.NewGenTyreConsumption;
 

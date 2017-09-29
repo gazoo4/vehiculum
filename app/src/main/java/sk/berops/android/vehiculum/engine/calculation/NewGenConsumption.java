@@ -1,11 +1,7 @@
 package sk.berops.android.vehiculum.engine.calculation;
 
-import com.github.mikephil.charting.data.PieEntry;
-
-import java.util.ArrayList;
-
-import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.dataModel.charting.PieChartable;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.Entry;
 

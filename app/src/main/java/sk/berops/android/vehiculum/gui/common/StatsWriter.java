@@ -22,7 +22,6 @@ import sk.berops.android.vehiculum.configuration.Preferences;
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Garage;
 import sk.berops.android.vehiculum.dataModel.UnitConstants;
-import sk.berops.android.vehiculum.dataModel.expense.Cost;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;
 import sk.berops.android.vehiculum.engine.calculation.NewGenConsumption;
 import sk.berops.android.vehiculum.engine.calculation.NewGenFuelConsumption;
@@ -34,11 +33,11 @@ import sk.berops.android.vehiculum.gui.MainActivity;
  */
 
 public class StatsWriter {
-	public static Garage garage = MainActivity.garage;
-	public static Context context = Vehiculum.context;
 	public static Preferences preferences = Preferences.getInstance();
 
 	public static void generateRowCarSummary(TableLayout layout) {
+		Garage garage = MainActivity.garage;
+		Context context = Vehiculum.context;
 		if (garage != null && garage.getActiveCar() != null) {
 			String description = context.getString(R.string.activity_main_car);
 			String nickname = garage.getActiveCar().getNickname();
@@ -49,6 +48,8 @@ public class StatsWriter {
 	}
 
 	public static void generateRowTotalCosts(TableLayout layout) {
+		Garage garage = MainActivity.garage;
+		Context context = Vehiculum.context;
 		NewGenConsumption c = garage.getActiveCar().getConsumption();
 		if (c == null) {
 			String message = context.getString(R.string.activity_main_no_expenses_message);
@@ -64,6 +65,8 @@ public class StatsWriter {
 	}
 
 	public static void generateRowAverageConsumption(TableLayout layout) {
+		Garage garage = MainActivity.garage;
+		Context context = Vehiculum.context;
 		double avgConsumption;
 		NewGenFuelConsumption c = garage.getActiveCar().getFuelConsumption();
 		if (c == null) return;
@@ -112,6 +115,8 @@ public class StatsWriter {
 	}
 
 	public static void generateRowTotalRelativeCosts(TableLayout layout) {
+		Context context = Vehiculum.context;
+		Garage garage = MainActivity.garage;
 		NewGenConsumption c = garage.getActiveCar().getConsumption();
 		if (c == null) return;
 
@@ -124,6 +129,8 @@ public class StatsWriter {
 	}
 
 	public static void generateRowRelativeCosts(TableLayout layout) {
+		Context context = Vehiculum.context;
+		Garage garage = MainActivity.garage;
 		FuellingEntry.FuelType t = garage.getActiveCar().getHistory().getFuellingEntries().getLast().getFuelType();
 		NewGenFuelConsumption c = garage.getActiveCar().getFuelConsumption();
 
@@ -138,6 +145,8 @@ public class StatsWriter {
 	}
 
 	public static void generateRowLastCosts(TableLayout layout) {
+		Garage garage = MainActivity.garage;
+		Context context = Vehiculum.context;
 		Car activeCar = garage.getActiveCar();
 		LinkedList<FuellingEntry> entries = activeCar.getHistory().getFuellingEntries();
 
@@ -172,6 +181,8 @@ public class StatsWriter {
 	}
 
 	public static void generateRowLastConsumption(TableLayout layout) {
+		Garage garage = MainActivity.garage;
+		Context context = Vehiculum.context;
 		Car activeCar = garage.getActiveCar();
 		LinkedList<FuellingEntry> entries = activeCar.getHistory().getFuellingEntries();
 
@@ -234,6 +245,7 @@ public class StatsWriter {
 	}
 
 	private static TableRow createStatRow(String description, String value, String unit, int valueColor) {
+		Context context = Vehiculum.context;
 		if (description == null) {
 			return null;
 		}

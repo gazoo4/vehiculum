@@ -3,7 +3,6 @@ package sk.berops.android.vehiculum.engine.synchronization.controllers;
 import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Record;
-import sk.berops.android.vehiculum.dataModel.expense.Expense;
 import sk.berops.android.vehiculum.dataModel.maintenance.GenericPart;
 
 /**

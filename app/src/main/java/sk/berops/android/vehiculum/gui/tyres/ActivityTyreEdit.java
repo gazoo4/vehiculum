@@ -35,10 +35,10 @@ public class ActivityTyreEdit extends ActivityTyreAdd {
 		editTextDot.setText(tyre.getDot());
 		editTextQuantity.setText(Integer.toString(1));
 		editTextQuantity.setVisibility(View.INVISIBLE);
-		editTextCost.setText(Double.toString(tyre.getCost()));
+		editTextCost.setText(Double.toString(tyre.getCost().getRecordedValue()));
 		editTextComment.setText(tyre.getComment());
 
-		spinnerCurrency.setSelection(tyre.getCurrency().getId());
+		spinnerCurrency.setSelection(tyre.getCost().getRecordedUnit().getId());
 		spinnerSeason.setSelection(tyre.getSeason().getId());
 		spinnerCondition.setSelection(tyre.getCondition().getId());
 	}

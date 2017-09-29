@@ -3,14 +3,12 @@ package sk.berops.android.vehiculum.gui.bureaucratic;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.dataModel.expense.BureaucraticEntry;
-import sk.berops.android.vehiculum.dataModel.expense.Entry;
 import sk.berops.android.vehiculum.dataModel.expense.FieldEmptyException;
 import sk.berops.android.vehiculum.gui.MainActivity;
 import sk.berops.android.vehiculum.gui.common.ActivityEntryGenericAdd;

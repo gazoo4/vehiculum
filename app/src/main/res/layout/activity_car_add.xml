@@ -98,6 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_car_add_mileage"
+                android:maxLines="1"
                 android:hint="@string/activity_car_add_nickname_hint"/>
 
             <LinearLayout

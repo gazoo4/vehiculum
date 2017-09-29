@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Car;
-import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.ExpenseController;
 

@@ -7,9 +7,6 @@ import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.synchronization.DataChangeSet;
-import sk.berops.android.vehiculum.dataModel.synchronization.DataCreate;
-import sk.berops.android.vehiculum.dataModel.synchronization.DataDelete;
-import sk.berops.android.vehiculum.dataModel.synchronization.DataUpdate;
 import sk.berops.android.vehiculum.dataModel.synchronization.DatasetChangeItem;
 import sk.berops.android.vehiculum.dataModel.synchronization.DatasetUpdatable;
 import sk.berops.android.vehiculum.gui.MainActivity;

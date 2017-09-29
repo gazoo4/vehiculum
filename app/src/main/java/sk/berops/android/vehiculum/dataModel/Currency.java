@@ -1,5 +1,6 @@
 package sk.berops.android.vehiculum.dataModel;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -205,6 +206,24 @@ public class Currency {
 			for (Unit unit : values()) {
 				idToUnitMapping.put(unit.id, unit);
 			}
+		}
+
+		public static ArrayList<CharSequence> extractSymbols() {
+			ArrayList<CharSequence> result = new ArrayList<>();
+			for (Unit u: Unit.values()) {
+				result.add(u.getSymbol());
+			}
+
+			return result;
+		}
+
+		public static ArrayList<CharSequence> extractShortCodesSymbols() {
+			ArrayList<CharSequence> result = new ArrayList<>();
+			for (Unit u: Unit.values()) {
+				result.add(u.getUnitIsoCode() +" ("+ u.getSymbol() +")");
+			}
+
+			return result;
 		}
 
 		public int getId() {

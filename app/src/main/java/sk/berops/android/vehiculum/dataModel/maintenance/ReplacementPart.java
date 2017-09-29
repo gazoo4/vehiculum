@@ -4,9 +4,7 @@ import org.simpleframework.xml.Element;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
-import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.ReplacementPartController;
 
 public class ReplacementPart extends GenericPart {

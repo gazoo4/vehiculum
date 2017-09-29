@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import sk.berops.android.vehiculum.dataModel.Record;
-
 /**
  * This class represents an information update done on the garage dataset. This information is usually used
  * for updating other parties with the changes done on the data in order to have it synchronized.

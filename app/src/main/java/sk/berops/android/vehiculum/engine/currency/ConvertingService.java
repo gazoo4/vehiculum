@@ -1,18 +1,8 @@
 package sk.berops.android.vehiculum.engine.currency;
 
-import android.app.IntentService;
-import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.util.Log;
-
 import java.util.Date;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import sk.berops.android.vehiculum.dataModel.Currency;
-import sk.berops.android.vehiculum.dataModel.expense.Expense;
-import sk.berops.android.vehiculum.engine.currency.fixerIo.DataPackage;
 
 /**
  * @author Bernard Halas

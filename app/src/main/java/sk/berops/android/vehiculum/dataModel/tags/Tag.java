@@ -8,7 +8,6 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.UUID;
 
-import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.engine.synchronization.controllers.TagController;
 import sk.berops.android.vehiculum.gui.MainActivity;

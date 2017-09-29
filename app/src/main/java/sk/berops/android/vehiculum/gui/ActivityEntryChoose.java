@@ -10,9 +10,9 @@ import sk.berops.android.vehiculum.gui.bureaucratic.ActivityBureaucraticAdd;
 import sk.berops.android.vehiculum.gui.fuelling.ActivityRefuel;
 import sk.berops.android.vehiculum.gui.insurance.ActivityInsuranceAdd;
 import sk.berops.android.vehiculum.gui.maintenance.ActivityMaintenanceAdd;
-import sk.berops.android.vehiculum.gui.tyres.ActivityTyreChange;
 import sk.berops.android.vehiculum.gui.service.ActivityServiceAdd;
 import sk.berops.android.vehiculum.gui.toll.ActivityTollAdd;
+import sk.berops.android.vehiculum.gui.tyres.ActivityTyreChange;
 
 public class ActivityEntryChoose extends DefaultActivity {
 

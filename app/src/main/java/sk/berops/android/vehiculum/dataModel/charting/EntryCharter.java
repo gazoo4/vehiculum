@@ -1,7 +1,5 @@
 package sk.berops.android.vehiculum.dataModel.charting;
 
-import android.util.Log;
-
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 

@@ -5,7 +5,6 @@ import java.util.UUID;
 import sk.berops.android.vehiculum.dataModel.Car;
 import sk.berops.android.vehiculum.dataModel.Record;
 import sk.berops.android.vehiculum.dataModel.maintenance.TyreConfigurationScheme;
-import sk.berops.android.vehiculum.engine.synchronization.controllers.RecordController;
 
 
 /**

@@ -1,18 +1,9 @@
 package sk.berops.android.vehiculum.io.internet;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.CustomEvent;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
-
-import sk.berops.android.vehiculum.Vehiculum;
 
 /**
  * @author Bernard Halas

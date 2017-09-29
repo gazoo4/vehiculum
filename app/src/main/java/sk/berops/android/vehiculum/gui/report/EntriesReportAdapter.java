@@ -13,7 +13,6 @@ import java.util.LinkedList;
 
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.configuration.Preferences;
-import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.expense.BureaucraticEntry;
 import sk.berops.android.vehiculum.dataModel.expense.Entry;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;
@@ -22,6 +21,7 @@ import sk.berops.android.vehiculum.dataModel.expense.MaintenanceEntry;
 import sk.berops.android.vehiculum.dataModel.expense.ServiceEntry;
 import sk.berops.android.vehiculum.dataModel.expense.TollEntry;
 import sk.berops.android.vehiculum.dataModel.expense.TyreChangeEntry;
+import sk.berops.android.vehiculum.engine.calculation.NewGenFuelConsumption;
 import sk.berops.android.vehiculum.gui.MainActivity;
 import sk.berops.android.vehiculum.gui.common.GuiUtils;
 import sk.berops.android.vehiculum.gui.common.TextFormatter;
@@ -93,11 +93,11 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 
 		date.setText(DateFormat.getDateInstance(DateFormat.MEDIUM).format(entry.getEventDate()));
 
-		totalPrice.setText(TextFormatter.format(entry.getCost(), "####0.00"));
-		totalPriceUnit.setText(entry.getCurrency().getUnitIsoCode());
+		totalPrice.setText(TextFormatter.format(entry.getCost().getPreferredValue(), "####0.00"));
+		totalPriceUnit.setText(entry.getCost().getPreferredUnit().getUnitIsoCode());
 
-		unitPrice.setText(TextFormatter.format(entry.getFuelPrice(), "####0.000"));
-		unitPriceUnit.setText(preferences.getCurrency().getUnitIsoCode() + "/"
+		unitPrice.setText(TextFormatter.format(entry.getFuelPrice().getPreferredValue(), "####0.000"));
+		unitPriceUnit.setText(entry.getFuelPrice().getPreferredUnit().getUnitIsoCode() + "/"
 				+ preferences.getQuantityUnit(entry.getFuelType()));
 
 		quantity.setText(TextFormatter.format(entry.getFuelQuantity(), "###0.00"));
@@ -107,14 +107,14 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 
 		consumptionUnit.setText(preferences.getConsumptionUnit(entry.getFuelType()).toUnitShort());
 
-		FuelConsumption c = entry.getFuelConsumption();
-		if (c.getAverageSinceLast() == 0.0) {
+		NewGenFuelConsumption c = entry.getFuelConsumption();
+		if (c.getLastConsumption() == 0.0) {
 			consumption.setText("--.--");
 			consumption.setShadowLayer(12, 0, 0, Color.WHITE);
 		} else {
-			consumption.setText(TextFormatter.format(c.getAverageSinceLast(), "##0.00"));
-			double avgConsumption = c.getAveragePerFuelType().get(entry.getFuelType());
-			double lastConsumption = c.getAverageSinceLast();
+			consumption.setText(TextFormatter.format(c.getLastConsumption(), "##0.00"));
+			double avgConsumption = c.getAverageTypeConsumption().get(entry.getFuelType());
+			double lastConsumption = c.getLastConsumption();
 			double relativeChange = (lastConsumption / avgConsumption - 0.8) / 0.4;
 			int consumptionTextColor = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange);
 			consumption.setTextColor(consumptionTextColor);
@@ -148,14 +148,11 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 
 		date.setText(DateFormat.getDateInstance(DateFormat.MEDIUM).format(entry.getEventDate()));
 
-		double partsCostNative = Currency.convert(entry.getPartsCostSI(), Currency.Unit.getUnit(0),
-				preferences.getCurrency(), entry.getEventDate());
-		partsCost.setText(TextFormatter.format(partsCostNative, "####0.00"));
-		partsCostUnit.setText(preferences.getCurrency().getUnitIsoCode());
+		partsCost.setText(TextFormatter.format(entry.getPartsCost().getPreferredValue(), "####0.00"));
+		partsCostUnit.setText(entry.getPartsCost().getPreferredUnit().getUnitIsoCode());
 
-		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
-		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
-		totalCostUnit.setText(preferences.getCurrency().getUnitIsoCode());
+		totalCost.setText(TextFormatter.format(entry.getCost().getPreferredValue(), "####0.00"));
+		totalCostUnit.setText(entry.getCost().getPreferredUnit().getUnitIsoCode());
 		
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
@@ -186,9 +183,8 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		
 		serviceType.setText(entry.getType().getType());
 		
-		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
-		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
-		totalCostUnit.setText(preferences.getCurrency().getUnitIsoCode());
+		totalCost.setText(TextFormatter.format(entry.getCost().getPreferredValue(), "####0.00"));
+		totalCostUnit.setText(entry.getCost().getPreferredUnit().getUnitIsoCode());
 		
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
@@ -223,9 +219,8 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 			newTyres.setText(context.getResources().getString(R.string.activity_entries_tyres_new_count));
 		}
 
-		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
-		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
-		totalCostUnit.setText(preferences.getCurrency().getUnitIsoCode());
+		totalCost.setText(TextFormatter.format(entry.getCost().getPreferredValue(), "####0.00"));
+		totalCostUnit.setText(entry.getCost().getPreferredUnit().getUnitIsoCode());
 
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
@@ -255,9 +250,8 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		
 		insuranceType.setText(entry.getType().getType());
 		
-		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
-		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
-		totalCostUnit.setText(preferences.getCurrency().getUnitIsoCode());
+		totalCost.setText(TextFormatter.format(entry.getCost().getPreferredValue(), "####0.00"));
+		totalCostUnit.setText(entry.getCost().getPreferredUnit().getUnitIsoCode());
 		
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
@@ -287,10 +281,9 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 		date.setText(DateFormat.getDateInstance(DateFormat.MEDIUM).format(entry.getEventDate()));
 		
 		tollType.setText(entry.getType().getType());
-		
-		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
-		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
-		totalCostUnit.setText(preferences.getCurrency().getUnitIsoCode());
+
+		totalCost.setText(TextFormatter.format(entry.getCost().getPreferredValue(), "####0.00"));
+		totalCostUnit.setText(entry.getCost().getPreferredUnit().getUnitIsoCode());
 		
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());
@@ -317,10 +310,9 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 				+ MainActivity.garage.getActiveCar().getDistanceUnit().getUnit());
 
 		date.setText(DateFormat.getDateInstance(DateFormat.MEDIUM).format(entry.getEventDate()));
-		
-		double totalCostNative = Currency.convert(entry.getCostSI(), Currency.Unit.getUnit(0), preferences.getCurrency(), entry.getEventDate());
-		totalCost.setText(TextFormatter.format(totalCostNative, "####0.00"));
-		totalCostUnit.setText(preferences.getCurrency().getUnitIsoCode());
+
+		totalCost.setText(TextFormatter.format(entry.getCost().getPreferredValue(), "####0.00"));
+		totalCostUnit.setText(entry.getCost().getPreferredUnit().getUnitIsoCode());
 		
 		entryType.setText(entry.getExpenseType().getExpenseType());
 		comment.setText(entry.getComment());

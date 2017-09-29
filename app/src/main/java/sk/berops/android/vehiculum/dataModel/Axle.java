@@ -3,7 +3,6 @@ package sk.berops.android.vehiculum.dataModel;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementMap;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

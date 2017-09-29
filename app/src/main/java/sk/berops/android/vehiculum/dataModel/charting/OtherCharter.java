@@ -3,7 +3,6 @@ package sk.berops.android.vehiculum.dataModel.charting;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-import sk.berops.android.vehiculum.dataModel.expense.OtherEntry;
 import sk.berops.android.vehiculum.engine.calculation.NewGenOtherConsumption;
 
 /**

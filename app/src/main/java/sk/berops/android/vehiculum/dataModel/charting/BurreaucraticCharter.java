@@ -1,11 +1,8 @@
 package sk.berops.android.vehiculum.dataModel.charting;
 
-import com.github.mikephil.charting.data.PieEntry;
-
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;
 import sk.berops.android.vehiculum.engine.calculation.NewGenBureaucraticConsumption;
 
 /**

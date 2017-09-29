@@ -2,10 +2,6 @@ package sk.berops.android.vehiculum.gui.common;
 
 import java.text.DecimalFormat;
 
-import sk.berops.android.vehiculum.configuration.Preferences;
-import sk.berops.android.vehiculum.dataModel.Currency;
-import sk.berops.android.vehiculum.dataModel.expense.Cost;
-
 public class TextFormatter {
 
 	/**

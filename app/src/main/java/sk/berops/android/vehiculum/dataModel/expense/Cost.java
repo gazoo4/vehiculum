@@ -6,7 +6,6 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementMap;
 
 import java.util.Collection;
-import java.util.TreeMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.TreeMap;

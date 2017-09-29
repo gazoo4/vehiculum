@@ -27,8 +27,14 @@ public abstract class ActivityExpenseAdd extends ActivityRecordAdd {
 	}
 
 	@Override
+	protected void attachGuiObjects() {
+		mapSpinners.put(Currency.Unit.extractSymbols(), spinnerCurrency);
+	}
+
+	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
+
 		Currency.Unit currency;
 		try {
 			currency = car.getHistory().getEntries().getLast().getCost().getRecordedUnit();

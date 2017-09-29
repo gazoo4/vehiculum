@@ -1,7 +1,7 @@
 package sk.berops.android.vehiculum.engine.calculation;
 
-import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 import sk.berops.android.vehiculum.dataModel.charting.OtherCharter;
+import sk.berops.android.vehiculum.dataModel.charting.PieCharter;
 
 /**
  * @author Bernard Halas

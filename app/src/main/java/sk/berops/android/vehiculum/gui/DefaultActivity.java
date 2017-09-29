@@ -6,8 +6,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -34,7 +35,7 @@ public abstract class DefaultActivity extends Activity  implements TextWatcher, 
     protected LinkedList<EditText> listEditTexts;
     protected LinkedList<ImageView> listIcons;
 	protected LinkedList<RadioGroup> listRadioGroups;
-    protected HashMap<Integer, Spinner> mapSpinners;
+    protected HashMap<Object, Spinner> mapSpinners;
 
 	/**
 	 * Variable indicating if any values in the activity have been changed yet since the activity
@@ -93,9 +94,19 @@ public abstract class DefaultActivity extends Activity  implements TextWatcher, 
         }
 
         Spinner s;
-        for (Integer id: mapSpinners.keySet()) {
-            s = mapSpinners.get(id);
-            UtilsActivity.styleSpinner(s, this, id);
+        for (Object key: mapSpinners.keySet()) {
+            s = mapSpinners.get(key);
+	        if (key instanceof Integer) {
+		        // These spinners take string array values from strings.xml (hence referring to them via integer)
+		        Integer i = (Integer) key;
+		        UtilsActivity.styleSpinner(s, this, i);
+	        } else if (key instanceof ArrayList){
+		        // These spinners take string array values from an ArrayList defined programatically
+		        ArrayList<CharSequence> list = (ArrayList<CharSequence>) key;
+		        UtilsActivity.styleSpinner(s, this, list);
+	        } else {
+		        Log.w(this.getClass().toString(), "Unknown source of spinner String values");
+	        }
         }
 
         for (ImageView i: listIcons) {

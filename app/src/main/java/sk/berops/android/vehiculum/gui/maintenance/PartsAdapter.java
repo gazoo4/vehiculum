@@ -56,9 +56,9 @@ public class PartsAdapter extends ArrayAdapter<ReplacementPart> {
 		
 		textViewID.setText(part.getProducerPartID());
 		textViewComment.setText(part.getComment());
-		textViewPrice.setText(Double.toString(part.getCost()));
+		textViewPrice.setText(Double.toString(part.getCost().getRecordedValue()));
 		textViewQuantity.setText(Integer.toString(part.getQuantity()) + "x");
-		textViewCurrency.setText(part.getCurrency().getUnitIsoCode());
+		textViewCurrency.setText(part.getCost().getRecordedUnit().getUnitIsoCode());
 		
 		return rowView;
 	}

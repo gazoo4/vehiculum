@@ -26,10 +26,10 @@ public class ActivityTyreChangeEdit extends ActivityTyreChange {
 	@Override
 	protected void initializeGuiObjects() {
 		super.initializeGuiObjects();
-		editTextLaborCost.setText(Double.toString(tyreChangeEntry.getLaborCost()));
-		editTextSmallPartsCost.setText(Double.toString(tyreChangeEntry.getExtraMaterialCost()));
-		editTextTyresCost.setText(Double.toString(tyreChangeEntry.getTyresCost()));
-		spinnerCurrency.setSelection(tyreChangeEntry.getCurrency().getId());
+		editTextLaborCost.setText(Double.toString(tyreChangeEntry.getLaborCost().getRecordedValue()));
+		editTextSmallPartsCost.setText(Double.toString(tyreChangeEntry.getExtraMaterialCost().getRecordedValue()));
+		editTextTyresCost.setText(Double.toString(tyreChangeEntry.getTyresCost().getRecordedValue()));
+		spinnerCurrency.setSelection(tyreChangeEntry.getCost().getRecordedUnit().getId());
 		updateTotalCost();
 	}
 }

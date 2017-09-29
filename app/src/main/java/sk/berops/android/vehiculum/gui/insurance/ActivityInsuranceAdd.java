@@ -3,13 +3,11 @@ package sk.berops.android.vehiculum.gui.insurance;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import sk.berops.android.vehiculum.R;
-import sk.berops.android.vehiculum.dataModel.expense.Entry;
 import sk.berops.android.vehiculum.dataModel.expense.FieldEmptyException;
 import sk.berops.android.vehiculum.dataModel.expense.InsuranceEntry;
 import sk.berops.android.vehiculum.gui.MainActivity;

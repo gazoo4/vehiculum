@@ -1,7 +1,5 @@
 package sk.berops.android.vehiculum.dataModel.maintenance;
 
-import android.graphics.Color;
-
 import org.simpleframework.xml.Element;
 
 import java.util.Date;

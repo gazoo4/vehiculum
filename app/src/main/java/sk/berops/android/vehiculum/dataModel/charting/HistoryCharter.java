@@ -2,7 +2,6 @@ package sk.berops.android.vehiculum.dataModel.charting;
 
 import com.github.mikephil.charting.data.PieEntry;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import sk.berops.android.vehiculum.R;

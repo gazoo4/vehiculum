@@ -7,12 +7,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import sk.berops.android.vehiculum.dataModel.UnitConstants.DistanceUnit;
 import sk.berops.android.vehiculum.dataModel.UnitConstants.QuantityUnit;
-import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry.FuelType;
 import sk.berops.android.vehiculum.dataModel.expense.History;
 import sk.berops.android.vehiculum.dataModel.expense.TyreChangeEntry;
 import sk.berops.android.vehiculum.dataModel.maintenance.TyreConfigurationScheme;
