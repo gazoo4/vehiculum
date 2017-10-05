@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -100,10 +99,6 @@ public abstract class DefaultActivity extends Activity  implements TextWatcher, 
 		        // These spinners take string array values from strings.xml (hence referring to them via integer)
 		        Integer i = (Integer) key;
 		        UtilsActivity.styleSpinner(s, this, i);
-	        } else if (key instanceof ArrayList){
-		        // These spinners take string array values from an ArrayList defined programatically
-		        ArrayList<CharSequence> list = (ArrayList<CharSequence>) key;
-		        UtilsActivity.styleSpinner(s, this, list);
 	        } else {
 		        Log.w(this.getClass().toString(), "Unknown source of spinner String values");
 	        }
