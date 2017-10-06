@@ -62,12 +62,14 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
         spinnerCurrency = (Spinner) findViewById(R.id.activity_refuel_currency);
         spinnerQuantityUnit = (Spinner) findViewById(R.id.activity_refuel_quantity_unit);
 
-        listEditTexts.add(editTextMileage);
-        listEditTexts.add(editTextCost);
-        listEditTexts.add(editTextComment);
-        listEditTexts.add(editTextQuantity);
+	    listEditTexts.add(editTextMileage);
+	    listEditTexts.add(editTextCost);
+	    listEditTexts.add(editTextComment);
+	    listEditTexts.add(editTextQuantity);
 
-        mapSpinners.put(R.array.activity_refuel_fuel_type, spinnerFuelType);
+	    mapSpinners.put(R.array.activity_refuel_fuel_type, spinnerFuelType);
+	    mapSpinners.put(Currency.Unit.extractCodesAndSymbols(), spinnerCurrency);
+	    //mapSpinners.put(R.array.activity_refuel_quantity_unit, spinnerQuantityUnit);
     }
 
     @Override

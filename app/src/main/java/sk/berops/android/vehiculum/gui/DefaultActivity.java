@@ -2,7 +2,6 @@ package sk.berops.android.vehiculum.gui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -85,21 +84,6 @@ public abstract class DefaultActivity extends Activity  implements TextWatcher, 
      * Method to customize the visuals of the GUI objects.
      */
     protected void styleGuiObjects() {
-        Spinner s;
-        for (Object key: mapSpinners.keySet()) {
-            s = mapSpinners.get(key);
-	        if (key instanceof Integer) {
-		        // These spinners take string array values from strings.xml (hence referring to them via integer)
-		        Integer i = (Integer) key;
-		        UtilsActivity.initSpinner(s, this, i);
-	        } else if (key instanceof List) {
-		        List objects = (List) key;
-		        UtilsActivity.initDualSpinner(s, this, objects);
-	        } else {
-		        Log.w(this.getClass().toString(), "Unknown source of spinner String values");
-	        }
-        }
-
         listIcons.parallelStream()
 		        .forEach(i -> UtilsActivity.tintIcon(i));
 	    listButtons.parallelStream()
@@ -112,6 +96,21 @@ public abstract class DefaultActivity extends Activity  implements TextWatcher, 
      * Method to link the java objects to the elements in the layout xml file
      */
     protected void initializeGuiObjects() {
+	    Spinner spinner;
+	    for (Object key: mapSpinners.keySet()) {
+		    spinner = mapSpinners.get(key);
+		    if (key instanceof Integer) {
+			    // These spinners take string array values from strings.xml (hence referring to them via integer)
+			    Integer i = (Integer) key;
+			    UtilsActivity.initSpinner(spinner, this, i);
+		    } else if (key instanceof List) {
+			    List objects = (List) key;
+			    UtilsActivity.initDualSpinner(spinner, this, objects);
+		    } else {
+			    Log.w(this.getClass().toString(), "Unknown source of spinner String values");
+		    }
+	    }
+
 	    for (EditText e: listEditTexts) {
 		    e.addTextChangedListener(this);
 	    }
@@ -134,18 +133,8 @@ public abstract class DefaultActivity extends Activity  implements TextWatcher, 
 					.setTitle(R.string.activity_generic_warning_hint)
 					.setMessage(R.string.activity_generic_discard_changes_warning)
 					.setCancelable(true)
-					.setPositiveButton(R.string.activity_generic_discard_hint, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int id) {
-							DefaultActivity.super.onBackPressed();
-						}
-					})
-					.setNegativeButton(R.string.activity_generic_cancel_hint, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int id) {
-							dialog.cancel();
-						}
-					})
+					.setPositiveButton(R.string.activity_generic_discard_hint, (dialog1, which) -> DefaultActivity.super.onBackPressed())
+					.setNegativeButton(R.string.activity_generic_cancel_hint, (dialog1, which) -> dialog1.cancel())
 					.create();
 			dialog.show();
 		} else {

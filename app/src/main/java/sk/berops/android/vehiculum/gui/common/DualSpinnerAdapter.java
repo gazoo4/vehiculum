@@ -37,12 +37,6 @@ public class DualSpinnerAdapter extends ArrayAdapter<DualString> {
 	 */
 	private int mDropDownResource;
 
-	/**
-	 * Contains the list of objects that represent the data of this ArrayAdapter.
-	 * The content of this list is referred to as "the array" in the documentation.
-	 */
-	private List<DualString> mObjects;
-
 	public DualSpinnerAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<CharSequence> shorts, List<CharSequence> longs) {
 		this(context, resource, DualString.of(shorts, longs));
 	}

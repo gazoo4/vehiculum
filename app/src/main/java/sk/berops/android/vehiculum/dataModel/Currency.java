@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import sk.berops.android.vehiculum.gui.common.DualString;
+
 public class Currency {
 	
 	private Unit unit;
@@ -196,8 +198,7 @@ public class Currency {
 
 			if (id == 0) return EUR; // EUR is our default currency
 			
-			Unit result = null;
-			result = idToUnitMapping.get(id);
+			Unit result = idToUnitMapping.get(id);
 			return result;
 		}
 		
@@ -217,10 +218,12 @@ public class Currency {
 			return result;
 		}
 
-		public static ArrayList<CharSequence> extractCodesAndSymbols() {
-			ArrayList<CharSequence> result = new ArrayList<>();
+		public static ArrayList<DualString> extractCodesAndSymbols() {
+			ArrayList<DualString> result = new ArrayList<>();
 			for (Unit u: Unit.values()) {
-				result.add(u.getUnitIsoCode() +" ("+ u.getSymbol() +")");
+				CharSequence collapsed = u.getSymbol();
+				CharSequence expanded = u.getUnitIsoCode() +" ("+ u.getSymbol() +")";
+				result.add(new DualString(collapsed, expanded));
 			}
 
 			return result;
