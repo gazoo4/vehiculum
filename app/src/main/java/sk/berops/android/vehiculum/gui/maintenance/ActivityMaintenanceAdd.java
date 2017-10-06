@@ -105,8 +105,8 @@ public class ActivityMaintenanceAdd extends ActivityEntryGenericAdd implements
 		listEditTexts.add(editTextCost);
 		listEditTexts.add(editTextComment);
 
-		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
-		mapSpinners.put(R.array.activity_expense_add_currency, spinnerLaborCostCurrency);
+		mapSpinners.put(Currency.Unit.extractCodesAndSymbols(), spinnerCurrency);
+		mapSpinners.put(Currency.Unit.extractCodesAndSymbols(), spinnerLaborCostCurrency);
 
 		listRadioGroups.add(radioGroupType);
 	}

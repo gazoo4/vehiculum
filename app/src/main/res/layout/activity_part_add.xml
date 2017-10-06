@@ -90,7 +90,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".20"
-                    android:entries="@array/activity_expense_add_currency"
                     android:prompt="@string/activity_expense_add_currency_hint"/>
             </LinearLayout>
 

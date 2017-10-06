@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.gui.Colors;
@@ -29,7 +29,7 @@ public class UtilsActivity {
 		editText.setHintTextColor(EDITTEXT_COLOR);
 	}
 	
-	public static void styleSpinner(Spinner spinner, Context context, int arrayID) {
+	public static void initSpinner(Spinner spinner, Context context, int arrayID) {
 		if (spinner == null || context == null) return;
 
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter
@@ -39,10 +39,10 @@ public class UtilsActivity {
 		spinner.setAdapter(adapter);
 	}
 
-	public static void styleSpinner(Spinner spinner, Context context, ArrayList<CharSequence> array) {
+	public static void initDualSpinner(Spinner spinner, Context context, List<DualString> array) {
 		if (spinner == null || context == null) return;
 
-		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(context, R.layout.spinner_white, array);
+		DualSpinnerAdapter adapter = new DualSpinnerAdapter(context, R.layout.spinner_white, array);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
 	}

@@ -71,7 +71,7 @@ public class ActivityTyreChange extends ActivityEntryGenericAdd {
 		listEditTexts.add(editTextMileage);
 		listEditTexts.add(editTextComment);
 
-		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
+		mapSpinners.put(Currency.Unit.extractCodesAndSymbols(), spinnerCurrency);
 	}
 
 	@Override

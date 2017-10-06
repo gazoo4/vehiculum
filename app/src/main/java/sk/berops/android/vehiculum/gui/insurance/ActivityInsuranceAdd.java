@@ -8,6 +8,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import sk.berops.android.vehiculum.R;
+import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.expense.FieldEmptyException;
 import sk.berops.android.vehiculum.dataModel.expense.InsuranceEntry;
 import sk.berops.android.vehiculum.gui.MainActivity;
@@ -50,7 +51,7 @@ public class ActivityInsuranceAdd extends ActivityEntryGenericAdd {
 		listEditTexts.add(editTextComment);
 
 		mapSpinners.put(R.array.activity_insurance_type, spinnerInsuranceType);
-		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
+		mapSpinners.put(Currency.Unit.extractCodesAndSymbols(), spinnerCurrency);
 	}
 	
 	@Override

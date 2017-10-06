@@ -8,6 +8,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import sk.berops.android.vehiculum.R;
+import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.expense.FieldEmptyException;
 import sk.berops.android.vehiculum.dataModel.expense.TollEntry;
 import sk.berops.android.vehiculum.gui.MainActivity;
@@ -49,7 +50,7 @@ public class ActivityTollAdd extends ActivityEntryGenericAdd {
 		listEditTexts.add(editTextCost);
 		listEditTexts.add(editTextComment);
 
-		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
+		mapSpinners.put(Currency.Unit.extractCodesAndSymbols(), spinnerCurrency);
 		mapSpinners.put(R.array.activity_toll_type, spinnerTollType);
 	}
 	

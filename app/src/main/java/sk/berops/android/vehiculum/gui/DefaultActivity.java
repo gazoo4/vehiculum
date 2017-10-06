@@ -17,6 +17,7 @@ import android.widget.Spinner;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import sk.berops.android.vehiculum.R;
 import sk.berops.android.vehiculum.gui.common.UtilsActivity;
@@ -84,29 +85,27 @@ public abstract class DefaultActivity extends Activity  implements TextWatcher, 
      * Method to customize the visuals of the GUI objects.
      */
     protected void styleGuiObjects() {
-        for (Button b: listButtons) {
-            UtilsActivity.styleButton(b);
-        }
-
-        for (EditText e: listEditTexts) {
-            UtilsActivity.styleEditText(e);
-        }
-
         Spinner s;
         for (Object key: mapSpinners.keySet()) {
             s = mapSpinners.get(key);
 	        if (key instanceof Integer) {
 		        // These spinners take string array values from strings.xml (hence referring to them via integer)
 		        Integer i = (Integer) key;
-		        UtilsActivity.styleSpinner(s, this, i);
+		        UtilsActivity.initSpinner(s, this, i);
+	        } else if (key instanceof List) {
+		        List objects = (List) key;
+		        UtilsActivity.initDualSpinner(s, this, objects);
 	        } else {
 		        Log.w(this.getClass().toString(), "Unknown source of spinner String values");
 	        }
         }
 
-        for (ImageView i: listIcons) {
-            UtilsActivity.tintIcon(i);
-        }
+        listIcons.parallelStream()
+		        .forEach(i -> UtilsActivity.tintIcon(i));
+	    listButtons.parallelStream()
+			    .forEach(b -> UtilsActivity.styleButton(b));
+	    listEditTexts.parallelStream()
+			    .forEach(e -> UtilsActivity.styleEditText(e));
     }
 
     /**

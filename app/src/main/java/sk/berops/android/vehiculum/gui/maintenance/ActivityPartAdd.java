@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import sk.berops.android.vehiculum.R;
+import sk.berops.android.vehiculum.dataModel.Currency;
 import sk.berops.android.vehiculum.dataModel.expense.FieldEmptyException;
 import sk.berops.android.vehiculum.dataModel.maintenance.ReplacementPart;
 import sk.berops.android.vehiculum.dataModel.maintenance.ReplacementPart.Originality;
@@ -53,7 +54,7 @@ public class ActivityPartAdd extends ActivityGenericPartAdd {
 		listEditTexts.add(editTextCarmakerPartId);
 		listEditTexts.add(editTextQuantity);
 
-		mapSpinners.put(R.array.activity_expense_add_currency, spinnerCurrency);
+		mapSpinners.put(Currency.Unit.extractCodesAndSymbols(), spinnerCurrency);
 		mapSpinners.put(R.array.activity_generic_part_add_condition, spinnerCondition);
 		mapSpinners.put(R.array.activity_part_add_originality, spinnerOriginality);
 	}

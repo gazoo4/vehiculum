@@ -28,7 +28,7 @@ public abstract class ActivityExpenseAdd extends ActivityRecordAdd {
 
 	@Override
 	protected void attachGuiObjects() {
-		mapSpinners.put(Currency.Unit.extractSymbols(), spinnerCurrency);
+		mapSpinners.put(Currency.Unit.extractCodesAndSymbols(), spinnerCurrency);
 	}
 
 	@Override

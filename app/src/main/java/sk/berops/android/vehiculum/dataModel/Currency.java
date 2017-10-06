@@ -217,7 +217,7 @@ public class Currency {
 			return result;
 		}
 
-		public static ArrayList<CharSequence> extractShortCodesSymbols() {
+		public static ArrayList<CharSequence> extractCodesAndSymbols() {
 			ArrayList<CharSequence> result = new ArrayList<>();
 			for (Unit u: Unit.values()) {
 				result.add(u.getUnitIsoCode() +" ("+ u.getSymbol() +")");
