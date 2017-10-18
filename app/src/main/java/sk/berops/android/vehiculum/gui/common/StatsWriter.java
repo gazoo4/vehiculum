@@ -69,18 +69,17 @@ public class StatsWriter {
 		Context context = Vehiculum.context;
 		double avgConsumption;
 		NewGenFuelConsumption c = garage.getActiveCar().getFuelConsumption();
-		if (c == null) return;
+		if (c == null || c.getAverageTypeConsumption() == null) return;
 
 		String description;
 		double valueSI;
 		double valueReport;
 		UnitConstants.ConsumptionUnit unit;
-		unit = preferences.getConsumptionUnit(garage.getActiveCar().getHistory().getFuellingEntries().getLast().getFuelType());
 
 		// we should buy at least 2 different fuels in order to display the stats separately
 		HashMap<FuellingEntry.FuelType, Double> map = new HashMap<>();
 		Set<UnitConstants.Substance> substances = new HashSet<>();
-		for (FuellingEntry.FuelType t : FuellingEntry.FuelType.values()) {
+		for (FuellingEntry.FuelType t : c.getAverageTypeConsumption().keySet()) {
 			avgConsumption = c.getAverageTypeConsumption().get(t);
 			if (avgConsumption != 0.0) {
 				map.put(t, avgConsumption);
@@ -118,7 +117,7 @@ public class StatsWriter {
 		Context context = Vehiculum.context;
 		Garage garage = MainActivity.garage;
 		NewGenConsumption c = garage.getActiveCar().getConsumption();
-		if (c == null) return;
+		if (c == null || c.getAverageCost() == null) return;
 
 		String description = context.getString(R.string.activity_main_relative_costs);
 		double valueSI = c.getAverageCost().getPreferredValue();
