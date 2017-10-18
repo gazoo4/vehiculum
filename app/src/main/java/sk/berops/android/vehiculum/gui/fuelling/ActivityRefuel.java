@@ -139,7 +139,7 @@ public class ActivityRefuel extends ActivityEntryGenericAdd {
 
             currency = Currency.Unit.getUnit(spinnerCurrency.getSelectedItemPosition());
             quantityUnit = UnitConstants.QuantityUnit.getQuantityUnit(spinnerQuantityUnit.getSelectedItemPosition());
-            unit = "" + currency.getUnitIsoCode() + "/" + quantityUnit.getUnit();
+            unit = "" + currency.getSymbol() + "/" + quantityUnit.getUnit();
             textViewPrice.setText(formattedPrice + " " + unit);
         } catch (NumberFormatException e) {
             // Both the fields need to be filled-in (quantity, cost)
