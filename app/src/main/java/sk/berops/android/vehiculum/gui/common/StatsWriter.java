@@ -59,7 +59,7 @@ public class StatsWriter {
 
 		String description = context.getString(R.string.activity_main_total_costs);
 		double value = c.getTotalCost().getPreferredValue();
-		String unit = c.getTotalCost().getPreferredUnit().getUnitIsoCode();
+		String unit = c.getTotalCost().getPreferredUnit().getSymbol();
 
 		layout.addView(createStatRow(description, value, unit));
 	}
@@ -117,7 +117,11 @@ public class StatsWriter {
 		Context context = Vehiculum.context;
 		Garage garage = MainActivity.garage;
 		NewGenConsumption c = garage.getActiveCar().getConsumption();
-		if (c == null || c.getAverageCost() == null) return;
+		if (c == null
+				|| c.getAverageCost() == null
+				|| c.getAverageCost().isZero()) {
+			return;
+		}
 
 		String description = context.getString(R.string.activity_main_relative_costs);
 		double valueSI = c.getAverageCost().getPreferredValue();

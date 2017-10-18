@@ -222,7 +222,7 @@ public class Cost extends Record {
 	public Double getPreferredValue() {
 		Currency.Unit u = getPreferredUnit();
 
-		if (u == null) {
+		if (u == null || isZero()) {
 			return 0.0;
 		} else {
 			return getValues().get(u);

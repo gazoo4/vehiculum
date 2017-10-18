@@ -96,7 +96,7 @@
     <string name="activity_main_relative_costs_fuel"				>Relative values for </string>
     <string name="activity_main_relative_since_last_refuel"			>Costs since last refuel</string>
     <string name="activity_main_since_last_refuel"					>Consumption since the last refuel</string>
-    <string name="activity_main_total_costs"						>Total values</string>
+    <string name="activity_main_total_costs"						>Total costs</string>
 
     <string name="activity_maintenance_button_add"					>+</string>
     <string name="activity_maintenance_button_delete"				>-</string>
