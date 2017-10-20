@@ -73,14 +73,16 @@ public class UnitConstants {
 	static Preferences preferences = Preferences.getInstance();
 
 	public enum Substance {
-		LIQUID(0),
-		GAS(1),
-		ELECTRIC(2);
+		LIQUID(0, "liquid"),
+		GAS(1, "gas"),
+		ELECTRIC(2, "electric");
 
 		private int id;
+		private String name;
 
-		Substance(int id) {
+		Substance(int id, String name) {
 			this.id = id;
+			this.name = name;
 		}
 
 		private static Map<Integer, Substance> idToSubstanceMapping;
@@ -103,8 +105,8 @@ public class UnitConstants {
 		public int getId() {
 			return id;
 		}
-		public void setId(int id) {
-			this.id = id;
+		public String toString() {
+			return name;
 		}
 	}
 	

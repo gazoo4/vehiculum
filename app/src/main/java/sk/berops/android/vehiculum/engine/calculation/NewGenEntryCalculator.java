@@ -31,7 +31,7 @@ public class NewGenEntryCalculator extends NewGenCalculator {
 			nextC.setAverageCost(new Cost());
 		} else {
 			Double mileage = entry.getMileageSI() - initial.getMileageSI();
-			Cost average = Cost.divide(total, (mileage * 100));
+			Cost average = Cost.subtract(total, initial.getCost());
 			nextC.setAverageCost(average);
 		}
 

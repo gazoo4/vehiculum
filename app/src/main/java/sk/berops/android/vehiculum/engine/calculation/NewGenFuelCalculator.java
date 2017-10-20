@@ -48,9 +48,7 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		NewGenFuelConsumption prevC = (previous == null) ? null : (NewGenFuelConsumption) previous.getConsumption();
 		NewGenFuelConsumption nextC = fEntry.getFuelConsumption();
 
-		nextC.setCostLastRefuel(calculateCostLastRefuel(fEntry));
-
-		//is total volume missing?
+		nextC.setLastCost(calculateCostLastRefuel(fEntry));
 
 		nextC.setTotalVolumeBySubstance(calculateTotalSubstanceVolume(prevC, fEntry));
 		nextC.setTotalVolumeByType(calculateTotalTypeVolume(prevC, fEntry));
@@ -97,7 +95,7 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		Cost result = new Cost();
 		FuellingEntry.FuelType type = entry.getFuelType();
 		if (previousByFuelType.get(type) != null) {
-			double mileage = entry.getMileageSI() - previousByFuelType.get(entry).getMileageSI();
+			double mileage = entry.getMileageSI() - previousByFuelType.get(type).getMileageSI();
 			result = Cost.divide(entry.getCost(), mileage);
 			result = Cost.multiply(result, 100);
 		}
@@ -226,7 +224,7 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		} else {
 			double mileage = entry.getMileageSI() - previous.getMileageSI();
 			double volume = entry.getFuelQuantitySI();
-			return volume / (mileage * 100);
+			return volume / mileage;
 		}
 	}
 

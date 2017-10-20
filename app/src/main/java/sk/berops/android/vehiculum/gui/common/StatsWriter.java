@@ -109,7 +109,11 @@ public class StatsWriter {
 			valueSI = c.getAverageConsumption().get(s);
 			valueReport = UnitConstants.convertUnitConsumptionFromSI(s, valueSI);
 			unit = preferences.getConsumptionUnit(s);
-			layout.addView(createStatRow(description + " " + s.name(), valueReport, unit.toUnitShort()));
+			if (substances.size() == 1) {
+				layout.addView(createStatRow(description, valueReport, unit.toUnitShort()));
+			} else {
+				layout.addView(createStatRow(description + " (" + s.toString() + ")", valueReport, unit.toUnitShort()));
+			}
 		}
 	}
 
@@ -159,7 +163,7 @@ public class StatsWriter {
 		}
 
 		FuellingEntry e = entries.getLast();
-		NewGenFuelConsumption c = activeCar.getFuelConsumption();
+		NewGenFuelConsumption c = e.getFuelConsumption();
 		FuellingEntry.FuelType type = e.getFuelType();
 
 		if (activeCar.getHistory().getFuellingEntriesFiltered(e.getFuelType()).size() <= 1) {

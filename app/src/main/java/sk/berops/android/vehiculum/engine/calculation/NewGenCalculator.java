@@ -17,16 +17,18 @@ public abstract class NewGenCalculator {
 
 	public static void calculateAll(Car car){
 		NewGenEntryCalculator calculator = new NewGenEntryCalculator();
+		NewGenCalculator typeCalculator;
 		for (Entry e: car.getHistory().getEntries()) {
+			// Generic calculations happen in "calculator"
 			calculator.processNext(e);
-			getCalculator(e.getExpenseType()).processNext(e);
+			// Specific calculations happen in "typeCalculator"
+			typeCalculator = getCalculator(e.getExpenseType());
+			typeCalculator.processNext(e);
 		}
 	}
 
 	private static NewGenCalculator getCalculator(Entry.ExpenseType type) {
-		if (typeCalculators.get(type) == null) {
-			typeCalculators.put(type, getNewInstance(type));
-		}
+		typeCalculators.putIfAbsent(type, getNewInstance(type));
 
 		return typeCalculators.get(type);
 	}

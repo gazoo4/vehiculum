@@ -30,10 +30,6 @@ public class NewGenFuelConsumption extends NewGenConsumption {
 	 */
 	public static final int FLOATING_AVG_CUT = 2;
 	/**
-	 * Average cost per distance unit since last refuel
-	 */
-	private Cost costLastRefuel;
-	/**
 	 * Total volume of fuel bought split into the substance categories (i.e. liquid = liter, gas = kg, electricity = kWh)
 	 */
 	private HashMap<UnitConstants.Substance, Double> totalVolumeBySubstance;
@@ -70,7 +66,7 @@ public class NewGenFuelConsumption extends NewGenConsumption {
 	 */
 	private double lastConsumption;
 	/**
-	 * Average cost per disctance unit from the last refuel
+	 * Average cost per distance unit from the last refuel
 	 */
 	private Cost lastCost;
 	/**
@@ -98,14 +94,6 @@ public class NewGenFuelConsumption extends NewGenConsumption {
 
 	public PieCharter generateCharter() {
 		return new FuellingCharter(this);
-	}
-
-	public Cost getCostLastRefuel() {
-		return costLastRefuel;
-	}
-
-	public void setCostLastRefuel(Cost costLastRefuel) {
-		this.costLastRefuel = costLastRefuel;
 	}
 
 	public HashMap<UnitConstants.Substance, Double> getTotalVolumeBySubstance() {
