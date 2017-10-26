@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import sk.berops.android.vehiculum.Vehiculum;
 import sk.berops.android.vehiculum.dataModel.Currency;
@@ -56,6 +57,7 @@ public class Preferences {
     }
     
     public CostUnit getCostUnit() {
+	    Log.d("XXXXXXXX", "returning key: "+ getInt(COST_UNIT_KEY, 1));
     	return CostUnit.getCostUnit(getInt(COST_UNIT_KEY, 1));
     }
     

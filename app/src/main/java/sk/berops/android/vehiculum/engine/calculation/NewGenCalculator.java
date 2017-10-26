@@ -18,6 +18,7 @@ public abstract class NewGenCalculator {
 	public static void calculateAll(Car car){
 		NewGenEntryCalculator calculator = new NewGenEntryCalculator();
 		NewGenCalculator typeCalculator;
+		typeCalculators.clear();
 		for (Entry e: car.getHistory().getEntries()) {
 			// Generic calculations happen in "calculator"
 			calculator.processNext(e);

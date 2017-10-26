@@ -69,7 +69,7 @@ public class StatsWriter {
 		Context context = Vehiculum.context;
 		double avgConsumption;
 		NewGenFuelConsumption c = garage.getActiveCar().getFuelConsumption();
-		if (c == null || c.getAverageTypeConsumption() == null) return;
+		if (c == null || c.getAverageConsumptionByType() == null) return;
 
 		String description;
 		double valueSI;
@@ -79,8 +79,8 @@ public class StatsWriter {
 		// we should buy at least 2 different fuels in order to display the stats separately
 		HashMap<FuellingEntry.FuelType, Double> map = new HashMap<>();
 		Set<UnitConstants.Substance> substances = new HashSet<>();
-		for (FuellingEntry.FuelType t : c.getAverageTypeConsumption().keySet()) {
-			avgConsumption = c.getAverageTypeConsumption().get(t);
+		for (FuellingEntry.FuelType t : c.getAverageConsumptionByType().keySet()) {
+			avgConsumption = c.getAverageConsumptionByType().get(t);
 			if (avgConsumption != 0.0) {
 				map.put(t, avgConsumption);
 				substances.add(t.getSubstance());
@@ -106,7 +106,7 @@ public class StatsWriter {
 		}
 
 		for (UnitConstants.Substance s: substances) {
-			valueSI = c.getAverageConsumption().get(s);
+			valueSI = c.getAverageConsumptionBySubstance().get(s);
 			valueReport = UnitConstants.convertUnitConsumptionFromSI(s, valueSI);
 			unit = preferences.getConsumptionUnit(s);
 			if (substances.size() == 1) {
@@ -144,7 +144,7 @@ public class StatsWriter {
 		String description = context.getString(R.string.activity_main_relative_costs_fuel);
 		description += " ";
 		description += t.toString();
-		double valueSI = c.getAverageTypeConsumption().get(t);
+		double valueSI = c.getAverageConsumptionByType().get(t);
 		UnitConstants.CostUnit unit = preferences.getCostUnit();
 
 		double valueReport = UnitConstants.convertUnitCost(valueSI);
@@ -207,7 +207,7 @@ public class StatsWriter {
 			return;
 		}
 
-		double avgConsumption = c.getAverageTypeConsumption().get(type);
+		double avgConsumption = c.getAverageConsumptionByType().get(type);
 		double lastConsumption = c.getLastConsumption();
 		double relativeChange = (lastConsumption / avgConsumption - 0.8) / 0.4;
 		int color = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange); //orange in the middle

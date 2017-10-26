@@ -667,13 +667,13 @@ public class UnitConstants {
 	/**
 	 * Method to convert the cost value according to the provided input and output cost units.
 	 * @param fromValue value to convert
-	 * @param fromUnit cost unit of the input value. If null, COST_PER_DISTANCE is used.
+	 * @param fromUnit cost unit of the input value. If null, COST_PER_100_DISTANCE is used.
 	 * @param toUnit cost unit of the desired output value. If null, value from user preferences is used.
 	 * @return
 	 */
 	public static double convertUnitCost(double fromValue, CostUnit fromUnit, CostUnit toUnit) {
 		if (fromUnit == null) {
-			fromUnit = CostUnit.COST_PER_DISTANCE;
+			fromUnit = CostUnit.COST_PER_100_DISTANCE;
 		}
 		if (toUnit == null) {
 			toUnit = preferences.getCostUnit();

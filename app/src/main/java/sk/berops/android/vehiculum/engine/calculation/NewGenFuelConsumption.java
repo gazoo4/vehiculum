@@ -56,11 +56,11 @@ public class NewGenFuelConsumption extends NewGenConsumption {
 	/**
 	 * Average fuel consumption per distance unit
 	 */
-	private HashMap<UnitConstants.Substance, Double> averageConsumption;
+	private HashMap<UnitConstants.Substance, Double> averageConsumptionBySubstance;
 	/**
 	 * Average fuel consumption (per fuel type) per distance unit
 	 */
-	private HashMap<FuellingEntry.FuelType, Double> averageTypeConsumption;
+	private HashMap<FuellingEntry.FuelType, Double> averageConsumptionByType;
 	/**
 	 * Average consumption from the last refuel
 	 */
@@ -144,20 +144,20 @@ public class NewGenFuelConsumption extends NewGenConsumption {
 		this.averageCostByType = averageCostByType;
 	}
 
-	public HashMap<UnitConstants.Substance, Double> getAverageConsumption() {
-		return averageConsumption;
+	public HashMap<UnitConstants.Substance, Double> getAverageConsumptionBySubstance() {
+		return averageConsumptionBySubstance;
 	}
 
-	public void setAverageConsumption(HashMap<UnitConstants.Substance, Double> averageConsumption) {
-		this.averageConsumption = averageConsumption;
+	public void setAverageConsumptionBySubstance(HashMap<UnitConstants.Substance, Double> averageConsumptionBySubstance) {
+		this.averageConsumptionBySubstance = averageConsumptionBySubstance;
 	}
 
-	public HashMap<FuellingEntry.FuelType, Double> getAverageTypeConsumption() {
-		return averageTypeConsumption;
+	public HashMap<FuellingEntry.FuelType, Double> getAverageConsumptionByType() {
+		return averageConsumptionByType;
 	}
 
-	public void setAverageTypeConsumption(HashMap<FuellingEntry.FuelType, Double> averageTypeConsumption) {
-		this.averageTypeConsumption = averageTypeConsumption;
+	public void setAverageConsumptionByType(HashMap<FuellingEntry.FuelType, Double> averageConsumptionByType) {
+		this.averageConsumptionByType = averageConsumptionByType;
 	}
 
 	public double getLastConsumption() {

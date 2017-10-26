@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import sk.berops.android.vehiculum.R;
+import sk.berops.android.vehiculum.dataModel.UnitConstants;
 import sk.berops.android.vehiculum.dataModel.expense.FuellingEntry;
 import sk.berops.android.vehiculum.gui.DefaultActivity;
 import sk.berops.android.vehiculum.gui.MainActivity;
@@ -51,7 +52,9 @@ public class ActivityCharts2 extends DefaultActivity {
 			chartEntries.putIfAbsent(fe.getFuelType(), new LinkedList<>());
 
 			LinkedList<Entry> entries = chartEntries.get(fe.getFuelType());
-			entries.add(new Entry((float) fe.getMileage(), (float) fe.getFuelConsumption().getLastConsumption()));
+			float mileage = (float) fe.getMileage();
+			float value = (float) UnitConstants.convertUnitConsumptionFromSI(fe.getFuelType(), fe.getFuelConsumption().getLastConsumption());
+			entries.add(new Entry(mileage, value));
 		}
 
 		// Load the values into chart DataSet objects

@@ -113,7 +113,7 @@ public class EntriesReportAdapter extends ArrayAdapter<Entry> {
 			consumption.setShadowLayer(12, 0, 0, Color.WHITE);
 		} else {
 			consumption.setText(TextFormatter.format(c.getLastConsumption(), "##0.00"));
-			double avgConsumption = c.getAverageTypeConsumption().get(entry.getFuelType());
+			double avgConsumption = c.getAverageConsumptionByType().get(entry.getFuelType());
 			double lastConsumption = c.getLastConsumption();
 			double relativeChange = (lastConsumption / avgConsumption - 0.8) / 0.4;
 			int consumptionTextColor = GuiUtils.getShade(Color.GREEN, 0xFFFFFF00, Color.RED, relativeChange);

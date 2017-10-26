@@ -57,13 +57,13 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		nextC.setTotalCostByType(calculateTotalTypeCost(prevC, fEntry));
 
 		// Here we need the already calculated total costs (in the step above)
-		nextC.setAverageCostBySubstance(calculateAverageSubstanceCost(nextC, fEntry));
-		nextC.setAverageCostByType(calculateAverageTypeCost(nextC, fEntry));
+		nextC.setAverageCostBySubstance(calculateAverageCostBySubstance(nextC, fEntry));
+		nextC.setAverageCostByType(calculateAverageCostByType(nextC, fEntry));
 
-		nextC.setAverageConsumption(calculateAverageConsumption(prevC, fEntry));
+		nextC.setAverageConsumptionBySubstance(calculateAverageConsumptionBySubstance(prevC, fEntry));
 		nextC.setLastConsumption(calculateLastConsumption(fEntry));
 
-		nextC.setAverageTypeConsumption(calculateAverageTypeConsumption(prevC, fEntry));
+		nextC.setAverageConsumptionByType(calculateAverageConsumptionByType(prevC, fEntry));
 
 		slideBySubstance(movingEntriesBySubstance, fEntry, MOVING_AVG_COUNT);
 		slideByType(movingEntriesByType, fEntry, MOVING_AVG_COUNT);
@@ -149,7 +149,7 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		return result;
 	}
 
-	private HashMap<UnitConstants.Substance, Cost> calculateAverageSubstanceCost(NewGenFuelConsumption nextC, FuellingEntry entry) {
+	private HashMap<UnitConstants.Substance, Cost> calculateAverageCostBySubstance(NewGenFuelConsumption nextC, FuellingEntry entry) {
 		HashMap<UnitConstants.Substance, Cost> result = new HashMap<>();
 		HashMap<UnitConstants.Substance, Cost> tCosts = nextC.getTotalCostBySubstance();
 
@@ -174,7 +174,7 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		return result;
 	}
 
-	private HashMap<FuellingEntry.FuelType, Cost> calculateAverageTypeCost(NewGenFuelConsumption nextC, FuellingEntry entry) {
+	private HashMap<FuellingEntry.FuelType, Cost> calculateAverageCostByType(NewGenFuelConsumption nextC, FuellingEntry entry) {
 		HashMap<FuellingEntry.FuelType, Cost> result = new HashMap<>();
 		HashMap<FuellingEntry.FuelType, Cost> tCosts = nextC.getTotalCostByType();
 
@@ -199,9 +199,9 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		return result;
 	}
 
-	private HashMap<UnitConstants.Substance, Double> calculateAverageConsumption(NewGenFuelConsumption prevC, FuellingEntry entry) {
+	private HashMap<UnitConstants.Substance, Double> calculateAverageConsumptionBySubstance(NewGenFuelConsumption prevC, FuellingEntry entry) {
 		HashMap<UnitConstants.Substance, Double> result;
-		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getAverageConsumption());
+		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getAverageConsumptionBySubstance());
 
 		UnitConstants.Substance substance = entry.getFuelType().getSubstance();
 		FuellingEntry initial = initialBySubstance.get(substance);
@@ -211,7 +211,8 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 			// At this moment the totalVolume needs to be calculated
 			double mileage = entry.getMileageSI() - initial.getMileageSI();
 			double volume = ((NewGenFuelConsumption) entry.getConsumption()).getTotalVolumeBySubstance().get(substance);
-			result.put(substance, volume / (mileage * 100));
+			volume -= initialBySubstance.get(substance).getFuelQuantitySI();
+			result.put(substance, 100 * volume / mileage); // Default unit: volume/100 * distance
 		}
 		return result;
 	}
@@ -224,13 +225,13 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 		} else {
 			double mileage = entry.getMileageSI() - previous.getMileageSI();
 			double volume = entry.getFuelQuantitySI();
-			return volume / mileage;
+			return 100 * volume / mileage; // Default unit: volume/100*distance
 		}
 	}
 
-	private HashMap<FuellingEntry.FuelType, Double> calculateAverageTypeConsumption(NewGenFuelConsumption prevC, FuellingEntry entry) {
+	private HashMap<FuellingEntry.FuelType, Double> calculateAverageConsumptionByType(NewGenFuelConsumption prevC, FuellingEntry entry) {
 		HashMap<FuellingEntry.FuelType, Double> result;
-		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getAverageTypeConsumption());
+		result = (prevC == null) ? new HashMap<>() : new HashMap<>(prevC.getAverageConsumptionByType());
 
 		FuellingEntry.FuelType type = entry.getFuelType();
 		FuellingEntry initial = initialByFuelType.get(type);
@@ -240,7 +241,8 @@ public class NewGenFuelCalculator extends NewGenTypeCalculator {
 			// At this moment the totalVolume needs to be calculated
 			double mileage = entry.getMileageSI() - initial.getMileageSI();
 			double volume = ((NewGenFuelConsumption) entry.getConsumption()).getTotalVolumeByType().get(type);
-			result.put(type, volume / (mileage * 100));
+			volume -= initialByFuelType.get(type).getFuelQuantitySI();
+			result.put(type, 100 * volume / mileage); // Default unit is volume/100*distance
 		}
 		return result;
 	}
