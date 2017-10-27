@@ -4,6 +4,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -43,12 +47,18 @@ public class ActivityCharts2 extends DefaultActivity {
 	}
 
 	private void loadAndDisplay() {
-		HashMap<FuellingEntry.FuelType, LinkedList<Entry>> chartEntries = new HashMap<>();
+		displayConsumptionData(chart);
+		// Refresh the chart
+		chart.invalidate();
+	}
 
+	private void displayConsumptionData(LineChart chart) {
+
+		HashMap<FuellingEntry.FuelType, LinkedList<Entry>> chartEntries = new HashMap<>();
 		LinkedList<FuellingEntry> fEntries = MainActivity.garage.getActiveCar().getHistory().getFuellingEntries();
 
 		// Collect the Consumption values
-		for (FuellingEntry fe: fEntries) {
+		for (FuellingEntry fe : fEntries) {
 			chartEntries.putIfAbsent(fe.getFuelType(), new LinkedList<>());
 
 			LinkedList<Entry> entries = chartEntries.get(fe.getFuelType());
@@ -59,17 +69,58 @@ public class ActivityCharts2 extends DefaultActivity {
 
 		// Load the values into chart DataSet objects
 		LineData data = new LineData();
-		for (FuellingEntry.FuelType type: chartEntries.keySet()) {
+		for (FuellingEntry.FuelType type : chartEntries.keySet()) {
 			LineDataSet dataSet = new LineDataSet(chartEntries.get(type), type.getType());
 			dataSet.setColor(type.getColor());
-			dataSet.setValueTextColor(Color.DKGRAY);
+			dataSet.setValueTextColor(Color.WHITE);
+			dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
 			data.addDataSet(dataSet);
 		}
 
+		// Style the data
+		data.setValueTextColor(Color.WHITE);
+		data.setValueTextSize(13f);
+
+		chart.setNoDataText(getString(R.string.activity_charts_no_consumption_data));
+		chart.setNoDataTextColor(Color.WHITE);
+
+		// Remove description
+		Description d = new Description();
+		d.setText("");
+		chart.setDescription(d);
+
+		// Style the axes
+		chart.getAxisRight().setEnabled(false);
+
+		AxisBase[] axes = new AxisBase[] {chart.getAxisLeft(), chart.getXAxis()};
+		for (AxisBase a: axes) {
+			a.setDrawGridLines(false);
+			a.setAxisLineWidth(2);
+			a.setDrawLabels(true);
+			a.setTextColor(Color.WHITE);
+			a.setTextSize(13f);
+		}
+		chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+		chart.getAxisLeft().setAxisMinimum(0);
+
+		// Default chart settings
+		chart.setAutoScaleMinMaxEnabled(true);
+		chart.setKeepPositionOnRotation(true);
+
+		// Workaround for X axis labels cut-off
+		chart.setExtraBottomOffset(10);
+
+		// Manipulating the legend
+		Legend legend = chart.getLegend();
+		legend.setEnabled(true);
+		legend.setTextColor(Color.WHITE);
+		legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+		legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
+		legend.setDrawInside(true);
+		legend.setTextSize(13f);
+
 		// Load the chart
 		chart.setData(data);
-		// Refresh the chart
-		chart.invalidate();
 	}
 }

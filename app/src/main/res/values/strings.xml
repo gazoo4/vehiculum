@@ -19,6 +19,8 @@
     <string name="activity_car_add_quantity_units_hint"				>Quantity units</string>
     <string name="activity_car_edit_label"							>Edit your car</string>
 
+    <string name="activity_charts_no_consumption_data"              >Not enough consumption data collected</string>
+
     <string name="activity_donate_donation_period"					>To change your donation, select your new donation program</string>
     <string name="activity_donate_period_monthly"					>This much coffee should keep us going for a month. Thank you.</string>
     <string name="activity_donate_period_prompt"					>Select your donation volume</string>
