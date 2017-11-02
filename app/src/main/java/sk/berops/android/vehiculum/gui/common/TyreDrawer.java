@@ -52,7 +52,7 @@ public class TyreDrawer {
 		TyreSchemeHelper helper = TyreSchemeHelper.getInstance();
 		if (helper.isFlashingMode()) {
 			// flashingPhase progressing in the interval <-1..0..1>
-			// convert to alpha <0..255..0>
+			// applyRules to alpha <0..255..0>
 			alpha = (int) ((1 - Math.abs(helper.getFlashingPhase())) * 255);
 		}
 

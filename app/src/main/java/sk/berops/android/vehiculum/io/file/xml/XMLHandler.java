@@ -1,4 +1,4 @@
-package sk.berops.android.vehiculum.io.xml;
+package sk.berops.android.vehiculum.io.file.xml;
 
 import android.app.Activity;
 import android.util.Log;
@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import sk.berops.android.vehiculum.dataModel.Garage;
+import sk.berops.android.vehiculum.io.file.FileDataHandler;
+import sk.berops.android.vehiculum.io.file.VehiculumCustomMatcher;
 
 /**
  * This class is used to define the behavior of the FileDataHandler in the XML world
@@ -71,6 +73,17 @@ public class XMLHandler extends FileDataHandler {
 			Log.e("ERROR", ex.getStackTrace().toString());
 			throw ioEx;
 		}
+	}
+
+	@Override
+	protected boolean isUpToDate(String pathname) {
+
+		return false;
+	}
+
+	@Override
+	protected void updateVersion(String pathname, String backupPathname) {
+
 	}
 
 	@Override

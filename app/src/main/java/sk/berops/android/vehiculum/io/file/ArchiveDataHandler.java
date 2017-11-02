@@ -1,4 +1,4 @@
-package sk.berops.android.vehiculum.io.xml;
+package sk.berops.android.vehiculum.io.file;
 
 import android.app.Activity;
 
@@ -11,6 +11,7 @@ import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 import sk.berops.android.vehiculum.dataModel.Garage;
+import sk.berops.android.vehiculum.io.file.xml.XMLHandler;
 
 /**
  * @author Bernard Halas

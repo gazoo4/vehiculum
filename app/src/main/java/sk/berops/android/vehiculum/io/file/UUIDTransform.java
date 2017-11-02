@@ -1,4 +1,4 @@
-package sk.berops.android.vehiculum.io.xml;
+package sk.berops.android.vehiculum.io.file;
 
 import org.simpleframework.xml.transform.Transform;
 

@@ -511,7 +511,7 @@ public class UnitConstants {
 	}
 
 	/**
-	 * Method to convert the consumption value from the SI (as stored in the app) to the consumption unit
+	 * Method to applyRules the consumption value from the SI (as stored in the app) to the consumption unit
 	 * as stored in the preferences.
 	 * @param type FuelType
 	 * @param fromValue consumption SI value
@@ -522,7 +522,7 @@ public class UnitConstants {
 	}
 
 	/**
-	 * Method to convert the consumption value from the SI to the consumption unit provided
+	 * Method to applyRules the consumption value from the SI to the consumption unit provided
 	 * @param type FuelType
 	 * @param fromValue consumption SI value
 	 * @param to target consumption unit
@@ -538,7 +538,7 @@ public class UnitConstants {
 	}
 
 	/**
-	 * Method to convert the consumption value from the SI (as stored in the app) to the consumption unit
+	 * Method to applyRules the consumption value from the SI (as stored in the app) to the consumption unit
 	 * as stored in the preferences
 	 * @param substance substance of the fuel
 	 * @param fromValue consumption SI value
@@ -549,7 +549,7 @@ public class UnitConstants {
 	}
 
 	/**
-	 * Method to convert the consumption value from the SI (as stored in the app) to the consumption
+	 * Method to applyRules the consumption value from the SI (as stored in the app) to the consumption
 	 * unit provided
 	 * @param substance substance of the fuel
 	 * @param fromValue consumption SI value
@@ -566,10 +566,10 @@ public class UnitConstants {
 	}
 
 	/**
-	 * Method to convert consumption value from the consumption unit provided in the 'from' to consumption unit provided in the 'to' variable
+	 * Method to applyRules consumption value from the consumption unit provided in the 'from' to consumption unit provided in the 'to' variable
 	 * @param fromValue consumption as quantified by the 'from' consumption unit
 	 * @param from consumption unit in which the source value is quantified
-	 * @param to consumption unit to which to convert the value
+	 * @param to consumption unit to which to applyRules the value
 	 * @return converted consumption value
 	 */
 	public static double convertUnitConsumption(double fromValue,
@@ -586,7 +586,7 @@ public class UnitConstants {
 	}
 
 	/**
-	 * Method to convert the consumption value based on the provided distance/quantity/scheme units
+	 * Method to applyRules the consumption value based on the provided distance/quantity/scheme units
 	 * @param fromValue input value for conversion
 	 * @param fromQuantity quantity unit of the input consumption
 	 * @param fromConsumption scheme of the input consumption
@@ -605,13 +605,13 @@ public class UnitConstants {
 	                                            DistanceUnit toDistance) {
 
 		if (fromQuantity.getSubstance() != toQuantity.getSubstance()) {
-			Log.d("ERROR", "We can't convert between volume/mass/energy units. Silently exiting with zero return");
+			Log.d("ERROR", "We can't applyRules between volume/mass/energy units. Silently exiting with zero return");
 			return 0.0;
 		}
 
 		double value = fromValue;
 
-		// First we need to convert towards the SI units
+		// First we need to applyRules towards the SI units
 		switch(fromConsumption) {
 			case FUEL_PER_DISTANCE:
 				value *= 100.0;
@@ -632,7 +632,7 @@ public class UnitConstants {
 		value /= fromDistance.getCoef();
 
 		// Now in value variable we should have the SI values.
-		// Starting to convert towards desired consumption unit.
+		// Starting to applyRules towards desired consumption unit.
 		value /= toQuantity.getCoef();
 		value *= toDistance.getCoef();
 
@@ -665,8 +665,8 @@ public class UnitConstants {
 	}
 
 	/**
-	 * Method to convert the cost value according to the provided input and output cost units.
-	 * @param fromValue value to convert
+	 * Method to applyRules the cost value according to the provided input and output cost units.
+	 * @param fromValue value to applyRules
 	 * @param fromUnit cost unit of the input value. If null, COST_PER_100_DISTANCE is used.
 	 * @param toUnit cost unit of the desired output value. If null, value from user preferences is used.
 	 * @return

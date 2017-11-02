@@ -1,4 +1,4 @@
-package sk.berops.android.vehiculum.io.xml;
+package sk.berops.android.vehiculum.io.file;
 
 import android.Manifest;
 import android.app.Activity;
@@ -94,7 +94,11 @@ public abstract class FileDataHandler extends DataHandler {
 
 	@Override
 	public Garage loadGarage() throws IOException {
-		return restoreFrom(getDefaultPath() +"/"+ getDefaultFileName());
+		String pathName = getDefaultPath() +"/"+ getDefaultFileName();
+		if (! isUpToDate(pathName)) {
+			updateVersion(pathName, pathName + ".old");
+		}
+		return restoreFrom(pathName);
 	}
 
 	@Override
@@ -115,6 +119,19 @@ public abstract class FileDataHandler extends DataHandler {
 			throw ex;
 		}
 	}
+
+	/**
+	 * Check if the version of the garage database in the given file is up-to-date
+	 * @param pathname path to the garage file
+	 * @return true if the version is up-to-date
+	 */
+	protected abstract boolean isUpToDate(String pathname);
+
+	/**
+	 * Update the garage database file so that it matches with the syntax of the current version of Vehiculum
+	 * @param pathname path to the garage file
+	 */
+	protected abstract void updateVersion(String pathname, String backup);
 
 	/**
 	 * Method called when needing to persist the garage to the external storage location

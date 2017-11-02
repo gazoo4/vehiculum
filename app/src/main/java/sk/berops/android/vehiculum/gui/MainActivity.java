@@ -26,9 +26,9 @@ import sk.berops.android.vehiculum.gui.common.StatsWriter;
 import sk.berops.android.vehiculum.gui.garage.ActivityGarageManagement;
 import sk.berops.android.vehiculum.gui.preferences.PreferenceWithHeaders;
 import sk.berops.android.vehiculum.gui.report.ActivityReportsNavigate;
-import sk.berops.android.vehiculum.io.xml.ArchiveDataHandler;
-import sk.berops.android.vehiculum.io.xml.DataHandler;
-import sk.berops.android.vehiculum.io.xml.XMLHandler;
+import sk.berops.android.vehiculum.io.file.ArchiveDataHandler;
+import sk.berops.android.vehiculum.io.file.DataHandler;
+import sk.berops.android.vehiculum.io.file.xml.XMLHandler;
 
 public class MainActivity extends DefaultActivity {
 

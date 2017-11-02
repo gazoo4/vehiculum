@@ -31,7 +31,7 @@ public class Garage extends Record {
 
 	/**
 	 * SW version the persisted garage object is written for. This is used then in the later stages
-	 * to convert garage data stored in one of the previous version of the app for the newer vehiculum version
+	 * to applyRules garage data stored in one of the previous version of the app for the newer vehiculum version
 	 */
 	@Element(name = "vehiculumVersion", required = false)
 	private static final int vehiculumVersion = BuildConfig.VERSION_CODE;

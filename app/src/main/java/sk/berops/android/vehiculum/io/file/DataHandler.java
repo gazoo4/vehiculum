@@ -1,4 +1,4 @@
-package sk.berops.android.vehiculum.io.xml;
+package sk.berops.android.vehiculum.io.file;
 
 import android.app.Activity;
 
