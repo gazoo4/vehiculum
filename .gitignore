@@ -38,3 +38,6 @@ proguard/
 # Android Studio
 .idea/
 *.iml
+
+# Generated images
+app/src/main/res/drawable-*dpi/*

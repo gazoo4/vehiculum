@@ -32,7 +32,7 @@ android {
         }
     }
     compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "sk.berops.android.fueller"
         versionCode 9
@@ -66,9 +66,9 @@ android {
 }
 
 configurations {
-    compile.exclude module: 'stax'
-    compile.exclude module: 'stax-api'
-    compile.exclude module: 'xpp3'
+    implementation.exclude module: 'stax'
+    implementation.exclude module: 'stax-api'
+    implementation.exclude module: 'xpp3'
 }
 
 repositories {
@@ -81,20 +81,23 @@ repositories {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:25.2.0'       // this needs to be the of the same version as compileSDK indicator
-    compile 'com.android.support:recyclerview-v7:25.2.0'    // this needs to be the of the same version as compileSDK indicator
-    compile 'com.android.support:support-v4:25.2.0'         // this needs to be the of the same version as compileSDK indicator
-    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-    compile 'com.jjoe64:graphview:3.1.4'
-    compile 'com.larswerkman:lobsterpicker:1.0.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+    // previously compile, but now only implementation or api keywords are supported, see
+    // https://developer.android.com/studio/build/gradle-plugin-3-0-0-migration.html?utm_source=android-studio#new_configurations
+
+    implementation 'com.android.support:appcompat-v7:25.2.0'       // this needs to be the of the same version as compileSDK indicator
+    implementation 'com.android.support:recyclerview-v7:25.2.0'    // this needs to be the of the same version as compileSDK indicator
+    implementation 'com.android.support:support-v4:25.2.0'         // this needs to be the of the same version as compileSDK indicator
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    implementation 'com.jjoe64:graphview:3.1.4'
+    implementation 'com.larswerkman:lobsterpicker:1.0.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true;
     }
-    compile 'org.apache.commons:commons-math3:3.5'
-    compile 'org.simpleframework:simple-xml:2.7.1'
+    implementation 'org.apache.commons:commons-math3:3.5'
+    implementation 'org.simpleframework:simple-xml:2.7.1'
 }
 
 afterEvaluate {
