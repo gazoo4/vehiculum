@@ -36,6 +36,16 @@ public class ArchiveDataHandler extends FileDataHandler {
 		this.fileHandler = handler;
 	}
 
+	// TODO: implement the following two methods, these are here just for testing purposes
+
+	@Override
+	protected boolean isUpToDate(String pathname) {return true;}
+
+	@Override
+	protected void updateVersion(String pathname, String backup) {
+		return;
+	}
+
 	@Override
 	public void exportTo(Garage garage, String pathFileName) throws IOException{
 		fileHandler.exportTo(garage, pathFileName + TEMP_SUFFIX);

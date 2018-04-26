@@ -41,3 +41,7 @@ proguard/
 
 # Generated images
 app/src/main/res/drawable-*dpi/*
+
+# All environment files (except of the templates)
+*.env
+!template*.env

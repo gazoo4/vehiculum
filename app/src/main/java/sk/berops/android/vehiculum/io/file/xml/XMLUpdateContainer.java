@@ -11,16 +11,21 @@ import sk.berops.android.vehiculum.io.file.RuleContainer;
  */
 
 public class XMLUpdateContainer implements RuleContainer {
-	public static final int VERSION_FROM = 8;
-	public static final int VERSION_TO = 9;
-
 	public enum XMLUpdateRule {
-		MULTI_CURRENCY_COST(regex match, regex replacement)
+		MULTI_CURRENCY_COST(0, "<cost>(\\d+.?\\d*)</cost>", "regex replacement", 8, 9);
 		private static Map<Integer, XMLUpdateRule> idToRuleMapping;
 		private int id;
+		private int versionFrom;
+		private int versionTo;
+		private String pattern;
+		private String replacement;
 
-		XMLUpdateRule(int id, String rule) {
+		XMLUpdateRule(int id, String pattern, String replacement, int versionFrom, int versionTo) {
 			this.id = id;
+			this.versionFrom = versionFrom;
+			this.versionTo = versionTo;
+			this.pattern = pattern;
+			this.replacement = replacement;
 		}
 
 		public static XMLUpdateRule getExpenseType(int id) {
@@ -47,16 +52,6 @@ public class XMLUpdateContainer implements RuleContainer {
 		public void setId(int id) {
 			this.id = id;
 		}
-	}
-
-	@Override
-	public int getVersionFrom() {
-		return VERSION_FROM;
-	}
-
-	@Override
-	public int getVersionTo() {
-		return VERSION_TO;
 	}
 
 	@Override
