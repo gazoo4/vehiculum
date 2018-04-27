@@ -102,6 +102,7 @@ dependencies {
 
 afterEvaluate {
     assembleDebug.dependsOn "generatePng"
+    assembleDebug.dependsOn "backupGarage"
 }
 
 task generatePng(type:Exec) {
@@ -112,4 +113,12 @@ task generatePng(type:Exec) {
 
     // working dir defaults to the project dir
     commandLine "bash", "./support_utils/svgconvert.sh", "$srcDir", "$dstDir"
+}
+
+task backupGarage(type:Exec) {
+    println 'Backup garage data'
+
+    commandLine "bash", "./support_utils/backupGarage.sh"
+
+    ignoreExitValue true
 }
